@@ -1,3 +1,9 @@
+/*
+  Only use this if you need to apply overarching style changes to the app.
+  Otherwise use component level styles or material theme styles
+*/
+
+
 body {
   margin: 0;
   padding: 0;

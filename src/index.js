@@ -9,10 +9,6 @@ import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import reducers from "./reducers";
 
-import createHistory from "history/createBrowserHistory";
-// import { Route } from "react-router";
-// import { ConnectedRouter, routerMiddleware, push } from "react-router-redux";
-
 import firebase from "firebase";
 
 import Dashboard from './containers/Dashboard';
@@ -28,7 +24,6 @@ var config = {
 
 firebase.initializeApp(config);
 
-const history = createHistory();
 
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

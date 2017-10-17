@@ -12,8 +12,7 @@ import {
 import { withStyles } from "material-ui/styles";
 
 import Dashboard from "./Dashboard";
-import Login from "./Login";
-import Signup from "./SignUp";
+import AuthPage from "./AuthPage";
 
 class App extends Component {
   render() {
@@ -23,16 +22,14 @@ class App extends Component {
         <div>
           <ul>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/login">login</Link></li>
-            <li><Link to="/signup">signup</Link></li>
+            <li><Link to="/AuthPage">AuthPage</Link></li>
             <li><Link to="/dashboard">dashboard</Link></li>
           </ul>
 
           <hr/>
 
           <Route exact path="/" component={Dashboard}/>
-          <Route path="/login" component={Login}/>
-          <Route path="/signup" component={Signup}/>
+          <Route path="/AuthPage" component={AuthPage}/>
           <Route path="/dashboard" component={Dashboard}/>
         </div>
       </Router>
