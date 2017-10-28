@@ -2,9 +2,9 @@ const initialState = {
   error: null,
   user: null,
   loading: false,
-  uid,
-  username,
-  status
+  // uid ,
+  // username,
+  // status
 };
 
 export default function auth(state = initialState, action) {
