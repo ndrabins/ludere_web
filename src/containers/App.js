@@ -9,14 +9,11 @@ import {
   Link
 } from 'react-router-dom'
 
-import { withStyles } from "material-ui/styles";
-
 import Dashboard from "./Dashboard";
 import AuthPage from "./AuthPage";
 
 class App extends Component {
-  render() {
-    const { classes } = this.props;
+  render() {    
     return <div className="App">
       <Router>
         <div>
