@@ -69,10 +69,14 @@ const styles = {
     flexDirection:"column",
     justifyContent:"center",
     alignItems:"center",
-    minHeight:"100%",
+    minHeight:"300px",
     overflow:"auto",
     display: 'flex',
     flexWrap: 'wrap',
+    padding: "50px 50px 50px 50px",
+    backgroundImage: `linear-gradient(to left, #6fe5c9, #00bcd4), linear-gradient(#000000, #000000)`,
+    borderRadius: "0px 6px 6px 0px",
+    color: "white",    
   },
   firebaseUI1: {
     minWidth: "250px"

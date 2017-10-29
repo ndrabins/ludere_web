@@ -77,11 +77,19 @@ const styles = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    minHeight: "100%",
+    minHeight: "300px",
     overflow: "auto",
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    padding: "50px",
+    backgroundImage: `linear-gradient(#303030, #303030)`,
+    borderRadius: "6px 0px 0px 6px",
+    opacity: 0.75,
+    color: "white",
   },
+  firebaseUI1: {
+    minWidth: "250px"
+  }
 };
 
 export default withStyles(styles)(SignUp);
