@@ -13,10 +13,10 @@ import Dashboard from "./Dashboard";
 import AuthPage from "./AuthPage";
 
 class App extends Component {
-  render() {    
+  render() {
     return <div className="App">
       <Router>
-        <div>
+        <div style={{height:'100%'}}>
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/AuthPage">AuthPage</Link></li>

@@ -1,35 +1,22 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
+
 import { withStyles } from 'material-ui/styles';
 import Input, { InputLabel } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
 
 import Button from "material-ui/Button";
 
-const styles = {
-  SignIn: {
-    width: "100%",
-    height: "500px",
-    alignSelf: "center",
-    flexDirection:"column",    
-    justifyContent:"center",
-    alignItems:"center",
-    minHeight:"100%",
-    overflow:"auto",
-    paddingRight: 100,
-    paddingLeft: 100,
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-};
-
 class SignIn extends Component {
-  state = {
-    email: '',
-    password: '',
-    showPassword: false,    
-  };
-  
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      password: '',
+      showPassword: false,
+    };
+  }
+
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
   };
@@ -56,8 +43,6 @@ class SignIn extends Component {
             onChange={this.handleChange('email')}
           />
         </FormControl>
-        <br/>
-        <br/>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="password">Password</InputLabel>
           <Input
@@ -77,8 +62,21 @@ class SignIn extends Component {
   }
 }
 
-SignIn.propTypes = {
-  classes: PropTypes.object.isRequired,
+const styles = {
+  SignIn: {
+    width: "100%",
+    alignSelf: "center",
+    flexDirection:"column",
+    justifyContent:"center",
+    alignItems:"center",
+    minHeight:"100%",
+    overflow:"auto",
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  firebaseUI1: {
+    minWidth: "250px"
+  }
 };
 
 export default withStyles(styles)(SignIn);

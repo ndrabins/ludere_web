@@ -1,45 +1,53 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+
 import { withStyles } from 'material-ui/styles';
 
-import SignUp from "../modules/SignUp";
-import SignIn from "../modules/SignIn";
+import SignUp from "../modules/auth/SignUp";
+import SignIn from "../modules/auth/SignIn";
+import SocialSignIn from "../modules/auth/SocialSignIn";
 
-var backgroundImg = "../public/mountains.jpg"
+import logoWhite from '../static/light.svg';
+import backgroundImg from '../static/mountains.png';
 
-const styles = {
-  AuthPage: {
-    width: "100%",
-    height: "500px",
-    backgroundImage: `url(${backgroundImg})`,
-    display:"flex",
-    justifyContent:"center",
-    alignItems:"center",
-    alignSelf:"center",
-    minHeight:"100%",
-    flexDirection:"row",
-    overflow:"auto",
-  },
-}
 
 class AuthPage extends Component {
-
   render() {
     return (
-      <div style={styles.AuthPage}>
-        <div className={this.props.SignUp}>
-          <SignUp />
+      <div className={this.props.classes.AuthPage}>
+        <img src={logoWhite} alt="Logo" />
+        <div className={this.props.classes.inputForm}>
+          <div className={this.props.SignUp}>
+            <SignUp />
+          </div>
+          <div className={this.props.SignIn}>
+            <SignIn />
+          </div>
         </div>
-        <div className={this.props.SignIn}>
-          <SignIn />
-        </div>
+        <SocialSignIn />
       </div>
     );
   }
 }
 
-AuthPage.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+
+const styles = {
+  AuthPage: {
+    backgroundSize: 'cover',
+    height: '100vh',
+    overflow: 'hidden',
+    backgroundImage: `url(${backgroundImg})`,
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    alignSelf:"center",
+    flexDirection:"column",
+  },
+  inputForm: {
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    alignSelf:"center",
+  }
+}
 
 export default withStyles(styles)(AuthPage);

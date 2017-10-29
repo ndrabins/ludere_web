@@ -1,13 +1,14 @@
 {
-  "name": "react-redux-firebase-material-router-electron-starter",
-  "description": "React, redux, firebase, material, react router, electron simple starter ",
+  "name": "Ludere",
+  "description": "Making life simple",
   "author": "me",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "firebase": "^4.5.0",
+    "firebaseui": "^2.4.1",
     "history": "^4.7.2",
-    "material-ui": "^1.0.0-beta.16",
+    "material-ui": "^1.0.0-beta.18",
     "material-ui-icons": "^1.0.0-beta.15",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",

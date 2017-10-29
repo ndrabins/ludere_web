@@ -1,36 +1,23 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
 
-import Button from 'material-ui/Button';
+import { withStyles } from "material-ui/styles";
+import Input, { InputLabel } from "material-ui/Input";
+import { FormControl } from "material-ui/Form";
 
-const styles = {
-  SignUp: {
-    width: "100%",
-    height: "500px",
-    alignSelf: "center",
-    flexDirection: "column",    
-    justifyContent: "center",
-    alignItems: "center",
-    minHeight: "100%",
-    overflow: "auto",
-    paddingRight: 100,
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-};
-
+import Button from "material-ui/Button";
 
 class SignUp extends Component {
-  state = {
-    email: '',
-    password: '',
-    confirm_password: '',
-    showPassword: false,    
-  };
-  
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: "",
+      password: "",
+      confirm_password: "",
+      showPassword: false
+    };
+  }
+
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
   };
@@ -54,33 +41,27 @@ class SignUp extends Component {
           <Input
             id="email"
             value={this.state.email}
-            onChange={this.handleChange('email')}
+            onChange={this.handleChange("email")}
           />
         </FormControl>
-        <br/>
-        <br/>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="password">New Password</InputLabel>
           <Input
             id="password"
-            type={this.state.showPassword ? 'text' : 'password'}
+            type={this.state.showPassword ? "text" : "password"}
             value={this.state.password}
-            onChange={this.handleChange('password')}
+            onChange={this.handleChange("password")}
           />
         </FormControl>
-        <br/>
-        <br/>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="confirm_password">Confirm Password</InputLabel>
           <Input
             id="confirm_password"
-            type={this.state.showPassword ? 'text' : 'password'}
+            type={this.state.showPassword ? "text" : "password"}
             value={this.state.confirm_password}
-            onChange={this.handleChange('confirm_password')}
+            onChange={this.handleChange("confirm_password")}
           />
         </FormControl>
-        <br/>
-        <br/>
         <Button raised color="primary" className={classes.button}>
           Sign Up
         </Button>
@@ -89,8 +70,18 @@ class SignUp extends Component {
   }
 }
 
-SignUp.propTypes = {
-  classes: PropTypes.object.isRequired,
+const styles = {
+  SignUp: {
+    width: "100%",
+    alignSelf: "center",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "100%",
+    overflow: "auto",
+    display: "flex",
+    flexWrap: "wrap"
+  },
 };
- 
+
 export default withStyles(styles)(SignUp);
