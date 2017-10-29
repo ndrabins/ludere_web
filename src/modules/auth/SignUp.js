@@ -81,7 +81,7 @@ const styles = {
     overflow: "auto",
     display: "flex",
     flexWrap: "wrap",
-    margin: "50px",
+    padding: "50px",
     backgroundImage: `linear-gradient(#303030, #303030)`,
     borderRadius: "6px 0px 0px 6px",
     opacity: 0.75,

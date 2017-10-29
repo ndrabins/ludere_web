@@ -12,7 +12,7 @@ import backgroundImg from '../static/mountains.png';
 class AuthPage extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       initial: true,
       signUpClick: false,
@@ -23,13 +23,13 @@ class AuthPage extends Component {
   handleSignUpClick() {
     this.setState({initial: false});
     this.setState({loginClick: false});
-    this.setState({signUpClick: true});    
+    this.setState({signUpClick: true});
     console.log('Sign Up Click');
-  }    
+  }
 
   handleLoginClick() {
     this.setState({initial: false});
-    this.setState({signUpClick: false});    
+    this.setState({signUpClick: false});
     this.setState({loginClick: true});
     console.log('Login Click');
   }
@@ -38,13 +38,9 @@ class AuthPage extends Component {
     return (
       <div className={this.props.classes.AuthPage}>
         <img src={logoWhite} alt="Logo" />
-        <div className={this.props.classes.inputForm}>
-          <div className={this.props.SignUp} onClick={() => this.handleSignUpClick()}>
-            <SignUp />
-          </div>
-          <div className={this.props.SignIn} onClick={() => this.handleLoginClick()}>
-            <SignIn />
-          </div>
+        <div style={styles.inputForm}>
+          <SignUp />
+          <SignIn />
         </div>
         <SocialSignIn />
       </div>

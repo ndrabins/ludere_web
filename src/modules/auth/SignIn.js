@@ -71,7 +71,7 @@ const styles = {
     alignItems:"center",
     minHeight:"300px",
     display: 'flex',
-    margin: "50px 50px 50px 50px",
+    padding: "50px",
     backgroundImage: `linear-gradient(to left, #6fe5c9, #00bcd4), linear-gradient(#000000, #000000)`,
     borderRadius: "0px 6px 6px 0px",
     color: "white",
