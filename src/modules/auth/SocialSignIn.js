@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import firebase from 'firebase';
-import firebaseUI from 'firebaseui';
+//import firebaseUI from 'firebaseui';
 import FirebaseAuth from '../../util/FirebaseAuth';
 
 class SocialSignIn extends Component {

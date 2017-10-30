@@ -16,22 +16,22 @@ class AuthPage extends Component {
     this.state = {
       initial: true,
       signUpClick: false,
-      loginClick: false
+      signInClick: false
     };
   }
 
-  handleSignUpClick() {
+  handleSignUpClick = () => {
     this.setState({ initial: false });
-    this.setState({ loginClick: false });
+    this.setState({ signInClick: false });
     this.setState({ signUpClick: true });
     console.log("Sign Up Click");
   }
 
-  handleLoginClick() {
+  handleSignInClick = () => {
     this.setState({ initial: false });
     this.setState({ signUpClick: false });
-    this.setState({ loginClick: true });
-    console.log("Login Click");
+    this.setState({ signInClick: true });
+    console.log("Sign In Click");
   }
 
   render() {
@@ -39,6 +39,7 @@ class AuthPage extends Component {
       <div style={styles.AuthPage}>
         <div style={styles.entryContainer}>
           <img src={logoWhite} alt="Logo" />
+          <br />
           <div style={styles.inputForm}>
             <SignUp />
             <SignIn />
@@ -73,20 +74,19 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center"
-    // padding: "50px 100px 50px 100px",
   },
-  SignUp: {
-    ":hover": {
-      transition: "1s",
-      left: 0
-    }
-  },
-  SignIn: {
-    ":hover": {
-      transition: "1s",
-      right: 0
-    }
-  }
+  // SignUp: {
+  //   ":hover": {
+  //     transition: "1s",
+  //     left: 0
+  //   }
+  // },
+  // SignIn: {
+  //   ":hover": {
+  //     transition: "1s",
+  //     right: 0
+  //   }
+  // }
 };
 
 export default withStyles(styles)(AuthPage);
