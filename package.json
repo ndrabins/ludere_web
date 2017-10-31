@@ -19,6 +19,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "css-font-family": "^1.0.7",
     "electron": "^1.7.8",
     "electron-builder": "^19.34.2"
   },

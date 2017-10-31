@@ -34,17 +34,17 @@ class SignIn extends Component {
 
     return (
       <div style={styles.SignIn} className={classes.SignIn}>
-        <h3>Log In</h3>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="emails">Email</InputLabel>
+        <p style={styles.Header}>Log In</p>
+        <FormControl style={styles.FormControl}>
+          <InputLabel style={styles.InputLabel} htmlFor="emails">Email</InputLabel>
           <Input
             id="email"
             value={this.state.email}
             onChange={this.handleChange('email')}
           />
         </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="password">Password</InputLabel>
+        <FormControl style={styles.FormControl}>
+          <InputLabel style={styles.InputLabel} htmlFor="password">Password</InputLabel>
           <Input
             id="password"
             type={this.state.showPassword ? 'text' : 'password'}
@@ -52,7 +52,6 @@ class SignIn extends Component {
             onChange={this.handleChange('password')}
           />
         </FormControl>
-        <br/>
         <br/>
         <Button raised color="primary" className={classes.button}>
           Sign In
@@ -67,15 +66,27 @@ const styles = {
     width: "100%",
     alignSelf: "center",
     flexDirection:"column",
-    justifyContent:"center",
+    justifyContent:"left",
     alignItems:"center",
-    minHeight:"100%",
-    overflow:"auto",
+    minHeight:"300px",
     display: 'flex',
-    flexWrap: 'wrap',
+    padding: "50px",
+    backgroundImage: `linear-gradient(to left, #6fe5c9, #00bcd4), linear-gradient(#000000, #000000)`,
+    borderRadius: "0px 6px 6px 0px",
+    color: "white",
+  },
+  Header: {
+    alignSelf: "left",
+    fontSize: "22px",
+  },
+  FormControl: {
+    paddingBottom: "10px",
+  },
+  InputLabel: {
+    color: "#FFFFFF",
   },
   firebaseUI1: {
-    minWidth: "250px"
+    minWidth: "200px"
   }
 };
 

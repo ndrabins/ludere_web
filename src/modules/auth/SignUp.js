@@ -35,17 +35,17 @@ class SignUp extends Component {
 
     return (
       <div style={styles.SignUp} className={classes.SignUp}>
-        <h3>Get Started</h3>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="emails">Email</InputLabel>
+        <p style={styles.Header}>Get Started</p>
+        <FormControl style={styles.FormControl}>
+          <InputLabel style={styles.InputLabel} htmlFor="emails">Email</InputLabel>
           <Input
             id="email"
             value={this.state.email}
             onChange={this.handleChange("email")}
           />
         </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="password">New Password</InputLabel>
+        <FormControl style={styles.FormControl}>
+          <InputLabel style={styles.InputLabel} htmlFor="password">New Password</InputLabel>
           <Input
             id="password"
             type={this.state.showPassword ? "text" : "password"}
@@ -53,8 +53,8 @@ class SignUp extends Component {
             onChange={this.handleChange("password")}
           />
         </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="confirm_password">Confirm Password</InputLabel>
+        <FormControl style={styles.FormControl}>
+          <InputLabel style={styles.InputLabel} htmlFor="confirm_password">Confirm Password</InputLabel>
           <Input
             id="confirm_password"
             type={this.state.showPassword ? "text" : "password"}
@@ -62,6 +62,7 @@ class SignUp extends Component {
             onChange={this.handleChange("confirm_password")}
           />
         </FormControl>
+        <br/>
         <Button raised color="primary" className={classes.button}>
           Sign Up
         </Button>
@@ -75,13 +76,32 @@ const styles = {
     width: "100%",
     alignSelf: "center",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "left",
     alignItems: "center",
-    minHeight: "100%",
+    minHeight: "300px",
     overflow: "auto",
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    padding: "50px",
+    backgroundImage: `linear-gradient(#303030, #303030)`,
+    borderRadius: "6px 0px 0px 6px",
+    opacity: 0.75,
+    color: "white",
+    fontFamily: "Roboto",
   },
+  Header: {    
+    alignSelf: "left",
+    fontSize: "22px",
+  },
+  FormControl: {
+    paddingBottom: "10px",
+  },
+  InputLabel: {
+    color: "#FFFFFF",
+  },
+  firebaseUI1: {
+    minWidth: "200px"
+  }
 };
 
 export default withStyles(styles)(SignUp);

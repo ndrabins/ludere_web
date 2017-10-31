@@ -1,6 +1,6 @@
 # Installation
 ```
-//yarn can be replaces with npm
+//yarn can be replaced with npm
 
 yarn global add foreman # for process management with electron
 yarn install
