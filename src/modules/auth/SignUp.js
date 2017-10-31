@@ -34,7 +34,7 @@ class SignUp extends Component {
     const { classes } = this.props;
 
     return (
-      <div style={styles.SignUp} className={classes.SignUp}>
+      <div style={styles.SignUp}>
         <p style={styles.Header}>Get Started</p>
         <FormControl style={styles.FormControl}>
           <InputLabel style={styles.InputLabel} htmlFor="emails">Email</InputLabel>
@@ -63,7 +63,7 @@ class SignUp extends Component {
           />
         </FormControl>
         <br/>
-        <Button raised color="primary" className={classes.button}>
+        <Button raised color="accent">
           Sign Up
         </Button>
       </div>
@@ -83,13 +83,12 @@ const styles = {
     display: "flex",
     flexWrap: "wrap",
     padding: "50px",
-    backgroundImage: `linear-gradient(#303030, #303030)`,
+    backgroundColor: 'rgba(48, 48, 48, 0.5)',
     borderRadius: "6px 0px 0px 6px",
-    opacity: 0.75,
     color: "white",
     fontFamily: "Roboto",
   },
-  Header: {    
+  Header: {
     alignSelf: "left",
     fontSize: "22px",
   },

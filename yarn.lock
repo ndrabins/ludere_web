@@ -4588,12 +4588,6 @@ jss-props-sort@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/jss-props-sort/-/jss-props-sort-5.0.0.tgz#8839c88433f64e8c1dab1a7068796f19b84f9195"
 
-jss-rtl@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/jss-rtl/-/jss-rtl-0.2.1.tgz#06fcde4a9369f8c6f660b700f1c68a5d7742eebb"
-  dependencies:
-    rtl-css-js "^1.7.0"
-
 jss-vendor-prefixer@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/jss-vendor-prefixer/-/jss-vendor-prefixer-6.0.0.tgz#be58124f0cbed76e98cc8eb5219dbb260f057d0b"
@@ -4860,9 +4854,9 @@ material-ui-icons@^1.0.0-beta.15:
   dependencies:
     recompose "^0.25.1"
 
-material-ui@^1.0.0-beta.18:
-  version "1.0.0-beta.18"
-  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-beta.18.tgz#844330a88d04366ac4aab37e3f0a2592e5988981"
+material-ui@^1.0.0-beta.19:
+  version "1.0.0-beta.19"
+  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-beta.19.tgz#fe2cf131f7ffe8f591ed063d1fa5b8360f272164"
   dependencies:
     babel-runtime "^6.26.0"
     brcast "^3.0.1"
@@ -4872,7 +4866,6 @@ material-ui@^1.0.0-beta.18:
     hoist-non-react-statics "^2.3.1"
     jss "^8.1.0"
     jss-preset-default "^3.0.0"
-    jss-rtl "^0.2.1"
     keycode "^2.1.9"
     lodash "^4.17.4"
     normalize-scroll-left "^0.1.2"
@@ -6634,10 +6627,6 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^2.0.0"
     inherits "^2.0.1"
-
-rtl-css-js@^1.7.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/rtl-css-js/-/rtl-css-js-1.8.0.tgz#af8ccdf5944bd8d6a2657fcf2e4a4e9adf62361b"
 
 run-async@^2.2.0:
   version "2.3.0"
