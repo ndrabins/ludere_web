@@ -4,7 +4,6 @@ import { withStyles } from 'material-ui/styles';
 
 import SignUp from "../modules/auth/SignUp";
 import SignIn from "../modules/auth/SignIn";
-import SocialSignIn from "../modules/auth/SocialSignIn";
 
 import logoWhite from '../static/light.svg';
 import backgroundImg from '../static/mountains.png';
@@ -23,7 +22,6 @@ class AuthPage extends Component {
             <SignIn />
           </div>
         </div>
-        <SocialSignIn />
       </div>
     );
   }

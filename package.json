@@ -5,9 +5,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^4.5.0",
+    "firebase": "4.6.0",
     "firebase-functions": "^0.7.1",
-    "firebaseui": "^2.4.1",
     "history": "^4.7.2",
     "material-ui": "^1.0.0-beta.18",
     "material-ui-icons": "^1.0.0-beta.15",
