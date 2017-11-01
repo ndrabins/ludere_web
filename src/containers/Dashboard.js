@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../actions";
+
 import Button from "material-ui/Button";
 
 class Dashboard extends Component {
@@ -8,9 +12,26 @@ class Dashboard extends Component {
         <Button raised color="primary">
           Dashboard
         </Button>
+        <Button raised color="primary" onClick={() => this.props.actions.signOutUser()}>
+          Sign out
+        </Button>
       </div>
     );
   }
 }
 
-export default Dashboard;
+
+function mapStateToProps(state) {
+  return {
+
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

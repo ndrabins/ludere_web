@@ -5,6 +5,7 @@ import orange from 'material-ui/colors/lightBlue';
 import cyan from 'material-ui/colors/cyan';
 import red from 'material-ui/colors/red';
 
+//https://material-ui-next.com/customization/themes/
 export const lightTheme = createMuiTheme({
   palette: {
     primary: {

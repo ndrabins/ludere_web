@@ -1,17 +1,18 @@
 import { AUTH_ERROR, AUTH_USER, SIGN_OUT_USER, AUTH_SUCCESS } from "./types";
-import firebase from 'firebase';
+import firebase from "firebase";
 
-export function signUpUser(credentials) {
+export function signUpUser(email, password) {
   return function(dispatch) {
     dispatch({ type: AUTH_USER });
+    console.log("signing up with ", email, password);
 
     firebase
       .auth()
-      .createUserWithEmailAndPassword(credentials.email, credentials.password)
+      .createUserWithEmailAndPassword(email, password)
       .then(user => {
         authSuccess(dispatch, user);
         // .updateProfile({displayName: values["displayName"]}
-        firebase.auth().currentUser.updateProfile({displayName: credentials.displayName});
+        // firebase.auth().currentUser.updateProfile({displayName: credentials.displayName});
       })
       .catch(error => {
         dispatch(authError(error));
@@ -19,31 +20,30 @@ export function signUpUser(credentials) {
   };
 }
 
-export function signInUser(credentials) {
+export function signInUser(email, password) {
   return dispatch => {
     dispatch({ type: AUTH_USER });
 
-    // const { currentUser } = firebase.auth();
-
     firebase
       .auth()
-      .signInWithEmailAndPassword(credentials.email, credentials.password)
+      .signInWithEmailAndPassword(email, password)
       .then(user => authSuccess(dispatch, user))
       .catch(error => {
         dispatch(authError(error));
       });
-
-    // firebase.database().ref().child("users").child(firebase.auth().currentUser.uid).setValue(firebase.auth().currentUser);
   };
 }
 
 export function signOutUser() {
   return function(dispatch) {
-    firebase.auth().signOut().then(() => {
-      dispatch({
-        type: SIGN_OUT_USER
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        dispatch({
+          type: SIGN_OUT_USER
+        });
       });
-    });
   };
 }
 
@@ -66,6 +66,7 @@ export function authUser() {
 }
 
 export function authError(error) {
+  console.log("auth error");
   return {
     type: AUTH_ERROR,
     payload: error
@@ -73,6 +74,7 @@ export function authError(error) {
 }
 
 const authSuccess = (dispatch, user) => {
+  console.log("auth success!");
   dispatch({
     type: AUTH_SUCCESS,
     payload: user

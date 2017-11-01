@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../../actions";
 
-import { withStyles } from "material-ui/styles";
 import Input, { InputLabel } from "material-ui/Input";
 import { FormControl } from "material-ui/Form";
 
@@ -63,7 +65,7 @@ class SignUp extends Component {
           />
         </FormControl>
         <br/>
-        <Button raised color="accent">
+        <Button raised color="accent" onClick={() => this.props.actions.signUpUser(this.state.email, this.state.password)}>
           Sign Up
         </Button>
       </div>
@@ -103,4 +105,17 @@ const styles = {
   }
 };
 
-export default withStyles(styles)(SignUp);
+function mapStateToProps(state) {
+  return {
+
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

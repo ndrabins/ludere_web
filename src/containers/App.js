@@ -27,7 +27,7 @@ function PrivateRoute({ component: Component, authenticated, ...rest }) {
           <Component {...props} />
         ) : (
           <Redirect
-            to={{ pathname: "/AuthPage", state: { from: props.location } }}
+            to={{ pathname: "/auth", state: { from: props.location } }}
           />
         )}
     />
@@ -42,7 +42,7 @@ function PublicRoute({ component: Component, authenticated, ...rest }) {
         authenticated === false ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/Dashboard" />
+          <Redirect to="/dashboard" />
         )}
     />
   );
@@ -88,12 +88,12 @@ class App extends Component {
                 <Route exact path="/" component={Home} />
                 <PublicRoute
                   authenticated={this.state.authenticated}
-                  path="/AuthPage"
+                  path="/auth"
                   component={AuthPage}
                 />
                 <PrivateRoute
                   authenticated={this.state.authenticated}
-                  path="/Dashboard"
+                  path="/dashboard"
                   component={Dashboard}
                 />
               </Switch>

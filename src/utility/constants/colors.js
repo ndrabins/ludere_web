@@ -1,3 +1,5 @@
+//https://app.zeplin.io/project/59f510ad1c5eea3e1c51bea8/styleguide
+
 export default {
   peach: "#e57373",
   creme: "#f8ffae",
@@ -14,8 +16,3 @@ export default {
   darkThemeDisabled: "#6D6D6D",
   darkThemeDefault: "#303030",
 };
-
-//red[300],
-//
-//
-//lightBlue[400],

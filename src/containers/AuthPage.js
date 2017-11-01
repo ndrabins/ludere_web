@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-
-import { withStyles } from "material-ui/styles";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../actions";
 
 import SignUp from "../modules/auth/SignUp";
 import SignIn from "../modules/auth/SignIn";
@@ -87,4 +88,16 @@ const styles = {
   // }
 };
 
-export default withStyles(styles)(AuthPage);
+function mapStateToProps(state) {
+  return {
+
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthPage);
