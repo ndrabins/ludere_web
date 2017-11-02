@@ -1105,7 +1105,7 @@ babel-register@^6.24.1, babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@6.26.0, babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.26.0:
+babel-runtime@6.26.0, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
@@ -1221,6 +1221,10 @@ body-parser@1.18.2:
     qs "6.5.1"
     raw-body "2.3.2"
     type-is "~1.6.15"
+
+bodymovin@^4.7.1:
+  version "4.12.3"
+  resolved "https://registry.yarnpkg.com/bodymovin/-/bodymovin-4.12.3.tgz#c09c7fb29623088691e38c5f43ae3170f1dd199e"
 
 bonjour@^3.5.0:
   version "3.5.0"
@@ -6131,6 +6135,13 @@ react-jss@^7.2.0:
     jss-preset-default "^3.0.0"
     prop-types "^15.5.8"
     theming "^1.1.0"
+
+react-lottie@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-lottie/-/react-lottie-0.2.2.tgz#046b66ac734d17d60e4f8ee17560c2748a1fad33"
+  dependencies:
+    babel-runtime "^6.11.6"
+    bodymovin "^4.7.1"
 
 react-popper@^0.7.4:
   version "0.7.4"

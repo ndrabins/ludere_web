@@ -14,6 +14,8 @@ import {
 
 import {lightTheme, darkTheme} from "../utility/themes";
 import { MuiThemeProvider } from "material-ui/styles";
+
+import Loading from "../modules/auth/Loading";
 import Dashboard from "./Dashboard";
 import AuthPage from "./AuthPage";
 import Home from "./Home";
@@ -76,8 +78,7 @@ class App extends Component {
 
   render() {
     if (this.state.loading) {
-      console.log("loading...");
-      return <div> loading </div>;
+      return <Loading />;
     }
     return (
       <div className="App">
