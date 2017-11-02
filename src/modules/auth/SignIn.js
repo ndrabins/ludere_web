@@ -54,7 +54,6 @@ class SignIn extends Component {
             onChange={this.handleChange('password')}
           />
         </FormControl>
-        <br/>
         <Button raised color="primary" style={styles.button} onClick={() => this.props.actions.signInUser(this.state.email, this.state.password)}>
           Sign In
         </Button>

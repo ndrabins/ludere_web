@@ -51,33 +51,19 @@ function PublicRoute({ component: Component, authenticated, ...rest }) {
 }
 
 class App extends Component {
-  state = {
-    authenticated: false,
-    loading: true
-  };
-
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        //set user to logged in here
-        console.log("logged in");
-        this.setState({
-          authenticated: true,
-          loading: false
-        });
+        //this could use refactoring I think..
+        this.props.actions.verifyAuth();
       } else {
         console.log("logged out");
-        //put logged redux action here
-        this.setState({
-          authenticated: false,
-          loading: false
-        });
       }
     });
   }
 
   render() {
-    if (this.state.loading) {
+    if (this.props.loading) {
       return <Loading />;
     }
     return (
@@ -88,12 +74,12 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Home} />
                 <PublicRoute
-                  authenticated={this.state.authenticated}
+                  authenticated={this.props.authenticated}
                   path="/auth"
                   component={AuthPage}
                 />
                 <PrivateRoute
-                  authenticated={this.state.authenticated}
+                  authenticated={this.props.authenticated}
                   path="/dashboard"
                   component={Dashboard}
                 />
@@ -107,7 +93,10 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    authenticated: state.auth.authenticated,
+    loading: state.auth.loading,
+  };
 }
 
 function mapDispatchToProps(dispatch) {

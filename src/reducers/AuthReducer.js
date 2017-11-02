@@ -4,7 +4,7 @@ const initialState = {
   authenticated: false,
   error: null,
   user: null,
-  loading: false
+  loading: true
 };
 
 export default function auth(state = initialState, action) {

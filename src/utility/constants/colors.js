@@ -7,6 +7,7 @@ export default {
   teal: "#6fe5c9",
   azure: "#29b6f6",
   purple: "#796eff",
+  aquamarine: "#00bcd4",
   lightThemePrimary: "#303030",
   lightThemeSecondary: "6d6d6d",
   lightThemeDisabled: "B9BBBE",

@@ -11,6 +11,14 @@ export function signUpUser(email, password) {
       .createUserWithEmailAndPassword(email, password)
       .then(user => {
         authSuccess(dispatch, user);
+
+        user.sendEmailVerification().then(function() {
+          // Email sent.
+          console.log("sent email");
+        }).catch(function(error) {
+          // An error happened.
+          console.log("could not send verification email");
+        });
         // .updateProfile({displayName: values["displayName"]}
         // firebase.auth().currentUser.updateProfile({displayName: credentials.displayName});
       })

@@ -1,7 +1,8 @@
 import { createMuiTheme } from 'material-ui/styles';
 import colors from './constants/colors';
 
-import orange from 'material-ui/colors/lightBlue';
+import lightBlue from 'material-ui/colors/lightBlue';
+import orange from 'material-ui/colors/orange';
 import cyan from 'material-ui/colors/cyan';
 import red from 'material-ui/colors/red';
 
@@ -9,7 +10,7 @@ import red from 'material-ui/colors/red';
 export const lightTheme = createMuiTheme({
   palette: {
     primary: {
-      ...cyan,
+      ...lightBlue,
     }, // Purple and green play nicely together.
     secondary: {
       ...orange,

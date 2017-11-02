@@ -33,8 +33,6 @@ class SignUp extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-
     return (
       <div style={styles.SignUp}>
         <p style={styles.Header}>Get Started</p>
@@ -64,8 +62,7 @@ class SignUp extends Component {
             onChange={this.handleChange("confirm_password")}
           />
         </FormControl>
-        <br/>
-        <Button raised color="accent" onClick={() => this.props.actions.signUpUser(this.state.email, this.state.password)}>
+        <Button raised color="primary" onClick={() => this.props.actions.signUpUser(this.state.email, this.state.password)}>
           Sign Up
         </Button>
       </div>
