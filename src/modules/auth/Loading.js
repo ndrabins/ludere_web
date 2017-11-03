@@ -9,11 +9,6 @@ class Loading extends Component {
   }
 
   render() {
-    const buttonStyle = {
-      display: 'block',
-      margin: '10px auto'
-    };
-
     const defaultOptions = {
       loop: true,
       autoplay: true,

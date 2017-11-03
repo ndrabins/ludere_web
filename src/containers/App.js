@@ -16,7 +16,7 @@ import {lightTheme, darkTheme} from "../utility/themes";
 import { MuiThemeProvider } from "material-ui/styles";
 
 import Loading from "../modules/auth/Loading";
-import Dashboard from "./Dashboard";
+import Main from "./Main";
 import AuthPage from "./AuthPage";
 import Home from "./Home";
 
@@ -44,7 +44,7 @@ function PublicRoute({ component: Component, authenticated, ...rest }) {
         authenticated === false ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/dashboard" />
+          <Redirect to="/" />
         )}
     />
   );
@@ -72,7 +72,6 @@ class App extends Component {
           <Router>
             <div style={{ height: "100%" }}>
               <Switch>
-                <Route exact path="/" component={Home} />
                 <PublicRoute
                   authenticated={this.props.authenticated}
                   path="/auth"
@@ -80,9 +79,10 @@ class App extends Component {
                 />
                 <PrivateRoute
                   authenticated={this.props.authenticated}
-                  path="/dashboard"
-                  component={Dashboard}
-                />
+                  path="/"
+                  component={Main}
+                >
+                </PrivateRoute>
               </Switch>
             </div>
           </Router>
