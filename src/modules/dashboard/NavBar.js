@@ -3,16 +3,17 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
+import { Link } from 'react-router-dom';
+
 import colors from "../../utility/constants/colors";
 
 import MenuIcon from "material-ui-icons/Menu";
+import NotificationsIcon from "material-ui-icons/Notifications";
 import Avatar from "material-ui/Avatar";
 import IconButton from "material-ui/IconButton";
 import Menu, { MenuItem } from "material-ui/Menu";
 import MoreVertIcon from "material-ui-icons/MoreVert";
 import Button from "material-ui/Button";
-
-const drawerWidth = 240;
 
 class NavBar extends Component {
   state = {
@@ -32,6 +33,10 @@ class NavBar extends Component {
     this.setState({ open: !this.state.open });
   };
 
+  navigateToCalendar() {
+
+  }
+
   render() {
     return (
       <div style={styles.container}>
@@ -39,13 +44,13 @@ class NavBar extends Component {
           <IconButton style={{height:"100%"}}>
             <MenuIcon />
           </IconButton>
-          <Button>Calendar</Button>
-          <Button>Dashboard</Button>
+          <Button component={Link} to="/calendar">Calendar</Button>
+          <Button component={Link} to="/dashboard">Dashboard</Button>
           <Button>Invite</Button>
         </div>
         <div style={styles.navEnd}>
           <IconButton style={{ color: "white" }}>
-            <MoreVertIcon />
+            <NotificationsIcon />
           </IconButton>
           <Avatar> N </Avatar>
           <div>
@@ -84,13 +89,14 @@ const styles = {
     marginTop: -3,
     justifyContent: "space-between",
     width: "100%",
-    flexDirection: "row"
+    flexDirection: "row",
+    boxShadow: "0 2px 5px 0 rgba(0, 0, 0, 0.24)",
   },
   navEnd: {
     display: "flex",
     height: "100%",
     alignSelf: "flex-end",
-    boxShadow: "0 5.5px 5px 0 rgba(0, 0, 0, 0.24)",
+    boxShadow: "0 3px 5px 0 rgba(0, 0, 0, 0.24)",
     borderBottomLeftRadius: 100,
     width: 188,
     backgroundColor: colors.lightThemePrimary,

@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import colors from "../../utility/constants/colors"
+
+const drawerWidth = 240;
 
 class SideNav extends Component {
   render() {
@@ -13,7 +16,8 @@ class SideNav extends Component {
 const styles = {
   container: {
     display: "flex",
-    backgroundColor: "red",
+    backgroundColor: colors.lightThemePrimary,
+    width: drawerWidth,
   }
 };
 

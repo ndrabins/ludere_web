@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
-import firebase from "firebase";
 
 import {
   BrowserRouter as Router,
@@ -52,14 +51,7 @@ function PublicRoute({ component: Component, authenticated, ...rest }) {
 
 class App extends Component {
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        //this could use refactoring I think..
-        this.props.actions.verifyAuth();
-      } else {
-        console.log("logged out");
-      }
-    });
+    this.props.actions.verifyAuth();
   }
 
   render() {
