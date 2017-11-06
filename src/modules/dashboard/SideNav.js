@@ -41,8 +41,7 @@ const styles = {
     backgroundColor: "#000000"
   },
   moduleSideNav: {
-    // display: "flex",
-    position: "relative",
+    display: "flex",
     backgroundColor: colors.lightThemePrimary,
     width: drawerWidth,
     transition: "width 0.75s",
