@@ -13,12 +13,24 @@ import Dashboard from './Dashboard';
 import Calendar from './Calendar';
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      drawerVisible: true
+    };
+  }
+
+  toggleDrawer(){
+    this.setState({drawerVisible: !this.state.drawerVisible});
+  }
+
   render() {
     return (
       <div style={styles.container}>
-        <SideNav />
+        <SideNav drawerVisible={this.state.drawerVisible} />
         <div style={styles.content}>
-          <NavBar />
+          <NavBar toggleDrawer={() => this.toggleDrawer()} />
           <Route path="/dashboard" component={Dashboard}/>
           <Route path="/calendar" component={Calendar}/>
         </div>

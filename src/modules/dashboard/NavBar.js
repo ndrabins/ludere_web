@@ -29,21 +29,13 @@ class NavBar extends Component {
     this.setState({ openNavMenu: false });
   };
 
-  handleDrawerToggle = () => {
-    this.setState({ open: !this.state.open });
-  };
-
-  navigateToCalendar() {
-
-  }
-
   render() {
     return (
       <div style={styles.container}>
         <div style={styles.navBegin}>
-          <IconButton style={{height:"100%"}}>
+          <Button dense style={styles.menuButton} onClick={this.props.toggleDrawer}>
             <MenuIcon />
-          </IconButton>
+          </Button>
           <Button component={Link} to="/calendar">Calendar</Button>
           <Button component={Link} to="/dashboard">Dashboard</Button>
           <Button>Invite</Button>
@@ -107,6 +99,13 @@ const styles = {
     display: "flex",
     justifyContent: "center",
   },
+  menuButton: {
+    height:"100%",
+    color:"white",
+    width: 58,
+    marginLeft: -2,
+    backgroundColor: colors.lightThemePrimary,
+  }
 };
 
 function mapStateToProps(state) {
