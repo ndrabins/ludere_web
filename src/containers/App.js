@@ -6,18 +6,17 @@ import * as Actions from "../actions";
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Redirect,
   Switch
 } from "react-router-dom";
 
-import {lightTheme, darkTheme} from "../utility/themes";
+import {lightTheme} from "../utility/themes"; //darkTheme
 import { MuiThemeProvider } from "material-ui/styles";
 
 import Loading from "../modules/auth/Loading";
 import Main from "./Main";
 import AuthPage from "./AuthPage";
-import Home from "./Home";
+// import Home from "./Home";
 
 function PrivateRoute({ component: Component, authenticated, ...rest }) {
   return (

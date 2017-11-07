@@ -76,7 +76,7 @@ const styles = {
   container: {
     display: "flex",
     backgroundColor: colors.lightThemeDefault,
-    border: "1px solid #979797",
+    borderBottom: "1px solid #B9BBBE",
     height: 64,
     justifyContent: "space-between",
     flexDirection: "row",
@@ -101,7 +101,7 @@ const styles = {
     height:"100%",
     color:"white",
     width: 58,
-    marginLeft: -2,
+    borderRadius: 0,
     backgroundColor: colors.lightThemePrimary,
   }
 };

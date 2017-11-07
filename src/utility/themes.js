@@ -1,9 +1,9 @@
 import { createMuiTheme } from 'material-ui/styles';
-import colors from './constants/colors';
+// import colors from './constants/colors';
 
 import lightBlue from 'material-ui/colors/lightBlue';
 import orange from 'material-ui/colors/orange';
-import cyan from 'material-ui/colors/cyan';
+// import cyan from 'material-ui/colors/cyan';
 import red from 'material-ui/colors/red';
 
 //https://material-ui-next.com/customization/themes/

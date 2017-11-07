@@ -28,7 +28,8 @@ export default function auth(state = initialState, action) {
         ...state,
         user: null,
         authenticated: false,
-        error: null
+        error: null,
+        loading: false
       };
     case AUTH_ERROR:
       return {

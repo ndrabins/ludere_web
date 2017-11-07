@@ -8,7 +8,9 @@ class SideNav extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <div style={styles.teamSideNav} />
+        <div style={styles.teamSideNav}>
+
+        </div>
         <div
           style={
             this.props.drawerVisible
@@ -41,18 +43,18 @@ const styles = {
     backgroundColor: "#000000"
   },
   moduleSideNav: {
-    // display: "flex",
     position: "relative",
     backgroundColor: colors.lightThemePrimary,
     width: drawerWidth,
-    transition: "width 0.75s",
+    transition: "width 0.75s ease",
     overflow: "hidden",
+    boxShadow: "0 9px 18px 0 rgba(0, 0, 0, 0.18)",
   },
   moduleSideNavClosed: {
     width: 0,
     backgroundColor: colors.lightThemePrimary,
     overflow: "hidden",
-    transition: "width 0.75s"
+    transition: "width 0.75s ease"
   },
   sideNavInner: {
     width: drawerWidth

@@ -3,10 +3,11 @@ import { combineReducers } from "redux";
 
 //Reducers
 import AuthReducer from "./AuthReducer";
+import TeamReducer from "./TeamReducer";
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
-  // router: routerReducer
+  team: TeamReducer,
 });
 
 export default rootReducer;
