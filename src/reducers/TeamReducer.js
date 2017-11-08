@@ -4,7 +4,10 @@ import {
   CREATE_TEAM_ERROR,
   JOIN_TEAM,
   JOIN_TEAM_SUCCESS,
-  JOIN_TEAM_ERROR
+  JOIN_TEAM_ERROR,
+  FETCH_TEAMS,
+  FETCH_TEAMS_SUCCESS,
+  FETCH_TEAMS_ERROR,
 } from "../actions/types";
 
 const initialState = {
@@ -16,6 +19,11 @@ export default function team(state = initialState, action) {
     case CREATE_TEAM:
       return {
         ...state,
+      };
+    case FETCH_TEAMS:
+      return {
+        ...state,
+        teams: ["team1", "team2"]
       };
     default:
       return state;

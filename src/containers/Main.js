@@ -21,6 +21,11 @@ class Main extends Component {
     };
   }
 
+  componentDidMount(){
+    this.props.actions.loadAppData();
+    this.props.actions.fetchTeams();
+  }
+
   toggleDrawer(){
     this.setState({drawerVisible: !this.state.drawerVisible});
   }

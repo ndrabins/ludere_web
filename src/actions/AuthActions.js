@@ -1,4 +1,12 @@
-import { AUTH_ERROR, AUTH_USER, SIGN_OUT_USER, AUTH_SUCCESS } from "./types";
+import {
+  AUTH_ERROR,
+  AUTH_USER,
+  SIGN_OUT_USER,
+  AUTH_SUCCESS,
+  LOAD_APP_DATA,
+  LOAD_APP_DATA_SUCCESS,
+  LOAD_APP_DATA_ERROR
+} from "./types";
 import firebase from "firebase";
 
 export function signUpUser(email, password) {
@@ -12,13 +20,16 @@ export function signUpUser(email, password) {
       .then(user => {
         authSuccess(dispatch, user);
 
-        user.sendEmailVerification().then(function() {
-          // Email sent.
-          console.log("sent email");
-        }).catch(function(error) {
-          // An error happened.
-          console.log("could not send verification email");
-        });
+        user
+          .sendEmailVerification()
+          .then(function() {
+            // Email sent.
+            console.log("sent email");
+          })
+          .catch(function(error) {
+            // An error happened.
+            console.log("could not send verification email");
+          });
         // .updateProfile({displayName: values["displayName"]}
         // firebase.auth().currentUser.updateProfile({displayName: credentials.displayName});
       })
@@ -88,3 +99,9 @@ const authSuccess = (dispatch, user) => {
     payload: user
   });
 };
+
+export function loadAppData() {
+  return dispatch => {
+    dispatch({ type: LOAD_APP_DATA });
+  };
+}

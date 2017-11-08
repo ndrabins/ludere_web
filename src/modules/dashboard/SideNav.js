@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import colors from "../../utility/constants/colors";
 import logoWhite from "../../static/light.svg";
 
+import TeamNav from "./TeamNav";
+
 const drawerWidth = 240;
 
 class SideNav extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <div style={styles.teamSideNav}>
-
-        </div>
+        <TeamNav />
         <div
           style={
             this.props.drawerVisible
@@ -48,7 +48,7 @@ const styles = {
     width: drawerWidth,
     transition: "width 0.75s ease",
     overflow: "hidden",
-    boxShadow: "0 9px 18px 0 rgba(0, 0, 0, 0.18)",
+    boxShadow: "0 9px 18px 0 rgba(0, 0, 0, 0.18)"
   },
   moduleSideNavClosed: {
     width: 0,
@@ -62,7 +62,7 @@ const styles = {
   logo: {
     position: "static",
     padding: 15,
-    width: 200,
+    width: 200
   }
 };
 
