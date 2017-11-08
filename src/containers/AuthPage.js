@@ -35,8 +35,8 @@ class AuthPage extends Component {
         <div style={styles.entryContainer}>
           <img src={logoWhite} alt="Logo" />
           <div style={styles.inputForm}>
-            <SignUp onClick={this.props.toggleSignUp} toggleSignUp={() => this.toggleSignUp()}/>
-            <SignIn onClick={this.props.toggleSignIn} toggleSignIn={() => this.toggleSignIn()}/>
+            <SignUp toggleSignUp={() => this.toggleSignUp()}/>
+            <SignIn toggleSignIn={() => this.toggleSignIn()}/>
           </div>
         </div>
       </div>
