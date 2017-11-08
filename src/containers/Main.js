@@ -33,9 +33,9 @@ class Main extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <SideNav drawerVisible={this.state.drawerVisible} />
+        <SideNav toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible} />
         <div style={styles.content}>
-          <NavBar toggleDrawer={() => this.toggleDrawer()} />
+          <NavBar toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible}/>
           <Route path="/dashboard" component={Dashboard}/>
           <Route path="/calendar" component={Calendar}/>
         </div>

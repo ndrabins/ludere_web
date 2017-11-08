@@ -1,13 +1,32 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../../actions";
+
 import Button from "material-ui/Button";
 import AddIcon from "material-ui-icons/Add";
 import Avatar from "material-ui/Avatar";
 import PeopleIcon from "material-ui-icons/PeopleOutline";
 import Tooltip from "material-ui/Tooltip";
 
-import AddTeamButton from './AddTeamButton';
+import AddTeamButton from "./AddTeamButton";
 
 class TeamNav extends Component {
+  renderTeams() {
+    if(!this.props.teams){
+      return;
+    }
+    console.log("our teams are:", this.props.teams);
+    let teams = this.props.teams.map((team, index) => {
+        return (
+          <Button key={index} fab style={styles.teamButton}>
+            <Avatar style={styles.avatar}>H</Avatar>
+          </Button>
+        )
+    });
+    return teams;
+  }
+
   render() {
     return (
       <div style={styles.container}>
@@ -16,10 +35,8 @@ class TeamNav extends Component {
             <PeopleIcon />
           </Button>
         </Tooltip>
-        <Button fab style={styles.teamButton}>
-          <Avatar style={styles.avatar}>H</Avatar>
-        </Button>
-         <AddTeamButton />
+        {this.renderTeams()}
+        <AddTeamButton />
       </div>
     );
   }
@@ -53,4 +70,16 @@ const styles = {
   }
 };
 
-export default TeamNav;
+function mapStateToProps(state) {
+  return {
+    teams: state.team.teams
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamNav);

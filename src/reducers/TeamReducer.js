@@ -23,7 +23,7 @@ export default function team(state = initialState, action) {
     case FETCH_TEAMS:
       return {
         ...state,
-        teams: ["team1", "team2"]
+        teams: action.teams
       };
     default:
       return state;

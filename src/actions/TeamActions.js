@@ -24,15 +24,19 @@ export function createTeam(teamName) {
 export function fetchTeams() {
   console.log("Fetching teams");
 
-  return dispatch => {
+  return (dispatch, getState) => {
+    let {uid} = getState().auth.user;
     dispatch({ type: FETCH_TEAMS });
 
     let teamRef = firebase.firestore().collection("teams");
-
-    teamRef.where(`members.timmy`, '==', true).get().then(function(querySnapshot) {
+    teamRef.where(`members.${uid}`, '==', true).onSnapshot(function(querySnapshot) {
+      var teams = [];
       querySnapshot.forEach(function(doc) {
+        teams.push(doc.data());
         console.log(doc.id, " => ", doc.data());
       });
+      dispatch({ type: FETCH_TEAMS, teams: teams });
+      console.log(teams);
     });
   };
 }

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import colors from "../../utility/constants/colors";
 
@@ -13,6 +13,7 @@ import Avatar from "material-ui/Avatar";
 import IconButton from "material-ui/IconButton";
 import Menu, { MenuItem } from "material-ui/Menu";
 import MoreVertIcon from "material-ui-icons/MoreVert";
+import CloseIcon from "material-ui-icons/Close";
 import Button from "material-ui/Button";
 
 class NavBar extends Component {
@@ -33,11 +34,21 @@ class NavBar extends Component {
     return (
       <div style={styles.container}>
         <div style={styles.navBegin}>
-          <Button dense style={styles.menuButton} onClick={this.props.toggleDrawer}>
-            <MenuIcon />
+          {!this.props.drawerVisible && (
+            <Button
+              dense
+              style={styles.menuButton}
+              onClick={this.props.toggleDrawer}
+            >
+              <MenuIcon />
+            </Button>
+          )}
+          <Button component={Link} to="/calendar">
+            Calendar
           </Button>
-          <Button component={Link} to="/calendar">Calendar</Button>
-          <Button component={Link} to="/dashboard">Dashboard</Button>
+          <Button component={Link} to="/dashboard">
+            Dashboard
+          </Button>
           <Button>Invite</Button>
         </div>
         <div style={styles.navEnd}>
@@ -80,7 +91,7 @@ const styles = {
     height: 64,
     justifyContent: "space-between",
     flexDirection: "row",
-    boxShadow: "0 2px 5px 0 rgba(0, 0, 0, 0.24)",
+    boxShadow: "0 2px 5px 0 rgba(0, 0, 0, 0.24)"
   },
   navEnd: {
     display: "flex",
@@ -95,14 +106,14 @@ const styles = {
   },
   navBegin: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   menuButton: {
-    height:"100%",
-    color:"white",
+    height: "100%",
+    color: "white",
     width: 58,
     borderRadius: 0,
-    backgroundColor: colors.lightThemePrimary,
+    backgroundColor: colors.lightThemePrimary
   }
 };
 
