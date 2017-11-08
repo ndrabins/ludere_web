@@ -14,35 +14,29 @@ class AuthPage extends Component {
     super(props);
 
     this.state = {
-      initial: true,
-      signUpClick: false,
-      signInClick: false
+      signUpVisible: false,
+      signInVisible: false,
     };
   }
 
-  handleSignUpClick = () => {
-    this.setState({ initial: false });
-    this.setState({ signInClick: false });
-    this.setState({ signUpClick: true });
+  toggleSignUp(){
+    this.setState({ signUpVisible: !this.state.signUpVisible});
     console.log("Sign Up Click");
   }
 
-  handleSignInClick = () => {
-    this.setState({ initial: false });
-    this.setState({ signUpClick: false });
-    this.setState({ signInClick: true });
+  toggleSignIn(){
+    this.setState({ signInVisible: !this.state.signInVisible});
     console.log("Sign In Click");
   }
 
   render() {
     return (
-      <div style={styles.AuthPage}>
+      <div style={styles.authPage}>
         <div style={styles.entryContainer}>
           <img src={logoWhite} alt="Logo" />
-          <br />
           <div style={styles.inputForm}>
-            <SignUp />
-            <SignIn />
+            <SignUp onClick={this.props.toggleSignUp} toggleSignUp={() => this.toggleSignUp()}/>
+            <SignIn onClick={this.props.toggleSignIn} toggleSignIn={() => this.toggleSignIn()}/>
           </div>
         </div>
       </div>
@@ -51,7 +45,7 @@ class AuthPage extends Component {
 }
 
 const styles = {
-  AuthPage: {
+  authPage: {
     backgroundSize: "cover",
     height: "100vh",
     overflow: "hidden",
@@ -72,20 +66,9 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    alignSelf: "center"
+    alignSelf: "center",
+    paddingTop: "20px",
   },
-  // SignUp: {
-  //   ":hover": {
-  //     transition: "1s",
-  //     left: 0
-  //   }
-  // },
-  // SignIn: {
-  //   ":hover": {
-  //     transition: "1s",
-  //     right: 0
-  //   }
-  // }
 };
 
 function mapStateToProps(state) {
