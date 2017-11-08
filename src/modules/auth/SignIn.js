@@ -17,6 +17,8 @@ class SignIn extends Component {
       email: '',
       password: '',
       showPassword: false,
+
+      // loginTransition: null,      
     };
   }
 
@@ -35,10 +37,11 @@ class SignIn extends Component {
   render() {
     return (
       <div style={
-        this.props.signInVisible
+        this.props.loginTransition === "SignIn"
           ? styles.moduleSignInOpen
           : styles.moduleSignInClosed
         }
+        onClick={this.props.toggleSignIn}
       >
         <p style={styles.header}>Log In</p>
         <FormControl style={styles.formControl}>
@@ -88,8 +91,24 @@ const styles = {
   },
   moduleSignInOpen: {
     position: "relative",
-    width: "500px",
     transition: "width 0.75s ease",
+    
+    width: "500px",
+    minHeight: "300px",    
+
+
+    display: "flex",    
+    flexWrap: "wrap",
+    flexDirection: "column",
+    overflow: "auto",
+    
+    alignSelf: "center",
+    alignItems:"left",
+
+    padding: "50px",
+    backgroundImage: `linear-gradient(to left, #6fe5c9, #00bcd4), linear-gradient(#000000, #000000)`,
+    borderRadius: "0px 6px 6px 0px",
+    color: "white",
   },
   header: {
     alignSelf: "left",

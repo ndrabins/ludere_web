@@ -17,6 +17,7 @@ class SignUp extends Component {
       password: "",
       confirm_password: "",
       showPassword: false,
+
     };
   }
 
@@ -35,10 +36,11 @@ class SignUp extends Component {
   render() {
     return (
       <div style={
-        this.props.signUpVisible
+        this.props.loginTransition === "SignUp"
           ? styles.moduleSignUpOpen
           : styles.moduleSignUpClosed
         }
+        onClick={this.props.toggleSignUp}
       >
         <p style={styles.header}>Get Started</p>
         <FormControl style={styles.formControl}>
@@ -94,13 +96,30 @@ const styles = {
     backgroundColor: 'rgba(48, 48, 48, 0.5)',
     borderRadius: "6px 0px 0px 6px",
     color: "white",
-    fontFamily: "Roboto",
 
     transition: "width 0.75s ease",
   },
   moduleSignUpOpen: {
     position: "relative",
     width: "500px",
+    transition: "width 0.75s ease",
+
+    minWidth: "200px",
+    minHeight: "300px",
+
+    display: "flex",    
+    flexWrap: "wrap",
+    flexDirection: "column",
+    overflow: "auto",    
+   
+    alignSelf: "center",
+    alignItems: "left",
+    
+    padding: "50px",
+    backgroundColor: 'rgba(48, 48, 48, 0.5)',
+    borderRadius: "6px 0px 0px 6px",
+    color: "white",
+
     transition: "width 0.75s ease",
   },
   header: {

@@ -14,18 +14,17 @@ class AuthPage extends Component {
     super(props);
 
     this.state = {
-      signUpVisible: false,
-      signInVisible: false,
+      loginTransition: null,
     };
   }
 
   toggleSignUp(){
-    this.setState({ signUpVisible: !this.state.signUpVisible});
+    this.setState({ loginTransition: "SignUp"});
     console.log("Sign Up Click");
   }
 
   toggleSignIn(){
-    this.setState({ signInVisible: !this.state.signInVisible});
+    this.setState({ loginTransition: "SignIn"});
     console.log("Sign In Click");
   }
 
@@ -35,8 +34,8 @@ class AuthPage extends Component {
         <div style={styles.entryContainer}>
           <img src={logoWhite} alt="Logo" />
           <div style={styles.inputForm}>
-            <SignUp toggleSignUp={() => this.toggleSignUp()}/>
-            <SignIn toggleSignIn={() => this.toggleSignIn()}/>
+            <SignUp toggleSignUp={() => this.toggleSignUp()} loginTransition={this.state.loginTransition}/>
+            <SignIn toggleSignIn={() => this.toggleSignIn()} loginTransition={this.state.loginTransition}/>
           </div>
         </div>
       </div>
