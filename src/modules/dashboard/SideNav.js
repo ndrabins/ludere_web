@@ -5,6 +5,7 @@ import CloseIcon from "material-ui-icons/Close";
 import IconButton from 'material-ui/IconButton';
 
 import TeamNav from "./TeamNav";
+import SideNavModules from './SideNavModules';
 
 const drawerWidth = 240;
 
@@ -30,10 +31,7 @@ class SideNav extends Component {
                 <CloseIcon />
               </IconButton>
             </div>
-            <p>something something something</p>
-            <p>something something something</p>
-            <p>something something something</p>
-            <p>something something something</p>
+            <SideNavModules />
           </div>
         </div>
       </div>

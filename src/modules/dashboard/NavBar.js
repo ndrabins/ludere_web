@@ -12,9 +12,10 @@ import NotificationsIcon from "material-ui-icons/Notifications";
 import Avatar from "material-ui/Avatar";
 import IconButton from "material-ui/IconButton";
 import Menu, { MenuItem } from "material-ui/Menu";
+import Button from "material-ui/Button";
 import MoreVertIcon from "material-ui-icons/MoreVert";
 import CloseIcon from "material-ui-icons/Close";
-import Button from "material-ui/Button";
+import PersonAdd from 'material-ui-icons/PersonAdd';
 
 class NavBar extends Component {
   state = {
@@ -49,7 +50,10 @@ class NavBar extends Component {
           <Button component={Link} to="/dashboard">
             Dashboard
           </Button>
-          <Button>Invite</Button>
+          <Button>
+            Invite
+            <PersonAdd style={styles.personAdd} />
+          </Button>
         </div>
         <div style={styles.navEnd}>
           <IconButton style={{ color: "white" }}>
@@ -114,6 +118,14 @@ const styles = {
     width: 58,
     borderRadius: 0,
     backgroundColor: colors.lightThemePrimary
+  },
+  personAdd:{
+    color: "white",
+    background: 'linear-gradient(to right, #29b6f6, #796eff)',
+    width: 22,
+    height: 22,
+    borderRadius: 20,
+    marginLeft: 10,
   }
 };
 
