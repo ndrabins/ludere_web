@@ -13,30 +13,52 @@ import {
 import firebase from "firebase";
 require("firebase/firestore");
 
-export function createTeam(teamName) {
-  console.log("Joining :", teamName);
+export function createTeam(teamName, description = "") {
+  return (dispatch, getState) => {
+    let { uid } = getState().auth.user;
 
-  return dispatch => {
+    let team = {
+      description: description,
+      members: {},
+      modules: {
+        chat: true,
+        kanban: true
+      },
+      members: {},
+      name: teamName
+    };
+    team.members[uid] = true;
+
     dispatch({ type: CREATE_TEAM });
+
+    firebase
+      .firestore()
+      .collection("teams")
+      .add(team)
+      .then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+        dispatch({ type: CREATE_TEAM_SUCCESS });
+      })
+      .catch(function(error) {
+        console.error("Error adding document: ", error);
+      });
   };
 }
 
 export function fetchTeams() {
-  console.log("Fetching teams");
-
   return (dispatch, getState) => {
-    let {uid} = getState().auth.user;
+    let { uid } = getState().auth.user;
     dispatch({ type: FETCH_TEAMS });
 
     let teamRef = firebase.firestore().collection("teams");
-    teamRef.where(`members.${uid}`, '==', true).onSnapshot(function(querySnapshot) {
-      var teams = [];
-      querySnapshot.forEach(function(doc) {
-        teams.push(doc.data());
-        console.log(doc.id, " => ", doc.data());
+    teamRef
+      .where(`members.${uid}`, "==", true)
+      .onSnapshot(function(querySnapshot) {
+        var teams = {};
+        querySnapshot.forEach(function(doc) {
+          teams[doc.id] = doc.data();
+        });
+        dispatch({ type: FETCH_TEAMS_SUCCESS, teams: teams });
       });
-      dispatch({ type: FETCH_TEAMS, teams: teams });
-      console.log(teams);
-    });
   };
 }

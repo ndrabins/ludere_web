@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
+import Map from "lodash/map";
 
 import Button from "material-ui/Button";
 import AddIcon from "material-ui-icons/Add";
@@ -17,9 +18,9 @@ class TeamNav extends Component {
       return;
     }
     console.log("our teams are:", this.props.teams);
-    let teams = this.props.teams.map((team, index) => {
+    let teams = Map(this.props.teams, (team, key) => {
         return (
-          <Button key={index} fab style={styles.teamButton}>
+          <Button key={key} fab style={styles.teamButton}>
             <Avatar style={styles.avatar}>H</Avatar>
           </Button>
         )

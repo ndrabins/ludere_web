@@ -11,7 +11,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  teams: [],
+  teams: {},
 };
 
 export default function team(state = initialState, action) {
@@ -20,7 +20,15 @@ export default function team(state = initialState, action) {
       return {
         ...state,
       };
+    case CREATE_TEAM_SUCCESS:
+      return {
+        ...state,
+      }
     case FETCH_TEAMS:
+      return {
+        ...state,
+      };
+      case FETCH_TEAMS_SUCCESS:
       return {
         ...state,
         teams: action.teams
