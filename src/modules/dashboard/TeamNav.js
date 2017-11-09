@@ -22,13 +22,15 @@ class TeamNav extends Component {
       return (
         <div key={key} style={styles.teamButtonContainer}>
           <div style={this.props.selectedTeam === key ? styles.selectIndicator : null}/>
-          <Button
-            fab
-            style={styles.teamButton}
-            onClick={() => this.props.actions.selectTeam(key)}
-          >
-            <Avatar style={styles.avatar}>H</Avatar>
-          </Button>
+          <Tooltip id="tooltip-right-start" title={team.name} placement="right">
+            <Button
+              fab
+              style={styles.teamButton}
+              onClick={() => this.props.actions.selectTeam(key)}
+            >
+              <Avatar style={styles.avatar}>H</Avatar>
+            </Button>
+          </Tooltip>
         </div>
       );
     });
@@ -67,16 +69,16 @@ const styles = {
     background: `linear-gradient(to left, #6fe5c9, #00bcd4)`
   },
   teamButton: {
-    position: 'absolute',
-    left: 11,
     width: 36,
     height: 36,
+    marginLeft: 11
   },
   avatar: {
     width: 36,
     height: 36
   },
   selectIndicator: {
+    position:'absolute',
     width:5,
     height: 38,
     backgroundColor :'white',
@@ -88,8 +90,6 @@ const styles = {
     flexDirection: 'row',
     width: '100%',
     height: 38,
-    // justifyContent: 'center',
-    alignItems: 'center',
     margin: "4px 0px 4px 0px"
   }
 };
