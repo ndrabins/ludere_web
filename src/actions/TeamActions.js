@@ -49,7 +49,9 @@ export function createTeam(teamName, description = "") {
 export function fetchTeams() {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
+    let firstTeam = null;
     dispatch({ type: FETCH_TEAMS });
+
 
     let teamRef = firebase.firestore().collection("teams");
     teamRef
@@ -57,15 +59,19 @@ export function fetchTeams() {
       .onSnapshot(function(querySnapshot) {
         var teams = {};
         querySnapshot.forEach(function(doc) {
+          if(firstTeam === null){
+            firstTeam = doc.id;
+          }
           teams[doc.id] = doc.data();
         });
+        dispatch(selectTeam(firstTeam));
         dispatch({ type: FETCH_TEAMS_SUCCESS, teams: teams });
       });
   };
 }
 
-export function selectTeam(teamID){
+export function selectTeam(teamID) {
   return dispatch => {
     dispatch({ type: SELECT_TEAM, selectedTeam: teamID });
-  }
+  };
 }

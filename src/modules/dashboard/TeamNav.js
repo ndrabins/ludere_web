@@ -5,7 +5,6 @@ import * as Actions from "../../actions";
 import Map from "lodash/map";
 
 import Button from "material-ui/Button";
-import AddIcon from "material-ui-icons/Add";
 import Avatar from "material-ui/Avatar";
 import PeopleIcon from "material-ui-icons/PeopleOutline";
 import Tooltip from "material-ui/Tooltip";
@@ -17,7 +16,6 @@ class TeamNav extends Component {
     if (!this.props.teams) {
       return;
     }
-    console.log("our teams are:", this.props.teams);
     let teams = Map(this.props.teams, (team, key) => {
       return (
         <div key={key} style={styles.teamButtonContainer}>
@@ -79,7 +77,7 @@ const styles = {
   },
   selectIndicator: {
     position:'absolute',
-    width:5,
+    width:4,
     height: 38,
     backgroundColor :'white',
     borderTopRightRadius: 4,

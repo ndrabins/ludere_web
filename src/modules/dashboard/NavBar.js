@@ -14,7 +14,6 @@ import IconButton from "material-ui/IconButton";
 import Menu, { MenuItem } from "material-ui/Menu";
 import Button from "material-ui/Button";
 import MoreVertIcon from "material-ui-icons/MoreVert";
-import CloseIcon from "material-ui-icons/Close";
 import PersonAdd from 'material-ui-icons/PersonAdd';
 
 class NavBar extends Component {
