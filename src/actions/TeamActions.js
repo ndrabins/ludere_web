@@ -7,7 +7,8 @@ import {
   JOIN_TEAM_ERROR,
   FETCH_TEAMS,
   FETCH_TEAMS_SUCCESS,
-  FETCH_TEAMS_ERROR
+  FETCH_TEAMS_ERROR,
+  SELECT_TEAM
 } from "./types";
 
 import firebase from "firebase";
@@ -61,4 +62,10 @@ export function fetchTeams() {
         dispatch({ type: FETCH_TEAMS_SUCCESS, teams: teams });
       });
   };
+}
+
+export function selectTeam(teamID){
+  return dispatch => {
+    dispatch({ type: SELECT_TEAM, selectedTeam: teamID });
+  }
 }

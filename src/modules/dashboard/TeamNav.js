@@ -14,16 +14,23 @@ import AddTeamButton from "./AddTeamButton";
 
 class TeamNav extends Component {
   renderTeams() {
-    if(!this.props.teams){
+    if (!this.props.teams) {
       return;
     }
     console.log("our teams are:", this.props.teams);
     let teams = Map(this.props.teams, (team, key) => {
-        return (
-          <Button key={key} fab style={styles.teamButton}>
+      return (
+        <div key={key} style={styles.teamButtonContainer}>
+          <div style={this.props.selectedTeam === key ? styles.selectIndicator : null}/>
+          <Button
+            fab
+            style={styles.teamButton}
+            onClick={() => this.props.actions.selectTeam(key)}
+          >
             <Avatar style={styles.avatar}>H</Avatar>
           </Button>
-        )
+        </div>
+      );
     });
     return teams;
   }
@@ -60,20 +67,37 @@ const styles = {
     background: `linear-gradient(to left, #6fe5c9, #00bcd4)`
   },
   teamButton: {
+    position: 'absolute',
+    left: 11,
     width: 36,
     height: 36,
-    margin: "8px 0px 8px 0px"
   },
-
   avatar: {
     width: 36,
     height: 36
+  },
+  selectIndicator: {
+    width:5,
+    height: 38,
+    backgroundColor :'white',
+    borderTopRightRadius: 4,
+    borderBottomRightRadius: 4,
+  },
+  teamButtonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    height: 38,
+    // justifyContent: 'center',
+    alignItems: 'center',
+    margin: "4px 0px 4px 0px"
   }
 };
 
 function mapStateToProps(state) {
   return {
-    teams: state.team.teams
+    teams: state.team.teams,
+    selectedTeam: state.team.selectedTeam
   };
 }
 

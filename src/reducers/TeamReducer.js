@@ -8,33 +8,39 @@ import {
   FETCH_TEAMS,
   FETCH_TEAMS_SUCCESS,
   FETCH_TEAMS_ERROR,
+  SELECT_TEAM
 } from "../actions/types";
 
 const initialState = {
   teams: {},
+  selectedTeam: null
 };
 
 export default function team(state = initialState, action) {
   switch (action.type) {
     case CREATE_TEAM:
       return {
-        ...state,
+        ...state
       };
     case CREATE_TEAM_SUCCESS:
       return {
-        ...state,
-      }
+        ...state
+      };
     case FETCH_TEAMS:
       return {
-        ...state,
+        ...state
       };
-      case FETCH_TEAMS_SUCCESS:
+    case FETCH_TEAMS_SUCCESS:
       return {
         ...state,
         teams: action.teams
+      };
+    case SELECT_TEAM:
+      return {
+        ...state,
+        selectedTeam: action.selectedTeam
       };
     default:
       return state;
   }
 }
-
