@@ -5,7 +5,10 @@ import {
   CREATE_CHANNEL_ERROR,
   FETCH_CHANNELS,
   FETCH_CHANNELS_SUCCESS,
-  FETCH_CHANNELS_ERROR
+  FETCH_CHANNELS_ERROR,
+  FETCH_MESSAGES,
+  FETCH_MESSAGES_SUCCESS,
+  FETCH_MESSAGES_ERROR,
 } from "./types";
 
 import firebase from "firebase";
@@ -62,5 +65,16 @@ export function selectChannel(channelID) {
   console.log("selected", channelID);
   return dispatch => {
     dispatch({ type: SELECT_CHANNEL, selectedChannel: channelID});
+
+    dispatch({ type: FETCH_MESSAGES});
+    let messageRef = firebase.firestore().collection(`chat/${channelID}/messages`);
+    messageRef
+      .onSnapshot(function(querySnapshot) {
+        var messages = {};
+        querySnapshot.forEach(function(doc) {
+          messages[doc.id] = doc.data();
+        });
+        dispatch({ type: FETCH_MESSAGES_SUCCESS, messages: messages });
+    });
   };
 }

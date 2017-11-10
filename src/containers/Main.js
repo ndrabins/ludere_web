@@ -8,9 +8,11 @@ import {Route} from 'react-router-dom';
 import NavBar from "../modules/dashboard/NavBar";
 import SideNav from "../modules/dashboard/SideNav";
 
-//Modules?
 import Dashboard from './Dashboard';
 import Calendar from './Calendar';
+
+//Modules
+import Chat from '../modules/chat/Chat';
 
 class Main extends Component {
   constructor(props) {
@@ -38,6 +40,7 @@ class Main extends Component {
           <NavBar toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible}/>
           <Route path="/dashboard" component={Dashboard}/>
           <Route path="/calendar" component={Calendar}/>
+          <Route path="/chat" component={Chat} />
         </div>
       </div>
     );

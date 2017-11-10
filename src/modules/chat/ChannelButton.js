@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
+import { Link } from "react-router-dom";
+
 class ChannelButton extends Component {
   state = {
     anchorEl: null,
@@ -38,55 +40,45 @@ class ChannelButton extends Component {
     }
 
     return (
-      <div
+      <Link
         style={channelStyle}
         onMouseEnter={this.handleHover}
         onMouseLeave={this.handleHover}
         onClick={this.handleClick}
+        to="/chat"
       >
-        {this.props.name}
-      </div>
+        # {this.props.name}
+      </Link>
     );
   }
 }
 
+const baseStyle = {
+  textDecoration: 'none',
+  color: "white",
+  marginLeft: 8,
+  marginRight: 8,
+  marginTop: 1,
+  marginBottom: 1,
+  display: "flex",
+  alignContent: "center",
+  padding: 5,
+  paddingLeft: 50
+}
+
 const styles = {
   channel: {
-    color: "white",
-    marginLeft: 8,
-    marginRight: 8,
-    marginTop: 1,
-    marginBottom: 1,
-    display: "flex",
-    alignContent: "center",
-    padding: 5,
-    paddingLeft: 50
+    ...baseStyle
   },
   hoveredChannel: {
-    color: "white",
-    marginLeft: 8,
-    marginRight: 8,
-    marginTop: 1,
-    marginBottom: 1,
-    display: "flex",
-    alignContent: "center",
-    padding: 5,
-    paddingLeft: 50,
-    backgroundColor: "#2B2B2B",
+    ...baseStyle,
+    backgroundColor: "#424242",
     borderRadius: 5,
     cursor: "pointer"
   },
   selectedChannel: {
-    color: "white",
-    marginLeft: 8,
-    marginRight: 8,
-    marginTop: 1,
-    marginBottom: 1,
-    display: "flex",
-    alignContent: "center",
-    padding: 5,
-    paddingLeft: 50,
-    backgroundColor: "#575757",
+    ...baseStyle,
+    backgroundColor: "#616161",
     borderRadius: 5,
   }
 };

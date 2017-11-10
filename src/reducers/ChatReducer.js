@@ -5,12 +5,17 @@ import {
   CREATE_CHANNEL_ERROR,
   FETCH_CHANNELS,
   FETCH_CHANNELS_SUCCESS,
-  FETCH_CHANNELS_ERROR
+  FETCH_CHANNELS_ERROR,
+  FETCH_MESSAGES,
+  FETCH_MESSAGES_SUCCESS,
+  FETCH_MESSAGES_ERROR,
 } from "../actions/types";
 
 const initialState = {
   channels: {},
-  selectedChannel: null
+  messages: {},
+  selectedChannel: null,
+
 };
 
 export default function team(state = initialState, action) {
@@ -42,6 +47,19 @@ export default function team(state = initialState, action) {
         ...state
       };
     case CREATE_CHANNEL_ERROR:
+      return {
+        ...state
+      };
+    case FETCH_MESSAGES:
+      return {
+        ...state
+      };
+    case FETCH_MESSAGES_SUCCESS:
+      return {
+        ...state,
+        messages: action.messages
+      };
+    case FETCH_MESSAGES_ERROR:
       return {
         ...state
       };
