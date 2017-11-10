@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ChatSideNav from '../chat/chatSideNav';
+import ChatSideNav from '../chat/ChatSideNav';
 import BoardsSideNav from '../boards/boardsSideNav';
 
 class SideNavModules extends Component {

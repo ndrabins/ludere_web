@@ -125,6 +125,7 @@ const styles = {
     height: 22,
     borderRadius: 20,
     marginLeft: 10,
+    padding:2
   }
 };
 

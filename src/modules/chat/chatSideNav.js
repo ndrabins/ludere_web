@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import IconButton from 'material-ui/IconButton';
-import AddIcon from "material-ui-icons/Add";
 import Message from 'material-ui-icons/Message';
 
+import CreateChannelButton from './CreateChannelButton';
 import ChannelList from './ChannelList';
+
 class ChatSideNav extends Component {
   render() {
     return (
@@ -16,9 +16,7 @@ class ChatSideNav extends Component {
               Chat
             </div>
           </div>
-          <IconButton style={{width:26, height:26, color: "white", background: 'linear-gradient(to right, #e57373, #ee8d68)'}}>
-            <AddIcon />
-          </IconButton>
+         <CreateChannelButton />
         </div>
         <div>
           <ChannelList />

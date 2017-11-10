@@ -1,7 +1,3 @@
-import MoreVertIcon from "material-ui-icons/MoreVert";
-import IconButton from "material-ui/IconButton";
-import Menu, { MenuItem } from "material-ui/Menu";
-
 import React, { Component } from 'react';
 
 class ChannelList extends Component {
@@ -54,6 +50,7 @@ const styles = {
     paddingLeft: 50,
     backgroundColor: "#636363",
     borderRadius: 5,
+    cursor: "pointer",
   }
 }
 

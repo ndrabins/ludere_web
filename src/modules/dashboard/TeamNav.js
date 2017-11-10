@@ -26,7 +26,7 @@ class TeamNav extends Component {
               style={styles.teamButton}
               onClick={() => this.props.actions.selectTeam(key)}
             >
-              <Avatar style={styles.avatar}>H</Avatar>
+              <Avatar style={styles.avatar}>{team.name[0]}</Avatar>
             </Button>
           </Tooltip>
         </div>
