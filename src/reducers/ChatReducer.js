@@ -17,7 +17,8 @@ export default function team(state = initialState, action) {
   switch (action.type) {
     case SELECT_CHANNEL:
       return {
-        ...state
+        ...state,
+        selectedChannel: action.selectedChannel,
       };
     case FETCH_CHANNELS:
       return {

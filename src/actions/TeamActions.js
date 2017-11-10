@@ -55,7 +55,6 @@ export function fetchTeams() {
     let firstTeam = null;
     dispatch({ type: FETCH_TEAMS });
 
-
     let teamRef = firebase.firestore().collection("teams");
     teamRef
       .where(`members.${uid}`, "==", true)

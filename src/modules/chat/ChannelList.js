@@ -17,7 +17,9 @@ class ChannelList extends Component {
     }
     let channels = Map(this.props.channels, (channel, key) => {
       return (
-        <ChannelButton key={key} name={channel.name}/>
+        <div key={key}>
+          <ChannelButton ID={key} name={channel.name}/>
+        </div>
       );
     });
     return channels;
@@ -30,10 +32,6 @@ class ChannelList extends Component {
       </div>
     );
   }
-}
-
-const styles = {
-
 }
 
 function mapStateToProps(state) {

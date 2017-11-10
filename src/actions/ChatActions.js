@@ -31,13 +31,13 @@ export function fetchChannels(selectedTeam) {
 export function createChannel(channelName) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
-    let { selectedTeam}  = getState().team;
+    let { selectedTeam } = getState().team;
 
     let channel = {
       createdBy: uid,
       name: channelName,
       dateCreated: Date.now(),
-      type: 'public',
+      type: "public",
       team: selectedTeam
     };
 
@@ -55,5 +55,12 @@ export function createChannel(channelName) {
         dispatch({ type: CREATE_CHANNEL_ERROR });
         console.error("Error adding document: ", error);
       });
+  };
+}
+
+export function selectChannel(channelID) {
+  console.log("selected", channelID);
+  return dispatch => {
+    dispatch({ type: SELECT_CHANNEL, selectedChannel: channelID});
   };
 }

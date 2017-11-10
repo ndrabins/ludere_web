@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../../actions";
 
-class ChannelList extends Component {
+class ChannelButton extends Component {
   state = {
     anchorEl: null,
     openNavMenu: false,
@@ -21,12 +24,25 @@ class ChannelList extends Component {
     });
   };
 
+  handleClick = () => {
+    this.props.actions.selectChannel(this.props.ID);
+  };
+
   render() {
+    let channelStyle = styles.channel;
+    if(this.state.isHovered){
+      channelStyle = styles.hoveredChannel;
+    }
+    if(this.props.ID === this.props.selectedChannel){
+      channelStyle = styles.selectedChannel;
+    }
+
     return (
       <div
-        style={this.state.isHovered ? styles.hoveredChannel : styles.channel}
+        style={channelStyle}
         onMouseEnter={this.handleHover}
         onMouseLeave={this.handleHover}
+        onClick={this.handleClick}
       >
         {this.props.name}
       </div>
@@ -39,6 +55,8 @@ const styles = {
     color: "white",
     marginLeft: 8,
     marginRight: 8,
+    marginTop: 1,
+    marginBottom: 1,
     display: "flex",
     alignContent: "center",
     padding: 5,
@@ -48,14 +66,42 @@ const styles = {
     color: "white",
     marginLeft: 8,
     marginRight: 8,
+    marginTop: 1,
+    marginBottom: 1,
     display: "flex",
     alignContent: "center",
     padding: 5,
     paddingLeft: 50,
-    backgroundColor: "#636363",
+    backgroundColor: "#2B2B2B",
     borderRadius: 5,
     cursor: "pointer"
+  },
+  selectedChannel: {
+    color: "white",
+    marginLeft: 8,
+    marginRight: 8,
+    marginTop: 1,
+    marginBottom: 1,
+    display: "flex",
+    alignContent: "center",
+    padding: 5,
+    paddingLeft: 50,
+    backgroundColor: "#575757",
+    borderRadius: 5,
   }
 };
 
-export default ChannelList;
+function mapStateToProps(state) {
+  return {
+    selectedChannel: state.chat.selectedChannel,
+  };
+}
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChannelButton);
