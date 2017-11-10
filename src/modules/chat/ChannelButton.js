@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class ChannelList extends Component {
   state = {
     anchorEl: null,
     openNavMenu: false,
-    isHovered: false,
+    isHovered: false
   };
 
   handleClickNavMenu = event => {
@@ -19,39 +19,43 @@ class ChannelList extends Component {
     this.setState({
       isHovered: !this.state.isHovered
     });
-  }
+  };
 
   render() {
     return (
-      <div style={this.state.isHovered ? styles.hoveredChannel : styles.channel} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
-        # Channel 1
+      <div
+        style={this.state.isHovered ? styles.hoveredChannel : styles.channel}
+        onMouseEnter={this.handleHover}
+        onMouseLeave={this.handleHover}
+      >
+        {this.props.name}
       </div>
     );
   }
 }
 
 const styles = {
-  channel :{
-    color:'white',
+  channel: {
+    color: "white",
     marginLeft: 8,
     marginRight: 8,
-    display:'flex',
-    alignContent: 'center',
+    display: "flex",
+    alignContent: "center",
     padding: 5,
     paddingLeft: 50
   },
-  hoveredChannel :{
-    color:'white',
+  hoveredChannel: {
+    color: "white",
     marginLeft: 8,
     marginRight: 8,
-    display:'flex',
-    alignContent: 'center',
+    display: "flex",
+    alignContent: "center",
     padding: 5,
     paddingLeft: 50,
     backgroundColor: "#636363",
     borderRadius: 5,
-    cursor: "pointer",
+    cursor: "pointer"
   }
-}
+};
 
 export default ChannelList;
