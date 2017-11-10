@@ -20,7 +20,6 @@ export function createTeam(teamName, description = "") {
 
     let team = {
       description: description,
-      members: {},
       modules: {
         chat: true,
         kanban: true

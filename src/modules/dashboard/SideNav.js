@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import colors from "../../utility/constants/colors";
 import logoWhite from "../../static/light.svg";
 import CloseIcon from "material-ui-icons/Close";
-import IconButton from 'material-ui/IconButton';
+import IconButton from "material-ui/IconButton";
 
 import TeamNav from "./TeamNav";
-import SideNavModules from './SideNavModules';
+import SideNavModules from "./SideNavModules";
 
 const drawerWidth = 240;
 
@@ -52,7 +52,7 @@ const styles = {
   },
   moduleSideNav: {
     position: "relative",
-    backgroundColor: colors.lightThemePrimary,
+    backgroundColor: "#333333",
     width: drawerWidth,
     transition: "width 0.75s ease",
     overflow: "hidden",
@@ -71,22 +71,22 @@ const styles = {
   sideNavBanner: {
     height: 64,
     width: drawerWidth,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
     overflow: "hidden"
   },
   logo: {
-    display: 'flex',
+    display: "flex",
     // width: "90%"
     maxWidth: 160,
-    marginLeft:5
+    marginLeft: 5
   },
   closeButton: {
-    display:'flex',
+    display: "flex",
     color: "#c3c3c3",
-    alignSelf: 'flex-end',
-    margin:5,
+    alignSelf: "flex-end",
+    margin: 5
   }
 };
 

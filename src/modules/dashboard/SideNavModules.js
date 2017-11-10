@@ -7,9 +7,8 @@ class SideNavModules extends Component {
   render() {
     return (
       <div style={styles.container}>
-        MODULES
         <ChatSideNav />
-        <BoardsSideNav />
+        {/* <BoardsSideNav /> */}
       </div>
     );
   }
@@ -17,7 +16,7 @@ class SideNavModules extends Component {
 
 const styles = {
   container: {
-    backgroundColor:'red',
+    marginTop: 10,
   }
 }
 
