@@ -17,7 +17,6 @@ class SignUp extends Component {
       password: "",
       confirm_password: "",
       showPassword: false,
-
     };
   }
 
@@ -35,13 +34,7 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div style={
-        this.props.loginTransition === "SignUp"
-          ? styles.moduleSignUpOpen
-          : styles.moduleSignUpClosed
-        }
-        onClick={this.props.toggleSignUp}
-      >
+      <div style={styles.moduleSignUpOpen} onClick={this.props.focusSignUp}>
         <p style={styles.header}>Get Started</p>
         <FormControl style={styles.formControl}>
           <InputLabel style={styles.inputLabel} htmlFor="emails">Email</InputLabel>
@@ -80,31 +73,8 @@ class SignUp extends Component {
 }
 
 const styles = {
-  moduleSignUpClosed: {
-    minWidth: "200px",
-    minHeight: "300px",
-
-    display: "flex",    
-    flexWrap: "wrap",
-    flexDirection: "column",
-    overflow: "auto",    
-   
-    alignSelf: "center",
-    alignItems: "left",
-    
-    padding: "50px",
-    backgroundColor: 'rgba(48, 48, 48, 0.5)',
-    borderRadius: "6px 0px 0px 6px",
-    color: "white",
-
-    transition: "width 0.75s ease",
-  },
   moduleSignUpOpen: {
-    position: "relative",
-    width: "500px",
-    transition: "width 0.75s ease",
-
-    minWidth: "200px",
+    width: "350px",
     minHeight: "300px",
 
     display: "flex",    
@@ -113,13 +83,13 @@ const styles = {
     overflow: "auto",    
    
     alignSelf: "center",
-    alignItems: "left",
     
-    padding: "50px",
+    padding: "50px 100px",
     backgroundColor: 'rgba(48, 48, 48, 0.5)',
     borderRadius: "6px 0px 0px 6px",
     color: "white",
 
+    position: "relative",
     transition: "width 0.75s ease",
   },
   header: {
@@ -133,7 +103,10 @@ const styles = {
     color: "#FFFFFF",
   },
   button: {
-    alignSelf: "center",
+    display: "flex",
+    flexDirection:"column",
+    paddingTop: "20px",
+    alignSelf: "stretch",
   },
 };
 

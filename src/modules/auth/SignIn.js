@@ -17,8 +17,6 @@ class SignIn extends Component {
       email: '',
       password: '',
       showPassword: false,
-
-      // loginTransition: null,      
     };
   }
 
@@ -36,13 +34,7 @@ class SignIn extends Component {
 
   render() {
     return (
-      <div style={
-        this.props.loginTransition === "SignIn"
-          ? styles.moduleSignInOpen
-          : styles.moduleSignInClosed
-        }
-        onClick={this.props.toggleSignIn}
-      >
+      <div style={styles.moduleSignInOpen} onClick={this.props.focusSignIn}>
         <p style={styles.header}>Log In</p>
         <FormControl style={styles.formControl}>
           <InputLabel style={styles.inputLabel} htmlFor="emails">Email</InputLabel>
@@ -62,7 +54,7 @@ class SignIn extends Component {
           />
         </FormControl>
         <div style={styles.button}>
-          <Button raised color="primary" style={styles.button} onClick={() => this.props.actions.signInUser(this.state.email, this.state.password)}>
+          <Button raised color="primary" onClick={() => this.props.actions.signInUser(this.state.email, this.state.password)}>
             Sign In
           </Button>
         </div>
@@ -72,30 +64,12 @@ class SignIn extends Component {
 }
 
 const styles = {
-  moduleSignInClosed: {
-    minWidth: "200px",
-    minHeight: "300px",
-
-    display: "flex",    
-    flexWrap: "wrap",
-    flexDirection: "column",
-    overflow: "auto",
-
-    alignSelf: "center",
-    alignItems:"left",
-
-    padding: "50px",
-    backgroundImage: `linear-gradient(to left, #6fe5c9, #00bcd4), linear-gradient(#000000, #000000)`,
-    borderRadius: "0px 6px 6px 0px",
-    color: "white",
-  },
   moduleSignInOpen: {
     position: "relative",
     transition: "width 0.75s ease",
     
-    width: "500px",
+    width: "350px",   
     minHeight: "300px",    
-
 
     display: "flex",    
     flexWrap: "wrap",
@@ -103,9 +77,8 @@ const styles = {
     overflow: "auto",
     
     alignSelf: "center",
-    alignItems:"left",
 
-    padding: "50px",
+    padding: "50px 100px",
     backgroundImage: `linear-gradient(to left, #6fe5c9, #00bcd4), linear-gradient(#000000, #000000)`,
     borderRadius: "0px 6px 6px 0px",
     color: "white",
@@ -121,7 +94,10 @@ const styles = {
     color: "#FFFFFF",
   },
   button: {
-    alignSelf: "center",
+    display: "flex",
+    flexDirection: "column",
+    paddingTop: "75px",
+    alignSelf: "stretch",
   },
 };
 
