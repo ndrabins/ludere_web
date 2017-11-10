@@ -90,13 +90,9 @@ export function selectTeam(teamID) {
 function loadTeamData(teamID){
   //This is probs gonna need some refactoring sometime soon... God help us
   return (dispatch, getState) => {
-    console.log('loading data for', teamID);
     let team = getState().team.teams[teamID];
 
-    console.log("Our team is", team);
-
     if(team.modules.chat === true){
-      console.log("load chat");
       dispatch(chatActions.fetchChannels(teamID));
     }
   }

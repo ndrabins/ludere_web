@@ -14,15 +14,46 @@ require("firebase/firestore");
 export function fetchChannels(selectedTeam) {
   return (dispatch, getState) => {
     dispatch({ type: FETCH_CHANNELS });
-    console.log("loading chat for ", selectedTeam);
 
     let chatRef = firebase.firestore().collection("chat");
     chatRef
       .where(`team`, "==", selectedTeam)
       .onSnapshot(function(querySnapshot) {
+        var channels = {};
         querySnapshot.forEach(function(doc) {
-          console.log(doc.data());
+          channels[doc.id] = doc.data();
         });
+        dispatch({ type: FETCH_CHANNELS_SUCCESS, channels: channels });
+      });
+  };
+}
+
+export function createChannel(channelName) {
+  return (dispatch, getState) => {
+    let { uid } = getState().auth.user;
+    let { selectedTeam}  = getState().team;
+
+    let channel = {
+      createdBy: uid,
+      name: channelName,
+      dateCreated: Date.now(),
+      type: 'public',
+      team: selectedTeam
+    };
+
+    dispatch({ type: CREATE_CHANNEL });
+
+    firebase
+      .firestore()
+      .collection("chat")
+      .add(channel)
+      .then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+        dispatch({ type: CREATE_CHANNEL_SUCCESS });
+      })
+      .catch(function(error) {
+        dispatch({ type: CREATE_CHANNEL_ERROR });
+        console.error("Error adding document: ", error);
       });
   };
 }

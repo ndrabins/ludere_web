@@ -28,6 +28,22 @@ export default function team(state = initialState, action) {
         ...state,
         channels: action.channels
       };
+    case FETCH_CHANNELS_ERROR:
+      return {
+        ...state
+      };
+    case CREATE_CHANNEL:
+      return {
+        ...state
+      };
+    case CREATE_CHANNEL_SUCCESS:
+      return {
+        ...state
+      };
+    case CREATE_CHANNEL_ERROR:
+      return {
+        ...state
+      };
     default:
       return state;
   }
