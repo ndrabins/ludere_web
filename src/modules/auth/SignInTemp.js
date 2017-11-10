@@ -20,23 +20,20 @@ const styles = {
     minHeight: "300px",
 
     display: "flex",    
-    flexDirection: "row",
-    overflow: "auto",    
+    flexDirection: "column",
    
     alignSelf: "center",
+    justifyContent: "center",
 
     position: "relative",    
     transition: "width 0.75s ease",
 
-    alignSelf: "center",
-
     padding: "50px",
     backgroundImage: `linear-gradient(to left, #6fe5c9, #00bcd4), linear-gradient(#000000, #000000)`,
     borderRadius: "0px 6px 6px 0px",
-    color: "white",
   },
   header: {
-    color: "white",
+    color: "#FFFFFF",
     fontSize: "22px",
     alignSelf: "center",
   },

@@ -40,6 +40,7 @@ class SignUp extends Component {
           <InputLabel style={styles.inputLabel} htmlFor="emails">Email</InputLabel>
           <Input
             id="email"
+            style={styles.inputText}
             value={this.state.email}
             onChange={this.handleChange("email")}
           />
@@ -48,6 +49,7 @@ class SignUp extends Component {
           <InputLabel style={styles.inputLabel} htmlFor="password">New Password</InputLabel>
           <Input
             id="password"
+            style={styles.inputText}
             type={this.state.showPassword ? "text" : "password"}
             value={this.state.password}
             onChange={this.handleChange("password")}
@@ -57,6 +59,7 @@ class SignUp extends Component {
           <InputLabel style={styles.inputLabel} htmlFor="confirm_password">Confirm Password</InputLabel>
           <Input
             id="confirm_password"
+            style={styles.inputText}
             type={this.state.showPassword ? "text" : "password"}
             value={this.state.confirm_password}
             onChange={this.handleChange("confirm_password")}
@@ -87,7 +90,7 @@ const styles = {
     padding: "50px 100px",
     backgroundColor: 'rgba(48, 48, 48, 0.5)',
     borderRadius: "6px 0px 0px 6px",
-    color: "white",
+    color: "#FFFFFF",
 
     position: "relative",
     transition: "width 0.75s ease",
@@ -100,6 +103,9 @@ const styles = {
     paddingBottom: "10px",
   },
   inputLabel: {
+    color: "#FFFFFF",
+  },
+  inputText: {
     color: "#FFFFFF",
   },
   button: {

@@ -19,21 +19,20 @@ const styles = {
     minHeight: "300px",
 
     display: "flex",    
-    flexDirection: "row",
-    overflow: "auto",    
+    flexDirection: "column",
    
     alignSelf: "center",
+    justifyContent: "center",
     
     padding: "50px",
     backgroundColor: 'rgba(48, 48, 48, 0.5)',
     borderRadius: "6px 0px 0px 6px",
-    color: "white",
 
     position: "relative",    
     transition: "width 0.75s ease",
   },
   header: {
-    color: "white",
+    color: "#FFFFFF",
     fontSize: "22px",
     alignSelf: "center",
   },
