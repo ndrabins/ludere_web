@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
-class SignIn extends Component {
+class SignInTemp extends Component {
   render() {
     return (
       <div style={styles.moduleSignInClosed} onClick={this.props.focusSignIn}>
@@ -39,17 +39,4 @@ const styles = {
   },
 };
 
-function mapStateToProps(state) {
-  return {
-
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  };
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default (SignInTemp);

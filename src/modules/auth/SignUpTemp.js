@@ -38,15 +38,4 @@ const styles = {
   },
 };
 
-function mapStateToProps(state) {
-  return {};
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  };
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpTemp);
+export default (SignUpTemp);
