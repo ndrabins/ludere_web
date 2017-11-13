@@ -55,7 +55,7 @@ class ChannelButton extends Component {
 
 const baseStyle = {
   textDecoration: 'none',
-  color: "white",
+  color: "#6f6f6f",
   marginLeft: 8,
   marginRight: 8,
   marginTop: 1,
@@ -73,11 +73,13 @@ const styles = {
   hoveredChannel: {
     ...baseStyle,
     backgroundColor: "#424242",
+    color: "#b9bbbe",
     borderRadius: 5,
     cursor: "pointer"
   },
   selectedChannel: {
     ...baseStyle,
+    color:"#FFFFFF",
     backgroundColor: "#616161",
     borderRadius: 5,
   }

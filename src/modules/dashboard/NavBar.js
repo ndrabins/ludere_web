@@ -91,6 +91,7 @@ const styles = {
     display: "flex",
     backgroundColor: colors.lightThemeDefault,
     borderBottom: "1px solid #B9BBBE",
+    minHeight: 64,
     height: 64,
     justifyContent: "space-between",
     flexDirection: "row",
@@ -109,10 +110,10 @@ const styles = {
   },
   navBegin: {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   menuButton: {
-    height: "100%",
+    height: 65,
     color: "white",
     width: 58,
     borderRadius: 0,
