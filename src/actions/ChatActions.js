@@ -9,6 +9,7 @@ import {
   FETCH_MESSAGES,
   FETCH_MESSAGES_SUCCESS,
   FETCH_MESSAGES_ERROR,
+  SEND_MESSAGE,
 } from "./types";
 
 import firebase from "firebase";
@@ -77,4 +78,25 @@ export function selectChannel(channelID) {
         dispatch({ type: FETCH_MESSAGES_SUCCESS, messages: messages });
     });
   };
+}
+
+export function sendMessage(messageText){
+  return (dispatch, getState) => {
+    let { uid } = getState().auth.user;
+    let { selectedChannel } = getState().chat;
+    let message = {
+      sentBy : uid,
+      dateCreated: Date.now(),
+      messageText: messageText,
+    }
+
+    let messageRef = firebase.firestore().collection(`chat/${selectedChannel}/messages`);
+
+    messageRef.add(message)
+    .then(function(docRef) {
+      console.log("Document written with ID: ", docRef.id);
+      console.log("sending message", message);
+      dispatch({ type: SEND_MESSAGE});
+    })
+  }
 }

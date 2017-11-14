@@ -16,7 +16,6 @@ class MessageList extends Component {
 const styles = {
   container:{
     display:'flex',
-    backgroundColor: 'blue',
     flex:1
   }
 }

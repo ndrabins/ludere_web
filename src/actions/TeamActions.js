@@ -92,6 +92,7 @@ function loadTeamData(teamID){
     let team = getState().team.teams[teamID];
 
     if(team.modules.chat === true){
+      dispatch(chatActions.selectChannel(null));
       dispatch(chatActions.fetchChannels(teamID));
     }
   }
