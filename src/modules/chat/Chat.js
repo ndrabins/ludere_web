@@ -23,7 +23,11 @@ class Chat extends Component {
 }
 
 const styles = {
-  container: { height: "100%", display: "flex", flexDirection: "column" }
+  container: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+  }
 };
 
 function mapStateToProps(state) {

@@ -69,7 +69,7 @@ export function selectChannel(channelID) {
 
     dispatch({ type: FETCH_MESSAGES});
     let messageRef = firebase.firestore().collection(`chat/${channelID}/messages`);
-    messageRef
+    messageRef.orderBy("dateCreated")
       .onSnapshot(function(querySnapshot) {
         var messages = {};
         querySnapshot.forEach(function(doc) {

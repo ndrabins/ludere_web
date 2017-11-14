@@ -71,7 +71,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     paddingRight: 10,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   messageInputContainer: {
     width: "100%",

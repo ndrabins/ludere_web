@@ -36,7 +36,7 @@ class Main extends Component {
     return (
       <div style={styles.container}>
         <SideNav toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible} />
-        <div style={styles.content}>
+        <div style={{...styles.content, ...{width:`calc(100% - ${298}px)`}}}>
           <NavBar toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible}/>
           <Route path="/dashboard" component={Dashboard}/>
           <Route path="/calendar" component={Calendar}/>
@@ -51,12 +51,13 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "row",
-    height: '100%'
+    height: '100%',
+    flex:1,
   },
   content: {
     display:"flex",
     flexDirection:"column",
-    width:"100%",
+    flex:1,
   }
 };
 
