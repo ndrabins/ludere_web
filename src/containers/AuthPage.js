@@ -5,6 +5,8 @@ import * as Actions from "../actions";
 
 import SignUp from "../modules/auth/SignUp";
 import SignIn from "../modules/auth/SignIn";
+import SignUpTemp from "../modules/auth/SignUpTemp";
+import SignInTemp from "../modules/auth/SignInTemp";
 
 import logoWhite from "../static/light.svg";
 import backgroundImg from "../static/mountains.png";
@@ -14,35 +16,62 @@ class AuthPage extends Component {
     super(props);
 
     this.state = {
-      initial: true,
-      signUpClick: false,
-      signInClick: false
+      loginTransition: null,
     };
   }
 
-  handleSignUpClick = () => {
-    this.setState({ initial: false });
-    this.setState({ signInClick: false });
-    this.setState({ signUpClick: true });
+  handleLoginClick() {
+    this.setState({isLoggedIn: true});
+  }
+
+  handleLogoutClick() {
+    this.setState({isLoggedIn: false});
+  }
+
+  focusSignUp(){
+    this.setState({ loginTransition: "SignUp"});
     console.log("Sign Up Click");
   }
 
-  handleSignInClick = () => {
-    this.setState({ initial: false });
-    this.setState({ signUpClick: false });
-    this.setState({ signInClick: true });
+  focusSignIn(){
+    this.setState({ loginTransition: "SignIn"});
     console.log("Sign In Click");
   }
 
+  focusNeutral(){
+    this.setState({ loginTransition: "null"});
+    console.log("Neutral Click");
+  }
+
   render() {
+
+    const loginTransition = this.state.loginTransition;
+    
+    let signUp = null;
+    if (loginTransition === "SignUp") {
+      signUp = <SignUp focusSignUp={() => this.focusSignUp()} loginTransition={this.state.loginTransition}/>
+    } else {
+      signUp = <SignUpTemp focusSignUp={() => this.focusSignUp()} loginTransition={this.state.loginTransition}/>
+    }
+
+    let signIn = null;
+    if (loginTransition === "SignIn") {
+      signIn = <SignIn focusSignIn={() => this.focusSignIn()} loginTransition={this.state.loginTransition}/>
+    } else {
+      signIn = <SignInTemp focusSignIn={() => this.focusSignIn()} loginTransition={this.state.loginTransition}/>
+    }
+
     return (
-      <div style={styles.AuthPage}>
+      <div style={styles.authPage}>
         <div style={styles.entryContainer}>
           <img src={logoWhite} alt="Logo" />
-          <br />
           <div style={styles.inputForm}>
-            <SignUp />
-            <SignIn />
+            <div style={styles.signUp}>
+              {signUp}
+            </div>
+            <div style={styles.signIn}>
+              {signIn}
+            </div>
           </div>
         </div>
       </div>
@@ -51,7 +80,7 @@ class AuthPage extends Component {
 }
 
 const styles = {
-  AuthPage: {
+  authPage: {
     backgroundSize: "cover",
     height: "100vh",
     overflow: "hidden",
@@ -72,26 +101,13 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    alignSelf: "center"
+    alignSelf: "center",
+    paddingTop: "20px",
   },
-  // SignUp: {
-  //   ":hover": {
-  //     transition: "1s",
-  //     left: 0
-  //   }
-  // },
-  // SignIn: {
-  //   ":hover": {
-  //     transition: "1s",
-  //     right: 0
-  //   }
-  // }
 };
 
 function mapStateToProps(state) {
-  return {
-
-  };
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {

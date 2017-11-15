@@ -33,62 +33,77 @@ class SignIn extends Component {
   };
 
   render() {
-
     return (
-      <div style={styles.SignIn}>
-        <p style={styles.Header}>Log In</p>
-        <FormControl style={styles.FormControl}>
-          <InputLabel style={styles.InputLabel} htmlFor="emails">Email</InputLabel>
+      <div style={styles.moduleSignInOpen} onClick={this.props.focusSignIn}>
+        <p style={styles.header}>Log In</p>
+        <FormControl style={styles.formControl}>
+          <InputLabel style={styles.inputLabel} htmlFor="emails">Email</InputLabel>
           <Input
             id="email"
+            style={styles.inputText}
             value={this.state.email}
             onChange={this.handleChange('email')}
           />
         </FormControl>
-        <FormControl style={styles.FormControl}>
-          <InputLabel style={styles.InputLabel} htmlFor="password">Password</InputLabel>
+        <FormControl style={styles.formControl}>
+          <InputLabel style={styles.inputLabel} htmlFor="password">Password</InputLabel>
           <Input
             id="password"
+            style={styles.inputText}
             type={this.state.showPassword ? 'text' : 'password'}
             value={this.state.password}
             onChange={this.handleChange('password')}
           />
         </FormControl>
-        <Button raised color="primary" style={styles.button} onClick={() => this.props.actions.signInUser(this.state.email, this.state.password)}>
-          Sign In
-        </Button>
+        <div style={styles.button}>
+          <Button raised color="primary" onClick={() => this.props.actions.signInUser(this.state.email, this.state.password)}>
+            Sign In
+          </Button>
+        </div>
       </div>
     );
   }
 }
 
 const styles = {
-  SignIn: {
-    width: "100%",
+  moduleSignInOpen: {
+    position: "relative",
+    transition: "width 0.75s ease",
+    
+    width: "350px",   
+    minHeight: "300px",    
+
+    display: "flex",    
+    flexWrap: "wrap",
+    flexDirection: "column",
+    overflow: "auto",
+    
     alignSelf: "center",
-    flexDirection:"column",
-    justifyContent:"left",
-    alignItems:"center",
-    minHeight:"300px",
-    display: 'flex',
-    padding: "50px",
+
+    padding: "50px 100px",
     backgroundImage: `linear-gradient(to left, #6fe5c9, #00bcd4), linear-gradient(#000000, #000000)`,
     borderRadius: "0px 6px 6px 0px",
-    color: "white",
+    color: "#FFFFFF",
   },
-  Header: {
+  header: {
     alignSelf: "left",
     fontSize: "22px",
   },
-  FormControl: {
+  formControl: {
     paddingBottom: "10px",
   },
-  InputLabel: {
+  inputLabel: {
     color: "#FFFFFF",
   },
-  firebaseUI1: {
-    minWidth: "200px"
-  }
+  inputText: {
+    color: "#FFFFFF",
+  },
+  button: {
+    display: "flex",
+    flexDirection: "column",
+    paddingTop: "75px",
+    alignSelf: "stretch",
+  },
 };
 
 function mapStateToProps(state) {

@@ -16,7 +16,7 @@ class SignUp extends Component {
       email: "",
       password: "",
       confirm_password: "",
-      showPassword: false
+      showPassword: false,
     };
   }
 
@@ -34,78 +34,90 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div style={styles.SignUp}>
-        <p style={styles.Header}>Get Started</p>
-        <FormControl style={styles.FormControl}>
-          <InputLabel style={styles.InputLabel} htmlFor="emails">Email</InputLabel>
+      <div style={styles.moduleSignUpOpen} onClick={this.props.focusSignUp}>
+        <p style={styles.header}>Get Started</p>
+        <FormControl style={styles.formControl}>
+          <InputLabel style={styles.inputLabel} htmlFor="emails">Email</InputLabel>
           <Input
             id="email"
+            style={styles.inputText}
             value={this.state.email}
             onChange={this.handleChange("email")}
           />
         </FormControl>
-        <FormControl style={styles.FormControl}>
-          <InputLabel style={styles.InputLabel} htmlFor="password">New Password</InputLabel>
+        <FormControl style={styles.formControl}>
+          <InputLabel style={styles.inputLabel} htmlFor="password">New Password</InputLabel>
           <Input
             id="password"
+            style={styles.inputText}
             type={this.state.showPassword ? "text" : "password"}
             value={this.state.password}
             onChange={this.handleChange("password")}
           />
         </FormControl>
-        <FormControl style={styles.FormControl}>
-          <InputLabel style={styles.InputLabel} htmlFor="confirm_password">Confirm Password</InputLabel>
+        <FormControl style={styles.formControl}>
+          <InputLabel style={styles.inputLabel} htmlFor="confirm_password">Confirm Password</InputLabel>
           <Input
             id="confirm_password"
+            style={styles.inputText}
             type={this.state.showPassword ? "text" : "password"}
             value={this.state.confirm_password}
             onChange={this.handleChange("confirm_password")}
           />
         </FormControl>
-        <Button raised color="primary" onClick={() => this.props.actions.signUpUser(this.state.email, this.state.password)}>
-          Sign Up
-        </Button>
+        <div style={styles.button}>
+          <Button raised color="primary" onClick={() => this.props.actions.signUpUser(this.state.email, this.state.password)}>
+            Sign Up
+          </Button>
+        </div>
       </div>
     );
   }
 }
 
 const styles = {
-  SignUp: {
-    width: "100%",
-    alignSelf: "center",
-    flexDirection: "column",
-    justifyContent: "left",
-    alignItems: "center",
+  moduleSignUpOpen: {
+    width: "350px",
     minHeight: "300px",
-    overflow: "auto",
-    display: "flex",
+
+    display: "flex",    
     flexWrap: "wrap",
-    padding: "50px",
+    flexDirection: "column",
+    overflow: "auto",    
+   
+    alignSelf: "center",
+    
+    padding: "50px 100px",
     backgroundColor: 'rgba(48, 48, 48, 0.5)',
     borderRadius: "6px 0px 0px 6px",
-    color: "white",
-    fontFamily: "Roboto",
+    color: "#FFFFFF",
+
+    position: "relative",
+    transition: "width 0.75s ease",
   },
-  Header: {
+  header: {
     alignSelf: "left",
     fontSize: "22px",
   },
-  FormControl: {
+  formControl: {
     paddingBottom: "10px",
   },
-  InputLabel: {
+  inputLabel: {
     color: "#FFFFFF",
   },
-  firebaseUI1: {
-    minWidth: "200px"
-  }
+  inputText: {
+    color: "#FFFFFF",
+  },
+  button: {
+    display: "flex",
+    flexDirection:"column",
+    paddingTop: "20px",
+    alignSelf: "stretch",
+  },
 };
 
 function mapStateToProps(state) {
-  return {
-
-  };
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {
