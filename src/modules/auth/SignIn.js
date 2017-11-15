@@ -32,9 +32,15 @@ class SignIn extends Component {
     this.setState({ showPassword: !this.state.showPassword });
   };
 
-  render() {
+  renderSignIn(){
+    if(this.props.loginTransition !== "SignIn"){
+      return(
+        <p style={styles.headerTemp}>SIGN IN</p>
+      );
+    }
+
     return (
-      <div style={styles.moduleSignInOpen} onClick={this.props.focusSignIn}>
+      <div style={{display:'flex', flexDirection:"column"}}>
         <p style={styles.header}>Log In</p>
         <FormControl style={styles.formControl}>
           <InputLabel style={styles.inputLabel} htmlFor="emails">Email</InputLabel>
@@ -61,6 +67,14 @@ class SignIn extends Component {
           </Button>
         </div>
       </div>
+    )
+  }
+
+  render() {
+    return (
+      <div style={this.props.loginTransition==="SignIn" ? styles.moduleSignInOpen : styles.moduleSignInClosed} onClick={this.props.focusSignIn}>
+        {this.renderSignIn()}
+      </div>
     );
   }
 }
@@ -69,15 +83,15 @@ const styles = {
   moduleSignInOpen: {
     position: "relative",
     transition: "width 0.75s ease",
-    
-    width: "350px",   
-    minHeight: "300px",    
 
-    display: "flex",    
+    width: "350px",
+    minHeight: "300px",
+
+    display: "flex",
     flexWrap: "wrap",
     flexDirection: "column",
     overflow: "auto",
-    
+
     alignSelf: "center",
 
     padding: "50px 100px",
@@ -85,9 +99,31 @@ const styles = {
     borderRadius: "0px 6px 6px 0px",
     color: "#FFFFFF",
   },
+  moduleSignInClosed: {
+    width: "150px",
+    minHeight: "300px",
+
+    display: "flex",
+    flexDirection: "column",
+
+    alignSelf: "center",
+    justifyContent: "center",
+
+    position: "relative",
+    transition: "width 0.75s ease",
+
+    padding: "50px",
+    backgroundImage: `linear-gradient(to left, #6fe5c9, #00bcd4), linear-gradient(#000000, #000000)`,
+    borderRadius: "0px 6px 6px 0px",
+  },
   header: {
     alignSelf: "left",
     fontSize: "22px",
+  },
+  headerTemp: {
+    color: "#FFFFFF",
+    fontSize: "22px",
+    alignSelf: "center",
   },
   formControl: {
     paddingBottom: "10px",
@@ -97,6 +133,7 @@ const styles = {
   },
   inputText: {
     color: "#FFFFFF",
+    width: "100%",
   },
   button: {
     display: "flex",

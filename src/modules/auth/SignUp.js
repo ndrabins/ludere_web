@@ -32,9 +32,15 @@ class SignUp extends Component {
     this.setState({ showPassword: !this.state.showPassword });
   };
 
-  render() {
-    return (
-      <div style={styles.moduleSignUpOpen} onClick={this.props.focusSignUp}>
+  renderSignUp(){
+    if(this.props.loginTransition !== "SignUp"){
+      return(
+        <p style={styles.headerClosed}>GET STARTED</p>
+      );
+    }
+
+    return(
+      <div style={{display:'flex', flexDirection:"column"}}>
         <p style={styles.header}>Get Started</p>
         <FormControl style={styles.formControl}>
           <InputLabel style={styles.inputLabel} htmlFor="emails">Email</InputLabel>
@@ -71,6 +77,14 @@ class SignUp extends Component {
           </Button>
         </div>
       </div>
+    )
+  }
+
+  render() {
+    return (
+      <div style={this.props.loginTransition==="SignUp" ? styles.moduleSignUpOpen : styles.moduleSignUpClosed} onClick={this.props.focusSignUp}>
+        {this.renderSignUp()}
+      </div>
     );
   }
 }
@@ -80,13 +94,13 @@ const styles = {
     width: "350px",
     minHeight: "300px",
 
-    display: "flex",    
+    display: "flex",
     flexWrap: "wrap",
     flexDirection: "column",
-    overflow: "auto",    
-   
+    overflow: "auto",
+
     alignSelf: "center",
-    
+
     padding: "50px 100px",
     backgroundColor: 'rgba(48, 48, 48, 0.5)',
     borderRadius: "6px 0px 0px 6px",
@@ -94,6 +108,28 @@ const styles = {
 
     position: "relative",
     transition: "width 0.75s ease",
+  },
+  moduleSignUpClosed: {
+    width: "150px",
+    minHeight: "300px",
+
+    display: "flex",
+    flexDirection: "column",
+
+    alignSelf: "center",
+    justifyContent: "center",
+
+    padding: "50px",
+    backgroundColor: 'rgba(48, 48, 48, 0.5)',
+    borderRadius: "6px 0px 0px 6px",
+
+    position: "relative",
+    transition: "width 0.75s ease",
+  },
+  headerClosed: {
+    color: "#FFFFFF",
+    fontSize: "22px",
+    alignSelf: "center",
   },
   header: {
     alignSelf: "left",
