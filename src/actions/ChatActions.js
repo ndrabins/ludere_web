@@ -88,6 +88,7 @@ export function sendMessage(messageText){
       sentBy : uid,
       dateCreated: Date.now(),
       messageText: messageText,
+      sentByDisplayName:"bob",
     }
 
     let messageRef = firebase.firestore().collection(`chat/${selectedChannel}/messages`);

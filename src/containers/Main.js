@@ -14,6 +14,8 @@ import Calendar from './Calendar';
 //Modules
 import Chat from '../modules/chat/Chat';
 
+const drawerWidth = 298;
+
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -33,10 +35,11 @@ class Main extends Component {
   }
 
   render() {
+
     return (
       <div style={styles.container}>
         <SideNav toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible} />
-        <div style={{...styles.content, ...{width:`calc(100% - ${298}px)`}}}>
+        <div style={{...styles.content, ...{width:`calc(100% - ${drawerWidth}px)`}}}>
           <NavBar toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible}/>
           <Route path="/dashboard" component={Dashboard}/>
           <Route path="/calendar" component={Calendar}/>
