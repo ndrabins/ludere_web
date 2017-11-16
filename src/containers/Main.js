@@ -5,6 +5,7 @@ import * as Actions from "../actions";
 
 import {Route} from 'react-router-dom';
 
+import WorkspaceFlow from '../modules/dashboard/WorkspaceFlow';
 import NavBar from "../modules/dashboard/NavBar";
 import SideNav from "../modules/dashboard/SideNav";
 
@@ -35,6 +36,12 @@ class Main extends Component {
   }
 
   render() {
+    //if user is not in a company, he must create or join one
+    // if(Object.keys(this.props.companies).length === 0){
+    //   return (
+    //     <CompanyFlow />
+    //   )
+    // }
 
     return (
       <div style={styles.container}>
@@ -65,7 +72,9 @@ const styles = {
 };
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    workspaces: state.workspace.workspaces
+  };
 }
 
 function mapDispatchToProps(dispatch) {

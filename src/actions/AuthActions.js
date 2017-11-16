@@ -100,6 +100,7 @@ const authSuccess = (dispatch, user) => {
   });
 };
 
+//this is where we will want to make all initial data calls for app.
 export function loadAppData() {
   return dispatch => {
     dispatch({ type: LOAD_APP_DATA });
