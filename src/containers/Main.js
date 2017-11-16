@@ -8,9 +8,13 @@ import {Route} from 'react-router-dom';
 import NavBar from "../modules/dashboard/NavBar";
 import SideNav from "../modules/dashboard/SideNav";
 
-//Modules?
 import Dashboard from './Dashboard';
 import Calendar from './Calendar';
+
+//Modules
+import Chat from '../modules/chat/Chat';
+
+const drawerWidth = 298;
 
 class Main extends Component {
   constructor(props) {
@@ -31,13 +35,15 @@ class Main extends Component {
   }
 
   render() {
+
     return (
       <div style={styles.container}>
-        <SideNav drawerVisible={this.state.drawerVisible} />
-        <div style={styles.content}>
-          <NavBar toggleDrawer={() => this.toggleDrawer()} />
+        <SideNav toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible} />
+        <div style={{...styles.content, ...{width:`calc(100% - ${drawerWidth}px)`}}}>
+          <NavBar toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible}/>
           <Route path="/dashboard" component={Dashboard}/>
           <Route path="/calendar" component={Calendar}/>
+          <Route path="/chat" component={Chat} />
         </div>
       </div>
     );
@@ -48,12 +54,13 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "row",
-    height: '100%'
+    height: '100%',
+    flex:1,
   },
   content: {
     display:"flex",
     flexDirection:"column",
-    width:"100%",
+    flex:1,
   }
 };
 

@@ -5,8 +5,6 @@ import * as Actions from "../actions";
 
 import SignUp from "../modules/auth/SignUp";
 import SignIn from "../modules/auth/SignIn";
-import SignUpTemp from "../modules/auth/SignUpTemp";
-import SignInTemp from "../modules/auth/SignInTemp";
 
 import logoWhite from "../static/light.svg";
 import backgroundImg from "../static/mountains.png";
@@ -44,22 +42,7 @@ class AuthPage extends Component {
   }
 
   render() {
-
     const loginTransition = this.state.loginTransition;
-    
-    let signUp = null;
-    if (loginTransition === "SignUp") {
-      signUp = <SignUp focusSignUp={() => this.focusSignUp()} loginTransition={this.state.loginTransition}/>
-    } else {
-      signUp = <SignUpTemp focusSignUp={() => this.focusSignUp()} loginTransition={this.state.loginTransition}/>
-    }
-
-    let signIn = null;
-    if (loginTransition === "SignIn") {
-      signIn = <SignIn focusSignIn={() => this.focusSignIn()} loginTransition={this.state.loginTransition}/>
-    } else {
-      signIn = <SignInTemp focusSignIn={() => this.focusSignIn()} loginTransition={this.state.loginTransition}/>
-    }
 
     return (
       <div style={styles.authPage}>
@@ -67,10 +50,10 @@ class AuthPage extends Component {
           <img src={logoWhite} alt="Logo" />
           <div style={styles.inputForm}>
             <div style={styles.signUp}>
-              {signUp}
+              <SignUp focusSignUp={() => this.focusSignUp()} loginTransition={this.state.loginTransition}/>
             </div>
             <div style={styles.signIn}>
-              {signIn}
+              <SignIn focusSignIn={() => this.focusSignIn()} loginTransition={this.state.loginTransition}/>
             </div>
           </div>
         </div>

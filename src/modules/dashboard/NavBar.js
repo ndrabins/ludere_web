@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import colors from "../../utility/constants/colors";
 
@@ -12,8 +12,9 @@ import NotificationsIcon from "material-ui-icons/Notifications";
 import Avatar from "material-ui/Avatar";
 import IconButton from "material-ui/IconButton";
 import Menu, { MenuItem } from "material-ui/Menu";
-import MoreVertIcon from "material-ui-icons/MoreVert";
 import Button from "material-ui/Button";
+import MoreVertIcon from "material-ui-icons/MoreVert";
+import PersonAdd from 'material-ui-icons/PersonAdd';
 
 class NavBar extends Component {
   state = {
@@ -33,12 +34,25 @@ class NavBar extends Component {
     return (
       <div style={styles.container}>
         <div style={styles.navBegin}>
-          <Button dense style={styles.menuButton} onClick={this.props.toggleDrawer}>
-            <MenuIcon />
+          {!this.props.drawerVisible && (
+            <Button
+              dense
+              style={styles.menuButton}
+              onClick={this.props.toggleDrawer}
+            >
+              <MenuIcon />
+            </Button>
+          )}
+          <Button component={Link} to="/calendar">
+            Calendar
           </Button>
-          <Button component={Link} to="/calendar">Calendar</Button>
-          <Button component={Link} to="/dashboard">Dashboard</Button>
-          <Button>Invite</Button>
+          <Button component={Link} to="/dashboard">
+            Dashboard
+          </Button>
+          <Button>
+            Invite
+            <PersonAdd style={styles.personAdd} />
+          </Button>
         </div>
         <div style={styles.navEnd}>
           <IconButton style={{ color: "white" }}>
@@ -77,10 +91,11 @@ const styles = {
     display: "flex",
     backgroundColor: colors.lightThemeDefault,
     borderBottom: "1px solid #B9BBBE",
+    minHeight: 64,
     height: 64,
     justifyContent: "space-between",
     flexDirection: "row",
-    boxShadow: "0 2px 5px 0 rgba(0, 0, 0, 0.24)",
+    boxShadow: "0 2px 5px 0 rgba(0, 0, 0, 0.24)"
   },
   navEnd: {
     display: "flex",
@@ -98,11 +113,20 @@ const styles = {
     justifyContent: "center",
   },
   menuButton: {
-    height:"100%",
-    color:"white",
+    height: 65,
+    color: "white",
     width: 58,
     borderRadius: 0,
-    backgroundColor: colors.lightThemePrimary,
+    backgroundColor: colors.lightThemePrimary
+  },
+  personAdd:{
+    color: "white",
+    background: 'linear-gradient(to right, #29b6f6, #796eff)',
+    width: 22,
+    height: 22,
+    borderRadius: 20,
+    marginLeft: 10,
+    padding:2
   }
 };
 
