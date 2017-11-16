@@ -103,11 +103,11 @@ const styles = {
 
     padding: "50px 100px",
     backgroundColor: 'rgba(48, 48, 48, 0.5)',
-    borderRadius: "6px 0px 0px 6px",
+    borderRadius: "15px 0px 0px 15px",
     color: "#FFFFFF",
 
     position: "relative",
-    transition: "width 0.75s ease",
+    transition: "width 0.4s ease",
   },
   moduleSignUpClosed: {
     width: "150px",
@@ -121,10 +121,10 @@ const styles = {
 
     padding: "50px",
     backgroundColor: 'rgba(48, 48, 48, 0.5)',
-    borderRadius: "6px 0px 0px 6px",
+    borderRadius: "15px 0px 0px 15px",
 
     position: "relative",
-    transition: "width 0.75s ease",
+    transition: "width 0.4s ease",
   },
   headerClosed: {
     color: "#FFFFFF",
