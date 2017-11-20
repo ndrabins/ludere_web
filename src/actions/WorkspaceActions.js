@@ -10,6 +10,9 @@ import {
 
 import {reset} from 'redux-form';
 import firebase from "firebase";
+
+import * as teamActions from "./TeamActions";
+
 require("firebase/firestore");
 
 
@@ -19,7 +22,6 @@ export function createWorkspace(values) {
     let workspace = {
       name: values.workspaceName,
       dateCreated: Date.now(),
-      teams: {},
       workspaceOwner: uid,
       members: {}
     };
@@ -46,6 +48,7 @@ export function createWorkspace(values) {
 export function fetchWorkspaces() {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
+    let selectedWorkspace = null;
 
     dispatch({ type: FETCH_WORKSPACES });
 
@@ -55,9 +58,26 @@ export function fetchWorkspaces() {
       .onSnapshot(function(querySnapshot) {
         var workspaces = {};
         querySnapshot.forEach(function(doc) {
+          if(selectedWorkspace === null){
+            selectedWorkspace = doc.id;
+          }
           workspaces[doc.id] = doc.data();
         });
         dispatch({ type: FETCH_WORKSPACES_SUCCESS, workspaces: workspaces });
+
+        if(selectedWorkspace!==null){
+          //if a user is in a workspace, load the data for it on app start.
+          dispatch(selectWorkspace(selectedWorkspace));
+          return;
+        }
+
       });
   };
 }
+
+export function selectWorkspace(workspaceID) {
+    return dispatch => {
+      dispatch({ type: SELECT_WORKSPACE, selectedWorkspace: workspaceID });
+      dispatch(teamActions.fetchTeams());
+    };
+  }

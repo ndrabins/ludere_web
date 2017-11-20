@@ -10,13 +10,16 @@ import {
 
 const initialState = {
   workspaces: {},
-  selectedCompany: null
+  selectedWorkspace: null
 };
 
 export default function workspaces(state = initialState, action) {
   switch (action.type) {
     case SELECT_WORKSPACE:
-      return state;
+      return {
+        ...state,
+        selectedWorkspace: action.selectedWorkspace
+      };
     case CREATE_WORKSPACE:
       return state;
     case CREATE_WORKSPACE_SUCCESS:
