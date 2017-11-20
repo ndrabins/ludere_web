@@ -28,17 +28,14 @@ class AuthPage extends Component {
 
   focusSignUp(){
     this.setState({ loginTransition: "SignUp"});
-    console.log("Sign Up Click");
   }
 
   focusSignIn(){
     this.setState({ loginTransition: "SignIn"});
-    console.log("Sign In Click");
   }
 
   focusNeutral(){
     this.setState({ loginTransition: "null"});
-    console.log("Neutral Click");
   }
 
   render() {

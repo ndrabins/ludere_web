@@ -36,12 +36,12 @@ class Main extends Component {
   }
 
   render() {
-    //if user is not in a company, he must create or join one
-    // if(Object.keys(this.props.companies).length === 0){
-    //   return (
-    //     <CompanyFlow />
-    //   )
-    // }
+    // if user is not in a company, he must create or join one
+    if(Object.keys(this.props.workspaces).length === 0){
+      return (
+        <WorkspaceFlow />
+      )
+    }
 
     return (
       <div style={styles.container}>

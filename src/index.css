@@ -22,3 +22,9 @@ html, body, #app, #app>div {
 .App {
   height: 100%;
 }
+
+h1 {
+  font-family: Roboto;
+  font-size: 48px;
+  font-weight: 500;
+}

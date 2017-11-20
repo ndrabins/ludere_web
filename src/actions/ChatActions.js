@@ -63,7 +63,6 @@ export function createChannel(channelName) {
 }
 
 export function selectChannel(channelID) {
-  console.log("selected", channelID);
   return dispatch => {
     dispatch({ type: SELECT_CHANNEL, selectedChannel: channelID});
 
@@ -97,7 +96,6 @@ export function sendMessage(messageText){
     messageRef.add(message)
     .then(function(docRef) {
       console.log("Document written with ID: ", docRef.id);
-      console.log("sending message", message);
       dispatch({ type: SEND_MESSAGE});
     })
   }

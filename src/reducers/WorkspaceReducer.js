@@ -8,7 +8,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  companies: {},
+  workspaces: {},
   selectedCompany: null
 };
 
