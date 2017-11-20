@@ -1,4 +1,5 @@
 import {
+  SELECT_WORKSPACE,
   CREATE_WORKSPACE,
   CREATE_WORKSPACE_SUCCESS,
   CREATE_WORKSPACE_ERROR,
@@ -14,6 +15,8 @@ const initialState = {
 
 export default function workspaces(state = initialState, action) {
   switch (action.type) {
+    case SELECT_WORKSPACE:
+      return state;
     case CREATE_WORKSPACE:
       return state;
     case CREATE_WORKSPACE_SUCCESS:

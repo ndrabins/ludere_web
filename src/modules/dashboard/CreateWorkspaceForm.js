@@ -7,11 +7,10 @@ import Button from "material-ui/Button";
 const required = value => (value == null ? "Required" : undefined);
 
 class CreateWorkspaceForm extends Component {
-
   render() {
     const { handleSubmit, pristine, reset, submitting } = this.props;
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={styles.form}>
         <Field
           name="workspaceName"
           component={TextField}
@@ -20,7 +19,7 @@ class CreateWorkspaceForm extends Component {
         />
 
         <div>
-          <Button type="submit" disabled={pristine || submitting} raised>
+          <Button type="submit" disabled={pristine || submitting} raised color="primary" style={styles.button}>
             Submit
           </Button>
         </div>
@@ -28,6 +27,21 @@ class CreateWorkspaceForm extends Component {
     );
   };
 };
+
+const styles = {
+  form:{
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+    flexDirection:'column',
+    width: "100%"
+  },
+  button :{
+    // background: "linear-gradient(to left, #6fe5c9, #00bcd4)",
+    color:"white",
+    margin: 10,
+  }
+}
 
 CreateWorkspaceForm = reduxForm({
   form: "createWorkspaceForm"

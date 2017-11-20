@@ -27,8 +27,9 @@ class Main extends Component {
   }
 
   componentDidMount(){
-    this.props.actions.loadAppData();
-    this.props.actions.fetchTeams();
+    this.props.actions.loadAppData(); //eventually this will load all initial data and show loading icon till finished.
+    this.props.actions.fetchWorkspaces();
+    // this.props.actions.fetchTeams();
   }
 
   toggleDrawer(){

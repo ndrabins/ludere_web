@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import Paper from "material-ui/Paper";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../../actions";
+
 import Button from "material-ui/Button";
 import CreateWorkspaceForm from "./CreateWorkspaceForm";
 import JoinWorkspaceForm from "./JoinWorkspaceForm";
 
-class CompanyFlow extends Component {
+class WorkspaceFlow extends Component {
   constructor(props) {
     super(props);
 
@@ -60,10 +64,19 @@ class CompanyFlow extends Component {
     );
   }
 
+  // handleCreateWorkspace(event){
+  //   event.preventDefault();
+  //   this.props.actions.createWorkspace()
+  // }
+  handleCreateWorkspace = (values) => {
+    // print the form values to the console
+    this.props.actions.createWorkspace(values);
+  }
+
   renderCreateWorkspace() {
     return (
       <Paper style={styles.content} elevation={4}>
-        <CreateWorkspaceForm />
+        <CreateWorkspaceForm onSubmit={this.handleCreateWorkspace}/>
       </Paper>
     );
   }
@@ -124,4 +137,14 @@ const styles = {
   }
 };
 
-export default CompanyFlow;
+function mapStateToProps(state) {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorkspaceFlow);
