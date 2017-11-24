@@ -44,6 +44,14 @@ export function createTeam(teamName, description = "") {
       .then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);
         dispatch({ type: CREATE_TEAM_SUCCESS });
+
+        //Set context to created team
+        dispatch(selectTeam(docRef.id));
+
+        //This needs to be refactored into a general purpose setup for modules function.
+        //when a team is created with the chat module, initialize their chat module with a general and announcements channel?
+        dispatch(chatActions.createChannel("general"));
+        dispatch(chatActions.createChannel("announcements"));
       })
       .catch(function(error) {
         console.error("Error adding document: ", error);

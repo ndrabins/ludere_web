@@ -19,8 +19,11 @@ require("firebase/firestore");
 export function createWorkspace(values) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
+
+    let workspaceName = values.workspaceName;
+
     let workspace = {
-      name: values.workspaceName,
+      name: workspaceName,
       dateCreated: Date.now(),
       workspaceOwner: uid,
       members: {}
@@ -36,7 +39,10 @@ export function createWorkspace(values) {
       .then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);
         dispatch({ type: CREATE_WORKSPACE_SUCCESS });
-        dispatch(reset('createWorkspaceForm'))
+        dispatch(reset('createWorkspaceForm'));
+
+        //Create workspace with an initial team that everyone is a part of.
+        dispatch(teamActions.createTeam(workspaceName));
       })
       .catch(function(error) {
         console.error("Error adding document: ", error);
