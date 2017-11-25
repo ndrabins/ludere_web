@@ -11,6 +11,7 @@ class CreateWorkspaceForm extends Component {
     const { handleSubmit, pristine, reset, submitting } = this.props;
     return (
       <form onSubmit={handleSubmit} style={styles.form}>
+        <h3> CREATE A WORKSPACE </h3>
         <Field
           name="workspaceName"
           component={TextField}
@@ -34,7 +35,8 @@ const styles = {
     justifyContent:'center',
     alignItems:'center',
     flexDirection:'column',
-    width: "100%"
+    width: "100%",
+    height: "100%",
   },
   button :{
     // background: "linear-gradient(to left, #6fe5c9, #00bcd4)",

@@ -5,7 +5,10 @@ import {
   CREATE_WORKSPACE_ERROR,
   FETCH_WORKSPACES,
   FETCH_WORKSPACES_SUCCESS,
-  FETCH_WORKSPACES_ERROR
+  FETCH_WORKSPACES_ERROR,
+  JOIN_WORKSPACE,
+  JOIN_WORKSPACE_SUCCESS,
+  JOIN_WORKSPACE_ERROR,
 } from "./types";
 
 import {reset} from 'redux-form';
@@ -49,6 +52,35 @@ export function createWorkspace(values) {
         dispatch({ type: CREATE_WORKSPACE_ERROR });
       });
   };
+}
+
+export function joinWorkspace(formValues){
+
+  return (dispatch, getState) => {
+
+    let { uid } = getState().auth.user;
+
+    let url = formValues.workspaceUrl;
+    dispatch({ type: JOIN_WORKSPACE });
+
+    let membersUpdate = {}
+    membersUpdate[`members.${uid}`] = true;
+
+    console.log(url);
+    firebase
+      .firestore()
+      .collection("workspaces").doc(url).
+      update(membersUpdate)
+      .then(function() {
+        dispatch({ type: JOIN_WORKSPACE_SUCCESS });
+        dispatch(reset('joinWorkspaceForm'));
+      })
+      .catch(function(error) {
+        //workspace doens't exist or error
+        console.error("Error adding document: ", error);
+        dispatch({ type: JOIN_WORKSPACE_ERROR });
+      });
+  }
 }
 
 export function fetchWorkspaces() {

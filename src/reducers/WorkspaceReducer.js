@@ -6,6 +6,9 @@ import {
   FETCH_WORKSPACES,
   FETCH_WORKSPACES_SUCCESS,
   FETCH_WORKSPACES_ERROR,
+  JOIN_WORKSPACE,
+  JOIN_WORKSPACE_SUCCESS,
+  JOIN_WORKSPACE_ERROR,
 } from "../actions/types";
 
 const initialState = {
@@ -34,6 +37,12 @@ export default function workspaces(state = initialState, action) {
         workspaces: action.workspaces
       };
     case FETCH_WORKSPACES_ERROR:
+      return state;
+    case JOIN_WORKSPACE:
+      return state;
+    case JOIN_WORKSPACE_SUCCESS:
+      return state;
+    case JOIN_WORKSPACE_ERROR:
       return state;
     default:
       return state;

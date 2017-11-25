@@ -6,6 +6,9 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
 import Button from "material-ui/Button";
+import IconButton from 'material-ui/IconButton';
+import ArrowBack from 'material-ui-icons/ArrowBack';
+
 import CreateWorkspaceForm from "./CreateWorkspaceForm";
 import JoinWorkspaceForm from "./JoinWorkspaceForm";
 
@@ -64,27 +67,32 @@ class WorkspaceFlow extends Component {
     );
   }
 
-  // handleCreateWorkspace(event){
-  //   event.preventDefault();
-  //   this.props.actions.createWorkspace()
-  // }
   handleCreateWorkspace = (values) => {
-    // print the form values to the console
     this.props.actions.createWorkspace(values);
+  }
+
+  handleJoinWorkspace = (url) => {
+    this.props.actions.joinWorkspace(url);
   }
 
   renderCreateWorkspace() {
     return (
-      <Paper style={styles.content} elevation={4}>
+      <Paper style={styles.formContent} elevation={4}>
         <CreateWorkspaceForm onSubmit={this.handleCreateWorkspace}/>
+        <IconButton onClick={() => this.selectOption(null)}>
+          <ArrowBack />
+        </IconButton>
       </Paper>
     );
   }
 
   renderJoinWorkspace() {
     return (
-      <Paper style={styles.content} elevation={4}>
-        <JoinWorkspaceForm />
+      <Paper style={styles.formContent} elevation={4}>
+        <JoinWorkspaceForm onSubmit={this.handleJoinWorkspace}/>
+        <IconButton onClick={() => this.selectOption(null)}>
+          <ArrowBack />
+        </IconButton>
       </Paper>
     );
   }
@@ -94,6 +102,7 @@ class WorkspaceFlow extends Component {
       <div style={styles.container}>
         {!this.state.option && this.renderInitialState()}
         {this.state.option === "create" && this.renderCreateWorkspace()}
+        {this.state.option === "join" && this.renderJoinWorkspace()}
       </div>
     );
   }
@@ -114,6 +123,15 @@ const styles = {
     height: "60%",
     display: "flex",
     flexDirection: "row",
+    backgroundColor: "#6d6d6d",
+    borderRadius: 5
+  },
+  formContent: {
+    padding: 16,
+    width: "40%",
+    height: "60%",
+    display: "flex",
+    flexDirection: "column",
     backgroundColor: "#6d6d6d",
     borderRadius: 5
   },

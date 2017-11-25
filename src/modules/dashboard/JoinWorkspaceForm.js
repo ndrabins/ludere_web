@@ -1,13 +1,51 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+
+import { Field, reduxForm } from "redux-form";
+import { TextField } from "redux-form-material-ui";
+import Button from "material-ui/Button";
+
+const required = value => (value == null ? "Required" : undefined);
 
 class JoinWorkspaceForm extends Component {
   render() {
+    const { handleSubmit, pristine, reset, submitting } = this.props;
     return (
-      <div>
-        Join Workspace
-      </div>
+      <form onSubmit={handleSubmit} style={styles.form}>
+        <h3> JOIN A WORKSPACE </h3>
+        <Field
+          name="workspaceUrl"
+          component={TextField}
+          placeholder="Workspace Invite URL"
+          validate={required}
+        />
+        <div>
+          <Button type="submit" disabled={pristine || submitting} raised color="primary" style={styles.button}>
+            Submit
+          </Button>
+        </div>
+      </form>
     );
+  };
+};
+
+const styles = {
+  form:{
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+    flexDirection:'column',
+    width: "100%",
+    height: "100%",
+  },
+  button :{
+    // background: "linear-gradient(to left, #6fe5c9, #00bcd4)",
+    color:"white",
+    margin: 10,
   }
 }
+
+JoinWorkspaceForm = reduxForm({
+  form: "joinWorkspaceForm"
+})(JoinWorkspaceForm);
 
 export default JoinWorkspaceForm;
