@@ -45,7 +45,7 @@ class ChannelButton extends Component {
         onMouseEnter={this.handleHover}
         onMouseLeave={this.handleHover}
         onClick={this.handleClick}
-        to="/chat"
+        to="/team/chat"
       >
         # {this.props.name}
       </Link>

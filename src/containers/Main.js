@@ -45,15 +45,14 @@ class Main extends Component {
       )
     }
 
-    console.log("main", this.props);
     return (
       <div style={styles.container}>
         <SideNav history={this.props.history} toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible} />
         <div style={{...styles.content, ...{width:`calc(100% - ${drawerWidth}px)`}}}>
           <NavBar toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible}/>
-          <Route path="/dashboard" component={Dashboard}/>
-          <Route path="/calendar" component={Calendar}/>
-          <Route path="/chat" component={Chat} />
+          <Route path="/team/dashboard" component={Dashboard}/>
+          <Route path="/team/calendar" component={Calendar}/>
+          <Route path="/team/chat" component={Chat} />
           <Route path="/community" component={Community} />
         </div>
       </div>

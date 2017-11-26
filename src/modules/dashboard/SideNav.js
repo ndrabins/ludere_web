@@ -11,7 +11,6 @@ const drawerWidth = 240;
 
 class SideNav extends Component {
   render() {
-    console.log("sidenav", this.props);
     return (
       <div style={styles.container}>
         <TeamNav history={this.props.history} />

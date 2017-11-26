@@ -11,7 +11,7 @@ class SideNavModules extends Component {
     return (
       <div style={styles.container}>
         <Route path="/community" component={CommunitySideNav} />
-        <Route exact path="/" component={ChatSideNav} />
+        <Route path="/team" component={ChatSideNav} />
         {/* <ChatSideNav /> */}
         {/* <BoardsSideNav /> */}
       </div>

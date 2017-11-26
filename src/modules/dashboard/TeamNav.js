@@ -24,7 +24,7 @@ class TeamNav extends Component {
 
   handleTeamSelect(key){
     // this.setState({indicatorHeight: this.state.indicatorHeight * 2});
-    this.props.history.push("/");
+    this.props.history.push("/team/");
     this.props.actions.selectTeam(key);
   }
 

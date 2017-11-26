@@ -43,10 +43,10 @@ class NavBar extends Component {
               <MenuIcon />
             </Button>
           )}
-          <Button component={Link} to="/calendar">
+          <Button component={Link} to="/team/calendar">
             Calendar
           </Button>
-          <Button component={Link} to="/dashboard">
+          <Button component={Link} to="/team/dashboard">
             Dashboard
           </Button>
           <Button>
