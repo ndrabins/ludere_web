@@ -59,7 +59,7 @@ class TeamNav extends Component {
     return (
       <div style={styles.containerWrapper} >
         <div style={styles.container}>
-          <div style={{...styles.teamButtonContainer}}>
+          <div style={{...styles.teamButtonContainer, paddingTop: 12}}>
             <Tooltip id="tooltip-right-start" title="Community" placement="right">
               <Button fab style={{ ...styles.teamButton, ...styles.communityButton }} onClick={() => this.handleCommunitySelect()} component={Link} to="/community">
                 <PeopleIcon />
@@ -78,6 +78,7 @@ class TeamNav extends Component {
 const styles = {
   containerWrapper:{
     height: "100%",
+    maxHeight: "100%",
     overflow: "hidden",
     width: 58,
   },
@@ -119,8 +120,6 @@ const styles = {
     // transition: "top 0.25s linear",
   },
   teamButtonContainer: {
-    display: 'flex',
-    flexDirection: 'row',
     width: '100%',
     minHeight: 38,
     margin: "4px 0px 4px 0px"

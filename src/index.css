@@ -9,6 +9,7 @@ body {
   padding: 0;
   font-family: roboto;
   height: 100%;
+  overflow:hidden;
 }
 
 html, body, #app, #app>div {
@@ -17,10 +18,12 @@ html, body, #app, #app>div {
 
 #root {
   height: 100%;
+  overflow:hidden;
 }
 
 .App {
   height: 100%;
+  overflow:hidden;
 }
 
 h1 {

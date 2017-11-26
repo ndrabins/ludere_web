@@ -65,6 +65,7 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     height: '100%',
+    maxHeight: '100%',
     flex:1,
     overflow:'hidden',
   },
