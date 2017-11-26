@@ -30,7 +30,18 @@ class NavBar extends Component {
     this.setState({ openNavMenu: false });
   };
 
+  handleCalendarSelect() {
+    this.props.history.push("/community/calendar");
+    this.props.actions.selectTeam(null);
+  }
+
+  handleDashboardSelect() {
+    this.props.history.push("/community/dashboard");
+    this.props.actions.selectTeam(null);
+  }
+
   render() {
+    console.log("nav", this.props);
     return (
       <div style={styles.container}>
         <div style={styles.navBegin}>
@@ -43,10 +54,10 @@ class NavBar extends Component {
               <MenuIcon />
             </Button>
           )}
-          <Button component={Link} to="/team/calendar">
+          <Button onClick={() => this.handleCalendarSelect()}>
             Calendar
           </Button>
-          <Button component={Link} to="/team/dashboard">
+          <Button onClick={() => this.handleDashboardSelect()}>
             Dashboard
           </Button>
           <Button>

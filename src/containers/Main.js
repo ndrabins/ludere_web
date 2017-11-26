@@ -49,11 +49,11 @@ class Main extends Component {
       <div style={styles.container}>
         <SideNav history={this.props.history} toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible} />
         <div style={{...styles.content, ...{width:`calc(100% - ${drawerWidth}px)`}}}>
-          <NavBar toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible}/>
-          <Route path="/team/dashboard" component={Dashboard}/>
-          <Route path="/team/calendar" component={Calendar}/>
+          <NavBar history={this.props.history} toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible}/>
+          <Route exact path="/community/dashboard" component={Dashboard}/>
+          <Route exact path="/community/calendar" component={Calendar}/>
+          <Route exact path="/community" component={Community} />
           <Route path="/team/chat" component={Chat} />
-          <Route path="/community" component={Community} />
         </div>
       </div>
     );

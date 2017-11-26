@@ -87,15 +87,16 @@ const styles = {
   },
   container: {
     display: "flex",
-    width: 76, //add 18 for
+    width: 58, //add 18 for
+    paddingRight: 18,
     backgroundColor: "#000000",
     flexDirection: "column",
     alignItems: "center",
     boxShadow: "0 5.5px 5px 0 rgba(0, 0, 0, 0.24), 0 9px 18px 0 rgba(0, 0, 0, 0.18)",
     height: "100%",
-    overflowY: 'auto',
-    overflowX: 'hidden',
-    paddingRight: 18,
+    // overflowY: 'auto',
+    // overflowX: 'hidden',
+    // paddingRight: 18,
   },
   communityButton: {
     color: "#FFF",
