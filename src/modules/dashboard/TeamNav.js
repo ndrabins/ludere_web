@@ -22,13 +22,13 @@ class TeamNav extends Component {
     };
   }
 
-  handleTeamSelect(key){
+  handleTeamSelect(key) {
     // this.setState({indicatorHeight: this.state.indicatorHeight * 2});
     this.props.history.push("/team/");
     this.props.actions.selectTeam(key);
   }
 
-  handleCommunitySelect(){
+  handleCommunitySelect() {
     this.props.history.push("/community");
     this.props.actions.selectTeam(null);
   }
@@ -40,6 +40,7 @@ class TeamNav extends Component {
     let teams = Map(this.props.teams, (team, key) => {
       return (
         <div key={key} style={styles.teamButtonContainer}>
+          <div style={this.props.selectedTeam === key ? styles.selectIndicator : null} />
           <Tooltip id="tooltip-right-start" title={team.name} placement="right">
             <Button
               fab
@@ -60,14 +61,15 @@ class TeamNav extends Component {
     return (
       <div style={styles.containerWrapper} >
         <div style={styles.container}>
-          <div style={{...styles.teamButtonContainer, paddingTop: 12}}>
+          <div style={{ ...styles.teamButtonContainer, paddingTop: 12 }}>
+            <div style={this.props.selectedTeam === null ? styles.selectIndicator : null} />
             <Tooltip id="tooltip-right-start" title="Community" placement="right">
               <Button fab style={{ ...styles.teamButton, ...styles.communityButton }} onClick={() => this.handleCommunitySelect()}>
                 <PeopleIcon />
               </Button>
             </Tooltip>
           </div>
-          <div style={{width: "40px", borderBottom: "#6f6f6f 1px solid", marginTop: 5, marginBottom: 5,   }} />
+          <div style={{ width: "40px", borderBottom: "#6f6f6f 1px solid", marginTop: 5, marginBottom: 5, }} />
           {this.renderTeams()}
           <AddTeamButton />
         </div>
@@ -77,7 +79,7 @@ class TeamNav extends Component {
 }
 
 const styles = {
-  containerWrapper:{
+  containerWrapper: {
     height: "100%",
     maxHeight: "100%",
     overflow: "hidden",
@@ -93,7 +95,6 @@ const styles = {
     height: "100%",
     overflowY: 'auto',
     overflowX: 'hidden',
-    // paddingTop: 12,
     paddingRight: 18,
   },
   communityButton: {
@@ -117,10 +118,12 @@ const styles = {
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
     alignSelf: 'flex-start',
-    display:'flex',
+    display: 'flex',
     // transition: "top 0.25s linear",  },
   },
   teamButtonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
     width: '100%',
     minHeight: 38,
     margin: "4px 0px 4px 0px"
