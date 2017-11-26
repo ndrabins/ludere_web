@@ -13,7 +13,7 @@ import {
 
 const initialState = {
   workspaces: {},
-  selectedWorkspace: null
+  selectedWorkspace: null,
 };
 
 export default function workspaces(state = initialState, action) {

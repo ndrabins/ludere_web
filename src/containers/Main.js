@@ -11,6 +11,7 @@ import SideNav from "../modules/dashboard/SideNav";
 
 import Dashboard from './Dashboard';
 import Calendar from './Calendar';
+import Community from '../modules/community/Community';
 
 //Modules
 import Chat from '../modules/chat/Chat';
@@ -52,6 +53,7 @@ class Main extends Component {
           <Route path="/dashboard" component={Dashboard}/>
           <Route path="/calendar" component={Calendar}/>
           <Route path="/chat" component={Chat} />
+          <Route path="/community" component={Community} />
         </div>
       </div>
     );
@@ -64,6 +66,7 @@ const styles = {
     flexDirection: "row",
     height: '100%',
     flex:1,
+    overflow:'hidden',
   },
   content: {
     display:"flex",

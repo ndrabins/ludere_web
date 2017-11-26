@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
+
+import { Link } from "react-router-dom";
 import Map from "lodash/map";
 
 import Button from "material-ui/Button";
@@ -12,6 +14,23 @@ import Tooltip from "material-ui/Tooltip";
 import AddTeamButton from "./AddTeamButton";
 
 class TeamNav extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      indicatorHeight: 50
+    };
+  }
+
+  handleTeamSelect(key){
+    // this.setState({indicatorHeight: this.state.indicatorHeight * 2});
+    this.props.actions.selectTeam(key);
+  }
+
+  handleCommunitySelect(){
+    this.props.actions.selectTeam(null);
+  }
+
   renderTeams() {
     if (!this.props.teams) {
       return;
@@ -19,12 +38,11 @@ class TeamNav extends Component {
     let teams = Map(this.props.teams, (team, key) => {
       return (
         <div key={key} style={styles.teamButtonContainer}>
-          <div style={this.props.selectedTeam === key ? styles.selectIndicator : null}/>
           <Tooltip id="tooltip-right-start" title={team.name} placement="right">
             <Button
               fab
               style={styles.teamButton}
-              onClick={() => this.props.actions.selectTeam(key)}
+              onClick={() => this.handleTeamSelect(key)}
             >
               <Avatar style={styles.avatar}>{team.name[0]}</Avatar>
             </Button>
@@ -35,37 +53,50 @@ class TeamNav extends Component {
     return teams;
   }
 
+  //          <div style={styles.selectIndicator} />
   render() {
+    console.log(this.props);
     return (
-      <div style={styles.container}>
-        <Tooltip id="tooltip-right-start" title="Community" placement="right">
-          <Button fab style={styles.communityButton}>
-            <PeopleIcon />
-          </Button>
-        </Tooltip>
-        {this.renderTeams()}
-        <AddTeamButton />
+      <div style={styles.containerWrapper} >
+        <div style={styles.container}>
+          <div style={{...styles.teamButtonContainer}}>
+            <Tooltip id="tooltip-right-start" title="Community" placement="right">
+              <Button fab style={{ ...styles.teamButton, ...styles.communityButton }} onClick={() => this.handleCommunitySelect()} component={Link} to="/community">
+                <PeopleIcon />
+              </Button>
+            </Tooltip>
+          </div>
+          <div style={{width: "40px", borderBottom: "#6f6f6f 1px solid", marginTop: 5, marginBottom: 5,   }} />
+          {this.renderTeams()}
+          <AddTeamButton />
+        </div>
       </div>
     );
   }
 }
 
 const styles = {
+  containerWrapper:{
+    height: "100%",
+    overflow: "hidden",
+    width: 58,
+  },
   container: {
     display: "flex",
-    width: 58,
+    width: 76, //add 18 for
     backgroundColor: "#000000",
     flexDirection: "column",
     alignItems: "center",
-    paddingTop: 12,
-    boxShadow: "0 5.5px 5px 0 rgba(0, 0, 0, 0.24), 0 9px 18px 0 rgba(0, 0, 0, 0.18)"
+    boxShadow: "0 5.5px 5px 0 rgba(0, 0, 0, 0.24), 0 9px 18px 0 rgba(0, 0, 0, 0.18)",
+    height: "100%",
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    // paddingTop: 12,
+    paddingRight: 18,
   },
   communityButton: {
-    width: 36,
-    height: 36,
-    margin: "8px 0px 8px 0px",
     color: "#FFF",
-    background: `linear-gradient(to left, #6fe5c9, #00bcd4)`
+    background: `linear-gradient(to left, #6fe5c9, #00bcd4)`,
   },
   teamButton: {
     width: 36,
@@ -77,20 +108,23 @@ const styles = {
     height: 36
   },
   selectIndicator: {
-    position:'absolute',
-    width:4,
+    // position: 'absolute',
+    width: 4,
     height: 38,
-    backgroundColor :'white',
+    backgroundColor: 'white',
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
+    alignSelf: 'flex-start',
+    display:'flex',
+    // transition: "top 0.25s linear",
   },
   teamButtonContainer: {
     display: 'flex',
     flexDirection: 'row',
     width: '100%',
-    height: 38,
+    minHeight: 38,
     margin: "4px 0px 4px 0px"
-  }
+  },
 };
 
 function mapStateToProps(state) {

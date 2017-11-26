@@ -11,9 +11,10 @@ const drawerWidth = 240;
 
 class SideNav extends Component {
   render() {
+    console.log(this.props);
     return (
       <div style={styles.container}>
-        <TeamNav />
+        <TeamNav {...this.props} />
         <div
           style={
             this.props.drawerVisible
@@ -41,9 +42,11 @@ class SideNav extends Component {
 
 const styles = {
   container: {
-    display: "flex"
+    display: "flex",
     // backgroundColor: colors.lightThemePrimary,
     // width: drawerWidth,
+    overflow:'hidden',
+    height: "100%",
   },
   teamSideNav: {
     display: "flex",
