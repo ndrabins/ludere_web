@@ -11,10 +11,10 @@ const drawerWidth = 240;
 
 class SideNav extends Component {
   render() {
-    console.log(this.props);
+    console.log("sidenav", this.props);
     return (
       <div style={styles.container}>
-        <TeamNav {...this.props} />
+        <TeamNav history={this.props.history} />
         <div
           style={
             this.props.drawerVisible

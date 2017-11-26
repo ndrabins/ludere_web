@@ -24,10 +24,12 @@ class TeamNav extends Component {
 
   handleTeamSelect(key){
     // this.setState({indicatorHeight: this.state.indicatorHeight * 2});
+    this.props.history.push("/");
     this.props.actions.selectTeam(key);
   }
 
   handleCommunitySelect(){
+    this.props.history.push("/community");
     this.props.actions.selectTeam(null);
   }
 
@@ -53,15 +55,14 @@ class TeamNav extends Component {
     return teams;
   }
 
-  //          <div style={styles.selectIndicator} />
+  // />
   render() {
-    console.log(this.props);
     return (
       <div style={styles.containerWrapper} >
         <div style={styles.container}>
           <div style={{...styles.teamButtonContainer, paddingTop: 12}}>
             <Tooltip id="tooltip-right-start" title="Community" placement="right">
-              <Button fab style={{ ...styles.teamButton, ...styles.communityButton }} onClick={() => this.handleCommunitySelect()} component={Link} to="/community">
+              <Button fab style={{ ...styles.teamButton, ...styles.communityButton }} onClick={() => this.handleCommunitySelect()}>
                 <PeopleIcon />
               </Button>
             </Tooltip>
@@ -117,7 +118,7 @@ const styles = {
     borderBottomRightRadius: 4,
     alignSelf: 'flex-start',
     display:'flex',
-    // transition: "top 0.25s linear",
+    // transition: "top 0.25s linear",  },
   },
   teamButtonContainer: {
     width: '100%',

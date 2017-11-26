@@ -96,7 +96,9 @@ export function fetchTeams() {
 export function selectTeam(teamID) {
   return dispatch => {
     dispatch({ type: SELECT_TEAM, selectedTeam: teamID });
-    dispatch(loadTeamData(teamID));
+    if(teamID !== null){
+      dispatch(loadTeamData(teamID));
+    }
   };
 }
 
