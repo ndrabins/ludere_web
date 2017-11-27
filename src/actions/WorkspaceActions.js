@@ -9,6 +9,9 @@ import {
   JOIN_WORKSPACE,
   JOIN_WORKSPACE_SUCCESS,
   JOIN_WORKSPACE_ERROR,
+  FETCH_WORKSPACE_USERS,
+  FETCH_WORKSPACE_USERS_SUCCESS,
+  FETCH_WORKSPACE_USERS_ERROR,
 } from "./types";
 
 import {reset} from 'redux-form';
@@ -114,8 +117,15 @@ export function fetchWorkspaces() {
 }
 
 export function selectWorkspace(workspaceID) {
-    return dispatch => {
-      dispatch({ type: SELECT_WORKSPACE, selectedWorkspace: workspaceID });
-      dispatch(teamActions.fetchTeams());
-    };
+  return dispatch => {
+    dispatch({ type: SELECT_WORKSPACE, selectedWorkspace: workspaceID });
+    dispatch(teamActions.fetchTeams());
+  };
+}
+
+export function fetchWorkspaceUsers(){
+  return (dispatch, getState) => {
+    console.log("fetching workspace users");
+    dispatch({ type: FETCH_WORKSPACE_USERS });
   }
+}

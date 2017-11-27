@@ -41,7 +41,6 @@ class NavBar extends Component {
   }
 
   render() {
-    console.log("nav", this.props);
     return (
       <div style={styles.container}>
         <div style={styles.navBegin}>
@@ -54,10 +53,10 @@ class NavBar extends Component {
               <MenuIcon />
             </Button>
           )}
-          <Button onClick={() => this.handleCalendarSelect()}>
+          <Button onClick={() => this.handleCalendarSelect()} disabled>
             Calendar
           </Button>
-          <Button onClick={() => this.handleDashboardSelect()}>
+          <Button onClick={() => this.handleDashboardSelect()} disabled>
             Dashboard
           </Button>
           <Button>

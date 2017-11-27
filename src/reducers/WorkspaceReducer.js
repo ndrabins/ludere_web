@@ -9,11 +9,15 @@ import {
   JOIN_WORKSPACE,
   JOIN_WORKSPACE_SUCCESS,
   JOIN_WORKSPACE_ERROR,
+  FETCH_WORKSPACE_USERS,
+  FETCH_WORKSPACE_USERS_SUCCESS,
+  FETCH_WORKSPACE_USERS_ERROR,
 } from "../actions/types";
 
 const initialState = {
   workspaces: {},
   selectedWorkspace: null,
+  workspaceUsers: {},
 };
 
 export default function workspaces(state = initialState, action) {
@@ -43,6 +47,15 @@ export default function workspaces(state = initialState, action) {
     case JOIN_WORKSPACE_SUCCESS:
       return state;
     case JOIN_WORKSPACE_ERROR:
+      return state;
+    case FETCH_WORKSPACE_USERS:
+      return state;
+    case FETCH_WORKSPACE_USERS_SUCCESS:
+      return {
+        ...state,
+        workspaceUsers: action.workspaceUsers
+      };
+    case FETCH_WORKSPACE_USERS_ERROR:
       return state;
     default:
       return state;

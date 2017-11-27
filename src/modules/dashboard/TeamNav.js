@@ -69,7 +69,7 @@ class TeamNav extends Component {
               </Button>
             </Tooltip>
           </div>
-          <div style={{ width: "40px", borderBottom: "#6f6f6f 1px solid", marginTop: 5, marginBottom: 5, }} />
+          <div style={{ width: "40px", borderBottom: "#6f6f6f 2px solid", marginTop: 5, marginBottom: 5, }} />
           {this.renderTeams()}
           <AddTeamButton />
         </div>
