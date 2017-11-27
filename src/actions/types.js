@@ -6,6 +6,7 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const LOAD_APP_DATA = 'LOAD_APP_DATA';
 export const LOAD_APP_DATA_ERROR = 'LOAD_APP_DATA_ERROR';
 export const LOAD_APP_DATA_SUCCESS = 'LOAD_APP_DATA_SUCCESS';
+export const INITIALIZE_USER = 'INITIALIZE_USER';
 
 //Team actions
 export const CREATE_TEAM = 'CREATE_TEAM';

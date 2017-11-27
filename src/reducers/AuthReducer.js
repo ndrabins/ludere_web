@@ -1,4 +1,4 @@
-import { AUTH_USER, SIGN_OUT_USER, AUTH_ERROR, AUTH_SUCCESS } from "../actions/types";
+import { AUTH_USER, SIGN_OUT_USER, AUTH_ERROR, AUTH_SUCCESS, INITIALIZE_USER } from "../actions/types";
 
 const initialState = {
   authenticated: false,
@@ -37,6 +37,8 @@ export default function auth(state = initialState, action) {
         error: action.payload.message,
         loading: false
       };
+    case INITIALIZE_USER:
+      return state;
     default:
       return state;
   }

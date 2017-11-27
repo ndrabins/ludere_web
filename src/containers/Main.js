@@ -30,6 +30,7 @@ class Main extends Component {
   componentDidMount(){
     this.props.actions.loadAppData(); //eventually this will load all initial data and show loading icon till finished.
     this.props.actions.fetchWorkspaces();
+    this.props.history.push('/community/');
     // this.props.actions.fetchTeams();
   }
 

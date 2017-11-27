@@ -5,6 +5,8 @@ import * as Actions from "../../actions";
 
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 
+import Avatar from 'material-ui/Avatar';
+
 class CommunityList extends Component {
 
   componentDidMount(){
@@ -35,33 +37,18 @@ class CommunityList extends Component {
             <TableRow >
               <TableCell padding="checkbox">Avatar</TableCell>
               <TableCell numeric>Name</TableCell>
-              <TableCell numeric></TableCell>
-              <TableCell numeric></TableCell>
-              <TableCell numeric></TableCell>
-              <TableCell numeric></TableCell>
-              <TableCell numeric></TableCell>
-              <TableCell numeric></TableCell>
-              <TableCell numeric></TableCell>
               <TableCell numeric>Status</TableCell>
-              <TableCell numeric></TableCell>
-
             </TableRow>
           </TableHead>
           <TableBody>
             {data.map(n => {
               return (
                 <TableRow key={n.id} hover>
-                  <TableCell padding="checkbox">{n.calories}</TableCell>
+                  <TableCell padding="checkbox">
+                    <Avatar> N </Avatar>
+                  </TableCell>
                   <TableCell numeric>{n.name}</TableCell>
-                  <TableCell numeric></TableCell>
-                  <TableCell numeric></TableCell>
-                  <TableCell numeric></TableCell>
-                  <TableCell numeric></TableCell>
-                  <TableCell numeric></TableCell>
-                  <TableCell numeric></TableCell>
-                  <TableCell numeric></TableCell>
                   <TableCell numeric>{n.fat}</TableCell>
-                  <TableCell numeric></TableCell>
                 </TableRow>
               );
             })}

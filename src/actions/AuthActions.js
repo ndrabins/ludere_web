@@ -5,9 +5,13 @@ import {
   AUTH_SUCCESS,
   LOAD_APP_DATA,
   LOAD_APP_DATA_SUCCESS,
-  LOAD_APP_DATA_ERROR
+  LOAD_APP_DATA_ERROR,
+  INITIALIZE_USER,
 } from "./types";
 import firebase from "firebase";
+import { INITIALIZE } from "redux-form/lib/actionTypes";
+
+require("firebase/firestore");
 
 export function signUpUser(email, password) {
   return function(dispatch) {
@@ -20,6 +24,11 @@ export function signUpUser(email, password) {
       .then(user => {
         authSuccess(dispatch, user);
 
+        //initialize the user to our user storage in firestore
+        //This is where we will store all the users profile information instead of firebases user object
+        //This is because you can't add fields to firebases user object
+        dispatch(initializeUser(user));
+
         user
           .sendEmailVerification()
           .then(function() {
@@ -30,13 +39,37 @@ export function signUpUser(email, password) {
             // An error happened.
             console.log("could not send verification email");
           });
-        // .updateProfile({displayName: values["displayName"]}
-        // firebase.auth().currentUser.updateProfile({displayName: credentials.displayName});
       })
       .catch(error => {
         dispatch(authError(error));
       });
   };
+}
+
+function initializeUser(user) {
+  console.log("initializing user", user);
+
+  let ourUserObject = {
+    displayName: user.displayName,
+    email: user.email,
+    photoURL: user.photoURL,
+    emailVerified: user.emailVerified,
+    uid : user.uid,
+    emailVerified : user.emailVerified,
+    createdAt : Date.now(),
+    lastLoginAt : Date.now(),
+  };
+  let uid = user.uid;
+
+  let userRef = firebase.firestore().collection("users").doc(uid);
+  return dispatch => {
+    userRef.set(ourUserObject).then(function() {
+      dispatch({ type: INITIALIZE_USER });
+    })
+    .catch(function(error) {
+      console.error("Error writing document: ", error);
+    });
+  }
 }
 
 export function signInUser(email, password) {
