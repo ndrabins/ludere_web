@@ -47,8 +47,6 @@ export function signUpUser(email, password) {
 }
 
 function initializeUser(user) {
-  //data anyone can view
-
   //data only owner of account can see/change
   let privateData = {
     uid : user.uid,

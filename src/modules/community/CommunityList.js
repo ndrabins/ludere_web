@@ -11,15 +11,13 @@ import Avatar from 'material-ui/Avatar';
 class CommunityList extends Component {
 
   renderUsers() {
-    console.log('rendering users', this.props.workspaceUsers);
     let users = Map(this.props.workspaceUsers, (user, uid) => {
-      console.log(user);
       return (
         <TableRow key={uid} hover>
           <TableCell padding="checkbox">
             <Avatar> N </Avatar>
           </TableCell>
-          <TableCell> {user.name} </TableCell>
+          <TableCell> {user.displayName} </TableCell>
           <TableCell numeric>true</TableCell>
         </TableRow>
       );

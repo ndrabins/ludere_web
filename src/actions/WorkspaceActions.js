@@ -146,40 +146,21 @@ export function selectWorkspace(workspaceID) {
 export function fetchWorkspaceUsers() {
   return (dispatch, getState) => {
     dispatch({ type: FETCH_WORKSPACE_USERS });
-    console.log("fetching...");
 
-    let workplaceID = getState().workspace.selectedWorkspace;
-    let membersList = getState().workspace.workspaces[workplaceID].members;
+    let workspaceUID = getState().workspace.selectedWorkspace;
 
-    let membersListArray = Object.keys(membersList);
+    let userRef = firebase
+      .firestore()
+      .collection(`users`);
 
-    let userData = {}
-
-    // membersListArray.map(memberUID => {
-    //   var userRef = firebase.firestore().collection("users").doc(memberUID);
-    //   console.log("user", memberUID);
-    //   userRef.get().then(function(doc) {
-    //     if (doc.exists) {
-    //         console.log("Document data:", doc.data());
-    //         userData[memberUID] = doc.data();
-    //     } else {
-    //         console.log("No such document!");
-    //     }
-    //   }).catch(function(error) {
-    //       console.log("Error getting document:", error);
-    //   });
-    // });
-    // console.log("In function", userData);
-
-    // let userList = {};
-    // Map(membersList, (memberStatus, uid) => {
-    //   var userRef = firebase.firestore().collection("users").doc(uid);
-
-    //   //loop through each user object, get the data for each one.
-    //   userRef.onSnapshot(function(doc){
-    //     userList[uid] = doc.data();
-    //   });
-    //   dispatch({ type: FETCH_WORKSPACE_USERS_SUCCESS, workspaceUsers: userList });
-    // });
+    userRef
+      .where(`workspaces.${workspaceUID}`, "==", true)
+      .onSnapshot(function (querySnapshot) {
+        var users = {};
+        querySnapshot.forEach(function (doc) {
+          users[doc.id] = doc.data();
+        });
+        dispatch({ type: FETCH_WORKSPACE_USERS_SUCCESS, workspaceUsers: users });
+      });
   }
 }
