@@ -8,11 +8,6 @@ import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Ta
 import Avatar from 'material-ui/Avatar';
 
 class CommunityList extends Component {
-
-  componentDidMount(){
-    this.props.actions.fetchWorkspaceUsers();
-  }
-
   render() {
     let id = 0;
     function createData(name, calories, fat, carbs, protein) {

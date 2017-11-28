@@ -47,8 +47,6 @@ export function signUpUser(email, password) {
 }
 
 function initializeUser(user) {
-  console.log("initializing user", user);
-
   let ourUserObject = {
     displayName: user.displayName,
     email: user.email,

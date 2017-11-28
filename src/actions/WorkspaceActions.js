@@ -18,6 +18,9 @@ import {reset} from 'redux-form';
 import firebase from "firebase";
 
 import * as teamActions from "./TeamActions";
+import { selectChannel } from "./index";
+
+import Map from "lodash/map";
 
 require("firebase/firestore");
 
@@ -104,14 +107,13 @@ export function fetchWorkspaces() {
           }
           workspaces[doc.id] = doc.data();
         });
-        dispatch({ type: FETCH_WORKSPACES_SUCCESS, workspaces: workspaces });
 
         if(selectedWorkspace!==null){
           //if a user is in a workspace, load the data for it on app start.
           dispatch(selectWorkspace(selectedWorkspace));
-          return;
         }
 
+        dispatch({ type: FETCH_WORKSPACES_SUCCESS, workspaces: workspaces });
       });
   };
 }
@@ -125,7 +127,20 @@ export function selectWorkspace(workspaceID) {
 
 export function fetchWorkspaceUsers(){
   return (dispatch, getState) => {
-    console.log("fetching workspace users");
     dispatch({ type: FETCH_WORKSPACE_USERS });
+
+    let workplaceID = getState().workspace.selectedWorkspace;
+    let membersList = getState().workspace.workspaces[workplaceID].members;
+
+    let userList = {};
+    Map(membersList, (memberStatus, uid) => {
+      var userRef = firebase.firestore().collection("users").doc(uid);
+
+      //loop through each user object, get the data for each one.
+      userRef.onSnapshot(function(doc){
+        userList[uid] = doc.data();
+      });
+    });
+    dispatch({ type: FETCH_WORKSPACE_USERS_SUCCESS, workspaceUsers: userList });
   }
 }
