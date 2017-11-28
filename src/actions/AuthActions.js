@@ -47,14 +47,21 @@ export function signUpUser(email, password) {
 }
 
 function initializeUser(user) {
-  let ourUserObject = {
-    displayName: user.displayName,
-    email: user.email,
-    photoURL: user.photoURL,
-    emailVerified: user.emailVerified,
+  //data anyone can view
+
+  //data only owner of account can see/change
+  let privateData = {
     uid : user.uid,
-    emailVerified : user.emailVerified,
+    emailVerified: user.emailVerified,
     createdAt : Date.now(),
+    email: user.email,
+  }
+
+  let ourUserObject = {
+    privateData: privateData,
+    workspaces: {},
+    displayName: user.displayName,
+    photoURL: user.photoURL,
     lastLoginAt : Date.now(),
   };
   let uid = user.uid;

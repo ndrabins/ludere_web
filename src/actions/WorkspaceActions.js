@@ -14,7 +14,7 @@ import {
   FETCH_WORKSPACE_USERS_ERROR,
 } from "./types";
 
-import {reset} from 'redux-form';
+import { reset } from 'redux-form';
 import firebase from "firebase";
 
 import * as teamActions from "./TeamActions";
@@ -41,51 +41,69 @@ export function createWorkspace(values) {
     workspace.members[uid] = true;
 
     dispatch({ type: CREATE_WORKSPACE });
+
     firebase
       .firestore()
       .collection("workspaces")
       .add(workspace)
-      .then(function(docRef) {
+      .then(function (docRef) {
         console.log("Document written with ID: ", docRef.id);
         dispatch({ type: CREATE_WORKSPACE_SUCCESS });
         dispatch(reset('createWorkspaceForm'));
 
+        //update user object with the workspace he is in
+        let userRef = firebase.firestore().collection("users").doc(uid);
+        let usersWorkspaceUpdate = {};
+        usersWorkspaceUpdate[`workspaces.${docRef.id}`] = true;
+
+        userRef.update(usersWorkspaceUpdate).then(function () {
+          console.log("Document successfully updated!");
+        })
+          .catch(function (error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+          });
+
         //Create workspace with an initial team that everyone is a part of.
         dispatch(teamActions.createTeam(workspaceName));
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error("Error adding document: ", error);
         dispatch({ type: CREATE_WORKSPACE_ERROR });
       });
   };
 }
 
-export function joinWorkspace(formValues){
+export function joinWorkspace(formValues) {
 
   return (dispatch, getState) => {
 
     let { uid } = getState().auth.user;
 
-    let url = formValues.workspaceUrl;
+    let workspaceUID = formValues.workspaceUrl;
     dispatch({ type: JOIN_WORKSPACE });
 
     let membersUpdate = {}
-    membersUpdate[`members.${uid}`] = true;
+    let usersWorkspaceUpdate = {}
 
-    console.log(url);
-    firebase
-      .firestore()
-      .collection("workspaces").doc(url).
-      update(membersUpdate)
-      .then(function() {
-        dispatch({ type: JOIN_WORKSPACE_SUCCESS });
-        dispatch(reset('joinWorkspaceForm'));
-      })
-      .catch(function(error) {
-        //workspace doens't exist or error
-        console.error("Error adding document: ", error);
-        dispatch({ type: JOIN_WORKSPACE_ERROR });
-      });
+    membersUpdate[`members.${uid}`] = true;
+    usersWorkspaceUpdate[`workspaces.${workspaceUID}`] = true;
+
+    let workspaceRef = firebase.firestore().collection("workspaces").doc(workspaceUID);
+    let userRef = firebase.firestore().collection("users").doc(uid);
+
+    var batch = firebase.firestore().batch();
+
+    batch.update(workspaceRef, membersUpdate);
+    batch.update(userRef, usersWorkspaceUpdate);
+
+    batch.commit().then(function () {
+      console.log("Transaction successfully committed!");
+      dispatch({ type: JOIN_WORKSPACE_SUCCESS });
+    }).catch(function (error) {
+      console.log("Transaction failed: ", error);
+      dispatch({ type: JOIN_WORKSPACE_ERROR });
+    });
   }
 }
 
@@ -99,16 +117,16 @@ export function fetchWorkspaces() {
     let workspaceRef = firebase.firestore().collection("workspaces");
     workspaceRef
       .where(`members.${uid}`, "==", true)
-      .onSnapshot(function(querySnapshot) {
+      .onSnapshot(function (querySnapshot) {
         var workspaces = {};
-        querySnapshot.forEach(function(doc) {
-          if(selectedWorkspace === null){
+        querySnapshot.forEach(function (doc) {
+          if (selectedWorkspace === null) {
             selectedWorkspace = doc.id;
           }
           workspaces[doc.id] = doc.data();
         });
 
-        if(selectedWorkspace!==null){
+        if (selectedWorkspace !== null) {
           //if a user is in a workspace, load the data for it on app start.
           dispatch(selectWorkspace(selectedWorkspace));
         }
@@ -125,22 +143,43 @@ export function selectWorkspace(workspaceID) {
   };
 }
 
-export function fetchWorkspaceUsers(){
+export function fetchWorkspaceUsers() {
   return (dispatch, getState) => {
     dispatch({ type: FETCH_WORKSPACE_USERS });
+    console.log("fetching...");
 
     let workplaceID = getState().workspace.selectedWorkspace;
     let membersList = getState().workspace.workspaces[workplaceID].members;
 
-    let userList = {};
-    Map(membersList, (memberStatus, uid) => {
-      var userRef = firebase.firestore().collection("users").doc(uid);
+    let membersListArray = Object.keys(membersList);
 
-      //loop through each user object, get the data for each one.
-      userRef.onSnapshot(function(doc){
-        userList[uid] = doc.data();
-      });
-    });
-    dispatch({ type: FETCH_WORKSPACE_USERS_SUCCESS, workspaceUsers: userList });
+    let userData = {}
+
+    // membersListArray.map(memberUID => {
+    //   var userRef = firebase.firestore().collection("users").doc(memberUID);
+    //   console.log("user", memberUID);
+    //   userRef.get().then(function(doc) {
+    //     if (doc.exists) {
+    //         console.log("Document data:", doc.data());
+    //         userData[memberUID] = doc.data();
+    //     } else {
+    //         console.log("No such document!");
+    //     }
+    //   }).catch(function(error) {
+    //       console.log("Error getting document:", error);
+    //   });
+    // });
+    // console.log("In function", userData);
+
+    // let userList = {};
+    // Map(membersList, (memberStatus, uid) => {
+    //   var userRef = firebase.firestore().collection("users").doc(uid);
+
+    //   //loop through each user object, get the data for each one.
+    //   userRef.onSnapshot(function(doc){
+    //     userList[uid] = doc.data();
+    //   });
+    //   dispatch({ type: FETCH_WORKSPACE_USERS_SUCCESS, workspaceUsers: userList });
+    // });
   }
 }

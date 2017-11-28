@@ -3,50 +3,44 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Map from "lodash/map";
 
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Avatar from 'material-ui/Avatar';
 
 class CommunityList extends Component {
+
+  renderUsers() {
+    console.log('rendering users', this.props.workspaceUsers);
+    let users = Map(this.props.workspaceUsers, (user, uid) => {
+      console.log(user);
+      return (
+        <TableRow key={uid} hover>
+          <TableCell padding="checkbox">
+            <Avatar> N </Avatar>
+          </TableCell>
+          <TableCell> {user.name} </TableCell>
+          <TableCell numeric>true</TableCell>
+        </TableRow>
+      );
+    });
+
+    return users;
+  }
+
   render() {
-    let id = 0;
-    function createData(name, calories, fat, carbs, protein) {
-      id += 1;
-      return { id, name, calories, fat, carbs, protein };
-    }
-
-    const data = [
-      createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-      createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-      createData('Eclair', 262, 16.0, 24, 6.0),
-      createData('Cupcake', 305, 3.7, 67, 4.3),
-      createData('Gingerbread', 356, 16.0, 49, 3.9),
-    ];
-
-
-    //added tablecells are for styling the spacing lol. Probs can be refactored.
     return (
       <div>
         <Table>
           <TableHead>
             <TableRow >
               <TableCell padding="checkbox">Avatar</TableCell>
-              <TableCell numeric>Name</TableCell>
+              <TableCell>Name</TableCell>
               <TableCell numeric>Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map(n => {
-              return (
-                <TableRow key={n.id} hover>
-                  <TableCell padding="checkbox">
-                    <Avatar> N </Avatar>
-                  </TableCell>
-                  <TableCell numeric>{n.name}</TableCell>
-                  <TableCell numeric>{n.fat}</TableCell>
-                </TableRow>
-              );
-            })}
+            {this.renderUsers()}
           </TableBody>
         </Table>
       </div>
@@ -56,7 +50,8 @@ class CommunityList extends Component {
 
 function mapStateToProps(state) {
   return {
-    workspaceUsers: state.workspace.workspaceUsers
+    workspaceUsers: state.workspace.workspaceUsers,
+    loading : state.workspace.loadingUsers
   };
 }
 
