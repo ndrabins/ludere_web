@@ -58,7 +58,7 @@ function initializeUser(user) {
   let ourUserObject = {
     privateData: privateData,
     workspaces: {},
-    displayName: user.displayName,
+    displayName: user.email, //till we get the user to set their own displayname? Probs should be part of the sign up?
     photoURL: user.photoURL,
     lastLoginAt : Date.now(),
   };

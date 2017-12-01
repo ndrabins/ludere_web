@@ -6,6 +6,7 @@ import AuthReducer from "./AuthReducer";
 import TeamReducer from "./TeamReducer";
 import ChatReducer from "./ChatReducer";
 import WorkspaceReducer from "./WorkspaceReducer";
+import CommunityReducer from "./CommunityReducer";
 import { reducer as formReducer } from 'redux-form'
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   team: TeamReducer,
   chat: ChatReducer,
   workspace: WorkspaceReducer,
+  community: CommunityReducer,
   form: formReducer
 });
 

@@ -7,6 +7,7 @@ import Map from "lodash/map";
 
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Avatar from 'material-ui/Avatar';
+import PersonOutlineIcon from 'material-ui-icons/PersonOutline';
 
 class CommunityList extends Component {
 
@@ -15,7 +16,9 @@ class CommunityList extends Component {
       return (
         <TableRow key={uid} hover>
           <TableCell padding="checkbox">
-            <Avatar> N </Avatar>
+            <Avatar>
+              <PersonOutlineIcon />
+            </Avatar>
           </TableCell>
           <TableCell> {user.displayName} </TableCell>
           <TableCell numeric>true</TableCell>
