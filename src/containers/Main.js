@@ -53,7 +53,7 @@ class Main extends Component {
           <NavBar history={this.props.history} toggleDrawer={() => this.toggleDrawer()} drawerVisible={this.state.drawerVisible}/>
           <Route exact path="/community/dashboard" component={Dashboard}/>
           <Route exact path="/community/calendar" component={Calendar}/>
-          <Route exact path="/community" component={Community} />
+          <Route path="/community" component={Community} />
           <Route path="/team/chat" component={Chat} />
         </div>
       </div>

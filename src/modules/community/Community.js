@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
+import {Route} from 'react-router-dom';
+
 import CommunityList from "./CommunityList";
+import CommunityChat from "./CommunityChat";
 
 class Community extends Component {
   componentDidMount(){
@@ -12,10 +15,19 @@ class Community extends Component {
 
   render() {
     return (
-      <div>
-        <CommunityList />
+      <div style={styles.container}>
+        <Route exact path="/community/" component={CommunityList} />
+        <Route exact path="/community/chat" component={CommunityChat}/>
       </div>
     );
+  }
+}
+
+const styles = {
+  container: {
+    height: "100%",
+    display: "flex",
+    flex:1,
   }
 }
 

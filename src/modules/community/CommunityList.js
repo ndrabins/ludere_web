@@ -5,17 +5,36 @@ import * as Actions from "../../actions";
 
 import Map from "lodash/map";
 
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Table, { TableBody, TableCell, TableHead, TableRow, } from 'material-ui/Table';
+import Checkbox from 'material-ui/Checkbox';
+
 import Avatar from 'material-ui/Avatar';
 import PersonOutlineIcon from 'material-ui-icons/PersonOutline';
 
 class CommunityList extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      // order: 'asc',
+      // orderBy: 'calories',
+      // selected
+    }
+  }
+
+  handleUserSelect(user) {
+    this.props.history.push("/community/chat");
+    console.log("selecting a person ", user);
+  }
+
+  // isSelected = id => this.state.selected[id] === true;
 
   renderUsers() {
     let users = Map(this.props.workspaceUsers, (user, uid) => {
+
       return (
-        <TableRow key={uid} hover>
-          <TableCell padding="checkbox">
+        <TableRow key={uid} hover style={{ cursor: "pointer" }} onClick={() => this.handleUserSelect(user)} >
+          <TableCell>
             <Avatar>
               <PersonOutlineIcon />
             </Avatar>
@@ -31,11 +50,11 @@ class CommunityList extends Component {
 
   render() {
     return (
-      <div>
+      <div style={styles.container}>
         <Table>
           <TableHead>
             <TableRow >
-              <TableCell padding="checkbox">Avatar</TableCell>
+              <TableCell>Avatar</TableCell>
               <TableCell>Name</TableCell>
               <TableCell numeric>Status</TableCell>
             </TableRow>
@@ -49,10 +68,18 @@ class CommunityList extends Component {
   }
 }
 
+const styles = {
+  container: {
+    height: "100%",
+    display: "flex",
+    flex: 1
+  }
+}
+
 function mapStateToProps(state) {
   return {
     workspaceUsers: state.workspace.workspaceUsers,
-    loading : state.workspace.loadingUsers
+    loading: state.workspace.loadingUsers
   };
 }
 

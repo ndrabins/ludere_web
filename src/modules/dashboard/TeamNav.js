@@ -29,7 +29,7 @@ class TeamNav extends Component {
   }
 
   handleCommunitySelect() {
-    this.props.history.push("/community");
+    this.props.history.push("/community/");
     this.props.actions.selectTeam(null);
   }
 
