@@ -47,7 +47,6 @@ export function createWorkspace(values) {
       .collection("workspaces")
       .add(workspace)
       .then(function (docRef) {
-        console.log("Document written with ID: ", docRef.id);
         dispatch({ type: CREATE_WORKSPACE_SUCCESS });
         dispatch(reset('createWorkspaceForm'));
 
@@ -57,7 +56,7 @@ export function createWorkspace(values) {
         usersWorkspaceUpdate[`workspaces.${docRef.id}`] = true;
 
         userRef.update(usersWorkspaceUpdate).then(function () {
-          console.log("Document successfully updated!");
+          // console.log("Document successfully updated!");
         })
           .catch(function (error) {
             // The document probably doesn't exist.

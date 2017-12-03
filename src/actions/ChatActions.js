@@ -52,7 +52,6 @@ export function createChannel(channelName) {
       .collection("chat")
       .add(channel)
       .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
         dispatch({ type: CREATE_CHANNEL_SUCCESS });
       })
       .catch(function(error) {
@@ -95,7 +94,6 @@ export function sendMessage(messageText){
 
     messageRef.add(message)
     .then(function(docRef) {
-      console.log("Document written with ID: ", docRef.id);
       dispatch({ type: SEND_MESSAGE});
     })
   }

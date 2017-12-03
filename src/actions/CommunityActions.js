@@ -12,8 +12,6 @@ import firebase from "firebase";
 require("firebase/firestore");
 
 export function startDirectMessage(recieverUID, recieverInfo) {
-  console.log("HOLA", recieverUID);
-  console.log("User", recieverInfo);
 
   /*
     1. Check if conversation exists
@@ -32,7 +30,6 @@ export function startDirectMessage(recieverUID, recieverInfo) {
   return (dispatch, getState) => {
     dispatch({ type: FETCH_DIRECT_MESSAGE });
     let { uid } = getState().auth.user;
-    console.log(uid);
 
     var directMessageRef = firebase.firestore().collection("community");
 

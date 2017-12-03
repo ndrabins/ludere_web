@@ -20,7 +20,6 @@ class CommunityMessageEntry extends Component {
       return;
     }
     // this.props.actions.sendMessage(this.state.messageText);
-    console.log("sending message");
 
     this.setState({
       messageText:'',
