@@ -6,10 +6,10 @@ import * as Actions from "../../actions";
 import CommunityMessageEntry from "./CommunityMessageEntry";
 import CommunityMessageList from "./CommunityMessageList";
 
-class Chat extends Component {
+class CommunityChat extends Component {
   componentWillUnmount() {
     //clean up selection
-    this.props.actions.selectChannel(null);
+    // this.props.actions.selectChannel(null);
   }
 
   render() {
@@ -43,4 +43,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chat);
+export default connect(mapStateToProps, mapDispatchToProps)(CommunityChat);

@@ -1,5 +1,11 @@
 import {
-
+  FETCH_DIRECT_MESSAGE,
+  CREATE_CONVERSATION,
+  CREATE_CONVERSATION_SUCCESS,
+  CREATE_CONVERSATION_ERROR,
+  FETCH_CONVERSATION_MESSAGES,
+  FETCH_CONVERSATION_MESSAGES_SUCCESS,
+  FETCH_CONVERSATION_MESSAGES_ERROR,
 } from "../actions/types";
 
 const initialState = {
@@ -10,6 +16,20 @@ const initialState = {
 
 export default function team(state = initialState, action) {
   switch (action.type) {
+    case FETCH_DIRECT_MESSAGE:
+      return state;
+    case CREATE_CONVERSATION:
+      return state;
+    case CREATE_CONVERSATION_SUCCESS:
+      return state;
+    case CREATE_CONVERSATION_ERROR:
+      return state;
+    case FETCH_CONVERSATION_MESSAGES:
+      return state;
+    case FETCH_CONVERSATION_MESSAGES_SUCCESS:
+      return state;
+    case FETCH_CONVERSATION_MESSAGES_ERROR:
+      return state;
     default:
       return state;
   }

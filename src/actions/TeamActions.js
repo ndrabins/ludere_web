@@ -77,18 +77,9 @@ export function fetchTeams() {
       .onSnapshot(function(querySnapshot) {
         var teams = {};
         querySnapshot.forEach(function(doc) {
-          if (firstTeam === null) {
-            firstTeam = doc.id;
-          }
           teams[doc.id] = doc.data();
         });
         dispatch({ type: FETCH_TEAMS_SUCCESS, teams: teams });
-
-        if (firstTeam !== null) {
-          //if a user is in a team, load the data for it on app start.
-          dispatch(selectTeam(firstTeam));
-          return;
-        }
       });
   };
 }

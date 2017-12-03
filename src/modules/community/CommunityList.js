@@ -22,9 +22,9 @@ class CommunityList extends Component {
     }
   }
 
-  handleUserSelect(user) {
+  handleUserSelect(uid, user) {
     this.props.history.push("/community/chat");
-    console.log("selecting a person ", user);
+    this.props.actions.startDirectMessage(uid, user);
   }
 
   // isSelected = id => this.state.selected[id] === true;
@@ -33,7 +33,7 @@ class CommunityList extends Component {
     let users = Map(this.props.workspaceUsers, (user, uid) => {
 
       return (
-        <TableRow key={uid} hover style={{ cursor: "pointer" }} onClick={() => this.handleUserSelect(user)} >
+        <TableRow key={uid} hover style={{ cursor: "pointer" }} onClick={() => this.handleUserSelect(uid, user)} >
           <TableCell>
             <Avatar>
               <PersonOutlineIcon />
