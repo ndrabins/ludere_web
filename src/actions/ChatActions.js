@@ -82,11 +82,15 @@ export function sendMessage(messageText){
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
     let { selectedChannel } = getState().chat;
+
+    //need to refactor this lol..
+    let myName = getState().workspace.workspaceUsers[uid].displayName;
+
     let message = {
       sentBy : uid,
       dateCreated: Date.now(),
       messageText: messageText,
-      sentByDisplayName:"bob",
+      sentByDisplayName: myName,
       edited: 'false',
     }
 

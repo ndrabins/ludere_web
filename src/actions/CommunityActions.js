@@ -55,11 +55,16 @@ export function sendDirectMessage(messageText){
     let { uid } = getState().auth.user;
     let { selectedConversation } = getState().community;
 
+    //refactor this here AND in chat actions
+    let myName = getState().workspace.workspaceUsers[uid].displayName;
+    // console.log(getState().workspace.workspaceUsers);
+    // console.log(uid);
+
     let message = {
       sentBy : uid,
       dateCreated: Date.now(),
       messageText: messageText,
-      sentByDisplayName: "bob",
+      sentByDisplayName: myName,
       edited: 'false',
     }
 
@@ -99,8 +104,8 @@ function createConversation(myUID, recieverUID) {
       members: {}
     };
 
-    console.log("myUID", myUID);
-    console.log("reciverUID", recieverUID);
+    // console.log("myUID", myUID);
+    // console.log("reciverUID", recieverUID);
     directMessage.members[myUID] = true;
     directMessage.members[recieverUID] = true;
 
