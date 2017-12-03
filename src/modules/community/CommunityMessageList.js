@@ -126,8 +126,8 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-    // selectedChannel: state.chat.selectedChannel,
-    // messages: state.chat.messages
+    selectedConversation: state.community.selectedConversation,
+    messages: state.community.messages
   };
 }
 

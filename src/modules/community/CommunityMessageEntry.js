@@ -16,10 +16,10 @@ class CommunityMessageEntry extends Component {
   };
 
   sendMessage = () => {
-    if(this.state.messageText === '' || !this.props.selectedChannel){
+    if(this.state.messageText === ''){
       return;
     }
-    // this.props.actions.sendMessage(this.state.messageText);
+    this.props.actions.sendDirectMessage(this.state.messageText);
 
     this.setState({
       messageText:'',

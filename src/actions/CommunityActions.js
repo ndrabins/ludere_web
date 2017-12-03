@@ -6,13 +6,13 @@ import {
   FETCH_CONVERSATION_MESSAGES,
   FETCH_CONVERSATION_MESSAGES_SUCCESS,
   FETCH_CONVERSATION_MESSAGES_ERROR,
+  SEND_DIRECT_MESSAGE,
 } from "./types";
 import firebase from "firebase";
 
 require("firebase/firestore");
 
 export function startDirectMessage(recieverUID, recieverInfo) {
-
   /*
     1. Check if conversation exists
       -where myUid is a member
@@ -26,7 +26,6 @@ export function startDirectMessage(recieverUID, recieverInfo) {
 
     2. TODO group chatps
   */
-
   return (dispatch, getState) => {
     dispatch({ type: FETCH_DIRECT_MESSAGE });
     let { uid } = getState().auth.user;
@@ -51,13 +50,42 @@ export function startDirectMessage(recieverUID, recieverInfo) {
   }
 }
 
+export function sendDirectMessage(messageText){
+  return (dispatch, getState) => {
+    let { uid } = getState().auth.user;
+    let { selectedConversation } = getState().community;
+
+    let message = {
+      sentBy : uid,
+      dateCreated: Date.now(),
+      messageText: messageText,
+      sentByDisplayName: "bob",
+      edited: 'false',
+    }
+
+    let messageRef = firebase.firestore().collection(`community/${selectedConversation}/messages`);
+    messageRef.add(message)
+    .then(function(docRef) {
+      dispatch({ type: SEND_DIRECT_MESSAGE});
+    })
+  }
+}
+
 function fetchConversationMessages(conversationID){
   return dispatch => {
-    dispatch({ type: FETCH_CONVERSATION_MESSAGES });
+    dispatch({ type: FETCH_CONVERSATION_MESSAGES, selectedConversation: conversationID });
 
-    dispatch({ type: FETCH_CONVERSATION_MESSAGES_ERROR });
-    dispatch({ type: FETCH_CONVERSATION_MESSAGES_SUCCESS });
+    let messageRef = firebase.firestore().collection(`community/${conversationID}/messages`);
+    messageRef.orderBy("dateCreated")
+      .onSnapshot(function(querySnapshot) {
+        var messages = {};
+        querySnapshot.forEach(function(doc) {
+          messages[doc.id] = doc.data();
+        });
+        dispatch({ type: FETCH_CONVERSATION_MESSAGES_SUCCESS, messages: messages });
+    });
 
+    // dispatch({ type: FETCH_CONVERSATION_MESSAGES_ERROR });
   }
 }
 

@@ -6,10 +6,11 @@ import {
   FETCH_CONVERSATION_MESSAGES,
   FETCH_CONVERSATION_MESSAGES_SUCCESS,
   FETCH_CONVERSATION_MESSAGES_ERROR,
+  SEND_DIRECT_MESSAGE,
 } from "../actions/types";
 
 const initialState = {
-  selectedChat: null, //a chat ID
+  selectedConversation: null, //a chat ID
   messages: {}, // list of message objects
   conversations: {}//list of active/recent conversations to have in the sidebar
 };
@@ -25,10 +26,15 @@ export default function team(state = initialState, action) {
     case CREATE_CONVERSATION_ERROR:
       return state;
     case FETCH_CONVERSATION_MESSAGES:
-      return state;
+      return { ...state, selectedConversation: action.selectedConversation };
     case FETCH_CONVERSATION_MESSAGES_SUCCESS:
-      return state;
+      return {
+        ...state,
+        messages: action.messages
+      };
     case FETCH_CONVERSATION_MESSAGES_ERROR:
+      return state;
+    case SEND_DIRECT_MESSAGE:
       return state;
     default:
       return state;
