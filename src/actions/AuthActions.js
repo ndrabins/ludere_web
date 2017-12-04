@@ -61,6 +61,7 @@ function initializeUser(user) {
     displayName: user.email, //till we get the user to set their own displayname? Probs should be part of the sign up?
     photoURL: user.photoURL,
     lastLoginAt : Date.now(),
+    conversations: {}, //conversationID:boolean , if a converstion is true it is an active one, if not it is inactive
   };
   let uid = user.uid;
 

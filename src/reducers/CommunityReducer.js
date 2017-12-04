@@ -7,6 +7,9 @@ import {
   FETCH_CONVERSATION_MESSAGES_SUCCESS,
   FETCH_CONVERSATION_MESSAGES_ERROR,
   SEND_DIRECT_MESSAGE,
+  ADD_ACTIVE_CONVERSATION,
+  ADD_ACTIVE_CONVERSATION_SUCCESS,
+  ADD_ACTIVE_CONVERSATION_ERROR,
 } from "../actions/types";
 
 const initialState = {
@@ -35,6 +38,12 @@ export default function team(state = initialState, action) {
     case FETCH_CONVERSATION_MESSAGES_ERROR:
       return state;
     case SEND_DIRECT_MESSAGE:
+      return state;
+    case ADD_ACTIVE_CONVERSATION:
+      return state;
+    case ADD_ACTIVE_CONVERSATION_SUCCESS:
+      return state;
+    case ADD_ACTIVE_CONVERSATION_ERROR:
       return state;
     default:
       return state;
