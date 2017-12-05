@@ -11,6 +11,7 @@ import CommunityChat from "./CommunityChat";
 class Community extends Component {
   componentDidMount(){
     this.props.actions.fetchWorkspaceUsers();
+    this.props.actions.fetchConversations();
   }
 
   render() {

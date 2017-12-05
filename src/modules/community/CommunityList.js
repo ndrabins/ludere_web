@@ -31,6 +31,10 @@ class CommunityList extends Component {
 
   renderUsers() {
     let users = Map(this.props.workspaceUsers, (user, uid) => {
+      if(this.props.myID === uid){
+        return; // don't render my own name in the list of users
+      }
+
 
       return (
         <TableRow key={uid} hover style={{ cursor: "pointer" }} onClick={() => this.handleUserSelect(uid, user)} >
@@ -79,7 +83,8 @@ const styles = {
 function mapStateToProps(state) {
   return {
     workspaceUsers: state.workspace.workspaceUsers,
-    loading: state.workspace.loadingUsers
+    loading: state.workspace.loadingUsers,
+    myID: state.auth.user.uid,
   };
 }
 

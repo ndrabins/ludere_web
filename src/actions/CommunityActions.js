@@ -10,6 +10,9 @@ import {
   ADD_ACTIVE_CONVERSATION,
   ADD_ACTIVE_CONVERSATION_SUCCESS,
   ADD_ACTIVE_CONVERSATION_ERROR,
+  FETCH_CONVERSATIONS,
+  FETCH_CONVERSATIONS_SUCCESS,
+  SET_CONVERSATION_INACTIVE
 } from "./types";
 import firebase from "firebase";
 
@@ -80,7 +83,24 @@ export function sendDirectMessage(messageText) {
   }
 }
 
-function fetchConversationMessages(conversationID) {
+export function fetchConversations() {
+  return (dispatch, getState) => {
+    dispatch({ type: FETCH_CONVERSATIONS });
+    let { uid } = getState().auth.user;
+    var conversationsRef = firebase.firestore().collection("community");
+
+    conversationsRef
+      .where(`members.${uid}`, "==", true).onSnapshot(function (querySnapshot) {
+        var conversations = {};
+        querySnapshot.forEach(function (doc) {
+          conversations[doc.id] = doc.data();
+        });
+        dispatch({ type: FETCH_CONVERSATIONS_SUCCESS, conversations: conversations });
+      });
+  }
+}
+
+export function fetchConversationMessages(conversationID) {
   return dispatch => {
     dispatch({ type: FETCH_CONVERSATION_MESSAGES, selectedConversation: conversationID });
 
@@ -140,12 +160,12 @@ function addToActiveConversations(conversationID) {
     let activeConversationRef = firebase.firestore().collection("users").doc(uid)
     activeConversationRef.update(conversationUpdate)
       .then(function () {
-        dispatch({type: ADD_ACTIVE_CONVERSATION_SUCCESS});
+        dispatch({ type: ADD_ACTIVE_CONVERSATION_SUCCESS });
       })
       .catch(function (error) {
-        dispatch({type: ADD_ACTIVE_CONVERSATION_ERROR});
+        dispatch({ type: ADD_ACTIVE_CONVERSATION_ERROR });
         console.error("Error writing document: ", error);
       });
-
   }
 }
+

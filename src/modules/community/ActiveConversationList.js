@@ -4,25 +4,42 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import Map from "lodash/map";
 
+import ActiveConversationButton from './ActiveConversationButton';
+
 class ActiveConversationList extends Component {
-  renderChannels() {
-    if (!this.props.channels) {
+  renderConversations() {
+    if (!this.props.conversations || !this.props.activeConversations) {
+      //return nothing while these are getting fetched.
       return;
     }
-    let channels = Map(this.props.channels, (channel, key) => {
-      return (
-        <div key={key}>
-          <ChannelButton ID={key} name={channel.name}/>
-        </div>
-      );
+
+    let conversations = Map(this.props.conversations, (conversation, key) => {
+      let title = '';
+      // console.log(conversation);
+      Map(conversation.members, (memberStatus, memberID) => {
+        console.log(memberID);
+        if(memberID != this.props.myID){
+          title += this.props.workspaceUsers[memberID].displayName;
+        }
+
+      });
+
+      if(this.props.activeConversations[key]){
+        return (
+          <div key={key}>
+            <ActiveConversationButton conversationID={key} name={title}/>
+          </div>
+        );
+      }
+
     });
-    return channels;
+    return conversations;
   }
 
   render() {
     return (
       <div>
-        {this.renderChannels()}
+        {this.renderConversations()}
       </div>
     );
   }
@@ -30,7 +47,10 @@ class ActiveConversationList extends Component {
 
 function mapStateToProps(state) {
   return {
-    // channels: state.profile.myUserProfile.,
+    activeConversations: state.profile.myUserProfile.conversations,
+    conversations: state.community.conversations,
+    myID: state.auth.user.uid,
+    workspaceUsers: state.workspace.workspaceUsers
   };
 }
 

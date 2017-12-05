@@ -10,6 +10,10 @@ import {
   ADD_ACTIVE_CONVERSATION,
   ADD_ACTIVE_CONVERSATION_SUCCESS,
   ADD_ACTIVE_CONVERSATION_ERROR,
+  FETCH_CONVERSATIONS,
+  FETCH_CONVERSATIONS_SUCCESS,
+  FETCH_CONVERSATIONS_ERROR,
+  SET_CONVERSATION_INACTIVE
 } from "../actions/types";
 
 const initialState = {
@@ -37,7 +41,18 @@ export default function team(state = initialState, action) {
       };
     case FETCH_CONVERSATION_MESSAGES_ERROR:
       return state;
+      case FETCH_CONVERSATIONS:
+      return state;
+    case FETCH_CONVERSATIONS_SUCCESS:
+      return {
+        ...state,
+        conversations: action.conversations
+      };
+    case FETCH_CONVERSATIONS_ERROR:
+      return state;
     case SEND_DIRECT_MESSAGE:
+      return state;
+    case SET_CONVERSATION_INACTIVE:
       return state;
     case ADD_ACTIVE_CONVERSATION:
       return state;

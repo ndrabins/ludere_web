@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PeopleIcon from "material-ui-icons/PeopleOutline";
 
 import CommunityAddButton from './CommunityAddButton';
+import ActiveConversationList from './ActiveConversationList';
 
 class CommunitySideNav extends Component {
   handleCommunityClick() {
@@ -22,7 +23,7 @@ class CommunitySideNav extends Component {
           <CommunityAddButton />
         </div>
         <div>
-          Recent convos
+          <ActiveConversationList />
         </div>
       </div>
     );
