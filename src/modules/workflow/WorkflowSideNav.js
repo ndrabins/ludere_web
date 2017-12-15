@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Message from "material-ui-icons/Message";
 
-import CreateWorkflowButton from "./CreateWorkflowButton";
+import CreateWorkflowButton from "./CreateBoardButton";
 import WorkflowBoardButton from "./WorkFlowBoardButton";
 
 class WorkflowSideNav extends Component {

@@ -14,10 +14,10 @@ import Dialog, {
 import Button from "material-ui/Button";
 import TextField from "material-ui/TextField";
 
-class CreateChatButton extends Component {
+class CreateBoardButton extends Component {
   state = {
     open: false,
-    workflowName: ""
+    boardName: ""
   };
 
   handleClickOpen = () => {
@@ -28,8 +28,9 @@ class CreateChatButton extends Component {
     this.setState({ open: false, workflowName: "" });
   };
 
-  handleCreateChannel = () => {
+  handleCreateBoard = () => {
     this.handleRequestClose();
+    this.props.actions.createBoard(this.state.boardName);
   };
 
   handleChange = prop => event => {
@@ -46,16 +47,16 @@ class CreateChatButton extends Component {
           <AddIcon style={{ fontSize: 16 }} />
         </IconButton>
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
-          <DialogTitle>Create Workflow</DialogTitle>
+          <DialogTitle>Create Board</DialogTitle>
           <DialogContent style={{ width: 300, maxWidth: 400 }}>
             <TextField
               autoFocus
               margin="dense"
               id="name"
-              label="Workflow Name"
+              label="Board Name"
               fullWidth
-              value={this.state.workflowName}
-              onChange={this.handleChange("workflowName")}
+              value={this.state.boardName}
+              onChange={this.handleChange("boardName")}
             />
           </DialogContent>
           <DialogActions>
@@ -64,11 +65,11 @@ class CreateChatButton extends Component {
             </Button>
             <Button
               raised
-              onClick={this.handleCreateChannel}
+              onClick={this.handleCreateBoard}
               color="primary"
               style={{ color: "white" }}
             >
-              Create Workflow
+              Create Board
             </Button>
           </DialogActions>
         </Dialog>
@@ -92,4 +93,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(CreateChatButton);
+export default connect(null, mapDispatchToProps)(CreateBoardButton);

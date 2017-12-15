@@ -1,7 +1,8 @@
 import {
   SELECT_BOARD,
   FETCH_BOARDS,
-  FETCH_BOARDS_SUCCESS
+  FETCH_BOARDS_SUCCESS,
+  CREATE_BOARD
 } from "../actions/types";
 
 const initialState = {
@@ -18,6 +19,8 @@ export default function workflow(state = initialState, action) {
       return state;
     case FETCH_BOARDS_SUCCESS:
       return { ...state, boards: action.boards };
+    case CREATE_BOARD:
+      return state;
     default:
       return state;
   }
