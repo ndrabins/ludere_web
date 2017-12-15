@@ -9,7 +9,7 @@ import Avatar from "material-ui/Avatar";
 
 import { Link } from "react-router-dom";
 
-class ActiveConversationButton extends Component {
+class BoardButton extends Component {
   state = {
     anchorEl: null,
     openNavMenu: false,
@@ -31,7 +31,7 @@ class ActiveConversationButton extends Component {
   };
 
   handleClick = () => {
-    // this.props.actions.fetchConversationMessages(this.props.conversationID);
+    this.props.actions.selectBoard(this.props.boardID);
   };
 
   render() {
@@ -41,7 +41,7 @@ class ActiveConversationButton extends Component {
       workflowStyle = styles.hoveredWorkflow;
       nameStyle = styles.hoveredName;
     }
-    if (this.props.conversationID === this.props.selectedConversation) {
+    if (this.props.boardID === this.props.selectedBoard) {
       workflowStyle = styles.selectedWorkflow;
       nameStyle = styles.selectedName;
     }
@@ -53,7 +53,7 @@ class ActiveConversationButton extends Component {
         onMouseLeave={this.handleHover}
       >
         <Link style={nameStyle} onClick={this.handleClick} to="/team/workflow">
-          name
+          {this.props.name}
         </Link>
         <IconButton
           style={{
@@ -120,7 +120,7 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-    selectedWorkflow: state.workflow.selectedWorkflow
+    selectedBoard: state.workflow.selectedBoard
   };
 }
 
@@ -130,6 +130,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ActiveConversationButton
-);
+export default connect(mapStateToProps, mapDispatchToProps)(BoardButton);

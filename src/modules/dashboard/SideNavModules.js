@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Message from "material-ui-icons/Message";
+import fireIcon from "../../static/icons/teamfire.svg";
 
 import CommunitySideNav from "../community/CommunitySideNav";
 import ChatSideNav from "../chat/ChatSideNav";
@@ -19,8 +19,10 @@ class TeamOverviewTitle extends Component {
             justifyContent: "center"
           }}
         >
-          <Message />
-          <div style={{ marginLeft: 14 }}>Team Overview</div>
+          <img src={fireIcon} />
+          <div style={{ marginLeft: 14, display: "flex", alignSelf: "center" }}>
+            Team Overview
+          </div>
         </div>
       </div>
     );

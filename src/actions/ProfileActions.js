@@ -9,24 +9,27 @@ import firebase from "firebase";
 require("firebase/firestore");
 
 //fetch my profileID on default
-export function fetchUserProfile(userID=null){
+export function fetchUserProfile(userID = null) {
   return (dispatch, getState) => {
     dispatch({ type: FETCH_USER_PROFILE });
     let { uid } = getState().auth.user;
     let profileID;
     let type;
-    if(userID===null){
+    if (userID === null) {
       profileID = uid;
       type = FETCH_MY_USER_PROFILE_SUCCESS;
-    }else{
+    } else {
       profileID = userID;
       type = FETCH_USER_PROFILE_SUCCESS;
     }
 
-    let profileRef = firebase.firestore().collection(`users`).doc(`${profileID}`);
+    let profileRef = firebase
+      .firestore()
+      .collection(`users`)
+      .doc(`${profileID}`);
 
-    profileRef.onSnapshot(function(doc){
-      dispatch({type : type, profile: doc.data() });
+    profileRef.onSnapshot(function(doc) {
+      dispatch({ type: type, profile: doc.data() });
     });
-  }
+  };
 }

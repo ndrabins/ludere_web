@@ -6,6 +6,10 @@ import Map from "lodash/map";
 import Board from "./Board";
 
 class Workflow extends Component {
+  componentWillUnmount() {
+    this.props.actions.selectBoard(null);
+  }
+
   render() {
     return (
       <div>

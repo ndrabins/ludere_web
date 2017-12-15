@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import colors from "../../utility/constants/colors";
 import logoWhite from "../../static/light.svg";
+
 import CloseIcon from "material-ui-icons/Close";
 import IconButton from "material-ui/IconButton";
 
@@ -44,8 +45,8 @@ const styles = {
     display: "flex",
     // backgroundColor: colors.lightThemePrimary,
     // width: drawerWidth,
-    overflow:'hidden',
-    height: "100%",
+    overflow: "hidden",
+    height: "100%"
   },
   teamSideNav: {
     display: "flex",

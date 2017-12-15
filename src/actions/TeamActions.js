@@ -13,6 +13,7 @@ import {
 
 import firebase from "firebase";
 import * as chatActions from "./ChatActions";
+import * as workflowActions from "./WorkflowActions";
 
 require("firebase/firestore");
 
@@ -87,7 +88,7 @@ export function fetchTeams() {
 export function selectTeam(teamID) {
   return dispatch => {
     dispatch({ type: SELECT_TEAM, selectedTeam: teamID });
-    if(teamID !== null){
+    if (teamID !== null) {
       dispatch(loadTeamData(teamID));
     }
   };
@@ -102,6 +103,7 @@ function loadTeamData(teamID) {
     if (team.modules.chat === true) {
       dispatch(chatActions.selectChannel(null));
       dispatch(chatActions.fetchChannels(teamID));
+      dispatch(workflowActions.fetchBoards(teamID));
     }
   };
 }

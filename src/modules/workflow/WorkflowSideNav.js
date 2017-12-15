@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import Message from "material-ui-icons/Message";
+import boardsIcon from "../../static/icons/boards.svg";
 
 import CreateWorkflowButton from "./CreateBoardButton";
-import WorkflowBoardButton from "./WorkFlowBoardButton";
+import BoardList from "./BoardList";
 
 class WorkflowSideNav extends Component {
   render() {
@@ -17,14 +17,13 @@ class WorkflowSideNav extends Component {
               justifyContent: "center"
             }}
           >
-            <Message />
+            <img src={boardsIcon} />
             <div style={{ marginLeft: 14 }}>Workflow</div>
           </div>
           <CreateWorkflowButton />
         </div>
         <div>
-          <WorkflowBoardButton />
-          <WorkflowBoardButton />
+          <BoardList />
         </div>
       </div>
     );
