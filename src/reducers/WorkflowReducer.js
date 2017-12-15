@@ -10,7 +10,7 @@ const initialState = {
   tasks: {}
 };
 
-export default function team(state = initialState, action) {
+export default function workflow(state = initialState, action) {
   switch (action.type) {
     case SELECT_BOARD:
       return { ...state, selectedBoard: action.selectedBoard };

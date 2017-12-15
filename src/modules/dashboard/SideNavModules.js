@@ -8,24 +8,31 @@ import WorkflowSideNav from "../workflow/WorkflowSideNav";
 
 import { Route } from "react-router-dom";
 
+class TeamOverviewTitle extends Component {
+  render() {
+    return (
+      <div style={styles.title}>
+        <div
+          style={{
+            display: "flex",
+            alignContent: "center",
+            justifyContent: "center"
+          }}
+        >
+          <Message />
+          <div style={{ marginLeft: 14 }}>Team Overview</div>
+        </div>
+      </div>
+    );
+  }
+}
+
 class SideNavModules extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <div style={styles.title}>
-          <div
-            style={{
-              display: "flex",
-              alignContent: "center",
-              justifyContent: "center"
-            }}
-          >
-            <Message />
-            <div style={{ marginLeft: 14 }}>Team Overview</div>
-          </div>
-        </div>
-
         <Route path="/community" component={CommunitySideNav} />
+        <Route path="/team" component={TeamOverviewTitle} />
         <Route path="/team" component={ChatSideNav} />
         <Route path="/team" component={WorkflowSideNav} />
       </div>

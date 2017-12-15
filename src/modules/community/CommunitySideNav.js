@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 import PeopleIcon from "material-ui-icons/PeopleOutline";
 
-import CommunityAddButton from './CommunityAddButton';
-import ActiveConversationList from './ActiveConversationList';
+import CommunityAddButton from "./CommunityAddButton";
+import ActiveConversationList from "./ActiveConversationList";
 
 class CommunitySideNav extends Component {
   handleCommunityClick() {
@@ -14,11 +14,17 @@ class CommunitySideNav extends Component {
     return (
       <div>
         <div style={styles.title}>
-          <div style={{ display: 'flex', alignContent: 'center', justifyContent: 'center', cursor: "pointer" }} onClick={()=>this.handleCommunityClick()}>
+          <div
+            style={{
+              display: "flex",
+              alignContent: "center",
+              justifyContent: "center",
+              cursor: "pointer"
+            }}
+            onClick={() => this.handleCommunityClick()}
+          >
             <PeopleIcon />
-            <div style={{ marginLeft: 14 }}>
-              Community
-            </div>
+            <div style={{ marginLeft: 14 }}>Community</div>
           </div>
           <CommunityAddButton />
         </div>
@@ -32,13 +38,13 @@ class CommunitySideNav extends Component {
 
 const styles = {
   title: {
-    display: 'flex',
-    color: 'white',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    display: "flex",
+    color: "white",
+    justifyContent: "space-between",
+    alignItems: "center",
     height: 40,
-    margin: '0px 10px 0 32px',
+    margin: "0px 10px 0 32px"
   }
-}
+};
 
 export default CommunitySideNav;

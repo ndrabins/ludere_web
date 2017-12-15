@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Message from "material-ui-icons/Message";
 
 import CreateWorkflowButton from "./CreateWorkflowButton";
+import WorkflowBoardButton from "./WorkFlowBoardButton";
 
 class WorkflowSideNav extends Component {
   render() {
@@ -22,8 +23,8 @@ class WorkflowSideNav extends Component {
           <CreateWorkflowButton />
         </div>
         <div>
-          <div> Stuff </div>
-          <div> More stuff </div>
+          <WorkflowBoardButton />
+          <WorkflowBoardButton />
         </div>
       </div>
     );

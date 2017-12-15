@@ -32,10 +32,10 @@ class ChannelButton extends Component {
 
   render() {
     let channelStyle = styles.channel;
-    if(this.state.isHovered){
+    if (this.state.isHovered) {
       channelStyle = styles.hoveredChannel;
     }
-    if(this.props.ID === this.props.selectedChannel){
+    if (this.props.ID === this.props.selectedChannel) {
       channelStyle = styles.selectedChannel;
     }
 
@@ -54,7 +54,7 @@ class ChannelButton extends Component {
 }
 
 const baseStyle = {
-  textDecoration: 'none',
+  textDecoration: "none",
   color: "#6f6f6f",
   marginLeft: 8,
   marginRight: 8,
@@ -64,7 +64,7 @@ const baseStyle = {
   alignContent: "center",
   padding: 5,
   paddingLeft: 50
-}
+};
 
 const styles = {
   channel: {
@@ -79,18 +79,17 @@ const styles = {
   },
   selectedChannel: {
     ...baseStyle,
-    color:"#FFFFFF",
+    color: "#FFFFFF",
     backgroundColor: "#616161",
-    borderRadius: 5,
+    borderRadius: 5
   }
 };
 
 function mapStateToProps(state) {
   return {
-    selectedChannel: state.chat.selectedChannel,
+    selectedChannel: state.chat.selectedChannel
   };
 }
-
 
 function mapDispatchToProps(dispatch) {
   return {

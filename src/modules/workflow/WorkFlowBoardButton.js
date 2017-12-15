@@ -4,9 +4,8 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
 import IconButton from "material-ui/IconButton";
-import CloseIcon from "material-ui-icons/Close";
+import MoreVertIcon from "material-ui-icons/MoreVert";
 import Avatar from "material-ui/Avatar";
-import PersonOutlineIcon from "material-ui-icons/PersonOutline";
 
 import { Link } from "react-router-dom";
 
@@ -32,47 +31,38 @@ class ActiveConversationButton extends Component {
   };
 
   handleClick = () => {
-    this.props.actions.fetchConversationMessages(this.props.conversationID);
+    // this.props.actions.fetchConversationMessages(this.props.conversationID);
   };
 
   render() {
-    let conversationStyle = styles.conversation;
+    let workflowStyle = styles.workflow;
     let nameStyle = styles.name;
     if (this.state.isHovered) {
-      conversationStyle = styles.hoveredConversation;
+      workflowStyle = styles.hoveredWorkflow;
       nameStyle = styles.hoveredName;
     }
     if (this.props.conversationID === this.props.selectedConversation) {
-      conversationStyle = styles.selectedConversation;
+      workflowStyle = styles.selectedWorkflow;
       nameStyle = styles.selectedName;
     }
 
     return (
       <div
-        style={conversationStyle}
+        style={workflowStyle}
         onMouseEnter={this.handleHover}
         onMouseLeave={this.handleHover}
       >
-        <Link style={nameStyle} onClick={this.handleClick} to="/community/chat">
-          <Avatar style={{ marginRight: 10 }}>
-            <PersonOutlineIcon />
-          </Avatar>
-          {this.props.name}
+        <Link style={nameStyle} onClick={this.handleClick} to="/team/workflow">
+          name
         </Link>
         <IconButton
           style={{
             color: nameStyle.color,
-            width: 40,
-            paddingLeft: 10
+            height: "100%",
+            width: 34
           }}
-          aria-label="Delete"
-          onClick={() =>
-            this.props.actions.setConversationInactive(
-              this.props.conversationID
-            )
-          }
         >
-          <CloseIcon style={{ fontSize: 16 }} />
+          <MoreVertIcon />
         </IconButton>
       </div>
     );
@@ -84,8 +74,9 @@ const baseStyle = {
   alignContent: "center",
   justifyContent: "space-between",
   marginLeft: 8,
-  marginRight: 8,
-  marginBottom: 1
+  marginRight: 4,
+  marginBottom: 1,
+  height: 28
 };
 
 const baseName = {
@@ -94,23 +85,23 @@ const baseName = {
   display: "flex",
   width: "100%",
   alignItems: "center",
-  paddingLeft: 40
+  paddingLeft: 52
 };
 
 const styles = {
-  conversation: {
+  workflow: {
     ...baseStyle
   },
   name: {
     ...baseName
   },
-  hoveredConversation: {
+  hoveredWorkflow: {
     ...baseStyle,
     backgroundColor: "#424242",
     borderRadius: 5,
     cursor: "pointer"
   },
-  selectedConversation: {
+  selectedWorkflow: {
     ...baseStyle,
     backgroundColor: "#616161",
     borderRadius: 5
@@ -129,7 +120,7 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-    selectedConversation: state.community.selectedConversation
+    selectedWorkflow: state.workflow.selectedWorkflow
   };
 }
 
