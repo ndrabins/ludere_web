@@ -41,20 +41,19 @@ export function startDirectMessage(recieverUID, recieverInfo) {
     directMessageRef
       .where(`members.${uid}`, "==", true)
       .where(`members.${recieverUID}`, "==", true)
-      .where("type", "==", "direct").onSnapshot(function (querySnapshot) {
-
+      .where("type", "==", "direct")
+      .onSnapshot(function(querySnapshot) {
         //If direct message exists, listen to it.
         //If direct message does not exist, create it
         if (querySnapshot.size > 0) {
           //Only do stuff with the first direct message returned
-          let conversationID = querySnapshot.docs[0].id
+          let conversationID = querySnapshot.docs[0].id;
           dispatch(fetchConversationMessages(conversationID));
         } else {
           dispatch(createConversation(uid, recieverUID));
         }
       });
-
-  }
+  };
 }
 
 export function sendDirectMessage(messageText) {
@@ -72,15 +71,16 @@ export function sendDirectMessage(messageText) {
       dateCreated: Date.now(),
       messageText: messageText,
       sentByDisplayName: myName,
-      edited: 'false',
-    }
+      edited: "false"
+    };
 
-    let messageRef = firebase.firestore().collection(`community/${selectedConversation}/messages`);
-    messageRef.add(message)
-      .then(function (docRef) {
-        dispatch({ type: SEND_DIRECT_MESSAGE });
-      })
-  }
+    let messageRef = firebase
+      .firestore()
+      .collection(`community/${selectedConversation}/messages`);
+    messageRef.add(message).then(function(docRef) {
+      dispatch({ type: SEND_DIRECT_MESSAGE });
+    });
+  };
 }
 
 export function fetchConversations() {
@@ -90,34 +90,65 @@ export function fetchConversations() {
     var conversationsRef = firebase.firestore().collection("community");
 
     conversationsRef
-      .where(`members.${uid}`, "==", true).onSnapshot(function (querySnapshot) {
+      .where(`members.${uid}`, "==", true)
+      .onSnapshot(function(querySnapshot) {
         var conversations = {};
-        querySnapshot.forEach(function (doc) {
+        querySnapshot.forEach(function(doc) {
           conversations[doc.id] = doc.data();
         });
-        dispatch({ type: FETCH_CONVERSATIONS_SUCCESS, conversations: conversations });
+        dispatch({
+          type: FETCH_CONVERSATIONS_SUCCESS,
+          conversations: conversations
+        });
       });
-  }
+  };
 }
 
 export function fetchConversationMessages(conversationID) {
   return dispatch => {
-    dispatch({ type: FETCH_CONVERSATION_MESSAGES, selectedConversation: conversationID });
+    dispatch({
+      type: FETCH_CONVERSATION_MESSAGES,
+      selectedConversation: conversationID
+    });
 
-    let messageRef = firebase.firestore().collection(`community/${conversationID}/messages`);
-    messageRef.orderBy("dateCreated")
-      .onSnapshot(function (querySnapshot) {
-        var messages = {};
-        querySnapshot.forEach(function (doc) {
-          messages[doc.id] = doc.data();
-        });
-        dispatch({ type: FETCH_CONVERSATION_MESSAGES_SUCCESS, messages: messages });
+    let messageRef = firebase
+      .firestore()
+      .collection(`community/${conversationID}/messages`);
+    messageRef.orderBy("dateCreated").onSnapshot(function(querySnapshot) {
+      var messages = {};
+      querySnapshot.forEach(function(doc) {
+        messages[doc.id] = doc.data();
       });
+      dispatch({
+        type: FETCH_CONVERSATION_MESSAGES_SUCCESS,
+        messages: messages
+      });
+    });
 
     dispatch(addToActiveConversations(conversationID)); //add to active conversations for user
 
     // dispatch({ type: FETCH_CONVERSATION_MESSAGES_ERROR });
-  }
+  };
+}
+
+export function setConversationInactive(conversationID) {
+  return (dispatch, getState) => {
+    let { uid } = getState().auth.user;
+    let conversationRef = firebase
+      .firestore()
+      .collection("users")
+      .doc(uid);
+    dispatch({ type: SET_CONVERSATION_INACTIVE });
+
+    let updateConversation = {};
+    updateConversation = {
+      conversations: {}
+    };
+
+    updateConversation.conversations[conversationID] = false;
+
+    conversationRef.set(updateConversation, { merge: true });
+  };
 }
 
 function createConversation(myUID, recieverUID) {
@@ -139,33 +170,36 @@ function createConversation(myUID, recieverUID) {
       .firestore()
       .collection("community")
       .add(directMessage)
-      .then(function (docRef) {
+      .then(function(docRef) {
         dispatch({ type: CREATE_CONVERSATION_SUCCESS });
         dispatch(addToActiveConversations(docRef.id)); //add new conversation to active conversation
       })
-      .catch(function (error) {
+      .catch(function(error) {
         dispatch({ type: CREATE_CONVERSATION_SUCCESS });
         console.error("Error adding document: ", error);
       });
-  }
+  };
 }
 
 function addToActiveConversations(conversationID) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
 
-    let conversationUpdate = {}
+    let conversationUpdate = {};
     conversationUpdate[`conversations.${conversationID}`] = true;
 
-    let activeConversationRef = firebase.firestore().collection("users").doc(uid)
-    activeConversationRef.update(conversationUpdate)
-      .then(function () {
+    let activeConversationRef = firebase
+      .firestore()
+      .collection("users")
+      .doc(uid);
+    activeConversationRef
+      .update(conversationUpdate)
+      .then(function() {
         dispatch({ type: ADD_ACTIVE_CONVERSATION_SUCCESS });
       })
-      .catch(function (error) {
+      .catch(function(error) {
         dispatch({ type: ADD_ACTIVE_CONVERSATION_ERROR });
         console.error("Error writing document: ", error);
       });
-  }
+  };
 }
-

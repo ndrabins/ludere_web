@@ -3,6 +3,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
+import IconButton from "material-ui/IconButton";
+import CloseIcon from "material-ui-icons/Close";
+import Avatar from "material-ui/Avatar";
+import PersonOutlineIcon from "material-ui-icons/PersonOutline";
+
 import { Link } from "react-router-dom";
 
 class ActiveConversationButton extends Component {
@@ -32,65 +37,97 @@ class ActiveConversationButton extends Component {
 
   render() {
     let conversationStyle = styles.conversation;
-    if(this.state.isHovered){
+    let nameStyle = styles.name;
+    if (this.state.isHovered) {
       conversationStyle = styles.hoveredConversation;
+      nameStyle = styles.hoveredName;
     }
-    if(this.props.conversationID === this.props.selectedConversation){
+    if (this.props.conversationID === this.props.selectedConversation) {
       conversationStyle = styles.selectedConversation;
+      nameStyle = styles.selectedName;
     }
 
     return (
-      <Link
+      <div
         style={conversationStyle}
         onMouseEnter={this.handleHover}
         onMouseLeave={this.handleHover}
-        onClick={this.handleClick}
-        to="/community/chat"
       >
-        # {this.props.name}
-      </Link>
+        <Link style={nameStyle} onClick={this.handleClick} to="/community/chat">
+          <Avatar style={{ marginRight: 10 }}>
+            <PersonOutlineIcon />
+          </Avatar>
+          {this.props.name}
+        </Link>
+        <IconButton
+          style={{
+            color: nameStyle.color,
+            fontSize: 24
+          }}
+          aria-label="Delete"
+          onClick={() =>
+            this.props.actions.setConversationInactive(
+              this.props.conversationID
+            )
+          }
+        >
+          <CloseIcon />
+        </IconButton>
+      </div>
     );
   }
 }
 
 const baseStyle = {
-  textDecoration: 'none',
-  color: "#6f6f6f",
-  marginLeft: 8,
-  marginRight: 8,
-  marginTop: 1,
-  marginBottom: 1,
   display: "flex",
   alignContent: "center",
-  padding: 5,
-  paddingLeft: 50
-}
+  justifyContent: "space-between"
+};
+
+const baseName = {
+  textDecoration: "none",
+  color: "#6f6f6f",
+  display: "flex",
+  width: "100%",
+  alignItems: "center",
+  paddingLeft: 40
+};
 
 const styles = {
   conversation: {
     ...baseStyle
   },
+  name: {
+    ...baseName
+  },
   hoveredConversation: {
     ...baseStyle,
     backgroundColor: "#424242",
-    color: "#b9bbbe",
     borderRadius: 5,
     cursor: "pointer"
   },
   selectedConversation: {
     ...baseStyle,
-    color:"#FFFFFF",
     backgroundColor: "#616161",
-    borderRadius: 5,
+    borderRadius: 5
+  },
+  hoveredName: {
+    ...baseName,
+    textDecoration: "none",
+    color: "#b9bbbe"
+  },
+  selectedName: {
+    ...baseName,
+    textDecoration: "none",
+    color: "#FFFFFF"
   }
 };
 
 function mapStateToProps(state) {
   return {
-    selectedConversation: state.community.selectedConversation,
+    selectedConversation: state.community.selectedConversation
   };
 }
-
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -98,4 +135,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActiveConversationButton);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ActiveConversationButton
+);

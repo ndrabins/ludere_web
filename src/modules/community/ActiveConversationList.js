@@ -18,7 +18,7 @@ class ActiveConversationList extends Component {
       // console.log(conversation);
       Map(conversation.members, (memberStatus, memberID) => {
         console.log(memberID);
-        if(memberID != this.props.myID){
+        if(memberID !== this.props.myID){
           title += this.props.workspaceUsers[memberID].displayName;
         }
 
