@@ -17,8 +17,8 @@ import Tooltip from "material-ui/Tooltip";
 class AddTeamButton extends Component {
   state = {
     open: false,
-    teamName : '',
-    description : ''
+    teamName: "",
+    description: ""
   };
 
   handleClickOpen = () => {
@@ -26,13 +26,13 @@ class AddTeamButton extends Component {
   };
 
   handleRequestClose = () => {
-    this.setState({ open: false, teamName:'', description:'' });
+    this.setState({ open: false, teamName: "", description: "" });
   };
 
   handleCreateTeam = () => {
     this.props.actions.createTeam(this.state.teamName);
     this.handleRequestClose();
-  }
+  };
 
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
@@ -48,16 +48,13 @@ class AddTeamButton extends Component {
             style={styles.addTeamButton}
             onClick={this.handleClickOpen}
           >
-            <AddIcon color={'white'}/>
+            <AddIcon style={{ color: "#B8B8B8", fontSize: 16 }} />
           </Button>
         </Tooltip>
-        <Dialog
-          open={this.state.open}
-          onRequestClose={this.handleRequestClose}
-        >
+        <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
           <DialogTitle>Create Team</DialogTitle>
           <DialogContent>
-            <DialogContentText>Create Team description asdfasdf asdfa sdfasd fasdf asdfasf</DialogContentText>
+            <DialogContentText>Create Team description</DialogContentText>
             <TextField
               autoFocus
               margin="dense"
@@ -66,22 +63,20 @@ class AddTeamButton extends Component {
               fullWidth
               required
               value={this.state.teamName}
-              onChange={this.handleChange('teamName')}
-            />
-            <TextField
-              margin="dense"
-              id="description"
-              label="Description"
-              fullWidth
-              value={this.state.description}
-              onChange={this.handleChange('description')}
+              onChange={this.handleChange("teamName")}
+              autoComplete="false"
             />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleRequestClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleCreateTeam} color="primary" raised style={{color:'white'}}>
+            <Button
+              onClick={this.handleCreateTeam}
+              color="primary"
+              raised
+              style={{ color: "white" }}
+            >
               Create
             </Button>
           </DialogActions>
@@ -97,15 +92,12 @@ const styles = {
     height: 36,
     margin: "8px 0px 8px 0px",
     border: "2px dashed #c3c3c3",
-    backgroundColor: 'rgba(0, 0, 0, 0.0)',
+    backgroundColor: "rgba(0, 0, 0, 0.0)"
   }
 };
 
-
 function mapStateToProps(state) {
-  return {
-
-  };
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {
@@ -113,6 +105,5 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(Actions, dispatch)
   };
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTeamButton);

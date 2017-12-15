@@ -17,7 +17,7 @@ import TextField from "material-ui/TextField";
 class CommunityAddButton extends Component {
   state = {
     open: false,
-    channelName: ''
+    channelName: ""
   };
 
   handleClickOpen = () => {
@@ -25,13 +25,13 @@ class CommunityAddButton extends Component {
   };
 
   handleRequestClose = () => {
-    this.setState({ open: false, channelName:'' });
+    this.setState({ open: false, channelName: "" });
   };
 
   handleCreateChannel = () => {
     this.handleRequestClose();
     this.props.actions.createChannel(this.state.channelName);
-  }
+  };
 
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
@@ -41,7 +41,7 @@ class CommunityAddButton extends Component {
     return (
       <div>
         <IconButton style={styles.createChannelButton}>
-          <AddIcon />
+          <AddIcon style={{ fontSize: 16 }} />
         </IconButton>
       </div>
     );
@@ -50,8 +50,8 @@ class CommunityAddButton extends Component {
 
 const styles = {
   createChannelButton: {
-    width: 26,
-    height: 26,
+    width: 22,
+    height: 22,
     color: "white",
     background: "linear-gradient(to right, #e57373, #ee8d68)"
   }
@@ -62,6 +62,5 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(Actions, dispatch)
   };
 }
-
 
 export default connect(null, mapDispatchToProps)(CommunityAddButton);

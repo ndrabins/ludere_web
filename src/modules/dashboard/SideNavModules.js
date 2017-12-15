@@ -1,19 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import ChatSideNav from '../chat/ChatSideNav';
-import BoardsSideNav from '../boards/boardsSideNav';
-import CommunitySideNav from '../community/CommunitySideNav';
+import Message from "material-ui-icons/Message";
 
-import {Route} from 'react-router-dom';
+import CommunitySideNav from "../community/CommunitySideNav";
+import ChatSideNav from "../chat/ChatSideNav";
+import WorkflowSideNav from "../workflow/WorkflowSideNav";
+
+import { Route } from "react-router-dom";
 
 class SideNavModules extends Component {
   render() {
     return (
       <div style={styles.container}>
+        <div style={styles.title}>
+          <div
+            style={{
+              display: "flex",
+              alignContent: "center",
+              justifyContent: "center"
+            }}
+          >
+            <Message />
+            <div style={{ marginLeft: 14 }}>Team Overview</div>
+          </div>
+        </div>
+
         <Route path="/community" component={CommunitySideNav} />
         <Route path="/team" component={ChatSideNav} />
-        {/* <ChatSideNav /> */}
-        {/* <BoardsSideNav /> */}
+        <Route path="/team" component={WorkflowSideNav} />
       </div>
     );
   }
@@ -21,8 +35,16 @@ class SideNavModules extends Component {
 
 const styles = {
   container: {
-    marginTop: 10,
+    marginTop: 10
+  },
+  title: {
+    display: "flex",
+    color: "white",
+    justifyContent: "space-between",
+    alignItems: "center",
+    height: 40,
+    margin: "0px 10px 0 32px"
   }
-}
+};
 
 export default SideNavModules;

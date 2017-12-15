@@ -17,7 +17,7 @@ import TextField from "material-ui/TextField";
 class CreateChatButton extends Component {
   state = {
     open: false,
-    channelName: ""
+    workflowName: ""
   };
 
   handleClickOpen = () => {
@@ -25,12 +25,11 @@ class CreateChatButton extends Component {
   };
 
   handleRequestClose = () => {
-    this.setState({ open: false, channelName: "" });
+    this.setState({ open: false, workflowName: "" });
   };
 
   handleCreateChannel = () => {
     this.handleRequestClose();
-    this.props.actions.createChannel(this.state.channelName);
   };
 
   handleChange = prop => event => {
@@ -41,22 +40,22 @@ class CreateChatButton extends Component {
     return (
       <div>
         <IconButton
-          style={styles.createChannelButton}
+          style={styles.createWorkFlowButton}
           onClick={this.handleClickOpen}
         >
           <AddIcon style={{ fontSize: 16 }} />
         </IconButton>
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
-          <DialogTitle>Create Channel</DialogTitle>
+          <DialogTitle>Create Workflow</DialogTitle>
           <DialogContent style={{ width: 300, maxWidth: 400 }}>
             <TextField
               autoFocus
               margin="dense"
               id="name"
-              label="Channel Name"
+              label="Workflow Name"
               fullWidth
-              value={this.state.channelName}
-              onChange={this.handleChange("channelName")}
+              value={this.state.workflowName}
+              onChange={this.handleChange("workflowName")}
             />
           </DialogContent>
           <DialogActions>
@@ -69,7 +68,7 @@ class CreateChatButton extends Component {
               color="primary"
               style={{ color: "white" }}
             >
-              Create Channel
+              Create Workflow
             </Button>
           </DialogActions>
         </Dialog>
@@ -79,11 +78,11 @@ class CreateChatButton extends Component {
 }
 
 const styles = {
-  createChannelButton: {
+  createWorkFlowButton: {
     width: 22,
     height: 22,
     color: "white",
-    background: "linear-gradient(to right, #e57373, #ee8d68)"
+    background: "linear-gradient(to right, #a770ef, #cf8bf3)"
   }
 };
 
