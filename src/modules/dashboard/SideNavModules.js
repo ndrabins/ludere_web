@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import fireIcon from "../../static/icons/teamfire.svg";
+import fireIcon from "../../static/teamfire.svg";
 
 import CommunitySideNav from "../community/CommunitySideNav";
 import ChatSideNav from "../chat/ChatSideNav";

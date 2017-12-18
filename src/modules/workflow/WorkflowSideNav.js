@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import boardsIcon from "../../static/icons/boards.svg";
+import boardsIcon from "../../static/boards.svg";
 
 import CreateWorkflowButton from "./CreateBoardButton";
 import BoardList from "./BoardList";

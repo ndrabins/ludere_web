@@ -1,101 +1,110 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const getItems = count =>
-  Array.from({ length: count }, (v, k) => k).map(k => ({
-    id: `item-${k}`,
-    content: `item ${k}`
-  }));
+import Button from "material-ui/Button";
+
+import Column from "./Column";
+import { initialize } from "redux-form";
 
 const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
+  const result = [...list];
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
 
   return result;
 };
 
-const grid = 8;
-const getItemStyle = (draggableStyle, isDragging) => ({
-  // some basic styles to make the items look a bit nicer
-  userSelect: "none",
-  padding: grid * 2,
-  margin: `0 0 ${grid}px 0`,
+const moveToOtherList = (list1, list2, sourceIndex, destinationIndex) => {
+  const resultList1 = [...list1];
+  const resultList2 = [...list2];
+  const [removed] = resultList1.splice(sourceIndex, 1);
+  resultList2.splice(destinationIndex, 0, removed);
 
-  // change background colour if dragging
-  background: isDragging ? "lightgreen" : "grey",
-
-  // styles we need to apply on draggables
-  ...draggableStyle
-});
-const getListStyle = isDraggingOver => ({
-  background: isDraggingOver ? "lightblue" : "lightgrey",
-  padding: grid,
-  width: 250
-});
+  return [resultList1, resultList2];
+};
 
 class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: getItems(10)
+      columns: {
+        1: {
+          id: 1,
+          title: "Accounts",
+          items: [{ id: 3, content: "a" }, { id: 4, content: "b" }]
+        },
+        2: {
+          id: 2,
+          title: "Cards",
+          items: [{ id: 5, content: "c" }, { id: 6, content: "d" }]
+        },
+        3: {
+          id: 3,
+          title: "Stuff",
+          items: [{ id: 9, content: "e" }, { id: 10, content: "f" }]
+        }
+      },
+      orderOfColumns: [1, 2, 3]
     };
-    this.onDragEnd = this.onDragEnd.bind(this);
   }
 
-  onDragEnd(result) {
+  onDragStart = initial => {
+    console.log("starting drag");
+  };
+
+  onDragEnd = result => {
     // dropped outside the list
     if (!result.destination) {
       return;
     }
 
-    const items = reorder(
-      this.state.items,
-      result.source.index,
-      result.destination.index
-    );
+    const source = result.source;
+    const destination = result.destination;
 
-    this.setState({
-      items
-    });
-  }
+    console.log("source:", source);
+    console.log("destination", destination);
+    // reordering column
+    if (result.type === "COLUMN") {
+      const orderOfColumns = reorder(
+        this.state.orderOfColumns,
+        source.index,
+        destination.index
+      );
+
+      this.setState({
+        orderOfColumns
+      });
+    }
+    return;
+  };
 
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="droppable">
+      <DragDropContext
+        onDragEnd={this.onDragEnd}
+        onDragStart={this.onDragStart}
+        style={{ overflowX: "auto" }}
+      >
+        <Droppable droppableId="board" type="COLUMN" direction="horizontal">
           {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver)}
-            >
-              {this.state.items.map(item => (
-                <Draggable key={item.id} draggableId={item.id}>
-                  {(provided, snapshot) => (
-                    <div>
-                      <div
-                        ref={provided.innerRef}
-                        style={getItemStyle(
-                          provided.draggableStyle,
-                          snapshot.isDragging
-                        )}
-                        {...provided.dragHandleProps}
-                      >
-                        {item.content}
-                      </div>
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Draggable>
+            <div style={styles.container} ref={provided.innerRef}>
+              {this.state.orderOfColumns.map(key => (
+                <Column key={key} data={this.state.columns[key]} />
               ))}
-              {provided.placeholder}
             </div>
           )}
         </Droppable>
+        <Button> Add list </Button>
       </DragDropContext>
     );
   }
 }
+
+const styles = {
+  container: {
+    display: "flex",
+    backgroundColor: "green"
+  }
+};
 
 export default Board;
