@@ -14,13 +14,8 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-const moveToOtherList = (list1, list2, sourceIndex, destinationIndex) => {
-  const resultList1 = [...list1];
-  const resultList2 = [...list2];
-  const [removed] = resultList1.splice(sourceIndex, 1);
-  resultList2.splice(destinationIndex, 0, removed);
-
-  return [resultList1, resultList2];
+const reorderItemsMap = ({ itemsMap, source, destination }) => {
+  console.log("moving item");
 };
 
 class Board extends Component {
@@ -31,7 +26,7 @@ class Board extends Component {
         1: {
           id: 1,
           title: "Accounts",
-          items: [{ id: 3, content: "a" }, { id: 4, content: "b" }]
+          items: [{ id: 11, content: "a" }, { id: 4, content: "b" }]
         },
         2: {
           id: 2,
@@ -74,8 +69,15 @@ class Board extends Component {
       this.setState({
         orderOfColumns
       });
+      return;
     }
-    return;
+
+    //item is moving
+    const data = reorderItemsMap({
+      itemsMap: this.state.orderOfColumns,
+      source,
+      destination
+    });
   };
 
   render() {

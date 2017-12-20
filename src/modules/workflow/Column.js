@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "react-beautiful-dnd";
+
+import ItemList from "./ItemList";
 
 class Column extends Component {
   render() {
     const { title, id, items } = this.props.data;
-    console.log(id);
-    console.log(this.props.data);
 
     return (
       <Draggable draggableId={id} type="COLUMN">
@@ -17,8 +17,7 @@ class Column extends Component {
             >
               <div {...provided.dragHandleProps}>{title}</div>
               <div>
-                <div>ITEM 1</div>
-                <div>ITEM 2</div>
+                <ItemList columnID={id} items={items} />
               </div>
             </div>
             {provided.placeholder}
@@ -35,13 +34,13 @@ const styles = {
     flexDirection: "column",
     height: 300,
     width: 200,
-    backgroundColor: "blue"
+    backgroundColor: "blue",
+    margin: 10
   },
   wrapper: {
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "red",
-    padding: 10
+    backgroundColor: "red"
   }
 };
 

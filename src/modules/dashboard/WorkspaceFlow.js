@@ -6,8 +6,8 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
 import Button from "material-ui/Button";
-import IconButton from 'material-ui/IconButton';
-import ArrowBack from 'material-ui-icons/ArrowBack';
+import IconButton from "material-ui/IconButton";
+import ArrowBack from "material-ui-icons/ArrowBack";
 
 import CreateWorkspaceForm from "./CreateWorkspaceForm";
 import JoinWorkspaceForm from "./JoinWorkspaceForm";
@@ -22,7 +22,6 @@ class WorkspaceFlow extends Component {
   }
 
   selectOption(optionChoice) {
-    console.log(optionChoice);
     this.setState({
       option: optionChoice
     });
@@ -67,18 +66,18 @@ class WorkspaceFlow extends Component {
     );
   }
 
-  handleCreateWorkspace = (values) => {
+  handleCreateWorkspace = values => {
     this.props.actions.createWorkspace(values);
-  }
+  };
 
-  handleJoinWorkspace = (url) => {
+  handleJoinWorkspace = url => {
     this.props.actions.joinWorkspace(url);
-  }
+  };
 
   renderCreateWorkspace() {
     return (
       <Paper style={styles.formContent} elevation={4}>
-        <CreateWorkspaceForm onSubmit={this.handleCreateWorkspace}/>
+        <CreateWorkspaceForm onSubmit={this.handleCreateWorkspace} />
         <IconButton onClick={() => this.selectOption(null)}>
           <ArrowBack />
         </IconButton>
@@ -89,7 +88,7 @@ class WorkspaceFlow extends Component {
   renderJoinWorkspace() {
     return (
       <Paper style={styles.formContent} elevation={4}>
-        <JoinWorkspaceForm onSubmit={this.handleJoinWorkspace}/>
+        <JoinWorkspaceForm onSubmit={this.handleJoinWorkspace} />
         <IconButton onClick={() => this.selectOption(null)}>
           <ArrowBack />
         </IconButton>

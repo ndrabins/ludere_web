@@ -1,0 +1,90 @@
+[debug] [2017-12-20T01:09:03.246Z] ----------------------------------------------------------------------
+[debug] [2017-12-20T01:09:03.248Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\ndrabinsky\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy
+[debug] [2017-12-20T01:09:03.248Z] CLI Version:   3.13.1
+[debug] [2017-12-20T01:09:03.248Z] Platform:      win32
+[debug] [2017-12-20T01:09:03.248Z] Node Version:  v8.6.0
+[debug] [2017-12-20T01:09:03.248Z] Time:          Tue Dec 19 2017 20:09:03 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:03.248Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-12-20T01:09:03.263Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-12-20T01:09:03.264Z] > authorizing via signed-in user
+[debug] [2017-12-20T01:09:03.266Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-12-20T01:09:03.266Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/Bl-dmMgprQwEzkpssocrwWfKDdHs6EP7CGoKAOJMgAk',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Tue Dec 19 2017 20:09:03 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:03.498Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-20T01:09:03.503Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/newapp-6c93a  
+ Tue Dec 19 2017 20:09:03 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:03.853Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-20T01:09:03.853Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/newapp-6c93a/tokens  
+ Tue Dec 19 2017 20:09:03 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:04.241Z] <<< HTTP RESPONSE 200
+[info] 5
+[info] 
+[info] === Deploying to 'newapp-6c93a'...
+[info] 
+[info] i  deploying database, storage, firestore, functions, hosting
+[info] i  database: checking rules syntax...
+[debug] [2017-12-20T01:09:04.499Z] >>> HTTP REQUEST PUT https://newapp-6c93a.firebaseio.com/.settings/rules.json?dryRun=true {
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+} 
+ Tue Dec 19 2017 20:09:04 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:04.723Z] <<< HTTP RESPONSE 200
+[info] +  database: rules syntax is valid
+[debug] [2017-12-20T01:09:04.727Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/newapp-6c93a  
+ Tue Dec 19 2017 20:09:04 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:05.065Z] <<< HTTP RESPONSE 200
+[info] i  storage: checking storage.rules for compilation errors...
+[debug] [2017-12-20T01:09:05.068Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/newapp-6c93a:test { source: { files: [ [Object] ] } } 
+ Tue Dec 19 2017 20:09:05 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:05.276Z] <<< HTTP RESPONSE 200
+[info] +  storage: rules file storage.rules compiled successfully
+[info] i  firestore: checking firestore.rules for compilation errors...
+[debug] [2017-12-20T01:09:05.279Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/newapp-6c93a:test { source: { files: [ [Object] ] } } 
+ Tue Dec 19 2017 20:09:05 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:05.425Z] <<< HTTP RESPONSE 200
+[info] +  firestore: rules file firestore.rules compiled successfully
+[debug] [2017-12-20T01:09:05.427Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "dependencies": {
+    "firebase-admin": "^5.5.1",
+    "firebase-functions": "^0.7.3"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[info] i  runtimeconfig: ensuring necessary APIs are enabled...
+[debug] [2017-12-20T01:09:05.429Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/newapp-6c93a?view=CONSUMER_VIEW  
+ Tue Dec 19 2017 20:09:05 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:05.429Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/newapp-6c93a?view=CONSUMER_VIEW  
+ Tue Dec 19 2017 20:09:05 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:05.986Z] <<< HTTP RESPONSE 200
+[info] +  runtimeconfig: all necessary APIs are enabled
+[debug] [2017-12-20T01:09:06.031Z] <<< HTTP RESPONSE 200
+[info] +  functions: all necessary APIs are enabled
+[debug] [2017-12-20T01:09:06.032Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/newapp-6c93a  
+ Tue Dec 19 2017 20:09:06 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:06.033Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/newapp-6c93a/apiKeys  
+ Tue Dec 19 2017 20:09:06 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:06.281Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-20T01:09:06.378Z] <<< HTTP RESPONSE 200
+[info] i  storage: uploading rules storage.rules...
+[debug] [2017-12-20T01:09:06.382Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/newapp-6c93a/rulesets { source: { files: [ [Object] ] } } 
+ Tue Dec 19 2017 20:09:06 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:06.586Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-20T01:09:06.587Z] [rules] created ruleset projects/newapp-6c93a/rulesets/83678465-32c4-4224-b78f-22743cd5bfb5
+[info] i  firestore: uploading rules firestore.rules...
+[debug] [2017-12-20T01:09:06.588Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/newapp-6c93a/rulesets { source: { files: [ [Object] ] } } 
+ Tue Dec 19 2017 20:09:06 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:06.589Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1beta1/projects/newapp-6c93a/databases/(default)/indexes  
+ Tue Dec 19 2017 20:09:06 GMT-0500 (Eastern Standard Time)
+[debug] [2017-12-20T01:09:06.839Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-20T01:09:06.839Z] [rules] created ruleset projects/newapp-6c93a/rulesets/521b6b55-9093-4604-a219-dd7dc0018884
+[debug] [2017-12-20T01:09:06.898Z] <<< HTTP RESPONSE 200

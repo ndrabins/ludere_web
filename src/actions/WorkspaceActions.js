@@ -56,7 +56,6 @@ export function createWorkspace(values) {
         usersWorkspaceUpdate[`workspaces.${docRef.id}`] = true;
 
         userRef.update(usersWorkspaceUpdate).then(function () {
-          // console.log("Document successfully updated!");
         })
           .catch(function (error) {
             // The document probably doesn't exist.
@@ -97,7 +96,6 @@ export function joinWorkspace(formValues) {
     batch.update(userRef, usersWorkspaceUpdate);
 
     batch.commit().then(function () {
-      console.log("Transaction successfully committed!");
       dispatch({ type: JOIN_WORKSPACE_SUCCESS });
     }).catch(function (error) {
       console.log("Transaction failed: ", error);

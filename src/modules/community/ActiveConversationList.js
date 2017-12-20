@@ -15,7 +15,6 @@ class ActiveConversationList extends Component {
 
     let conversations = Map(this.props.conversations, (conversation, key) => {
       let title = '';
-      // console.log(conversation);
       Map(conversation.members, (memberStatus, memberID) => {
         console.log(memberID);
         if(memberID !== this.props.myID){

@@ -30,7 +30,7 @@
     "electron": "^1.7.8",
     "electron-builder": "^19.34.2"
   },
-  "homepage": "./",
+  "homepage": ".",
   "main": "src/electron-starter.js",
   "scripts": {
     "start": "nf start -p 3000",
@@ -45,9 +45,10 @@
     "postinstall": "install-app-deps"
   },
   "build": {
-    "appId": "com.electron.electron-with-create-react-app",
+    "appId": "com.electron.ludere",
     "win": {
-      "iconUrl": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
+      "iconUrl":
+        "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
     },
     "directories": {
       "buildResources": "public"
