@@ -21,10 +21,13 @@ const styles = {
     minHeight: 40,
     cursor: "grab",
     border: "1px solid grey",
-    borderRadius: 5,
-    backgroundColor: "teal",
+    borderRadius: 8,
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "white",
+    padding: 15,
+    marginTop: 4,
+    marginBottom: 4
   },
   content: {}
 };

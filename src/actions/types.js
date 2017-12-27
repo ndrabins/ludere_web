@@ -95,3 +95,6 @@ export const SELECT_BOARD = "SELECT_BOARD";
 export const CREATE_BOARD = "CREATE_BOARD";
 export const FETCH_BOARDS = "FETCH_BOARDS";
 export const FETCH_BOARDS_SUCCESS = "FETCH_BOARDS_SUCCESS";
+export const CREATE_LIST = "CREATE_LIST";
+export const CREATE_TASK = "CREATE_TASK";
+export const FETCH_BOARD_DATA = "FETCH_BOARD_DATA";

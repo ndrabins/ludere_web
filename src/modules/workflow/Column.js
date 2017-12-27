@@ -15,8 +15,10 @@ class Column extends Component {
               ref={provided.innerRef}
               style={{ ...styles.container, ...provided.draggableStyle }}
             >
-              <div {...provided.dragHandleProps}>{title}</div>
-              <div>
+              <div {...provided.dragHandleProps} style={styles.title}>
+                {title}
+              </div>
+              <div style={styles.itemsContainer}>
                 <ItemList columnID={id} items={items} />
               </div>
             </div>
@@ -32,15 +34,28 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
-    height: 300,
+    minHeight: 300,
     width: 200,
-    backgroundColor: "blue",
-    margin: 10
+    backgroundColor: "#E5E5E6",
+    margin: 10,
+    borderRadius: 7
+  },
+  itemsContainer: {
+    padding: 8
   },
   wrapper: {
     display: "flex",
-    flexDirection: "column",
-    backgroundColor: "red"
+    flexDirection: "column"
+  },
+  title: {
+    height: 20,
+    padding: 8,
+    color: "#FFFFFF",
+    display: "flex",
+    backgroundColor: "#00BCD4",
+    alignItems: "center",
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7
   }
 };
 

@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "4.6.0",
+    "firebase": "latest",
     "firebase-admin": "^5.5.1",
     "firebase-functions": "^0.7.3",
     "history": "^4.7.2",

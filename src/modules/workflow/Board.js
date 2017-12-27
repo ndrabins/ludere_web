@@ -26,7 +26,24 @@ class Board extends Component {
         1: {
           id: 1,
           title: "Accounts",
-          items: [{ id: 11, content: "a" }, { id: 4, content: "b" }]
+          items: [
+            {
+              id: 11,
+              content:
+                "AccountsAccounts Accounts Accounts BillboardBillboard BillboardBillboard"
+            },
+            {
+              id: 15,
+              content:
+                "AccountsAccounts Accounts Accounts BillboardBillboard BillboardBillboard"
+            },
+            {
+              id: 155,
+              content:
+                "AccountsAccounts Accounts Accounts BillboardBillboard BillboardBillboard"
+            },
+            { id: 4, content: "Billboard Billboard BillboardBillboard" }
+          ]
         },
         2: {
           id: 2,
@@ -85,7 +102,7 @@ class Board extends Component {
       <DragDropContext
         onDragEnd={this.onDragEnd}
         onDragStart={this.onDragStart}
-        style={{ overflowX: "auto" }}
+        style={styles.wrapper}
       >
         <Droppable droppableId="board" type="COLUMN" direction="horizontal">
           {(provided, snapshot) => (
@@ -96,7 +113,6 @@ class Board extends Component {
             </div>
           )}
         </Droppable>
-        <Button> Add list </Button>
       </DragDropContext>
     );
   }
@@ -105,7 +121,11 @@ class Board extends Component {
 const styles = {
   container: {
     display: "flex",
-    backgroundColor: "green"
+    height: "100%"
+  },
+  wrapper: {
+    height: "100%",
+    overflowX: "auto"
   }
 };
 

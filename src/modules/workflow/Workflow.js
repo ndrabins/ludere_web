@@ -12,7 +12,7 @@ class Workflow extends Component {
 
   render() {
     return (
-      <div>
+      <div style={styles.wrapper}>
         <Board />
       </div>
     );
@@ -30,5 +30,11 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(Actions, dispatch)
   };
 }
+
+const styles = {
+  wrapper: {
+    height: "100%"
+  }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Workflow);

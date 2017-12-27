@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import Item from "./Item";
 
+import Button from "material-ui/Button";
+
 class ItemList extends Component {
   renderItems = dropProvided => {
     const { items } = this.props;
@@ -25,6 +27,7 @@ class ItemList extends Component {
           ))}
           {dropProvided.placeholder}
         </div>
+        <Button style={styles.addButton}> Add Item </Button>
       </div>
     );
   };
@@ -47,16 +50,19 @@ class ItemList extends Component {
 const styles = {
   wrapper: {
     display: "flex",
-    flexDirection: "row",
-    backgroundColor: "purple"
+    flexDirection: "row"
   },
   container: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    width: "100%"
   },
   dropZone: {
     minHeight: 250,
     marginBottom: 8
+  },
+  addButton: {
+    backgroundColor: "white"
   }
 };
 

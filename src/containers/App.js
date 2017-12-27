@@ -10,7 +10,7 @@ import {
   Switch
 } from "react-router-dom";
 
-import {lightTheme} from "../utility/themes"; //darkTheme
+import { lightTheme } from "../utility/themes"; //darkTheme
 import { MuiThemeProvider } from "material-ui/styles";
 
 import Loading from "../modules/auth/Loading";
@@ -29,7 +29,8 @@ function PrivateRoute({ component: Component, authenticated, ...rest }) {
           <Redirect
             to={{ pathname: "/auth", state: { from: props.location } }}
           />
-        )}
+        )
+      }
     />
   );
 }
@@ -39,11 +40,8 @@ function PublicRoute({ component: Component, authenticated, ...rest }) {
     <Route
       {...rest}
       render={props =>
-        authenticated === false ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/" />
-        )}
+        authenticated === false ? <Component {...props} /> : <Redirect to="/" />
+      }
     />
   );
 }
@@ -72,8 +70,7 @@ class App extends Component {
                   authenticated={this.props.authenticated}
                   path="/"
                   component={Main}
-                >
-                </PrivateRoute>
+                />
               </Switch>
             </div>
           </Router>
@@ -86,7 +83,7 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
-    loading: state.auth.loading,
+    loading: state.auth.loading
   };
 }
 
