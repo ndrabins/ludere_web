@@ -5,10 +5,9 @@ import ItemList from "./ItemList";
 
 class Column extends Component {
   render() {
-    const { title, id, items } = this.props.data;
-
+    const { list, ID } = this.props;
     return (
-      <Draggable draggableId={id} type="COLUMN">
+      <Draggable draggableId={ID} type="COLUMN">
         {(provided, snapshot) => (
           <div style={styles.wrapper}>
             <div
@@ -16,10 +15,10 @@ class Column extends Component {
               style={{ ...styles.container, ...provided.draggableStyle }}
             >
               <div {...provided.dragHandleProps} style={styles.title}>
-                {title}
+                {list.name}
               </div>
               <div style={styles.itemsContainer}>
-                <ItemList columnID={id} items={items} />
+                {/* <ItemList columnID={id} items={items} /> */}
               </div>
             </div>
             {provided.placeholder}

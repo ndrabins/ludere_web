@@ -2,9 +2,12 @@ import {
   SELECT_BOARD,
   FETCH_BOARDS,
   FETCH_BOARDS_SUCCESS,
-  FETCH_BOARD_DATA,
+  FETCH_LISTS,
+  FETCH_TASKS,
   CREATE_BOARD,
-  CREATE_LIST
+  CREATE_LIST,
+  CREATE_TASK,
+  CHANGE_COLUMN_ORDER
 } from "./types";
 import firebase from "firebase";
 
@@ -22,7 +25,8 @@ export function createBoard(boardName) {
       createdBy: uid,
       teamID: selectedTeamID,
       boardName: boardName,
-      type: "public"
+      type: "public",
+      listOrder: []
     };
 
     let boardRef = firebase.firestore().collection("workflow");
@@ -32,6 +36,7 @@ export function createBoard(boardName) {
       dispatch(createList(docRef.id, "Backlog"));
       dispatch(createList(docRef.id, "In Progress"));
       dispatch(createList(docRef.id, "Done"));
+      dispatch(createList(docRef.id, "Archived"));
     });
   };
 }
@@ -44,17 +49,44 @@ export function createList(boardID, listName) {
       .firestore()
       .collection("workflow")
       .doc(boardID)
-      .collection("list");
+      .collection("lists");
 
     let list = {
       dateCreated: Date.now(),
       createdBy: uid,
       boardID: boardID,
       name: listName,
-      index: 1
+      taskOrder: []
     };
 
     listRef.add(list).then(function(docRef) {
+      console.log("List created with ref ", docRef.id);
+    });
+  };
+}
+
+export function createTask(boardID, listID, taskName) {
+  return (dispatch, getState) => {
+    dispatch({ type: CREATE_TASK });
+    let { uid } = getState().auth.user;
+    let taskRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(boardID)
+      .collection("tasks");
+
+    let task = {
+      dateCreated: Date.now(),
+      dateUpdated: Date.now(),
+      lastMemberWhoUpdated: uid,
+      description: "",
+      dueDate: null,
+      createdBy: uid,
+      boardID: boardID,
+      name: taskName
+    };
+
+    taskRef.add(task).then(function(docRef) {
       console.log("List created with ref ", docRef.id);
     });
   };
@@ -84,14 +116,28 @@ export function fetchBoardData(boardID) {
       .firestore()
       .collection("workflow")
       .doc(boardID)
-      .collection("list");
+      .collection("lists");
+
+    let tasksRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(boardID)
+      .collection("tasks");
 
     listsRef.onSnapshot(function(querySnapshot) {
-      var boardData = {};
+      var listData = {};
       querySnapshot.forEach(function(doc) {
-        boardData[doc.id] = doc.data();
+        listData[doc.id] = doc.data();
       });
-      dispatch({ type: FETCH_BOARD_DATA, boardData: boardData });
+      dispatch({ type: FETCH_LISTS, listData: listData });
+    });
+
+    tasksRef.onSnapshot(function(querySnapshot) {
+      var taskData = {};
+      querySnapshot.forEach(function(doc) {
+        taskData[doc.id] = doc.data();
+      });
+      dispatch({ type: FETCH_TASKS, taskData: taskData });
     });
 
     // documents.forEach(async doc => {
@@ -124,5 +170,25 @@ export function selectBoard(boardID) {
     //     });
     //     dispatch({ type: FETCH_MESSAGES_SUCCESS, messages: messages });
     // });
+  };
+}
+
+export function changeColumnOrder(startIndex, endIndex) {
+  return (dispatch, getState) => {
+    const { selectedBoard, boards } = getState().workflow;
+    const boardData = boards[selectedBoard];
+
+    let listOrder = [...boardData.listOrder];
+    const [removed] = listOrder.splice(startIndex, 1);
+    listOrder.splice(endIndex, 0, removed);
+
+    let boardRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(selectedBoard);
+
+    boardRef.update({ listOrder: listOrder }).then(function() {
+      dispatch({ type: CHANGE_COLUMN_ORDER });
+    });
   };
 }

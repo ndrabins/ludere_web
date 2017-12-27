@@ -2,15 +2,18 @@ import {
   SELECT_BOARD,
   FETCH_BOARDS,
   FETCH_BOARDS_SUCCESS,
-  FETCH_BOARD_DATA,
+  FETCH_LISTS,
+  FETCH_TASKS,
   CREATE_BOARD,
-  CREATE_LIST
+  CREATE_LIST,
+  CHANGE_COLUMN_ORDER
 } from "../actions/types";
 
 const initialState = {
   selectedBoard: null,
   boards: {},
-  boardData: {}
+  listData: null,
+  taskData: {}
 };
 
 export default function workflow(state = initialState, action) {
@@ -23,8 +26,12 @@ export default function workflow(state = initialState, action) {
       return { ...state, boards: action.boards };
     case CREATE_BOARD:
       return state;
-    case FETCH_BOARD_DATA:
-      return { ...state, boardData: action.boardData };
+    case FETCH_LISTS:
+      return { ...state, listData: action.listData };
+    case FETCH_TASKS:
+      return { ...state, taskData: action.taskData };
+    case CHANGE_COLUMN_ORDER:
+      return state;
     default:
       return state;
   }

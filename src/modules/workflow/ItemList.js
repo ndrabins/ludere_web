@@ -35,10 +35,10 @@ class ItemList extends Component {
   render() {
     const { columnID, items } = this.props;
 
-    const stringColumnID = columnID.toString();
+    // const stringColumnID = columnID.toString();
 
     return (
-      <Droppable droppableId={stringColumnID} type={"ITEM"}>
+      <Droppable droppableId={"id"} type={"ITEM"}>
         {(dropProvided, dropSnapshot) => (
           <div style={styles.wrapper}>{this.renderItems(dropProvided)}</div>
         )}

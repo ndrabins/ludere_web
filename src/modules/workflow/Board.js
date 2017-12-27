@@ -1,22 +1,14 @@
 import React, { Component } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../../actions";
+import Map from "lodash/map";
 
 import Button from "material-ui/Button";
 
 import Column from "./Column";
 import { initialize } from "redux-form";
-
-const reorder = (list, startIndex, endIndex) => {
-  const result = [...list];
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
-
-const reorderItemsMap = ({ itemsMap, source, destination }) => {
-  console.log("moving item");
-};
 
 class Board extends Component {
   constructor(props) {
@@ -73,31 +65,23 @@ class Board extends Component {
     const source = result.source;
     const destination = result.destination;
 
-    console.log("source:", source);
-    console.log("destination", destination);
-    // reordering column
     if (result.type === "COLUMN") {
-      const orderOfColumns = reorder(
-        this.state.orderOfColumns,
-        source.index,
-        destination.index
-      );
-
-      this.setState({
-        orderOfColumns
-      });
+      this.props.actions.changeColumnOrder(source.index, destination.index);
       return;
     }
 
     //item is moving
-    const data = reorderItemsMap({
-      itemsMap: this.state.orderOfColumns,
-      source,
-      destination
-    });
   };
 
   render() {
+    const { selectedBoard, boards, listData } = this.props;
+    const board = boards[selectedBoard];
+    const { listOrder } = board;
+
+    if (listData === null) {
+      return <div> </div>;
+    }
+
     return (
       <DragDropContext
         onDragEnd={this.onDragEnd}
@@ -107,8 +91,8 @@ class Board extends Component {
         <Droppable droppableId="board" type="COLUMN" direction="horizontal">
           {(provided, snapshot) => (
             <div style={styles.container} ref={provided.innerRef}>
-              {this.state.orderOfColumns.map(key => (
-                <Column key={key} data={this.state.columns[key]} />
+              {listOrder.map(ID => (
+                <Column key={ID} list={listData[ID]} ID={ID} />
               ))}
             </div>
           )}
@@ -129,4 +113,18 @@ const styles = {
   }
 };
 
-export default Board;
+function mapStateToProps(state) {
+  return {
+    listData: state.workflow.listData,
+    boards: state.workflow.boards,
+    selectedBoard: state.workflow.selectedBoard
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Board);
