@@ -11,47 +11,6 @@ import Column from "./Column";
 import { initialize } from "redux-form";
 
 class Board extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      columns: {
-        1: {
-          id: 1,
-          title: "Accounts",
-          items: [
-            {
-              id: 11,
-              content:
-                "AccountsAccounts Accounts Accounts BillboardBillboard BillboardBillboard"
-            },
-            {
-              id: 15,
-              content:
-                "AccountsAccounts Accounts Accounts BillboardBillboard BillboardBillboard"
-            },
-            {
-              id: 155,
-              content:
-                "AccountsAccounts Accounts Accounts BillboardBillboard BillboardBillboard"
-            },
-            { id: 4, content: "Billboard Billboard BillboardBillboard" }
-          ]
-        },
-        2: {
-          id: 2,
-          title: "Cards",
-          items: [{ id: 5, content: "c" }, { id: 6, content: "d" }]
-        },
-        3: {
-          id: 3,
-          title: "Stuff",
-          items: [{ id: 9, content: "e" }, { id: 10, content: "f" }]
-        }
-      },
-      orderOfColumns: [1, 2, 3]
-    };
-  }
-
   onDragStart = initial => {
     console.log("starting drag");
   };
@@ -79,7 +38,7 @@ class Board extends Component {
     const { listOrder } = board;
 
     if (listData === null) {
-      return <div> </div>;
+      return <div>Loading </div>;
     }
 
     return (

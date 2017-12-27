@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-class Item extends Component {
+class Task extends Component {
   render() {
-    const { item, isDragging, provided } = this.props;
+    const { task, isDragging, provided } = this.props;
 
     return (
       <div
@@ -10,7 +10,7 @@ class Item extends Component {
         style={{ ...styles.container, ...provided.draggableStyle }}
         {...provided.dragHandleProps}
       >
-        <div> {item.content} </div>
+        <div> {task.content} </div>
       </div>
     );
   }
@@ -32,4 +32,4 @@ const styles = {
   content: {}
 };
 
-export default Item;
+export default Task;

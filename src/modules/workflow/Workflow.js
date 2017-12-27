@@ -33,7 +33,9 @@ function mapDispatchToProps(dispatch) {
 
 const styles = {
   wrapper: {
-    height: "100%"
+    height: "100%",
+    overflowX: "auto",
+    overflowY: "hidden"
   }
 };
 

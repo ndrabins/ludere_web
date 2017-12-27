@@ -31,8 +31,6 @@ export function createBoard(boardName) {
 
     let boardRef = firebase.firestore().collection("workflow");
     boardRef.add(board).then(function(docRef) {
-      console.log("Board created with ref ", docRef.id);
-
       dispatch(createList(docRef.id, "Backlog"));
       dispatch(createList(docRef.id, "In Progress"));
       dispatch(createList(docRef.id, "Done"));
@@ -45,11 +43,19 @@ export function createList(boardID, listName) {
   return (dispatch, getState) => {
     dispatch({ type: CREATE_LIST });
     let { uid } = getState().auth.user;
+    // const { selectedBoard } = getState().workflow;
+    let listOrder = getState().workflow.boards[boardID].listOrder;
+
     let listRef = firebase
       .firestore()
       .collection("workflow")
       .doc(boardID)
       .collection("lists");
+
+    let boardRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(boardID);
 
     let list = {
       dateCreated: Date.now(),
@@ -60,34 +66,46 @@ export function createList(boardID, listName) {
     };
 
     listRef.add(list).then(function(docRef) {
-      console.log("List created with ref ", docRef.id);
+      listOrder.push(docRef.id);
+      boardRef.update({ listOrder: listOrder });
     });
   };
 }
 
-export function createTask(boardID, listID, taskName) {
+export function createTask(listID, taskName) {
   return (dispatch, getState) => {
     dispatch({ type: CREATE_TASK });
     let { uid } = getState().auth.user;
+    const { selectedBoard } = getState().workflow;
+    let taskOrder = getState().workflow.listData[listID].taskOrder;
+
     let taskRef = firebase
       .firestore()
       .collection("workflow")
-      .doc(boardID)
+      .doc(selectedBoard)
       .collection("tasks");
+
+    let listRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(selectedBoard)
+      .collection("lists")
+      .doc(listID);
 
     let task = {
       dateCreated: Date.now(),
       dateUpdated: Date.now(),
-      lastMemberWhoUpdated: uid,
+      lastUpdatedBy: uid,
       description: "",
       dueDate: null,
       createdBy: uid,
-      boardID: boardID,
+      boardID: selectedBoard,
       name: taskName
     };
 
     taskRef.add(task).then(function(docRef) {
-      console.log("List created with ref ", docRef.id);
+      taskOrder.push(docRef.id);
+      listRef.update({ taskOrder: taskOrder });
     });
   };
 }

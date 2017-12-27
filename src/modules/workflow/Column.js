@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
+import Button from "material-ui/Button";
 
-import ItemList from "./ItemList";
+import TaskList from "./TaskList";
 
 class Column extends Component {
   render() {
@@ -17,8 +18,8 @@ class Column extends Component {
               <div {...provided.dragHandleProps} style={styles.title}>
                 {list.name}
               </div>
-              <div style={styles.itemsContainer}>
-                {/* <ItemList columnID={id} items={items} /> */}
+              <div style={styles.tasksContainer}>
+                <TaskList columnID={ID} tasks={list.tasksOrder} />
               </div>
             </div>
             {provided.placeholder}
@@ -39,7 +40,7 @@ const styles = {
     margin: 10,
     borderRadius: 7
   },
-  itemsContainer: {
+  tasksContainer: {
     padding: 8
   },
   wrapper: {
