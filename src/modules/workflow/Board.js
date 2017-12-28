@@ -5,12 +5,36 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import Map from "lodash/map";
 
-import Button from "material-ui/Button";
+import TextField from "material-ui/TextField";
 
 import Column from "./Column";
 import { initialize } from "redux-form";
 
 class Board extends Component {
+  state = {
+    listName: ""
+  };
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
+
+  createList = () => {
+    if (this.state.listName === "") {
+      return;
+    }
+    this.props.actions.createList(
+      this.props.selectedBoard,
+      this.state.listName
+    );
+
+    this.setState({
+      listName: ""
+    });
+  };
+
   onDragStart = initial => {
     console.log("starting drag");
   };
@@ -74,6 +98,21 @@ class Board extends Component {
               {listOrder.map(ID => (
                 <Column key={ID} list={listData[ID]} ID={ID} />
               ))}
+              <div style={styles.listEntryDiv}>
+                <TextField
+                  id="listName"
+                  placeholder="Add a list"
+                  value={this.state.listName}
+                  onChange={this.handleChange("listName")}
+                  margin="normal"
+                  onKeyPress={ev => {
+                    if (ev.key === "Enter" && !ev.shiftKey) {
+                      this.createList();
+                      ev.preventDefault();
+                    }
+                  }}
+                />
+              </div>
             </div>
           )}
         </Droppable>
@@ -88,8 +127,18 @@ const styles = {
     height: "100%"
   },
   wrapper: {
-    height: "100%",
-    overflowX: "auto"
+    height: "100%"
+  },
+  listEntryDiv: {
+    height: 60,
+    minWidth: 200,
+    backgroundColor: "#E5E5E6",
+    margin: 6,
+    borderRadius: 7,
+    display: "flex",
+    alignItems: "center",
+    paddingLeft: 10,
+    paddingRIght: 10
   }
 };
 

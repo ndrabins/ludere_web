@@ -35,7 +35,9 @@ const styles = {
   wrapper: {
     height: "100%",
     overflowX: "auto",
-    overflowY: "hidden"
+    overflowY: "hidden",
+    paddingRight: 56,
+    paddingBottom: 10
   }
 };
 
