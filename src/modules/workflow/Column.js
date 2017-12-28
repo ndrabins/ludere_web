@@ -80,14 +80,21 @@ const styles = {
     width: 200,
     backgroundColor: "#E5E5E6",
     margin: 6,
-    borderRadius: 7
+    borderRadius: 7,
+    maxHeight: "100%"
+  },
+  tasksContainer: {
+    display: "flex",
+    height: "100%",
+    width: "100%"
   },
   wrapper: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    maxHeight: "95%"
   },
   title: {
-    height: 20,
+    minHeight: 20,
     padding: 8,
     color: "#FFFFFF",
     display: "flex",

@@ -124,7 +124,9 @@ class Board extends Component {
 const styles = {
   container: {
     display: "flex",
-    height: "100%"
+    height: "100%",
+    paddingRight: 58,
+    paddingBottom: 50
   },
   wrapper: {
     height: "100%"

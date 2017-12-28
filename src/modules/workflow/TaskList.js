@@ -60,8 +60,7 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     overflowY: "auto",
-    maxHeight: "70vh",
-    position: "relative"
+    width: "100%"
   },
   container: {
     padding: 10,

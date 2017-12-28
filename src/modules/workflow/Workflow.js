@@ -36,8 +36,8 @@ const styles = {
     height: "100%",
     overflowX: "auto",
     overflowY: "hidden",
-    paddingRight: 56,
-    paddingBottom: 10
+    position: "relative",
+    display: "flex"
   }
 };
 
