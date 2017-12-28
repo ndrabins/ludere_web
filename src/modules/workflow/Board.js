@@ -125,8 +125,7 @@ const styles = {
   container: {
     display: "flex",
     height: "100%",
-    paddingRight: 58,
-    paddingBottom: 50
+    paddingRight: 58
   },
   wrapper: {
     height: "100%"

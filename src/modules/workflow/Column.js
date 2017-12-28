@@ -34,6 +34,10 @@ class Column extends Component {
 
   render() {
     const { list, ID } = this.props;
+    if (list === undefined || list.name === undefined) {
+      return <div />;
+    }
+
     return (
       <Draggable draggableId={ID} type="COLUMN">
         {(provided, snapshot) => (

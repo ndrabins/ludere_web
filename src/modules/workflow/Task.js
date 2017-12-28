@@ -3,6 +3,11 @@ import React, { Component } from "react";
 class Task extends Component {
   render() {
     const { task, isDragging, provided } = this.props;
+
+    if (task === undefined) {
+      return <div />;
+    }
+
     return (
       <div
         ref={provided.innerRef}
