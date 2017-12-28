@@ -23,13 +23,34 @@ class Board extends Component {
 
     const source = result.source;
     const destination = result.destination;
+    console.log("source:", source);
+    console.log("destination:", destination);
 
     if (result.type === "COLUMN") {
       this.props.actions.changeColumnOrder(source.index, destination.index);
       return;
     }
 
+    //moving within same column
+    if (source.droppableId === destination.droppableId) {
+      this.props.actions.changeTaskOrder(
+        source.index,
+        destination.index,
+        source.droppableId
+      );
+      return;
+    }
+
     //item is moving
+    if (source.droppableId !== destination.droppableId) {
+      this.props.actions.moveTaskToColumn(
+        source.index,
+        destination.index,
+        source.droppableId,
+        destination.droppableId
+      );
+      return;
+    }
   };
 
   render() {

@@ -7,47 +7,25 @@ import * as Actions from "../../actions";
 import Task from "./Task";
 
 import Button from "material-ui/Button";
-import TextField from "material-ui/TextField";
 
 class TaskList extends Component {
-  state = {
-    taskName: ""
-  };
-
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
-  };
-
-  createTask = () => {
-    if (this.state.taskName === "") {
-      return;
-    }
-    this.props.actions.createTask(this.props.columnID, this.state.taskName);
-
-    this.setState({
-      taskName: ""
-    });
-  };
-
   renderTasks = dropProvided => {
-    const { tasks } = this.props;
+    const { taskOrder, taskData } = this.props;
 
-    if (tasks === undefined) {
+    if (taskData === null) {
       return;
     }
 
     return (
       <div style={styles.container}>
         <div style={styles.dropZone} ref={dropProvided.innerRef}>
-          {tasks.map(task => (
-            <Draggable key={task.id} draggableId={task.id} type={"Task"}>
+          {taskOrder.map(taskID => (
+            <Draggable key={taskID} draggableId={taskID} type={"TASK"}>
               {(dragProvided, dragSnapshot) => (
                 <div>
                   <Task
-                    key={task.id}
-                    task={task}
+                    key={taskID}
+                    task={taskData[taskID]}
                     isDragging={dragSnapshot.isDragging}
                     provided={dragProvided}
                   />
@@ -70,22 +48,7 @@ class TaskList extends Component {
     return (
       <Droppable droppableId={columnID} type={"TASK"}>
         {(dropProvided, dropSnapshot) => (
-          <div style={styles.wrapper}>
-            {this.renderTasks(dropProvided)}
-            <TextField
-              id="taskName"
-              placeholder="Create a card"
-              value={this.state.taskName}
-              onChange={this.handleChange("taskName")}
-              margin="normal"
-              onKeyPress={ev => {
-                if (ev.key === "Enter" && !ev.shiftKey) {
-                  this.createTask();
-                  ev.preventDefault();
-                }
-              }}
-            />
-          </div>
+          <div style={styles.wrapper}>{this.renderTasks(dropProvided)}</div>
         )}
       </Droppable>
     );
@@ -95,9 +58,13 @@ class TaskList extends Component {
 const styles = {
   wrapper: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    overflowY: "auto",
+    maxHeight: "70vh",
+    position: "relative"
   },
   container: {
+    padding: 10,
     display: "flex",
     flexDirection: "column",
     width: "100%"
@@ -111,10 +78,10 @@ const styles = {
   }
 };
 
-function mapDispatchToProps(dispatch) {
+function mapStateToProps(state) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    taskData: state.workflow.taskData
   };
 }
 
-export default connect(null, mapDispatchToProps)(TaskList);
+export default connect(mapStateToProps, null)(TaskList);

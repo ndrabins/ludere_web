@@ -7,7 +7,9 @@ import {
   CREATE_BOARD,
   CREATE_LIST,
   CREATE_TASK,
-  CHANGE_COLUMN_ORDER
+  CHANGE_COLUMN_ORDER,
+  CHANGE_TASK_ORDER,
+  MOVE_TASK_TO_COLUMN
 } from "./types";
 import firebase from "firebase";
 
@@ -72,7 +74,7 @@ export function createList(boardID, listName) {
   };
 }
 
-export function createTask(listID, taskName) {
+export function createTask(listID, taskTitle) {
   return (dispatch, getState) => {
     dispatch({ type: CREATE_TASK });
     let { uid } = getState().auth.user;
@@ -100,7 +102,7 @@ export function createTask(listID, taskName) {
       dueDate: null,
       createdBy: uid,
       boardID: selectedBoard,
-      name: taskName
+      title: taskTitle
     };
 
     taskRef.add(task).then(function(docRef) {
@@ -208,5 +210,70 @@ export function changeColumnOrder(startIndex, endIndex) {
     boardRef.update({ listOrder: listOrder }).then(function() {
       dispatch({ type: CHANGE_COLUMN_ORDER });
     });
+  };
+}
+
+export function changeTaskOrder(startIndex, endIndex, listID) {
+  return (dispatch, getState) => {
+    const { selectedBoard, listData } = getState().workflow;
+
+    let taskOrder = listData[listID].taskOrder;
+
+    const [removed] = taskOrder.splice(startIndex, 1);
+    taskOrder.splice(endIndex, 0, removed);
+
+    let listRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(selectedBoard)
+      .collection("lists")
+      .doc(listID);
+
+    listRef.update({ taskOrder: taskOrder }).then(function() {
+      dispatch({ type: CHANGE_TASK_ORDER });
+    });
+  };
+}
+
+export function moveTaskToColumn(startIndex, endIndex, startListID, endListID) {
+  return (dispatch, getState) => {
+    const { selectedBoard, listData } = getState().workflow;
+
+    let startListTaskOrder = listData[startListID].taskOrder;
+    let endListTaskOrder = listData[endListID].taskOrder;
+
+    //remove item from task order in first list
+    const [removed] = startListTaskOrder.splice(startIndex, 1);
+    //add it to destination list
+    endListTaskOrder.splice(endIndex, 0, removed);
+
+    const startListRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(selectedBoard)
+      .collection("lists")
+      .doc(startListID);
+
+    const endListRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(selectedBoard)
+      .collection("lists")
+      .doc(endListID);
+
+    var batch = firebase.firestore().batch();
+
+    // This code may get re-run multiple times if there are conflicts.
+    batch.update(startListRef, { taskOrder: startListTaskOrder });
+    batch.update(endListRef, { taskOrder: endListTaskOrder });
+
+    batch
+      .commit()
+      .then(function() {
+        dispatch({ type: MOVE_TASK_TO_COLUMN });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 }

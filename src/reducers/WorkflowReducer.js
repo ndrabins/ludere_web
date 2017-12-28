@@ -6,14 +6,16 @@ import {
   FETCH_TASKS,
   CREATE_BOARD,
   CREATE_LIST,
-  CHANGE_COLUMN_ORDER
+  CHANGE_COLUMN_ORDER,
+  CHANGE_TASK_ORDER,
+  MOVE_TASK_TO_COLUMN
 } from "../actions/types";
 
 const initialState = {
   selectedBoard: null,
   boards: {},
   listData: null,
-  taskData: {}
+  taskData: null
 };
 
 export default function workflow(state = initialState, action) {
@@ -31,6 +33,10 @@ export default function workflow(state = initialState, action) {
     case FETCH_TASKS:
       return { ...state, taskData: action.taskData };
     case CHANGE_COLUMN_ORDER:
+      return state;
+    case CHANGE_TASK_ORDER:
+      return state;
+    case MOVE_TASK_TO_COLUMN:
       return state;
     default:
       return state;

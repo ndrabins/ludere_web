@@ -3,14 +3,13 @@ import React, { Component } from "react";
 class Task extends Component {
   render() {
     const { task, isDragging, provided } = this.props;
-
     return (
       <div
         ref={provided.innerRef}
         style={{ ...styles.container, ...provided.draggableStyle }}
         {...provided.dragHandleProps}
       >
-        <div> {task.content} </div>
+        <div> {task.title} </div>
       </div>
     );
   }
