@@ -9,6 +9,7 @@ import Button from "material-ui/Button";
 import TextField from "material-ui/TextField";
 
 import TaskList from "./TaskList";
+import EditableText from "../../common/EditableText";
 
 class Column extends Component {
   state = {
@@ -19,6 +20,14 @@ class Column extends Component {
     this.setState({
       [name]: event.target.value
     });
+  };
+
+  handleTitleChange = name => {
+    console.log("name is", name);
+    let newList = this.props.list;
+    newList.name = name;
+
+    this.props.actions.updateList(newList, this.props.ID);
   };
 
   createTask = () => {
@@ -47,12 +56,15 @@ class Column extends Component {
               style={{ ...styles.container, ...provided.draggableStyle }}
             >
               <div {...provided.dragHandleProps} style={styles.title}>
-                {list.name}
+                <EditableText
+                  value={list.name}
+                  handleEnterPress={this.handleTitleChange}
+                />
               </div>
               <div style={styles.tasksContainer}>
                 <TaskList columnID={ID} taskOrder={list.taskOrder} />
               </div>
-              <div>
+              <div style={styles.taskEntry}>
                 <TextField
                   id="taskName"
                   placeholder="Create a card"
@@ -89,8 +101,7 @@ const styles = {
   },
   tasksContainer: {
     display: "flex",
-    height: "100%",
-    width: "100%"
+    height: "100%"
   },
   wrapper: {
     display: "flex",
@@ -98,14 +109,19 @@ const styles = {
     maxHeight: "95%"
   },
   title: {
-    minHeight: 20,
-    padding: 8,
+    minHeight: 40,
+    paddingBottom: 10,
     color: "#FFFFFF",
     display: "flex",
     backgroundColor: "#00BCD4",
     alignItems: "center",
+    justifyContent: "center",
     borderTopLeftRadius: 7,
-    borderTopRightRadius: 7
+    borderTopRightRadius: 7,
+    color: "white"
+  },
+  taskEntry: {
+    paddingLeft: 10
   }
 };
 

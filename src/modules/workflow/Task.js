@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Typography from "material-ui/Typography";
 
 class Task extends Component {
   render() {
@@ -14,7 +15,16 @@ class Task extends Component {
         style={{ ...styles.container, ...provided.draggableStyle }}
         {...provided.dragHandleProps}
       >
-        <div> {task.title} </div>
+        <Typography
+          style={{
+            display: "flex",
+            wordWrap: "break-all",
+            overflowWrap: "break-word",
+            wordBreak: "break-all"
+          }}
+        >
+          {task.title}
+        </Typography>
       </div>
     );
   }
@@ -22,18 +32,19 @@ class Task extends Component {
 
 const styles = {
   container: {
-    minHeight: 40,
+    minHeight: 30,
     cursor: "grab",
-    border: "1px solid grey",
+    boxShadow: "0 9px 18px 0 rgba(0, 0, 0, 0.04)",
     borderRadius: 8,
     display: "flex",
     alignItems: "center",
     backgroundColor: "white",
-    padding: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
     marginTop: 4,
-    marginBottom: 4
-  },
-  content: {}
+    marginBottom: 4,
+    display: "flex"
+  }
 };
 
 export default Task;

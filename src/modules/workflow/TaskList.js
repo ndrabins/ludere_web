@@ -69,8 +69,7 @@ const styles = {
     width: "100%"
   },
   dropZone: {
-    minHeight: 250,
-    marginBottom: 8
+    minHeight: 250
   },
   addButton: {
     backgroundColor: "white"

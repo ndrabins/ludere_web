@@ -8,7 +8,8 @@ import {
   CREATE_LIST,
   CHANGE_COLUMN_ORDER,
   CHANGE_TASK_ORDER,
-  MOVE_TASK_TO_COLUMN
+  MOVE_TASK_TO_COLUMN,
+  UPDATE_LIST
 } from "../actions/types";
 
 const initialState = {
@@ -37,6 +38,8 @@ export default function workflow(state = initialState, action) {
     case CHANGE_TASK_ORDER:
       return state;
     case MOVE_TASK_TO_COLUMN:
+      return state;
+    case UPDATE_LIST:
       return state;
     default:
       return state;

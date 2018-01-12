@@ -9,7 +9,8 @@ import {
   CREATE_TASK,
   CHANGE_COLUMN_ORDER,
   CHANGE_TASK_ORDER,
-  MOVE_TASK_TO_COLUMN
+  MOVE_TASK_TO_COLUMN,
+  UPDATE_LIST
 } from "./types";
 import firebase from "firebase";
 
@@ -112,6 +113,23 @@ export function createTask(listID, taskTitle) {
   };
 }
 
+export function updateList(list, listID) {
+  return (dispatch, getState) => {
+    console.log(list);
+
+    let listRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(list.boardID)
+      .collection("lists")
+      .doc(listID);
+
+    listRef.update(list).then(function() {
+      dispatch({ type: UPDATE_LIST });
+    });
+  };
+}
+
 export function fetchBoards(selectedTeamID) {
   return (dispatch, getState) => {
     dispatch({ type: FETCH_BOARDS });
@@ -159,15 +177,6 @@ export function fetchBoardData(boardID) {
       });
       dispatch({ type: FETCH_TASKS, taskData: taskData });
     });
-
-    // documents.forEach(async doc => {
-    //   console.log("Parent Document ID: ", doc.id);
-    //   let subCollectionDocs = await collectionRef.doc(doc.id).collection("subCollection").get()
-    //   subCollectionDocs.forEach(subCollectionDoc => {
-    //     subCollectionDoc.forEach(doc => {
-    //       console.log("Sub Document ID: ", doc.id);
-    //     })
-    // });
   };
 }
 
@@ -179,17 +188,6 @@ export function selectBoard(boardID) {
     }
     dispatch({ type: SELECT_BOARD, selectedBoard: boardID });
     dispatch(fetchBoardData(boardID));
-
-    // dispatch({ type: FETCH_MESSAGES});
-    // let messageRef = firebase.firestore().collection(`chat/${channelID}/messages`);
-    // messageRef.orderBy("dateCreated")
-    //   .onSnapshot(function(querySnapshot) {
-    //     var messages = {};
-    //     querySnapshot.forEach(function(doc) {
-    //       messages[doc.id] = doc.data();
-    //     });
-    //     dispatch({ type: FETCH_MESSAGES_SUCCESS, messages: messages });
-    // });
   };
 }
 
