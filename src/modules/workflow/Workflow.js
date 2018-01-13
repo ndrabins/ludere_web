@@ -19,12 +19,6 @@ class Workflow extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    boards: state.workflow.boards
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(Actions, dispatch)
@@ -41,4 +35,4 @@ const styles = {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Workflow);
+export default connect(null, mapDispatchToProps)(Workflow);

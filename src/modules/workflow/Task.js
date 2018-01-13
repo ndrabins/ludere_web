@@ -39,10 +39,8 @@ const styles = {
     display: "flex",
     alignItems: "center",
     backgroundColor: "white",
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 4,
-    marginBottom: 4,
+    padding: 10, 
+    margin: `0 0 8px 0`,
     display: "flex"
   }
 };

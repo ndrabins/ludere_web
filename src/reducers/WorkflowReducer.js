@@ -9,7 +9,7 @@ import {
   CHANGE_COLUMN_ORDER,
   CHANGE_TASK_ORDER,
   MOVE_TASK_TO_COLUMN,
-  UPDATE_LIST
+  UPDATE_LIST,
 } from "../actions/types";
 
 const initialState = {

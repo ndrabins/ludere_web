@@ -101,7 +101,7 @@ class Board extends Component {
               <div style={styles.listEntryDiv}>
                 <TextField
                   id="listName"
-                  placeholder="Add a list"
+                  placeholder="Add a list..."
                   value={this.state.listName}
                   onChange={this.handleChange("listName")}
                   margin="normal"
@@ -110,6 +110,9 @@ class Board extends Component {
                       this.createList();
                       ev.preventDefault();
                     }
+                  }}
+                  InputProps={{
+                    disableUnderline: true,
                   }}
                 />
               </div>

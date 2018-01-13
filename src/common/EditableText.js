@@ -62,6 +62,7 @@ const styles = theme => ({
     padding: "6px 8px",
     width: "calc(100% - 24px)",
     overflowY: "hidden",
+    overflowX: "hidden",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     "&:focus": {
       color: "black",

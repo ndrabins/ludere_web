@@ -10,7 +10,7 @@ import {
   CHANGE_COLUMN_ORDER,
   CHANGE_TASK_ORDER,
   MOVE_TASK_TO_COLUMN,
-  UPDATE_LIST
+  UPDATE_LIST,
 } from "./types";
 import firebase from "firebase";
 
@@ -213,7 +213,7 @@ export function changeColumnOrder(startIndex, endIndex) {
 
 export function changeTaskOrder(startIndex, endIndex, listID) {
   return (dispatch, getState) => {
-    const { selectedBoard, listData } = getState().workflow;
+    const { selectedBoard, listData, boards } = getState().workflow;
 
     let taskOrder = listData[listID].taskOrder;
 
@@ -225,7 +225,7 @@ export function changeTaskOrder(startIndex, endIndex, listID) {
       .collection("workflow")
       .doc(selectedBoard)
       .collection("lists")
-      .doc(listID);
+      .doc(listID); 
 
     listRef.update({ taskOrder: taskOrder }).then(function() {
       dispatch({ type: CHANGE_TASK_ORDER });
