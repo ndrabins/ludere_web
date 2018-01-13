@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import Map from "lodash/map";
 import Board from "./Board";
+import TaskDetail from "./TaskDetail";
 
 class Workflow extends Component {
   componentWillUnmount() {
@@ -14,6 +15,7 @@ class Workflow extends Component {
     return (
       <div style={styles.wrapper}>
         <Board />
+        <TaskDetail />
       </div>
     );
   }
@@ -30,7 +32,6 @@ const styles = {
     height: "100%",
     overflowX: "auto",
     overflowY: "hidden",
-    position: "relative",
     display: "flex"
   }
 };

@@ -26,6 +26,7 @@ class TaskList extends Component {
                   <Task
                     key={taskID}
                     task={taskData[taskID]}
+                    taskID={taskID}
                     isDragging={dragSnapshot.isDragging}
                     provided={dragProvided}
                   />

@@ -10,13 +10,17 @@ import {
   CHANGE_TASK_ORDER,
   MOVE_TASK_TO_COLUMN,
   UPDATE_LIST,
+  TOGGLE_TASK_DETAIL,
+  SELECT_TASK
 } from "../actions/types";
 
 const initialState = {
   selectedBoard: null,
   boards: {},
   listData: null,
-  taskData: null
+  taskData: null,
+  showTaskDetail: false,
+  selectedTask: null, 
 };
 
 export default function workflow(state = initialState, action) {
@@ -41,6 +45,10 @@ export default function workflow(state = initialState, action) {
       return state;
     case UPDATE_LIST:
       return state;
+    case TOGGLE_TASK_DETAIL:
+      return {...state, showTaskDetail: !state.showTaskDetail};
+    case SELECT_TASK:
+      return {...state, selectedTask: action.selectedTask};
     default:
       return state;
   }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { initialize } from "redux-form";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
@@ -8,7 +9,8 @@ import Map from "lodash/map";
 import TextField from "material-ui/TextField";
 
 import Column from "./Column";
-import { initialize } from "redux-form";
+
+
 
 class Board extends Component {
   state = {

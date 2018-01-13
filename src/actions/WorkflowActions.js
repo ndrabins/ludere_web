@@ -11,6 +11,8 @@ import {
   CHANGE_TASK_ORDER,
   MOVE_TASK_TO_COLUMN,
   UPDATE_LIST,
+  TOGGLE_TASK_DETAIL,
+  SELECT_TASK,
 } from "./types";
 import firebase from "firebase";
 
@@ -274,4 +276,24 @@ export function moveTaskToColumn(startIndex, endIndex, startListID, endListID) {
         console.log(error);
       });
   };
+}
+
+export function toggleTaskDetail(taskID=null) {
+  // console.log("toggling: ", taskID);
+  return (dispatch, getState) => {
+    const { selectedTask, showTaskDetail } = getState().workflow;
+
+    if(taskID !== null && taskID !== selectedTask){
+      dispatch({ type: SELECT_TASK, selectedTask: taskID});
+    }
+
+    if(taskID !== null && !showTaskDetail){
+      dispatch({ type: SELECT_TASK, selectedTask: taskID});
+      dispatch({ type: TOGGLE_TASK_DETAIL});
+    }
+
+    if(taskID === null || taskID === selectedTask && showTaskDetail){
+      dispatch({ type: TOGGLE_TASK_DETAIL});
+    }
+  }
 }

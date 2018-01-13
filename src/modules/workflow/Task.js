@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../../actions";
 import Typography from "material-ui/Typography";
 
 class Task extends Component {
   render() {
-    const { task, isDragging, provided } = this.props;
+    const { task, isDragging, provided, taskID } = this.props;
 
     if (task === undefined) {
       return <div />;
@@ -14,6 +17,7 @@ class Task extends Component {
         ref={provided.innerRef}
         style={{ ...styles.container, ...provided.draggableStyle }}
         {...provided.dragHandleProps}
+        onClick={() => this.props.actions.toggleTaskDetail(taskID)}
       >
         <Typography
           style={{
@@ -41,8 +45,15 @@ const styles = {
     backgroundColor: "white",
     padding: 10, 
     margin: `0 0 8px 0`,
-    display: "flex"
+    display: "flex",
+    cursor: 'pointer',
   }
 };
 
-export default Task;
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(null, mapDispatchToProps)(Task);
