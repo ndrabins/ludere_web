@@ -38,7 +38,7 @@ class Board extends Component {
   };
 
   onDragStart = initial => {
-    console.log("starting drag");
+    // console.log("starting drag");
   };
 
   onDragEnd = result => {
@@ -49,8 +49,8 @@ class Board extends Component {
 
     const source = result.source;
     const destination = result.destination;
-    console.log("source:", source);
-    console.log("destination:", destination);
+    // console.log("source:", source);
+    // console.log("destination:", destination);
 
     if (result.type === "COLUMN") {
       this.props.actions.changeColumnOrder(source.index, destination.index);
