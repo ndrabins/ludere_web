@@ -19,8 +19,8 @@ class TaskList extends Component {
     return (
       <div style={styles.container}>
         <div style={styles.dropZone} ref={dropProvided.innerRef}>
-          {taskOrder.map(taskID => (
-            <Draggable key={taskID} draggableId={taskID} type={"TASK"}>
+          {taskOrder.map((taskID, index) => (
+            <Draggable key={taskID} draggableId={taskID} index={index} type={"TASK"}>
               {(dragProvided, dragSnapshot) => (
                 <div>
                   <Task

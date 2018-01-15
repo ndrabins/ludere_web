@@ -48,14 +48,16 @@ class Column extends Component {
     }
 
     return (
-      <Draggable draggableId={ID} type="COLUMN">
+      <Draggable draggableId={ID} type="COLUMN" index={this.props.index}>
         {(provided, snapshot) => (
           <div style={styles.wrapper}>
             <div
               ref={provided.innerRef}
-              style={{ ...styles.container, ...provided.draggableStyle }}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              style={{ ...styles.container, ...provided.draggableProps.style }}
             >
-              <div {...provided.dragHandleProps} style={styles.title}>
+              <div style={styles.title}>
                 <EditableText
                   value={list.name}
                   handleEnterPress={this.handleTitleChange}

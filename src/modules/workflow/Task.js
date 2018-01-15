@@ -15,8 +15,9 @@ class Task extends Component {
     return (
       <div
         ref={provided.innerRef}
-        style={{ ...styles.container, ...provided.draggableStyle }}
+        {...provided.draggableProps}
         {...provided.dragHandleProps}
+        style={{ ...styles.container, ...provided.draggableProps.style }}
         onClick={() => this.props.actions.toggleTaskDetail(taskID)}
       >
         <Typography

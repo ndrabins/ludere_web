@@ -9,6 +9,7 @@ import Map from "lodash/map";
 import TextField from "material-ui/TextField";
 
 import Column from "./Column";
+import index from "@firebase/app";
 
 
 
@@ -49,8 +50,8 @@ class Board extends Component {
 
     const source = result.source;
     const destination = result.destination;
-    // console.log("source:", source);
-    // console.log("destination:", destination);
+    console.log("source:", source);
+    console.log("destination:", destination);
 
     if (result.type === "COLUMN") {
       this.props.actions.changeColumnOrder(source.index, destination.index);
@@ -97,8 +98,8 @@ class Board extends Component {
         <Droppable droppableId="board" type="COLUMN" direction="horizontal">
           {(provided, snapshot) => (
             <div style={styles.container} ref={provided.innerRef}>
-              {listOrder.map(ID => (
-                <Column key={ID} list={listData[ID]} ID={ID} />
+              {listOrder.map((ID, index) => (
+                <Column key={ID} list={listData[ID]} ID={ID} index={index} />
               ))}
               <div style={styles.listEntryDiv}>
                 <TextField
