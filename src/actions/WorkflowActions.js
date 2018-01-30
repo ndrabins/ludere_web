@@ -105,7 +105,11 @@ export function createTask(listID, taskTitle) {
       dueDate: null,
       createdBy: uid,
       boardID: selectedBoard,
-      title: taskTitle
+      title: taskTitle,
+      tags: [],
+      checklist: [],
+      assigned: [],
+      comments: [],
     };
 
     taskRef.add(task).then(function(docRef) {

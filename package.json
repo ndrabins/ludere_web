@@ -1,20 +1,22 @@
 {
   "name": "Ludere",
-  "description": "Making life simple",
+  "description": "Dat workflow tool boi",
   "author": "me",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "firebase": "latest",
     "firebase-admin": "^5.5.1",
     "firebase-functions": "^0.7.3",
     "history": "^4.7.2",
     "lodash": "^4.17.4",
-    "material-ui": "next",
+    "material-ui": "1.0.0-beta.30",
     "material-ui-icons": "^1.0.0-beta.17",
     "moment": "^2.19.2",
     "react": "^16.0.0",
     "react-beautiful-dnd": "^4.0.0",
+    "react-datepicker": "^1.0.4",
     "react-dom": "^16.0.0",
     "react-lottie": "^0.2.2",
     "react-redux": "^5.0.6",
@@ -26,32 +28,12 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "css-font-family": "^1.0.7",
-    "electron": "^1.7.8",
-    "electron-builder": "^19.34.2"
+    "css-font-family": "^1.0.7"
   },
-  "homepage": ".",
-  "main": "src/electron-starter.js",
   "scripts": {
-    "start": "nf start -p 3000",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "electron": "electron .",
-    "electron-start": "node src/electron-wait-react",
-    "react-start": "react-scripts start",
-    "pack": "build --dir",
-    "dist": "npm run build && build",
-    "postinstall": "install-app-deps"
-  },
-  "build": {
-    "appId": "com.electron.ludere",
-    "win": {
-      "iconUrl":
-        "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
-    },
-    "directories": {
-      "buildResources": "public"
-    }
+    "eject": "react-scripts eject"
   }
 }
