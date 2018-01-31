@@ -4,7 +4,7 @@
   "author": "me",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "start_url": ".",
   "dependencies": {
     "firebase": "latest",
     "firebase-admin": "^5.5.1",

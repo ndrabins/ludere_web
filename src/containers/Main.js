@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import WorkspaceFlow from "../modules/dashboard/WorkspaceFlow";
 import NavBar from "../modules/dashboard/NavBar";
@@ -64,11 +64,13 @@ class Main extends Component {
             toggleDrawer={() => this.toggleDrawer()}
             drawerVisible={this.state.drawerVisible}
           />
-          <Route exact path="/community/dashboard" component={Dashboard} />
-          <Route exact path="/community/calendar" component={Calendar} />
-          <Route path="/community" component={Community} />
-          <Route path="/team/chat" component={Chat} />
-          <Route path="/team/workflow" component={WorkFlow} />
+          <Switch>
+            <Route exact path="/community/dashboard" component={Dashboard} />
+            <Route exact path="/community/calendar" component={Calendar} />
+            <Route path="/community" component={Community} />
+            <Route path="/team/chat" component={Chat} />
+            <Route path="/team/workflow" component={WorkFlow} />
+          </Switch>
         </div>
       </div>
     );
