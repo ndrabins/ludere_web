@@ -7,24 +7,10 @@ import IconButton from 'material-ui/IconButton';
 import ArrowIcon from 'material-ui-icons/KeyboardArrowRight';
 import Typography from 'material-ui/Typography'
 
+import EditableText from '../../common/EditableText';
 import DatePicker from '../../common/IconDatePicker';
 
 class TaskDetail extends Component {
-  // constructor (props) {
-  //   super(props)
-  //   this.state = {
-  //     startDate: moment()
-  //   };
-  // }
-  
-  // handleChange = (date) => {
-  //   console.log(date);
-  //   this.setState({
-  //     startDate: date
-  //   });
-  // }
-
-
   render() {
     const {classes, showTaskDetail, taskData, selectedTask} = this.props;
 
@@ -46,7 +32,9 @@ class TaskDetail extends Component {
               {task.title}
             </Typography>
           </div>
-          <DatePicker />
+          <div>
+            <DatePicker />
+          </div>
         </div>
       </div>
     );
@@ -80,15 +68,18 @@ const styles = theme => ({
   },
   header:{
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
     backgroundColor: '#b9bbbe'
   },
   headerLeft: {
     display: 'flex',
+    maxWidth: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     paddingRight: 10, 
+    whiteSpace: "pre-line",
+    wordWrap: "break-word",
   }
 });
 
