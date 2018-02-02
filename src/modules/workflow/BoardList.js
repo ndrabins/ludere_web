@@ -4,7 +4,9 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import Map from "lodash/map";
 
-import WorkflowBoardButton from "./WorkflowBoardButton";
+import BoardButton from "./BoardButton";
+
+
 
 class BoardList extends Component {
   renderBoards() {
@@ -14,7 +16,7 @@ class BoardList extends Component {
     let boards = Map(this.props.boards, (board, key) => {
       return (
         <div key={key}>
-          <WorkflowBoardButton boardID={key} name={board.boardName} />
+          <BoardButton boardID={key} name={board.boardName} />
         </div>
       );
     });
