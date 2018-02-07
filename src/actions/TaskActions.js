@@ -1,0 +1,142 @@
+import {
+  FETCH_TASKS,
+  CREATE_TASK,
+  CHANGE_TASK_ORDER,
+  MOVE_TASK_TO_COLUMN,
+  TOGGLE_TASK_DETAIL,
+  SELECT_TASK
+} from "./types";
+import firebase from "firebase";
+
+require("firebase/firestore");
+
+export function createTask(listID, taskTitle) {
+  return (dispatch, getState) => {
+    dispatch({ type: CREATE_TASK });
+    let { uid } = getState().auth.user;
+    const { selectedBoard } = getState().workflow;
+    let taskOrder = getState().workflow.listData[listID].taskOrder;
+
+    let taskRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(selectedBoard)
+      .collection("tasks");
+
+    let listRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(selectedBoard)
+      .collection("lists")
+      .doc(listID);
+
+    let task = {
+      dateCreated: Date.now(),
+      dateUpdated: Date.now(),
+      lastUpdatedBy: uid,
+      description: "",
+      dueDate: null,
+      createdBy: uid,
+      boardID: selectedBoard,
+      title: taskTitle,
+      tags: [],
+      checklist: [],
+      assigned: [],
+      comments: []
+    };
+
+    taskRef.add(task).then(function(docRef) {
+      taskOrder.push(docRef.id);
+      listRef.update({ taskOrder: taskOrder });
+    });
+  };
+}
+
+export function changeTaskOrder(startIndex, endIndex, listID) {
+  return (dispatch, getState) => {
+    const { selectedBoard, listData, boards } = getState().workflow;
+
+    let taskOrder = listData[listID].taskOrder;
+
+    const [removed] = taskOrder.splice(startIndex, 1);
+    taskOrder.splice(endIndex, 0, removed);
+
+    let listRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(selectedBoard)
+      .collection("lists")
+      .doc(listID);
+
+    listRef.update({ taskOrder: taskOrder }).then(function() {
+      dispatch({ type: CHANGE_TASK_ORDER });
+    });
+  };
+}
+
+export function moveTaskToColumn(startIndex, endIndex, startListID, endListID) {
+  return (dispatch, getState) => {
+    const { selectedBoard, listData } = getState().workflow;
+
+    let startListTaskOrder = listData[startListID].taskOrder;
+    let endListTaskOrder = listData[endListID].taskOrder;
+
+    //remove item from task order in first list
+    const [removed] = startListTaskOrder.splice(startIndex, 1);
+    //add it to destination list
+    endListTaskOrder.splice(endIndex, 0, removed);
+
+    const startListRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(selectedBoard)
+      .collection("lists")
+      .doc(startListID);
+
+    const endListRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(selectedBoard)
+      .collection("lists")
+      .doc(endListID);
+
+    var batch = firebase.firestore().batch();
+
+    // This code may get re-run multiple times if there are conflicts.
+    batch.update(startListRef, { taskOrder: startListTaskOrder });
+    batch.update(endListRef, { taskOrder: endListTaskOrder });
+
+    batch
+      .commit()
+      .then(function() {
+        dispatch({ type: MOVE_TASK_TO_COLUMN });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+}
+
+export function toggleTaskDetail(taskID = null) {
+  // console.log("toggling: ", taskID);
+  return (dispatch, getState) => {
+    const { selectedTask, showTaskDetail } = getState().workflow;
+
+    if (taskID !== null && taskID !== selectedTask) {
+      dispatch({ type: SELECT_TASK, selectedTask: taskID });
+    }
+
+    if (taskID !== null && !showTaskDetail) {
+      dispatch({ type: SELECT_TASK, selectedTask: taskID });
+      dispatch({ type: TOGGLE_TASK_DETAIL });
+    }
+
+    if (taskID === null || (taskID === selectedTask && showTaskDetail)) {
+      dispatch({ type: TOGGLE_TASK_DETAIL });
+    }
+  };
+}
+
+export function updateTask(updatedTask) {
+  console.log("updating task");
+}

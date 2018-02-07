@@ -81,7 +81,7 @@ class Board extends Component {
   };
 
   render() {
-    const { selectedBoard, boards, listData } = this.props;
+    const { selectedBoard, boards, listData, showTaskDetail } = this.props;
     const board = boards[selectedBoard];
     const { listOrder } = board;
 
@@ -97,7 +97,7 @@ class Board extends Component {
       >
         <Droppable droppableId="board" type="COLUMN" direction="horizontal">
           {(provided, snapshot) => (
-            <div style={styles.container} ref={provided.innerRef}>
+            <div style={showTaskDetail ? {...styles.container, paddingRight: 400} : styles.container} ref={provided.innerRef}>
               {listOrder.map((ID, index) => (
                 <Column key={ID} list={listData[ID]} ID={ID} index={index} />
               ))}
@@ -153,7 +153,8 @@ function mapStateToProps(state) {
   return {
     listData: state.workflow.listData,
     boards: state.workflow.boards,
-    selectedBoard: state.workflow.selectedBoard
+    selectedBoard: state.workflow.selectedBoard,
+    showTaskDetail: state.workflow.showTaskDetail,
   };
 }
 

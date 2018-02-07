@@ -5,3 +5,4 @@ export * from "./WorkspaceActions";
 export * from "./CommunityActions";
 export * from "./ProfileActions";
 export * from "./WorkflowActions";
+export * from "./TaskActions";

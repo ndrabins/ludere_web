@@ -4,7 +4,8 @@ import TextField from "material-ui/TextField";
 
 class EditableText extends Component {
   state = {
-    value: this.props.value
+    value: this.props.value,
+    renderEditableText: false
   };
 
   handleChange = name => event => {
@@ -13,33 +14,59 @@ class EditableText extends Component {
     });
   };
 
+  handleTextClick = () => {
+    this.setState({ renderEditableText: true });
+  };
+
+  handleBlur = () => {
+    this.setState({ renderEditableText: false });
+  };
+
+  handleFieldEnter = () => {
+    this.props.handleEnterPress(this.state.value);
+    this.handleBlur();
+  };
+
   render() {
     const { classes } = this.props;
+    const { renderEditableText, value } = this.state;
 
     return (
       <div className={classes.container}>
-        <TextField
-          value={this.state.value}
-          onChange={this.handleChange("value")}
-          multiline
-          InputProps={{
-            disableUnderline: true,
-            classes: {
-              root: classes.textFieldRoot,
-              input: classes.textFieldInput
-            }
-          }}
-          InputLabelProps={{
-            shrink: true,
-            className: classes.textFieldFormLabel
-          }}
-          onKeyPress={ev => {
-            if (ev.key === "Enter" && !ev.shiftKey) {
-              this.props.handleEnterPress(this.state.value);
-              ev.preventDefault();
-            }
-          }}
-        />
+        {renderEditableText ? (
+          <TextField
+            value={this.state.value}
+            onChange={this.handleChange("value")}
+            multiline
+            autoFocus
+            onBlur={() => this.handleBlur()}
+            InputProps={{
+              disableUnderline: true,
+              classes: {
+                root: classes.textFieldRoot,
+                input: classes.textFieldInput
+              }
+            }}
+            InputLabelProps={{
+              shrink: true,
+              className: classes.textFieldFormLabel
+            }}
+            onKeyPress={ev => {
+              if (ev.key === "Enter" && !ev.shiftKey) {
+                this.handleBlur();
+                ev.preventDefault();
+              }
+            }}
+          />
+        ) : (
+          <div
+            className={classes.normalText}
+            onClick={() => this.handleTextClick()}
+          >
+            {" "}
+            {value}{" "}
+          </div>
+        )}
       </div>
     );
   }
@@ -53,6 +80,15 @@ const styles = theme => ({
   },
   textFieldRoot: {
     padding: 0
+  },
+  normalText: {
+    color: "white",
+    paddingTop: 5,
+    display: "flex",
+    wordWrap: "break-all",
+    overflowWrap: "break-word",
+    wordBreak: "break-all",
+    width: "100%"
   },
   textFieldInput: {
     borderRadius: 4,
