@@ -6558,6 +6558,10 @@ redux-form@^7.1.2:
     lodash-es "^4.17.3"
     prop-types "^15.5.9"
 
+redux-persist@^5.6.10:
+  version "5.6.10"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-5.6.10.tgz#bd964c16a171dc729827ec4ff6bce7f340daa931"
+
 redux-thunk@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
