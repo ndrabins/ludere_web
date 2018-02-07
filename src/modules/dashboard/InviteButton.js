@@ -20,7 +20,6 @@ class InviteButton extends Component {
   };
 
   setChoice = choice => {
-    console.log(choice);
     this.setState({ choice: choice });
   };
 

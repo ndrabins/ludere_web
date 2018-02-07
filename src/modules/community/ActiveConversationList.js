@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import Map from "lodash/map";
 
-import ActiveConversationButton from './ActiveConversationButton';
+import ActiveConversationButton from "./ActiveConversationButton";
 
 class ActiveConversationList extends Component {
   renderConversations() {
@@ -14,33 +14,26 @@ class ActiveConversationList extends Component {
     }
 
     let conversations = Map(this.props.conversations, (conversation, key) => {
-      let title = '';
+      let title = "";
       Map(conversation.members, (memberStatus, memberID) => {
-        console.log(memberID);
-        if(memberID !== this.props.myID){
+        if (memberID !== this.props.myID) {
           title += this.props.workspaceUsers[memberID].displayName;
         }
-
       });
 
-      if(this.props.activeConversations[key]){
+      if (this.props.activeConversations[key]) {
         return (
           <div key={key}>
-            <ActiveConversationButton conversationID={key} name={title}/>
+            <ActiveConversationButton conversationID={key} name={title} />
           </div>
         );
       }
-
     });
     return conversations;
   }
 
   render() {
-    return (
-      <div>
-        {this.renderConversations()}
-      </div>
-    );
+    return <div>{this.renderConversations()}</div>;
   }
 }
 
@@ -59,4 +52,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActiveConversationList);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ActiveConversationList
+);

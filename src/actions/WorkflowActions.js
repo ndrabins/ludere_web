@@ -81,8 +81,6 @@ export function createList(boardID, listName) {
 
 export function updateList(list, listID) {
   return (dispatch, getState) => {
-    console.log(list);
-
     let listRef = firebase
       .firestore()
       .collection("workflow")

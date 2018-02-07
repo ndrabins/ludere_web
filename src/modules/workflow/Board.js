@@ -11,8 +11,6 @@ import TextField from "material-ui/TextField";
 import Column from "./Column";
 import index from "@firebase/app";
 
-
-
 class Board extends Component {
   state = {
     listName: ""
@@ -50,8 +48,6 @@ class Board extends Component {
 
     const source = result.source;
     const destination = result.destination;
-    console.log("source:", source);
-    console.log("destination:", destination);
 
     if (result.type === "COLUMN") {
       this.props.actions.changeColumnOrder(source.index, destination.index);
@@ -97,7 +93,14 @@ class Board extends Component {
       >
         <Droppable droppableId="board" type="COLUMN" direction="horizontal">
           {(provided, snapshot) => (
-            <div style={showTaskDetail ? {...styles.container, paddingRight: 400} : styles.container} ref={provided.innerRef}>
+            <div
+              style={
+                showTaskDetail
+                  ? { ...styles.container, paddingRight: 400 }
+                  : styles.container
+              }
+              ref={provided.innerRef}
+            >
               {listOrder.map((ID, index) => (
                 <Column key={ID} list={listData[ID]} ID={ID} index={index} />
               ))}
@@ -115,7 +118,7 @@ class Board extends Component {
                     }
                   }}
                   InputProps={{
-                    disableUnderline: true,
+                    disableUnderline: true
                   }}
                 />
               </div>
@@ -154,7 +157,7 @@ function mapStateToProps(state) {
     listData: state.workflow.listData,
     boards: state.workflow.boards,
     selectedBoard: state.workflow.selectedBoard,
-    showTaskDetail: state.workflow.showTaskDetail,
+    showTaskDetail: state.workflow.showTaskDetail
   };
 }
 

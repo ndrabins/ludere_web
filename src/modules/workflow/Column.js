@@ -23,7 +23,6 @@ class Column extends Component {
   };
 
   handleTitleChange = name => {
-    console.log("name is", name);
     let newList = this.props.list;
     newList.name = name;
 

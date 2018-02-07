@@ -44,7 +44,6 @@ export function createTeam(teamName, description = "") {
     teamRef
       .add(team)
       .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
         dispatch({ type: CREATE_TEAM_SUCCESS });
 
         //Set context to created team
