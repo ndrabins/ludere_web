@@ -31,7 +31,7 @@ class TaskDetail extends Component {
             <IconButton onClick={() => this.props.actions.toggleTaskDetail()}>
               <ArrowIcon />
             </IconButton>
-            <Typography>{task.title}</Typography>
+            <Typography className={classes.title}>{task.title}</Typography>
           </div>
           <div>
             <DatePicker />
@@ -81,6 +81,13 @@ const styles = theme => ({
     paddingRight: 10,
     whiteSpace: "pre-line",
     wordWrap: "break-word"
+  },
+  title: {
+    display: "flex",
+    wordWrap: "break-all",
+    overflowWrap: "break-word",
+    wordBreak: "break-all",
+    padding: "5px 5px 0px 2px"
   }
 });
 

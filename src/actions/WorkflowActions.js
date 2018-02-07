@@ -24,9 +24,10 @@ export function createBoard(boardName) {
     dispatch({ type: CREATE_BOARD });
     let { uid } = getState().auth.user;
     let selectedTeamID = getState().team.selectedTeam;
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let board = {
-      dateCreated: Date.now(),
+      dateCreated: timestamp,
       createdBy: uid,
       teamID: selectedTeamID,
       boardName: boardName,
@@ -50,6 +51,7 @@ export function createList(boardID, listName) {
     let { uid } = getState().auth.user;
     // const { selectedBoard } = getState().workflow;
     let listOrder = getState().workflow.boards[boardID].listOrder;
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let listRef = firebase
       .firestore()
@@ -63,7 +65,7 @@ export function createList(boardID, listName) {
       .doc(boardID);
 
     let list = {
-      dateCreated: Date.now(),
+      dateCreated: timestamp,
       createdBy: uid,
       boardID: boardID,
       name: listName,

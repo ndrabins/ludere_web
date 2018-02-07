@@ -53,7 +53,7 @@ class EditableText extends Component {
             }}
             onKeyPress={ev => {
               if (ev.key === "Enter" && !ev.shiftKey) {
-                this.handleBlur();
+                this.handleFieldEnter();
                 ev.preventDefault();
               }
             }}
@@ -63,8 +63,7 @@ class EditableText extends Component {
             className={classes.normalText}
             onClick={() => this.handleTextClick()}
           >
-            {" "}
-            {value}{" "}
+            {value}
           </div>
         )}
       </div>
@@ -88,7 +87,10 @@ const styles = theme => ({
     wordWrap: "break-all",
     overflowWrap: "break-word",
     wordBreak: "break-all",
-    width: "100%"
+    justifyContent: "center",
+    alignContent: "center",
+    minWidth: 120,
+    minHeight: 14
   },
   textFieldInput: {
     borderRadius: 4,

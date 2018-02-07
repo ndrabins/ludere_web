@@ -16,19 +16,19 @@ class MessageEntry extends Component {
   };
 
   sendMessage = () => {
-    if(this.state.messageText === '' || !this.props.selectedChannel){
+    if (this.state.messageText === "" || !this.props.selectedChannel) {
       return;
     }
     this.props.actions.sendMessage(this.state.messageText);
 
     this.setState({
-      messageText:'',
+      messageText: ""
     });
-  }
+  };
 
   render() {
-    let name = '';
-    if(this.props.selectedChannel){
+    let name = "";
+    if (this.props.selectedChannel) {
       name = this.props.channels[this.props.selectedChannel].name;
     }
 
@@ -45,10 +45,11 @@ class MessageEntry extends Component {
               id="name"
               placeholder={`Message #${name}`}
               fullWidth
+              autoComplete="off"
               value={this.state.messageText}
               onChange={this.handleChange("messageText")}
               InputProps={{
-                disableUnderline: true,
+                disableUnderline: true
               }}
               onKeyPress={ev => {
                 if (ev.key === "Enter" && !ev.shiftKey) {
@@ -71,14 +72,14 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     paddingRight: 10,
-    paddingLeft: 10,
+    paddingLeft: 10
   },
   messageInputContainer: {
     width: "100%",
     border: "2px solid black",
     borderRadius: 8,
     padding: 5,
-    display:'flex',
+    display: "flex"
   },
   fileInput: {
     color: "#767778",
@@ -89,11 +90,11 @@ const styles = {
     cursor: "pointer",
     borderRight: "solid 2px #767778"
   },
-  textFieldContainer:{
+  textFieldContainer: {
     width: "100%",
     paddingLeft: 10,
     paddingRight: 10,
-    display:'flex'
+    display: "flex"
   }
 };
 

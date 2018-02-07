@@ -11,10 +11,10 @@ import {
   JOIN_WORKSPACE_ERROR,
   FETCH_WORKSPACE_USERS,
   FETCH_WORKSPACE_USERS_SUCCESS,
-  FETCH_WORKSPACE_USERS_ERROR,
+  FETCH_WORKSPACE_USERS_ERROR
 } from "./types";
 
-import { reset } from 'redux-form';
+import { reset } from "redux-form";
 import firebase from "firebase";
 
 import * as teamActions from "./TeamActions";
@@ -24,16 +24,16 @@ import Map from "lodash/map";
 
 require("firebase/firestore");
 
-
 export function createWorkspace(values) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
 
     let workspaceName = values.workspaceName;
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let workspace = {
       name: workspaceName,
-      dateCreated: Date.now(),
+      dateCreated: timestamp,
       workspaceOwner: uid,
       members: {}
     };
@@ -46,18 +46,22 @@ export function createWorkspace(values) {
       .firestore()
       .collection("workspaces")
       .add(workspace)
-      .then(function (docRef) {
+      .then(function(docRef) {
         dispatch({ type: CREATE_WORKSPACE_SUCCESS });
-        dispatch(reset('createWorkspaceForm'));
+        dispatch(reset("createWorkspaceForm"));
 
         //update user object with the workspace he is in
-        let userRef = firebase.firestore().collection("users").doc(uid);
+        let userRef = firebase
+          .firestore()
+          .collection("users")
+          .doc(uid);
         let usersWorkspaceUpdate = {};
         usersWorkspaceUpdate[`workspaces.${docRef.id}`] = true;
 
-        userRef.update(usersWorkspaceUpdate).then(function () {
-        })
-          .catch(function (error) {
+        userRef
+          .update(usersWorkspaceUpdate)
+          .then(function() {})
+          .catch(function(error) {
             // The document probably doesn't exist.
             console.error("Error updating document: ", error);
           });
@@ -65,7 +69,7 @@ export function createWorkspace(values) {
         //Create workspace with an initial team that everyone is a part of.
         dispatch(teamActions.createTeam(workspaceName));
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.error("Error adding document: ", error);
         dispatch({ type: CREATE_WORKSPACE_ERROR });
       });
@@ -73,35 +77,42 @@ export function createWorkspace(values) {
 }
 
 export function joinWorkspace(formValues) {
-
   return (dispatch, getState) => {
-
     let { uid } = getState().auth.user;
 
     let workspaceUID = formValues.workspaceUrl;
     dispatch({ type: JOIN_WORKSPACE });
 
-    let membersUpdate = {}
-    let usersWorkspaceUpdate = {}
+    let membersUpdate = {};
+    let usersWorkspaceUpdate = {};
 
     membersUpdate[`members.${uid}`] = true;
     usersWorkspaceUpdate[`workspaces.${workspaceUID}`] = true;
 
-    let workspaceRef = firebase.firestore().collection("workspaces").doc(workspaceUID);
-    let userRef = firebase.firestore().collection("users").doc(uid);
+    let workspaceRef = firebase
+      .firestore()
+      .collection("workspaces")
+      .doc(workspaceUID);
+    let userRef = firebase
+      .firestore()
+      .collection("users")
+      .doc(uid);
 
     var batch = firebase.firestore().batch();
 
     batch.update(workspaceRef, membersUpdate);
     batch.update(userRef, usersWorkspaceUpdate);
 
-    batch.commit().then(function () {
-      dispatch({ type: JOIN_WORKSPACE_SUCCESS });
-    }).catch(function (error) {
-      console.log("Transaction failed: ", error);
-      dispatch({ type: JOIN_WORKSPACE_ERROR });
-    });
-  }
+    batch
+      .commit()
+      .then(function() {
+        dispatch({ type: JOIN_WORKSPACE_SUCCESS });
+      })
+      .catch(function(error) {
+        console.log("Transaction failed: ", error);
+        dispatch({ type: JOIN_WORKSPACE_ERROR });
+      });
+  };
 }
 
 export function fetchWorkspaces() {
@@ -114,9 +125,9 @@ export function fetchWorkspaces() {
     let workspaceRef = firebase.firestore().collection("workspaces");
     workspaceRef
       .where(`members.${uid}`, "==", true)
-      .onSnapshot(function (querySnapshot) {
+      .onSnapshot(function(querySnapshot) {
         var workspaces = {};
-        querySnapshot.forEach(function (doc) {
+        querySnapshot.forEach(function(doc) {
           if (selectedWorkspace === null) {
             selectedWorkspace = doc.id;
           }
@@ -146,18 +157,19 @@ export function fetchWorkspaceUsers() {
 
     let workspaceUID = getState().workspace.selectedWorkspace;
 
-    let userRef = firebase
-      .firestore()
-      .collection(`users`);
+    let userRef = firebase.firestore().collection(`users`);
 
     userRef
       .where(`workspaces.${workspaceUID}`, "==", true)
-      .onSnapshot(function (querySnapshot) {
+      .onSnapshot(function(querySnapshot) {
         var users = {};
-        querySnapshot.forEach(function (doc) {
+        querySnapshot.forEach(function(doc) {
           users[doc.id] = doc.data();
         });
-        dispatch({ type: FETCH_WORKSPACE_USERS_SUCCESS, workspaceUsers: users });
+        dispatch({
+          type: FETCH_WORKSPACE_USERS_SUCCESS,
+          workspaceUsers: users
+        });
       });
-  }
+  };
 }

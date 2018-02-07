@@ -55,6 +55,7 @@ class CreateBoardButton extends Component {
               id="name"
               label="Board Name"
               fullWidth
+              autoComplete="off"
               value={this.state.boardName}
               onChange={this.handleChange("boardName")}
             />

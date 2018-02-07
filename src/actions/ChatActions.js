@@ -9,7 +9,7 @@ import {
   FETCH_MESSAGES,
   FETCH_MESSAGES_SUCCESS,
   FETCH_MESSAGES_ERROR,
-  SEND_MESSAGE,
+  SEND_MESSAGE
 } from "./types";
 
 import firebase from "firebase";
@@ -36,11 +36,12 @@ export function createChannel(channelName) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
     let { selectedTeam } = getState().team;
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let channel = {
       createdBy: uid,
       name: channelName,
-      dateCreated: Date.now(),
+      dateCreated: timestamp,
       type: "public",
       team: selectedTeam
     };
@@ -63,42 +64,45 @@ export function createChannel(channelName) {
 
 export function selectChannel(channelID) {
   return dispatch => {
-    dispatch({ type: SELECT_CHANNEL, selectedChannel: channelID});
+    dispatch({ type: SELECT_CHANNEL, selectedChannel: channelID });
 
-    dispatch({ type: FETCH_MESSAGES});
-    let messageRef = firebase.firestore().collection(`chat/${channelID}/messages`);
-    messageRef.orderBy("dateCreated")
-      .onSnapshot(function(querySnapshot) {
-        var messages = {};
-        querySnapshot.forEach(function(doc) {
-          messages[doc.id] = doc.data();
-        });
-        dispatch({ type: FETCH_MESSAGES_SUCCESS, messages: messages });
+    dispatch({ type: FETCH_MESSAGES });
+    let messageRef = firebase
+      .firestore()
+      .collection(`chat/${channelID}/messages`);
+    messageRef.orderBy("dateCreated").onSnapshot(function(querySnapshot) {
+      var messages = {};
+      querySnapshot.forEach(function(doc) {
+        messages[doc.id] = doc.data();
+      });
+      dispatch({ type: FETCH_MESSAGES_SUCCESS, messages: messages });
     });
   };
 }
 
-export function sendMessage(messageText){
+export function sendMessage(messageText) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
     let { selectedChannel } = getState().chat;
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     //need to refactor this lol..
     let myName = getState().workspace.workspaceUsers[uid].displayName;
 
     let message = {
-      sentBy : uid,
-      dateCreated: Date.now(),
+      sentBy: uid,
+      dateCreated: timestamp,
       messageText: messageText,
       sentByDisplayName: myName,
-      edited: 'false',
-    }
+      edited: "false"
+    };
 
-    let messageRef = firebase.firestore().collection(`chat/${selectedChannel}/messages`);
+    let messageRef = firebase
+      .firestore()
+      .collection(`chat/${selectedChannel}/messages`);
 
-    messageRef.add(message)
-    .then(function(docRef) {
-      dispatch({ type: SEND_MESSAGE});
-    })
-  }
+    messageRef.add(message).then(function(docRef) {
+      dispatch({ type: SEND_MESSAGE });
+    });
+  };
 }

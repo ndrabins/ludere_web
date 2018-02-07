@@ -4,7 +4,8 @@ import {
   CHANGE_TASK_ORDER,
   MOVE_TASK_TO_COLUMN,
   TOGGLE_TASK_DETAIL,
-  SELECT_TASK
+  SELECT_TASK,
+  UPDATE_TASK_DATE
 } from "./types";
 import firebase from "firebase";
 
@@ -16,6 +17,7 @@ export function createTask(listID, taskTitle) {
     let { uid } = getState().auth.user;
     const { selectedBoard } = getState().workflow;
     let taskOrder = getState().workflow.listData[listID].taskOrder;
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let taskRef = firebase
       .firestore()
@@ -31,8 +33,8 @@ export function createTask(listID, taskTitle) {
       .doc(listID);
 
     let task = {
-      dateCreated: Date.now(),
-      dateUpdated: Date.now(),
+      dateCreated: timestamp,
+      dateUpdated: timestamp,
       lastUpdatedBy: uid,
       description: "",
       dueDate: null,
@@ -137,6 +139,16 @@ export function toggleTaskDetail(taskID = null) {
   };
 }
 
-export function updateTask(updatedTask) {
-  console.log("updating task");
+export function updateTaskDate(date) {
+  return (dispatch, getState) => {
+    let { selectedTask, selectedBoard } = getState().worfklow;
+    let taskRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(selectedBoard)
+      .collection("tasks")
+      .doc(selectedTask);
+
+    dispatch({ type: UPDATE_TASK_DATE });
+  };
 }

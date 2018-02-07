@@ -64,11 +64,11 @@ export function sendDirectMessage(messageText) {
     //refactor this here AND in chat actions
     let myName = getState().workspace.workspaceUsers[uid].displayName;
     // console.log(getState().workspace.workspaceUsers);
-    // console.log(uid);
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let message = {
       sentBy: uid,
-      dateCreated: Date.now(),
+      dateCreated: timestamp,
       messageText: messageText,
       sentByDisplayName: myName,
       edited: "false"
@@ -154,9 +154,10 @@ export function setConversationInactive(conversationID) {
 function createConversation(myUID, recieverUID) {
   return dispatch => {
     dispatch({ type: CREATE_CONVERSATION });
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let directMessage = {
-      dateCreated: Date.now(),
+      dateCreated: timestamp,
       type: "direct",
       members: {}
     };
