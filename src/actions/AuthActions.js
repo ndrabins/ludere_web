@@ -6,7 +6,7 @@ import {
   LOAD_APP_DATA,
   LOAD_APP_DATA_SUCCESS,
   LOAD_APP_DATA_ERROR,
-  INITIALIZE_USER,
+  INITIALIZE_USER
 } from "./types";
 import firebase from "firebase";
 import { INITIALIZE } from "redux-form/lib/actionTypes";
@@ -48,32 +48,39 @@ export function signUpUser(email, password) {
 
 function initializeUser(user) {
   //data only owner of account can see/change
+  const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+
   let privateData = {
-    uid : user.uid,
+    uid: user.uid,
     emailVerified: user.emailVerified,
-    createdAt : Date.now(),
-    email: user.email,
-  }
+    createdAt: timestamp,
+    email: user.email
+  };
 
   let ourUserObject = {
     privateData: privateData,
     workspaces: {},
     displayName: user.email, //till we get the user to set their own displayname? Probs should be part of the sign up?
     photoURL: user.photoURL,
-    lastLoginAt : Date.now(),
-    conversations: {}, //conversationID:boolean , if a converstion is true it is an active one, if not it is inactive
+    lastLoginAt: timestamp,
+    conversations: {} //conversationID:boolean , if a converstion is true it is an active one, if not it is inactive
   };
   let uid = user.uid;
 
-  let userRef = firebase.firestore().collection("users").doc(uid);
+  let userRef = firebase
+    .firestore()
+    .collection("users")
+    .doc(uid);
   return dispatch => {
-    userRef.set(ourUserObject).then(function() {
-      dispatch({ type: INITIALIZE_USER });
-    })
-    .catch(function(error) {
-      console.error("Error writing document: ", error);
-    });
-  }
+    userRef
+      .set(ourUserObject)
+      .then(function() {
+        dispatch({ type: INITIALIZE_USER });
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
+  };
 }
 
 export function signInUser(email, password) {

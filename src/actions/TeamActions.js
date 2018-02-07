@@ -21,6 +21,7 @@ export function createTeam(teamName, description = "") {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
     let { selectedWorkspace } = getState().workspace;
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let teamRef = firebase
       .firestore()
@@ -34,7 +35,7 @@ export function createTeam(teamName, description = "") {
       },
       members: {},
       name: teamName,
-      dateCreated: Date.now()
+      dateCreated: timestamp
     };
     team.members[uid] = true;
 
