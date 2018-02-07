@@ -6,6 +6,7 @@ import * as Actions from "../../actions";
 import { Link } from "react-router-dom";
 
 import colors from "../../utility/constants/colors";
+import InviteButton from './InviteButton'
 
 import MenuIcon from "material-ui-icons/Menu";
 import NotificationsIcon from "material-ui-icons/Notifications";
@@ -59,10 +60,7 @@ class NavBar extends Component {
           <Button onClick={() => this.handleDashboardSelect()} disabled>
             Dashboard
           </Button>
-          <Button>
-            Invite
-            <PersonAdd style={styles.personAdd} />
-          </Button>
+          <InviteButton />
         </div>
         <div style={styles.navEnd}>
           <IconButton style={{ color: "white" }}>
@@ -129,15 +127,6 @@ const styles = {
     borderRadius: 0,
     backgroundColor: colors.lightThemePrimary
   },
-  personAdd:{
-    color: "white",
-    background: 'linear-gradient(to right, #29b6f6, #796eff)',
-    width: 22,
-    height: 22,
-    borderRadius: 20,
-    marginLeft: 10,
-    padding:2
-  }
 };
 
 function mapStateToProps(state) {

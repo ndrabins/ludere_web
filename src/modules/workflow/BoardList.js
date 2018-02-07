@@ -6,8 +6,6 @@ import Map from "lodash/map";
 
 import BoardButton from "./BoardButton";
 
-
-
 class BoardList extends Component {
   renderBoards() {
     if (!this.props.boards) {
