@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 import Map from "lodash/map";
 
 import Button from "material-ui/Button";
@@ -34,13 +35,19 @@ class TeamNav extends Component {
   }
 
   renderTeams() {
+    const { location } = this.props;
+
     if (!this.props.teams) {
       return;
     }
+
+    let focusTeam = location.pathname.includes("team");
+
     let teams = Map(this.props.teams, (team, key) => {
+      let selectIndicatorStyle = focusTeam && this.props.selectedTeam === key;
       return (
         <div key={key} style={styles.teamButtonContainer}>
-          <div style={this.props.selectedTeam === key ? styles.selectIndicator : null} />
+          <div style={selectIndicatorStyle ? styles.selectIndicator : null} />
           <Tooltip id="tooltip-right-start" title={team.name} placement="right">
             <Button
               fab
@@ -58,18 +65,37 @@ class TeamNav extends Component {
 
   // />
   render() {
+    const { location } = this.props;
+
+    let focusCommunity = location.pathname.includes("community");
+
     return (
-      <div style={styles.containerWrapper} >
+      <div style={styles.containerWrapper}>
         <div style={styles.container}>
           <div style={{ ...styles.teamButtonContainer, paddingTop: 12 }}>
-            <div style={this.props.selectedTeam === null ? styles.selectIndicator : null} />
-            <Tooltip id="tooltip-right-start" title="Community" placement="right">
-              <Button fab style={{ ...styles.teamButton, ...styles.communityButton }} onClick={() => this.handleCommunitySelect()}>
+            <div style={focusCommunity ? styles.selectIndicator : null} />
+            <Tooltip
+              id="tooltip-right-start"
+              title="Community"
+              placement="right"
+            >
+              <Button
+                fab
+                style={{ ...styles.teamButton, ...styles.communityButton }}
+                onClick={() => this.handleCommunitySelect()}
+              >
                 <PeopleIcon />
               </Button>
             </Tooltip>
           </div>
-          <div style={{ width: "40px", borderBottom: "#6f6f6f 2px solid", marginTop: 5, marginBottom: 5, }} />
+          <div
+            style={{
+              width: "40px",
+              borderBottom: "#6f6f6f 2px solid",
+              marginTop: 5,
+              marginBottom: 5
+            }}
+          />
           {this.renderTeams()}
           <AddTeamButton />
         </div>
@@ -83,7 +109,7 @@ const styles = {
     height: "100%",
     maxHeight: "100%",
     overflow: "hidden",
-    width: 58,
+    width: 58
   },
   container: {
     display: "flex",
@@ -92,15 +118,16 @@ const styles = {
     backgroundColor: "#000000",
     flexDirection: "column",
     alignItems: "center",
-    boxShadow: "0 5.5px 5px 0 rgba(0, 0, 0, 0.24), 0 9px 18px 0 rgba(0, 0, 0, 0.18)",
-    height: "100%",
+    boxShadow:
+      "0 5.5px 5px 0 rgba(0, 0, 0, 0.24), 0 9px 18px 0 rgba(0, 0, 0, 0.18)",
+    height: "100%"
     // overflowY: 'auto',
     // overflowX: 'hidden',
     // paddingRight: 18,
   },
   communityButton: {
     color: "#FFF",
-    background: `linear-gradient(to left, #6fe5c9, #00bcd4)`,
+    background: `linear-gradient(to left, #6fe5c9, #00bcd4)`
   },
   teamButton: {
     width: 36,
@@ -115,20 +142,20 @@ const styles = {
     // position: 'absolute',
     width: 4,
     height: 38,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
-    alignSelf: 'flex-start',
-    display: 'flex',
+    alignSelf: "flex-start",
+    display: "flex"
     // transition: "top 0.25s linear",  },
   },
   teamButtonContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '100%',
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
     minHeight: 38,
     margin: "4px 0px 4px 0px"
-  },
+  }
 };
 
 function mapStateToProps(state) {
@@ -144,4 +171,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TeamNav);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRouter(TeamNav)
+);

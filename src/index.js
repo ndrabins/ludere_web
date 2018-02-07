@@ -17,8 +17,6 @@ import rootReducer from "./reducers";
 
 import firebase from "firebase";
 
-//import Dashboard from './containers/Dashboard';
-
 var config = {
   apiKey: "AIzaSyDBODwiyli_Rn3WcEBWRc8TMXTEAqatgHQ",
   authDomain: "newapp-6c93a.firebaseapp.com",

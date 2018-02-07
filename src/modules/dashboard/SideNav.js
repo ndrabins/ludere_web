@@ -14,7 +14,7 @@ class SideNav extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <TeamNav history={this.props.history} />
+        <TeamNav />
         <div
           style={
             this.props.drawerVisible
