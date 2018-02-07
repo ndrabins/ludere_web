@@ -20,7 +20,7 @@ const initialState = {
   listData: null,
   taskData: null,
   showTaskDetail: false,
-  selectedTask: null, 
+  selectedTask: null
 };
 
 export default function workflow(state = initialState, action) {
@@ -46,9 +46,9 @@ export default function workflow(state = initialState, action) {
     case UPDATE_LIST:
       return state;
     case TOGGLE_TASK_DETAIL:
-      return {...state, showTaskDetail: !state.showTaskDetail};
+      return { ...state, showTaskDetail: !state.showTaskDetail };
     case SELECT_TASK:
-      return {...state, selectedTask: action.selectedTask};
+      return { ...state, selectedTask: action.selectedTask };
     default:
       return state;
   }

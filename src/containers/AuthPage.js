@@ -10,32 +10,24 @@ import logoWhite from "../static/light.svg";
 import backgroundImg from "../static/mountains.png";
 
 class AuthPage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loginTransition: null,
-    };
-  }
-
   handleLoginClick() {
-    this.setState({isLoggedIn: true});
+    this.setState({ isLoggedIn: true });
   }
 
   handleLogoutClick() {
-    this.setState({isLoggedIn: false});
+    this.setState({ isLoggedIn: false });
   }
 
-  focusSignUp(){
-    this.setState({ loginTransition: "SignUp"});
+  focusSignUp() {
+    this.setState({ loginTransition: "SignUp" });
   }
 
-  focusSignIn(){
-    this.setState({ loginTransition: "SignIn"});
+  focusSignIn() {
+    this.setState({ loginTransition: "SignIn" });
   }
 
-  focusNeutral(){
-    this.setState({ loginTransition: "null"});
+  focusNeutral() {
+    this.setState({ loginTransition: "null" });
   }
 
   render() {
@@ -47,10 +39,16 @@ class AuthPage extends Component {
           <img src={logoWhite} alt="Logo" />
           <div style={styles.inputForm}>
             <div style={styles.signUp}>
-              <SignUp focusSignUp={() => this.focusSignUp()} loginTransition={this.state.loginTransition}/>
+              <SignUp
+                focusSignUp={() => this.focusSignUp()}
+                loginTransition={this.state.loginTransition}
+              />
             </div>
             <div style={styles.signIn}>
-              <SignIn focusSignIn={() => this.focusSignIn()} loginTransition={this.state.loginTransition}/>
+              <SignIn
+                focusSignIn={() => this.focusSignIn()}
+                loginTransition={this.state.loginTransition}
+              />
             </div>
           </div>
         </div>
@@ -82,8 +80,8 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    paddingTop: "20px",
-  },
+    paddingTop: "20px"
+  }
 };
 
 function mapStateToProps(state) {
