@@ -42,7 +42,7 @@ export function createTask(listID, taskTitle) {
       boardID: selectedBoard,
       title: taskTitle,
       tags: [],
-      checklist: [],
+      subtasks: [],
       assigned: [],
       comments: []
     };
@@ -122,7 +122,11 @@ export function moveTaskToColumn(startIndex, endIndex, startListID, endListID) {
 export function toggleTaskDetail(taskID = null) {
   // console.log("toggling: ", taskID);
   return (dispatch, getState) => {
-    const { selectedTask, showTaskDetail } = getState().workflow;
+    const { selectedTask, showTaskDetail, selectedBoard } = getState().workflow;
+
+    if (selectedBoard === null) {
+      dispatch({ type: SELECT_TASK, selectedTask: null });
+    }
 
     if (taskID !== null && taskID !== selectedTask) {
       dispatch({ type: SELECT_TASK, selectedTask: taskID });
@@ -139,15 +143,31 @@ export function toggleTaskDetail(taskID = null) {
   };
 }
 
-export function updateTaskDate(date) {
+export function updateTaskTitle(title) {
   return (dispatch, getState) => {
-    let { selectedTask, selectedBoard } = getState().worfklow;
+    //javascript voodoo here man
+    //it has to be done this way lol.
+    const selectedBoard = getState()["workflow"]["selectedBoard"];
+    const selectedTask = getState()["workflow"]["selectedTask"];
+
     let taskRef = firebase
       .firestore()
       .collection("workflow")
       .doc(selectedBoard)
       .collection("tasks")
       .doc(selectedTask);
+
+    return taskRef
+      .update({
+        title: title
+      })
+      .then(function() {
+        console.log("Document successfully updated!");
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
 
     dispatch({ type: UPDATE_TASK_DATE });
   };

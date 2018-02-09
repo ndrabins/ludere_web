@@ -51,7 +51,7 @@ class AddTeamButton extends Component {
             <AddIcon style={{ color: "#B8B8B8", fontSize: 16 }} />
           </Button>
         </Tooltip>
-        <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
+        <Dialog open={this.state.open} onClose={this.handleRequestClose}>
           <DialogTitle>Create Team</DialogTitle>
           <DialogContent>
             <DialogContentText>Create Team description</DialogContentText>
@@ -65,6 +65,12 @@ class AddTeamButton extends Component {
               value={this.state.teamName}
               onChange={this.handleChange("teamName")}
               autoComplete="false"
+              onKeyPress={ev => {
+                if (ev.key === "Enter" && !ev.shiftKey) {
+                  this.handleCreateTeam();
+                  ev.preventDefault();
+                }
+              }}
             />
           </DialogContent>
           <DialogActions>

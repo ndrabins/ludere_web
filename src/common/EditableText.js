@@ -8,6 +8,12 @@ class EditableText extends Component {
     renderEditableText: false
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value !== this.state.value) {
+      this.setState({ value: nextProps.value });
+    }
+  }
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
@@ -23,6 +29,7 @@ class EditableText extends Component {
   };
 
   handleFieldEnter = () => {
+    console.log("value inside edit", this.state.value);
     this.props.handleEnterPress(this.state.value);
     this.handleBlur();
   };
@@ -39,6 +46,7 @@ class EditableText extends Component {
             onChange={this.handleChange("value")}
             multiline
             autoFocus
+            rowsMax="4"
             onBlur={() => this.handleBlur()}
             InputProps={{
               disableUnderline: true,
@@ -82,13 +90,10 @@ const styles = theme => ({
   },
   normalText: {
     color: "white",
-    paddingTop: 5,
     display: "flex",
     wordWrap: "break-all",
     overflowWrap: "break-word",
     wordBreak: "break-all",
-    justifyContent: "center",
-    alignContent: "center",
     minWidth: 120,
     minHeight: 14
   },

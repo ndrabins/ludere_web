@@ -7,10 +7,14 @@ import IconButton from "material-ui/IconButton";
 import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
 import Typography from "material-ui/Typography";
 
-import EditableText from "../../common/EditableText";
 import DatePicker from "../../common/IconDatePicker";
+import EditableText from "../../common/EditableText";
+import TaskSubTasks from "./taskDetailComponents/TaskSubTasks";
 
 class TaskDetail extends Component {
+  handleTitleChange = title => {
+    this.props.actions.updateTaskTitle(title);
+  };
   render() {
     const { classes, showTaskDetail, taskData, selectedTask } = this.props;
     const task = taskData[selectedTask];
@@ -31,11 +35,17 @@ class TaskDetail extends Component {
             <IconButton onClick={() => this.props.actions.toggleTaskDetail()}>
               <ArrowIcon />
             </IconButton>
-            <Typography className={classes.title}>{task.title}</Typography>
+            <EditableText
+              value={task.title}
+              handleEnterPress={title => this.handleTitleChange(title)}
+            />
           </div>
           <div>
             <DatePicker />
           </div>
+        </div>
+        <div className={classes.taskContent}>
+          <TaskSubTasks subTasks={task.subTasks} />
         </div>
       </div>
     );
@@ -53,7 +63,9 @@ const styles = theme => ({
     right: -400,
     transition: "opacity 0.5s ease, right 0.5s ease",
     opacity: 0,
-    boxShadow: "0px 7px 14px 2px rgba(0, 0, 0, 0.5)"
+    boxShadow: "0px 7px 14px 2px rgba(0, 0, 0, 0.5)",
+    display: "flex",
+    flexDirection: "column"
   },
   container: {
     height: `calc(100% - 84px)`,
@@ -65,9 +77,12 @@ const styles = theme => ({
     right: 0,
     transition: "opacity 0.5s ease, right 0.5s ease",
     opacity: 1,
-    boxShadow: "0px 7px 14px 2px rgba(0, 0, 0, 0.5)"
+    boxShadow: "0px 7px 14px 2px rgba(0, 0, 0, 0.5)",
+    display: "flex",
+    flexDirection: "column"
   },
   header: {
+    borderTopLeftRadius: 10,
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
@@ -82,12 +97,11 @@ const styles = theme => ({
     whiteSpace: "pre-line",
     wordWrap: "break-word"
   },
-  title: {
+  taskContent: {
     display: "flex",
-    wordWrap: "break-all",
-    overflowWrap: "break-word",
-    wordBreak: "break-all",
-    padding: "5px 5px 0px 2px"
+    height: "100%",
+    backgroundColor: "red",
+    margin: 8
   }
 });
 

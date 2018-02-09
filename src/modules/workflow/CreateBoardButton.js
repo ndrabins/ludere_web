@@ -58,6 +58,12 @@ class CreateBoardButton extends Component {
               autoComplete="off"
               value={this.state.boardName}
               onChange={this.handleChange("boardName")}
+              onKeyPress={ev => {
+                if (ev.key === "Enter" && !ev.shiftKey) {
+                  this.handleCreateBoard();
+                  ev.preventDefault();
+                }
+              }}
             />
           </DialogContent>
           <DialogActions>
