@@ -83,6 +83,7 @@ const styles = theme => ({
   },
   header: {
     borderTopLeftRadius: 10,
+    paddingTop: 10,
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",

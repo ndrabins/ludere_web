@@ -16,6 +16,7 @@ import Community from "../modules/community/Community";
 //Modules
 import WorkFlow from "../modules/workflow/Workflow";
 import Chat from "../modules/chat/Chat";
+import TeamDashboard from "../modules/team/teamDashboard";
 
 const drawerWidth = 298;
 
@@ -67,6 +68,7 @@ class Main extends Component {
             <Route exact path="/community/dashboard" component={Dashboard} />
             <Route exact path="/community/calendar" component={Calendar} />
             <Route path="/community" component={Community} />
+            <Route exact path="/team" component={TeamDashboard} />
             <Route path="/team/chat" component={Chat} />
             <Route path="/team/workflow" component={WorkFlow} />
           </Switch>
