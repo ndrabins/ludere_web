@@ -10,6 +10,10 @@ import logoWhite from "../static/light.svg";
 import backgroundImg from "../static/mountains.png";
 
 class AuthPage extends Component {
+  state = {
+    loginTransition: "null"
+  };
+
   handleLoginClick() {
     this.setState({ isLoggedIn: true });
   }

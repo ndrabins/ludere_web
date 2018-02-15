@@ -22,6 +22,14 @@ export const lightTheme = createMuiTheme({
       rounded: {
         borderRadius: 7
       }
+    },
+    MuiCheckbox: {
+      default: {
+        // color: "red"
+      },
+      checked: {
+        // color: "red"
+      }
     }
   }
 });

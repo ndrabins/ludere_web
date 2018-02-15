@@ -35,7 +35,9 @@ export function createTeam(teamName, description = "") {
       },
       members: {},
       name: teamName,
-      dateCreated: timestamp
+      dateCreated: timestamp,
+      teamIconURL: null,
+      teamIconColor: "#303030"
     };
     team.members[uid] = true;
 

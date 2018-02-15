@@ -7,7 +7,6 @@ import IconButton from "material-ui/IconButton";
 import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
 import Typography from "material-ui/Typography";
 
-import DatePicker from "../../common/IconDatePicker";
 import EditableText from "../../common/EditableText";
 import TaskSubTasks from "./taskDetailComponents/TaskSubTasks";
 
@@ -17,10 +16,10 @@ class TaskDetail extends Component {
   };
   render() {
     const { classes, showTaskDetail, taskData, selectedTask } = this.props;
-    const task = taskData[selectedTask];
     if (selectedTask === null || task === undefined) {
       return <div className={classes.hiddenContainer} />;
     }
+    const task = taskData[selectedTask];
 
     return (
       <div
@@ -40,12 +39,10 @@ class TaskDetail extends Component {
               handleEnterPress={title => this.handleTitleChange(title)}
             />
           </div>
-          <div>
-            <DatePicker />
-          </div>
+          <div>something</div>
         </div>
         <div className={classes.taskContent}>
-          <TaskSubTasks subTasks={task.subTasks} />
+          <TaskSubTasks subtasks={task.subtasks} />
         </div>
       </div>
     );
@@ -101,7 +98,7 @@ const styles = theme => ({
   taskContent: {
     display: "flex",
     height: "100%",
-    backgroundColor: "red",
+    border: "red 3px solid",
     margin: 8
   }
 });

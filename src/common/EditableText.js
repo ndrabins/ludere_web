@@ -82,8 +82,7 @@ class EditableText extends Component {
 const styles = theme => ({
   container: {
     display: "flex",
-    height: "100%",
-    padding: 8
+    height: "100%"
   },
   textFieldRoot: {
     padding: 0
@@ -95,7 +94,14 @@ const styles = theme => ({
     overflowWrap: "break-word",
     wordBreak: "break-all",
     minWidth: 120,
-    minHeight: 14
+    minHeight: 14,
+    "&:hover": {
+      cursor: "text",
+      opacity: 0.5,
+      backgroundColor: "#303030",
+      border: "1px solid #303030",
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
+    }
   },
   textFieldInput: {
     borderRadius: 4,

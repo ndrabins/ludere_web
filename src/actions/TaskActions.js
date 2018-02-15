@@ -5,7 +5,8 @@ import {
   MOVE_TASK_TO_COLUMN,
   TOGGLE_TASK_DETAIL,
   SELECT_TASK,
-  UPDATE_TASK_DATE
+  UPDATE_TASK_DATE,
+  ADD_SUBTASK
 } from "./types";
 import firebase from "firebase";
 
@@ -170,5 +171,33 @@ export function updateTaskTitle(title) {
       });
 
     dispatch({ type: UPDATE_TASK_DATE });
+  };
+}
+
+export function addSubtask(subtasks) {
+  return (dispatch, getState) => {
+    const { selectedTask, selectedBoard } = getState().workflow;
+
+    console.log("subtasks", subtasks);
+    dispatch({ type: ADD_SUBTASK });
+
+    let taskRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(selectedBoard)
+      .collection("tasks")
+      .doc(selectedTask);
+
+    return taskRef
+      .update({
+        subtasks: subtasks
+      })
+      .then(function() {
+        console.log("Document successfully updated!");
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
   };
 }
