@@ -97,15 +97,11 @@ export function selectTeam(teamID) {
 }
 
 //Whenever we select a team, we should make all the calls regarding data we need for that team
-function loadTeamData(teamID) {
+export function loadTeamData(teamID) {
   //This is probs gonna need some refactoring sometime soon... God help us
   return (dispatch, getState) => {
-    let team = getState().team.teams[teamID];
-
-    if (team.modules.chat === true) {
-      dispatch(chatActions.selectChannel(null));
-      dispatch(chatActions.fetchChannels(teamID));
-      dispatch(workflowActions.fetchBoards(teamID));
-    }
+    dispatch(chatActions.selectChannel(null));
+    dispatch(chatActions.fetchChannels(teamID));
+    dispatch(workflowActions.fetchBoards(teamID));
   };
 }

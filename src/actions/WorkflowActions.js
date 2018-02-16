@@ -49,7 +49,6 @@ export function createList(boardID, listName) {
   return (dispatch, getState) => {
     dispatch({ type: CREATE_LIST });
     let { uid } = getState().auth.user;
-    // const { selectedBoard } = getState().workflow;
     let listOrder = getState().workflow.boards[boardID].listOrder;
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 

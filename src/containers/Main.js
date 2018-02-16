@@ -30,9 +30,14 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    this.props.actions.loadAppData(); //eventually this will load all initial data and show loading icon till finished.
-    this.props.actions.fetchWorkspaces();
-    this.props.actions.fetchUserProfile();
+    const { actions, selectedTeam } = this.props;
+    actions.loadAppData(); //eventually this will load all initial data and show loading icon till finished.
+    actions.fetchWorkspaces();
+    actions.fetchUserProfile();
+
+    if (selectedTeam) {
+      actions.loadTeamData(selectedTeam);
+    }
     // this.props.actions.fetchTeams();
   }
 
@@ -96,7 +101,8 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-    workspaces: state.workspace.workspaces
+    workspaces: state.workspace.workspaces,
+    selectedTeam: state.team.selectedTeam
   };
 }
 

@@ -8,7 +8,8 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 
 import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage"; // defaults to localStorage for web and AsyncStorage for react-native
+// import storage from "redux-persist/lib/storage"; //this is synchronous which is too slow.
+import * as storage from "localforage";
 import hardSet from "redux-persist/lib/stateReconciler/hardSet";
 import { PersistGate } from "redux-persist/integration/react";
 
