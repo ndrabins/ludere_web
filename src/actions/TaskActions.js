@@ -5,8 +5,7 @@ import {
   MOVE_TASK_TO_COLUMN,
   TOGGLE_TASK_DETAIL,
   SELECT_TASK,
-  UPDATE_TASK_DATE,
-  ADD_SUBTASK
+  UPDATE_TASK
 } from "./types";
 import firebase from "firebase";
 
@@ -170,15 +169,14 @@ export function updateTaskTitle(title) {
         console.error("Error updating document: ", error);
       });
 
-    dispatch({ type: UPDATE_TASK_DATE });
+    dispatch({ type: UPDATE_TASK });
   };
 }
 
-export function addSubtask(subtasks) {
+export function updateTask(updatedTask) {
   return (dispatch, getState) => {
-    console.log("adding subtasks", subtasks);
     const { selectedTask, selectedBoard } = getState().workflow;
-    dispatch({ type: ADD_SUBTASK });
+    dispatch({ type: UPDATE_TASK });
 
     let taskRef = firebase
       .firestore()
@@ -188,9 +186,7 @@ export function addSubtask(subtasks) {
       .doc(selectedTask);
 
     return taskRef
-      .update({
-        subtasks: subtasks
-      })
+      .update(updatedTask)
       .then(function() {
         console.log("Document successfully updated!");
       })

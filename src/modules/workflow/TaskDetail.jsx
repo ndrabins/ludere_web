@@ -42,7 +42,7 @@ class TaskDetail extends Component {
           <div>something</div>
         </div>
         <div className={classes.taskContent}>
-          <TaskSubTasks subtasks={task.subtasks} />
+          <TaskSubTasks task={task} />
         </div>
       </div>
     );
@@ -98,7 +98,6 @@ const styles = theme => ({
   taskContent: {
     display: "flex",
     height: "100%",
-    border: "red 3px solid",
     margin: 8
   }
 });

@@ -12,8 +12,7 @@ import {
   UPDATE_LIST,
   TOGGLE_TASK_DETAIL,
   SELECT_TASK,
-  UPDATE_TASK_DATE,
-  ADD_SUBTASK
+  UPDATE_TASK
 } from "../actions/types";
 
 const initialState = {
@@ -43,7 +42,7 @@ export default function workflow(state = initialState, action) {
       return state;
     case MOVE_TASK_TO_COLUMN:
       return state;
-    case UPDATE_TASK_DATE:
+    case UPDATE_TASK:
       return state;
     case UPDATE_LIST:
       return state;
@@ -52,8 +51,6 @@ export default function workflow(state = initialState, action) {
     case CREATE_BOARD:
       return state;
     case FETCH_BOARDS:
-      return state;
-    case ADD_SUBTASK:
       return state;
     default:
       return state;

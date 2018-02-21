@@ -29,21 +29,30 @@ class TaskDetailSubtasks extends Component {
 
   handleCreateSubtask = () => {
     const { subtaskContent } = this.state;
-    const { subtasks } = this.props;
-    const newSubtasks = [...subtasks, {content: subtaskContent, completed: false}]
+    const { task } = this.props;
+    const { subtasks } = task;
+    task.subtasks = [...subtasks, {content: subtaskContent, completed: false}]
 
-    this.props.actions.addSubtask(newSubtasks);
+    this.props.actions.updateTask(task);
     this.setState({ subtaskContent: "" });
   };
 
+  handleToggleSubtask = (index) => {
+    const { task } = this.props;
+    const { subtasks } = task;
+    subtasks[index].completed = !subtasks[index].completed;
+    this.props.actions.updateTask(task);
+
+  }
+
   render() {
-    const { classes, subtasks } = this.props;
+    const { classes, task } = this.props;
     const { subtaskContent } = this.state;
 
     return (
       <div className={classes.root}>
         <Typography>Subtasks</Typography>
-        <SubtaskList subtasks={subtasks} />
+        <SubtaskList subtasks={task.subtasks} handleToggleSubtask={this.handleToggleSubtask} />
         <TextField
           id="subtaskContent"
           label="Subtask Name"

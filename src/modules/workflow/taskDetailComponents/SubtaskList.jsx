@@ -11,7 +11,7 @@ class SubtaskList extends Component {
         {subtasks.map((subtask, index) => (
           <div
             key={index}
-            // onClick={this.handleToggle(value)}
+            onClick={() => this.props.handleToggleSubtask(index)}
             className={classes.subtask}
           >
             <Checkbox checked={subtask.completed} tabIndex={-1} disableRipple={true} />

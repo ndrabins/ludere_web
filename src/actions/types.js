@@ -107,5 +107,4 @@ export const CHANGE_TASK_ORDER = "CHANGE_TASK_ORDER";
 export const MOVE_TASK_TO_COLUMN = "MOVE_TASK_TO_COLUMN";
 export const CREATE_TASK = "CREATE_TASK";
 export const FETCH_TASKS = "FETCH_TASKS";
-export const UPDATE_TASK_DATE = "UPDATE_TASK_DATE";
-export const ADD_SUBTASK = "ADD_SUBTASK";
+export const UPDATE_TASK = "UPDATE_TASK";
