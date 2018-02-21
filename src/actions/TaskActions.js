@@ -176,9 +176,8 @@ export function updateTaskTitle(title) {
 
 export function addSubtask(subtasks) {
   return (dispatch, getState) => {
+    console.log("adding subtasks", subtasks);
     const { selectedTask, selectedBoard } = getState().workflow;
-
-    console.log("subtasks", subtasks);
     dispatch({ type: ADD_SUBTASK });
 
     let taskRef = firebase

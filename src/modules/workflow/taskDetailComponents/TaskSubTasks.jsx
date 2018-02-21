@@ -30,13 +30,9 @@ class TaskDetailSubtasks extends Component {
   handleCreateSubtask = () => {
     const { subtaskContent } = this.state;
     const { subtasks } = this.props;
-    const newSubtasks = subtasks.push({
-      content: subtaskContent,
-      completed: false
-    });
+    const newSubtasks = [...subtasks, {content: subtaskContent, completed: false}]
 
     this.props.actions.addSubtask(newSubtasks);
-    console.log('subtasks are:', newSubtasks)
     this.setState({ subtaskContent: "" });
   };
 

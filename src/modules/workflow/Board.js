@@ -15,6 +15,11 @@ class Board extends Component {
   state = {
     listName: ""
   };
+
+  componentDidMount() {
+    this.props.actions.fetchBoardData(this.props.selectedBoard);
+  }
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
