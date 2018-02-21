@@ -42,7 +42,6 @@ class TaskDetailSubtasks extends Component {
     const { subtasks } = task;
     subtasks[index].completed = !subtasks[index].completed;
     this.props.actions.updateTask(task);
-
   }
 
   render() {

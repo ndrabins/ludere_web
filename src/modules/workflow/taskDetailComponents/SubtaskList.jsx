@@ -15,7 +15,7 @@ class SubtaskList extends Component {
             className={classes.subtask}
           >
             <Checkbox checked={subtask.completed} tabIndex={-1} disableRipple={true} />
-            <Typography className={classes.text}>{subtask.content}</Typography>
+            <Typography className={subtask.completed ? classes.completedText : classes.text}>{subtask.content}</Typography>
           </div>
         ))}
       </div>
@@ -39,7 +39,17 @@ const styles = theme => ({
     display: "flex",
     wordWrap: "break-all",
     overflowWrap: "break-word",
-    wordBreak: "break-all"
+    wordBreak: "break-all",
+    transition: "color 0.5s ease"
+  },
+  completedText: {
+    display: "flex",
+    wordWrap: "break-all",
+    overflowWrap: "break-word",
+    wordBreak: "break-all",
+    textDecoration: "line-through",
+    color: '#B0B2B6',
+    transition: "color 0.25s ease"
   }
 });
 
