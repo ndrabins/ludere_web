@@ -71,7 +71,7 @@ class CreateBoardButton extends Component {
               Cancel
             </Button>
             <Button
-              raised
+              variant="raised"
               onClick={this.handleCreateBoard}
               color="primary"
               style={{ color: "white" }}

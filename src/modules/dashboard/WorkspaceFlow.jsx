@@ -40,7 +40,7 @@ class WorkspaceFlow extends Component {
                   background: "linear-gradient(to left, #6fe5c9, #00bcd4)"
                 }
               }}
-              raised
+              variant="raised"
               onClick={() => this.selectOption("create")}
             >
               Create Workspace
@@ -56,7 +56,7 @@ class WorkspaceFlow extends Component {
                 background: "linear-gradient(to right, #a770ef, #cf8bf3)"
               }
             }}
-            raised
+            variant="raised"
             onClick={() => this.selectOption("join")}
           >
             Join Workspace

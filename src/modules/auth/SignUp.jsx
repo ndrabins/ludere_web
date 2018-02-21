@@ -72,7 +72,7 @@ class SignUp extends Component {
           />
         </FormControl>
         <div style={styles.button}>
-          <Button raised color="primary" onClick={() => this.props.actions.signUpUser(this.state.email, this.state.password)}>
+          <Button variant="raised" color="primary" onClick={() => this.props.actions.signUpUser(this.state.email, this.state.password)}>
             Sign Up
           </Button>
         </div>

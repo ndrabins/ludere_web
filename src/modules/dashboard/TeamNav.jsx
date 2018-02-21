@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
+import { withStyles } from "material-ui/styles";
 
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
@@ -50,7 +51,7 @@ class TeamNav extends Component {
           <div style={selectIndicatorStyle ? styles.selectIndicator : null} />
           <Tooltip id="tooltip-right-start" title={team.name} placement="right">
             <Button
-              fab
+              variant="fab"
               style={styles.teamButton}
               onClick={() => this.handleTeamSelect(key)}
             >
@@ -80,7 +81,7 @@ class TeamNav extends Component {
               placement="right"
             >
               <Button
-                fab
+                variant="fab"
                 style={{ ...styles.teamButton, ...styles.communityButton }}
                 onClick={() => this.handleCommunitySelect()}
               >
@@ -172,5 +173,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  withRouter(TeamNav)
+  withStyles(styles)(
+  withRouter(TeamNav))
 );

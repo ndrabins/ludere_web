@@ -43,7 +43,7 @@ class AddTeamButton extends Component {
       <div>
         <Tooltip id="tooltip-right-start" title="Add team" placement="right">
           <Button
-            fab
+            variant="fab"
             aria-label="add"
             style={styles.addTeamButton}
             onClick={this.handleClickOpen}

@@ -64,7 +64,7 @@ class CreateChatButton extends Component {
               Cancel
             </Button>
             <Button
-              raised
+              variant="raised"
               onClick={this.handleCreateChannel}
               color="primary"
               style={{ color: "white" }}

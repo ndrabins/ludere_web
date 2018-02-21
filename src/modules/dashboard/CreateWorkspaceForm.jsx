@@ -20,7 +20,7 @@ class CreateWorkspaceForm extends Component {
         />
 
         <div>
-          <Button type="submit" disabled={pristine || submitting} raised color="primary" style={styles.button}>
+          <Button type="submit" disabled={pristine || submitting} variant="raised" color="primary" style={styles.button}>
             Submit
           </Button>
         </div>
