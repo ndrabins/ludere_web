@@ -43,18 +43,23 @@ class TeamNav extends Component {
     }
 
     let focusTeam = location.pathname.includes("team");
+    let index = 0;
+    console.log(ColorArray);
 
     let teams = Map(this.props.teams, (team, key) => {
       let selectIndicatorStyle = focusTeam && this.props.selectedTeam === key;
+      index++;
       return (
         <div key={key} className={classes.teamButtonContainer}>
           <span
-            className={selectIndicatorStyle ? classes.selectIndicator : classes.notSelected}
+            style={selectIndicatorStyle ?
+              {...styles.selectIndicator, backgroundColor: ColorArray[index % 6]} :
+              {...styles.notSelected, backgroundColor: ColorArray[index % 6]}}
           />
           <Tooltip id="tooltip-right-start" title={team.name} placement="right">
             <Button
               variant="fab"
-              className={classes.teamButton}
+              style={{...styles.teamButton, backgroundColor: ColorArray[index % 6]}}
               onClick={() => this.handleTeamSelect(key)}
             >
               <div className={classes.teamAbbreviation}>{team.name.slice(0,2)}</div>
@@ -74,7 +79,10 @@ class TeamNav extends Component {
       <div className={classes.containerWrapper}>
         <div className={classes.container}>
           <div className={classes.teamButtonContainer}>
-            <span className={focusCommunity ? classes.selectIndicator : classes.notSelected} />
+            <span style={focusCommunity ?
+              {...styles.selectIndicator, background: `linear-gradient(to left, #6fe5c9, #00bcd4)`} :
+              {...styles.notSelected, background: `linear-gradient(to left, #6fe5c9, #00bcd4)`}}
+            />
             <Tooltip
               id="tooltip-right-start"
               title="Community"
