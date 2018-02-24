@@ -47,7 +47,6 @@ class NavBar extends Component {
         <div style={styles.navBegin}>
           {!this.props.drawerVisible && (
             <Button
-              dense
               style={styles.menuButton}
               onClick={this.props.toggleDrawer}
             >

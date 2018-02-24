@@ -15,9 +15,9 @@
     "material-ui": "^1.0.0-beta.34",
     "material-ui-icons": "^1.0.0-beta.17",
     "moment": "^2.19.2",
-    "react": "^16.0.0",
+    "react": "^16.2.0",
     "react-beautiful-dnd": "^4.0.1",
-    "react-dom": "^16.0.0",
+    "react-dom": "^16.2.0",
     "react-lottie": "^0.2.2",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
@@ -29,9 +29,11 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "css-font-family": "^1.0.7"
+    "css-font-family": "^1.0.7",
+    "source-map-explorer": "^1.5.0"
   },
   "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

@@ -39,7 +39,6 @@ class TaskDetail extends Component {
               handleEnterPress={title => this.handleTitleChange(title)}
             />
           </div>
-          <div>something</div>
         </div>
         <div className={classes.taskContent}>
           <TaskSubTasks task={task} />
@@ -80,7 +79,6 @@ const styles = theme => ({
   },
   header: {
     borderTopLeftRadius: 10,
-    paddingTop: 10,
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import { withStyles } from "material-ui/styles";
+import ColorArray from '../../utility/constants/colorsArray';
 
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
@@ -36,8 +37,7 @@ class TeamNav extends Component {
   }
 
   renderTeams() {
-    const { location } = this.props;
-
+    const { location, classes } = this.props;
     if (!this.props.teams) {
       return;
     }
@@ -47,15 +47,17 @@ class TeamNav extends Component {
     let teams = Map(this.props.teams, (team, key) => {
       let selectIndicatorStyle = focusTeam && this.props.selectedTeam === key;
       return (
-        <div key={key} style={styles.teamButtonContainer}>
-          <div style={selectIndicatorStyle ? styles.selectIndicator : null} />
+        <div key={key} className={classes.teamButtonContainer}>
+          <span
+            className={selectIndicatorStyle ? classes.selectIndicator : classes.notSelected}
+          />
           <Tooltip id="tooltip-right-start" title={team.name} placement="right">
             <Button
               variant="fab"
-              style={styles.teamButton}
+              className={classes.teamButton}
               onClick={() => this.handleTeamSelect(key)}
             >
-              <Avatar style={styles.avatar}>{team.name[0]}</Avatar>
+              <div className={classes.teamAbbreviation}>{team.name.slice(0,2)}</div>
             </Button>
           </Tooltip>
         </div>
@@ -64,17 +66,15 @@ class TeamNav extends Component {
     return teams;
   }
 
-  // />
   render() {
-    const { location } = this.props;
-
+    const { location, classes } = this.props;
     let focusCommunity = location.pathname.includes("community");
 
     return (
-      <div style={styles.containerWrapper}>
-        <div style={styles.container}>
-          <div style={{ ...styles.teamButtonContainer, paddingTop: 12 }}>
-            <div style={focusCommunity ? styles.selectIndicator : null} />
+      <div className={classes.containerWrapper}>
+        <div className={classes.container}>
+          <div className={classes.teamButtonContainer}>
+            <span className={focusCommunity ? classes.selectIndicator : classes.notSelected} />
             <Tooltip
               id="tooltip-right-start"
               title="Community"
@@ -82,21 +82,14 @@ class TeamNav extends Component {
             >
               <Button
                 variant="fab"
-                style={{ ...styles.teamButton, ...styles.communityButton }}
+                className={classes.communityButton}
                 onClick={() => this.handleCommunitySelect()}
               >
                 <PeopleIcon />
               </Button>
             </Tooltip>
           </div>
-          <div
-            style={{
-              width: "40px",
-              borderBottom: "#6f6f6f 2px solid",
-              marginTop: 5,
-              marginBottom: 5
-            }}
-          />
+          <div className={classes.divider} />
           {this.renderTeams()}
           <AddTeamButton />
         </div>
@@ -108,54 +101,69 @@ class TeamNav extends Component {
 const styles = {
   containerWrapper: {
     height: "100%",
-    maxHeight: "100%",
-    overflow: "hidden",
-    width: 58
+    overflowY: "auto",
+    overflowX: "hidden",
+    width: 400, //the width and margin are like this to 1. Hide the scroll bar 2. Allow the tooltips to have room to show
+    marginRight: -340,
+  },
+  divider: {
+    width: 34,
+    border: "1px solid #C3C3C3",
+    marginTop: 5,
+    marginBottom: 5
   },
   container: {
     display: "flex",
-    width: 58, //add 18 for
-    paddingRight: 18,
+    width: 60,
     backgroundColor: "#000000",
     flexDirection: "column",
     alignItems: "center",
     boxShadow:
       "0 5.5px 5px 0 rgba(0, 0, 0, 0.24), 0 9px 18px 0 rgba(0, 0, 0, 0.18)",
-    height: "100%"
-    // overflowY: 'auto',
-    // overflowX: 'hidden',
-    // paddingRight: 18,
+    height: "100%",
+    paddingTop: 5,
   },
   communityButton: {
     color: "#FFF",
-    background: `linear-gradient(to left, #6fe5c9, #00bcd4)`
+    background: `linear-gradient(to left, #6fe5c9, #00bcd4)`,
+    width: 36,
+    height: 36,
   },
   teamButton: {
     width: 36,
     height: 36,
-    marginLeft: 11
   },
-  avatar: {
-    width: 36,
-    height: 36
-  },
-  selectIndicator: {
-    // position: 'absolute',
-    width: 4,
+  notSelected: {
+    width: 0,
+    position: 'absolute',
     height: 38,
     backgroundColor: "white",
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
-    alignSelf: "flex-start",
-    display: "flex"
-    // transition: "top 0.25s linear",  },
+    transition: "width .25s linear",
+    left: 0,
+  },
+  selectIndicator: {
+    position: 'absolute',
+    width: 7,
+    height: 38,
+    backgroundColor: "white",
+    borderTopRightRadius: 4,
+    borderBottomRightRadius: 4,
+    transition: "width .25s linear",
+    left: 0,
   },
   teamButtonContainer: {
     display: "flex",
     flexDirection: "row",
+    justifyContent: "center",
     width: "100%",
     minHeight: 38,
     margin: "4px 0px 4px 0px"
+  },
+  teamAbbreviation:{
+    fontSize: 14,
+    color: 'white',
   }
 };
 
@@ -173,6 +181,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(
-  withRouter(TeamNav))
+  withStyles(styles)(withRouter(TeamNav))
 );

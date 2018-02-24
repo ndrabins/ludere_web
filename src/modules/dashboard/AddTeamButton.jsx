@@ -30,6 +30,9 @@ class AddTeamButton extends Component {
   };
 
   handleCreateTeam = () => {
+    if(this.state.teamName.length < 2){
+      return;
+    }
     this.props.actions.createTeam(this.state.teamName);
     this.handleRequestClose();
   };
@@ -79,6 +82,7 @@ class AddTeamButton extends Component {
             </Button>
             <Button
               onClick={this.handleCreateTeam}
+              variant='raised'
               color="primary"
               raised
               style={{ color: "white" }}
