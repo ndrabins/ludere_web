@@ -44,7 +44,6 @@ class TeamNav extends Component {
 
     let focusTeam = location.pathname.includes("team");
     let index = 0;
-    console.log(ColorArray);
 
     let teams = Map(this.props.teams, (team, key) => {
       let selectIndicatorStyle = focusTeam && this.props.selectedTeam === key;

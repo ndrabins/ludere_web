@@ -107,7 +107,7 @@ const styles = {
     color: "#FFFFFF",
 
     position: "relative",
-    transition: "width 0.4s ease",
+    transition: "width 0.4s ease-out",
   },
   moduleSignUpClosed: {
     width: "150px",
@@ -124,7 +124,7 @@ const styles = {
     borderRadius: "15px 0px 0px 15px",
 
     position: "relative",
-    transition: "width 0.4s ease",
+    transition: "width 0.4s ease-out",
   },
   headerClosed: {
     color: "#FFFFFF",

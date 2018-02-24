@@ -82,7 +82,7 @@ class SignIn extends Component {
 const styles = {
   moduleSignInOpen: {
     position: "relative",
-    transition: "width 0.4s ease",
+    transition: "width 0.4s ease-out",
 
     width: "350px",
     minHeight: "300px",
@@ -110,7 +110,7 @@ const styles = {
     justifyContent: "center",
 
     position: "relative",
-    transition: "width 0.4s ease",
+    transition: "width 0.4s ease-out",
 
     padding: "50px",
     backgroundImage: `linear-gradient(to left, #6fe5c9, #00bcd4), linear-gradient(#000000, #000000)`,
