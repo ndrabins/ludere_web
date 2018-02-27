@@ -38,7 +38,7 @@ class TeamDashboard extends Component {
           </Grid>
           <Grid item xs={12} className={classes.teamContainerItem}>
             <TeamCard
-              title={"Activity"}
+              title={"Activity "}
               background={`linear-gradient(to right, #29b6f6, #6f86d6)`}
             >
               <TeamMembers />
