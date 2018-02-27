@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-
-import fireIcon from "../../static/teamfire.svg";
-
 import CommunitySideNav from "../community/CommunitySideNav";
 import ChatSideNav from "../chat/ChatSideNav";
 import WorkflowSideNav from "../workflow/WorkflowSideNav";
@@ -10,28 +7,9 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 // import SelectableTextButton from '../../common/SelectableTextButton';
 
-import { Route } from "react-router-dom";
+import TeamOverviewTitle from './TeamOverviewTitle';
 
-class TeamOverviewTitle extends Component {
-  render() {
-    return (
-      <div style={styles.title}>
-        <div
-          style={{
-            display: "flex",
-            alignContent: "center",
-            justifyContent: "center"
-          }}
-        >
-          <img src={fireIcon} />
-          <div style={{ marginLeft: 14, display: "flex", alignSelf: "center" }}>
-            Team Overview
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+import { Route } from "react-router-dom";
 
 class SideNavModules extends Component {
   render() {

@@ -112,6 +112,7 @@ const styles = {
     overflowX: "hidden",
     width: 400, //the width and margin are like this to 1. Hide the scroll bar 2. Allow the tooltips to have room to show
     marginRight: -340,
+    backgroundColor: '#000000'
   },
   divider: {
     width: 34,
@@ -161,6 +162,7 @@ const styles = {
     left: 0,
   },
   teamButtonContainer: {
+    position: 'relative',
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",

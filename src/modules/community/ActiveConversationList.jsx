@@ -16,9 +16,7 @@ class ActiveConversationList extends Component {
     let conversations = Map(this.props.conversations, (conversation, key) => {
       let title = "";
       Map(conversation.members, (memberStatus, memberID) => {
-        if (memberID !== this.props.myID) {
-          title += this.props.workspaceUsers[memberID].displayName;
-        }
+        title += this.props.workspaceUsers[memberID].displayName;
       });
 
       if (this.props.activeConversations[key]) {

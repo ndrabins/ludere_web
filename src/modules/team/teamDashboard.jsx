@@ -7,6 +7,8 @@ import Typography from "material-ui/Typography";
 import Grid from "material-ui/Grid";
 import Paper from "material-ui/Paper";
 
+import InviteMembers from './InviteMembers';
+
 class TeamDashboard extends Component {
   render() {
     const { classes } = this.props;
@@ -16,7 +18,9 @@ class TeamDashboard extends Component {
           <Grid item xs={12}>
             <Grid container spacing={0} className={classes.teamContainer}>
               <Grid item xs={6} className={classes.teamContainerItem}>
-                <Paper className={classes.paperContainer} elevation={8} />
+                <Paper className={classes.paperContainer} elevation={8}>
+                  <InviteMembers />
+                </Paper>
               </Grid>
               <Grid item xs={6} className={classes.teamContainerItem}>
                 <Paper className={classes.paperContainer} elevation={8}/>

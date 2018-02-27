@@ -16,7 +16,7 @@ import Community from "../modules/community/Community";
 //Modules
 import WorkFlow from "../modules/workflow/Workflow";
 import Chat from "../modules/chat/Chat";
-import TeamDashboard from "../modules/team/teamDashboard";
+import TeamDashboard from "../modules/team/TeamDashboard";
 
 const drawerWidth = 298;
 

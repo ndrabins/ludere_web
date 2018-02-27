@@ -12,16 +12,6 @@ import Avatar from 'material-ui/Avatar';
 import PersonOutlineIcon from 'material-ui-icons/PersonOutline';
 
 class CommunityList extends Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      // order: 'asc',
-      // orderBy: 'calories',
-      // selected
-    }
-  }
-
   handleUserSelect(uid, user) {
     this.props.history.push("/community/chat");
     this.props.actions.startDirectMessage(uid, user);
@@ -31,11 +21,9 @@ class CommunityList extends Component {
 
   renderUsers() {
     let users = Map(this.props.workspaceUsers, (user, uid) => {
-      if(this.props.myID === uid){
-        return; // don't render my own name in the list of users
-      }
-
-
+      // if(this.props.myID === uid){
+      //   return; // don't render my own name in the list of users
+      // }
       return (
         <TableRow key={uid} hover style={{ cursor: "pointer" }} onClick={() => this.handleUserSelect(uid, user)} >
           <TableCell>
