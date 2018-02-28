@@ -21,13 +21,13 @@ class TeamDashboard extends Component {
               title={"Team Members"}
               background={`linear-gradient(to left, #6fe5c9, #00bcd4)`}
             >
-              {/* <TeamMembers /> */}
+              <TeamMembers />
             </TeamCard>
             <TeamCard
               title={"Notifications"}
               background={`linear-gradient(to right, #e57373, #ee8d68)`}
             >
-              {/* <TeamMembers /> */}
+              <div> coming soon </div>
             </TeamCard>
           </div>
         </div>
@@ -37,7 +37,7 @@ class TeamDashboard extends Component {
               title={"Activity"}
               background={`linear-gradient(to right, #29b6f6, #6f86d6)`}
             >
-              {/* <TeamMembers /> */}
+              <div> coming soon </div>
             </TeamCard>
           </div>
         </div>
