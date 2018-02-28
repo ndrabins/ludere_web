@@ -15,36 +15,32 @@ class TeamDashboard extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Grid container spacing={0} className={classes.teamContainer}>
-          <Grid item xs={12} className={classes.teamContainer}>
-            <Grid container spacing={0} className={classes.teamContainer}>
-              <Grid item xs={6} className={classes.teamContainerItem}>
-                <TeamCard
-                  title={"Team Members"}
-                  background={`linear-gradient(to left, #6fe5c9, #00bcd4)`}
-                >
-                  <TeamMembers />
-                </TeamCard>
-              </Grid>
-              <Grid item xs={6} className={classes.teamContainerItem}>
-                <TeamCard
-                  title={"Notifications"}
-                  background={`linear-gradient(to right, #e57373, #ee8d68)`}
-                >
-                  <TeamMembers />
-                </TeamCard>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs={12} className={classes.teamContainerItem}>
+        <div className={classes.row}>
+          <div className={classes.column}>
+            <TeamCard
+              title={"Team Members"}
+              background={`linear-gradient(to left, #6fe5c9, #00bcd4)`}
+            >
+              {/* <TeamMembers /> */}
+            </TeamCard>
+            <TeamCard
+              title={"Notifications"}
+              background={`linear-gradient(to right, #e57373, #ee8d68)`}
+            >
+              {/* <TeamMembers /> */}
+            </TeamCard>
+          </div>
+        </div>
+        <div className={classes.row}>
+          <div className={classes.column}>
             <TeamCard
               title={"Activity"}
               background={`linear-gradient(to right, #29b6f6, #6f86d6)`}
             >
-              <TeamMembers />
+              {/* <TeamMembers /> */}
             </TeamCard>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
       </div>
     );
   }
@@ -52,17 +48,21 @@ class TeamDashboard extends Component {
 
 const styles = theme => ({
   root: {
-    // flexGrow: 1,
     height: "100%",
     minHeight: 500,
-    display:'flex',
+    display: "flex",
+    flexDirection: "column",
+    padding: 5
   },
-  teamContainer: {
-
+  row: {
+    paddingToz: 10,
+    height: "50%",
+    display: "flex"
   },
-  teamContainerItem: {
-    padding: 10,
-    flex: 1,
+  column: {
+    display: "flex",
+    height: "100%",
+    width: "100%"
   }
 });
 

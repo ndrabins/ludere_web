@@ -16,7 +16,7 @@ class TeamMembers extends Component {
     return (
       <div className={classes.root}>
         <List className={classes.listRoot}>
-          {[0, 1, 2, 3, 4, 5, 6, 7,8,9,10].map(value => (
+          {[0, 1, 2, 3].map(value => (
             <ListItem key={value} dense button className={classes.listItem}>
               <Avatar alt="Remy Sharp" src="https://scontent.ford1-1.fna.fbcdn.net/v/t1.0-1/c0.0.160.160/p160x160/22089762_10212994040620494_6391197030639313727_n.jpg?oh=3c0e14ac86a4edf2ad51c7bd32319402&oe=5B051ABF" />
               <ListItemText primary={`Line item ${value + 1}`} />

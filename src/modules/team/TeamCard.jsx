@@ -48,7 +48,8 @@ const styles = theme => ({
   paperContainer: {
     display: 'flex',
     flexDirection: 'column',
-    flex: 1
+    margin: 10,
+    flex: 1,
   },
 });
 
