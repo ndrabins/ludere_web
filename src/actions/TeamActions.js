@@ -17,7 +17,7 @@ import * as workflowActions from "./WorkflowActions";
 
 require("firebase/firestore");
 
-export function createTeam(teamName, description = "") {
+export function createTeam(teamName, description = "", initialTeam = false) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
     let { selectedWorkspace } = getState().workspace;
@@ -26,6 +26,11 @@ export function createTeam(teamName, description = "") {
     let teamRef = firebase
       .firestore()
       .collection(`workspaces/${selectedWorkspace}/teams`);
+
+    let workspaceRef = firebase
+      .firestore()
+      .collection("workspaces")
+      .doc(selectedWorkspace);
 
     let team = {
       description: description,
@@ -47,9 +52,13 @@ export function createTeam(teamName, description = "") {
       .add(team)
       .then(function(docRef) {
         dispatch({ type: CREATE_TEAM_SUCCESS });
-
-        //Set context to created team
         dispatch(selectTeam(docRef.id));
+
+        console.log("inital team is", initialTeam);
+        if (initialTeam) {
+          console.log("CREATING INITAL TEAM");
+          workspaceRef.update({ initalTeam: docRef.id });
+        }
 
         //This needs to be refactored into a general purpose setup for modules function.
         //when a team is created with the chat module, initialize their chat module with a general and announcements channel?
@@ -103,5 +112,27 @@ export function loadTeamData(teamID) {
     dispatch(chatActions.selectChannel(null));
     dispatch(chatActions.fetchChannels(teamID));
     dispatch(workflowActions.fetchBoards(teamID));
+  };
+}
+
+export function joinTeam(teamID, userID = null) {
+  return (dispatch, getState) => {
+    const { selectedWorkspace } = getState().workspace;
+    let UID;
+    if ((userID = null)) {
+      UID = getState().auth.user.uid;
+    } else {
+      UID = userID;
+    }
+
+    let teamRef = firebase
+      .firestore()
+      .collection(`workspaces/${selectedWorkspace}/teams`)
+      .doc(teamID);
+
+    let team = { members: {} };
+    team.members[UID] = true;
+
+    teamRef.update(team);
   };
 }

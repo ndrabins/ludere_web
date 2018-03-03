@@ -30,7 +30,7 @@ var config = {
 firebase.initializeApp(config);
 
 const persistConfig = {
-  key: "root",
+  key: "ludereRoot",
   storage,
   stateReconciler: hardSet
 };

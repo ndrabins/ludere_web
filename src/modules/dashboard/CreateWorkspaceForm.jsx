@@ -17,6 +17,7 @@ class CreateWorkspaceForm extends Component {
           component={TextField}
           placeholder="Workspace Name"
           validate={required}
+          autoComplete="off"
         />
 
         <div>

@@ -11,7 +11,7 @@ import ProfileReducer from "./ProfileReducer";
 import WorkflowReducer from "./WorkflowReducer";
 import { reducer as formReducer } from "redux-form";
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   auth: AuthReducer,
   team: TeamReducer,
   workspace: WorkspaceReducer,
@@ -21,5 +21,13 @@ const rootReducer = combineReducers({
   workflow: WorkflowReducer,
   form: formReducer
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === "SIGN_OUT_USER") {
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+};
 
 export default rootReducer;

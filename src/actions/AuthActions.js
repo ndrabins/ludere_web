@@ -10,6 +10,7 @@ import {
 } from "./types";
 import firebase from "firebase";
 import { INITIALIZE } from "redux-form/lib/actionTypes";
+import * as localforage from "localforage";
 
 require("firebase/firestore");
 
@@ -106,6 +107,17 @@ export function signOutUser() {
         dispatch({
           type: SIGN_OUT_USER
         });
+      });
+
+    localforage
+      .clear()
+      .then(function() {
+        // Run this code once the database has been entirely deleted.
+        console.log("Clearing all Storage");
+      })
+      .catch(function(err) {
+        // This code runs if there were any errors
+        console.log(err);
       });
   };
 }

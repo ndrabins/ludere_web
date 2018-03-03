@@ -38,6 +38,9 @@ export function createWorkspace(values) {
       members: {}
     };
 
+    const initialTeam = true; // set flag that this is the first team for workspace
+    const description = "";
+
     workspace.members[uid] = true;
 
     dispatch({ type: CREATE_WORKSPACE });
@@ -67,7 +70,9 @@ export function createWorkspace(values) {
           });
 
         //Create workspace with an initial team that everyone is a part of.
-        dispatch(teamActions.createTeam(workspaceName));
+        dispatch(
+          teamActions.createTeam(workspaceName, description, initialTeam)
+        );
       })
       .catch(function(error) {
         console.error("Error adding document: ", error);
@@ -76,27 +81,30 @@ export function createWorkspace(values) {
   };
 }
 
-export function joinWorkspace(formValues) {
+export function joinWorkspace(workspaceID, history) {
   return (dispatch, getState) => {
-    let { uid } = getState().auth.user;
-
-    let workspaceUID = formValues.workspaceUrl;
     dispatch({ type: JOIN_WORKSPACE });
+    let { user } = getState().auth;
+
+    if (user == null) {
+      console.log("no user logged in");
+      return;
+    }
 
     let membersUpdate = {};
     let usersWorkspaceUpdate = {};
 
-    membersUpdate[`members.${uid}`] = true;
-    usersWorkspaceUpdate[`workspaces.${workspaceUID}`] = true;
+    membersUpdate[`members.${user.uid}`] = true;
+    usersWorkspaceUpdate[`workspaces.${workspaceID}`] = true;
 
     let workspaceRef = firebase
       .firestore()
       .collection("workspaces")
-      .doc(workspaceUID);
+      .doc(workspaceID);
     let userRef = firebase
       .firestore()
       .collection("users")
-      .doc(uid);
+      .doc(user.uid);
 
     var batch = firebase.firestore().batch();
 
@@ -107,6 +115,7 @@ export function joinWorkspace(formValues) {
       .commit()
       .then(function() {
         dispatch({ type: JOIN_WORKSPACE_SUCCESS });
+        history.push("/team/");
       })
       .catch(function(error) {
         console.log("Transaction failed: ", error);

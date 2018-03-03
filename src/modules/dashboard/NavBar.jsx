@@ -77,7 +77,7 @@ class NavBar extends Component {
               id="simple-menu"
               anchorEl={this.state.anchorEl}
               open={this.state.openNavMenu}
-              onRequestClose={this.handleRequestCloseNavMenu}
+              onClose={this.handleRequestCloseNavMenu}
             >
               <MenuItem onClick={this.handleRequestCloseNavMenu}>
                 Profile

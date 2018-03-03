@@ -13,9 +13,10 @@ import {
 import { lightTheme } from "../utility/themes"; //darkTheme
 import { MuiThemeProvider } from "material-ui/styles";
 
-import Loading from "../modules/auth/Loading";
+import Loading from "../common/Loading";
 import Main from "./Main";
 import AuthPage from "./AuthPage";
+import JoinWorkspace from "../modules/workspace/JoinWorkspace";
 // import Home from "./Home";
 
 function PrivateRoute({ component: Component, authenticated, ...rest }) {
@@ -61,6 +62,10 @@ class App extends Component {
           <Router>
             <div style={{ height: "100%" }}>
               <Switch>
+                <Route
+                  path="/joinWorkspace/:workspaceID"
+                  component={JoinWorkspace}
+                />
                 <PublicRoute
                   authenticated={this.props.authenticated}
                   path="/auth"

@@ -46,7 +46,7 @@ class CreateChatButton extends Component {
         >
           <AddIcon style={{ fontSize: 16 }} />
         </IconButton>
-        <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
+        <Dialog open={this.state.open} onClose={this.handleRequestClose}>
           <DialogTitle>Create Channel</DialogTitle>
           <DialogContent style={{ width: 300, maxWidth: 400 }}>
             <TextField

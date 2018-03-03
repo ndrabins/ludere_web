@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Lottie from 'react-lottie';
-import * as animationData from '../../static/loading.json';
+import * as animationData from '../static/loading.json';
 
 class Loading extends Component {
    constructor(props) {
