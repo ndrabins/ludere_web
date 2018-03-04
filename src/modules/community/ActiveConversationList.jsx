@@ -9,14 +9,12 @@ import ActiveConversationButton from "./ActiveConversationButton";
 class ActiveConversationList extends Component {
   renderConversations() {
     if (!this.props.conversations || !this.props.activeConversations) {
-      //return nothing while these are getting fetched.
       return;
     }
 
     let conversations = Map(this.props.conversations, (conversation, key) => {
       let title = "";
       Map(conversation.members, (memberStatus, memberID) => {
-        console.log('workspaceusers', this.props.workspaceUsers)
         title += this.props.workspaceUsers[memberID].displayName;
       });
 

@@ -31,7 +31,8 @@ class InviteButton extends Component {
     const { open, copiedValue, copied } = this.state;
 
     const myWorkspace = workspaces[selectedWorkspace];
-    const url=`http://localhost:3000/joinWorkspace/${selectedWorkspace}`
+    const localURL = window.location.href.split('/'); //get just base URL
+    const url=`${localURL[2]}/joinWorkspace/${selectedWorkspace}`
 
     return (
       <div className={classes.container}>
