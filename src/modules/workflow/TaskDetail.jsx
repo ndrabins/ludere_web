@@ -16,6 +16,11 @@ class TaskDetail extends Component {
   };
   render() {
     const { classes, showTaskDetail, taskData, selectedTask } = this.props;
+
+    if(taskData == null){
+      return;
+    }
+
     const task = taskData[selectedTask];
 
     if (selectedTask === null || task === undefined) {

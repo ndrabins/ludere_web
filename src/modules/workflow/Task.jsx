@@ -25,7 +25,6 @@ class Task extends Component {
             display: "flex",
             wordWrap: "break-all",
             overflowWrap: "break-word",
-            wordBreak: "break-all"
           }}
         >
           {task.title}
@@ -44,7 +43,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
     backgroundColor: "white",
-    padding: 10, 
+    padding: 10,
     margin: `0 0 8px 0`,
     display: "flex",
     cursor: 'pointer',

@@ -92,7 +92,6 @@ const styles = theme => ({
     display: "flex",
     wordWrap: "break-all",
     overflowWrap: "break-word",
-    wordBreak: "break-all",
     minWidth: 120,
     minHeight: 14,
     "&:hover": {

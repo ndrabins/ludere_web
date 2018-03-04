@@ -39,14 +39,12 @@ const styles = theme => ({
     display: "flex",
     wordWrap: "break-all",
     overflowWrap: "break-word",
-    wordBreak: "break-all",
     transition: "color 0.5s ease-out"
   },
   completedText: {
     display: "flex",
     wordWrap: "break-all",
     overflowWrap: "break-word",
-    wordBreak: "break-all",
     textDecoration: "line-through",
     color: '#B0B2B6',
     transition: "color 0.25s ease-out"
