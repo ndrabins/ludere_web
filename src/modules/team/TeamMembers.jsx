@@ -7,25 +7,43 @@ import List, { ListItem, ListItemSecondaryAction, ListItemText } from 'material-
 import Checkbox from 'material-ui/Checkbox';
 import Avatar from 'material-ui/Avatar';
 import Button from 'material-ui/Button';
+import PersonIcon from 'material-ui-icons/AccountCircle'
 import Map from "lodash/map";
 import Has from "lodash/has";
 
 class TeamMembers extends Component {
+  componentDidMount(){
+    this.props.actions.fetchWorkspaceUsers();
+  }
+
+  handleAddClick = (userID) => {
+    const {selectedTeam} = this.props;
+    console.log('userid', userID);
+    this.props.actions.joinTeam(selectedTeam, userID)
+  }
+
   render() {
-    const { classes, workspaceMembers, teams, selectedTeam } = this.props;
-    const teamMembers = teams[selectedTeam];
+    const { classes, workspaceMembers, teams, selectedTeam, loading } = this.props;
+
+    if(loading){
+      return <div> loading </div>
+    }
+
+    const teamMembers = teams[selectedTeam].members;
 
     return (
       <div className={classes.root}>
         <List className={classes.listRoot} dense>
-            {Map(workspaceMembers, (member, key) => {
+            {Map(workspaceMembers, (member, userID) => {
               return (
-                <ListItem key={key} button className={classes.listItem}>
-                  <Avatar className={classes.avatar} src="https://scontent.ford1-1.fna.fbcdn.net/v/t1.0-1/c0.0.160.160/p160x160/22089762_10212994040620494_6391197030639313727_n.jpg?oh=3c0e14ac86a4edf2ad51c7bd32319402&oe=5B051ABF" />
+                <ListItem key={userID} button className={classes.listItem}>
+                  <Avatar className={classes.avatar}>
+                    <PersonIcon />
+                  </Avatar>
                   <ListItemText primary={`${member.displayName}`} />
                   <ListItemSecondaryAction>
-                    { Has(teamMembers, key) &&
-                      <Button variant="raised" size="medium" color="primary" className={classes.button}>
+                    {!Has(teamMembers, userID) &&
+                      <Button variant="raised" size="medium" color="primary" onClick={() => this.handleAddClick(userID)} className={classes.button}>
                         Add To Team
                       </Button>
                     }
@@ -70,6 +88,7 @@ function mapStateToProps(state) {
     workspaceMembers: state.workspace.workspaceUsers,
     teams: state.team.teams,
     selectedTeam: state.team.selectedTeam,
+    loading: state.team.loading,
   };
 }
 

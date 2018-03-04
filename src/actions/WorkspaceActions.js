@@ -115,7 +115,7 @@ export function joinWorkspace(workspaceID, history) {
       .commit()
       .then(function() {
         dispatch({ type: JOIN_WORKSPACE_SUCCESS });
-        history.push("/team/");
+        history.push("/community/");
       })
       .catch(function(error) {
         console.log("Transaction failed: ", error);

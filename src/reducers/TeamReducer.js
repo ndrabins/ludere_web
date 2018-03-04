@@ -13,33 +13,34 @@ import {
 
 const initialState = {
   teams: {},
-  selectedTeam: null
+  selectedTeam: null,
+  loading: false
 };
 
 export default function team(state = initialState, action) {
   switch (action.type) {
     case CREATE_TEAM:
-      return {
-        ...state
-      };
+      return state;
     case CREATE_TEAM_SUCCESS:
-      return {
-        ...state
-      };
+      return state;
     case FETCH_TEAMS:
       return {
-        ...state
+        ...state,
+        loading: true
       };
     case FETCH_TEAMS_SUCCESS:
       return {
         ...state,
-        teams: action.teams
+        teams: action.teams,
+        loading: false
       };
     case SELECT_TEAM:
       return {
         ...state,
         selectedTeam: action.selectedTeam
       };
+    case JOIN_TEAM:
+      return state;
     default:
       return state;
   }

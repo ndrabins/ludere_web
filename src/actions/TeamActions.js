@@ -119,7 +119,7 @@ export function joinTeam(teamID, userID = null) {
   return (dispatch, getState) => {
     const { selectedWorkspace } = getState().workspace;
     let UID;
-    if ((userID = null)) {
+    if (userID == null) {
       UID = getState().auth.user.uid;
     } else {
       UID = userID;
@@ -130,9 +130,15 @@ export function joinTeam(teamID, userID = null) {
       .collection(`workspaces/${selectedWorkspace}/teams`)
       .doc(teamID);
 
-    let team = { members: {} };
-    team.members[UID] = true;
+    let newTeamMember = {};
 
-    teamRef.update(team);
+    newTeamMember[`members.${UID}`] = true;
+
+    teamRef.update(newTeamMember);
+    dispatch({ type: JOIN_TEAM });
   };
 }
+
+// BY LITTLE LION
+// SCREW CODE THIS IS A MESSAGE SAYING I FRICKIN FRICKETY FRICK LOVE YOU
+// i have the hiccups
