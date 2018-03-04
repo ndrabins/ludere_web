@@ -112,7 +112,6 @@ export function fetchBoards(selectedTeamID) {
 
 export function fetchBoardData(boardID) {
   return (dispatch, getState) => {
-    // let documents = await collectionRef.get();
     let listsRef = firebase
       .firestore()
       .collection("workflow")

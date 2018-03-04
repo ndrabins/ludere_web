@@ -7,6 +7,7 @@ import IconButton from "material-ui/IconButton";
 import CloseIcon from "material-ui-icons/Close";
 import Avatar from "material-ui/Avatar";
 import PersonOutlineIcon from "material-ui-icons/PersonOutline";
+import Typography from "material-ui/Typography";
 
 import { Link } from "react-router-dom";
 
@@ -57,7 +58,7 @@ class ActiveConversationButton extends Component {
           <Avatar style={{ marginRight: 10 }}>
             <PersonOutlineIcon />
           </Avatar>
-          {this.props.name}
+          <Typography style={{color:'white' }}noWrap> {this.props.name} </Typography>
         </Link>
         <IconButton
           style={{
@@ -85,7 +86,8 @@ const baseStyle = {
   justifyContent: "space-between",
   marginLeft: 8,
   marginRight: 8,
-  marginBottom: 1
+  marginBottom: 1,
+  padding: 3,
 };
 
 const baseName = {
@@ -94,7 +96,6 @@ const baseName = {
   display: "flex",
   width: "100%",
   alignItems: "center",
-  paddingLeft: 40
 };
 
 const styles = {

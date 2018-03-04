@@ -17,7 +17,7 @@ class TaskDetail extends Component {
   render() {
     const { classes, showTaskDetail, taskData, selectedTask } = this.props;
 
-    if(taskData == null){
+    if (taskData == null) {
       return;
     }
 
@@ -39,10 +39,12 @@ class TaskDetail extends Component {
             <IconButton onClick={() => this.props.actions.toggleTaskDetail()}>
               <ArrowIcon />
             </IconButton>
-            <EditableText
-              value={task.title}
-              handleEnterPress={title => this.handleTitleChange(title)}
-            />
+            <div>
+              <EditableText
+                value={task.title}
+                handleEnterPress={title => this.handleTitleChange(title)}
+              />
+            </div>
           </div>
         </div>
         <div className={classes.taskContent}>
@@ -87,11 +89,13 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    backgroundColor: "#b9bbbe"
+    backgroundColor: "#b9bbbe",
+    height: 70
   },
   headerLeft: {
     display: "flex",
-    maxWidth: "100%",
+    width: "100%",
+    height: "100%",
     flexDirection: "row",
     alignItems: "center",
     paddingRight: 10,

@@ -21,7 +21,8 @@ const initialState = {
   listData: null,
   taskData: null,
   showTaskDetail: false,
-  selectedTask: null
+  selectedTask: null,
+  loading: false
 };
 
 export default function workflow(state = initialState, action) {
@@ -29,7 +30,7 @@ export default function workflow(state = initialState, action) {
     case SELECT_BOARD:
       return { ...state, selectedBoard: action.selectedBoard };
     case FETCH_BOARDS_SUCCESS:
-      return { ...state, boards: action.boards };
+      return { ...state, boards: action.boards, loading: false };
     case FETCH_LISTS:
       return { ...state, listData: action.listData };
     case FETCH_TASKS:
@@ -51,7 +52,7 @@ export default function workflow(state = initialState, action) {
     case CREATE_BOARD:
       return state;
     case FETCH_BOARDS:
-      return state;
+      return { ...state, loading: true };
     default:
       return state;
   }

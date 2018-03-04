@@ -16,6 +16,7 @@ class ActiveConversationList extends Component {
     let conversations = Map(this.props.conversations, (conversation, key) => {
       let title = "";
       Map(conversation.members, (memberStatus, memberID) => {
+        console.log('workspaceusers', this.props.workspaceUsers)
         title += this.props.workspaceUsers[memberID].displayName;
       });
 

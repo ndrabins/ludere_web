@@ -29,7 +29,6 @@ class EditableText extends Component {
   };
 
   handleFieldEnter = () => {
-    console.log("value inside edit", this.state.value);
     this.props.handleEnterPress(this.state.value);
     this.handleBlur();
   };
@@ -46,7 +45,8 @@ class EditableText extends Component {
             onChange={this.handleChange("value")}
             multiline
             autoFocus
-            rowsMax="4"
+            fullWidth
+            rowsMax="8"
             onBlur={() => this.handleBlur()}
             InputProps={{
               disableUnderline: true,
@@ -82,17 +82,19 @@ class EditableText extends Component {
 const styles = theme => ({
   container: {
     display: "flex",
-    height: "100%"
+    height: "100%",
+    // margin: 10,
+    width: '100%',
   },
   textFieldRoot: {
-    padding: 0
+    padding: 0,
+    width: '100%',
   },
   normalText: {
     color: "white",
     display: "flex",
     wordWrap: "break-all",
     overflowWrap: "break-word",
-    minWidth: 120,
     minHeight: 14,
     "&:hover": {
       cursor: "text",
@@ -107,10 +109,13 @@ const styles = theme => ({
     backgroundColor: "transparent",
     color: "white",
     fontSize: 16,
-    padding: "6px 8px",
+    padding: "7px 8px",
     width: "calc(100% - 24px)",
-    overflowY: "hidden",
+    marginLeft: 5,
+    marginRight: 5,
+    overflowY: "auto",
     overflowX: "hidden",
+    cursor: "text",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     "&:focus": {
       color: "black",
@@ -121,7 +126,7 @@ const styles = theme => ({
     }
   },
   textFieldFormLabel: {
-    fontSize: 18
+    // fontSize: 18
   }
 });
 
