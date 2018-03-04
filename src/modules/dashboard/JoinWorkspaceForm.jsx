@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-
-import { Field, reduxForm } from "redux-form";
-import { TextField } from "redux-form-material-ui";
 import Button from "material-ui/Button";
 
 const required = value => (value == null ? "Required" : undefined);
@@ -12,12 +9,6 @@ class JoinWorkspaceForm extends Component {
     return (
       <form onSubmit={handleSubmit} style={styles.form}>
         <h3> JOIN A WORKSPACE </h3>
-        <Field
-          name="workspaceUrl"
-          component={TextField}
-          placeholder="Workspace Invite URL"
-          validate={required}
-        />
         <div>
           <Button type="submit" disabled={pristine || submitting} variant="raised" color="primary" style={styles.button}>
             Submit
@@ -43,9 +34,5 @@ const styles = {
     margin: 10,
   }
 }
-
-JoinWorkspaceForm = reduxForm({
-  form: "joinWorkspaceForm"
-})(JoinWorkspaceForm);
 
 export default JoinWorkspaceForm;

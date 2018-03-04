@@ -9,7 +9,6 @@ import WorkspaceReducer from "./WorkspaceReducer";
 import CommunityReducer from "./CommunityReducer";
 import ProfileReducer from "./ProfileReducer";
 import WorkflowReducer from "./WorkflowReducer";
-import { reducer as formReducer } from "redux-form";
 
 const appReducer = combineReducers({
   auth: AuthReducer,
@@ -18,8 +17,7 @@ const appReducer = combineReducers({
   community: CommunityReducer,
   profile: ProfileReducer,
   chat: ChatReducer,
-  workflow: WorkflowReducer,
-  form: formReducer
+  workflow: WorkflowReducer
 });
 
 const rootReducer = (state, action) => {

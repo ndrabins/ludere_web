@@ -18,7 +18,7 @@ class TaskDetail extends Component {
     const { classes, showTaskDetail, taskData, selectedTask } = this.props;
 
     if (taskData == null) {
-      return;
+      return <div />;
     }
 
     const task = taskData[selectedTask];

@@ -9,7 +9,6 @@ import {
   INITIALIZE_USER
 } from "./types";
 import firebase from "firebase";
-import { INITIALIZE } from "redux-form/lib/actionTypes";
 import * as localforage from "localforage";
 
 require("firebase/firestore");

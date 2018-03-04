@@ -14,7 +14,6 @@ import {
   FETCH_WORKSPACE_USERS_ERROR
 } from "./types";
 
-import { reset } from "redux-form";
 import firebase from "firebase";
 
 import * as teamActions from "./TeamActions";
@@ -24,11 +23,9 @@ import Map from "lodash/map";
 
 require("firebase/firestore");
 
-export function createWorkspace(values) {
+export function createWorkspace(workspaceName) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
-
-    let workspaceName = values.workspaceName;
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let workspace = {
@@ -51,7 +48,6 @@ export function createWorkspace(values) {
       .add(workspace)
       .then(function(docRef) {
         dispatch({ type: CREATE_WORKSPACE_SUCCESS });
-        dispatch(reset("createWorkspaceForm"));
 
         //update user object with the workspace he is in
         let userRef = firebase
