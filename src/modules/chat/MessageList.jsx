@@ -32,15 +32,15 @@ class MessageList extends Component {
       previousTimeStamp = message.dateCreated;
 
       //render only text if last message is by the same user AND within 3 minutes
-      if(lastUser === message.sentBy && enoughTimeHasPassed){
-        return (
-        <div style={styles.messageContainer} key={key}>
-          <div style={styles.messageBlockContent}>
-            <p style={styles.messageText}>{message.messageText}</p>
-          </div>
-        </div>
-        );
-      }
+      // if(lastUser === message.sentBy && enoughTimeHasPassed){
+      //   return (
+      //   <div style={styles.messageContainer} key={key}>
+      //     <div style={styles.messageBlockContent}>
+      //       <p style={styles.messageText}>{message.messageText}</p>
+      //     </div>
+      //   </div>
+      //   );
+      // }
 
 
       //normal message with avatar

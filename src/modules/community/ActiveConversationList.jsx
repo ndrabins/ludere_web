@@ -8,7 +8,7 @@ import ActiveConversationButton from "./ActiveConversationButton";
 
 class ActiveConversationList extends Component {
   renderConversations() {
-    if (!this.props.conversations || !this.props.activeConversations) {
+    if (!this.props.conversations || !this.props.activeConversations || !this.props.workspaceUsers) {
       return;
     }
 
