@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "newapp-6c93a"
+    "default": "staging-ludere",
+    "production": "production-ludere",
+    "staging": "staging-ludere",
+    "dev": "dev-ludere"
   }
 }
