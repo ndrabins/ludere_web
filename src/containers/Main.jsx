@@ -31,7 +31,6 @@ class Main extends Component {
 
   componentDidMount() {
     const { actions, selectedTeam } = this.props;
-    actions.loadAppData(); //eventually this will load all initial data and show loading icon till finished.
     actions.fetchWorkspaces();
     actions.fetchUserProfile();
 

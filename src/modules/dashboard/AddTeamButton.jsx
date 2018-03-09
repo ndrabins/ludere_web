@@ -84,7 +84,6 @@ class AddTeamButton extends Component {
               onClick={this.handleCreateTeam}
               variant='raised'
               color="primary"
-              raised
               style={{ color: "white" }}
             >
               Create

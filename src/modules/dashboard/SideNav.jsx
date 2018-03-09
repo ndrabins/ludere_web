@@ -7,26 +7,28 @@ import IconButton from "material-ui/IconButton";
 
 import TeamNav from "./TeamNav";
 import SideNavModules from "./SideNavModules";
+import { withStyles } from "material-ui/styles";
 
 const drawerWidth = 240;
 
 class SideNav extends Component {
   render() {
+    const { classes } = this.props;
     return (
-      <div style={styles.container}>
+      <div className={classes.container}>
         <TeamNav />
         <div
-          style={
+          className={
             this.props.drawerVisible
-              ? styles.moduleSideNav
-              : styles.moduleSideNavClosed
+              ? classes.moduleSideNav
+              : classes.moduleSideNavClosed
           }
         >
-          <div style={styles.sideNavInner}>
-            <div style={styles.sideNavBanner}>
-              <img src={logoWhite} style={styles.logo} alt="Logo" />
+          <div className={classes.sideNavInner}>
+            <div className={classes.sideNavBanner}>
+              <img src={logoWhite} className={classes.logo} alt="Logo" />
               <IconButton
-                style={styles.closeButton}
+                className={classes.closeButton}
                 onClick={this.props.toggleDrawer}
               >
                 <CloseIcon />
@@ -93,4 +95,4 @@ const styles = {
   }
 };
 
-export default SideNav;
+export default withStyles(styles)(SideNav);

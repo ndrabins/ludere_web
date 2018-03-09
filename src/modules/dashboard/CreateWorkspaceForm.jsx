@@ -52,7 +52,6 @@ class CreateWorkspaceForm extends Component {
             onClick={this.handleCreateWorkspace}
             variant="raised"
             color="primary"
-            raised
             style={{ color: "white" }}
           >
             Create

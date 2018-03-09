@@ -16,7 +16,6 @@ require("firebase/firestore");
 export function signUpUser(email, password) {
   return function(dispatch) {
     dispatch({ type: AUTH_USER });
-    console.log("signing up with ", email, password);
 
     firebase
       .auth()
@@ -33,7 +32,6 @@ export function signUpUser(email, password) {
           .sendEmailVerification()
           .then(function() {
             // Email sent.
-            console.log("sent email");
           })
           .catch(function(error) {
             // An error happened.
@@ -112,7 +110,6 @@ export function signOutUser() {
       .clear()
       .then(function() {
         // Run this code once the database has been entirely deleted.
-        console.log("Clearing all Storage");
       })
       .catch(function(err) {
         // This code runs if there were any errors
@@ -154,10 +151,3 @@ const authSuccess = (dispatch, user) => {
     payload: user
   });
 };
-
-//this is where we will want to make all initial data calls for app.
-export function loadAppData() {
-  return dispatch => {
-    dispatch({ type: LOAD_APP_DATA });
-  };
-}
