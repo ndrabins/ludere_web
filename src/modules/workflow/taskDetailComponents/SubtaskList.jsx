@@ -14,7 +14,7 @@ class SubtaskList extends Component {
             onClick={() => this.props.handleToggleSubtask(index)}
             className={classes.subtask}
           >
-            <Checkbox checked={subtask.completed} tabIndex={-1} disableRipple={true} />
+            <Checkbox checked={subtask.completed} tabIndex={-1} disableRipple={false} />
             <Typography className={subtask.completed ? classes.completedText : classes.text}>{subtask.content}</Typography>
           </div>
         ))}
@@ -26,10 +26,10 @@ class SubtaskList extends Component {
 const styles = theme => ({
   root: {
     width: "100%",
-    maxHeight: '40%',
     overflowY: 'auto',
   },
   subtask: {
+    marginTop: -14,
     padding: 0,
     display:'flex',
     flexDirection: 'row',

@@ -25,10 +25,12 @@ export const lightTheme = createMuiTheme({
     },
     MuiCheckbox: {
       default: {
-        // color: "red"
+        // color: "#6fe5c9",
+        borderRadius: 15
       },
-      checked: {
-        // color: "red"
+      checkedSecondary: {
+        color: "#00B4CE",
+        borderRadius: 15
       }
     }
   }
