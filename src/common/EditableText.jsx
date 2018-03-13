@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
-import TextField from "material-ui/TextField";
+
+import Input from "material-ui/Input";
+import { FormControl } from "material-ui/Form";
 
 class EditableText extends Component {
   state = {
@@ -40,32 +42,25 @@ class EditableText extends Component {
     return (
       <div className={classes.container}>
         {renderEditableText ? (
-          <TextField
-            value={this.state.value}
-            onChange={this.handleChange("value")}
-            multiline
-            autoFocus
-            fullWidth
-            rowsMax="8"
-            onBlur={() => this.handleBlur()}
-            InputProps={{
-              disableUnderline: true,
-              classes: {
-                root: classes.textFieldRoot,
-                input: classes.textFieldInput
-              }
-            }}
-            InputLabelProps={{
-              shrink: true,
-              className: classes.textFieldFormLabel
-            }}
-            onKeyPress={ev => {
-              if (ev.key === "Enter" && !ev.shiftKey) {
-                this.handleFieldEnter();
-                ev.preventDefault();
-              }
-            }}
-          />
+          <FormControl className={classes.formControl}>
+            <Input
+              className={classes.input}
+              value={this.state.value}
+              onChange={this.handleChange("value")}
+              multiline
+              autoFocus
+              fullWidth
+              rowsMax="8"
+              disableUnderline
+              onBlur={() => this.handleBlur()}
+              onKeyPress={ev => {
+                if (ev.key === "Enter" && !ev.shiftKey) {
+                  this.handleFieldEnter();
+                  ev.preventDefault();
+                }
+              }}
+            />
+          </FormControl>
         ) : (
           <div
             className={classes.normalText}
@@ -83,50 +78,37 @@ const styles = theme => ({
   container: {
     display: "flex",
     height: "100%",
-    // margin: 10,
-    width: '100%',
-  },
-  textFieldRoot: {
-    padding: 0,
-    width: '100%',
+    width: "100%"
   },
   normalText: {
+    width: "100%",
     color: "white",
     display: "flex",
     wordWrap: "break-all",
     overflowWrap: "break-word",
+    backgroundColor: "transparent",
+    padding: 5,
+    opacity: 1,
+    border: "0px #000A solid",
+    borderRadius: 5,
     minHeight: 14,
     "&:hover": {
       cursor: "text",
-      opacity: 0.5,
-      backgroundColor: "#303030",
-      border: "1px solid #303030",
-      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
+      backgroundColor: "rgba(0,0,0,.15)  ",
+      transition: "background-color 0.25s ease-out"
     }
   },
-  textFieldInput: {
-    borderRadius: 4,
-    backgroundColor: "transparent",
-    color: "white",
-    fontSize: 16,
-    padding: "7px 8px",
-    width: "calc(100% - 24px)",
-    marginLeft: 5,
-    marginRight: 5,
+  input: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    padding: 5,
+    color: "black",
     overflowY: "auto",
     overflowX: "hidden",
-    cursor: "text",
-    transition: theme.transitions.create(["border-color", "box-shadow"]),
-    "&:focus": {
-      color: "black",
-      backgroundColor: "#FFF",
-      border: "1px solid #ced4da",
-      borderColor: "#80bdff",
-      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
-    }
+    cursor: "text"
   },
-  textFieldFormLabel: {
-    // fontSize: 18
+  formControl: {
+    width: '100%',
   }
 });
 

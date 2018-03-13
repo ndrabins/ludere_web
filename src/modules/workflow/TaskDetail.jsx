@@ -35,11 +35,11 @@ class TaskDetail extends Component {
         }
       >
         <div className={classes.header}>
-          <div className={classes.headerLeft}>
+          <div className={classes.headerInner}>
             <IconButton onClick={() => this.props.actions.toggleTaskDetail()}>
               <ArrowIcon />
             </IconButton>
-            <div>
+            <div className={classes.titleContainer}>
               <EditableText
                 value={task.title}
                 handleEnterPress={title => this.handleTitleChange(title)}
@@ -90,9 +90,11 @@ const styles = theme => ({
     flexDirection: "column",
     alignItems: "flex-start",
     backgroundColor: "#b9bbbe",
-    height: 70
+    minHeight: 70,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
-  headerLeft: {
+  headerInner: {
     display: "flex",
     width: "100%",
     height: "100%",
@@ -106,6 +108,11 @@ const styles = theme => ({
     display: "flex",
     height: "100%",
     margin: 8
+  },
+  titleContainer:{
+    width: '100%',
+    display: 'flex',
+    height: '100%',
   }
 });
 

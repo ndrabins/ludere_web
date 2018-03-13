@@ -12,6 +12,7 @@ import {
 
 import { lightTheme } from "../utility/themes"; //darkTheme
 import { MuiThemeProvider } from "material-ui/styles";
+import CssBaseline from 'material-ui/CssBaseline';
 
 import Loading from "../common/Loading";
 import Main from "./Main";
@@ -58,6 +59,7 @@ class App extends Component {
     }
     return (
       <div className="App">
+        <CssBaseline />
         <MuiThemeProvider theme={lightTheme}>
           <Router>
             <div style={{ height: "100%" }}>

@@ -37,6 +37,7 @@ const styles = {
     borderRadius: 5,
     margin: '1px 8px',
     "&:hover": {
+      transition: 'background-color .25s ease-out',
       backgroundColor: "#424242",
       cursor: "pointer"
     }
@@ -51,7 +52,9 @@ const styles = {
     borderRadius: 5,
     margin: '1px 8px',
     backgroundColor: '#616161',
+    transition: 'background-color .25s ease-out',
     "&:hover": {
+      transition: 'background-color .25s ease-out',
       backgroundColor: "#424242",
       cursor: "pointer"
     }

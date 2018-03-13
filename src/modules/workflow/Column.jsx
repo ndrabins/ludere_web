@@ -112,6 +112,9 @@ const styles = {
   title: {
     minHeight: 40,
     paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
     color: "#FFFFFF",
     display: "flex",
     backgroundColor: "#00BCD4",
