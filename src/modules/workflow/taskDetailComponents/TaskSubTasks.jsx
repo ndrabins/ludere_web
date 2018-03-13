@@ -9,14 +9,6 @@ import * as Actions from "../../../actions";
 
 import SubtaskList from "./SubtaskList";
 import { TextField } from "material-ui";
-const dummySubTasks = [
-  { content: "Stuff", completed: false },
-  { content: "Stuff1", completed: false },
-  { content: "Stuff2", completed: true },
-  { content: "Stuff3", completed: true },
-  { content: "Stuff3", completed: true },
-  { content: "Stuff3", completed: true }
-];
 
 class TaskDetailSubtasks extends Component {
   state = {
@@ -49,6 +41,20 @@ class TaskDetailSubtasks extends Component {
     this.props.actions.updateTask(task);
   };
 
+  handleDelete = (removeIndex) => {
+    const { task } = this.props;
+    let { subtasks } = task;
+    subtasks = subtasks.splice(removeIndex, 1);
+    this.props.actions.updateTask(task);
+  }
+
+  updateSubtaskContent = (index, subtaskContent) => {
+    const { task } = this.props;
+    let { subtasks } = task;
+    subtasks[index].content = subtaskContent;
+    this.props.actions.updateTask(task);
+  }
+
   render() {
     const { classes, task } = this.props;
     const { subtaskContent } = this.state;
@@ -59,6 +65,8 @@ class TaskDetailSubtasks extends Component {
         <SubtaskList
           subtasks={task.subtasks}
           handleToggleSubtask={this.handleToggleSubtask}
+          handleDelete={this.handleDelete}
+          subtaskUpdate={this.updateSubtaskContent}
         />
         <div className={classes.entryWrapper}>
           <Checkbox

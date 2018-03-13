@@ -101,8 +101,6 @@ const styles = theme => ({
     flexDirection: "row",
     alignItems: "center",
     paddingRight: 10,
-    whiteSpace: "pre-line",
-    wordWrap: "break-word"
   },
   taskContent: {
     display: "flex",
