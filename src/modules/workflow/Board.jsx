@@ -82,11 +82,13 @@ class Board extends Component {
   render() {
     const { selectedBoard, boards, listData, showTaskDetail } = this.props;
     const board = boards[selectedBoard];
+
+    if (listData === null || !board.listOrder) {
+      return <div />;
+    }
+
     const { listOrder } = board;
 
-    if (listData === null) {
-      return <div>Loading </div>;
-    }
 
     return (
       <DragDropContext

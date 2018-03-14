@@ -115,10 +115,11 @@ const styles = {
     backgroundColor: '#0000'
   },
   divider: {
-    width: 34,
-    border: "1px solid #C3C3C3",
     marginTop: 5,
-    marginBottom: 5
+    marginBottom: 5,
+    height: 2,
+    width: '34px',
+    border: "1px solid #C3C3C3"
   },
   container: {
     display: "flex",

@@ -58,7 +58,7 @@ class TaskDetail extends Component {
         <div className={classes.taskContent}>
           <Description task={task} />
           <TaskSubTasks task={task} />
-          <Button onClick={this.handleDelete} variant="raised" className={classes.deleteButton}> Delete </Button>
+          <Button onClick={this.handleDelete} variant="raised" className={classes.deleteButton}> Delete Task </Button>
         </div>
       </div>
     );
