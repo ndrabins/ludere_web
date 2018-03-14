@@ -35,13 +35,13 @@ class SignIn extends Component {
   renderSignIn(){
     if(this.props.loginTransition !== "SignIn"){
       return(
-        <p style={styles.headerTemp}>SIGN IN</p>
+          <p style={styles.headerTemp}>SIGN IN</p>
       );
     }
 
     return (
       <div style={{display:'flex', flexDirection:"column"}}>
-        <p style={styles.header}>Log In</p>
+        <p style={styles.header}>Sign In</p>
         <FormControl style={styles.formControl}>
           <InputLabel style={styles.inputLabel} htmlFor="emails">Email</InputLabel>
           <Input
@@ -85,23 +85,23 @@ const styles = {
     transition: "width 0.4s ease-out",
 
     width: "350px",
-    minHeight: "300px",
+    minHeight: "400px",
 
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "column",
     overflow: "auto",
+    justifyContent: 'center',
 
     alignSelf: "center",
 
-    padding: "50px 100px",
     backgroundImage: `linear-gradient(to left, #6fe5c9, #00bcd4), linear-gradient(#000000, #000000)`,
     borderRadius: "0px 15px 15px 0px",
     color: "#FFFFFF",
   },
   moduleSignInClosed: {
-    width: "150px",
-    minHeight: "300px",
+    width: "250px",
+    minHeight: "400px",
 
     display: "flex",
     flexDirection: "column",
@@ -112,7 +112,6 @@ const styles = {
     position: "relative",
     transition: "width 0.4s ease-out",
 
-    padding: "50px",
     backgroundImage: `linear-gradient(to left, #6fe5c9, #00bcd4), linear-gradient(#000000, #000000)`,
     borderRadius: "0px 15px 15px 0px",
   },

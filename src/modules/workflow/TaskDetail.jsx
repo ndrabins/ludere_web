@@ -9,11 +9,13 @@ import Typography from "material-ui/Typography";
 
 import EditableText from "../../common/EditableText";
 import TaskSubTasks from "./taskDetailComponents/TaskSubTasks";
+import Description from "./taskDetailComponents/Description";
 
 class TaskDetail extends Component {
   handleTitleChange = title => {
     this.props.actions.updateTaskTitle(title);
   };
+
   render() {
     const { classes, showTaskDetail, taskData, selectedTask } = this.props;
 
@@ -48,6 +50,7 @@ class TaskDetail extends Component {
           </div>
         </div>
         <div className={classes.taskContent}>
+          <Description task={task} />
           <TaskSubTasks task={task} />
         </div>
       </div>
@@ -92,7 +95,7 @@ const styles = theme => ({
     backgroundColor: "#b9bbbe",
     minHeight: 70,
     paddingTop: 10,
-    paddingBottom: 10,
+    paddingBottom: 10
   },
   headerInner: {
     display: "flex",
@@ -100,17 +103,18 @@ const styles = theme => ({
     height: "100%",
     flexDirection: "row",
     alignItems: "center",
-    paddingRight: 10,
+    paddingRight: 10
   },
   taskContent: {
     display: "flex",
     height: "100%",
-    margin: 8
+    margin: 8,
+    flexDirection: 'column',
   },
-  titleContainer:{
-    width: '100%',
-    display: 'flex',
-    height: '100%',
+  titleContainer: {
+    width: "100%",
+    display: "flex",
+    height: "100%"
   }
 });
 

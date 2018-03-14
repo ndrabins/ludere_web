@@ -92,7 +92,7 @@ class SignUp extends Component {
 const styles = {
   moduleSignUpOpen: {
     width: "350px",
-    minHeight: "300px",
+    minHeight: "400px",
 
     display: "flex",
     flexWrap: "wrap",
@@ -110,8 +110,8 @@ const styles = {
     transition: "width 0.4s ease-out",
   },
   moduleSignUpClosed: {
-    width: "150px",
-    minHeight: "300px",
+    width: "250px",
+    minHeight: "400px",
 
     display: "flex",
     flexDirection: "column",
