@@ -98,7 +98,6 @@ class TaskDetailSubtasks extends Component {
               value={subtaskContent}
               onChange={this.handleChange("subtaskContent")}
               multiline
-              autoFocus
               fullWidth
               rowsMax="3"
               placeholder="Enter a new task!"

@@ -46,7 +46,6 @@ class SubtaskList extends Component {
             value={descriptionText}
             onChange={this.handleChange("descriptionText")}
             multiline
-            autoFocus
             fullWidth
             rowsMax="8"
             placeholder="Add a description"

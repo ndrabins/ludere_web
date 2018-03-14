@@ -5,7 +5,8 @@ import {
   MOVE_TASK_TO_COLUMN,
   TOGGLE_TASK_DETAIL,
   SELECT_TASK,
-  UPDATE_TASK
+  UPDATE_TASK,
+  DELETE_TASK
 } from "./types";
 import firebase from "firebase";
 
@@ -189,6 +190,30 @@ export function updateTask(updatedTask) {
       .update(updatedTask)
       .then(function() {
         //document updated succesffuly
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
+  };
+}
+
+export function deleteTask() {
+  return (dispatch, getState) => {
+    const { selectedTask, selectedBoard } = getState().workflow;
+    dispatch({ type: UPDATE_TASK });
+
+    let taskRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(selectedBoard)
+      .collection("tasks")
+      .doc(selectedTask);
+
+    return taskRef
+      .delete()
+      .then(function() {
+        //document deleted succesffuly
       })
       .catch(function(error) {
         // The document probably doesn't exist.

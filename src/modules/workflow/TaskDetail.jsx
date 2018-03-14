@@ -6,6 +6,7 @@ import { withStyles } from "material-ui/styles";
 import IconButton from "material-ui/IconButton";
 import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
 import Typography from "material-ui/Typography";
+import Button from "material-ui/Button";
 
 import EditableText from "../../common/EditableText";
 import TaskSubTasks from "./taskDetailComponents/TaskSubTasks";
@@ -15,6 +16,11 @@ class TaskDetail extends Component {
   handleTitleChange = title => {
     this.props.actions.updateTaskTitle(title);
   };
+
+  handleDelete = () => {
+    this.props.actions.deleteTask();
+    this.props.actions.toggleTaskDetail(null);
+  }
 
   render() {
     const { classes, showTaskDetail, taskData, selectedTask } = this.props;
@@ -52,6 +58,7 @@ class TaskDetail extends Component {
         <div className={classes.taskContent}>
           <Description task={task} />
           <TaskSubTasks task={task} />
+          <Button onClick={this.handleDelete} variant="raised" className={classes.deleteButton}> Delete </Button>
         </div>
       </div>
     );
@@ -115,6 +122,16 @@ const styles = theme => ({
     width: "100%",
     display: "flex",
     height: "100%"
+  },
+  deleteButton: {
+    marginTop: 10,
+    display:'flex',
+    alignSelf:'center',
+    color:'white',
+    backgroundColor: '#C62828',
+    '&:hover':{
+      backgroundColor: '#B71C1C'
+    }
   }
 });
 
