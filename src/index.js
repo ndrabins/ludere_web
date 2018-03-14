@@ -19,24 +19,24 @@ import rootReducer from "./reducers";
 import firebase from "firebase";
 
 // Development
-var config = {
-  apiKey: "AIzaSyB-ZZE-ROAr-JOOmDQIa-v4YBwLzbXGklE",
-  authDomain: "dev-ludere.firebaseapp.com",
-  databaseURL: "https://dev-ludere.firebaseio.com",
-  projectId: "dev-ludere",
-  storageBucket: "",
-  messagingSenderId: "826975908697"
-};
+// var config = {
+//   apiKey: "AIzaSyB-ZZE-ROAr-JOOmDQIa-v4YBwLzbXGklE",
+//   authDomain: "dev-ludere.firebaseapp.com",
+//   databaseURL: "https://dev-ludere.firebaseio.com",
+//   projectId: "dev-ludere",
+//   storageBucket: "",
+//   messagingSenderId: "826975908697"
+// };
 
 // Staging
-// var config = {
-//   apiKey: "AIzaSyBN3GDDJkYMChPbB6sxZuwIEI1noSvQ0FE",
-//   authDomain: "staging-ludere.firebaseapp.com",
-//   databaseURL: "https://staging-ludere.firebaseio.com",
-//   projectId: "staging-ludere",
-//   storageBucket: "staging-ludere.appspot.com",
-//   messagingSenderId: "674177146337"
-// };
+var config = {
+  apiKey: "AIzaSyBN3GDDJkYMChPbB6sxZuwIEI1noSvQ0FE",
+  authDomain: "staging-ludere.firebaseapp.com",
+  databaseURL: "https://staging-ludere.firebaseio.com",
+  projectId: "staging-ludere",
+  storageBucket: "staging-ludere.appspot.com",
+  messagingSenderId: "674177146337"
+};
 
 // Production
 

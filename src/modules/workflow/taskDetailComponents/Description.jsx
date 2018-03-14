@@ -12,6 +12,12 @@ class SubtaskList extends Component {
     descriptionText: this.props.task.description
   };
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.description !== this.state.descriptionText){
+      this.setState({descriptionText: nextProps.task.description});
+    }
+  }
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value

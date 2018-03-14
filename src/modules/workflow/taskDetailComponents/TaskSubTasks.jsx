@@ -77,20 +77,6 @@ class TaskDetailSubtasks extends Component {
             disableRipple={true}
             classes={{ checked: classes.decorationCheckbox }}
           />
-          {/* <TextField
-            id="subtaskContent"
-            placeholder="Enter a new task!"
-            className={classes.textField}
-            value={subtaskContent}
-            onChange={this.handleChange("subtaskContent")}
-            margin="none"
-            onKeyPress={ev => {
-              if (ev.key === "Enter" && !ev.shiftKey) {
-                this.handleCreateSubtask();
-                ev.preventDefault();
-              }
-            }}
-          /> */}
           <FormControl className={classes.formControl}>
             <Input
               className={classes.input}
