@@ -8,7 +8,8 @@ import Checkbox from "material-ui/Checkbox";
 import * as Actions from "../../../actions";
 
 import SubtaskList from "./SubtaskList";
-import { TextField } from "material-ui";
+import Input from "material-ui/Input";
+import { FormControl } from "material-ui/Form";
 
 class TaskDetailSubtasks extends Component {
   state = {
@@ -41,19 +42,19 @@ class TaskDetailSubtasks extends Component {
     this.props.actions.updateTask(task);
   };
 
-  handleDelete = (removeIndex) => {
+  handleDelete = removeIndex => {
     const { task } = this.props;
     let { subtasks } = task;
     subtasks = subtasks.splice(removeIndex, 1);
     this.props.actions.updateTask(task);
-  }
+  };
 
   updateSubtaskContent = (index, subtaskContent) => {
     const { task } = this.props;
     let { subtasks } = task;
     subtasks[index].content = subtaskContent;
     this.props.actions.updateTask(task);
-  }
+  };
 
   render() {
     const { classes, task } = this.props;
@@ -76,7 +77,7 @@ class TaskDetailSubtasks extends Component {
             disableRipple={true}
             classes={{ checked: classes.decorationCheckbox }}
           />
-          <TextField
+          {/* <TextField
             id="subtaskContent"
             placeholder="Enter a new task!"
             className={classes.textField}
@@ -89,7 +90,27 @@ class TaskDetailSubtasks extends Component {
                 ev.preventDefault();
               }
             }}
-          />
+          /> */}
+          <FormControl className={classes.formControl}>
+            <Input
+              className={classes.input}
+              classes={{ focused: classes.inputFocused }}
+              value={subtaskContent}
+              onChange={this.handleChange("subtaskContent")}
+              multiline
+              autoFocus
+              fullWidth
+              rowsMax="3"
+              placeholder="Enter a new task!"
+              disableUnderline
+              onKeyPress={ev => {
+                if (ev.key === "Enter" && !ev.shiftKey) {
+                  this.handleCreateSubtask();
+                  ev.preventDefault();
+                }
+              }}
+            />
+          </FormControl>
         </div>
       </div>
     );
@@ -105,14 +126,43 @@ const styles = {
   entryWrapper: {
     marginRight: 15,
     display: "flex",
-    marginTop: -8,
+    marginTop: -8
   },
-  textField: {
+  input: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    padding: 5,
+    color: "black",
+    overflowY: "auto",
+    overflowX: "hidden",
+    cursor: "text",
+    border: "transparent 2px solid",
+    transition: "border .25s ease-out",
+    "&:hover": {
+      border: "#B0B2B6 2px solid"
+    }
+  },
+  inputFocused: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    padding: 5,
+    color: "black",
+    overflowY: "auto",
+    overflowX: "hidden",
+    cursor: "text",
+    transition: "border .25s ease-out",
+    border: "2px solid #6d6d6d",
+    "&:hover": {
+      border: "2px solid #6d6d6d"
+    }
+  },
+  formControl: {
     width: "100%",
+    marginTop: 3
   },
   decorationCheckbox: {
     marginTop: -5,
-    color: "#686869",
+    color: "#686869"
   }
 };
 

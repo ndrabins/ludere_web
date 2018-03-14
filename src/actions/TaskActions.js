@@ -188,7 +188,7 @@ export function updateTask(updatedTask) {
     return taskRef
       .update(updatedTask)
       .then(function() {
-        console.log("Document successfully updated!");
+        //document updated succesffuly
       })
       .catch(function(error) {
         // The document probably doesn't exist.

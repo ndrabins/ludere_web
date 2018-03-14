@@ -82,7 +82,7 @@ const styles = theme => ({
     border: 'transparent 2px solid',
     transition: 'border .25s ease-out',
     '&:hover': {
-      border: 'gray 2px solid',
+      border: '#B0B2B6 2px solid',
     },
   },
   inputFocused:{
@@ -94,9 +94,9 @@ const styles = theme => ({
     overflowX: "hidden",
     cursor: "text",
     transition: 'border .25s ease-out',
-    border: '2px solid #303030',
+    border: '2px solid #6d6d6d',
     '&:hover': {
-      border: '2px solid #303030',
+      border: '2px solid #6d6d6d',
     },
   },
   formControl: {
