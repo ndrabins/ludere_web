@@ -5,7 +5,10 @@ import {
   TOGGLE_TASK_DETAIL,
   SELECT_TASK,
   UPDATE_TASK,
-  DELETE_TASK
+  DELETE_TASK,
+  CREATE_COMMENT,
+  FETCH_COMMENTS,
+  FETCH_COMMENTS_SUCCESS
 } from "./types";
 import firebase from "firebase";
 
@@ -43,8 +46,7 @@ export function createTask(listID, taskTitle) {
       title: taskTitle,
       tags: [],
       subtasks: [],
-      assigned: [],
-      comments: []
+      assigned: []
     };
 
     taskRef.add(task).then(function(docRef) {
@@ -120,26 +122,49 @@ export function moveTaskToColumn(startIndex, endIndex, startListID, endListID) {
 }
 
 export function toggleTaskDetail(taskID = null) {
-  // console.log("toggling: ", taskID);
   return (dispatch, getState) => {
     const { selectedTask, showTaskDetail, selectedBoard } = getState().workflow;
 
+    //No board is selected
     if (selectedBoard === null) {
       dispatch({ type: SELECT_TASK, selectedTask: null });
     }
 
+    // detail is open, just switch task we are looking at
     if (taskID !== null && taskID !== selectedTask) {
-      dispatch({ type: SELECT_TASK, selectedTask: taskID });
+      dispatch(fetchTask(taskID));
     }
 
+    //detail is closed, open it on task
     if (taskID !== null && !showTaskDetail) {
-      dispatch({ type: SELECT_TASK, selectedTask: taskID });
+      dispatch(fetchTask(taskID));
       dispatch({ type: TOGGLE_TASK_DETAIL });
     }
 
+    //task detail open and click on same task. Close taskdetail
     if (taskID === null || (taskID === selectedTask && showTaskDetail)) {
       dispatch({ type: TOGGLE_TASK_DETAIL });
     }
+  };
+}
+
+export function fetchTask(taskID) {
+  return (dispatch, getState) => {
+    const { selectedBoard } = getState().workflow;
+    dispatch({ type: SELECT_TASK, selectedTask: taskID });
+
+    dispatch({ type: FETCH_COMMENTS });
+    let commentRef = firebase
+      .firestore()
+      .collection(`workflow/${selectedBoard}/tasks/${taskID}/comments`);
+
+    commentRef.orderBy("dateCreated").onSnapshot(function(querySnapshot) {
+      var comments = {};
+      querySnapshot.forEach(function(doc) {
+        comments[doc.id] = doc.data();
+      });
+      dispatch({ type: FETCH_COMMENTS_SUCCESS, comments: comments });
+    });
   };
 }
 
@@ -217,5 +242,33 @@ export function deleteTask() {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
       });
+  };
+}
+
+export function createComment(commentText) {
+  return (dispatch, getState) => {
+    let { uid } = getState().auth.user;
+    const { selectedTask, selectedBoard } = getState().workflow;
+
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+
+    //need to refactor this lol..
+    // let myName = getState().workspace.workspaceUsers[uid].displayName;
+
+    let newComment = {
+      sentBy: uid,
+      dateCreated: timestamp,
+      content: commentText,
+      sentByDisplayName: "bob",
+      edited: "false"
+    };
+
+    let commentRef = firebase
+      .firestore()
+      .collection(`workflow/${selectedBoard}/tasks/${selectedTask}/comments`);
+
+    commentRef.add(newComment).then(function(docRef) {
+      dispatch({ type: CREATE_COMMENT });
+    });
   };
 }

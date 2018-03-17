@@ -11,7 +11,10 @@ import {
   UPDATE_LIST,
   TOGGLE_TASK_DETAIL,
   SELECT_TASK,
-  UPDATE_TASK
+  UPDATE_TASK,
+  CREATE_COMMENT,
+  FETCH_COMMENTS,
+  FETCH_COMMENTS_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -21,7 +24,8 @@ const initialState = {
   taskData: null,
   showTaskDetail: false,
   selectedTask: null,
-  loading: false
+  loading: false,
+  comments: {}
 };
 
 export default function workflow(state = initialState, action) {
@@ -38,6 +42,12 @@ export default function workflow(state = initialState, action) {
       return { ...state, showTaskDetail: !state.showTaskDetail };
     case SELECT_TASK:
       return { ...state, selectedTask: action.selectedTask };
+    case CREATE_COMMENT:
+      return state;
+    case FETCH_COMMENTS:
+      return state;
+    case FETCH_COMMENTS_SUCCESS:
+      return { ...state, comments: action.comments };
     case CHANGE_TASK_ORDER:
       return state;
     case MOVE_TASK_TO_COLUMN:

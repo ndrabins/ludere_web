@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 import { withStyles } from "material-ui/styles";
 import Input from "material-ui/Input";
 import { FormControl } from "material-ui/Form";
+import SectionDivider from "../../../common/SectionDivider";
 
-class SubtaskList extends Component {
+class Description extends Component {
   state = {
     descriptionText: this.props.task.description
   };
@@ -44,6 +45,7 @@ class SubtaskList extends Component {
 
     return (
       <div className={classes.root}>
+        <SectionDivider content={'Description'} />
         <FormControl className={classes.formControl}>
           <Input
             className={classes.input}
@@ -115,5 +117,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(null, mapDispatchToProps)(
-  withStyles(styles)(SubtaskList)
+  withStyles(styles)(Description)
 );

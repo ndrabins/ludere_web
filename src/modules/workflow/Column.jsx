@@ -68,7 +68,7 @@ class Column extends Component {
               <div style={styles.taskEntry}>
                 <TextField
                   id="taskName"
-                  placeholder="Create a card"
+                  placeholder="Create a task"
                   value={this.state.taskName}
                   onChange={this.handleChange("taskName")}
                   margin="normal"

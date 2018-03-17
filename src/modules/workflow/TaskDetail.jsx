@@ -8,8 +8,10 @@ import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
 import Button from "material-ui/Button";
 
 import EditableText from "../../common/EditableText";
+import SectionDivider from "../../common/SectionDivider";
 import TaskSubTasks from "./taskDetailComponents/TaskSubTasks";
 import Description from "./taskDetailComponents/Description";
+import CommentSection from "./taskDetailComponents/CommentSection";
 
 class TaskDetail extends Component {
   handleTitleChange = title => {
@@ -57,6 +59,8 @@ class TaskDetail extends Component {
         <div className={classes.taskContent}>
           <Description task={task} />
           <TaskSubTasks task={task} />
+          <CommentSection task={task} />
+          <SectionDivider content={'Utility'} />
           <Button onClick={this.handleDelete} variant="raised" className={classes.deleteButton}> Delete Task </Button>
         </div>
       </div>

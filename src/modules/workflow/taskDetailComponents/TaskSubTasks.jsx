@@ -7,6 +7,7 @@ import Checkbox from "material-ui/Checkbox";
 
 import * as Actions from "../../../actions";
 
+import SectionDivider from "../../../common/SectionDivider";
 import SubtaskList from "./SubtaskList";
 import Input from "material-ui/Input";
 import { FormControl } from "material-ui/Form";
@@ -64,7 +65,8 @@ class TaskDetailSubtasks extends Component {
 
     return (
       <div className={classes.root}>
-        <Typography gutterBottom>Subtasks</Typography>
+        <SectionDivider content={'Subtasks'} />
+
         <SubtaskList
           subtasks={task.subtasks}
           handleToggleSubtask={this.handleToggleSubtask}
