@@ -116,9 +116,9 @@ const styles = theme => ({
     paddingRight: 10
   },
   taskContent: {
-    display: "flex",
+    overflowY: 'auto',
     height: "100%",
-    margin: 8,
+    padding: 8,
     flexDirection: 'column',
   },
   titleContainer: {
