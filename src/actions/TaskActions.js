@@ -1,5 +1,4 @@
 import {
-  FETCH_TASKS,
   CREATE_TASK,
   CHANGE_TASK_ORDER,
   MOVE_TASK_TO_COLUMN,
@@ -57,7 +56,7 @@ export function createTask(listID, taskTitle) {
 
 export function changeTaskOrder(startIndex, endIndex, listID) {
   return (dispatch, getState) => {
-    const { selectedBoard, listData, boards } = getState().workflow;
+    const { selectedBoard, listData } = getState().workflow;
 
     let taskOrder = listData[listID].taskOrder;
 
@@ -150,6 +149,7 @@ export function updateTaskTitle(title) {
     //it has to be done this way lol.
     const selectedBoard = getState()["workflow"]["selectedBoard"];
     const selectedTask = getState()["workflow"]["selectedTask"];
+    dispatch({ type: UPDATE_TASK });
 
     let taskRef = firebase
       .firestore()
@@ -169,8 +169,6 @@ export function updateTaskTitle(title) {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
       });
-
-    dispatch({ type: UPDATE_TASK });
   };
 }
 
@@ -201,7 +199,7 @@ export function updateTask(updatedTask) {
 export function deleteTask() {
   return (dispatch, getState) => {
     const { selectedTask, selectedBoard } = getState().workflow;
-    dispatch({ type: UPDATE_TASK });
+    dispatch({ type: DELETE_TASK });
 
     let taskRef = firebase
       .firestore()

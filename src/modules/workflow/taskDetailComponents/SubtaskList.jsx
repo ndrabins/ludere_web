@@ -5,19 +5,10 @@ import Checkbox from "material-ui/Checkbox";
 import CloseIcon from "material-ui-icons/Close";
 import IconButton from "material-ui/IconButton";
 
-import EditableText from '../../../common/EditableText';
-
 class SubtaskList extends Component {
   handleDeleteClick = (event, index) => {
     event.stopPropagation();
     this.props.handleDelete(index);
-  }
-
-  handleUpdateSubtaskContent = (index) => {
-    // event.stopPropagation();
-    const { subtaskUpdate } = this.props;
-    console.log('updating');
-    console.log('index')
   }
 
   render() {
@@ -44,10 +35,6 @@ class SubtaskList extends Component {
               >
                 {subtask.content}
               </Typography>
-              {/* <EditableText
-                value={subtask.content}
-                handleEnterPress={ ()  => this.handleUpdateSubtaskContent(index)}
-              /> */}
             </div>
             <IconButton onClick={(event) => this.handleDeleteClick(event, index)}>
               <CloseIcon />

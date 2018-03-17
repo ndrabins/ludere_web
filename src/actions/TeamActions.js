@@ -2,11 +2,8 @@ import {
   CREATE_TEAM,
   CREATE_TEAM_SUCCESS,
   JOIN_TEAM,
-  JOIN_TEAM_SUCCESS,
-  JOIN_TEAM_ERROR,
   FETCH_TEAMS,
   FETCH_TEAMS_SUCCESS,
-  FETCH_TEAMS_ERROR,
   SELECT_TEAM,
   CREATE_TEAM_ERROR
 } from "./types";
@@ -77,7 +74,6 @@ export function fetchTeams() {
     let { uid } = getState().auth.user;
     let { selectedWorkspace } = getState().workspace;
 
-    let firstTeam = null;
     dispatch({ type: FETCH_TEAMS });
 
     let teamRef = firebase

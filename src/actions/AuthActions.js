@@ -3,9 +3,6 @@ import {
   AUTH_USER,
   SIGN_OUT_USER,
   AUTH_SUCCESS,
-  LOAD_APP_DATA,
-  LOAD_APP_DATA_SUCCESS,
-  LOAD_APP_DATA_ERROR,
   INITIALIZE_USER
 } from "./types";
 import firebase from "firebase";

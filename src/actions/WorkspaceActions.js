@@ -5,21 +5,16 @@ import {
   CREATE_WORKSPACE_ERROR,
   FETCH_WORKSPACES,
   FETCH_WORKSPACES_SUCCESS,
-  FETCH_WORKSPACES_ERROR,
   JOIN_WORKSPACE,
   JOIN_WORKSPACE_SUCCESS,
   JOIN_WORKSPACE_ERROR,
   FETCH_WORKSPACE_USERS,
-  FETCH_WORKSPACE_USERS_SUCCESS,
-  FETCH_WORKSPACE_USERS_ERROR
+  FETCH_WORKSPACE_USERS_SUCCESS
 } from "./types";
 
 import firebase from "firebase";
 
 import * as teamActions from "./TeamActions";
-import { selectChannel } from "./index";
-
-import Map from "lodash/map";
 
 require("firebase/firestore");
 

@@ -6,14 +6,6 @@ import * as Actions from "../../actions";
 import IconButton from "material-ui/IconButton";
 import AddIcon from "material-ui-icons/Add";
 
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle
-} from "material-ui/Dialog";
-import Button from "material-ui/Button";
-import TextField from "material-ui/TextField";
-
 class CommunityAddButton extends Component {
   state = {
     open: false,

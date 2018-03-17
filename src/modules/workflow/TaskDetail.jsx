@@ -5,7 +5,6 @@ import * as Actions from "../../actions";
 import { withStyles } from "material-ui/styles";
 import IconButton from "material-ui/IconButton";
 import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
-import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
 
 import EditableText from "../../common/EditableText";
@@ -23,7 +22,7 @@ class TaskDetail extends Component {
   }
 
   render() {
-    const { classes, showTaskDetail, taskData, selectedTask } = this.props;
+    const { classes, taskData, selectedTask } = this.props;
 
     if (taskData == null) {
       return <div />;

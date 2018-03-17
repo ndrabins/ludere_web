@@ -45,23 +45,17 @@ class Main extends Component {
   }
 
   render() {
-    const { selectedTeam, history } = this.props;
+    const { history } = this.props;
 
     // if user is not in a company, he must create or join one
     if (Object.keys(this.props.workspaces).length === 0) {
       return <WorkspaceFlow />;
     }
 
-    //if there is no team selected don't allow the user to go to a team page, instead redirect to community
-    // if(selectedTeam == null){
-    //   history.push('/community/');
-    //   return <div />
-    // }
-
     return (
       <div style={styles.container}>
         <SideNav
-          history={this.props.history}
+          history={history}
           toggleDrawer={() => this.toggleDrawer()}
           drawerVisible={this.state.drawerVisible}
         />
@@ -72,7 +66,7 @@ class Main extends Component {
           }}
         >
           <NavBar
-            history={this.props.history}
+            history={history}
             toggleDrawer={() => this.toggleDrawer()}
             drawerVisible={this.state.drawerVisible}
           />

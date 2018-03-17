@@ -3,7 +3,6 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
 import { connect } from "react-redux";
 import { withStyles } from "material-ui/styles";
-import Typography from "material-ui/Typography";
 import Input from "material-ui/Input";
 import { FormControl } from "material-ui/Form";
 
@@ -40,7 +39,7 @@ class SubtaskList extends Component {
   };
 
   render() {
-    const { classes, description } = this.props;
+    const { classes } = this.props;
     const { descriptionText } = this.state;
 
     return (

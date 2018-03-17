@@ -5,9 +5,6 @@ import * as Actions from "../../actions";
 import { withStyles } from "material-ui/styles";
 import Loading from "../../common/Loading";
 
-import { withRouter } from "react-router";
-
-
 class joinWorkspace extends Component {
   componentDidMount(){
     const {workspaceID} = this.props.match.params;

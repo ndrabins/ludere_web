@@ -3,9 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import { withStyles } from "material-ui/styles";
-import Typography from "material-ui/Typography";
-import Grid from "material-ui/Grid";
-import Paper from "material-ui/Paper";
 
 import TeamMembers from "./TeamMembers";
 import TeamCard from "./TeamCard";

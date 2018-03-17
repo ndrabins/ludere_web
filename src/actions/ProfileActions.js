@@ -1,7 +1,6 @@
 import {
   FETCH_USER_PROFILE,
   FETCH_USER_PROFILE_SUCCESS,
-  FETCH_USER_PROFILE_ERROR,
   FETCH_MY_USER_PROFILE_SUCCESS
 } from "./types";
 import firebase from "firebase";
@@ -15,6 +14,8 @@ export function fetchUserProfile(userID = null) {
     let { uid } = getState().auth.user;
     let profileID;
     let type;
+
+    //If no userID given, then fetch current users profile.
     if (userID === null) {
       profileID = uid;
       type = FETCH_MY_USER_PROFILE_SUCCESS;

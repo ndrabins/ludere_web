@@ -5,12 +5,10 @@ import * as Actions from "../../actions";
 import { withStyles } from "material-ui/styles";
 import ColorArray from '../../utility/constants/colorsArray';
 
-import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import Map from "lodash/map";
 
 import Button from "material-ui/Button";
-import Avatar from "material-ui/Avatar";
 import PeopleIcon from "material-ui-icons/PeopleOutline";
 import Tooltip from "material-ui/Tooltip";
 

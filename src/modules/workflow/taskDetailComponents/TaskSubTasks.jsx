@@ -25,21 +25,23 @@ class TaskDetailSubtasks extends Component {
   handleCreateSubtask = () => {
     const { subtaskContent } = this.state;
     const { task } = this.props;
-    const { subtasks } = task;
-    task.subtasks = [
+    const newTask = {...task};
+    let subtasks  = newTask.subtasks;
+    newTask.subtasks = [
       ...subtasks,
       { content: subtaskContent, completed: false }
     ];
 
-    this.props.actions.updateTask(task);
+    this.props.actions.updateTask(newTask);
     this.setState({ subtaskContent: "" });
   };
 
   handleToggleSubtask = index => {
     const { task } = this.props;
-    const { subtasks } = task;
+    const newTask = {...task};
+    let subtasks = newTask.subtasks
     subtasks[index].completed = !subtasks[index].completed;
-    this.props.actions.updateTask(task);
+    this.props.actions.updateTask(newTask);
   };
 
   handleDelete = removeIndex => {

@@ -6,13 +6,8 @@ import {
   FETCH_TASKS,
   CREATE_BOARD,
   CREATE_LIST,
-  CREATE_TASK,
   CHANGE_COLUMN_ORDER,
-  CHANGE_TASK_ORDER,
-  MOVE_TASK_TO_COLUMN,
-  UPDATE_LIST,
-  TOGGLE_TASK_DETAIL,
-  SELECT_TASK
+  UPDATE_LIST
 } from "./types";
 import firebase from "firebase";
 

@@ -8,17 +8,23 @@ import ActiveConversationButton from "./ActiveConversationButton";
 
 class ActiveConversationList extends Component {
   renderConversations() {
-    if (!this.props.conversations || !this.props.activeConversations || !this.props.workspaceUsers) {
+    const { conversations, myUserProfile, workspaceUsers } = this.props;
+
+    if (!conversations || !activeConversations || !workspaceUsers) {
       return;
     }
+    const { activeConversations } = myUserProfile;
 
-    let conversations = Map(this.props.conversations, (conversation, key) => {
+    let displayedConversations = Map(conversations, (conversation, key) => {
       let title = "";
       Map(conversation.members, (memberStatus, memberID) => {
-        title += this.props.workspaceUsers[memberID].displayName;
+        if(!workspaceUsers[memberID].displayName){
+          return;
+        }
+        title += workspaceUsers[memberID].displayName;
       });
 
-      if (this.props.activeConversations[key]) {
+      if (activeConversations[key]) {
         return (
           <div key={key}>
             <ActiveConversationButton conversationID={key} name={title} />
@@ -26,7 +32,7 @@ class ActiveConversationList extends Component {
         );
       }
     });
-    return conversations;
+    return displayedConversations;
   }
 
   render() {
@@ -36,7 +42,7 @@ class ActiveConversationList extends Component {
 
 function mapStateToProps(state) {
   return {
-    activeConversations: state.profile.myUserProfile.conversations,
+    myUserProfile: state.profile.myUserProfile,
     conversations: state.community.conversations,
     myID: state.auth.user.uid,
     workspaceUsers: state.workspace.workspaceUsers
