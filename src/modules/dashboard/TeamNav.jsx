@@ -108,6 +108,7 @@ const styles = {
     height: "100%",
     overflowY: "auto",
     overflowX: "hidden",
+    minWidth: 400,
     width: 400, //the width and margin are like this to 1. Hide the scroll bar 2. Allow the tooltips to have room to show
     marginRight: -340,
     backgroundColor: '#0000'
@@ -117,7 +118,7 @@ const styles = {
     marginBottom: 5,
     height: 2,
     width: '34px',
-    border: "1px solid #C3C3C3"
+    backgroundColor: "#C3C3C3"
   },
   container: {
     display: "flex",

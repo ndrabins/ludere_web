@@ -12,8 +12,10 @@ import { Route } from "react-router-dom";
 
 class SideNavModules extends Component {
   render() {
+    const { classes } = this.props;
     return (
-      <div style={styles.container}>
+      <div className={classes.container}>
+        <Route exact path="/" component={CommunitySideNav} />
         <Route path="/community" component={CommunitySideNav} />
         <Route path="/team" component={TeamOverviewTitle} />
         <Route path="/team" component={ChatSideNav} />
@@ -25,7 +27,8 @@ class SideNavModules extends Component {
 
 const styles = {
   container: {
-    marginTop: 10
+    marginTop: 10,
+    width: 240,
   },
   title: {
     display: "flex",

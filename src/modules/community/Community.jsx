@@ -17,6 +17,7 @@ class Community extends Component {
   render() {
     return (
       <div style={styles.container}>
+        <Route exact path="/" component={CommunityList} />
         <Route exact path="/community/" component={CommunityList} />
         <Route exact path="/community/chat" component={CommunityChat}/>
       </div>

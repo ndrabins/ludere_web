@@ -4,15 +4,29 @@ import Typography from "material-ui/Typography";
 import Checkbox from "material-ui/Checkbox";
 import CloseIcon from "material-ui-icons/Close";
 import IconButton from "material-ui/IconButton";
+import Fade from "material-ui/transitions/Fade";
 
 class SubtaskList extends Component {
+  state = {
+    hovered: null
+  };
+
   handleDeleteClick = (event, index) => {
     event.stopPropagation();
     this.props.handleDelete(index);
-  }
+  };
+
+  handleHover = index => {
+    this.setState({ hovered: index });
+  };
+
+  handleLeave = () => {
+    this.setState({ hovered: null });
+  };
 
   render() {
     const { subtasks, classes, handleDelete } = this.props;
+    const { hovered } = this.state;
 
     return (
       <div className={classes.root}>
@@ -21,6 +35,8 @@ class SubtaskList extends Component {
             key={index}
             onClick={() => this.props.handleToggleSubtask(index)}
             className={classes.subtask}
+            onMouseOver={() => this.handleHover(index)}
+            onMouseLeave={() => this.handleLeave()}
           >
             <div className={classes.subtaskContent}>
               <Checkbox
@@ -36,9 +52,13 @@ class SubtaskList extends Component {
                 {subtask.content}
               </Typography>
             </div>
-            <IconButton onClick={(event) => this.handleDeleteClick(event, index)}>
-              <CloseIcon />
-            </IconButton>
+            <Fade in={index === hovered} timeout={{enter: 250, exit: 100}}>
+              <IconButton
+                onClick={event => this.handleDeleteClick(event, index)}
+              >
+                <CloseIcon className={classes.closeIcon}/>
+              </IconButton>
+            </Fade>
           </div>
         ))}
       </div>
@@ -50,7 +70,7 @@ const styles = theme => ({
   root: {
     width: "100%",
     overflowY: "auto",
-    paddingTop: 8,
+    paddingTop: 8
   },
   subtask: {
     marginTop: -14,
@@ -58,7 +78,7 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    width: '100%',
+    width: "100%"
   },
   text: {
     display: "flex",
@@ -74,10 +94,13 @@ const styles = theme => ({
     color: "#B0B2B6",
     transition: "color 0.25s ease-out"
   },
-  subtaskContent:{
+  subtaskContent: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "center"
+  },
+  closeIcon: {
+    color: '#6d6d6d',
   }
 });
 

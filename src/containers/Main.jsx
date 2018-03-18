@@ -73,7 +73,8 @@ class Main extends Component {
           <Switch>
             <Route exact path="/community/dashboard" component={Dashboard} />
             <Route exact path="/community/calendar" component={Calendar} />
-            <Route path="/community" component={Community} />
+            <Route exact path="/" component={Community} />
+            <Route exact path="/community" component={Community} />
             <Route exact path="/team" component={TeamDashboard} />
             <Route path="/team/chat" component={Chat} />
             <Route path="/team/workflow" component={WorkFlow} />
