@@ -76,7 +76,8 @@ const baseStyle = {
   marginLeft: 8,
   marginRight: 4,
   marginBottom: 1,
-  height: 28
+  height: 28,
+  fontSize: '14px',
 };
 
 const baseName = {

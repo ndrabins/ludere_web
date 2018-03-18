@@ -63,7 +63,8 @@ const baseStyle = {
   display: "flex",
   alignContent: "center",
   padding: 5,
-  paddingLeft: 50
+  paddingLeft: 50,
+  fontSize: '14px',
 };
 
 const styles = {

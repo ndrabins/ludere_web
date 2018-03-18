@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import { withStyles } from "material-ui/styles";
-import ColorArray from '../../utility/constants/colorsArray';
+import ColorArray from "../../utility/constants/colorsArray";
 
 import { withRouter } from "react-router";
 import Map from "lodash/map";
@@ -49,17 +49,35 @@ class TeamNav extends Component {
       return (
         <div key={key} className={classes.teamButtonContainer}>
           <span
-            style={selectIndicatorStyle ?
-              {...styles.selectIndicator, backgroundColor: ColorArray[index % 6]} :
-              {...styles.notSelected, backgroundColor: ColorArray[index % 6]}}
+            style={
+              selectIndicatorStyle
+                ? {
+                    ...styles.selectIndicator,
+                    backgroundColor: ColorArray[index % 6]
+                  }
+                : {
+                    ...styles.notSelected,
+                    backgroundColor: ColorArray[index % 6]
+                  }
+            }
           />
-          <Tooltip id="tooltip-right-start" title={team.name} placement="right">
+          <Tooltip
+            id="tooltip-right-start"
+            title={team.name}
+            placement="right"
+            className={classes.toolTipContainer}
+          >
             <Button
               variant="fab"
-              style={{...styles.teamButton, backgroundColor: ColorArray[index % 6]}}
+              style={{
+                ...styles.teamButton,
+                backgroundColor: ColorArray[index % 6]
+              }}
               onClick={() => this.handleTeamSelect(key)}
             >
-              <div className={classes.teamAbbreviation}>{team.name.slice(0,2)}</div>
+              <div className={classes.teamAbbreviation}>
+                {team.name.slice(0, 2)}
+              </div>
             </Button>
           </Tooltip>
         </div>
@@ -76,14 +94,24 @@ class TeamNav extends Component {
       <div className={classes.containerWrapper}>
         <div className={classes.container}>
           <div className={classes.teamButtonContainer}>
-            <span style={focusCommunity ?
-              {...styles.selectIndicator, background: `linear-gradient(to left, #6fe5c9, #00bcd4)`} :
-              {...styles.notSelected, background: `linear-gradient(to left, #6fe5c9, #00bcd4)`}}
+            <span
+              style={
+                focusCommunity
+                  ? {
+                      ...styles.selectIndicator,
+                      background: `linear-gradient(to left, #6fe5c9, #00bcd4)`
+                    }
+                  : {
+                      ...styles.notSelected,
+                      background: `linear-gradient(to left, #6fe5c9, #00bcd4)`
+                    }
+              }
             />
             <Tooltip
               id="tooltip-right-start"
               title="Community"
               placement="right"
+              className={classes.toolTipContainer}
             >
               <Button
                 variant="fab"
@@ -111,13 +139,13 @@ const styles = {
     minWidth: 400,
     width: 400, //the width and margin are like this to 1. Hide the scroll bar 2. Allow the tooltips to have room to show
     marginRight: -340,
-    backgroundColor: '#0000'
+    backgroundColor: "#0000"
   },
   divider: {
     marginTop: 5,
     marginBottom: 5,
     height: 2,
-    width: '34px',
+    width: "34px",
     backgroundColor: "#C3C3C3"
   },
   container: {
@@ -129,50 +157,55 @@ const styles = {
     boxShadow:
       "0 5.5px 5px 0 rgba(0, 0, 0, 0.24), 0 9px 18px 0 rgba(0, 0, 0, 0.18)",
     height: "100%",
-    paddingTop: 5,
+    paddingTop: 5
   },
   communityButton: {
     color: "#FFF",
     background: `linear-gradient(to left, #6fe5c9, #00bcd4)`,
     width: 36,
-    height: 36,
+    height: 36
   },
   teamButton: {
     width: 36,
-    height: 36,
+    height: 36
   },
   notSelected: {
     width: 0,
-    position: 'absolute',
+    position: "absolute",
     height: 38,
     backgroundColor: "white",
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
     transition: "width .25s linear",
-    left: 0,
+    left: 0
   },
   selectIndicator: {
-    position: 'absolute',
+    position: "absolute",
     width: 7,
     height: 38,
     backgroundColor: "white",
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
     transition: "width .25s linear",
-    left: 0,
+    left: 0
   },
   teamButtonContainer: {
-    position: 'relative',
+    position: "relative",
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     width: "100%",
     minHeight: 38,
-    margin: "4px 0px 4px 0px"
+    margin: "6px 0px 6px 0px"
   },
-  teamAbbreviation:{
+  teamAbbreviation: {
     fontSize: 14,
-    color: 'white',
+    color: "white"
+  },
+  toolTipContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   }
 };
 
