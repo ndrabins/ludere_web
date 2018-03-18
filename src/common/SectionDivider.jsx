@@ -24,17 +24,18 @@ const styles = theme => ({
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 5,
+    fontColor: "#303030",
   },
   content:{
     marginLeft: 10,
     marginRight: 10,
+    fontColor: "#303030",
   },
   divider: {
     display: 'flex',
-    height: 1,
-    backgroundColor: '#B9BBBE',
+    height: 2,
+    background: "linear-gradient(to right, #29b6f6, #6f86d6)",
     width: '100%',
-    // margin: 10,
   }
 });
 

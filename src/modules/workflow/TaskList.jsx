@@ -64,7 +64,7 @@ const styles = {
     width: "100%"
   },
   container: {
-    padding: 10,
+    padding: 8,
     display: "flex",
     flexDirection: "column",
     width: "100%"

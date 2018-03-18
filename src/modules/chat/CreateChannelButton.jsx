@@ -57,6 +57,12 @@ class CreateChatButton extends Component {
               fullWidth
               value={this.state.channelName}
               onChange={this.handleChange("channelName")}
+              onKeyPress={ev => {
+                if (ev.key === "Enter" && !ev.shiftKey) {
+                  this.handleCreateChannel();
+                  ev.preventDefault();
+                }
+              }}
             />
           </DialogContent>
           <DialogActions>

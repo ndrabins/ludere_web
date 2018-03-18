@@ -69,8 +69,7 @@ class TaskDetail extends Component {
             variant="raised"
             className={classes.deleteButton}
           >
-            {" "}
-            Delete Task{" "}
+            Delete Task
           </Button>
         </div>
       </div>
@@ -80,7 +79,7 @@ class TaskDetail extends Component {
 
 const styles = theme => ({
   hiddenContainer: {
-    marginTop: 5,
+    marginTop: 6,
     height: `calc(100% - 84px)`,
     width: 400,
     position: "absolute",
@@ -95,7 +94,7 @@ const styles = theme => ({
     flexDirection: "column"
   },
   container: {
-    marginTop: 5,
+    marginTop: 6,
     height: `calc(100% - 84px)`,
     width: 400,
     position: "absolute",
@@ -125,7 +124,7 @@ const styles = theme => ({
     alignItems: "center",
     paddingRight: 10,
     marginTop: "-2px",
-    marginBottom: "-2px"
+    marginBottom: "-3px"
   },
   taskContent: {
     overflowY: "auto",
@@ -143,9 +142,9 @@ const styles = theme => ({
     display: "flex",
     alignSelf: "center",
     color: "white",
-    backgroundColor: "#C62828",
+    backgroundColor: "#b9bbbe",
     "&:hover": {
-      backgroundColor: "#B71C1C"
+      backgroundColor: "#e74c3c"
     }
   },
   arrowIcon: {

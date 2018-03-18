@@ -45,7 +45,6 @@ class Description extends Component {
 
     return (
       <div className={classes.root}>
-        <SectionDivider content={'Description'} />
         <FormControl className={classes.formControl}>
           <Input
             className={classes.input}
@@ -55,6 +54,7 @@ class Description extends Component {
             multiline
             fullWidth
             rowsMax="8"
+            rows="2"
             placeholder="Add a description"
             disableUnderline
             onBlur={() => this.handleBlur()}
