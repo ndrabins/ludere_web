@@ -4,6 +4,7 @@ import Typography from "material-ui/Typography";
 import Grid from "material-ui/Grid";
 import Paper from "material-ui/Paper";
 
+
 class TeamCard extends Component {
   static defaultProps = {
     background: `linear-gradient(to left, #6fe5c9, #00bcd4)`
@@ -26,7 +27,7 @@ class TeamCard extends Component {
 
 const inlineStyles = {
   heading: {
-    minHeight: 50,
+    minHeight: 40,
     width: '100%',
     display: 'flex',
     borderRadius: "7px 7px 0px 0px",
@@ -45,6 +46,8 @@ const styles = theme => ({
     alignContent: 'center',
     justifyContent: 'center',
     paddingLeft: 10,
+    fontWeight: 600,
+    fontSize: 16,
   },
   paperContainer: {
     display: 'flex',

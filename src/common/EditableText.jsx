@@ -27,6 +27,8 @@ class EditableText extends Component {
   };
 
   handleBlur = () => {
+    // make call if user clicks out of box
+    this.props.handleEnterPress(this.state.value);
     this.setState({ renderEditableText: false });
   };
 
@@ -90,6 +92,7 @@ const styles = theme => ({
     backgroundColor: "transparent",
     padding: 5,
     opacity: 1,
+    fontWeight: 600,
     border: "0px #000A solid",
     borderRadius: 5,
     minHeight: 14,
@@ -100,6 +103,7 @@ const styles = theme => ({
     }
   },
   input: {
+    fontWeight: 600,
     backgroundColor: "white",
     borderRadius: 5,
     padding: 5,

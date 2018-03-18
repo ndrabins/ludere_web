@@ -21,7 +21,7 @@ class TaskDetail extends Component {
   handleDelete = () => {
     this.props.actions.deleteTask();
     this.props.actions.toggleTaskDetail(null);
-  }
+  };
 
   render() {
     const { classes, taskData, selectedTask } = this.props;
@@ -45,7 +45,10 @@ class TaskDetail extends Component {
       >
         <div className={classes.header}>
           <div className={classes.headerInner}>
-            <IconButton onClick={() => this.props.actions.toggleTaskDetail()}>
+            <IconButton
+              className={classes.arrowIcon}
+              onClick={() => this.props.actions.toggleTaskDetail()}
+            >
               <ArrowIcon />
             </IconButton>
             <div className={classes.titleContainer}>
@@ -60,8 +63,15 @@ class TaskDetail extends Component {
           <Description task={task} />
           <TaskSubTasks task={task} />
           <CommentSection task={task} />
-          <SectionDivider content={'Utility'} />
-          <Button onClick={this.handleDelete} variant="raised" className={classes.deleteButton}> Delete Task </Button>
+          <SectionDivider content={"Utility"} />
+          <Button
+            onClick={this.handleDelete}
+            variant="raised"
+            className={classes.deleteButton}
+          >
+            {" "}
+            Delete Task{" "}
+          </Button>
         </div>
       </div>
     );
@@ -70,6 +80,7 @@ class TaskDetail extends Component {
 
 const styles = theme => ({
   hiddenContainer: {
+    marginTop: 5,
     height: `calc(100% - 84px)`,
     width: 400,
     position: "absolute",
@@ -84,10 +95,11 @@ const styles = theme => ({
     flexDirection: "column"
   },
   container: {
+    marginTop: 5,
     height: `calc(100% - 84px)`,
     width: 400,
     position: "absolute",
-    backgroundColor: "#E3E3E4",
+    backgroundColor: "#f5f5f5",
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     right: 0,
@@ -102,10 +114,8 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    backgroundColor: "#b9bbbe",
-    minHeight: 70,
-    paddingTop: 10,
-    paddingBottom: 10
+    background: "linear-gradient(to right, #29b6f6, #6f86d6)",
+    minHeight: 40
   },
   headerInner: {
     display: "flex",
@@ -113,13 +123,15 @@ const styles = theme => ({
     height: "100%",
     flexDirection: "row",
     alignItems: "center",
-    paddingRight: 10
+    paddingRight: 10,
+    marginTop: "-2px",
+    marginBottom: "-2px"
   },
   taskContent: {
-    overflowY: 'auto',
+    overflowY: "auto",
     height: "100%",
     padding: 8,
-    flexDirection: 'column',
+    flexDirection: "column"
   },
   titleContainer: {
     width: "100%",
@@ -128,13 +140,16 @@ const styles = theme => ({
   },
   deleteButton: {
     marginTop: 10,
-    display:'flex',
-    alignSelf:'center',
-    color:'white',
-    backgroundColor: '#C62828',
-    '&:hover':{
-      backgroundColor: '#B71C1C'
+    display: "flex",
+    alignSelf: "center",
+    color: "white",
+    backgroundColor: "#C62828",
+    "&:hover": {
+      backgroundColor: "#B71C1C"
     }
+  },
+  arrowIcon: {
+    color: "white"
   }
 });
 
