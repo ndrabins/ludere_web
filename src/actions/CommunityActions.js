@@ -9,7 +9,9 @@ import {
   ADD_ACTIVE_CONVERSATION_ERROR,
   FETCH_CONVERSATIONS,
   FETCH_CONVERSATIONS_SUCCESS,
-  SET_CONVERSATION_INACTIVE
+  SET_CONVERSATION_INACTIVE,
+  UNSUBSCRIBE_CONVERSATION_MESSAGES,
+  UNSUBSCRIBE_CONVERSATIONS
 } from "./types";
 import firebase from "firebase";
 
@@ -86,7 +88,7 @@ export function fetchConversations() {
     let { uid } = getState().auth.user;
     var conversationsRef = firebase.firestore().collection("community");
 
-    conversationsRef
+    var conversationsListener = conversationsRef
       .where(`members.${uid}`, "==", true)
       .onSnapshot(function(querySnapshot) {
         var conversations = {};
@@ -95,7 +97,8 @@ export function fetchConversations() {
         });
         dispatch({
           type: FETCH_CONVERSATIONS_SUCCESS,
-          conversations: conversations
+          conversations: conversations,
+          conversationsListener: conversationsListener
         });
       });
   };
@@ -111,20 +114,42 @@ export function fetchConversationMessages(conversationID) {
     let messageRef = firebase
       .firestore()
       .collection(`community/${conversationID}/messages`);
-    messageRef.orderBy("dateCreated").onSnapshot(function(querySnapshot) {
-      var messages = {};
-      querySnapshot.forEach(function(doc) {
-        messages[doc.id] = doc.data();
+
+    var messagesListener = messageRef
+      .orderBy("dateCreated")
+      .onSnapshot(function(querySnapshot) {
+        var messages = {};
+        querySnapshot.forEach(function(doc) {
+          messages[doc.id] = doc.data();
+        });
+        dispatch({
+          type: FETCH_CONVERSATION_MESSAGES_SUCCESS,
+          messages: messages,
+          messagesListener: messagesListener
+        });
       });
-      dispatch({
-        type: FETCH_CONVERSATION_MESSAGES_SUCCESS,
-        messages: messages
-      });
-    });
 
     dispatch(addToActiveConversations(conversationID)); //add to active conversations for user
+  };
+}
 
-    // dispatch({ type: FETCH_CONVERSATION_MESSAGES_ERROR });
+export function unsubscribeFromMessages() {
+  return (dispatch, getState) => {
+    const messagesListener = getState().community.messagesListener;
+    if (messagesListener == null) return; // do nothing if no listener
+
+    messagesListener();
+    dispatch({ type: UNSUBSCRIBE_CONVERSATION_MESSAGES });
+  };
+}
+
+export function unsubscribeFromConversations() {
+  return (dispatch, getState) => {
+    const conversationsListener = getState().community.conversationsListener;
+    if (conversationsListener == null) return; // do nothing if no listener
+
+    conversationsListener();
+    dispatch({ type: UNSUBSCRIBE_CONVERSATIONS });
   };
 }
 
@@ -159,8 +184,6 @@ function createConversation(myUID, recieverUID) {
       members: {}
     };
 
-    // console.log("myUID", myUID);
-    // console.log("reciverUID", recieverUID);
     directMessage.members[myUID] = true;
     directMessage.members[recieverUID] = true;
 

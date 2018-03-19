@@ -8,7 +8,8 @@ import {
   DELETE_TASK,
   CREATE_COMMENT,
   FETCH_COMMENTS,
-  FETCH_COMMENTS_SUCCESS
+  FETCH_COMMENTS_SUCCESS,
+  UNSUBSCRIBE_TASK_COMMENTS
 } from "./types";
 import firebase from "firebase";
 
@@ -150,6 +151,8 @@ export function toggleTaskDetail(taskID = null) {
 
 export function fetchTask(taskID) {
   return (dispatch, getState) => {
+    dispatch(unsubscribeFromTaskComments()); // unsubscribe from previous comments
+
     const { selectedBoard } = getState().workflow;
     dispatch({ type: SELECT_TASK, selectedTask: taskID });
 
@@ -158,13 +161,30 @@ export function fetchTask(taskID) {
       .firestore()
       .collection(`workflow/${selectedBoard}/tasks/${taskID}/comments`);
 
-    commentRef.orderBy("dateCreated").onSnapshot(function(querySnapshot) {
-      var comments = {};
-      querySnapshot.forEach(function(doc) {
-        comments[doc.id] = doc.data();
+    const taskCommentsListener = commentRef
+      .orderBy("dateCreated")
+      .onSnapshot(function(querySnapshot) {
+        var comments = {};
+        querySnapshot.forEach(function(doc) {
+          comments[doc.id] = doc.data();
+        });
+        dispatch({
+          type: FETCH_COMMENTS_SUCCESS,
+          comments: comments,
+          taskCommentsListener: taskCommentsListener
+        });
       });
-      dispatch({ type: FETCH_COMMENTS_SUCCESS, comments: comments });
-    });
+  };
+}
+
+export function unsubscribeFromTaskComments() {
+  return (dispatch, getState) => {
+    const taskCommentsListener = getState().workflow.taskCommentsListener;
+    console.log(taskCommentsListener);
+    if (taskCommentsListener == null) return; // do nothing if no listener
+
+    taskCommentsListener();
+    dispatch({ type: UNSUBSCRIBE_TASK_COMMENTS });
   };
 }
 

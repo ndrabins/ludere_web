@@ -13,13 +13,17 @@ import {
   FETCH_CONVERSATIONS,
   FETCH_CONVERSATIONS_SUCCESS,
   FETCH_CONVERSATIONS_ERROR,
-  SET_CONVERSATION_INACTIVE
+  SET_CONVERSATION_INACTIVE,
+  UNSUBSCRIBE_CONVERSATIONS,
+  UNSUBSCRIBE_CONVERSATION_MESSAGES
 } from "../actions/types";
 
 const initialState = {
   selectedConversation: null, //a chat ID
   messages: {}, // list of message objects
-  conversations: {}//list of active/recent conversations to have in the sidebar
+  conversations: {}, //list of active/recent conversations to have in the sidebar
+  conversationsListener: null,
+  messagesListener: null
 };
 
 export default function team(state = initialState, action) {
@@ -37,17 +41,23 @@ export default function team(state = initialState, action) {
     case FETCH_CONVERSATION_MESSAGES_SUCCESS:
       return {
         ...state,
-        messages: action.messages
+        messages: action.messages,
+        messagesListener: action.messagesListener
       };
+    case UNSUBSCRIBE_CONVERSATION_MESSAGES:
+      return state;
     case FETCH_CONVERSATION_MESSAGES_ERROR:
       return state;
-      case FETCH_CONVERSATIONS:
+    case FETCH_CONVERSATIONS:
       return state;
     case FETCH_CONVERSATIONS_SUCCESS:
       return {
         ...state,
-        conversations: action.conversations
+        conversations: action.conversations,
+        conversationsListener: action.conversationsListener
       };
+    case UNSUBSCRIBE_CONVERSATIONS:
+      return state;
     case FETCH_CONVERSATIONS_ERROR:
       return state;
     case SEND_DIRECT_MESSAGE:

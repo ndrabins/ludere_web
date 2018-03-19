@@ -9,7 +9,9 @@ import MessageList from "./MessageList";
 class Chat extends Component {
   componentWillUnmount() {
     //clean up selection
-    this.props.actions.selectChannel(null);
+    const { actions, selectedChannel } = this.props;
+    actions.selectChannel(null);
+    actions.unsubscribeFromMessages(selectedChannel);
   }
 
   render() {
@@ -26,7 +28,7 @@ const styles = {
   container: {
     height: "100%",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "column"
   }
 };
 

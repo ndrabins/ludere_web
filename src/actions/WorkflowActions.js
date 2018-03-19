@@ -7,7 +7,9 @@ import {
   CREATE_BOARD,
   CREATE_LIST,
   CHANGE_COLUMN_ORDER,
-  UPDATE_LIST
+  UPDATE_LIST,
+  UNSUBSCRIBE_BOARD_DATA,
+  UNSUBSCRIBE_BOARDS
 } from "./types";
 import firebase from "firebase";
 
@@ -90,23 +92,51 @@ export function updateList(list, listID) {
 
 export function fetchBoards(selectedTeamID) {
   return (dispatch, getState) => {
+    dispatch(unsubscribeFromBoards()); // unsubscribe from previous listener;
     dispatch({ type: FETCH_BOARDS });
 
     let workflowRef = firebase.firestore().collection("workflow");
-    workflowRef
+    const boardsListener = workflowRef
       .where(`teamID`, "==", selectedTeamID)
       .onSnapshot(function(querySnapshot) {
         var boards = {};
         querySnapshot.forEach(function(doc) {
           boards[doc.id] = doc.data();
         });
-        dispatch({ type: FETCH_BOARDS_SUCCESS, boards: boards });
+        dispatch({
+          type: FETCH_BOARDS_SUCCESS,
+          boards: boards,
+          boardsListener: boardsListener
+        });
       });
+  };
+}
+
+export function unsubscribeFromBoardData() {
+  return (dispatch, getState) => {
+    const { listsListener, tasksListener } = getState().workflow;
+    if (listsListener == null || tasksListener == null) return;
+
+    listsListener();
+    tasksListener();
+    dispatch({ type: UNSUBSCRIBE_BOARD_DATA });
+  };
+}
+
+export function unsubscribeFromBoards() {
+  return (dispatch, getState) => {
+    const { boardsListener } = getState().workflow;
+    if (boardsListener == null) return;
+
+    boardsListener();
+    dispatch({ type: UNSUBSCRIBE_BOARDS });
   };
 }
 
 export function fetchBoardData(boardID) {
   return (dispatch, getState) => {
+    dispatch(unsubscribeFromBoardData()); // unsubscribe from previous listener;
+
     let listsRef = firebase
       .firestore()
       .collection("workflow")
@@ -119,20 +149,28 @@ export function fetchBoardData(boardID) {
       .doc(boardID)
       .collection("tasks");
 
-    listsRef.onSnapshot(function(querySnapshot) {
+    const listsListener = listsRef.onSnapshot(function(querySnapshot) {
       var listData = {};
       querySnapshot.forEach(function(doc) {
         listData[doc.id] = doc.data();
       });
-      dispatch({ type: FETCH_LISTS, listData: listData });
+      dispatch({
+        type: FETCH_LISTS,
+        listData: listData,
+        listsListener: listsListener
+      });
     });
 
-    tasksRef.onSnapshot(function(querySnapshot) {
+    const tasksListener = tasksRef.onSnapshot(function(querySnapshot) {
       var taskData = {};
       querySnapshot.forEach(function(doc) {
         taskData[doc.id] = doc.data();
       });
-      dispatch({ type: FETCH_TASKS, taskData: taskData });
+      dispatch({
+        type: FETCH_TASKS,
+        taskData: taskData,
+        tasksListener: tasksListener
+      });
     });
   };
 }

@@ -14,7 +14,10 @@ import {
   UPDATE_TASK,
   CREATE_COMMENT,
   FETCH_COMMENTS,
-  FETCH_COMMENTS_SUCCESS
+  FETCH_COMMENTS_SUCCESS,
+  UNSUBSCRIBE_TASK_COMMENTS,
+  UNSUBSCRIBE_BOARD_DATA,
+  UNSUBSCRIBE_BOARDS
 } from "../actions/types";
 
 const initialState = {
@@ -25,7 +28,11 @@ const initialState = {
   showTaskDetail: false,
   selectedTask: null,
   loading: false,
-  comments: {}
+  comments: {},
+  taskCommentsListener: null,
+  tasksListener: null,
+  listsListener: null,
+  boardsListener: null
 };
 
 export default function workflow(state = initialState, action) {
@@ -33,11 +40,24 @@ export default function workflow(state = initialState, action) {
     case SELECT_BOARD:
       return { ...state, selectedBoard: action.selectedBoard };
     case FETCH_BOARDS_SUCCESS:
-      return { ...state, boards: action.boards, loading: false };
+      return {
+        ...state,
+        boards: action.boards,
+        loading: false,
+        boardsListener: action.boardsListener
+      };
     case FETCH_LISTS:
-      return { ...state, listData: action.listData };
+      return {
+        ...state,
+        listData: action.listData,
+        listsListener: action.listsListener
+      };
     case FETCH_TASKS:
-      return { ...state, taskData: action.taskData };
+      return {
+        ...state,
+        taskData: action.taskData,
+        tasksListener: action.tasksListener
+      };
     case TOGGLE_TASK_DETAIL:
       return { ...state, showTaskDetail: !state.showTaskDetail };
     case SELECT_TASK:
@@ -47,12 +67,18 @@ export default function workflow(state = initialState, action) {
     case FETCH_COMMENTS:
       return state;
     case FETCH_COMMENTS_SUCCESS:
-      return { ...state, comments: action.comments };
+      return {
+        ...state,
+        comments: action.comments,
+        taskCommentsListener: action.taskCommentsListener
+      };
     case CHANGE_TASK_ORDER:
       return state;
     case MOVE_TASK_TO_COLUMN:
       return state;
     case UPDATE_TASK:
+      return state;
+    case UNSUBSCRIBE_TASK_COMMENTS:
       return state;
     case UPDATE_LIST:
       return state;
@@ -62,6 +88,10 @@ export default function workflow(state = initialState, action) {
       return state;
     case FETCH_BOARDS:
       return { ...state, loading: true };
+    case UNSUBSCRIBE_BOARD_DATA:
+      return state;
+    case UNSUBSCRIBE_BOARDS:
+      return state;
     default:
       return state;
   }

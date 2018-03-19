@@ -40,6 +40,11 @@ class Main extends Component {
     // this.props.actions.fetchTeams();
   }
 
+  componentWillUnmount() {
+    const { actions } = this.props;
+    actions.unsubscribeFromChannels();
+  }
+
   toggleDrawer() {
     this.setState({ drawerVisible: !this.state.drawerVisible });
   }

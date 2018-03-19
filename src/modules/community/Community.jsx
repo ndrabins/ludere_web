@@ -14,6 +14,10 @@ class Community extends Component {
     this.props.actions.fetchConversations();
   }
 
+  componentWillUnmount() {
+    this.props.actions.unsubscribeFromConversations();
+  }
+
   render() {
     return (
       <div style={styles.container}>
