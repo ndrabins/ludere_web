@@ -32,7 +32,7 @@ class TeamDashboard extends Component {
           <div className={classes.column}>
             <TeamCard
               title={"Activity"}
-              background={`linear-gradient(to right, #29b6f6, #6f86d6)`}
+              background={`linear-gradient(to right, #29b6f6, #53C6F7)`}
             >
               <div> coming soon </div>
             </TeamCard>

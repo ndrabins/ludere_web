@@ -33,13 +33,13 @@ const styles = theme => ({
   divider1: {
     display: 'flex',
     height: 2,
-    background: "linear-gradient(to right, #29b6f6, #6f86d6)",
+    background: "linear-gradient(to right, #29b6f6, #53C6F7)",
     width: '100%',
   },
   divider2: {
     display: 'flex',
     height: 2,
-    background: "linear-gradient(to left, #29b6f6, #6f86d6)",
+    background: "linear-gradient(to left, #29b6f6, #53C6F7)",
     width: '100%',
   }
 });
