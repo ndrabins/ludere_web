@@ -18,7 +18,6 @@ class TeamMembers extends Component {
 
   handleAddClick = (userID) => {
     const {selectedTeam} = this.props;
-    console.log('userid', userID);
     this.props.actions.joinTeam(selectedTeam, userID)
   }
 

@@ -180,7 +180,6 @@ export function fetchTask(taskID) {
 export function unsubscribeFromTaskComments() {
   return (dispatch, getState) => {
     const taskCommentsListener = getState().workflow.taskCommentsListener;
-    console.log(taskCommentsListener);
     if (taskCommentsListener == null) return; // do nothing if no listener
 
     taskCommentsListener();

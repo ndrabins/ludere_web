@@ -115,7 +115,7 @@ const styles = {
   entryWrapper: {
     marginRight: 15,
     display: "flex",
-    marginTop: -8
+    // marginTop: -8
   },
   input: {
     backgroundColor: "white",

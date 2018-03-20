@@ -106,7 +106,6 @@ export function selectChannel(channelID) {
         querySnapshot.forEach(function(doc) {
           messages[doc.id] = doc.data();
         });
-        console.log("message recieved");
         dispatch({
           type: FETCH_MESSAGES_SUCCESS,
           messages: messages,

@@ -68,36 +68,36 @@ class SubtaskList extends Component {
 
 const styles = theme => ({
   root: {
-    width: "100%",
     overflowY: "auto",
-    paddingTop: 8
   },
   subtask: {
-    marginTop: -14,
     padding: 0,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "100%"
+    marginTop: '-8px',
   },
   text: {
-    display: "flex",
-    wordWrap: "break-all",
-    overflowWrap: "break-word",
-    transition: "color 0.5s ease-out"
+    whiteSpace: "pre-line",
+    wordWrap: "break-word",
+    overflowWrap: "break-all",
+    transition: "color 0.5s ease-out",
+    paddingTop: 13,
+    maxWidth: '100%',
   },
   completedText: {
-    display: "flex",
-    wordWrap: "break-all",
-    overflowWrap: "break-word",
+    whiteSpace: "pre-line",
+    wordWrap: "break-word",
+    overflowWrap: "break-all",
     textDecoration: "line-through",
     color: "#B0B2B6",
-    transition: "color 0.25s ease-out"
+    transition: "color 0.25s ease-out",
+    paddingTop: 13,
   },
   subtaskContent: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "flex-start",
   },
   closeIcon: {
     color: '#6d6d6d',
