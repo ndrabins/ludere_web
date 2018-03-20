@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
+import { withStyles } from "material-ui/styles";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
@@ -41,7 +42,7 @@ class Column extends Component {
   };
 
   render() {
-    const { list, ID } = this.props;
+    const { list, ID, classes } = this.props;
     if (list === undefined || list.name === undefined) {
       return <div />;
     }
@@ -69,7 +70,9 @@ class Column extends Component {
                 <TextField
                   id="taskName"
                   placeholder="Create a task"
+                  className={classes.textField}
                   value={this.state.taskName}
+                  fullWidth
                   onChange={this.handleChange("taskName")}
                   margin="normal"
                   onKeyPress={ev => {
@@ -125,8 +128,9 @@ const styles = {
     color: "white"
   },
   taskEntry: {
-    paddingLeft: 10
-  }
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
 };
 
 function mapDispatchToProps(dispatch) {
@@ -135,4 +139,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(Column);
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Column));
