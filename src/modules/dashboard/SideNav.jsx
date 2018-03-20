@@ -45,8 +45,6 @@ class SideNav extends Component {
 const styles = {
   container: {
     display: "flex",
-    // backgroundColor: colors.lightThemePrimary,
-    // width: drawerWidth,
     overflow: "hidden",
     height: "100%"
   },

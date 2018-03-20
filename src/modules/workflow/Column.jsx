@@ -120,7 +120,7 @@ const styles = {
     paddingBottom: 5,
     color: "#FFFFFF",
     display: "flex",
-    backgroundColor: "#00BCD4",
+    background: "linear-gradient(to right, #00BCD4, #26d0ce)",
     alignItems: "center",
     justifyContent: "center",
     borderTopLeftRadius: 7,

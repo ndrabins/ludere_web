@@ -28,7 +28,7 @@ export const lightTheme = createMuiTheme({
         borderRadius: 15
       },
       checkedSecondary: {
-        color: "#00B4CE",
+        color: "#29B8F6",
         borderRadius: 15
       }
     }

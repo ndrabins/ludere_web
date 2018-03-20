@@ -22,8 +22,7 @@ const styles = theme => ({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 5,
+    marginTop: 5,
     fontColor: "#303030",
   },
   content:{
@@ -44,6 +43,5 @@ const styles = theme => ({
     width: '100%',
   }
 });
-
 export default withStyles(styles)(SectionDivider);
 

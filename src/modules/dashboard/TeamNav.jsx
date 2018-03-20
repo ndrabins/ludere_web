@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import { withStyles } from "material-ui/styles";
-import ColorArray from "../../utility/constants/colorsArray";
+// import ColorArray from "../../utility/constants/colorsArray";
+import GradientArray from "../../utility/constants/gradientArray";
 
 import { withRouter } from "react-router";
 import Map from "lodash/map";
@@ -53,11 +54,11 @@ class TeamNav extends Component {
               selectIndicatorStyle
                 ? {
                     ...styles.selectIndicator,
-                    backgroundColor: ColorArray[index % 6]
+                    background: GradientArray[index % 4]
                   }
                 : {
                     ...styles.notSelected,
-                    backgroundColor: ColorArray[index % 6]
+                    background: GradientArray[index % 4]
                   }
             }
           />
@@ -71,7 +72,7 @@ class TeamNav extends Component {
               variant="fab"
               style={{
                 ...styles.teamButton,
-                backgroundColor: ColorArray[index % 6]
+                background: GradientArray[index % 4]
               }}
               onClick={() => this.handleTeamSelect(key)}
             >

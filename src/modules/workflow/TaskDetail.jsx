@@ -43,34 +43,36 @@ class TaskDetail extends Component {
             : classes.hiddenContainer
         }
       >
-        <div className={classes.header}>
-          <div className={classes.headerInner}>
-            <IconButton
-              className={classes.arrowIcon}
-              onClick={() => this.props.actions.toggleTaskDetail()}
-            >
-              <ArrowIcon />
-            </IconButton>
-            <div className={classes.titleContainer}>
-              <EditableText
-                value={task.title}
-                handleEnterPress={title => this.handleTitleChange(title)}
-              />
+        <div className={classes.innerContainer}>
+          <div className={classes.header}>
+            <div className={classes.headerInner}>
+              <IconButton
+                className={classes.arrowIcon}
+                onClick={() => this.props.actions.toggleTaskDetail()}
+              >
+                <ArrowIcon />
+              </IconButton>
+              <div className={classes.titleContainer}>
+                <EditableText
+                  value={task.title}
+                  handleEnterPress={title => this.handleTitleChange(title)}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div className={classes.taskContent}>
-          <Description task={task} />
-          <TaskSubTasks task={task} />
-          <CommentSection task={task} />
-          <SectionDivider content={"Utility"} />
-          <Button
-            onClick={this.handleDelete}
-            variant="raised"
-            className={classes.deleteButton}
-          >
-            Delete Task
-          </Button>
+          <div className={classes.taskContent}>
+            <Description task={task} />
+            <TaskSubTasks task={task} />
+            <CommentSection task={task} />
+            <SectionDivider content={"Utility"} />
+            <Button
+              onClick={this.handleDelete}
+              variant="raised"
+              className={classes.deleteButton}
+            >
+              Delete Task
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -81,17 +83,15 @@ const styles = theme => ({
   hiddenContainer: {
     marginTop: 6,
     height: `calc(100% - 84px)`,
-    width: 400,
+    width: 0,
     position: "absolute",
     backgroundColor: "#E3E3E4",
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
-    right: -400,
-    transition: "opacity 0.5s ease-out, right 0.5s ease-out",
+    right: 0,
+    transition: "opacity 0.7s ease-out, width .7s ease-out",
     opacity: 0,
     boxShadow: "0px 7px 14px 2px rgba(0, 0, 0, 0.5)",
-    display: "flex",
-    flexDirection: "column"
   },
   container: {
     marginTop: 6,
@@ -102,9 +102,13 @@ const styles = theme => ({
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     right: 0,
-    transition: "opacity 0.5s ease-out, right 0.5s ease-out",
+    transition: "opacity 0.7s ease-out, width .7s ease-out",
     opacity: 1,
     boxShadow: "0px 7px 14px 2px rgba(0, 0, 0, 0.5)",
+  },
+  innerContainer:{
+    minWidth: 400,
+    height: '100%',
     display: "flex",
     flexDirection: "column"
   },
@@ -127,10 +131,9 @@ const styles = theme => ({
     marginBottom: "-3px"
   },
   taskContent: {
-    overflowY: "auto",
     height: "100%",
     padding: 8,
-    flexDirection: "column"
+    overflowY: "auto",
   },
   titleContainer: {
     width: "100%",
@@ -148,7 +151,9 @@ const styles = theme => ({
     }
   },
   arrowIcon: {
-    color: "white"
+    color: "white",
+    marginTop: -2,
+    marginBottom: -2,
   }
 });
 
