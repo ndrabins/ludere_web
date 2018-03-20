@@ -76,28 +76,30 @@ const styles = theme => ({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: '-8px',
+    width: '100%',
   },
   text: {
     whiteSpace: "pre-line",
     wordWrap: "break-word",
-    overflowWrap: "break-all",
     transition: "color 0.5s ease-out",
     paddingTop: 13,
-    maxWidth: '100%',
+    width: '100%',
   },
   completedText: {
     whiteSpace: "pre-line",
     wordWrap: "break-word",
-    overflowWrap: "break-all",
     textDecoration: "line-through",
     color: "#B0B2B6",
     transition: "color 0.25s ease-out",
     paddingTop: 13,
+    width: '100%',
   },
   subtaskContent: {
     display: "flex",
     flexDirection: "row",
     alignItems: "flex-start",
+    wordWrap: "break-word",
+    width: 273, // this shouldnt be hard coded but I couldn't figure out how to make the text no go past div.
   },
   closeIcon: {
     color: '#6d6d6d',
