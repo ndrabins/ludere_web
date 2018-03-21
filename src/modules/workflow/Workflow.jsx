@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
-import Board from "./Board";
-import TaskDetail from "./TaskDetail";
+import Board from "./boardComponents/Board";
+import TaskDetail from "./boardComponents/TaskDetail";
 
 class Workflow extends Component {
   componentWillUnmount() {

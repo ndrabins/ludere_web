@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as Actions from "../../actions";
+import * as Actions from "../../../actions";
 import Map from "lodash/map";
 
 import TextField from "material-ui/TextField";
@@ -96,8 +96,12 @@ class Board extends Component {
         onDragStart={this.onDragStart}
         style={styles.wrapper}
       >
-        <Droppable droppableId="board" type="COLUMN" direction="horizontal">
-          {(provided, snapshot) => (
+        <Droppable
+          droppableId="board"
+          type="COLUMN"
+          direction="horizontal"
+        >
+          {(provided) => (
             <div
               style={
                 showTaskDetail

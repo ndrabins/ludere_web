@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as Actions from "../../actions";
+import * as Actions from "../../../actions";
 import Typography from "material-ui/Typography";
 
 class Task extends Component {

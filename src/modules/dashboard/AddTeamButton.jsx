@@ -100,7 +100,7 @@ const styles = {
     width: 36,
     height: 36,
     margin: "8px 0px 8px 0px",
-    border: "2px dashed #c3c3c3",
+    border: "1px dashed #c3c3c3",
     backgroundColor: "rgba(0, 0, 0, 0.0)"
   }
 };

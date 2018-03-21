@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as Actions from "../../actions";
+import * as Actions from "../../../actions";
 
 import Task from "./Task";
 

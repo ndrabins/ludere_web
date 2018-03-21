@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as Actions from "../../actions";
+import * as Actions from "../../../actions";
 import { withStyles } from "material-ui/styles";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
@@ -10,7 +10,7 @@ import Button from "material-ui/Button";
 import TextField from "material-ui/TextField";
 
 import TaskList from "./TaskList";
-import EditableText from "../../common/EditableText";
+import EditableText from "../../../common/EditableText";
 
 class Column extends Component {
   state = {
@@ -97,7 +97,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     minHeight: 300,
-    width: 200,
+    width: 240,
     backgroundColor: "#E5E5E6",
     margin: 6,
     borderRadius: 7,

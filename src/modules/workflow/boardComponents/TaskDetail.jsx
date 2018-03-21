@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as Actions from "../../actions";
+import * as Actions from "../../../actions";
 import { withStyles } from "material-ui/styles";
 import IconButton from "material-ui/IconButton";
 import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
 import Button from "material-ui/Button";
 
-import EditableText from "../../common/EditableText";
-import SectionDivider from "../../common/SectionDivider";
-import TaskSubTasks from "./taskDetailComponents/TaskSubTasks";
-import Description from "./taskDetailComponents/Description";
-import CommentSection from "./taskDetailComponents/CommentSection";
+import EditableText from "../../../common/EditableText";
+import SectionDivider from "../../../common/SectionDivider";
+import TaskSubTasks from "../taskDetailComponents/TaskSubTasks";
+import Description from "../taskDetailComponents/Description";
+import CommentSection from "../taskDetailComponents/CommentSection";
 
 class TaskDetail extends Component {
   handleTitleChange = title => {
