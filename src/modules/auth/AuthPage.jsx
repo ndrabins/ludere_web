@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as Actions from "../actions";
+import * as Actions from "../../actions";
 
-import SignUp from "../modules/auth/SignUp";
-import SignIn from "../modules/auth/SignIn";
+import SignUp from "./SignUp";
+import SignIn from "./SignIn";
 
-import logoWhite from "../static/light.svg";
-import backgroundImg from "../static/mountains.png";
+import logoWhite from "../../static/light.svg";
+import backgroundImg from "../../static/mountains.png";
 
 class AuthPage extends Component {
   state = {

@@ -29,6 +29,8 @@
   },
   "devDependencies": {
     "css-font-family": "^1.0.7",
+    "eslint-plugin-prettier": "^2.6.0",
+    "prettier": "^1.11.1",
     "source-map-explorer": "^1.5.0"
   },
   "scripts": {
