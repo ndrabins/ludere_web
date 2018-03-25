@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
+import { withStyles } from "material-ui/styles";
 
+import Typography from "material-ui/Typography";
 import Input, { InputLabel } from "material-ui/Input";
 import { FormControl } from "material-ui/Form";
-
+import Fade from "material-ui/transitions/Fade";
 import Button from "material-ui/Button";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import "./firebaseUI.css"; // Import globally.
 
 class SignUp extends Component {
   constructor(props) {
@@ -15,8 +19,8 @@ class SignUp extends Component {
     this.state = {
       email: "",
       password: "",
-      confirm_password: "",
-      showPassword: false,
+      confirmPassword: "",
+      showPassword: false
     };
   }
 
@@ -24,132 +28,166 @@ class SignUp extends Component {
     this.setState({ [prop]: event.target.value });
   };
 
-  handleMouseDownPasssword = event => {
-    event.preventDefault();
-  };
-
-  handleClickShowPasssword = () => {
-    this.setState({ showPassword: !this.state.showPassword });
-  };
-
-  renderSignUp(){
-    if(this.props.loginTransition !== "SignUp"){
-      return(
-        <p style={styles.headerClosed}>GET STARTED</p>
-      );
+  getSignUpStyles = () => {
+    const { classes, loginTransition } = this.props;
+    if (loginTransition === "null") {
+      return classes.noneSelected;
+    } else if (loginTransition === "SignUp") {
+      return classes.signUpSelected;
+    } else {
+      return classes.signInSelected;
     }
+  };
 
-    return(
-      <div style={{display:'flex', flexDirection:"column"}}>
-        <p style={styles.header}>Get Started</p>
-        <FormControl style={styles.formControl}>
-          <InputLabel style={styles.inputLabel} htmlFor="emails">Email</InputLabel>
-          <Input
-            id="email"
-            style={styles.inputText}
-            value={this.state.email}
-            onChange={this.handleChange("email")}
-          />
-        </FormControl>
-        <FormControl style={styles.formControl}>
-          <InputLabel style={styles.inputLabel} htmlFor="password">New Password</InputLabel>
-          <Input
-            id="password"
-            style={styles.inputText}
-            type={this.state.showPassword ? "text" : "password"}
-            value={this.state.password}
-            onChange={this.handleChange("password")}
-          />
-        </FormControl>
-        <FormControl style={styles.formControl}>
-          <InputLabel style={styles.inputLabel} htmlFor="confirm_password">Confirm Password</InputLabel>
-          <Input
-            id="confirm_password"
-            style={styles.inputText}
-            type={this.state.showPassword ? "text" : "password"}
-            value={this.state.confirm_password}
-            onChange={this.handleChange("confirm_password")}
-          />
-        </FormControl>
-        <div style={styles.button}>
-          <Button variant="raised" color="primary" onClick={() => this.props.actions.signUpUser(this.state.email, this.state.password)}>
-            Sign Up
-          </Button>
-        </div>
-      </div>
-    )
-  }
+  renderSignUp = () => {
+    const { loginTransition, classes } = this.props;
+    if (loginTransition === "null") {
+      return (
+        <Typography className={classes.headerText} variant="display1">
+          GET STARTED
+        </Typography>
+      );
+    } else if (loginTransition === "SignUp") {
+      return (
+        <Fade in={true} timeout={{ enter: 1000, exit: 1000 }}>
+          <div className={classes.signUpContent}>
+            <Typography className={classes.headerText} variant="display1">
+              Get Started
+            </Typography>
+            <FormControl className={classes.formControl}>
+              <InputLabel className={classes.label} shrink={true}>
+                Email
+              </InputLabel>
+              <Input
+                classes={{ focused: classes.inputFocused }}
+                className={classes.input}
+                value={this.state.value}
+                onChange={this.handleChange("email")}
+                autoFocus
+                fullWidth
+                disableUnderline
+              />
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <InputLabel className={classes.label} shrink={true}>
+                Password
+              </InputLabel>
+              <Input
+                type="password"
+                classes={{ focused: classes.inputFocused }}
+                className={classes.input}
+                value={this.state.value}
+                onChange={this.handleChange("password")}
+                fullWidth
+                disableUnderline
+              />
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <InputLabel className={classes.label} shrink={true}>
+                Confirm Password
+              </InputLabel>
+              <Input
+                type="password"
+                classes={{ focused: classes.inputFocused }}
+                className={classes.input}
+                value={this.state.value}
+                onChange={this.handleChange("confirmPassword")}
+                fullWidth
+                disableUnderline
+              />
+            </FormControl>
+          </div>
+        </Fade>
+      );
+    } else if (loginTransition === "SignIn") {
+      return <div />;
+    }
+  };
 
   render() {
+    const { loginTransition, setFocus, classes } = this.props;
+
     return (
-      <div style={this.props.loginTransition==="SignUp" ? styles.moduleSignUpOpen : styles.moduleSignUpClosed} onClick={this.props.focusSignUp}>
-        {this.renderSignUp()}
+      <div className={classes.formContainer} onClick={() => setFocus("SignUp")}>
+        <div className={this.getSignUpStyles()}>{this.renderSignUp()}</div>
       </div>
     );
   }
 }
 
 const styles = {
-  moduleSignUpOpen: {
-    width: "350px",
-    minHeight: "400px",
-
-    display: "flex",
-    flexWrap: "wrap",
-    flexDirection: "column",
-    overflow: "auto",
-
-    alignSelf: "center",
-
-    padding: "50px 100px",
-    backgroundColor: 'rgba(48, 48, 48, 0.5)',
-    borderRadius: "15px 0px 0px 15px",
-    color: "#FFFFFF",
-
-    position: "relative",
-    transition: "width 0.4s ease-out",
+  headerText: {
+    color: "white",
+    fontFamily: "Open Sans",
+    fontWeight: "bold",
+    paddingBottom: 18
   },
-  moduleSignUpClosed: {
-    width: "250px",
-    minHeight: "400px",
-
+  formContainer: {
     display: "flex",
     flexDirection: "column",
-
-    alignSelf: "center",
-    justifyContent: "center",
-
-    padding: "50px",
-    backgroundColor: 'rgba(48, 48, 48, 0.5)',
+    backgroundColor: "#303030",
+    opacity: 0.75,
     borderRadius: "15px 0px 0px 15px",
-
-    position: "relative",
+    padding: 10,
+    height: "100%"
+  },
+  signUpSelected: {
+    width: 400,
     transition: "width 0.4s ease-out",
+    display: "flex",
+    height: "100%"
+    // justifyContent: "center"
   },
-  headerClosed: {
-    color: "#FFFFFF",
-    fontSize: "22px",
-    alignSelf: "center",
+  noneSelected: {
+    width: 320,
+    transition: "width 0.4s ease-out",
+    height: "100%",
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center"
   },
-  header: {
-    alignSelf: "left",
-    fontSize: "22px",
+  signInSelected: {
+    width: 80,
+    transition: "width 0.4s ease-out"
+  },
+  signUpContent: {
+    display: "flex",
+    flexDirection: "column",
+    paddingLeft: 80,
+    paddingRight: 80,
+    width: "100%",
+    paddingTop: 42
   },
   formControl: {
-    paddingBottom: "10px",
+    marginBotton: 10
   },
-  inputLabel: {
-    color: "#FFFFFF",
+  input: {
+    backgroundColor: "transparent",
+    borderRadius: 5,
+    padding: 5,
+    color: "white",
+    border: "1px solid #6D6D6D",
+    overflowY: "auto",
+    overflowX: "hidden",
+    cursor: "text",
+    transition: "border 0.25s ease-out",
+    "&:hover": {
+      cursor: "text",
+      border: "1px solid #C3C3C3"
+    },
+    marginBottom: 10
   },
-  inputText: {
-    color: "#FFFFFF",
+  inputFocused: {
+    border: "1px solid #FFF",
+    transition: "border 0.25s ease-out",
+    "&:hover": {
+      cursor: "text",
+      border: "1px solid #FFF"
+    }
   },
-  button: {
-    display: "flex",
-    flexDirection:"column",
-    paddingTop: "20px",
-    alignSelf: "stretch",
-  },
+  label: {
+    color: "#FFF"
+  }
 };
 
 function mapStateToProps(state) {
@@ -162,5 +200,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(SignUp)
+);

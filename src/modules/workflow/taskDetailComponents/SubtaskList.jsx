@@ -52,11 +52,11 @@ class SubtaskList extends Component {
                 {subtask.content}
               </Typography>
             </div>
-            <Fade in={index === hovered} timeout={{enter: 250, exit: 100}}>
+            <Fade in={index === hovered} timeout={{ enter: 250, exit: 100 }}>
               <IconButton
                 onClick={event => this.handleDeleteClick(event, index)}
               >
-                <CloseIcon className={classes.closeIcon}/>
+                <CloseIcon className={classes.closeIcon} />
               </IconButton>
             </Fade>
           </div>
@@ -68,22 +68,22 @@ class SubtaskList extends Component {
 
 const styles = theme => ({
   root: {
-    overflowY: "auto",
+    overflowY: "auto"
   },
   subtask: {
     padding: 0,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: '-8px',
-    width: '100%',
+    marginTop: "-8px",
+    width: "100%"
   },
   text: {
     whiteSpace: "pre-line",
     wordWrap: "break-word",
     transition: "color 0.5s ease-out",
     paddingTop: 13,
-    width: '100%',
+    width: "100%"
   },
   completedText: {
     whiteSpace: "pre-line",
@@ -92,17 +92,17 @@ const styles = theme => ({
     color: "#B0B2B6",
     transition: "color 0.25s ease-out",
     paddingTop: 13,
-    width: '100%',
+    width: "100%"
   },
   subtaskContent: {
     display: "flex",
     flexDirection: "row",
     alignItems: "flex-start",
     wordWrap: "break-word",
-    width: 273, // this shouldnt be hard coded but I couldn't figure out how to make the text no go past div.
+    width: 273 // this shouldnt be hard coded but I couldn't figure out how to make the text no go past div.
   },
   closeIcon: {
-    color: '#6d6d6d',
+    color: "#6d6d6d"
   }
 });
 

@@ -14,46 +14,31 @@ class AuthPage extends Component {
     loginTransition: "null"
   };
 
-  handleLoginClick() {
-    this.setState({ isLoggedIn: true });
-  }
-
-  handleLogoutClick() {
-    this.setState({ isLoggedIn: false });
-  }
-
-  focusSignUp() {
-    this.setState({ loginTransition: "SignUp" });
-  }
-
-  focusSignIn() {
-    this.setState({ loginTransition: "SignIn" });
-  }
-
-  focusNeutral() {
-    this.setState({ loginTransition: "null" });
-  }
+  setFocus = focus => {
+    console.log(focus);
+    this.setState({ loginTransition: focus });
+  };
 
   render() {
-    const loginTransition = this.state.loginTransition;
+    const { loginTransition } = this.state;
 
     return (
       <div style={styles.authPage}>
         <div style={styles.entryContainer}>
-          <img src={logoWhite} alt="Logo" />
+          <img
+            src={logoWhite}
+            alt="Logo"
+            onClick={() => this.setFocus("null")}
+          />
           <div style={styles.inputForm}>
-            <div style={styles.signUp}>
-              <SignUp
-                focusSignUp={() => this.focusSignUp()}
-                loginTransition={this.state.loginTransition}
-              />
-            </div>
-            <div style={styles.signIn}>
-              <SignIn
-                focusSignIn={() => this.focusSignIn()}
-                loginTransition={this.state.loginTransition}
-              />
-            </div>
+            <SignUp
+              setFocus={this.setFocus}
+              loginTransition={loginTransition}
+            />
+            <SignIn
+              setFocus={this.setFocus}
+              loginTransition={loginTransition}
+            />
           </div>
         </div>
       </div>
@@ -64,7 +49,7 @@ class AuthPage extends Component {
 const styles = {
   authPage: {
     backgroundSize: "cover",
-    height: "100vh",
+    height: "100%",
     overflow: "hidden",
     backgroundImage: `url(${backgroundImg})`,
     display: "flex",
@@ -83,8 +68,9 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    alignSelf: "center",
-    paddingTop: "20px"
+    marginTop: "20px",
+    width: "620px",
+    height: 500
   }
 };
 
