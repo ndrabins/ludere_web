@@ -109,6 +109,7 @@ class Board extends Component {
                   : styles.container
               }
               ref={provided.innerRef}
+              {...provided.droppableProps}
             >
               {listOrder.map((ID, index) => (
                 <Column key={ID} list={listData[ID]} ID={ID} index={index} />

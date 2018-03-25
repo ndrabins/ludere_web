@@ -9,47 +9,51 @@ import Task from "./Task";
 import Button from "material-ui/Button";
 
 class TaskList extends Component {
-  renderTasks = dropProvided => {
+  render() {
+    const { columnID, tasks } = this.props;
     const { taskOrder, taskData } = this.props;
 
     if (taskData === null) {
       return;
     }
 
-    return (
-      <div style={styles.container}>
-        <div style={styles.dropZone} ref={dropProvided.innerRef}>
-          {taskOrder.map((taskID, index) => (
-            <Draggable key={taskID} draggableId={taskID} index={index} type={"TASK"}>
-              {(dragProvided, dragSnapshot) => (
-                <div>
-                  <Task
-                    key={taskID}
-                    task={taskData[taskID]}
-                    taskID={taskID}
-                    isDragging={dragSnapshot.isDragging}
-                    provided={dragProvided}
-                  />
-                  {dragProvided.placeholder}
-                </div>
-              )}
-            </Draggable>
-          ))}
-          {dropProvided.placeholder}
-        </div>
-      </div>
-    );
-  };
-
-  render() {
-    const { columnID, tasks } = this.props;
-
     // const stringColumnID = columnID.toString();
 
     return (
       <Droppable droppableId={columnID} type={"TASK"}>
         {(dropProvided, dropSnapshot) => (
-          <div style={styles.wrapper}>{this.renderTasks(dropProvided)}</div>
+          <div
+            style={styles.wrapper}
+            {...dropProvided.droppableProps}
+            ref={dropProvided.innerRef}
+          >
+            <div style={styles.container}>
+              <div style={styles.dropZone}>
+                {taskOrder.map((taskID, index) => (
+                  <Draggable
+                    key={taskID}
+                    draggableId={taskID}
+                    index={index}
+                    type={"TASK"}
+                  >
+                    {(dragProvided, dragSnapshot) => (
+                      <div ref={dragProvided.innerRef}>
+                        <Task
+                          key={taskID}
+                          task={taskData[taskID]}
+                          taskID={taskID}
+                          isDragging={dragSnapshot.isDragging}
+                          provided={dragProvided}
+                        />
+                        {dragProvided.placeholder}
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {dropProvided.placeholder}
+              </div>
+            </div>
+          </div>
         )}
       </Droppable>
     );

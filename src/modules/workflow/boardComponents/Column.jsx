@@ -52,14 +52,13 @@ class Column extends Component {
       <Draggable draggableId={ID} type="COLUMN" index={this.props.index}>
         {(provided, snapshot) => (
           <div style={styles.wrapper} >
-            <Paper
+            <div
               elevation={4}
               ref={provided.innerRef}
               {...provided.draggableProps}
-              {...provided.dragHandleProps}
               style={{ ...styles.container, ...provided.draggableProps.style }}
             >
-              <div style={styles.title}>
+              <div style={styles.title} {...provided.dragHandleProps}>
                 <EditableText
                   value={list.name}
                   handleEnterPress={this.handleTitleChange}
@@ -85,7 +84,7 @@ class Column extends Component {
                   }}
                 />
               </div>
-            </Paper>
+            </div>
             {provided.placeholder}
           </div>
         )}
