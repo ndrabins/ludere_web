@@ -105,19 +105,19 @@ export function moveTaskToColumn(startIndex, endIndex, startListID, endListID) {
       .collection("lists")
       .doc(endListID);
 
-    var batch = firebase.firestore().batch();
-
-    // This code may get re-run multiple times if there are conflicts.
-    batch.update(startListRef, { taskOrder: startListTaskOrder });
-    batch.update(endListRef, { taskOrder: endListTaskOrder });
-
-    batch
-      .commit()
+    firebase
+      .firestore()
+      .runTransaction(function(transaction) {
+        return transaction.get(startListRef).then(function(sfDoc) {
+          transaction.update(startListRef, { taskOrder: startListTaskOrder });
+          transaction.update(endListRef, { taskOrder: endListTaskOrder });
+        });
+      })
       .then(function() {
         dispatch({ type: MOVE_TASK_TO_COLUMN });
       })
-      .catch(function(error) {
-        console.log(error);
+      .catch(function(err) {
+        console.error(err);
       });
   };
 }

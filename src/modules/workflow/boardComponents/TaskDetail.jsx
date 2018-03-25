@@ -6,6 +6,7 @@ import { withStyles } from "material-ui/styles";
 import IconButton from "material-ui/IconButton";
 import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
 import Button from "material-ui/Button";
+import Paper from "material-ui/Paper";
 
 import EditableText from "../../../common/EditableText";
 import SectionDivider from "../../../common/SectionDivider";
@@ -33,10 +34,11 @@ class TaskDetail extends Component {
     const task = taskData[selectedTask];
 
     if (selectedTask === null || task === undefined) {
-      return <div className={classes.hiddenContainer} />;
+      return <Paper className={classes.hiddenContainer} />;
     }
     return (
-      <div
+      <Paper
+        elevation={16}
         className={
           this.props.showTaskDetail
             ? classes.container
@@ -74,7 +76,7 @@ class TaskDetail extends Component {
             </Button>
           </div>
         </div>
-      </div>
+      </Paper>
     );
   }
 }
@@ -91,7 +93,6 @@ const styles = theme => ({
     right: 0,
     transition: "opacity 0.7s ease-out, width 1s ease-out",
     opacity: 0,
-    boxShadow: "0px 7px 14px 2px rgba(0, 0, 0, 0.5)",
   },
   container: {
     marginTop: 6,
@@ -104,7 +105,6 @@ const styles = theme => ({
     right: 0,
     transition: "opacity 1s ease-out, width .7s ease-out",
     opacity: 1,
-    boxShadow: "0px 7px 14px 2px rgba(0, 0, 0, 0.5)",
   },
   innerContainer:{
     minWidth: 400,

@@ -8,6 +8,7 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 
 import Button from "material-ui/Button";
 import TextField from "material-ui/TextField";
+import Paper from "material-ui/Paper";
 
 import TaskList from "./TaskList";
 import EditableText from "../../../common/EditableText";
@@ -50,8 +51,9 @@ class Column extends Component {
     return (
       <Draggable draggableId={ID} type="COLUMN" index={this.props.index}>
         {(provided, snapshot) => (
-          <div style={styles.wrapper}>
-            <div
+          <div style={styles.wrapper} >
+            <Paper
+              elevation={4}
               ref={provided.innerRef}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
@@ -83,7 +85,7 @@ class Column extends Component {
                   }}
                 />
               </div>
-            </div>
+            </Paper>
             {provided.placeholder}
           </div>
         )}
