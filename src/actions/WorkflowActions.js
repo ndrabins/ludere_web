@@ -137,6 +137,11 @@ export function fetchBoardData(boardID) {
   return (dispatch, getState) => {
     dispatch(unsubscribeFromBoardData()); // unsubscribe from previous listener;
 
+    //TODO: rearchitect so this hacky fix isn't needed.
+    if (boardID === null) {
+      return;
+    }
+
     let listsRef = firebase
       .firestore()
       .collection("workflow")

@@ -14,7 +14,7 @@ class TaskList extends Component {
     const { taskOrder, taskData } = this.props;
 
     if (taskData === null) {
-      return;
+      return <div />;
     }
 
     // const stringColumnID = columnID.toString();
