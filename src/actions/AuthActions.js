@@ -48,6 +48,8 @@ export function authWithProvider(providerType) {
 
     if (providerType === "Google") {
       provider = new firebase.auth.GoogleAuthProvider();
+    } else if (providerType === "Twitter") {
+      provider = new firebase.auth.TwitterAuthProvider();
     }
 
     firebase

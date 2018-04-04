@@ -96,6 +96,12 @@ class SignUp extends Component {
               >
                 SIGN IN WITH GOOGLE
               </Button>
+              <Button
+                variant="raised"
+                onClick={() => this.props.actions.authWithProvider("Twitter")}
+              >
+                SIGN IN WITH TWITTER
+              </Button>
             </div>
             <IconButton
               className={classes.rightArrow}
