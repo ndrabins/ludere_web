@@ -8,9 +8,10 @@ import Typography from "material-ui/Typography";
 import Input, { InputLabel } from "material-ui/Input";
 import { FormControl } from "material-ui/Form";
 import Fade from "material-ui/transitions/Fade";
+import IconButton from "material-ui/IconButton";
+import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
 import Button from "material-ui/Button";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import "./firebaseUI.css"; // Import globally.
+import firebase from "firebase";
 
 class SignUp extends Component {
   constructor(props) {
@@ -43,9 +44,11 @@ class SignUp extends Component {
     const { loginTransition, classes } = this.props;
     if (loginTransition === "null") {
       return (
-        <Typography className={classes.headerText} variant="display1">
-          GET STARTED
-        </Typography>
+        <Fade in={true} timeout={{ enter: 1000, exit: 1000 }}>
+          <Typography className={classes.headerText} variant="display1">
+            GET STARTED
+          </Typography>
+        </Fade>
       );
     } else if (loginTransition === "SignUp") {
       return (
@@ -96,6 +99,12 @@ class SignUp extends Component {
                 disableUnderline
               />
             </FormControl>
+            <div className={classes.socialAuth}>
+              <Button> google </Button>
+            </div>
+            <IconButton className={classes.rightArrow}>
+              <ArrowIcon style={{ fontSize: 36 }} />
+            </IconButton>
           </div>
         </Fade>
       );
@@ -120,13 +129,14 @@ const styles = {
     color: "white",
     fontFamily: "Open Sans",
     fontWeight: "bold",
-    paddingBottom: 18
+    paddingBottom: 18,
+    minWidth: 200
   },
   formContainer: {
     display: "flex",
     flexDirection: "column",
     backgroundColor: "#303030",
-    opacity: 0.75,
+    opacity: 0.85,
     borderRadius: "15px 0px 0px 15px",
     padding: 10,
     height: "100%"
@@ -156,7 +166,8 @@ const styles = {
     paddingLeft: 80,
     paddingRight: 80,
     width: "100%",
-    paddingTop: 42
+    paddingTop: 42,
+    position: "relative"
   },
   formControl: {
     marginBotton: 10
@@ -167,8 +178,7 @@ const styles = {
     padding: 5,
     color: "white",
     border: "1px solid #6D6D6D",
-    overflowY: "auto",
-    overflowX: "hidden",
+    overflow: "hidden",
     cursor: "text",
     transition: "border 0.25s ease-out",
     "&:hover": {
@@ -185,8 +195,18 @@ const styles = {
       border: "1px solid #FFF"
     }
   },
+  rightArrow: {
+    color: "white",
+    position: "absolute",
+    right: 0,
+    bottom: 0
+  },
   label: {
-    color: "#FFF"
+    color: "#FFF",
+    fontWeight: "bold"
+  },
+  socialAuth: {
+    minWidth: 240
   }
 };
 

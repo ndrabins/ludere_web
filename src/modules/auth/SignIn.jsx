@@ -7,10 +7,11 @@ import { withStyles } from "material-ui/styles";
 import Typography from "material-ui/Typography";
 import Input, { InputLabel } from "material-ui/Input";
 import { FormControl } from "material-ui/Form";
+import IconButton from "material-ui/IconButton";
+import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
 import Fade from "material-ui/transitions/Fade";
-
 import Button from "material-ui/Button";
-
+import firebase from "firebase";
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -39,13 +40,17 @@ class SignUp extends Component {
 
   renderSignIn = () => {
     const { loginTransition, classes } = this.props;
+    const { email, password } = this.state;
+
     if (loginTransition === "null") {
       return (
-        <div className={classes.noneSelected}>
-          <Typography className={classes.headerText} variant="display1">
-            SIGN IN
-          </Typography>
-        </div>
+        <Fade in={true} timeout={{ enter: 1000, exit: 1000 }}>
+          <div className={classes.noneSelected}>
+            <Typography className={classes.headerText} variant="display1">
+              SIGN IN
+            </Typography>
+          </div>
+        </Fade>
       );
     } else if (loginTransition === "SignUp") {
       return <div />;
@@ -84,6 +89,20 @@ class SignUp extends Component {
                 disableUnderline
               />
             </FormControl>
+            <div className={classes.socialAuth}>
+              <Button
+                variant="raised"
+                onClick={() => this.props.actions.authWithProvider("Google")}
+              >
+                SIGN IN WITH GOOGLE
+              </Button>
+            </div>
+            <IconButton
+              className={classes.rightArrow}
+              onClick={() => this.props.actions.signInUser(email, password)}
+            >
+              <ArrowIcon style={{ fontSize: 36 }} />
+            </IconButton>
           </div>
         </Fade>
       );
@@ -107,7 +126,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    opacity: 1,
+    opacity: 0.85,
     background: `linear-gradient(270deg, #6FE5C9 0%, #00BCD4 100%)`,
     borderRadius: "0px 15px 15px 0px",
     padding: 10,
@@ -117,7 +136,9 @@ const styles = {
     color: "white",
     fontFamily: "Open Sans",
     fontWeight: "bold",
-    paddingBottom: 18
+    paddingBottom: 18,
+    minWidth: 200,
+    textAlign: "center"
   },
   signUpSelected: {
     width: 80,
@@ -144,6 +165,7 @@ const styles = {
     paddingRight: 80,
     width: "100%",
     paddingTop: 42,
+    position: "relative"
   },
   formControl: {
     marginBotton: 10
@@ -153,9 +175,8 @@ const styles = {
     borderRadius: 5,
     padding: 5,
     color: "white",
-    border: "1px solid #C3C3C3",
-    overflowY: "auto",
-    overflowX: "hidden",
+    border: "1px solid #CECECE",
+    overflow: "hidden",
     cursor: "text",
     transition: "border 0.25s ease-out",
     "&:hover": {
@@ -170,10 +191,20 @@ const styles = {
     "&:hover": {
       cursor: "text",
       border: "1px solid #FFF"
-    },
+    }
   },
   label: {
-    color: "#FFF"
+    color: "#FFF",
+    fontWeight: "bold"
+  },
+  rightArrow: {
+    color: "white",
+    position: "absolute",
+    right: 0,
+    bottom: 0
+  },
+  socialAuth: {
+    minWidth: 240
   }
 };
 

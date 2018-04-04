@@ -41,6 +41,40 @@ export function signUpUser(email, password) {
   };
 }
 
+export function authWithProvider(providerType) {
+  return function(dispatch) {
+    dispatch({ type: AUTH_USER });
+    let provider;
+
+    if (providerType === "Google") {
+      provider = new firebase.auth.GoogleAuthProvider();
+    }
+
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(function(result) {
+        var user = result.user;
+
+        //check if user has been initialized in Ludere
+        //if they have your done, if not initialize them
+        var userRef = firebase
+          .firestore()
+          .collection("users")
+          .doc(user.uid);
+        userRef.get().then(function(doc) {
+          if (!doc.exists) {
+            dispatch(initializeUser(user));
+          }
+          authSuccess(dispatch, user);
+        });
+      })
+      .catch(function(error) {
+        authError(error);
+      });
+  };
+}
+
 function initializeUser(user) {
   //data only owner of account can see/change
   const timestamp = firebase.firestore.FieldValue.serverTimestamp();

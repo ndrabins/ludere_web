@@ -15,7 +15,6 @@ class AuthPage extends Component {
   };
 
   setFocus = focus => {
-    console.log(focus);
     this.setState({ loginTransition: focus });
   };
 
@@ -28,6 +27,7 @@ class AuthPage extends Component {
           <img
             src={logoWhite}
             alt="Logo"
+            style={styles.clickable}
             onClick={() => this.setFocus("null")}
           />
           <div style={styles.inputForm}>
@@ -70,7 +70,11 @@ const styles = {
     alignItems: "center",
     marginTop: "20px",
     width: "620px",
-    height: 500
+    height: 500,
+    cursor: "pointer"
+  },
+  clickable: {
+    cursor: "pointer"
   }
 };
 
