@@ -14,7 +14,7 @@ import { lightTheme } from "../utility/themes"; //darkTheme
 import { MuiThemeProvider } from "material-ui/styles";
 import CssBaseline from "material-ui/CssBaseline";
 
-import Loading from "../common/Loading";
+import Loading from "../common/LoadingLottie";
 import Main from "./Main";
 import AuthPage from "../modules/auth/AuthPage";
 import JoinWorkspace from "../modules/workspace/JoinWorkspace";

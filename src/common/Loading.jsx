@@ -19,7 +19,7 @@ class Loading extends Component {
 
 const styles = theme => ({
   root: {
-
+    height: '100%',
   }
 });
 
