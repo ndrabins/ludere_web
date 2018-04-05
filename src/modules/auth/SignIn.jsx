@@ -11,6 +11,8 @@ import IconButton from "material-ui/IconButton";
 import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
 import Fade from "material-ui/transitions/Fade";
 import Button from "material-ui/Button";
+
+import GoogleIcon from "../../static/google.svg";
 import firebase from "firebase";
 class SignUp extends Component {
   constructor(props) {
@@ -89,19 +91,25 @@ class SignUp extends Component {
                 disableUnderline
               />
             </FormControl>
-            <div className={classes.socialAuth}>
+            <div>
               <Button
                 variant="raised"
                 onClick={() => this.props.actions.authWithProvider("Google")}
+                className={classes.googleButton}
               >
+                <img
+                  src={GoogleIcon}
+                  alt="google icon"
+                  className={classes.icon}
+                />
                 SIGN IN WITH GOOGLE
               </Button>
-              <Button
+              {/* <Button
                 variant="raised"
                 onClick={() => this.props.actions.authWithProvider("Twitter")}
               >
                 SIGN IN WITH TWITTER
-              </Button>
+              </Button> */}
             </div>
             <IconButton
               className={classes.rightArrow}
@@ -132,7 +140,6 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    opacity: 0.85,
     background: `linear-gradient(270deg, #6FE5C9 0%, #00BCD4 100%)`,
     borderRadius: "0px 15px 15px 0px",
     padding: 10,
@@ -209,8 +216,15 @@ const styles = {
     right: 0,
     bottom: 0
   },
-  socialAuth: {
-    minWidth: 240
+  googleButton: {
+    width: 240,
+    background: "#FFF",
+    color: "#6A6A6A"
+  },
+  icon: {
+    height: 24,
+    width: 24,
+    marginRight: 10
   }
 };
 

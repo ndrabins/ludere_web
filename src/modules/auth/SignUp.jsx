@@ -12,6 +12,7 @@ import IconButton from "material-ui/IconButton";
 import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
 import Button from "material-ui/Button";
 import firebase from "firebase";
+import GoogleIcon from "../../static/google.svg";
 
 class SignUp extends Component {
   constructor(props) {
@@ -21,7 +22,8 @@ class SignUp extends Component {
       email: "",
       password: "",
       confirmPassword: "",
-      showPassword: false
+      showPassword: false,
+      error: ""
     };
   }
 
@@ -40,8 +42,20 @@ class SignUp extends Component {
     }
   };
 
+  handleSignUp = () => {
+    const { email, password, confirmPassword } = this.state;
+
+    if (password !== confirmPassword || password === "") {
+      this.setState({ error: `Passwords don't match` });
+      return;
+    }
+    this.props.actions.signUpUser(email.password);
+  };
+
   renderSignUp = () => {
     const { loginTransition, classes } = this.props;
+    const { email, password } = this.state;
+
     if (loginTransition === "null") {
       return (
         <Fade in={true} timeout={{ enter: 1000, exit: 1000 }}>
@@ -99,10 +113,30 @@ class SignUp extends Component {
                 disableUnderline
               />
             </FormControl>
-            <div className={classes.socialAuth}>
-              <Button> google </Button>
+            <div>
+              <Button
+                variant="raised"
+                onClick={() => this.props.actions.authWithProvider("Google")}
+                className={classes.googleButton}
+              >
+                <img
+                  src={GoogleIcon}
+                  alt="google icon"
+                  className={classes.icon}
+                />
+                SIGN IN WITH GOOGLE
+              </Button>
+              {/* <Button
+                variant="raised"
+                onClick={() => this.props.actions.authWithProvider("Twitter")}
+              >
+                SIGN IN WITH TWITTER
+              </Button> */}
             </div>
-            <IconButton className={classes.rightArrow}>
+            <IconButton
+              className={classes.rightArrow}
+              onClick={this.handleSignUp}
+            >
               <ArrowIcon style={{ fontSize: 36 }} />
             </IconButton>
           </div>
@@ -205,8 +239,15 @@ const styles = {
     color: "#FFF",
     fontWeight: "bold"
   },
-  socialAuth: {
-    minWidth: 240
+  googleButton: {
+    width: 240,
+    background: "#FFF",
+    color: "#6A6A6A"
+  },
+  icon: {
+    height: 24,
+    width: 24,
+    marginRight: 10
   }
 };
 
