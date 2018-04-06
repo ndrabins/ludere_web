@@ -13,7 +13,6 @@ import Fade from "material-ui/transitions/Fade";
 import Button from "material-ui/Button";
 
 import GoogleIcon from "../../static/google.svg";
-import firebase from "firebase";
 class SignUp extends Component {
   constructor(props) {
     super(props);

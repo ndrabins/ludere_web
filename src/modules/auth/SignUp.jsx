@@ -11,7 +11,6 @@ import Fade from "material-ui/transitions/Fade";
 import IconButton from "material-ui/IconButton";
 import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
 import Button from "material-ui/Button";
-import firebase from "firebase";
 import GoogleIcon from "../../static/google.svg";
 
 class SignUp extends Component {
