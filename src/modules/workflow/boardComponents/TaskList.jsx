@@ -37,7 +37,10 @@ class TaskList extends Component {
                     type={"TASK"}
                   >
                     {(dragProvided, dragSnapshot) => (
-                      <div ref={dragProvided.innerRef} style={{marginBottom:8}}>
+                      <div
+                        ref={dragProvided.innerRef}
+                        style={{ marginBottom: 8 }}
+                      >
                         <Task
                           key={taskID}
                           task={taskData[taskID]}
@@ -65,10 +68,11 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     overflowY: "auto",
-    width: "100%"
+    width: "100%",
+    margin:8,
   },
   container: {
-    padding: 8,
+    // padding: 8,
     display: "flex",
     flexDirection: "column",
     width: "100%"

@@ -52,17 +52,19 @@ class Task extends PureComponent {
         >
           {task.title}
         </Typography>
-        <div style={styles.extraInfoContainer}>
-          <CircularProgress
-            style={styles.progress}
-            variant="static"
-            value={percent}
-          />
-          <Typography variant="caption" style={styles.subtasksCounter}>
-            {Filter(task.subtasks, { completed: true }).length}/
-            {task.subtasks.length}
-          </Typography>
-        </div>
+        {task.subtasks.length > 0 && (
+          <div style={styles.extraInfoContainer}>
+            <CircularProgress
+              style={styles.progress}
+              variant="static"
+              value={percent}
+            />
+            <Typography variant="caption" style={styles.subtasksCounter}>
+              {Filter(task.subtasks, { completed: true }).length}/
+              {task.subtasks.length}
+            </Typography>
+          </div>
+        )}
       </div>
     );
   }

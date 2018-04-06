@@ -83,12 +83,11 @@ class Board extends Component {
     const { selectedBoard, boards, listData, showTaskDetail } = this.props;
     const board = boards[selectedBoard];
 
-    if (listData === null || !board|| !board.listOrder) {
+    if (listData === null || !board || !board.listOrder) {
       return <div />;
     }
 
     const { listOrder } = board;
-
 
     return (
       <DragDropContext
@@ -96,12 +95,8 @@ class Board extends Component {
         onDragStart={this.onDragStart}
         style={styles.wrapper}
       >
-        <Droppable
-          droppableId="board"
-          type="COLUMN"
-          direction="horizontal"
-        >
-          {(provided) => (
+        <Droppable droppableId="board" type="COLUMN" direction="horizontal">
+          {provided => (
             <div
               style={
                 showTaskDetail
