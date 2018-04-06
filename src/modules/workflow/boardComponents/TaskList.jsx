@@ -37,7 +37,7 @@ class TaskList extends Component {
                     type={"TASK"}
                   >
                     {(dragProvided, dragSnapshot) => (
-                      <div ref={dragProvided.innerRef}>
+                      <div ref={dragProvided.innerRef} style={{marginBottom:8}}>
                         <Task
                           key={taskID}
                           task={taskData[taskID]}

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
@@ -7,7 +7,7 @@ import { CircularProgress } from "material-ui/Progress";
 import Filter from "lodash/filter";
 import CommentIcon from "material-ui-icons/ModeComment";
 
-class Task extends Component {
+class Task extends PureComponent {
   state = {
     subtaskPercentageDone: 0
   };
@@ -74,13 +74,10 @@ const styles = {
     cursor: "grab",
     boxShadow: "0 9px 18px 0 rgba(0, 0, 0, 0.04)",
     borderRadius: 8,
-    display: "flex",
     backgroundColor: "white",
     padding: 10,
-    margin: `0 0 8px 0`,
-    display: "flex",
-    cursor: "pointer",
-    flexDirection: "column"
+    margin: "0 0 8px 0",
+    cursor: "pointer"
   },
   progress: {
     display: "block",
