@@ -25,9 +25,9 @@ class TaskDetail extends Component {
   };
 
   render() {
-    const { classes, taskData, selectedTask } = this.props;
+    const { classes, taskData, selectedTask, showTaskDetail } = this.props;
 
-    if (taskData == null) {
+    if (taskData == null || !showTaskDetail) {
       return <div />;
     }
 
@@ -161,7 +161,8 @@ function mapStateToProps(state) {
   return {
     showTaskDetail: state.workflow.showTaskDetail,
     taskData: state.workflow.taskData,
-    selectedTask: state.workflow.selectedTask
+    selectedTask: state.workflow.selectedTask,
+    showTaskDetail: state.workflow.showTaskDetail,
   };
 }
 

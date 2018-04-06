@@ -18,7 +18,6 @@ class Task extends Component {
     const subtasksDone = Filter(subtasks, { completed: true }).length;
 
     let percentDone = subtasksDone / totalSubtasks * 100;
-    console.log(percentDone);
     if (totalSubtasks === 0) {
       return 0;
     }
