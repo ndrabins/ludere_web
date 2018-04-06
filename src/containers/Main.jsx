@@ -5,7 +5,7 @@ import * as Actions from "../actions";
 
 import { Route, Switch } from "react-router-dom";
 
-import WorkspaceFlow from "../modules/dashboard/WorkspaceFlow";
+import WorkspaceFlow from "../modules/workspace/WorkspaceFlow";
 import NavBar from "../modules/dashboard/NavBar";
 import SideNav from "../modules/dashboard/SideNav";
 
@@ -52,8 +52,8 @@ class Main extends Component {
   render() {
     const { history } = this.props;
 
-    // if user is not in a company, he must create or join one
-    if (Object.keys(this.props.workspaces).length === 0) {
+    // if user is not in a company, they must create or join one
+    if (Object.keys(this.props.workspaces).length === 0 || true) {
       return <WorkspaceFlow />;
     }
 

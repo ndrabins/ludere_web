@@ -37,7 +37,6 @@ export function createBoard(boardName) {
       dispatch(createList(docRef.id, "Backlog"));
       dispatch(createList(docRef.id, "In Progress"));
       dispatch(createList(docRef.id, "Done"));
-      dispatch(createList(docRef.id, "Archived"));
     });
   };
 }
