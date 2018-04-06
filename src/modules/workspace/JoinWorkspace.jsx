@@ -7,9 +7,9 @@ import Loading from "../../common/Loading";
 
 class joinWorkspace extends Component {
   componentDidMount() {
-    const { workspaceID } = this.props.match.params;
-    this.props.actions.joinWorkspace(workspaceID, this.props.history);
-    console.log(this.props);
+    // const { workspaceID } = this.props.match.params;
+    // this.props.actions.joinWorkspace(workspaceID, this.props.history);
+    // console.log(this.props);
   }
 
   render() {
@@ -18,7 +18,7 @@ class joinWorkspace extends Component {
     return (
       <div className={classes.root}>
         Joining Workspace!
-        <Loading size={140} />
+        <div> something </div>
       </div>
     );
   }

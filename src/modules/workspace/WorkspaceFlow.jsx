@@ -37,7 +37,7 @@ class WorkspaceFlow extends Component {
     const { value } = this.state;
     return (
       <div className={classes.container}>
-        <div className={classes.root}>
+        <div className={classes.tabsContainer}>
           <Tabs
             value={this.state.value}
             onChange={this.handleChange}
@@ -50,8 +50,8 @@ class WorkspaceFlow extends Component {
             />
             <Tab label="Join Workspace" />
           </Tabs>
-          {value === 0 && <div>Item One</div>}
-          {value === 1 && <div>Item Two</div>}
+          {value === 0 && <CreateWorkspace />}
+          {value === 1 && <JoinWorkspace />}
         </div>
       </div>
     );
@@ -68,6 +68,10 @@ const styles = {
     fontFamily: "Roboto",
     width: "100%",
     flexGrow: 1
+  },
+  tabsContainer: {
+    minWidth: 400,
+    minHeight: 500,
   },
   content: {
     padding: 40
