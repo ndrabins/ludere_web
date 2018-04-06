@@ -53,7 +53,7 @@ class Main extends Component {
     const { history } = this.props;
 
     // if user is not in a company, they must create or join one
-    if (Object.keys(this.props.workspaces).length === 0 || true) {
+    if (Object.keys(this.props.workspaces).length === 0) {
       return <WorkspaceFlow />;
     }
 
