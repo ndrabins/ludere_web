@@ -48,7 +48,8 @@ class SignUp extends Component {
       this.setState({ error: `Passwords don't match` });
       return;
     }
-    this.props.actions.signUpUser(email.password);
+
+    this.props.actions.signUpUser(email, password);
   };
 
   renderSignUp = () => {
