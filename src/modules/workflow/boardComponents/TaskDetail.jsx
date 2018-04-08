@@ -27,18 +27,19 @@ class TaskDetail extends Component {
   render() {
     const { classes, taskData, selectedTask, showTaskDetail } = this.props;
 
-    if (taskData == null) {
-      return <div />;
-    }
-
     const task = taskData[selectedTask];
 
-    const showTask =
-      selectedTask === null || task === undefined || !showTaskDetail;
+    if (selectedTask === null || task === undefined || !showTaskDetail) {
+      return <Paper className={classes.hiddenContainer} />;
+    }
     return (
       <Paper
         elevation={16}
-        className={showTask ? classes.container : classes.hiddenContainer}
+        className={
+          this.props.showTaskDetail
+            ? classes.container
+            : classes.hiddenContainer
+        }
       >
         <div className={classes.innerContainer}>
           <div className={classes.header}>
