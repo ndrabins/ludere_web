@@ -28,7 +28,7 @@ const initialState = {
   taskData: null,
   showTaskDetail: false,
   selectedTask: null,
-  loading: false,
+  loadingBoards: false,
   loadingLists: false,
   loadingTasks: false,
   comments: {},
@@ -52,7 +52,7 @@ export default function workflow(state = initialState, action) {
       return {
         ...state,
         boards: action.boards,
-        loading: false,
+        loadingBoards: false,
         boardsListener: action.boardsListener
       };
     case FETCH_LISTS:
@@ -98,7 +98,7 @@ export default function workflow(state = initialState, action) {
     case CREATE_BOARD:
       return state;
     case FETCH_BOARDS:
-      return { ...state, loading: true };
+      return { ...state, loadingBoards: true };
     case UNSUBSCRIBE_BOARD_DATA:
       return state;
     case UNSUBSCRIBE_BOARDS:

@@ -61,6 +61,7 @@ export function createTeam(teamName, description = "", initialTeam = false) {
         //when a team is created with the chat module, initialize their chat module with a general and announcements channel?
         dispatch(chatActions.createChannel("general"));
         dispatch(chatActions.createChannel("announcements"));
+        dispatch(workflowActions.createBoard("general"));
       })
       .catch(function(error) {
         console.error("Error adding document: ", error);

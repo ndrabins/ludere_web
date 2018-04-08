@@ -87,14 +87,15 @@ class Board extends Component {
       listData,
       showTaskDetail,
       loadingTasks,
-      loadingLists
+      loadingLists,
+      loadingBoards
     } = this.props;
-    const board = boards[selectedBoard];
 
-    if (loadingLists || loadingTasks) {
+    if (loadingLists || loadingTasks || loadingBoards) {
       return <Loading />;
     }
 
+    const board = boards[selectedBoard];
     const { listOrder } = board;
 
     return (
@@ -172,7 +173,8 @@ function mapStateToProps(state) {
     selectedBoard: state.workflow.selectedBoard,
     showTaskDetail: state.workflow.showTaskDetail,
     loadingLists: state.workflow.loadingLists,
-    loadingTasks: state.workflow.loadingTasks
+    loadingTasks: state.workflow.loadingTasks,
+    loadingBoards: state.workflow.loadingBoards
   };
 }
 
