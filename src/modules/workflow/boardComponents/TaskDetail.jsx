@@ -27,23 +27,18 @@ class TaskDetail extends Component {
   render() {
     const { classes, taskData, selectedTask, showTaskDetail } = this.props;
 
-    if (taskData == null || !showTaskDetail) {
+    if (taskData == null) {
       return <div />;
     }
 
     const task = taskData[selectedTask];
 
-    if (selectedTask === null || task === undefined) {
-      return <Paper className={classes.hiddenContainer} />;
-    }
+    const showTask =
+      selectedTask === null || task === undefined || !showTaskDetail;
     return (
       <Paper
         elevation={16}
-        className={
-          this.props.showTaskDetail
-            ? classes.container
-            : classes.hiddenContainer
-        }
+        className={showTask ? classes.container : classes.hiddenContainer}
       >
         <div className={classes.innerContainer}>
           <div className={classes.header}>
@@ -92,7 +87,7 @@ const styles = theme => ({
     borderBottomLeftRadius: 10,
     right: 0,
     transition: "opacity 0.7s ease-out, width 1s ease-out",
-    opacity: 0,
+    opacity: 0
   },
   container: {
     marginTop: 6,
@@ -104,11 +99,11 @@ const styles = theme => ({
     borderBottomLeftRadius: 10,
     right: 0,
     transition: "opacity 1s ease-out, width .7s ease-out",
-    opacity: 1,
+    opacity: 1
   },
-  innerContainer:{
+  innerContainer: {
     minWidth: 400,
-    height: '100%',
+    height: "100%",
     display: "flex",
     flexDirection: "column"
   },
@@ -133,7 +128,7 @@ const styles = theme => ({
   taskContent: {
     height: "100%",
     padding: 8,
-    overflowY: "auto",
+    overflowY: "auto"
   },
   titleContainer: {
     width: "100%",
@@ -153,7 +148,7 @@ const styles = theme => ({
   arrowIcon: {
     color: "white",
     marginTop: -2,
-    marginBottom: -2,
+    marginBottom: -2
   }
 });
 
@@ -162,7 +157,7 @@ function mapStateToProps(state) {
     showTaskDetail: state.workflow.showTaskDetail,
     taskData: state.workflow.taskData,
     selectedTask: state.workflow.selectedTask,
-    showTaskDetail: state.workflow.showTaskDetail,
+    showTaskDetail: state.workflow.showTaskDetail
   };
 }
 
