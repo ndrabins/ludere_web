@@ -1,13 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { withStyles } from "material-ui/styles";
 
-class Calendar extends Component {
+class Dashboard extends Component {
   render() {
-    return (
-      <div>
-        Calendar
-      </div>
-    );
+    const { classes } = this.props;
+    return <div className={classes.root}>UNDER CONSTRUCTION</div>;
   }
 }
 
-export default Calendar;
+const styles = {
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%"
+  }
+};
+
+export default withStyles(styles)(Dashboard);

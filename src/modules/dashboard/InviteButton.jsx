@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Button from "material-ui/Button";
+import IconButton from "material-ui/IconButton";
 import PersonAdd from "material-ui-icons/PersonAdd";
 import { withStyles } from "material-ui/styles";
 import Dialog, { DialogTitle, DialogContent } from "material-ui/Dialog";
 import TextField from "material-ui/TextField";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 class InviteButton extends Component {
   state = {
     open: false,
-    copied: false,
+    copied: false
   };
 
   handleClose = () => {
@@ -25,15 +26,17 @@ class InviteButton extends Component {
     const { classes, selectedWorkspace } = this.props;
     const { open, copied } = this.state;
 
-    const localURL = window.location.href.split('/'); //get just base URL
-    const url=`https://${localURL[2]}/joinWorkspace/${selectedWorkspace}`
+    const localURL = window.location.href.split("/"); //get just base URL
+    const url = `https://${localURL[2]}/joinWorkspace/${selectedWorkspace}`;
 
     return (
       <div className={classes.container}>
-        <Button onClick={this.handleClickOpen}>
-          Invite
+        <IconButton
+          onClick={this.handleClickOpen}
+          className={classes.inviteButton}
+        >
           <PersonAdd className={classes.personAdd} />
-        </Button>
+        </IconButton>
         <Dialog open={open} onClose={this.handleClose}>
           <DialogTitle>Share this url to invite!</DialogTitle>
           <DialogContent>
@@ -44,9 +47,11 @@ class InviteButton extends Component {
               value={url}
               margin="normal"
             />
-             <CopyToClipboard text={url}
-              onCopy={() => this.setState({copied: true})}>
-              <Button variant="raised"> {copied ? "COPIED" : "COPY" }</Button>
+            <CopyToClipboard
+              text={url}
+              onCopy={() => this.setState({ copied: true })}
+            >
+              <Button variant="raised"> {copied ? "COPIED" : "COPY"}</Button>
             </CopyToClipboard>
           </DialogContent>
         </Dialog>
@@ -57,17 +62,19 @@ class InviteButton extends Component {
 
 const styles = theme => ({
   container: {
+    marginLeft: 10,
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
+    alignItems: "center"
   },
   personAdd: {
     color: "white",
-    background: "linear-gradient(to right, #29b6f6, #796eff)",
-    width: 22,
-    height: 22,
-    borderRadius: 20,
-    marginLeft: 10,
-    padding: 2
+    fontSize: 16
+  },
+  inviteButton: {
+    width: 24,
+    height: 24,
+    background: "linear-gradient(to right, #29b6f6, #796eff)"
   },
   workspaceButton: {
     background: "linear-gradient(to left, #13F1FC, #29B6F6)",

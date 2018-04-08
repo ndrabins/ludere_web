@@ -1,13 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { withStyles } from "material-ui/styles";
 
 class Dashboard extends Component {
   render() {
-    return (
-      <div>
-        Dashboard
-      </div>
-    );
+    const { classes } = this.props;
+    return <div className={classes.root}>UNDER CONSTRUCTION</div>;
   }
 }
 
-export default Dashboard;
+const styles = {
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%"
+  }
+};
+
+export default withStyles(styles)(Dashboard);
