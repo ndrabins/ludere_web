@@ -8,7 +8,8 @@ import Map from "lodash/map";
 import TextField from "material-ui/TextField";
 
 import Column from "./Column";
-import index from "@firebase/app";
+import Loading from "../../../common/Loading";
+// import index from "@firebase/app";
 
 class Board extends Component {
   state = {
@@ -67,7 +68,7 @@ class Board extends Component {
       return;
     }
 
-    //item is moving
+    //item is moving columns
     if (source.droppableId !== destination.droppableId) {
       this.props.actions.moveTaskToColumn(
         source.index,
@@ -80,11 +81,18 @@ class Board extends Component {
   };
 
   render() {
-    const { selectedBoard, boards, listData, showTaskDetail } = this.props;
+    const {
+      selectedBoard,
+      boards,
+      listData,
+      showTaskDetail,
+      loadingTasks,
+      loadingLists
+    } = this.props;
     const board = boards[selectedBoard];
 
-    if (listData === null || !board || !board.listOrder) {
-      return <div />;
+    if (loadingLists || loadingTasks) {
+      return <Loading />;
     }
 
     const { listOrder } = board;
@@ -107,7 +115,7 @@ class Board extends Component {
               {...provided.droppableProps}
             >
               {listOrder.map((ID, index) => (
-                <Column key={ID} list={listData[ID]} ID={ID} index={index} />
+                <Column key={ID} ID={ID} index={index} />
               ))}
               <div style={styles.listEntryDiv}>
                 <TextField
@@ -162,7 +170,9 @@ function mapStateToProps(state) {
     listData: state.workflow.listData,
     boards: state.workflow.boards,
     selectedBoard: state.workflow.selectedBoard,
-    showTaskDetail: state.workflow.showTaskDetail
+    showTaskDetail: state.workflow.showTaskDetail,
+    loadingLists: state.workflow.loadingLists,
+    loadingTasks: state.workflow.loadingTasks
   };
 }
 

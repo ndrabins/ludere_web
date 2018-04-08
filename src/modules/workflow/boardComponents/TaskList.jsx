@@ -10,14 +10,12 @@ import Button from "material-ui/Button";
 
 class TaskList extends Component {
   render() {
-    const { columnID, tasks } = this.props;
+    const { columnID } = this.props;
     const { taskOrder, taskData } = this.props;
 
-    if (taskData === null) {
+    if (taskData == null) {
       return <div />;
     }
-
-    // const stringColumnID = columnID.toString();
 
     return (
       <Droppable droppableId={columnID} type={"TASK"}>

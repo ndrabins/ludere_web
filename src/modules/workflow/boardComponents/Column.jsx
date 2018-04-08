@@ -43,15 +43,13 @@ class Column extends Component {
   };
 
   render() {
-    const { list, ID, classes } = this.props;
-    if (list === undefined || list.name === undefined) {
-      return <div />;
-    }
+    const { listData, ID, classes } = this.props;
+    let list = listData[ID];
 
     return (
       <Draggable draggableId={ID} type="COLUMN" index={this.props.index}>
         {(provided, snapshot) => (
-          <div style={styles.wrapper} >
+          <div style={styles.wrapper}>
             <div
               elevation={4}
               ref={provided.innerRef}
@@ -130,9 +128,15 @@ const styles = {
   },
   taskEntry: {
     paddingLeft: 10,
-    paddingRight: 10,
-  },
+    paddingRight: 10
+  }
 };
+
+function mapStateToProps(state) {
+  return {
+    listData: state.workflow.listData
+  };
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -140,4 +144,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(Column));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(Column)
+);

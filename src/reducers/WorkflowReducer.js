@@ -17,7 +17,8 @@ import {
   FETCH_COMMENTS_SUCCESS,
   UNSUBSCRIBE_TASK_COMMENTS,
   UNSUBSCRIBE_BOARD_DATA,
-  UNSUBSCRIBE_BOARDS
+  UNSUBSCRIBE_BOARDS,
+  FETCH_BOARD_DATA
 } from "../actions/types";
 
 const initialState = {
@@ -28,6 +29,8 @@ const initialState = {
   showTaskDetail: false,
   selectedTask: null,
   loading: false,
+  loadingLists: false,
+  loadingTasks: false,
   comments: {},
   taskCommentsListener: null,
   tasksListener: null,
@@ -39,6 +42,12 @@ export default function workflow(state = initialState, action) {
   switch (action.type) {
     case SELECT_BOARD:
       return { ...state, selectedBoard: action.selectedBoard };
+    case FETCH_BOARD_DATA:
+      return {
+        ...state,
+        loadingLists: true,
+        loadingTasks: true
+      };
     case FETCH_BOARDS_SUCCESS:
       return {
         ...state,
@@ -49,12 +58,14 @@ export default function workflow(state = initialState, action) {
     case FETCH_LISTS:
       return {
         ...state,
+        loadingLists: false,
         listData: action.listData,
         listsListener: action.listsListener
       };
     case FETCH_TASKS:
       return {
         ...state,
+        loadingTasks: false,
         taskData: action.taskData,
         tasksListener: action.tasksListener
       };

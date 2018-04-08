@@ -9,7 +9,8 @@ import {
   CHANGE_COLUMN_ORDER,
   UPDATE_LIST,
   UNSUBSCRIBE_BOARD_DATA,
-  UNSUBSCRIBE_BOARDS
+  UNSUBSCRIBE_BOARDS,
+  FETCH_BOARD_DATA
 } from "./types";
 import firebase from "firebase";
 
@@ -140,6 +141,8 @@ export function fetchBoardData(boardID) {
     if (boardID === null) {
       return;
     }
+
+    dispatch({ type: FETCH_BOARD_DATA });
 
     let listsRef = firebase
       .firestore()
