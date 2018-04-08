@@ -25,7 +25,7 @@ class Column extends Component {
   };
 
   handleTitleChange = name => {
-    let newList = this.props.list;
+    let newList = { ...this.props.list };
     newList.name = name;
 
     this.props.actions.updateList(newList, this.props.ID);
@@ -43,8 +43,7 @@ class Column extends Component {
   };
 
   render() {
-    const { listData, ID, classes } = this.props;
-    let list = listData[ID];
+    const { list, ID, classes } = this.props;
 
     return (
       <Draggable draggableId={ID} type="COLUMN" index={this.props.index}>
@@ -132,11 +131,11 @@ const styles = {
   }
 };
 
-function mapStateToProps(state) {
-  return {
-    listData: state.workflow.listData
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     listData: state.workflow.listData
+//   };
+// }
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -144,6 +143,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(Column)
-);
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Column));

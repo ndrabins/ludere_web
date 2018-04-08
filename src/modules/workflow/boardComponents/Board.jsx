@@ -115,7 +115,7 @@ class Board extends Component {
               {...provided.droppableProps}
             >
               {listOrder.map((ID, index) => (
-                <Column key={ID} ID={ID} index={index} />
+                <Column key={ID} ID={ID} index={index} list={listData[ID]} />
               ))}
               <div style={styles.listEntryDiv}>
                 <TextField
