@@ -54,7 +54,8 @@ class App extends Component {
   }
 
   render() {
-    if (this.props.loading) {
+    const { loading } = this.props;
+    if (loading) {
       return (
         <div style={{ height: "100%" }}>
           <Loading />

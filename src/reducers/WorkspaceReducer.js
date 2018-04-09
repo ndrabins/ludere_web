@@ -11,7 +11,7 @@ import {
   JOIN_WORKSPACE_ERROR,
   FETCH_WORKSPACE_USERS,
   FETCH_WORKSPACE_USERS_SUCCESS,
-  FETCH_WORKSPACE_USERS_ERROR,
+  FETCH_WORKSPACE_USERS_ERROR
 } from "../actions/types";
 
 const initialState = {
@@ -19,6 +19,7 @@ const initialState = {
   selectedWorkspace: null,
   workspaceUsers: {},
   loadingUsers: false,
+  loadingWorkspaces: false
 };
 
 export default function workspaces(state = initialState, action) {
@@ -35,10 +36,11 @@ export default function workspaces(state = initialState, action) {
     case CREATE_WORKSPACE_ERROR:
       return state;
     case FETCH_WORKSPACES:
-      return state;
+      return { ...state, loadingWorkspaces: true };
     case FETCH_WORKSPACES_SUCCESS:
       return {
         ...state,
+        loadingWorkspaces: false,
         workspaces: action.workspaces
       };
     case FETCH_WORKSPACES_ERROR:
@@ -52,13 +54,13 @@ export default function workspaces(state = initialState, action) {
     case FETCH_WORKSPACE_USERS:
       return {
         ...state,
-        loadingUsers: true,
+        loadingUsers: true
       };
     case FETCH_WORKSPACE_USERS_SUCCESS:
       return {
         ...state,
         workspaceUsers: action.workspaceUsers,
-        loadingUsers: false,
+        loadingUsers: false
       };
     case FETCH_WORKSPACE_USERS_ERROR:
       return state;

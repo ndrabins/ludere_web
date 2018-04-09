@@ -45,9 +45,7 @@ class WorkspaceFlow extends Component {
             textColor="primary"
             centered
           >
-            <Tab
-              label="Create Workspace"
-            />
+            <Tab label="Create Workspace" />
             <Tab label="Join Workspace" />
           </Tabs>
           {value === 0 && <CreateWorkspace />}
@@ -71,7 +69,7 @@ const styles = {
   },
   tabsContainer: {
     minWidth: 400,
-    minHeight: 500,
+    minHeight: 500
   },
   content: {
     padding: 40

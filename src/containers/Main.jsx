@@ -8,6 +8,7 @@ import { Route, Switch } from "react-router-dom";
 import WorkspaceFlow from "../modules/workspace/WorkspaceFlow";
 import NavBar from "../modules/dashboard/NavBar";
 import SideNav from "../modules/dashboard/SideNav";
+import Loading from "../common/LoadingLottie";
 
 import Dashboard from "./Dashboard";
 import Calendar from "./Calendar";
@@ -50,7 +51,11 @@ class Main extends Component {
   }
 
   render() {
-    const { history } = this.props;
+    const { history, loadingWorkspaces } = this.props;
+
+    if (loadingWorkspaces) {
+      return <Loading />;
+    }
 
     // if user is not in a company, they must create or join one
     if (Object.keys(this.props.workspaces).length === 0) {
@@ -109,7 +114,8 @@ const styles = {
 function mapStateToProps(state) {
   return {
     workspaces: state.workspace.workspaces,
-    selectedTeam: state.team.selectedTeam
+    selectedTeam: state.team.selectedTeam,
+    loadingWorkspaces: state.workspace.loadingWorkspaces
   };
 }
 
