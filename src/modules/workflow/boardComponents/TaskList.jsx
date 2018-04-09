@@ -65,9 +65,8 @@ const styles = {
   wrapper: {
     display: "flex",
     flexDirection: "row",
-    overflowY: "auto",
     width: "100%",
-    margin:8,
+    margin: 8
   },
   container: {
     // padding: 8,

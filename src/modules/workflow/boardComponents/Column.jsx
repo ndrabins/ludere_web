@@ -98,17 +98,14 @@ const styles = {
     width: 240,
     backgroundColor: "#E5E5E6",
     margin: 6,
-    borderRadius: 7,
-    maxHeight: "100%"
+    borderRadius: 7
   },
   tasksContainer: {
-    display: "flex",
-    height: "100%"
+    display: "flex"
   },
   wrapper: {
     display: "flex",
-    flexDirection: "column",
-    maxHeight: "95%"
+    flexDirection: "column"
   },
   title: {
     minHeight: 40,

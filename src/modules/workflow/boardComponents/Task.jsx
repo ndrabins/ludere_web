@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
@@ -7,7 +7,7 @@ import { CircularProgress } from "material-ui/Progress";
 import Filter from "lodash/filter";
 import CommentIcon from "material-ui-icons/ModeComment";
 
-class Task extends PureComponent {
+class Task extends Component {
   state = {
     subtaskPercentageDone: 0
   };
