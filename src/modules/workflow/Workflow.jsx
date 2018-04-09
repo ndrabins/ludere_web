@@ -31,7 +31,8 @@ const styles = {
   wrapper: {
     height: "100%",
     overflowX: "auto",
-    overflowY: "auto"
+    overflowY: "auto",
+    display: "flex"
   }
 };
 
