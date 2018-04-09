@@ -104,8 +104,8 @@ const styles = {
     display: "flex"
   },
   wrapper: {
-    display: "flex",
-    flexDirection: "column"
+    // display: "flex",
+    // flexDirection: "column"
   },
   title: {
     minHeight: 40,

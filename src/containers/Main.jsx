@@ -108,8 +108,7 @@ const styles = {
   },
   content: {
     display: "flex",
-    flexDirection: "column",
-    flex: 1
+    flexDirection: "column"
   }
 };
 
