@@ -93,7 +93,8 @@ const styles = {
     minHeight: 48,
     height: 48,
     justifyContent: "space-between",
-    flexDirection: "row"
+    flexDirection: "row",
+    zIndex: 10
   },
   navEnd: {
     display: "flex",

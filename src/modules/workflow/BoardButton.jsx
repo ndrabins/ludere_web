@@ -35,13 +35,17 @@ class BoardButton extends Component {
   };
 
   render() {
+    const { location } = this.props;
     let workflowStyle = styles.workflow;
     let nameStyle = styles.name;
     if (this.state.isHovered) {
       workflowStyle = styles.hoveredWorkflow;
       nameStyle = styles.hoveredName;
     }
-    if (this.props.boardID === this.props.selectedBoard) {
+    if (
+      this.props.boardID === this.props.selectedBoard &&
+      location.pathname.includes("workflow")
+    ) {
       workflowStyle = styles.selectedWorkflow;
       nameStyle = styles.selectedName;
     }
@@ -77,7 +81,7 @@ const baseStyle = {
   marginRight: 4,
   marginBottom: 1,
   height: 28,
-  fontSize: '14px',
+  fontSize: "14px"
 };
 
 const baseName = {

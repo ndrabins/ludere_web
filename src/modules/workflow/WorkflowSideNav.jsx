@@ -23,7 +23,7 @@ class WorkflowSideNav extends Component {
           <CreateWorkflowButton />
         </div>
         <div>
-          <BoardList />
+          <BoardList location={this.props.location} />
         </div>
       </div>
     );

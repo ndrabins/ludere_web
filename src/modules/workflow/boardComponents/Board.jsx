@@ -91,7 +91,12 @@ class Board extends Component {
       loadingBoards
     } = this.props;
 
-    if (loadingLists || loadingTasks || loadingBoards) {
+    if (
+      loadingLists ||
+      loadingTasks ||
+      loadingBoards ||
+      selectedBoard === null
+    ) {
       return <Loading />;
     }
 

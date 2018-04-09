@@ -6,7 +6,7 @@ import { withStyles } from "material-ui/styles";
 import { withRouter } from "react-router";
 // import SelectableTextButton from '../../common/SelectableTextButton';
 
-import TeamOverviewTitle from './TeamOverviewTitle';
+import TeamOverviewTitle from "./TeamOverviewTitle";
 
 import { Route } from "react-router-dom";
 
@@ -28,7 +28,7 @@ class SideNavModules extends Component {
 const styles = {
   container: {
     marginTop: 10,
-    width: 240,
+    width: 240
   },
   title: {
     display: "flex",

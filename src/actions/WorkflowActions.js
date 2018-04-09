@@ -92,8 +92,8 @@ export function updateList(list, listID) {
 
 export function fetchBoards(selectedTeamID) {
   return (dispatch, getState) => {
-    dispatch(unsubscribeFromBoards()); // unsubscribe from previous listener;
     dispatch({ type: FETCH_BOARDS });
+    dispatch(unsubscribeFromBoards()); // unsubscribe from previous listener;
 
     let workflowRef = firebase.firestore().collection("workflow");
     const boardsListener = workflowRef
@@ -184,10 +184,10 @@ export function fetchBoardData(boardID) {
 
 export function selectBoard(boardID) {
   return dispatch => {
-    if (boardID === null) {
-      dispatch({ type: SELECT_BOARD, selectedBoard: null });
-      return;
-    }
+    // if (boardID === null) {
+    //   dispatch({ type: SELECT_BOARD, selectedBoard: null });
+    //   return;
+    // }
     dispatch({ type: SELECT_BOARD, selectedBoard: boardID });
     dispatch(fetchBoardData(boardID));
   };
