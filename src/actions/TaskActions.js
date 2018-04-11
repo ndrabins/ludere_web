@@ -105,20 +105,23 @@ export function moveTaskToColumn(startIndex, endIndex, startListID, endListID) {
       .collection("lists")
       .doc(endListID);
 
-    firebase
-      .firestore()
-      .runTransaction(function(transaction) {
-        return transaction.get(startListRef).then(function(sfDoc) {
-          transaction.update(startListRef, { taskOrder: startListTaskOrder });
-          transaction.update(endListRef, { taskOrder: endListTaskOrder });
-        });
-      })
-      .then(function() {
-        dispatch({ type: MOVE_TASK_TO_COLUMN });
-      })
-      .catch(function(err) {
-        console.error(err);
-      });
+    dispatch({ type: MOVE_TASK_TO_COLUMN });
+    startListRef.update({ taskOrder: startListTaskOrder });
+    endListRef.update({ taskOrder: endListTaskOrder });
+    // firebase
+    //   .firestore()
+    //   .runTransaction(function(transaction) {
+    //     return transaction.get(startListRef).then(function(sfDoc) {
+    //       transaction.update(startListRef, { taskOrder: startListTaskOrder });
+    //       transaction.update(endListRef, { taskOrder: endListTaskOrder });
+    //     });
+    //   })
+    //   .then(function() {
+    //     dispatch({ type: MOVE_TASK_TO_COLUMN });
+    //   })
+    //   .catch(function(err) {
+    //     console.error(err);
+    //   });
   };
 }
 
