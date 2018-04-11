@@ -46,12 +46,10 @@ class TaskList extends Component {
                           isDragging={dragSnapshot.isDragging}
                           provided={dragProvided}
                         />
-                        {dragProvided.placeholder}
                       </div>
                     )}
                   </Draggable>
                 ))}
-                {dropProvided.placeholder}
               </div>
             </div>
           </div>

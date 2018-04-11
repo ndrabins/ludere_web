@@ -82,7 +82,6 @@ class Column extends Component {
                 />
               </div>
             </div>
-            {provided.placeholder}
           </div>
         )}
       </Draggable>
