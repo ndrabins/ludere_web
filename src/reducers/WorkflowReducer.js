@@ -41,7 +41,11 @@ const initialState = {
 export default function workflow(state = initialState, action) {
   switch (action.type) {
     case SELECT_BOARD:
-      return { ...state, selectedBoard: action.selectedBoard };
+      return {
+        ...state,
+        selectedBoard: action.selectedBoard,
+        selectedTask: null
+      };
     case FETCH_BOARD_DATA:
       return {
         ...state,
