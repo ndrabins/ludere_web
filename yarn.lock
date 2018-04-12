@@ -3129,6 +3129,14 @@ filename-regex@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/filename-regex/-/filename-regex-2.0.1.tgz#c1c4b9bee3e09725ddb106b75c1e301fe2f18b26"
 
+filepond-plugin-image-preview@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-preview/-/filepond-plugin-image-preview-1.0.8.tgz#dd7bed6a6adffb9599f52b425a7a9ca22bfa941b"
+
+filepond@^1.2.10, filepond@^1.2.8:
+  version "1.2.10"
+  resolved "https://registry.yarnpkg.com/filepond/-/filepond-1.2.10.tgz#7fed4b7b34072746a13d49b5315a578277f358b9"
+
 fileset@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/fileset/-/fileset-2.0.3.tgz#8e7548a96d3cc2327ee5e674168723a333bba2a0"
@@ -6406,6 +6414,12 @@ react-event-listener@^0.5.0, react-event-listener@^0.5.1:
     fbjs "^0.8.16"
     prop-types "^15.6.0"
     warning "^3.0.0"
+
+react-filepond@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-filepond/-/react-filepond-2.0.3.tgz#de796080512f9052db16eab9d3190ff5e8dd8c8e"
+  dependencies:
+    filepond "^1.2.8"
 
 react-icon-base@2.1.0:
   version "2.1.0"

@@ -8,7 +8,6 @@ class LocationBar extends Component {
 
   getLocation = () => {
     const { location } = this.props;
-    console.log(location);
     let locationName;
 
     if (location.pathname.includes("workflow")) {

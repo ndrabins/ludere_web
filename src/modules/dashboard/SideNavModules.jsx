@@ -14,18 +14,19 @@ class SideNavModules extends Component {
   render() {
     const { classes, location } = this.props;
     const { pathname } = location;
+    const showModules =
+      pathname.includes("team") || pathname.includes("profile");
     return (
       <div className={classes.container}>
         <Route exact path="/" component={CommunitySideNav} />
         <Route path="/community" component={CommunitySideNav} />
-        {pathname.includes("team") ||
-          (pathname.includes("profile") && (
-            <Fragment>
-              <TeamOverviewTitle />
-              <ChatSideNav />
-              <WorkflowSideNav />
-            </Fragment>
-          ))}
+        {showModules && (
+          <Fragment>
+            <TeamOverviewTitle />
+            <ChatSideNav />
+            <WorkflowSideNav />
+          </Fragment>
+        )}
       </div>
     );
   }
