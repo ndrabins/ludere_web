@@ -28,6 +28,11 @@ class NavBar extends Component {
     this.setState({ openNavMenu: false });
   };
 
+  handleProfileSelect = () => {
+    this.props.history.push("/profile/");
+    this.handleRequestCloseNavMenu();
+  };
+
   handleCalendarSelect() {
     this.props.history.push("/community/calendar");
     this.props.actions.selectTeam(null);
@@ -72,9 +77,7 @@ class NavBar extends Component {
               open={this.state.openNavMenu}
               onClose={this.handleRequestCloseNavMenu}
             >
-              <MenuItem onClick={this.handleRequestCloseNavMenu}>
-                Profile
-              </MenuItem>
+              <MenuItem onClick={this.handleProfileSelect}>Profile</MenuItem>
               <MenuItem onClick={() => this.props.actions.signOutUser()}>
                 Logout
               </MenuItem>

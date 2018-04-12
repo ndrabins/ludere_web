@@ -13,6 +13,7 @@ import LocationBar from "common/LocationBar";
 
 import Dashboard from "./Dashboard";
 import Calendar from "./Calendar";
+import Profile from "../modules/dashboard/Profile";
 import Community from "../modules/community/Community";
 
 //Modules
@@ -85,6 +86,7 @@ class Main extends Component {
           <Switch>
             <Route exact path="/community/dashboard" component={Dashboard} />
             <Route exact path="/community/calendar" component={Calendar} />
+            <Route exact path="/profile" component={Profile} />
             <Route exact path="/" component={Community} />
             <Route exact path="/community" component={Community} />
             <Route exact path="/team" component={TeamDashboard} />

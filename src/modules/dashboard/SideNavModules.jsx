@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import CommunitySideNav from "../community/CommunitySideNav";
 import ChatSideNav from "../chat/ChatSideNav";
 import WorkflowSideNav from "../workflow/WorkflowSideNav";
@@ -12,14 +12,20 @@ import { Route } from "react-router-dom";
 
 class SideNavModules extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, location } = this.props;
+    const { pathname } = location;
     return (
       <div className={classes.container}>
         <Route exact path="/" component={CommunitySideNav} />
         <Route path="/community" component={CommunitySideNav} />
-        <Route path="/team" component={TeamOverviewTitle} />
-        <Route path="/team" component={ChatSideNav} />
-        <Route path="/team" component={WorkflowSideNav} />
+        {pathname.includes("team") ||
+          (pathname.includes("profile") && (
+            <Fragment>
+              <TeamOverviewTitle />
+              <ChatSideNav />
+              <WorkflowSideNav />
+            </Fragment>
+          ))}
       </div>
     );
   }

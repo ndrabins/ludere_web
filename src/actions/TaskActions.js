@@ -105,9 +105,9 @@ export function moveTaskToColumn(startIndex, endIndex, startListID, endListID) {
       .collection("lists")
       .doc(endListID);
 
-    dispatch({ type: MOVE_TASK_TO_COLUMN });
     startListRef.update({ taskOrder: startListTaskOrder });
     endListRef.update({ taskOrder: endListTaskOrder });
+    dispatch({ type: MOVE_TASK_TO_COLUMN });
     // firebase
     //   .firestore()
     //   .runTransaction(function(transaction) {

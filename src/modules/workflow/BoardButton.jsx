@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
+import { withRouter } from "react-router";
 
 import IconButton from "material-ui/IconButton";
 import MoreVertIcon from "material-ui-icons/MoreVert";
@@ -135,4 +136,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoardButton);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRouter(BoardButton)
+);
