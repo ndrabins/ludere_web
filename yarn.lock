@@ -3129,13 +3129,29 @@ filename-regex@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/filename-regex/-/filename-regex-2.0.1.tgz#c1c4b9bee3e09725ddb106b75c1e301fe2f18b26"
 
-filepond-plugin-image-preview@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-image-preview/-/filepond-plugin-image-preview-1.0.8.tgz#dd7bed6a6adffb9599f52b425a7a9ca22bfa941b"
+filepond-plugin-image-crop@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-crop/-/filepond-plugin-image-crop-1.0.1.tgz#1c3132cc72a2e0b0d3eecb4da63283b1b9f3ca2d"
 
-filepond@^1.2.10, filepond@^1.2.8:
-  version "1.2.10"
-  resolved "https://registry.yarnpkg.com/filepond/-/filepond-1.2.10.tgz#7fed4b7b34072746a13d49b5315a578277f358b9"
+filepond-plugin-image-exif-orientation@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-exif-orientation/-/filepond-plugin-image-exif-orientation-1.0.1.tgz#79a8204c47d218c8a3262b466f34e6af18ea231a"
+
+filepond-plugin-image-preview@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-preview/-/filepond-plugin-image-preview-1.0.9.tgz#e82032eac45be1c56efbe5bac19d137c5df908f3"
+
+filepond-plugin-image-resize@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-resize/-/filepond-plugin-image-resize-1.0.1.tgz#40a11c5499f1c62dc3221f6a840ae8b4c8f742f7"
+
+filepond-plugin-image-transform@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-transform/-/filepond-plugin-image-transform-1.0.1.tgz#07f7f888fba3663795d6b5e2d03b2de88f4cc3f4"
+
+filepond@^1.2.11, filepond@^1.2.8:
+  version "1.2.11"
+  resolved "https://registry.yarnpkg.com/filepond/-/filepond-1.2.11.tgz#f4a878ad3c717017bb5348b9f8d763f3fd09128a"
 
 fileset@^2.0.2:
   version "2.0.3"

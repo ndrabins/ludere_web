@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
+import Typography from "material-ui/Typography";
 
 class LocationBar extends Component {
   static defaultProps = {
@@ -21,7 +22,11 @@ class LocationBar extends Component {
     const { classes, locationName } = this.props;
     return (
       <div className={classes.root}>
-        <div className={classes.nameContainer}>{this.getLocation()}</div>
+        <div className={classes.nameContainer}>
+          <Typography variant="title" className={classes.location}>
+            {this.getLocation()}
+          </Typography>
+        </div>
       </div>
     );
   }
@@ -37,6 +42,9 @@ const styles = {
   },
   nameContainer: {
     marginLeft: 15
+  },
+  location: {
+    color: "#303030"
   }
 };
 

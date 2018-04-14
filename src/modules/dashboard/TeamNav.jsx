@@ -152,7 +152,7 @@ const styles = {
   container: {
     display: "flex",
     width: 60,
-    backgroundColor: "#000000",
+    backgroundColor: "#2a2a2a",
     flexDirection: "column",
     alignItems: "center",
     boxShadow:

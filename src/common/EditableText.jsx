@@ -96,6 +96,7 @@ const styles = theme => ({
     border: "0px #000A solid",
     borderRadius: 5,
     minHeight: 14,
+    textShadow: "1px 1px 1px rgba(0,0,0,0.5)",
     "&:hover": {
       cursor: "text",
       backgroundColor: "rgba(0,0,0,.15)  ",
@@ -103,7 +104,7 @@ const styles = theme => ({
     }
   },
   input: {
-    fontWeight: 600,
+    fontWeight: 500,
     backgroundColor: "white",
     borderRadius: 5,
     padding: 5,
@@ -113,7 +114,7 @@ const styles = theme => ({
     cursor: "text"
   },
   formControl: {
-    width: '100%',
+    width: "100%"
   }
 });
 

@@ -47,7 +47,7 @@ if (url.includes("app")) {
     authDomain: "dev-ludere.firebaseapp.com",
     databaseURL: "https://dev-ludere.firebaseio.com",
     projectId: "dev-ludere",
-    storageBucket: "",
+    storageBucket: "dev-ludere.appspot.com",
     messagingSenderId: "826975908697"
   };
 }

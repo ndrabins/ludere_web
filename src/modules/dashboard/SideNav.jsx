@@ -55,7 +55,7 @@ const styles = {
   },
   moduleSideNav: {
     position: "relative",
-    backgroundColor: "#333333",
+    backgroundColor: "#303030",
     minWidth: drawerWidth,
     width: drawerWidth,
     transition: "width 0.75s ease-out, min-width 0.75s ease-out",
@@ -68,7 +68,7 @@ const styles = {
     minWidth: 0,
     backgroundColor: colors.lightThemePrimary,
     overflow: "hidden",
-    transition: "width 0.75s ease-out, min-width 0.75s ease-out",
+    transition: "width 0.75s ease-out, min-width 0.75s ease-out"
   },
   sideNavInner: {
     width: drawerWidth

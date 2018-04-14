@@ -92,7 +92,7 @@ class NavBar extends Component {
 const styles = {
   container: {
     display: "flex",
-    backgroundColor: "#FAFAFA",
+    backgroundColor: "#FFFFFF",
     minHeight: 48,
     height: 48,
     justifyContent: "space-between",
@@ -107,7 +107,7 @@ const styles = {
     borderBottomLeftRadius: 35,
     paddingLeft: 30,
     paddingRight: 20,
-    backgroundColor: colors.lightThemePrimary,
+    backgroundColor: "#2a2a2a",
     alignItems: "center"
   },
   navBegin: {
@@ -125,11 +125,13 @@ const styles = {
     marginRight: 10
   },
   menuButton: {
-    height: 65,
+    height: "100%",
     color: "white",
-    width: 58,
     borderRadius: 0,
-    backgroundColor: colors.lightThemePrimary
+    backgroundColor: "#2a2a2a",
+    "&:hover": {
+      backgroundColor: "#2a2a2a"
+    }
   }
 };
 
