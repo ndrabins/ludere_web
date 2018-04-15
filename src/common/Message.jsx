@@ -5,22 +5,30 @@ import Avatar from "material-ui/Avatar";
 import FolderIcon from "material-ui-icons/Folder";
 import moment from "moment";
 
-
 class Message extends Component {
   render() {
-    const { text, timestamp, sentBy, classes, displayName } = this.props;
+    const {
+      text,
+      timestamp,
+      sentBy,
+      classes,
+      displayName,
+      photoURL
+    } = this.props;
     let diff = moment(timestamp).diff(moment(), "minutes");
-    let formattedTimesstamp = moment().add(diff, "minutes").calendar();
+    let formattedTimesstamp = moment()
+      .add(diff, "minutes")
+      .calendar();
 
-    return(
+    return (
       <div className={classes.messageContainer}>
-        <Avatar>
-          <FolderIcon />
-        </Avatar>
+        <Avatar src={photoURL} />
         <div className={classes.messageContent}>
           <div className={classes.messageHeader}>
             <Typography className={classes.name}> {displayName} </Typography>
-            <Typography className={classes.date}> {formattedTimesstamp} </Typography>
+            <Typography className={classes.date}>
+              {formattedTimesstamp}
+            </Typography>
           </div>
           <Typography className={classes.messageText}>{text}</Typography>
         </div>
@@ -33,7 +41,7 @@ const styles = theme => ({
   messageContainer: {
     marginRight: 10,
     flexDirection: "row",
-    display: "flex",
+    display: "flex"
   },
   messageContent: {
     maxWidth: "90%",

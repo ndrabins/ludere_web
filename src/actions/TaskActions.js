@@ -269,20 +269,20 @@ export function deleteTask() {
 
 export function createComment(commentText) {
   return (dispatch, getState) => {
-    let { uid } = getState().auth.user;
+    const { uid } = getState().auth.user;
+    const { myUserProfile } = getState().profile;
+
     const { selectedTask, selectedBoard } = getState().workflow;
 
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-
-    //need to refactor this lol..
-    // let myName = getState().workspace.workspaceUsers[uid].displayName;
 
     let newComment = {
       sentBy: uid,
       dateCreated: timestamp,
       content: commentText,
-      sentByDisplayName: "bob",
-      edited: "false"
+      sentByDisplayName: myUserProfile.displayName,
+      edited: "false",
+      photoURL: myUserProfile.photoURL
     };
 
     let commentRef = firebase

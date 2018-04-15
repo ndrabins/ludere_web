@@ -14,8 +14,13 @@ import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageTransform from "filepond-plugin-image-transform";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 
+import Input, { InputLabel } from "material-ui/Input";
+import { FormControl, FormHelperText } from "material-ui/Form";
+import Typography from "material-ui/Typography";
+import Paper from "material-ui/Paper";
 import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
+import Snackbar from "material-ui/Snackbar";
 
 registerPlugin(
   FilepondPluginImagePreview,
@@ -30,7 +35,9 @@ class Profile extends Component {
     super(props);
 
     this.state = {
-      files: []
+      files: [],
+      displayName: this.props.profile.displayName,
+      openSnackbar: false
     };
   }
 
@@ -79,6 +86,7 @@ class Profile extends Component {
     this.pond.browse();
   };
 
+  // TODO: this doesn't work at the moment.
   handleAbort = (fieldName, file, metadata, load, error, progress, abort) => {
     console.log("aborting");
     return {
@@ -91,12 +99,34 @@ class Profile extends Component {
     };
   };
 
+  handleUpdateProfile = () => {
+    const { profile, actions } = this.props;
+    const { displayName } = this.state;
+
+    let updatedProfile = { ...profile };
+    updatedProfile.displayName = displayName;
+    this.setState({ openSnackbar: true });
+
+    actions.updateUserProfile({ displayName: displayName });
+  };
+
+  handleClose = () => {
+    this.setState({ openSnackbar: false });
+  };
+
+  handleChange = prop => event => {
+    this.setState({ [prop]: event.target.value });
+  };
+
   render() {
-    const { files } = this.state;
+    const { files, displayName, openSnackbar } = this.state;
     const { classes, user, profile } = this.props;
 
     return (
       <div className={classes.root}>
+        <Typography className={classes.title} variant="title" gutterBottom>
+          Profile
+        </Typography>
         <div className={classes.avatar}>
           <FilePond
             instantUpload={false}
@@ -116,8 +146,46 @@ class Profile extends Component {
           >
             {files.map(file => <File key={file} source={file} />)}
           </FilePond>
-          {/* <Button onClick={this.handleBrowse}> Browse </Button> */}
         </div>
+        <Typography
+          className={classes.subheading}
+          variant="headline"
+          gutterBottom
+        >
+          Profile Information
+        </Typography>
+        <FormControl className={classes.formControl}>
+          <InputLabel className={classes.label} shrink={true}>
+            Display Name
+          </InputLabel>
+          <Input
+            classes={{ focused: classes.inputFocused }}
+            className={classes.input}
+            value={displayName}
+            onChange={this.handleChange("displayName")}
+            fullWidth
+            disableUnderline
+          />
+          <FormHelperText>
+            What people in your workspace call you?
+          </FormHelperText>
+        </FormControl>
+        <Button
+          onClick={this.handleUpdateProfile}
+          variant="raised"
+          className={classes.saveButton}
+        >
+          Save Profile
+        </Button>
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          open={openSnackbar}
+          onClose={this.handleClose}
+          SnackbarContentProps={{
+            "aria-describedby": "message-id"
+          }}
+          message={<span id="message-id">Profile Updated</span>}
+        />
       </div>
     );
   }
@@ -128,21 +196,64 @@ const styles = {
     display: "flex",
     width: "100%",
     height: "100%",
-    justifyContent: "center",
-    paddingTop: 20
+    alignItems: "flex-start",
+    paddingTop: 20,
+    flexDirection: "column",
+    paddingLeft: 100,
+    paddingRight: 100
+  },
+  title: {
+    fontSize: 32,
+    marginBottom: 20
+  },
+  subheading: {
+    marginTop: 20,
+    marginBottom: 10
   },
   avatar: {
     width: 400,
-    height: 400,
-    minHeight: 400,
     minWidth: 400
   },
-  avatarPhoto: {
-    position: "absolute",
-    width: 400,
-    height: 400
+  formControl: {
+    marginBotton: 10,
+    width: "100%"
+  },
+  label: {
+    color: "#303030"
+  },
+  input: {
+    backgroundColor: "transparent",
+    borderRadius: 5,
+    padding: 5,
+    color: "303030",
+    border: "1px solid #6d6d6d",
+    overflow: "hidden",
+    cursor: "text",
+    transition: "border 0.25s ease-out",
+    "&:hover": {
+      cursor: "text",
+      border: "1px solid #B9BBBE"
+    }
+  },
+  inputFocused: {
+    border: "1px solid #303030",
+    transition: "border 0.25s ease-out",
+    "&:hover": {
+      cursor: "text",
+      border: "1px solid #303030"
+    }
+  },
+  saveButton: {
+    marginTop: 30,
+    color: "white",
+    background: `linear-gradient(to right, #29b6f6, #796eff)`
   }
 };
+
+// lightThemePrimary: "#303030",
+// lightThemeSecondary: "6d6d6d",
+// lightThemeDisabled: "B9BBBE",
+// lightThemeDefault: "f9f9f9",
 
 function mapStateToProps(state) {
   return {

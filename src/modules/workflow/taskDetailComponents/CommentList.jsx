@@ -26,6 +26,7 @@ class CommentList extends Component {
                 timestamp={comment.DateCreated}
                 sentBy={comment.sentBy}
                 displayName={comment.sentByDisplayName}
+                photoURL={comment.photoURL}
               />
             </div>
           );
@@ -39,7 +40,7 @@ const styles = theme => ({
   root: {
     width: "100%",
     overflowY: "auto",
-    marginBottom: 10,
+    marginBottom: 10
   },
   text: {
     display: "flex",
