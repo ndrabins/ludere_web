@@ -101,6 +101,11 @@ class Board extends Component {
     }
 
     const board = boards[selectedBoard];
+
+    if (!board) {
+      return <div />;
+    }
+
     const { listOrder } = board;
 
     return (

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
+import { withRouter } from "react-router";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
 import AddIcon from "material-ui-icons/Add";
@@ -30,10 +31,11 @@ class AddTeamButton extends Component {
   };
 
   handleCreateTeam = () => {
-    if(this.state.teamName.length < 2){
+    if (this.state.teamName.length < 2) {
       return;
     }
     this.props.actions.createTeam(this.state.teamName);
+    this.props.history.push("/team");
     this.handleRequestClose();
   };
 
@@ -82,7 +84,7 @@ class AddTeamButton extends Component {
             </Button>
             <Button
               onClick={this.handleCreateTeam}
-              variant='raised'
+              variant="raised"
               color="primary"
               style={{ color: "white" }}
             >
@@ -115,4 +117,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddTeamButton);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRouter(AddTeamButton)
+);

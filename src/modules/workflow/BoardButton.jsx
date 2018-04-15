@@ -36,7 +36,8 @@ class BoardButton extends Component {
   };
 
   render() {
-    const { location } = this.props;
+    const { history, boardID, selectedBoard } = this.props;
+
     let workflowStyle = styles.workflow;
     let nameStyle = styles.name;
     if (this.state.isHovered) {
@@ -44,8 +45,8 @@ class BoardButton extends Component {
       nameStyle = styles.hoveredName;
     }
     if (
-      this.props.boardID === this.props.selectedBoard &&
-      location.pathname.includes("workflow")
+      boardID === selectedBoard &&
+      history.location.pathname.includes("workflow")
     ) {
       workflowStyle = styles.selectedWorkflow;
       nameStyle = styles.selectedName;

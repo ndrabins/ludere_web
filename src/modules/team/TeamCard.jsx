@@ -47,7 +47,7 @@ const styles = theme => ({
     paddingLeft: 10,
     fontWeight: 600,
     fontSize: 16,
-    textShadow: "1px 1px 1px rgba(0,0,0,0.5)"
+    textShadow: "1px 1px 1px rgba(0,0,0,0.4)"
   },
   paperContainer: {
     display: "flex",

@@ -8,6 +8,7 @@ import TaskDetail from "./boardComponents/TaskDetail";
 class Workflow extends Component {
   componentWillUnmount() {
     this.props.actions.toggleTaskDetail();
+    this.props.actions.selectBoard(null);
   }
 
   render() {

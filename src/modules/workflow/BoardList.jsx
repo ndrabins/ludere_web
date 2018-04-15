@@ -14,11 +14,7 @@ class BoardList extends Component {
     let boards = Map(this.props.boards, (board, key) => {
       return (
         <div key={key}>
-          <BoardButton
-            boardID={key}
-            name={board.boardName}
-            location={this.props.location}
-          />
+          <BoardButton boardID={key} name={board.boardName} />
         </div>
       );
     });
