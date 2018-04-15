@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { withStyles } from "material-ui/styles";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../../../actions";
+
+import firebase from "firebase";
+
 import { FilePond, File, registerPlugin } from "react-filepond";
 import FilePondImagePreview from "filepond-plugin-image-preview";
 import FilepondPluginImagePreview from "filepond-plugin-image-preview";
@@ -8,7 +13,8 @@ import FilePondPluginImageCrop from "filepond-plugin-image-crop";
 import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageTransform from "filepond-plugin-image-transform";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import firebase from "firebase";
+
+import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
 
 registerPlugin(
@@ -28,7 +34,6 @@ class Profile extends Component {
     };
   }
 
-  componentDidMount() {}
   // Initialized the file
   handleInit = () => {
     console.log("filepond now initialised");
@@ -43,15 +48,10 @@ class Profile extends Component {
     progress,
     abort
   ) => {
-    // handle file upload here
-    console.log(" handle file upload here");
-    console.log(file);
-
-    this.setState({ files: [file] });
-
+    const { user, profile, actions } = this.props;
     const fileUpload = file;
-    const storageRef = firebase.storage().ref(`filepond/${file.name}`);
-    const task = storageRef.put(fileUpload, metadata);
+    const profileRef = firebase.storage().ref(`images/${user.uid}/profilePic`);
+    const task = profileRef.put(fileUpload, metadata);
 
     task.on(
       `state_changed`,
@@ -63,6 +63,8 @@ class Profile extends Component {
       },
       () => {
         //Success
+        let downloadURL = task.snapshot.downloadURL;
+        actions.updateUserProfile({ photoURL: downloadURL });
         load("something");
       }
     );
@@ -91,28 +93,30 @@ class Profile extends Component {
 
   render() {
     const { files } = this.state;
-    const { classes } = this.props;
+    const { classes, user, profile } = this.props;
 
     return (
       <div className={classes.root}>
         <div className={classes.avatar}>
           <FilePond
-            ref={ref => (this.pond = ref)}
-            oninit={this.handleInit()}
-            labelIdle={"Drag & Drop your picture or Click to Browse"}
-            imagePreviewHeight={400}
-            accept="image/png, image/jpeg, image/gif"
+            instantUpload={false}
             // imageCropAspectRatio={"1:1"}
             // imageResizeTargetWidth={200}
             // imageResizeTargetHeight={200}
+            oninit={this.handleInit}
+            labelIdle={"Drag & Drop your profile picture or Click to Browse"}
+            imagePreviewHeight={400}
+            labelTapToCancel=""
+            accept="image/png, image/jpeg, image/gif"
             server={{
               process: this.handleProcessing,
               abortLoad: this.handleAbort
             }}
+            ref={ref => (this.pond = ref)}
           >
             {files.map(file => <File key={file} source={file} />)}
           </FilePond>
-          <Button onClick={this.handleBrowse}> Browse </Button>
+          {/* <Button onClick={this.handleBrowse}> Browse </Button> */}
         </div>
       </div>
     );
@@ -123,14 +127,36 @@ const styles = {
   root: {
     display: "flex",
     width: "100%",
-    height: "100%"
+    height: "100%",
+    justifyContent: "center",
+    paddingTop: 20
   },
   avatar: {
     width: 400,
     height: 400,
     minHeight: 400,
     minWidth: 400
+  },
+  avatarPhoto: {
+    position: "absolute",
+    width: 400,
+    height: 400
   }
 };
 
-export default withStyles(styles)(Profile);
+function mapStateToProps(state) {
+  return {
+    user: state.auth.user,
+    profile: state.profile.myUserProfile
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(Profile)
+);

@@ -13,7 +13,7 @@ import LocationBar from "common/LocationBar";
 
 import Dashboard from "./Dashboard";
 import Calendar from "./Calendar";
-import Profile from "../modules/dashboard/Profile";
+import Profile from "../modules/dashboard/Profile/Profile";
 import Community from "../modules/community/Community";
 
 //Modules

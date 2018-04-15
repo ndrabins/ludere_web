@@ -6431,9 +6431,9 @@ react-event-listener@^0.5.0, react-event-listener@^0.5.1:
     prop-types "^15.6.0"
     warning "^3.0.0"
 
-react-filepond@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/react-filepond/-/react-filepond-2.0.3.tgz#de796080512f9052db16eab9d3190ff5e8dd8c8e"
+react-filepond@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-filepond/-/react-filepond-2.0.4.tgz#aa85d334141f7df691b30cac23a6b5f1a36bb972"
   dependencies:
     filepond "^1.2.8"
 

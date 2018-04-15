@@ -2,7 +2,8 @@ import {
   FETCH_USER_PROFILE,
   FETCH_USER_PROFILE_SUCCESS,
   FETCH_MY_USER_PROFILE_SUCCESS,
-  FETCH_USER_PROFILE_ERROR
+  FETCH_USER_PROFILE_ERROR,
+  UPDATE_USER_PROFILE
 } from "../actions/types";
 
 const initialState = {
@@ -20,6 +21,8 @@ export default function team(state = initialState, action) {
     case FETCH_MY_USER_PROFILE_SUCCESS:
       return { ...state, myUserProfile: action.profile, loading: false };
     case FETCH_USER_PROFILE_ERROR:
+      return state;
+    case UPDATE_USER_PROFILE:
       return state;
     default:
       return state;

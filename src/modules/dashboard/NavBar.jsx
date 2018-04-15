@@ -115,8 +115,8 @@ const styles = {
     justifyContent: "center"
   },
   avatar: {
-    width: 26,
-    height: 26,
+    width: 40,
+    height: 40,
     cursor: "pointer",
     border: "2px solid #C3C3C3"
   },

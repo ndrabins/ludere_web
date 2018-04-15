@@ -1,7 +1,8 @@
 import {
   FETCH_USER_PROFILE,
   FETCH_USER_PROFILE_SUCCESS,
-  FETCH_MY_USER_PROFILE_SUCCESS
+  FETCH_MY_USER_PROFILE_SUCCESS,
+  UPDATE_USER_PROFILE
 } from "./types";
 import firebase from "firebase";
 
@@ -32,5 +33,19 @@ export function fetchUserProfile(userID = null) {
     profileRef.onSnapshot(function(doc) {
       dispatch({ type: type, profile: doc.data() });
     });
+  };
+}
+
+export function updateUserProfile(userProfile) {
+  return (dispatch, getState) => {
+    let { uid } = getState().auth.user;
+    dispatch({ type: UPDATE_USER_PROFILE });
+
+    let profileRef = firebase
+      .firestore()
+      .collection(`users`)
+      .doc(`${uid}`);
+
+    profileRef.update(userProfile);
   };
 }
