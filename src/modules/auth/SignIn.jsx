@@ -63,7 +63,13 @@ class SignUp extends Component {
               Sign In
             </Typography>
             <FormControl className={classes.formControl}>
-              <InputLabel className={classes.label} shrink={true}>
+              <InputLabel
+                FormLabelClasses={{
+                  root: classes.label,
+                  focused: classes.cssFocused
+                }}
+                shrink={true}
+              >
                 Email
               </InputLabel>
               <Input
@@ -77,7 +83,13 @@ class SignUp extends Component {
               />
             </FormControl>
             <FormControl className={classes.formControl}>
-              <InputLabel className={classes.label} shrink={true}>
+              <InputLabel
+                FormLabelClasses={{
+                  root: classes.label,
+                  focused: classes.cssFocused
+                }}
+                shrink={true}
+              >
                 Password
               </InputLabel>
               <Input
@@ -150,7 +162,8 @@ const styles = {
     fontWeight: "bold",
     paddingBottom: 18,
     minWidth: 200,
-    textAlign: "center"
+    textAlign: "center",
+    textShadow: "1px 1px 1px rgba(0,0,0,0.4)"
   },
   signUpSelected: {
     width: 80,
@@ -206,9 +219,15 @@ const styles = {
     }
   },
   label: {
+    "&$cssFocused": {
+      color: "#FFF",
+      fontWeight: "bold",
+      textShadow: "1px 1px 1px rgba(0,0,0,0.4)"
+    },
     color: "#FFF",
-    fontWeight: "bold"
+    textShadow: "1px 1px 1px rgba(0,0,0,0.4)"
   },
+  cssFocused: {},
   rightArrow: {
     color: "white",
     position: "absolute",

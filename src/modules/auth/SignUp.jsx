@@ -72,7 +72,13 @@ class SignUp extends Component {
               Get Started
             </Typography>
             <FormControl className={classes.formControl}>
-              <InputLabel className={classes.label} shrink={true}>
+              <InputLabel
+                FormLabelClasses={{
+                  root: classes.label,
+                  focused: classes.cssFocused
+                }}
+                shrink={true}
+              >
                 Email
               </InputLabel>
               <Input
@@ -86,7 +92,13 @@ class SignUp extends Component {
               />
             </FormControl>
             <FormControl className={classes.formControl}>
-              <InputLabel className={classes.label} shrink={true}>
+              <InputLabel
+                FormLabelClasses={{
+                  root: classes.label,
+                  focused: classes.cssFocused
+                }}
+                shrink={true}
+              >
                 Password
               </InputLabel>
               <Input
@@ -100,7 +112,13 @@ class SignUp extends Component {
               />
             </FormControl>
             <FormControl className={classes.formControl}>
-              <InputLabel className={classes.label} shrink={true}>
+              <InputLabel
+                FormLabelClasses={{
+                  root: classes.label,
+                  focused: classes.cssFocused
+                }}
+                shrink={true}
+              >
                 Confirm Password
               </InputLabel>
               <Input
@@ -236,9 +254,13 @@ const styles = {
     bottom: 0
   },
   label: {
-    color: "#FFF",
-    fontWeight: "bold"
+    "&$cssFocused": {
+      color: "#FFF",
+      fontWeight: "bold"
+    },
+    color: "#FFF"
   },
+  cssFocused: {},
   googleButton: {
     width: 240,
     background: "#FFF",

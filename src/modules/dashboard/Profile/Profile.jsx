@@ -168,7 +168,13 @@ class Profile extends Component {
           Profile Information
         </Typography>
         <FormControl className={classes.formControl}>
-          <InputLabel className={classes.label} shrink={true}>
+          <InputLabel
+            FormLabelClasses={{
+              root: classes.label,
+              focused: classes.cssFocused
+            }}
+            shrink={true}
+          >
             Display Name
           </InputLabel>
           <Input
@@ -233,13 +239,18 @@ const styles = {
     width: "100%"
   },
   label: {
+    "&$cssFocused": {
+      color: "#303030",
+      fontWeight: 500
+    },
     color: "#303030"
   },
+  cssFocused: {},
   input: {
     backgroundColor: "transparent",
     borderRadius: 5,
     padding: 5,
-    color: "303030",
+    color: "#303030",
     border: "1px solid #6d6d6d",
     overflow: "hidden",
     cursor: "text",
