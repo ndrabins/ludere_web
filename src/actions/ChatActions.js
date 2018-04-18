@@ -118,6 +118,7 @@ export function selectChannel(channelID) {
 export function sendMessage(messageText) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
+    let { photoURL } = getState().profile.myUserProfile;
     let { selectedChannel } = getState().chat;
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -127,9 +128,12 @@ export function sendMessage(messageText) {
     let message = {
       sentBy: uid,
       dateCreated: timestamp,
+      dateUpdated: timestamp,
       messageText: messageText,
       sentByDisplayName: myName,
-      edited: "false"
+      edited: "false",
+      avatarURL: photoURL,
+      type: "message" // VS. type file later...
     };
 
     let messageRef = firebase

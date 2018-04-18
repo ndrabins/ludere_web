@@ -12,7 +12,15 @@ import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orien
 import FilePondPluginImageCrop from "filepond-plugin-image-crop";
 import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageTransform from "filepond-plugin-image-transform";
+import FilePondPluginFileEncode from "filepond-plugin-file-encode";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+import FilePondPluginValidateSize from "filepond-plugin-file-validate-size";
+
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+
+//filepond-plugin-file-encode
+//filepond-plugin-file-validate-size
+//filepond-plugin-file-validate-type
 
 import Input, { InputLabel } from "material-ui/Input";
 import { FormControl, FormHelperText } from "material-ui/Form";
@@ -27,7 +35,10 @@ registerPlugin(
   FilePondPluginImageExifOrientation,
   FilePondPluginImageCrop,
   FilePondPluginImageResize,
-  FilePondPluginImageTransform
+  FilePondPluginImageTransform,
+  FilePondPluginFileEncode,
+  FilePondPluginFileValidateType,
+  FilePondPluginValidateSize
 );
 
 class Profile extends Component {
@@ -131,14 +142,18 @@ class Profile extends Component {
           <FilePond
             instantUpload={false}
             // imageCropAspectRatio={"1:1"}
+            // allowFileTypeValidation={true}
+            // allowImageTransform={true}
+            // allowImageResize={true}
+            // imageResizeMode="cover"
             // imageResizeTargetWidth={200}
             // imageResizeTargetHeight={200}
-            maxFileSize={"5MB"}
+            maxFileSize="5MB"
             oninit={this.handleInit}
             labelIdle={"Drag & Drop your profile picture or Click to Browse"}
             imagePreviewHeight={400}
             labelTapToCancel=""
-            accept="image/png, image/jpeg, image/gif"
+            accept={["image/*"]}
             server={{
               process: this.handleProcessing,
               abortLoad: this.handleAbort
@@ -194,14 +209,15 @@ class Profile extends Component {
 
 const styles = {
   root: {
-    display: "flex",
     width: "100%",
     height: "100%",
     alignItems: "flex-start",
     paddingTop: 20,
     flexDirection: "column",
     paddingLeft: 100,
-    paddingRight: 100
+    paddingRight: 100,
+    paddingBottom: 20,
+    overflowY: "auto"
   },
   title: {
     fontSize: 32,

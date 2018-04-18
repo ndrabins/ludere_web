@@ -68,9 +68,12 @@ export function sendDirectMessage(messageText) {
     let message = {
       sentBy: uid,
       dateCreated: timestamp,
+      dateUpdated: timestamp,
       messageText: messageText,
       sentByDisplayName: myName,
-      edited: "false"
+      edited: "false",
+      avatarURL: photoURL,
+      type: "message" // VS. type file later...
     };
 
     let messageRef = firebase

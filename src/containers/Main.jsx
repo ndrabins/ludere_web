@@ -9,7 +9,6 @@ import WorkspaceFlow from "../modules/workspace/WorkspaceFlow";
 import NavBar from "../modules/dashboard/NavBar";
 import SideNav from "../modules/dashboard/SideNav";
 import Loading from "../common/LoadingLottie";
-import LocationBar from "common/LocationBar";
 
 import Dashboard from "./Dashboard";
 import Calendar from "./Calendar";
@@ -82,7 +81,6 @@ class Main extends Component {
             toggleDrawer={() => this.toggleDrawer()}
             drawerVisible={this.state.drawerVisible}
           />
-          <LocationBar location={location} />
           <Switch>
             <Route exact path="/community/dashboard" component={Dashboard} />
             <Route exact path="/community/calendar" component={Calendar} />

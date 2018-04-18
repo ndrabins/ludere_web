@@ -3129,6 +3129,18 @@ filename-regex@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/filename-regex/-/filename-regex-2.0.1.tgz#c1c4b9bee3e09725ddb106b75c1e301fe2f18b26"
 
+filepond-plugin-file-encode@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-file-encode/-/filepond-plugin-file-encode-1.0.4.tgz#954e979d12c1d9a8ea96c990b1f1b1fcc51cd7b4"
+
+filepond-plugin-file-validate-size@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-file-validate-size/-/filepond-plugin-file-validate-size-1.0.3.tgz#645edd3405687d72e2a68c1d28983fed1594d5e3"
+
+filepond-plugin-file-validate-type@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-file-validate-type/-/filepond-plugin-file-validate-type-1.0.3.tgz#7efb84fdedc86cb279a86a8712ed75ddaa1b5e74"
+
 filepond-plugin-image-crop@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/filepond-plugin-image-crop/-/filepond-plugin-image-crop-1.0.1.tgz#1c3132cc72a2e0b0d3eecb4da63283b1b9f3ca2d"
