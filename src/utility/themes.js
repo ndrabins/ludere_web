@@ -22,15 +22,6 @@ export const lightTheme = createMuiTheme({
       rounded: {
         borderRadius: 7
       }
-    },
-    MuiCheckbox: {
-      default: {
-        borderRadius: 15
-      },
-      checkedSecondary: {
-        color: "#29B8F6",
-        borderRadius: 15
-      }
     }
   }
 });

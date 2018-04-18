@@ -45,8 +45,8 @@ const styles = theme => ({
   },
   messageContent: {
     maxWidth: "90%",
-    marginTop: 10,
-    marginRight: 30,
+    marginRight: 10,
+    marginLeft: 5,
     display: "flex",
     flexDirection: "column"
   },
@@ -63,7 +63,7 @@ const styles = theme => ({
   },
   name: {
     fontSize: 16,
-    fontWeight: "bold"
+    fontWeight: "500"
   },
   date: {
     fontSize: 12,

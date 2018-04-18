@@ -133,6 +133,7 @@ class Profile extends Component {
             // imageCropAspectRatio={"1:1"}
             // imageResizeTargetWidth={200}
             // imageResizeTargetHeight={200}
+            maxFileSize={"5MB"}
             oninit={this.handleInit}
             labelIdle={"Drag & Drop your profile picture or Click to Browse"}
             imagePreviewHeight={400}

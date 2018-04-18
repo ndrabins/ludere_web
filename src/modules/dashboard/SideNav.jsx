@@ -27,12 +27,15 @@ class SideNav extends Component {
           <div className={classes.sideNavInner}>
             <div className={classes.sideNavBanner}>
               <img src={logoWhite} className={classes.logo} alt="Logo" />
+              {/*
+              TODO: FIX WIDTH ISSUE
+              Disabling this till I can figure out width issue.
               <IconButton
                 className={classes.closeButton}
                 onClick={this.props.toggleDrawer}
               >
                 <CloseIcon />
-              </IconButton>
+              </IconButton> */}
             </div>
             <SideNavModules />
           </div>

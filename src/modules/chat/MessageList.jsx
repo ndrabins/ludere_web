@@ -16,15 +16,20 @@ class MessageList extends Component {
 
     let messages = Map(this.props.messages, (message, key) => {
       let diff = moment(message.dateCreated).diff(moment(), "minutes");
-      let timestamp = moment().add(diff, "minutes").calendar();
+      let timestamp = moment()
+        .add(diff, "minutes")
+        .calendar();
 
       //check to see if 3 minutes have passed to change render
-      if (previousTimeStamp !== null){
-        let recentDiff = moment(message.dateCreated).diff(previousTimeStamp, 'seconds');
-        if(recentDiff < 180){
+      if (previousTimeStamp !== null) {
+        let recentDiff = moment(message.dateCreated).diff(
+          previousTimeStamp,
+          "seconds"
+        );
+        if (recentDiff < 180) {
           enoughTimeHasPassed = true;
-        }else{
-          enoughTimeHasPassed= false;
+        } else {
+          enoughTimeHasPassed = false;
         }
       }
 
@@ -42,11 +47,10 @@ class MessageList extends Component {
       //   );
       // }
 
-
       //normal message with avatar
       return (
         <div style={styles.messageContainer} key={key}>
-          <Avatar style={{ margin:"10px 10px 0px 10px" }}>
+          <Avatar style={{ margin: "10px 10px 0px 10px" }}>
             <FolderIcon />
           </Avatar>
           <div style={styles.messageContent}>
@@ -85,7 +89,7 @@ const styles = {
     marginLeft: 10,
     marginRight: 10,
     flexDirection: "row",
-    display: "flex",
+    display: "flex"
   },
   messageContent: {
     maxWidth: "90%",
@@ -94,7 +98,7 @@ const styles = {
     display: "flex",
     flexDirection: "column"
   },
-  messageBlockContent:{
+  messageBlockContent: {
     width: "90%",
     marginLeft: 60,
     display: "flex",

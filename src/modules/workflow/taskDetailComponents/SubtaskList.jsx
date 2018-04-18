@@ -40,6 +40,10 @@ class SubtaskList extends Component {
           >
             <div className={classes.subtaskContent}>
               <Checkbox
+                classes={{
+                  root: classes.root,
+                  checked: classes.checked
+                }}
                 checked={subtask.completed}
                 tabIndex={-1}
                 disableRipple={false}
@@ -103,7 +107,13 @@ const styles = theme => ({
   },
   closeIcon: {
     color: "#6d6d6d"
-  }
+  },
+  root: {
+    "&$checked": {
+      color: "#36B6F5"
+    }
+  },
+  checked: {}
 });
 
 export default withStyles(styles)(SubtaskList);
