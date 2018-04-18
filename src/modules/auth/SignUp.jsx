@@ -12,6 +12,7 @@ import IconButton from "material-ui/IconButton";
 import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
 import Button from "material-ui/Button";
 import GoogleIcon from "../../static/google.svg";
+import TwitterIcon from "react-icons/lib/fa/twitter";
 
 class SignUp extends Component {
   constructor(props) {
@@ -131,7 +132,7 @@ class SignUp extends Component {
                 disableUnderline
               />
             </FormControl>
-            <div>
+            <div className={classes.buttonContainer}>
               <Button
                 variant="raised"
                 onClick={() => this.props.actions.authWithProvider("Google")}
@@ -144,12 +145,14 @@ class SignUp extends Component {
                 />
                 SIGN IN WITH GOOGLE
               </Button>
-              {/* <Button
+              <Button
+                className={classes.twitterButton}
                 variant="raised"
                 onClick={() => this.props.actions.authWithProvider("Twitter")}
               >
+                <TwitterIcon className={classes.icon} />
                 SIGN IN WITH TWITTER
-              </Button> */}
+              </Button>
             </div>
             <IconButton
               className={classes.rightArrow}
@@ -262,14 +265,31 @@ const styles = {
   },
   cssFocused: {},
   googleButton: {
+    marginTop: 30,
     width: 240,
     background: "#FFF",
     color: "#6A6A6A"
+  },
+  twitterButton: {
+    marginTop: 10,
+    width: 240,
+    background: "#55acee",
+    color: "#FFF",
+    "&:hover": {
+      background: "#3197E5"
+    }
   },
   icon: {
     height: 24,
     width: 24,
     marginRight: 10
+  },
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    flexGrow: 1,
+    marginBottom: 40
   }
 };
 
