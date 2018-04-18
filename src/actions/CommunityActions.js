@@ -59,6 +59,7 @@ export function sendDirectMessage(messageText) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
     let { selectedConversation } = getState().community;
+    let { photoURL } = getState().profile.myUserProfile;
 
     //refactor this here AND in chat actions
     let myName = getState().workspace.workspaceUsers[uid].displayName;

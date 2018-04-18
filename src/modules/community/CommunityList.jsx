@@ -1,15 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
 import Map from "lodash/map";
 
-import Table, { TableBody, TableCell, TableHead, TableRow, } from 'material-ui/Table';
-import Checkbox from 'material-ui/Checkbox';
+import Table, {
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow
+} from "material-ui/Table";
+import Checkbox from "material-ui/Checkbox";
 
-import Avatar from 'material-ui/Avatar';
-import PersonOutlineIcon from 'material-ui-icons/PersonOutline';
+import Avatar from "material-ui/Avatar";
+import PersonOutlineIcon from "material-ui-icons/PersonOutline";
 
 class CommunityList extends Component {
   handleUserSelect(uid, user) {
@@ -25,11 +30,14 @@ class CommunityList extends Component {
       //   return; // don't render my own name in the list of users
       // }
       return (
-        <TableRow key={uid} hover style={{ cursor: "pointer" }} onClick={() => this.handleUserSelect(uid, user)} >
+        <TableRow
+          key={uid}
+          hover
+          style={{ cursor: "pointer" }}
+          onClick={() => this.handleUserSelect(uid, user)}
+        >
           <TableCell>
-            <Avatar>
-              <PersonOutlineIcon />
-            </Avatar>
+            <Avatar src={user.photoURL} />
           </TableCell>
           <TableCell> {user.displayName} </TableCell>
           <TableCell numeric>true</TableCell>
@@ -45,15 +53,13 @@ class CommunityList extends Component {
       <div style={styles.container}>
         <Table>
           <TableHead>
-            <TableRow >
+            <TableRow>
               <TableCell>Avatar</TableCell>
               <TableCell>Name</TableCell>
               <TableCell numeric>Status</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {this.renderUsers()}
-          </TableBody>
+          <TableBody>{this.renderUsers()}</TableBody>
         </Table>
       </div>
     );
@@ -66,13 +72,13 @@ const styles = {
     display: "flex",
     flex: 1
   }
-}
+};
 
 function mapStateToProps(state) {
   return {
     workspaceUsers: state.workspace.workspaceUsers,
     loading: state.workspace.loadingUsers,
-    myID: state.auth.user.uid,
+    myID: state.auth.user.uid
   };
 }
 

@@ -46,9 +46,7 @@ class TeamMembers extends Component {
           {Map(workspaceMembers, (member, userID) => {
             return (
               <ListItem key={userID} button className={classes.listItem}>
-                <Avatar className={classes.avatar}>
-                  <PersonIcon />
-                </Avatar>
+                <Avatar src={member.photoURL} className={classes.avatar} />
                 <ListItemText primary={`${member.displayName}`} />
                 <ListItemSecondaryAction>
                   {!Has(teamMembers, userID) && (

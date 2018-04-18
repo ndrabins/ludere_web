@@ -141,10 +141,7 @@ class Profile extends Component {
         <div className={classes.avatar}>
           <FilePond
             instantUpload={false}
-            // imageCropAspectRatio={"1:1"}
-            // allowFileTypeValidation={true}
-            // allowImageTransform={true}
-            // allowImageResize={true}
+            // imageCropAspectRatio="1:1"
             // imageResizeMode="cover"
             // imageResizeTargetWidth={200}
             // imageResizeTargetHeight={200}

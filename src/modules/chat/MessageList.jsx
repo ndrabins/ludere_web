@@ -50,9 +50,10 @@ class MessageList extends Component {
       //normal message with avatar
       return (
         <div style={styles.messageContainer} key={key}>
-          <Avatar style={{ margin: "10px 10px 0px 10px" }}>
-            <FolderIcon />
-          </Avatar>
+          <Avatar
+            src={message.avatarURL}
+            style={{ margin: "10px 10px 0px 10px" }}
+          />
           <div style={styles.messageContent}>
             <div style={styles.messageHeader}>
               <div style={styles.name}> {message.sentByDisplayName} </div>
@@ -117,7 +118,7 @@ const styles = {
   },
   name: {
     fontSize: 16,
-    fontWeight: "bold"
+    fontWeight: 500
   },
   date: {
     fontSize: 12,
