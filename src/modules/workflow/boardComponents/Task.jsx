@@ -6,6 +6,7 @@ import Typography from "material-ui/Typography";
 import { CircularProgress } from "material-ui/Progress";
 import Filter from "lodash/filter";
 import CommentIcon from "material-ui-icons/ModeComment";
+import Circle from "react-circle";
 
 class Task extends Component {
   state = {
@@ -54,10 +55,17 @@ class Task extends Component {
         </Typography>
         {task.subtasks.length > 0 && (
           <div style={styles.extraInfoContainer}>
-            <CircularProgress
-              style={styles.progress}
-              variant="static"
-              value={percent}
+            <Circle
+              animate={true} // Boolean: Animated/Static progress
+              size={30} // Number: Defines the size of the circle.
+              lineWidth={30} // Number: Defines the thickness of the circle's stroke.
+              progress={percent} // Number: Update to change the progress and percentage.
+              progressColor="#20BDD3" // String: Color of "progress" portion of circle.
+              bgColor="whitesmoke" // String: Color of "empty" portion of circle.
+              textColor="#303030" // String: Color of percentage text color.
+              roundedStroke={true} // Boolean: Rounded/Flat line ends
+              showPercentage={false} // Boolean: Show/hide percentage.
+              showPercentageSymbol={false} // Boolean: Show/hide only the "%" symbol.
             />
             <Typography variant="caption" style={styles.subtasksCounter}>
               {Filter(task.subtasks, { completed: true }).length}/

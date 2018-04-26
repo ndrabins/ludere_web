@@ -186,7 +186,7 @@ class Profile extends Component {
             disableUnderline
           />
           <FormHelperText>
-            What people in your workspace call you?
+            What do people in your workspace call you?
           </FormHelperText>
         </FormControl>
         <Button
