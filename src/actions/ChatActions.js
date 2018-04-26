@@ -9,7 +9,8 @@ import {
   FETCH_MESSAGES_SUCCESS,
   SEND_MESSAGE,
   UNSUBSCRIBE_CHANNELS,
-  UNSUBSCRIBE_MESSAGES
+  UNSUBSCRIBE_MESSAGES,
+  FETCH_MORE_MESSAGES
 } from "./types";
 
 import firebase from "firebase";
@@ -100,14 +101,47 @@ export function selectChannel(channelID) {
     dispatch({ type: FETCH_MESSAGES });
 
     var messageListener = messageRef
-      .orderBy("dateCreated")
+      .orderBy("dateCreated", "desc")
+      .limit(10)
       .onSnapshot(function(querySnapshot) {
         var messages = {};
         querySnapshot.forEach(function(doc) {
           messages[doc.id] = doc.data();
         });
+
+        // var lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+        // console.log("last", lastVisible);
+
         dispatch({
           type: FETCH_MESSAGES_SUCCESS,
+          messages: messages,
+          messagesListener: messageListener
+        });
+      });
+  };
+}
+
+export function getMoreMessages(numberOfMessages) {
+  return (dispatch, getState) => {
+    const selectedChannelID = getState().chat.selectedChannel;
+    let oldMessageListener = getState().chat.messagesListener;
+    oldMessageListener();
+
+    let messageRef = firebase
+      .firestore()
+      .collection(`chat/${selectedChannelID}/messages`);
+
+    var messageListener = messageRef
+      .orderBy("dateCreated", "desc")
+      .limit(numberOfMessages)
+      .onSnapshot(function(querySnapshot) {
+        var messages = {};
+        querySnapshot.forEach(function(doc) {
+          messages[doc.id] = doc.data();
+        });
+
+        dispatch({
+          type: FETCH_MORE_MESSAGES,
           messages: messages,
           messagesListener: messageListener
         });

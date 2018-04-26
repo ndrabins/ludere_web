@@ -4,37 +4,44 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
 import moment from "moment";
-import Map from "lodash/map";
+import ForInRight from "lodash/forInRight";
 
 import Avatar from "material-ui/Avatar";
+import Button from "material-ui/Button";
 import FolderIcon from "material-ui-icons/Folder";
 class MessageList extends Component {
-  renderMessages() {
-    var lastUser = null;
-    var previousTimeStamp = null;
-    var enoughTimeHasPassed = false;
+  state = {
+    numberOfMessages: 25
+  };
 
-    let messages = Map(this.props.messages, (message, key) => {
+  renderMessages() {
+    let lastUser = null;
+    let previousTimeStamp = null;
+    let enoughTimeHasPassed = false;
+
+    let messages = [];
+
+    ForInRight(this.props.messages, (message, key) => {
       let diff = moment(message.dateCreated).diff(moment(), "minutes");
       let timestamp = moment()
         .add(diff, "minutes")
         .calendar();
 
       //check to see if 3 minutes have passed to change render
-      if (previousTimeStamp !== null) {
-        let recentDiff = moment(message.dateCreated).diff(
-          previousTimeStamp,
-          "seconds"
-        );
-        if (recentDiff < 180) {
-          enoughTimeHasPassed = true;
-        } else {
-          enoughTimeHasPassed = false;
-        }
-      }
+      // if (previousTimeStamp !== null) {
+      //   let recentDiff = moment(message.dateCreated).diff(
+      //     previousTimeStamp,
+      //     "seconds"
+      //   );
+      //   if (recentDiff < 180) {
+      //     enoughTimeHasPassed = true;
+      //   } else {
+      //     enoughTimeHasPassed = false;
+      //   }
+      // }
 
-      lastUser = message.sentBy;
-      previousTimeStamp = message.dateCreated;
+      // lastUser = message.sentBy;
+      // previousTimeStamp = message.dateCreated;
 
       //render only text if last message is by the same user AND within 3 minutes
       // if(lastUser === message.sentBy && enoughTimeHasPassed){
@@ -48,7 +55,7 @@ class MessageList extends Component {
       // }
 
       //normal message with avatar
-      return (
+      messages.push(
         <div style={styles.messageContainer} key={key}>
           <Avatar
             src={message.avatarURL}
@@ -67,9 +74,17 @@ class MessageList extends Component {
     return messages;
   }
 
+  handleFetchMore = () => {
+    const { numberOfMessages } = this.state;
+    this.props.actions.getMoreMessages(numberOfMessages);
+
+    this.setState({ numberOfMessages: numberOfMessages + 25 });
+  };
+
   render() {
     return (
       <div style={styles.container}>
+        <Button onClick={this.handleFetchMore}>Fetch more messages</Button>
         <div style={styles.messages}>{this.renderMessages()}</div>
       </div>
     );

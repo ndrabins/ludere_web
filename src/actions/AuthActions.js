@@ -92,7 +92,7 @@ function initializeUser(user) {
     privateData: privateData,
     workspaces: {},
     displayName: user.email, //till we get the user to set their own displayname? Probs should be part of the sign up?
-    photoURL: user.photoURL,
+    photoURL: user.photoURL || "https://plus.google.com/107300655302181640274",
     lastLoginAt: timestamp,
     conversations: {} //conversationID:boolean , if a converstion is true it is an active one, if not it is inactive
   };

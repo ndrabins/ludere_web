@@ -11,7 +11,8 @@ import {
   FETCH_MESSAGES_ERROR,
   SEND_MESSAGE,
   UNSUBSCRIBE_CHANNELS,
-  UNSUBSCRIBE_MESSAGES
+  UNSUBSCRIBE_MESSAGES,
+  FETCH_MORE_MESSAGES
 } from "../actions/types";
 
 const initialState = {
@@ -48,6 +49,12 @@ export default function team(state = initialState, action) {
     case FETCH_MESSAGES:
       return state;
     case FETCH_MESSAGES_SUCCESS:
+      return {
+        ...state,
+        messages: action.messages,
+        messagesListener: action.messagesListener
+      };
+    case FETCH_MORE_MESSAGES:
       return {
         ...state,
         messages: action.messages,
