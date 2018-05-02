@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
+import Loading from "../../common/Loading";
 
 import moment from "moment";
 import ForInRight from "lodash/forInRight";
@@ -9,10 +10,55 @@ import ForInRight from "lodash/forInRight";
 import Avatar from "material-ui/Avatar";
 import Button from "material-ui/Button";
 import FolderIcon from "material-ui-icons/Folder";
+import { Typography } from "material-ui";
 class MessageList extends Component {
-  state = {
-    numberOfMessages: 25
+  constructor(props) {
+    super(props);
+    this.messageList = React.createRef();
+    this.messagesEnd = React.createRef();
+
+    this.state = {
+      numberOfMessages: 25,
+      initialLoad: true
+    };
+  }
+
+  componentDidMount() {
+    this.messageList.current.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentDidUpdate(prevProps) {
+    let containerHeight = this.messageList.current.scrollHeight;
+    let innerContainerHeight = this.messageList.current.clientHeight;
+    let scrollbarLocation = this.messageList.current.scrolltop;
+
+    let scrollPositionBottom =
+      this.messageList.current.scrollHeight -
+      (this.messageList.current.scrollTop +
+        this.messageList.current.clientHeight);
+
+    if (scrollPositionBottom < 200) {
+      this.scrollToBottom();
+    }
+
+    if (this.messageList.current.scrollTop === 0) {
+      return;
+    }
+  }
+
+  scrollToBottom = () => {
+    this.messagesEnd.current.scrollIntoView({ behavior: "smooth" });
   };
+
+  handleScroll = () => {
+    if (this.messageList.current.scrollTop === 0) {
+      this.handleFetchMore();
+    }
+  };
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
 
   renderMessages() {
     let lastUser = null;
@@ -82,10 +128,22 @@ class MessageList extends Component {
   };
 
   render() {
+    const { loadingMoreMessages } = this.props;
+
     return (
       <div style={styles.container}>
-        <Button onClick={this.handleFetchMore}>Fetch more messages</Button>
-        <div style={styles.messages}>{this.renderMessages()}</div>
+        <div style={styles.messages} ref={this.messageList}>
+          {loadingMoreMessages && (
+            <div style={styles.loadingContainer}>
+              <Loading />
+            </div>
+          )}
+          {this.renderMessages()}
+          <div
+            style={{ float: "left", clear: "both" }}
+            ref={this.messagesEnd}
+          />
+        </div>
       </div>
     );
   }
@@ -141,13 +199,17 @@ const styles = {
     display: "flex",
     marginLeft: 3,
     color: "#b9bbbe"
+  },
+  loadingContainer: {
+    height: 100
   }
 };
 
 function mapStateToProps(state) {
   return {
     selectedChannel: state.chat.selectedChannel,
-    messages: state.chat.messages
+    messages: state.chat.messages,
+    loadingMoreMessages: state.chat.loadingMoreMessages
   };
 }
 

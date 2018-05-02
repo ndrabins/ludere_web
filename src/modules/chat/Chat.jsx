@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
+import Loading from "../../common/Loading";
 
 import MessageEntry from "./MessageEntry";
 import MessageList from "./MessageList";
@@ -15,6 +16,12 @@ class Chat extends Component {
   }
 
   render() {
+    const { loadingMessages } = this.props;
+
+    if (loadingMessages) {
+      return <Loading />;
+    }
+
     return (
       <div style={styles.container}>
         <MessageList />
@@ -34,7 +41,8 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-    selectedChannel: state.chat.selectedChannel
+    selectedChannel: state.chat.selectedChannel,
+    loadingMessages: state.chat.loadingMessages
   };
 }
 

@@ -31,7 +31,7 @@ class Loading extends Component {
 
 const styles = {
   background: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#FFFFFFF",
     display: "flex",
     height: "100%",
     justifyContent: "center",

@@ -12,7 +12,8 @@ import {
   SEND_MESSAGE,
   UNSUBSCRIBE_CHANNELS,
   UNSUBSCRIBE_MESSAGES,
-  FETCH_MORE_MESSAGES
+  FETCH_MORE_MESSAGES,
+  FETCH_MORE_MESSAGES_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -20,7 +21,9 @@ const initialState = {
   messages: {},
   selectedChannel: null,
   messagesListener: null,
-  channelListener: null
+  channelListener: null,
+  loadingMessages: false,
+  loadingMoreMessages: false
 };
 
 export default function team(state = initialState, action) {
@@ -47,18 +50,22 @@ export default function team(state = initialState, action) {
     case CREATE_CHANNEL_ERROR:
       return state;
     case FETCH_MESSAGES:
-      return state;
+      return { ...state, loadingMessages: true };
     case FETCH_MESSAGES_SUCCESS:
       return {
         ...state,
         messages: action.messages,
-        messagesListener: action.messagesListener
+        messagesListener: action.messagesListener,
+        loadingMessages: false
       };
     case FETCH_MORE_MESSAGES:
+      return { ...state, loadingMoreMessages: true };
+    case FETCH_MORE_MESSAGES_SUCCESS:
       return {
         ...state,
         messages: action.messages,
-        messagesListener: action.messagesListener
+        messagesListener: action.messagesListener,
+        loadingMoreMessages: false
       };
     case FETCH_MESSAGES_ERROR:
       return state;

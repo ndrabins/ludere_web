@@ -10,7 +10,8 @@ import {
   SEND_MESSAGE,
   UNSUBSCRIBE_CHANNELS,
   UNSUBSCRIBE_MESSAGES,
-  FETCH_MORE_MESSAGES
+  FETCH_MORE_MESSAGES,
+  FETCH_MORE_MESSAGES_SUCCESS
 } from "./types";
 
 import firebase from "firebase";
@@ -102,7 +103,7 @@ export function selectChannel(channelID) {
 
     var messageListener = messageRef
       .orderBy("dateCreated", "desc")
-      .limit(10)
+      .limit(25)
       .onSnapshot(function(querySnapshot) {
         var messages = {};
         querySnapshot.forEach(function(doc) {
@@ -127,6 +128,8 @@ export function getMoreMessages(numberOfMessages) {
     let oldMessageListener = getState().chat.messagesListener;
     oldMessageListener();
 
+    dispatch({ type: FETCH_MORE_MESSAGES });
+
     let messageRef = firebase
       .firestore()
       .collection(`chat/${selectedChannelID}/messages`);
@@ -141,7 +144,7 @@ export function getMoreMessages(numberOfMessages) {
         });
 
         dispatch({
-          type: FETCH_MORE_MESSAGES,
+          type: FETCH_MORE_MESSAGES_SUCCESS,
           messages: messages,
           messagesListener: messageListener
         });
