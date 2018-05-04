@@ -1,16 +1,12 @@
+import ForInRight from "lodash/forInRight";
+import Avatar from "material-ui/Avatar";
+import moment from "moment";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import Loading from "../../common/Loading";
 
-import moment from "moment";
-import ForInRight from "lodash/forInRight";
-
-import Avatar from "material-ui/Avatar";
-import Button from "material-ui/Button";
-import FolderIcon from "material-ui-icons/Folder";
-import { Typography } from "material-ui";
 class MessageList extends Component {
   constructor(props) {
     super(props);
@@ -19,29 +15,40 @@ class MessageList extends Component {
 
     this.state = {
       numberOfMessages: 25,
-      initialLoad: true
+      oldScrollPosition: 0
     };
   }
 
   componentDidMount() {
     this.messageList.current.addEventListener("scroll", this.handleScroll);
+    this.messageList.current.scrollTop = 10000;
   }
 
   componentDidUpdate(prevProps) {
+    const { oldScrollPosition } = this.state;
+
     let containerHeight = this.messageList.current.scrollHeight;
     let innerContainerHeight = this.messageList.current.clientHeight;
-    let scrollbarLocation = this.messageList.current.scrolltop;
+    let scrollbarLocation = this.messageList.current.scrollTop;
 
     let scrollPositionBottom =
-      this.messageList.current.scrollHeight -
-      (this.messageList.current.scrollTop +
-        this.messageList.current.clientHeight);
+      containerHeight - (scrollbarLocation + innerContainerHeight);
 
     if (scrollPositionBottom < 200) {
       this.scrollToBottom();
+      return;
     }
 
-    if (this.messageList.current.scrollTop === 0) {
+    if (
+      Object.keys(prevProps.messages).length === 0 &&
+      Object.keys(this.props.messages).length > 0
+    ) {
+      this.messageList.current.scrollTop = 10000;
+      return;
+    }
+
+    if (scrollbarLocation === 0) {
+      this.messageList.current.scrollTop = containerHeight - oldScrollPosition;
       return;
     }
   }
@@ -51,7 +58,13 @@ class MessageList extends Component {
   };
 
   handleScroll = () => {
+    let containerHeight = this.messageList.current.scrollHeight;
+
     if (this.messageList.current.scrollTop === 0) {
+      //on fetch more, save old scroll position
+      this.setState({
+        oldScrollPosition: containerHeight
+      });
       this.handleFetchMore();
     }
   };
