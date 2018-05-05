@@ -12,12 +12,15 @@ class TeamCard extends Component {
   render() {
     const { classes, title, background } = this.props;
     return (
-      <Paper className={classes.paperContainer} elevation={8}>
-        <div style={{ ...inlineStyles.heading, background: background }}>
+      <Paper className={classes.paperContainer} elevation={4}>
+        <Paper
+          style={{ ...inlineStyles.heading, background: background }}
+          elevation={2}
+        >
           <Typography className={classes.title} variant="headline">
             {title}
           </Typography>
-        </div>
+        </Paper>
         <div className={classes.root}>{this.props.children}</div>
       </Paper>
     );
@@ -26,11 +29,14 @@ class TeamCard extends Component {
 
 const inlineStyles = {
   heading: {
-    minHeight: 40,
-    width: "100%",
+    minHeight: 50,
     display: "flex",
-    borderRadius: "7px 7px 0px 0px",
-    alignItems: "center"
+    alignItems: "center",
+    width: "calc(100% - 20px)",
+    margin: "-10px 0px 10px 10px",
+    borderRadius: 7,
+    padding: "5px 5px"
+    // boxShadow: "0 4px 20px 0px rgba(0, 0, 0, 0.12)"
   }
 };
 
