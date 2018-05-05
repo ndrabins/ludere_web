@@ -6,7 +6,7 @@ import * as Actions from "../../actions";
 import colors from "../../utility/constants/colors";
 import InviteButton from "./InviteButton";
 
-import MenuIcon from "material-ui-icons/Menu";
+import MenuIcon from "@material-ui/icons/Menu";
 import Avatar from "material-ui/Avatar";
 import IconButton from "material-ui/IconButton";
 import Menu, { MenuItem } from "material-ui/Menu";

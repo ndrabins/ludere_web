@@ -9,7 +9,7 @@ import Input, { InputLabel } from "material-ui/Input";
 import { FormControl } from "material-ui/Form";
 import Fade from "material-ui/transitions/Fade";
 import IconButton from "material-ui/IconButton";
-import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
+import ArrowIcon from "@material-ui/icons/KeyboardArrowRight";
 import Button from "material-ui/Button";
 import GoogleIcon from "../../static/google.svg";
 import TwitterIcon from "react-icons/lib/fa/twitter";

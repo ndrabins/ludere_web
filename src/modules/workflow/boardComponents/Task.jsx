@@ -5,7 +5,7 @@ import * as Actions from "../../../actions";
 import Typography from "material-ui/Typography";
 import { CircularProgress } from "material-ui/Progress";
 import Filter from "lodash/filter";
-import CommentIcon from "material-ui-icons/ModeComment";
+import CommentIcon from "@material-ui/icons/ModeComment";
 import Circle from "react-circle";
 
 class Task extends Component {

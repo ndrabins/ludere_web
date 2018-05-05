@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
 import { withStyles } from "material-ui/styles";
 import IconButton from "material-ui/IconButton";
-import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
+import ArrowIcon from "@material-ui/icons/KeyboardArrowRight";
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
 

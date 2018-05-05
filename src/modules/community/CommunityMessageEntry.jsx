@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
 import TextField from "material-ui/TextField";
-import AddIcon from "material-ui-icons/Add";
+import AddIcon from "@material-ui/icons/Add";
 
 class CommunityMessageEntry extends Component {
   state = {

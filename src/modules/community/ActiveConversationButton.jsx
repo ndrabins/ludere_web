@@ -4,9 +4,9 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
 import IconButton from "material-ui/IconButton";
-import CloseIcon from "material-ui-icons/Close";
+import CloseIcon from "@material-ui/icons/Close";
 import Avatar from "material-ui/Avatar";
-import PersonOutlineIcon from "material-ui-icons/PersonOutline";
+import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import Typography from "material-ui/Typography";
 
 import { Link } from "react-router-dom";

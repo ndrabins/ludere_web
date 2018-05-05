@@ -8,7 +8,7 @@ import * as Actions from "../../actions";
 import Tabs, { Tab } from "material-ui/Tabs";
 import Button from "material-ui/Button";
 import IconButton from "material-ui/IconButton";
-import ArrowBack from "material-ui-icons/ArrowBack";
+import ArrowBack from "@material-ui/icons/ArrowBack";
 
 import { withStyles } from "material-ui/styles";
 

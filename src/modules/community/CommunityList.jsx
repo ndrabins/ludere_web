@@ -14,7 +14,7 @@ import Table, {
 import Checkbox from "material-ui/Checkbox";
 
 import Avatar from "material-ui/Avatar";
-import PersonOutlineIcon from "material-ui-icons/PersonOutline";
+import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 
 class CommunityList extends Component {
   handleUserSelect(uid, user) {

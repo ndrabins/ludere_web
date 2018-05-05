@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
 import IconButton from "material-ui/IconButton";
-import AddIcon from "material-ui-icons/Add";
+import AddIcon from "@material-ui/icons/Add";
 
 class CommunityAddButton extends Component {
   state = {

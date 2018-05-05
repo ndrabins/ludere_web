@@ -5,7 +5,7 @@ import * as Actions from "../../actions";
 import { withRouter } from "react-router";
 
 import IconButton from "material-ui/IconButton";
-import MoreVertIcon from "material-ui-icons/MoreVert";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Avatar from "material-ui/Avatar";
 
 import { Link } from "react-router-dom";

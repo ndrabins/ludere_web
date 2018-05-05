@@ -10,7 +10,7 @@ import { withRouter } from "react-router";
 import Map from "lodash/map";
 
 import Button from "material-ui/Button";
-import PeopleIcon from "material-ui-icons/PeopleOutline";
+import PeopleIcon from "@material-ui/icons/PeopleOutline";
 import Tooltip from "material-ui/Tooltip";
 
 import AddTeamButton from "./AddTeamButton";

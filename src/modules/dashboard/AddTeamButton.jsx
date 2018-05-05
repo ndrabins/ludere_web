@@ -6,7 +6,7 @@ import * as Actions from "../../actions";
 import { withRouter } from "react-router";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
-import AddIcon from "material-ui-icons/Add";
+import AddIcon from "@material-ui/icons/Add";
 import Dialog, {
   DialogActions,
   DialogContent,

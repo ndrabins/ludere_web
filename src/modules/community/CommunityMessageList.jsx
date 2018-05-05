@@ -7,7 +7,7 @@ import moment from "moment";
 import Map from "lodash/map";
 
 import Avatar from "material-ui/Avatar";
-import FolderIcon from "material-ui-icons/Folder";
+import FolderIcon from "@material-ui/icons/Folder";
 class CommunityMessageList extends Component {
   renderMessages() {
     var lastUser = null;

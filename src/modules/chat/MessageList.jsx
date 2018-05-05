@@ -43,7 +43,7 @@ class MessageList extends Component {
       Object.keys(prevProps.messages).length === 0 &&
       Object.keys(this.props.messages).length > 0
     ) {
-      this.messageList.current.scrollTop = 10000;
+      this.messageList.current.scrollTop = 10000; //this is here to set the scroll bar to the bottom of page on load
       return;
     }
 

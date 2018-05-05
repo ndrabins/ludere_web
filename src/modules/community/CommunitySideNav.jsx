@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import PeopleIcon from "material-ui-icons/PeopleOutline";
+import PeopleIcon from "@material-ui/icons/PeopleOutline";
 
 import CommunityAddButton from "./CommunityAddButton";
 import ActiveConversationList from "./ActiveConversationList";

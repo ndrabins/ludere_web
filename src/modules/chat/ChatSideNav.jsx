@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Message from 'material-ui-icons/Message';
+import Message from '@material-ui/icons/Message';
 
 import CreateChannelButton from './CreateChannelButton';
 import ChannelList from './ChannelList';

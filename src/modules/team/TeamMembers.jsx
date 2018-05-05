@@ -10,8 +10,8 @@ import List, {
 } from "material-ui/List";
 import Checkbox from "material-ui/Checkbox";
 import Avatar from "material-ui/Avatar";
-import Button from "material-ui/Button";
-import PersonIcon from "material-ui-icons/AccountCircle";
+import IconButton from "material-ui/IconButton";
+import AddIcon from "@material-ui/icons/Add";
 import Map from "lodash/map";
 import Has from "lodash/has";
 
@@ -50,15 +50,18 @@ class TeamMembers extends Component {
                 <ListItemText primary={`${member.displayName}`} />
                 <ListItemSecondaryAction>
                   {!Has(teamMembers, userID) && (
-                    <Button
-                      variant="raised"
-                      size="medium"
-                      color="primary"
-                      onClick={() => this.handleAddClick(userID)}
-                      className={classes.button}
-                    >
-                      Add To Team
-                    </Button>
+                    // <Button
+                    //   variant="raised"
+                    //   size="medium"
+                    //   color="primary"
+                    //   onClick={() => this.handleAddClick(userID)}
+                    //   className={classes.button}
+                    // >
+                    //   Add To Team
+                    // </Button>
+                    <IconButton className={classes.button} aria-label="Delete">
+                      <AddIcon />
+                    </IconButton>
                   )}
                 </ListItemSecondaryAction>
               </ListItem>

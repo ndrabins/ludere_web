@@ -8,7 +8,7 @@ import Typography from "material-ui/Typography";
 import Input, { InputLabel } from "material-ui/Input";
 import { FormControl } from "material-ui/Form";
 import IconButton from "material-ui/IconButton";
-import ArrowIcon from "material-ui-icons/KeyboardArrowRight";
+import ArrowIcon from "@material-ui/icons/KeyboardArrowRight";
 import Fade from "material-ui/transitions/Fade";
 import Button from "material-ui/Button";
 

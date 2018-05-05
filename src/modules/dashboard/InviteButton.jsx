@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Button from "material-ui/Button";
 import IconButton from "material-ui/IconButton";
-import PersonAdd from "material-ui-icons/PersonAdd";
+import PersonAdd from "@material-ui/icons/PersonAdd";
 import { withStyles } from "material-ui/styles";
 import Dialog, { DialogTitle, DialogContent } from "material-ui/Dialog";
 import TextField from "material-ui/TextField";
