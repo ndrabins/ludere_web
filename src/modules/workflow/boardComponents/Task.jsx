@@ -27,7 +27,7 @@ class Task extends Component {
   };
 
   render() {
-    const { task, isDragging, provided, taskID } = this.props;
+    const { task, taskID } = this.props;
     const { subtaskPercentageDone } = this.state;
 
     if (task === undefined) {
@@ -38,10 +38,7 @@ class Task extends Component {
 
     return (
       <div
-        ref={provided.innerRef}
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        style={{ ...styles.container, ...provided.draggableProps.style }}
+        style={styles.container}
         onClick={() => this.props.actions.toggleTaskDetail(taskID)}
       >
         <Typography

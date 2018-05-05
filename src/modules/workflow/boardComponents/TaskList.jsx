@@ -37,14 +37,17 @@ class TaskList extends Component {
                     {(dragProvided, dragSnapshot) => (
                       <div
                         ref={dragProvided.innerRef}
-                        style={{ marginBottom: 8 }}
+                        {...dragProvided.draggableProps}
+                        {...dragProvided.dragHandleProps}
+                        style={{
+                          ...styles.taskContainer,
+                          ...dragProvided.draggableProps.style
+                        }}
                       >
                         <Task
                           key={taskID}
                           task={taskData[taskID]}
                           taskID={taskID}
-                          isDragging={dragSnapshot.isDragging}
-                          provided={dragProvided}
                         />
                       </div>
                     )}
@@ -77,6 +80,9 @@ const styles = {
   },
   addButton: {
     backgroundColor: "white"
+  },
+  taskContainer: {
+    marginBottom: 8
   }
 };
 
