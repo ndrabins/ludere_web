@@ -50,7 +50,7 @@ class MessageEntry extends Component {
             multiple
             type="file"
           />
-          <label htmlFor="raised-button-file">
+          <label className={classes.htmlLabel} htmlFor="raised-button-file">
             <AddIcon />
           </label>
         </div>
@@ -87,12 +87,13 @@ const styles = theme => ({
   container: {
     display: "flex",
     marginBottom: 20,
-    paddingRight: 10
+    paddingRight: 10,
+    alignItems: "center"
   },
   fileInput: {
     color: "#767778",
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -107,7 +108,7 @@ const styles = theme => ({
   textRoot: {
     padding: 0,
     borderRadius: 4,
-    marginTop: 10
+    marginBottom: 20
   },
   textInput: {
     borderRadius: 4,
@@ -137,6 +138,11 @@ const styles = theme => ({
   },
   fileUploader: {
     display: "none"
+  },
+  htmlLabel: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 

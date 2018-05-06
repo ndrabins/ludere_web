@@ -179,6 +179,8 @@ const styles = theme => ({
   messageContainer: {
     marginLeft: 10,
     marginRight: 10,
+    paddingTop: 3,
+    paddingBottom: 3,
     flexDirection: "row",
     display: "flex",
     backgroundColor: "transparent",
