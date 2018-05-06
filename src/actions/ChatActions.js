@@ -152,7 +152,7 @@ export function getMoreMessages(numberOfMessages) {
   };
 }
 
-export function sendMessage(messageText) {
+export function sendMessage({ messageText, type = "message", fileURL = "" }) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
     let { photoURL } = getState().profile.myUserProfile;
@@ -170,7 +170,9 @@ export function sendMessage(messageText) {
       sentByDisplayName: myName,
       edited: "false",
       avatarURL: photoURL,
-      type: "message" // VS. type file later...
+      emojis: [],
+      fileURL: fileURL,
+      type: type // VS. type file later...
     };
 
     let messageRef = firebase

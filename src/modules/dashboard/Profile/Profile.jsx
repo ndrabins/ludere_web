@@ -200,7 +200,7 @@ class Profile extends Component {
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
           open={openSnackbar}
           onClose={this.handleClose}
-          SnackbarContentProps={{
+          ContentProps={{
             "aria-describedby": "message-id"
           }}
           message={<span id="message-id">Profile Updated</span>}

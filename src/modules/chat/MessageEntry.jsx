@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import { withStyles } from "material-ui/styles";
+import firebase from "firebase";
 
 import TextField from "material-ui/TextField";
 import { InputAdornment } from "material-ui/Input";
@@ -25,10 +26,30 @@ class MessageEntry extends Component {
     if (this.state.messageText === "" || !this.props.selectedChannel) {
       return;
     }
-    this.props.actions.sendMessage(this.state.messageText);
+    this.props.actions.sendMessage({ messageText: this.state.messageText });
 
     this.setState({
       messageText: ""
+    });
+  };
+
+  uploadFile = ev => {
+    ev.preventDefault();
+
+    const { selectedChannel, actions } = this.props;
+
+    const file = this.uploadInput.files[0];
+    const chatUploadRef = firebase
+      .storage()
+      .ref(`chat/${selectedChannel}/${file.name}`);
+
+    // data.append("file", this.uploadInput.files[0]);
+    chatUploadRef.put(file).then(function(snapshot) {
+      actions.sendMessage({
+        messageText: file.name,
+        type: "file",
+        fileURL: snapshot.downloadURL
+      });
     });
   };
 
@@ -49,6 +70,10 @@ class MessageEntry extends Component {
             id="raised-button-file"
             multiple
             type="file"
+            onChange={this.uploadFile}
+            ref={ref => {
+              this.uploadInput = ref;
+            }}
           />
           <label className={classes.htmlLabel} htmlFor="raised-button-file">
             <AddIcon />
@@ -87,7 +112,8 @@ const styles = theme => ({
   container: {
     display: "flex",
     marginBottom: 20,
-    paddingRight: 10,
+    paddingRight: 15,
+    paddingLeft: 10,
     alignItems: "center"
   },
   fileInput: {

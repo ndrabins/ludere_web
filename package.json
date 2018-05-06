@@ -22,7 +22,7 @@
     "history": "^4.7.2",
     "localforage": "^1.7.1",
     "lodash": "^4.17.5",
-    "material-ui": "^1.0.0-beta.44",
+    "material-ui": "^1.0.0-beta.45",
     "material-ui-icons": "^1.0.0-beta.36",
     "moment": "^2.22.1",
     "prop-types": "^15.6.1",
