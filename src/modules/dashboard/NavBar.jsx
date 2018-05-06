@@ -57,10 +57,10 @@ class NavBar extends Component {
               <MenuIcon />
             </Button>
           )}
-          <Button onClick={() => this.handleCalendarSelect()}>Calendar</Button>
+          {/* <Button onClick={() => this.handleCalendarSelect()}>Calendar</Button>
           <Button onClick={() => this.handleDashboardSelect()}>
             Dashboard
-          </Button>
+          </Button> */}
           <InviteButton />
         </div>
         <div className={classes.navEnd}>

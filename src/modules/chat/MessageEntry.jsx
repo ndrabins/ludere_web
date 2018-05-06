@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
+import { withStyles } from "material-ui/styles";
 
 import TextField from "material-ui/TextField";
+import { InputAdornment } from "material-ui/Input";
+
+import Typography from "material-ui/Typography";
+import Input, { InputLabel } from "material-ui/Input";
+import { FormControl } from "material-ui/Form";
 import AddIcon from "@material-ui/icons/Add";
 
 class MessageEntry extends Component {
@@ -32,71 +38,107 @@ class MessageEntry extends Component {
       name = this.props.channels[this.props.selectedChannel].name;
     }
 
+    const { classes } = this.props;
+
     return (
-      <div style={styles.container}>
-        <div style={styles.messageInputContainer}>
-          <div style={styles.fileInput}>
+      <div className={classes.container}>
+        <div className={classes.fileInput}>
+          <input
+            accept="image/*"
+            className={classes.fileUploader}
+            id="raised-button-file"
+            multiple
+            type="file"
+          />
+          <label htmlFor="raised-button-file">
             <AddIcon />
-          </div>
-          <div style={styles.textFieldContainer}>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              placeholder={`Message #${name}`}
-              fullWidth
-              autoComplete="off"
-              value={this.state.messageText}
-              onChange={this.handleChange("messageText")}
-              InputProps={{
-                disableUnderline: true
-              }}
-              onKeyPress={ev => {
-                if (ev.key === "Enter" && !ev.shiftKey) {
-                  this.sendMessage();
-                  ev.preventDefault();
-                }
-              }}
-            />
-          </div>
+          </label>
         </div>
+        <TextField
+          autoFocus
+          id="name"
+          placeholder={`Message #${name}`}
+          fullWidth
+          rowsMax={12}
+          multiline
+          autoComplete="off"
+          value={this.state.messageText}
+          onChange={this.handleChange("messageText")}
+          InputProps={{
+            disableUnderline: true,
+            classes: {
+              root: classes.textRoot,
+              input: classes.textInput
+            }
+          }}
+          onKeyPress={ev => {
+            if (ev.key === "Enter" && !ev.shiftKey) {
+              this.sendMessage();
+              ev.preventDefault();
+            }
+          }}
+        />
       </div>
     );
   }
 }
 
-const styles = {
+const styles = theme => ({
   container: {
     display: "flex",
-    height: 80,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingRight: 10,
-    paddingLeft: 10
-  },
-  messageInputContainer: {
-    width: "100%",
-    border: "2px solid black",
-    borderRadius: 8,
-    padding: 5,
-    display: "flex"
+    marginBottom: 20,
+    paddingRight: 10
   },
   fileInput: {
     color: "#767778",
-    width: 36,
+    width: 50,
+    height: 50,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     cursor: "pointer",
-    borderRight: "solid 2px #767778"
+    borderRadius: 5,
+    marginRight: 5,
+    transition: theme.transitions.create(["background-color"]),
+    "&:hover": {
+      backgroundColor: "#c3c3c3"
+    }
   },
-  textFieldContainer: {
-    width: "100%",
-    paddingLeft: 10,
-    paddingRight: 10,
-    display: "flex"
+  textRoot: {
+    padding: 0,
+    borderRadius: 4,
+    marginTop: 10
+  },
+  textInput: {
+    borderRadius: 4,
+    backgroundColor: theme.palette.common.white,
+    border: "1px solid #c3c3c3",
+    fontSize: 16,
+    padding: "10px 12px",
+    width: "calc(100% - 24px)",
+    transition: theme.transitions.create(["border-color", "box-shadow"]),
+    fontFamily: [
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"'
+    ].join(","),
+    "&:hover": {
+      borderColor: "#6d6d6d",
+      boxShadow: "0 0 0 0.2rem rgba(109,109,109,.12)"
+    },
+    "&:focus": {
+      borderColor: "#6d6d6d",
+      boxShadow: "0 0 0 0.2rem rgba(109,109,109,.25)"
+    }
+  },
+  fileUploader: {
+    display: "none"
   }
-};
+});
 
 function mapStateToProps(state) {
   return {
@@ -111,4 +153,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MessageEntry);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(MessageEntry)
+);

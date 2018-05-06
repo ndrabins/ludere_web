@@ -4,6 +4,7 @@ import moment from "moment";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { withStyles } from "material-ui/styles";
 import * as Actions from "../../actions";
 import Loading from "../../common/Loading";
 
@@ -58,6 +59,11 @@ class MessageList extends Component {
   };
 
   handleScroll = () => {
+    //return early on the case where window tries to scroll before ref set
+    if (this.messageList.current === null) {
+      return;
+    }
+
     let containerHeight = this.messageList.current.scrollHeight;
 
     if (this.messageList.current.scrollTop === 0) {
@@ -74,6 +80,7 @@ class MessageList extends Component {
   }
 
   renderMessages() {
+    const { classes } = this.props;
     let lastUser = null;
     let previousTimeStamp = null;
     let enoughTimeHasPassed = false;
@@ -86,50 +93,47 @@ class MessageList extends Component {
         .add(diff, "minutes")
         .calendar();
 
-      //check to see if 3 minutes have passed to change render
-      // if (previousTimeStamp !== null) {
-      //   let recentDiff = moment(message.dateCreated).diff(
-      //     previousTimeStamp,
-      //     "seconds"
-      //   );
-      //   if (recentDiff < 180) {
-      //     enoughTimeHasPassed = true;
-      //   } else {
-      //     enoughTimeHasPassed = false;
-      //   }
-      // }
+      // check to see if 3 minutes have passed to change render
+      if (previousTimeStamp !== null) {
+        let recentDiff = moment(message.dateCreated).diff(
+          previousTimeStamp,
+          "seconds"
+        );
+        if (recentDiff < 180) {
+          enoughTimeHasPassed = true;
+        } else {
+          enoughTimeHasPassed = false;
+        }
+      }
 
-      // lastUser = message.sentBy;
-      // previousTimeStamp = message.dateCreated;
+      lastUser = message.sentBy;
+      previousTimeStamp = message.dateCreated;
 
-      //render only text if last message is by the same user AND within 3 minutes
-      // if(lastUser === message.sentBy && enoughTimeHasPassed){
-      //   return (
-      //   <div style={styles.messageContainer} key={key}>
-      //     <div style={styles.messageBlockContent}>
-      //       <p style={styles.messageText}>{message.messageText}</p>
-      //     </div>
-      //   </div>
-      //   );
-      // }
-
-      //normal message with avatar
-      messages.push(
-        <div style={styles.messageContainer} key={key}>
-          <Avatar
-            src={message.avatarURL}
-            style={{ margin: "10px 10px 0px 10px" }}
-          />
-          <div style={styles.messageContent}>
-            <div style={styles.messageHeader}>
-              <div style={styles.name}> {message.sentByDisplayName} </div>
-              <div style={styles.date}> {timestamp} </div>
+      // render only text if last message is by the same user AND within 3 minutes
+      if (lastUser === message.sentBy && enoughTimeHasPassed) {
+        messages.push(
+          <div className={classes.messageContainer} key={key}>
+            <div className={classes.messageBlockContent}>
+              <p className={classes.messageText}>{message.messageText}</p>
             </div>
-            <p style={styles.messageText}>{message.messageText}</p>
           </div>
-        </div>
-      );
+        );
+      } else {
+        messages.push(
+          <div className={classes.messageContainer} key={key}>
+            <Avatar src={message.avatarURL} style={{ margin: "0px 10px" }} />
+            <div className={classes.messageContent}>
+              <div className={classes.messageHeader}>
+                <div className={classes.name}>{message.sentByDisplayName}</div>
+                <div className={classes.date}> {timestamp} </div>
+              </div>
+              <p className={classes.messageText}>{message.messageText}</p>
+            </div>
+          </div>
+        );
+      }
     });
+
     return messages;
   }
 
@@ -141,19 +145,19 @@ class MessageList extends Component {
   };
 
   render() {
-    const { loadingMoreMessages } = this.props;
+    const { loadingMoreMessages, classes } = this.props;
 
     return (
-      <div style={styles.container}>
-        <div style={styles.messages} ref={this.messageList}>
+      <div className={classes.container}>
+        <div className={classes.messages} ref={this.messageList}>
           {loadingMoreMessages && (
-            <div style={styles.loadingContainer}>
+            <div className={classes.loadingContainer}>
               <Loading />
             </div>
           )}
           {this.renderMessages()}
           <div
-            style={{ float: "left", clear: "both" }}
+            style={{ float: "left", clear: "both", height: 20 }}
             ref={this.messagesEnd}
           />
         </div>
@@ -162,7 +166,7 @@ class MessageList extends Component {
   }
 }
 
-const styles = {
+const styles = theme => ({
   container: {
     display: "flex",
     flex: 1,
@@ -176,11 +180,15 @@ const styles = {
     marginLeft: 10,
     marginRight: 10,
     flexDirection: "row",
-    display: "flex"
+    display: "flex",
+    backgroundColor: "transparent",
+    transition: theme.transitions.create(["background-color"]),
+    "&:hover": {
+      backgroundColor: "#C3C3C3"
+    }
   },
   messageContent: {
     maxWidth: "90%",
-    marginTop: 10,
     marginRight: 30,
     display: "flex",
     flexDirection: "column"
@@ -216,7 +224,7 @@ const styles = {
   loadingContainer: {
     height: 100
   }
-};
+});
 
 function mapStateToProps(state) {
   return {
@@ -232,4 +240,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MessageList);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(MessageList)
+);

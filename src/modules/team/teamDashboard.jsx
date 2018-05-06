@@ -49,7 +49,8 @@ const styles = theme => ({
     minHeight: 500,
     display: "flex",
     flexDirection: "column",
-    padding: 5
+    padding: 5,
+    paddingTop: 20
   },
   row: {
     paddingToz: 10,

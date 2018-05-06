@@ -103,7 +103,7 @@ export function selectChannel(channelID) {
 
     var messageListener = messageRef
       .orderBy("dateCreated", "desc")
-      .limit(25)
+      .limit(50)
       .onSnapshot(function(querySnapshot) {
         var messages = {};
         querySnapshot.forEach(function(doc) {

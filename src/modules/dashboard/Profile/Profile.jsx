@@ -140,7 +140,7 @@ class Profile extends Component {
         </Typography>
         <div className={classes.avatar}>
           <FilePond
-            instantUpload={false}
+            instantUpload={true}
             // imageCropAspectRatio="1:1"
             // imageResizeMode="cover"
             // imageResizeTargetWidth={200}
@@ -150,7 +150,7 @@ class Profile extends Component {
             labelIdle={"Drag & Drop your profile picture or Click to Browse"}
             imagePreviewHeight={400}
             labelTapToCancel=""
-            accept={["image/*"]}
+            accept="image/*"
             server={{
               process: this.handleProcessing,
               abortLoad: this.handleAbort

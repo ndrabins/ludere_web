@@ -52,9 +52,9 @@ class Main extends Component {
   }
 
   render() {
-    const { history, location, loadingWorkspaces } = this.props;
+    const { history, location, loadingWorkspaces, loadingProfile } = this.props;
 
-    if (loadingWorkspaces) {
+    if (loadingWorkspaces || loadingProfile) {
       return <Loading />;
     }
 
@@ -116,7 +116,8 @@ function mapStateToProps(state) {
   return {
     workspaces: state.workspace.workspaces,
     selectedTeam: state.team.selectedTeam,
-    loadingWorkspaces: state.workspace.loadingWorkspaces
+    loadingWorkspaces: state.workspace.loadingWorkspaces,
+    loadingProfile: state.profile.loading
   };
 }
 
