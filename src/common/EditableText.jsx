@@ -38,7 +38,7 @@ class EditableText extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, textStyle } = this.props;
     const { renderEditableText, value } = this.state;
 
     return (
@@ -65,7 +65,7 @@ class EditableText extends Component {
           </FormControl>
         ) : (
           <div
-            className={classes.normalText}
+            className={textStyle ? textStyle : classes.normalText}
             onClick={() => this.handleTextClick()}
           >
             {value}

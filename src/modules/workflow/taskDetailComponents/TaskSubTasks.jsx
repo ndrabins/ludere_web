@@ -26,8 +26,8 @@ class TaskDetailSubtasks extends Component {
   handleCreateSubtask = () => {
     const { subtaskContent } = this.state;
     const { task } = this.props;
-    const newTask = {...task};
-    let subtasks  = newTask.subtasks;
+    const newTask = { ...task };
+    let subtasks = newTask.subtasks;
     newTask.subtasks = [
       ...subtasks,
       { content: subtaskContent, completed: false }
@@ -39,8 +39,8 @@ class TaskDetailSubtasks extends Component {
 
   handleToggleSubtask = index => {
     const { task } = this.props;
-    const newTask = {...task};
-    let subtasks = newTask.subtasks
+    const newTask = { ...task };
+    let subtasks = newTask.subtasks;
     subtasks[index].completed = !subtasks[index].completed;
     this.props.actions.updateTask(newTask);
   };
@@ -52,7 +52,7 @@ class TaskDetailSubtasks extends Component {
     this.props.actions.updateTask(task);
   };
 
-  updateSubtaskContent = (index, subtaskContent) => {
+  updateSubtaskContent = (subtaskContent, index) => {
     const { task } = this.props;
     let { subtasks } = task;
     subtasks[index].content = subtaskContent;
@@ -65,7 +65,7 @@ class TaskDetailSubtasks extends Component {
 
     return (
       <div className={classes.root}>
-        <SectionDivider content={'Subtasks'} />
+        <SectionDivider content={"Subtasks"} />
 
         <SubtaskList
           subtasks={task.subtasks}
@@ -114,7 +114,7 @@ const styles = {
   },
   entryWrapper: {
     marginRight: 15,
-    display: "flex",
+    display: "flex"
     // marginTop: -8
   },
   input: {

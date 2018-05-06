@@ -32,8 +32,8 @@ const inlineStyles = {
     minHeight: 50,
     display: "flex",
     alignItems: "center",
-    width: "calc(100% - 20px)",
-    margin: "-10px 0px 10px 10px",
+    width: "calc(100% - 40px)",
+    margin: "-15px 0px 10px 20px",
     borderRadius: 7,
     padding: "5px 5px"
     // boxShadow: "0 4px 20px 0px rgba(0, 0, 0, 0.12)"
@@ -59,6 +59,7 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     margin: 10,
+    marginTop: 20,
     flex: 1
   }
 });

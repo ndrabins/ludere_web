@@ -50,7 +50,7 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     padding: 5,
-    paddingTop: 20
+    paddingTop: 10
   },
   row: {
     paddingToz: 10,

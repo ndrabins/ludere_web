@@ -5,6 +5,7 @@ import Checkbox from "material-ui/Checkbox";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "material-ui/IconButton";
 import Fade from "material-ui/transitions/Fade";
+import EditableText from "../../../common/EditableText";
 
 class SubtaskList extends Component {
   state = {
@@ -25,7 +26,7 @@ class SubtaskList extends Component {
   };
 
   render() {
-    const { subtasks, classes, handleDelete } = this.props;
+    const { subtasks, classes, handleDelete, subtaskUpdate } = this.props;
     const { hovered } = this.state;
 
     return (
@@ -33,13 +34,13 @@ class SubtaskList extends Component {
         {subtasks.map((subtask, index) => (
           <div
             key={index}
-            onClick={() => this.props.handleToggleSubtask(index)}
             className={classes.subtask}
             onMouseOver={() => this.handleHover(index)}
             onMouseLeave={() => this.handleLeave()}
           >
             <div className={classes.subtaskContent}>
               <Checkbox
+                onClick={() => this.props.handleToggleSubtask(index)}
                 classes={{
                   root: classes.root,
                   checked: classes.checked
@@ -48,13 +49,15 @@ class SubtaskList extends Component {
                 tabIndex={-1}
                 disableRipple={false}
               />
-              <Typography
-                className={
-                  subtask.completed ? classes.completedText : classes.text
-                }
-              >
-                {subtask.content}
-              </Typography>
+              <div className={classes.textContainer}>
+                <EditableText
+                  value={subtask.content}
+                  handleEnterPress={content => subtaskUpdate(content, index)}
+                  textStyle={
+                    subtask.completed ? classes.completedText : classes.text
+                  }
+                />
+              </div>
             </div>
             <Fade in={index === hovered} timeout={{ enter: 250, exit: 100 }}>
               <IconButton
@@ -86,7 +89,7 @@ const styles = theme => ({
     whiteSpace: "pre-line",
     wordWrap: "break-word",
     transition: "color 0.5s ease-out",
-    paddingTop: 13,
+    paddingTop: 5,
     width: "100%"
   },
   completedText: {
@@ -95,7 +98,13 @@ const styles = theme => ({
     textDecoration: "line-through",
     color: "#B0B2B6",
     transition: "color 0.25s ease-out",
-    paddingTop: 13,
+    paddingTop: 5,
+    width: "100%"
+  },
+  textContainer: {
+    whiteSpace: "pre-line",
+    wordWrap: "break-word",
+    paddingTop: 10,
     width: "100%"
   },
   subtaskContent: {

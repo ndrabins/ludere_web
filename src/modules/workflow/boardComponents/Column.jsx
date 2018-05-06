@@ -61,9 +61,6 @@ class Column extends Component {
                   handleEnterPress={this.handleTitleChange}
                 />
               </div>
-              <div style={styles.tasksContainer}>
-                <TaskList columnID={ID} taskOrder={list.taskOrder} />
-              </div>
               <div style={styles.taskEntry}>
                 <TextField
                   id="taskName"
@@ -71,6 +68,7 @@ class Column extends Component {
                   className={classes.textField}
                   value={this.state.taskName}
                   fullWidth
+                  multiline
                   onChange={this.handleChange("taskName")}
                   margin="normal"
                   onKeyPress={ev => {
@@ -80,6 +78,9 @@ class Column extends Component {
                     }
                   }}
                 />
+              </div>
+              <div style={styles.tasksContainer}>
+                <TaskList columnID={ID} taskOrder={list.taskOrder} />
               </div>
             </div>
           </div>
