@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import { withStyles } from "material-ui/styles";
 import * as Actions from "../../actions";
 import Loading from "../../common/Loading";
+import { Typography } from "material-ui";
 
 class MessageList extends Component {
   constructor(props) {
@@ -109,8 +110,25 @@ class MessageList extends Component {
       lastUser = message.sentBy;
       previousTimeStamp = message.dateCreated;
 
+      if (message.type === "file") {
+        messages.push(
+          <div className={classes.messageContainer} key={key}>
+            <Avatar src={message.avatarURL} style={{ margin: "0px 10px" }} />
+            <div className={classes.messageContent}>
+              <div className={classes.messageHeader}>
+                <div className={classes.name}>{message.sentByDisplayName}</div>
+                <div className={classes.date}> {timestamp} </div>
+              </div>
+              <Typography variant="title" className={classes.messageText}>
+                {message.messageText}
+              </Typography>
+              <img src={message.fileURL} className={classes.uploadedImage} />
+            </div>
+          </div>
+        );
+      }
       // render only text if last message is by the same user AND within 3 minutes
-      if (lastUser === message.sentBy && enoughTimeHasPassed) {
+      else if (lastUser === message.sentBy && enoughTimeHasPassed) {
         messages.push(
           <div className={classes.messageContainer} key={key}>
             <div className={classes.messageBlockContent}>
@@ -225,6 +243,10 @@ const styles = theme => ({
   },
   loadingContainer: {
     height: 100
+  },
+  uploadedImage: {
+    maxWidth: 400,
+    maxHeight: 400
   }
 });
 
