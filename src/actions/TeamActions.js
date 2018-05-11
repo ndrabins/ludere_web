@@ -5,7 +5,8 @@ import {
   FETCH_TEAMS,
   FETCH_TEAMS_SUCCESS,
   SELECT_TEAM,
-  CREATE_TEAM_ERROR
+  CREATE_TEAM_ERROR,
+  REMOVE_TEAM_MEMBER
 } from "./types";
 
 import firebase from "firebase";
@@ -133,6 +134,30 @@ export function joinTeam(teamID, userID = null) {
 
     teamRef.update(newTeamMember);
     dispatch({ type: JOIN_TEAM });
+  };
+}
+
+export function removeFromTeam(teamID, userID) {
+  return (dispatch, getState) => {
+    const { selectedWorkspace } = getState().workspace;
+    let UID;
+    if (userID == null) {
+      UID = getState().auth.user.uid;
+    } else {
+      UID = userID;
+    }
+
+    let teamRef = firebase
+      .firestore()
+      .collection(`workspaces/${selectedWorkspace}/teams`)
+      .doc(teamID);
+
+    let newTeamMember = {};
+
+    newTeamMember[`members.${UID}`] = false;
+
+    teamRef.update(newTeamMember);
+    dispatch({ type: REMOVE_TEAM_MEMBER });
   };
 }
 

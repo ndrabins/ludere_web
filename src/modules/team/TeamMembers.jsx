@@ -11,18 +11,41 @@ import List, {
 import Checkbox from "material-ui/Checkbox";
 import Avatar from "material-ui/Avatar";
 import IconButton from "material-ui/IconButton";
+import Button from "material-ui/Button";
 import AddIcon from "@material-ui/icons/Add";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+
+import Menu, { MenuItem } from "material-ui/Menu";
+
 import Map from "lodash/map";
 import Has from "lodash/has";
 
 class TeamMembers extends Component {
+  state = {
+    anchorEl: null,
+    selectedUserID: null
+  };
   componentDidMount() {
     this.props.actions.fetchWorkspaceUsers();
   }
 
+  handleMenuClick = (event, userID) => {
+    this.setState({ anchorEl: event.currentTarget, selectedUserID: userID });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
   handleAddClick = userID => {
     const { selectedTeam } = this.props;
     this.props.actions.joinTeam(selectedTeam, userID);
+  };
+
+  handleRemoveClick = userID => {
+    const { selectedTeam } = this.props;
+    this.props.actions.removeFromTeam(selectedTeam, userID);
+    this.handleClose();
   };
 
   render() {
@@ -33,6 +56,8 @@ class TeamMembers extends Component {
       selectedTeam,
       loading
     } = this.props;
+
+    const { anchorEl, selectedUserID } = this.state;
 
     if (loading || !teams[selectedTeam]) {
       return <div> loading </div>;
@@ -49,19 +74,36 @@ class TeamMembers extends Component {
                 <Avatar src={member.photoURL} className={classes.avatar} />
                 <ListItemText primary={`${member.displayName}`} />
                 <ListItemSecondaryAction>
-                  {!Has(teamMembers, userID) && (
-                    // <Button
-                    //   variant="raised"
-                    //   size="medium"
-                    //   color="primary"
-                    //   onClick={() => this.handleAddClick(userID)}
-                    //   className={classes.button}
-                    // >
-                    //   Add To Team
-                    // </Button>
-                    <IconButton className={classes.button} aria-label="Delete">
+                  {!teamMembers[userID] ? (
+                    <IconButton
+                      className={classes.button}
+                      aria-label="Add Team Member"
+                      onClick={() => this.handleAddClick(userID)}
+                    >
                       <AddIcon />
                     </IconButton>
+                  ) : (
+                    <div>
+                      <IconButton
+                        aria-owns={anchorEl ? "simple-menu" : null}
+                        aria-haspopup="true"
+                        onClick={ev => this.handleMenuClick(ev, userID)}
+                      >
+                        <MoreVertIcon />
+                      </IconButton>
+                      <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        open={Boolean(anchorEl) && selectedUserID === userID}
+                        onClose={this.handleClose}
+                      >
+                        <MenuItem
+                          onClick={() => this.handleRemoveClick(userID)}
+                        >
+                          Remove Member
+                        </MenuItem>
+                      </Menu>
+                    </div>
                   )}
                 </ListItemSecondaryAction>
               </ListItem>
@@ -95,7 +137,7 @@ const styles = theme => ({
   },
   button: {
     marginTop: 6,
-    color: "white"
+    color: "#00BCD4"
   }
 });
 

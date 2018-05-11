@@ -4,7 +4,8 @@ import {
   JOIN_TEAM,
   FETCH_TEAMS,
   FETCH_TEAMS_SUCCESS,
-  SELECT_TEAM
+  SELECT_TEAM,
+  REMOVE_TEAM_MEMBER
 } from "../actions/types";
 
 const initialState = {
@@ -36,6 +37,8 @@ export default function team(state = initialState, action) {
         selectedTeam: action.selectedTeam
       };
     case JOIN_TEAM:
+      return state;
+    case REMOVE_TEAM_MEMBER:
       return state;
     default:
       return state;
