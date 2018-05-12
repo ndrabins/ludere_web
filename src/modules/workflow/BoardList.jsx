@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { withStyles } from "material-ui/styles";
+
 import * as Actions from "../../actions";
 import Map from "lodash/map";
 
@@ -22,9 +24,14 @@ class BoardList extends Component {
   }
 
   render() {
-    return <div>{this.renderBoards()}</div>;
+    const { classes } = this.props;
+    return <div className={classes.container}>{this.renderBoards()}</div>;
   }
 }
+
+const styles = {
+  container: {}
+};
 
 function mapStateToProps(state) {
   return {
@@ -38,4 +45,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoardList);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(BoardList)
+);

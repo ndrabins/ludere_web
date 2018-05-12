@@ -9,13 +9,17 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import Button from "material-ui/Button";
 import TextField from "material-ui/TextField";
 import Paper from "material-ui/Paper";
+import Menu, { MenuItem } from "material-ui/Menu";
+import IconButton from "material-ui/IconButton";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import TaskList from "./TaskList";
 import EditableText from "../../../common/EditableText";
 
 class Column extends Component {
   state = {
-    taskName: ""
+    taskName: "",
+    anchorEl: null
   };
 
   handleChange = name => event => {
@@ -42,8 +46,25 @@ class Column extends Component {
     });
   };
 
+  handleMenuClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  handleColumnDelete = columnID => {
+    const { selectedTeam } = this.props;
+    console.log("deleting..");
+    console.log(columnID);
+    // this.props.actions.removeFromTeam(selectedTeam, columnID);
+    this.handleClose();
+  };
+
   render() {
     const { list, ID, classes } = this.props;
+    const { anchorEl } = this.state;
 
     return (
       <Draggable draggableId={ID} type="COLUMN" index={this.props.index}>
@@ -60,6 +81,23 @@ class Column extends Component {
                   value={list.name}
                   handleEnterPress={this.handleTitleChange}
                 />
+                <IconButton
+                  aria-owns={anchorEl ? "simple-menu" : null}
+                  aria-haspopup="true"
+                  onClick={this.handleMenuClick}
+                >
+                  <MoreVertIcon />
+                </IconButton>
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={this.handleClose}
+                >
+                  <MenuItem onClick={() => this.handleColumnDelete(ID)}>
+                    Delete Column
+                  </MenuItem>
+                </Menu>
               </div>
               <div style={styles.taskEntry}>
                 <TextField
@@ -110,17 +148,16 @@ const styles = {
   title: {
     minHeight: 40,
     paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingRight: 2,
+    paddingTop: 2,
+    paddingBottom: 2,
     color: "#FFFFFF",
     display: "flex",
     background: "linear-gradient(to right, #00BCD4, #26d0ce)",
     alignItems: "center",
     justifyContent: "center",
     borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    color: "white"
+    borderTopRightRadius: 7
   },
   taskEntry: {
     paddingLeft: 10,

@@ -4,25 +4,17 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import { withRouter } from "react-router";
 
-import IconButton from "material-ui/IconButton";
+import { withStyles } from "material-ui/styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Avatar from "material-ui/Avatar";
+import Typography from "material-ui/Typography";
+import Menu, { MenuItem } from "material-ui/Menu";
 
 import { Link } from "react-router-dom";
 
 class BoardButton extends Component {
   state = {
     anchorEl: null,
-    openNavMenu: false,
-    isHovered: false
-  };
-
-  handleClickNavMenu = event => {
-    this.setState({ openNavMenu: true, anchorEl: event.currentTarget });
-  };
-
-  handleRequestCloseNavMenu = () => {
-    this.setState({ openNavMenu: false });
+    editingBoardName: false
   };
 
   handleHover = () => {
@@ -31,97 +23,140 @@ class BoardButton extends Component {
     });
   };
 
+  handleUpdateBoardName = () => {
+    this.setState({ editingBoardName: true });
+    this.handleClose();
+  };
+
+  handleBoardDelete = (event, boardID) => {
+    console.log("deleting board", boardID);
+    this.handleClose();
+  };
+
   handleClick = () => {
     this.props.actions.selectBoard(this.props.boardID);
   };
 
-  render() {
-    const { history, boardID, selectedBoard } = this.props;
+  handleMenuClick = event => {
+    event.stopPropagation();
+    this.setState({ anchorEl: event.currentTarget });
+  };
 
-    let workflowStyle = styles.workflow;
-    let nameStyle = styles.name;
-    if (this.state.isHovered) {
-      workflowStyle = styles.hoveredWorkflow;
-      nameStyle = styles.hoveredName;
-    }
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  render() {
+    const { history, boardID, selectedBoard, classes } = this.props;
+    const { anchorEl } = this.state;
+
+    let workflowStyle = classes.workflow;
+    let nameStyle = classes.name;
     if (
       boardID === selectedBoard &&
       history.location.pathname.includes("workflow")
     ) {
-      workflowStyle = styles.selectedWorkflow;
-      nameStyle = styles.selectedName;
+      workflowStyle = classes.selectedWorkflow;
+      nameStyle = classes.selectedName;
     }
 
     return (
-      <div
-        style={workflowStyle}
-        onMouseEnter={this.handleHover}
-        onMouseLeave={this.handleHover}
-      >
-        <Link style={nameStyle} onClick={this.handleClick} to="/team/workflow">
-          {this.props.name}
-        </Link>
-        <IconButton
-          style={{
-            color: nameStyle.color,
-            height: "100%",
-            width: 34
-          }}
+      <div className={workflowStyle}>
+        <Typography
+          className={nameStyle}
+          onClick={this.handleClick}
+          noWrap
+          component={Link}
+          to="/team/workflow"
         >
-          <MoreVertIcon />
-        </IconButton>
+          {this.props.name}
+        </Typography>
+        <MoreVertIcon
+          className={classes.icon}
+          aria-owns={anchorEl ? "simple-menu" : null}
+          aria-haspopup="true"
+          onClick={ev => this.handleMenuClick(ev)}
+        />
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={this.handleClose}
+        >
+          <MenuItem onClick={this.handleUpdateBoardName}>Edit Name</MenuItem>
+          <MenuItem onClick={ev => this.handleBoardDelete(ev, boardID)}>
+            Delete Board
+          </MenuItem>
+        </Menu>
       </div>
     );
   }
 }
 
-const baseStyle = {
-  display: "flex",
-  alignContent: "center",
-  justifyContent: "space-between",
-  marginLeft: 8,
-  marginRight: 4,
-  marginBottom: 1,
-  height: 28,
-  fontSize: "14px"
-};
-
-const baseName = {
-  textDecoration: "none",
-  color: "#6f6f6f",
-  display: "flex",
-  width: "100%",
-  alignItems: "center",
-  paddingLeft: 52
-};
-
 const styles = {
   workflow: {
-    ...baseStyle
-  },
-  name: {
-    ...baseName
-  },
-  hoveredWorkflow: {
-    ...baseStyle,
-    backgroundColor: "#424242",
+    display: "flex",
+    alignContent: "center",
+    justifyContent: "space-between",
+    marginLeft: 8,
+    marginRight: 9,
+    marginBottom: 1,
+    height: 28,
+    fontSize: "14px",
+    transition: "background-color 0.25s ease-out",
     borderRadius: 5,
-    cursor: "pointer"
+    "&:hover": {
+      borderRadius: 5,
+      backgroundColor: "#424242",
+      cursor: "pointer"
+    }
   },
   selectedWorkflow: {
-    ...baseStyle,
+    display: "flex",
+    alignContent: "center",
+    justifyContent: "space-between",
+    marginLeft: 8,
+    marginRight: 9,
+    marginBottom: 1,
+    height: 28,
+    fontSize: "14px",
     backgroundColor: "#616161",
-    borderRadius: 5
+    borderRadius: 5,
+    transition: "background-color 0.25s ease-out",
+    "&:hover": {
+      borderRadius: 5,
+      backgroundColor: "#424242",
+      cursor: "pointer"
+    }
   },
-  hoveredName: {
-    ...baseName,
+  name: {
     textDecoration: "none",
-    color: "#b9bbbe"
+    display: "flex",
+    width: "100%",
+    alignItems: "center",
+    paddingLeft: 52,
+    transition: "color 0.25s ease-out",
+    color: "#6f6f6f",
+    "&:hover": {
+      color: "#b9bbbe",
+      cursor: "pointer"
+    }
   },
   selectedName: {
-    ...baseName,
     textDecoration: "none",
-    color: "#FFFFFF"
+    color: "#FFFFFF",
+    display: "flex",
+    width: "100%",
+    alignItems: "center",
+    paddingLeft: 52
+  },
+  icon: {
+    color: "#6f6f6f",
+    marginTop: 2,
+    "&:hover": {
+      color: "#b9bbbe",
+      cursor: "pointer"
+    }
   }
 };
 
@@ -138,5 +173,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  withRouter(BoardButton)
+  withRouter(withStyles(styles)(BoardButton))
 );

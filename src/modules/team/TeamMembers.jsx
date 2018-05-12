@@ -136,7 +136,6 @@ const styles = theme => ({
     width: 40
   },
   button: {
-    marginTop: 6,
     color: "#00BCD4"
   }
 });
