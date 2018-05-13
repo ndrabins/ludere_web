@@ -11,7 +11,8 @@ import {
   UNSUBSCRIBE_CHANNELS,
   UNSUBSCRIBE_MESSAGES,
   FETCH_MORE_MESSAGES,
-  FETCH_MORE_MESSAGES_SUCCESS
+  FETCH_MORE_MESSAGES_SUCCESS,
+  UPDATE_CHANNEL
 } from "./types";
 
 import firebase from "firebase";
@@ -85,6 +86,19 @@ export function createChannel(channelName) {
         dispatch({ type: CREATE_CHANNEL_ERROR });
         console.error("Error adding document: ", error);
       });
+  };
+}
+
+export function updateChannel(updates, channelID) {
+  return (dispatch, getState) => {
+    let channelRef = firebase
+      .firestore()
+      .collection("chat")
+      .doc(channelID);
+
+    channelRef.update(updates).then(function() {
+      dispatch({ type: UPDATE_CHANNEL });
+    });
   };
 }
 

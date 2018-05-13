@@ -8,14 +8,19 @@ import { withStyles } from "material-ui/styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Typography from "material-ui/Typography";
 import Menu, { MenuItem } from "material-ui/Menu";
+import Input from "material-ui/Input";
 
 import { Link } from "react-router-dom";
 
 class BoardButton extends Component {
-  state = {
-    anchorEl: null,
-    editingBoardName: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      anchorEl: null,
+      isEditingBoardName: false,
+      boardName: this.props.name
+    };
+  }
 
   handleHover = () => {
     this.setState({
@@ -24,7 +29,7 @@ class BoardButton extends Component {
   };
 
   handleUpdateBoardName = () => {
-    this.setState({ editingBoardName: true });
+    this.setState({ isEditingBoardName: true });
     this.handleClose();
   };
 
@@ -46,9 +51,22 @@ class BoardButton extends Component {
     this.setState({ anchorEl: null });
   };
 
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
+
+  handleFieldEnter = () => {
+    const { boardName } = this.state;
+    const { actions, boardID } = this.props;
+    actions.updateBoard({ boardName: boardName }, boardID);
+    this.setState({ isEditingBoardName: false });
+  };
+
   render() {
-    const { history, boardID, selectedBoard, classes } = this.props;
-    const { anchorEl } = this.state;
+    const { history, boardID, selectedBoard, classes, name } = this.props;
+    const { anchorEl, isEditingBoardName, boardName } = this.state;
 
     let workflowStyle = classes.workflow;
     let nameStyle = classes.name;
@@ -62,15 +80,32 @@ class BoardButton extends Component {
 
     return (
       <div className={workflowStyle}>
-        <Typography
-          className={nameStyle}
-          onClick={this.handleClick}
-          noWrap
-          component={Link}
-          to="/team/workflow"
-        >
-          {this.props.name}
-        </Typography>
+        {isEditingBoardName ? (
+          <Input
+            className={classes.input}
+            value={boardName}
+            onChange={this.handleChange("boardName")}
+            autoFocus
+            fullWidth
+            disableUnderline
+            onKeyPress={ev => {
+              if (ev.key === "Enter") {
+                this.handleFieldEnter();
+                ev.preventDefault();
+              }
+            }}
+          />
+        ) : (
+          <Typography
+            className={nameStyle}
+            onClick={this.handleClick}
+            noWrap
+            component={Link}
+            to="/team/workflow"
+          >
+            {name}
+          </Typography>
+        )}
         <MoreVertIcon
           className={classes.icon}
           aria-owns={anchorEl ? "simple-menu" : null}
@@ -157,6 +192,18 @@ const styles = {
       color: "#b9bbbe",
       cursor: "pointer"
     }
+  },
+  input: {
+    fontWeight: 500,
+    marginLeft: 50,
+    fontSize: 14,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 5,
+    padding: 5,
+    color: "black",
+    overflowY: "hidden",
+    overflowX: "hidden",
+    cursor: "text"
   }
 };
 

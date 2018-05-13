@@ -6,13 +6,15 @@ import { withStyles } from "material-ui/styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Typography from "material-ui/Typography";
 import Menu, { MenuItem } from "material-ui/Menu";
+import Input from "material-ui/Input";
 
 import { Link } from "react-router-dom";
 
 class ChannelButton extends Component {
   state = {
     anchorEl: null,
-    editingChannelName: false
+    isEditingChannelName: false,
+    channelName: this.props.name
   };
 
   handleClickNavMenu = event => {
@@ -24,11 +26,11 @@ class ChannelButton extends Component {
   };
 
   handleClick = () => {
-    this.props.actions.selectChannel(this.props.ID);
+    this.props.actions.selectChannel(this.props.channelID);
   };
 
   handleUpdateChannelName = () => {
-    this.setState({ editingChannelName: true });
+    this.setState({ isEditingChannelName: true });
     this.handleClose();
   };
 
@@ -46,38 +48,59 @@ class ChannelButton extends Component {
     this.setState({ anchorEl: null });
   };
 
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
+
+  handleFieldEnter = () => {
+    const { channelName } = this.state;
+    const { actions, channelID } = this.props;
+    actions.updateChannel({ name: channelName }, channelID);
+    this.setState({ isEditingChannelName: false });
+  };
+
   render() {
-    const { boardID, classes, ID, selectedChannel } = this.props;
-    const { anchorEl } = this.state;
+    const { classes, channelID, selectedChannel } = this.props;
+    const { anchorEl, isEditingChannelName, channelName } = this.state;
 
     let channelStyle = classes.channel;
     let nameStyle = classes.name;
 
-    if (ID === selectedChannel) {
+    if (channelID === selectedChannel) {
       channelStyle = classes.selectedChannel;
       nameStyle = classes.selectedName;
     }
 
     return (
-      // <Link
-      //   style={channelStyle}
-      //   onMouseEnter={this.handleHover}
-      //   onMouseLeave={this.handleHover}
-      //   onClick={this.handleClick}
-      //   to="/team/chat"
-      // >
-      //   # {this.props.name}
-      // </Link>
       <div className={channelStyle}>
-        <Typography
-          className={nameStyle}
-          onClick={this.handleClick}
-          noWrap
-          component={Link}
-          to="/team/chat"
-        >
-          {this.props.name}
-        </Typography>
+        {isEditingChannelName ? (
+          <Input
+            className={classes.input}
+            value={channelName}
+            onChange={this.handleChange("channelName")}
+            autoFocus
+            fullWidth
+            disableUnderline
+            onKeyPress={ev => {
+              if (ev.key === "Enter") {
+                this.handleFieldEnter();
+                ev.preventDefault();
+              }
+            }}
+          />
+        ) : (
+          <Typography
+            className={nameStyle}
+            onClick={this.handleClick}
+            noWrap
+            component={Link}
+            to="/team/chat"
+          >
+            {this.props.name}
+          </Typography>
+        )}
         <MoreVertIcon
           className={classes.icon}
           aria-owns={anchorEl ? "simple-menu" : null}
@@ -91,7 +114,7 @@ class ChannelButton extends Component {
           onClose={this.handleClose}
         >
           <MenuItem onClick={this.handleUpdateChannelName}>Edit Name</MenuItem>
-          <MenuItem onClick={ev => this.handleChannelDelete(ev, ID)}>
+          <MenuItem onClick={ev => this.handleChannelDelete(ev, channelID)}>
             Delete Channel
           </MenuItem>
         </Menu>
@@ -164,6 +187,18 @@ const styles = {
       color: "#b9bbbe",
       cursor: "pointer"
     }
+  },
+  input: {
+    fontWeight: 500,
+    marginLeft: 50,
+    fontSize: 14,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 5,
+    padding: 5,
+    color: "black",
+    overflowY: "hidden",
+    overflowX: "hidden",
+    cursor: "text"
   }
 };
 

@@ -10,7 +10,8 @@ import {
   UPDATE_LIST,
   UNSUBSCRIBE_BOARD_DATA,
   UNSUBSCRIBE_BOARDS,
-  FETCH_BOARD_DATA
+  FETCH_BOARD_DATA,
+  UPDATE_BOARD
 } from "./types";
 import firebase from "firebase";
 
@@ -38,6 +39,19 @@ export function createBoard(boardName) {
       dispatch(createList(docRef.id, "Backlog"));
       dispatch(createList(docRef.id, "In Progress"));
       dispatch(createList(docRef.id, "Done"));
+    });
+  };
+}
+
+export function updateBoard(updates, boardID) {
+  return (dispatch, getState) => {
+    let boardRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(boardID);
+
+    boardRef.update(updates).then(function() {
+      dispatch({ type: UPDATE_BOARD });
     });
   };
 }

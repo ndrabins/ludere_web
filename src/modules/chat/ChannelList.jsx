@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import Map from "lodash/map";
 
-import ChannelButton from './ChannelButton';
+import ChannelButton from "./ChannelButton";
 
 class ChannelList extends Component {
   renderChannels() {
@@ -14,7 +14,7 @@ class ChannelList extends Component {
     let channels = Map(this.props.channels, (channel, key) => {
       return (
         <div key={key}>
-          <ChannelButton ID={key} name={channel.name}/>
+          <ChannelButton channelID={key} name={channel.name} />
         </div>
       );
     });
@@ -22,17 +22,13 @@ class ChannelList extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.renderChannels()}
-      </div>
-    );
+    return <div>{this.renderChannels()}</div>;
   }
 }
 
 function mapStateToProps(state) {
   return {
-    channels: state.chat.channels,
+    channels: state.chat.channels
   };
 }
 

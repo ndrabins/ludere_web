@@ -13,7 +13,8 @@ import {
   UNSUBSCRIBE_CHANNELS,
   UNSUBSCRIBE_MESSAGES,
   FETCH_MORE_MESSAGES,
-  FETCH_MORE_MESSAGES_SUCCESS
+  FETCH_MORE_MESSAGES_SUCCESS,
+  UPDATE_CHANNEL
 } from "../actions/types";
 
 const initialState = {
@@ -74,6 +75,8 @@ export default function team(state = initialState, action) {
     case UNSUBSCRIBE_CHANNELS:
       return state;
     case UNSUBSCRIBE_MESSAGES:
+      return state;
+    case UPDATE_CHANNEL:
       return state;
     default:
       return state;

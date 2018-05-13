@@ -18,7 +18,8 @@ import {
   UNSUBSCRIBE_TASK_COMMENTS,
   UNSUBSCRIBE_BOARD_DATA,
   UNSUBSCRIBE_BOARDS,
-  FETCH_BOARD_DATA
+  FETCH_BOARD_DATA,
+  UPDATE_BOARD
 } from "../actions/types";
 
 const initialState = {
@@ -92,6 +93,8 @@ export default function workflow(state = initialState, action) {
     case MOVE_TASK_TO_COLUMN:
       return state;
     case UPDATE_TASK:
+      return state;
+    case UPDATE_BOARD:
       return state;
     case UNSUBSCRIBE_TASK_COMMENTS:
       return state;
