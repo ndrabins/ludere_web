@@ -6,11 +6,6 @@ import { withStyles } from "material-ui/styles";
 import firebase from "firebase";
 
 import TextField from "material-ui/TextField";
-import { InputAdornment } from "material-ui/Input";
-
-import Typography from "material-ui/Typography";
-import Input, { InputLabel } from "material-ui/Input";
-import { FormControl } from "material-ui/Form";
 import AddIcon from "@material-ui/icons/Add";
 
 class MessageEntry extends Component {

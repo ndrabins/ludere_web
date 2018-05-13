@@ -9,7 +9,7 @@ import firebase from "firebase";
 require("firebase/firestore");
 
 //fetch my profileID on default
-export function fetchUserProfile(userID = null) {
+export function fetchUserProfile(userID = "fetchMyProfile") {
   return (dispatch, getState) => {
     dispatch({ type: FETCH_USER_PROFILE });
     let { uid } = getState().auth.user;
@@ -17,7 +17,7 @@ export function fetchUserProfile(userID = null) {
     let type;
 
     //If no userID given, then fetch current users profile.
-    if (userID === null) {
+    if (userID === "fetchMyProfile") {
       profileID = uid;
       type = FETCH_MY_USER_PROFILE_SUCCESS;
     } else {
