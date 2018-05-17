@@ -162,7 +162,11 @@ const styles = theme => ({
     width: 30,
     height: 30,
     border: " 2px solid white",
-    marginLeft: "-10px"
+    marginLeft: "-10px",
+    "&:hover": {
+      border: "solid 2px #303030",
+      color: "#303030"
+    }
   },
   assignedUsersContainer: {
     display: "flex",
