@@ -9,8 +9,11 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Avatar from "@material-ui/core/Avatar";
+import Checkbox from "@material-ui/core/Checkbox";
 import Map from "lodash/map";
+import pickBy from "lodash/pickBy";
 
 class AssignUser extends Component {
   state = {
@@ -25,7 +28,51 @@ class AssignUser extends Component {
       showAssignUser: !showAssignUser,
       anchorEl: event.currentTarget
     });
-    console.log("assigning user");
+  };
+
+  assignUserToTask = (event, userID) => {
+    const { actions, task, taskID } = this.props;
+    event.stopPropagation();
+    let isMemberAssigned = task.assigned[userID];
+    let updatedTask = { ...task };
+    updatedTask.assigned[userID] = !isMemberAssigned; //toggles assigning user
+    actions.updateTask(updatedTask, taskID);
+  };
+
+  getAssignedUsersContent = () => {
+    const { classes, task, workspaceMembers } = this.props;
+    const possibleUsers = { ...task.assigned };
+
+    // get only the users that are assigned
+    let assignedUsers = pickBy(possibleUsers, user => user === true);
+
+    if (Object.keys(assignedUsers).length >= 1) {
+      return (
+        <div className={classes.assignedUsersContainer}>
+          {Map(assignedUsers, (isAssigned, memberID) => {
+            let teamMember = workspaceMembers[memberID];
+            return (
+              <Avatar
+                className={classes.avatar}
+                key={memberID}
+                alt="Person"
+                src={teamMember.photoURL}
+                onClick={this.assignUserClick}
+              />
+            );
+          })}
+        </div>
+      );
+    } else {
+      return (
+        <IconButton
+          className={classes.iconButton}
+          onClick={this.assignUserClick}
+        >
+          <PersonIcon className={classes.icon} />
+        </IconButton>
+      );
+    }
   };
 
   handleClose = event => {
@@ -34,49 +81,50 @@ class AssignUser extends Component {
   };
 
   render() {
-    const {
-      task,
-      taskID,
-      classes,
-      teams,
-      selectedTeam,
-      workspaceMembers
-    } = this.props;
+    const { classes, teams, selectedTeam, workspaceMembers, task } = this.props;
     const { anchorEl } = this.state;
-
-    console.log(teams);
-    console.log(workspaceMembers);
 
     const teamMembers = teams[selectedTeam].members; // array of userIDs in team
 
     return (
       <div style={styles.container}>
-        <IconButton
-          className={classes.iconButton}
-          onClick={this.assignUserClick}
-        >
-          <PersonIcon className={classes.icon} />
-        </IconButton>
+        {this.getAssignedUsersContent()}
         <Menu
           id="simple-menu"
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
+          PaperProps={{
+            style: {
+              maxHeight: 500,
+              width: 400
+            }
+          }}
         >
-          {Map(teamMembers, (isMember, memberID) => {
+          {Map(teamMembers, (isTeamMember, memberID) => {
+            let teamMember = workspaceMembers[memberID];
+            let isMemberAssigned = task.assigned[memberID];
+
             return (
-              isMember && (
+              isTeamMember && (
                 <MenuItem
                   key={memberID}
-                  onClick={this.handleClose}
-                  className={classes.menuItem}
+                  onClick={event => this.assignUserToTask(event, memberID)}
                 >
-                  <Avatar alt="Remy Sharp" src="/static/images/remy.jpg" />
-                  <ListItemText
-                    classes={{ primary: classes.primary }}
-                    inset
-                    primary={workspaceMembers[memberID].displayName}
-                  />
+                  <Avatar alt="Person" src={teamMember.photoURL} />
+                  <ListItemText inset primary={teamMember.displayName} />
+                  <ListItemSecondaryAction>
+                    <Checkbox
+                      checked={isMemberAssigned}
+                      tabIndex={-1}
+                      disableRipple
+                      onClick={event => this.assignUserToTask(event, memberID)}
+                      classes={{
+                        root: classes.root,
+                        checked: classes.checked
+                      }}
+                    />
+                  </ListItemSecondaryAction>
                 </MenuItem>
               )
             );
@@ -100,20 +148,26 @@ const styles = theme => ({
       color: "#303030"
     }
   },
+  root: {
+    "&$checked": {
+      color: "#00BCD4"
+    }
+  },
+  checked: {},
   icon: {
     fontSize: 24,
     color: "inherit"
   },
-  menuItem: {
-    "&:focus": {
-      backgroundColor: theme.palette.primary.main,
-      "& $primary, & $icon": {
-        color: theme.palette.common.white
-      }
-    }
+  avatar: {
+    width: 30,
+    height: 30,
+    border: " 2px solid white",
+    marginLeft: "-10px"
   },
-  primary: {},
-  listItemIcon: {}
+  assignedUsersContainer: {
+    display: "flex",
+    marginLeft: 15
+  }
 });
 
 function mapStateToProps(state) {

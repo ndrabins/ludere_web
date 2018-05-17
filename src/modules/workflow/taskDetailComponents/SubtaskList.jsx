@@ -47,7 +47,6 @@ class SubtaskList extends Component {
                 }}
                 checked={subtask.completed}
                 tabIndex={-1}
-                disableRipple={false}
               />
               <div className={classes.textContainer}>
                 <EditableText
@@ -119,7 +118,7 @@ const styles = theme => ({
   },
   root: {
     "&$checked": {
-      color: "#36B6F5"
+      color: "#00ca72"
     }
   },
   checked: {}

@@ -219,17 +219,24 @@ export function updateTaskTitle(title) {
   };
 }
 
-export function updateTask(updatedTask) {
+export function updateTask(updatedTask, taskID = null) {
   return (dispatch, getState) => {
     const { selectedTask, selectedBoard } = getState().workflow;
     dispatch({ type: UPDATE_TASK });
+
+    let taskIDToUpdate;
+    if (taskID === null) {
+      taskIDToUpdate = selectedTask;
+    } else {
+      taskIDToUpdate = taskID;
+    }
 
     let taskRef = firebase
       .firestore()
       .collection("workflow")
       .doc(selectedBoard)
       .collection("tasks")
-      .doc(selectedTask);
+      .doc(taskIDToUpdate);
 
     return taskRef
       .update(updatedTask)

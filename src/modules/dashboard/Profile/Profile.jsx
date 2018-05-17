@@ -86,6 +86,7 @@ class Profile extends Component {
         task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
           actions.updateUserProfile({ photoURL: downloadURL });
         });
+        load("something");
       }
     );
     return {
