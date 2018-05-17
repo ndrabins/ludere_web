@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
-import IconButton from "material-ui/IconButton";
+import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import Avatar from "material-ui/Avatar";
+import Avatar from "@material-ui/core/Avatar";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
-import Typography from "material-ui/Typography";
+import Typography from "@material-ui/core/Typography";
 
 import { Link } from "react-router-dom";
 

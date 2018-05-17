@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import { withStyles } from "material-ui/styles";
-import Typography from "material-ui/Typography";
+import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Checkbox from "material-ui/Checkbox";
+import Checkbox from "@material-ui/core/Checkbox";
 
 import * as Actions from "../../../actions";
 
 import SectionDivider from "../../../common/SectionDivider";
 import SubtaskList from "./SubtaskList";
-import Input from "material-ui/Input";
-import { FormControl } from "material-ui/Form";
+import Input from "@material-ui/core/Input";
+import { FormControl } from "@material-ui/core/Form";
 
 class TaskDetailSubtasks extends Component {
   state = {

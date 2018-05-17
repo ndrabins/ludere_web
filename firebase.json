@@ -26,9 +26,7 @@
     "rules": "storage.rules"
   },
   "functions": {
-    "predeploy": [
-
-    ],
+    "predeploy": [],
     "source": "functions"
   }
 }

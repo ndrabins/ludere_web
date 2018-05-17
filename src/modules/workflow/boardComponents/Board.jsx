@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
 import Map from "lodash/map";
 
-import TextField from "material-ui/TextField";
+import TextField from "@material-ui/core/TextField";
 
 import Column from "./Column";
 import Loading from "../../../common/Loading";

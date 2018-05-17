@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
-import { withStyles } from "material-ui/styles";
+import { withStyles } from "@material-ui/core/styles";
 // import ColorArray from "../../utility/constants/colorsArray";
 import GradientArray from "../../utility/constants/gradientArray";
 
 import { withRouter } from "react-router";
 import Map from "lodash/map";
 
-import Button from "material-ui/Button";
+import Button from "@material-ui/core/Button";
 import PeopleIcon from "@material-ui/icons/PeopleOutline";
-import Tooltip from "material-ui/Tooltip";
+import Tooltip from "@material-ui/core/Tooltip";
 
 import AddTeamButton from "./AddTeamButton";
 

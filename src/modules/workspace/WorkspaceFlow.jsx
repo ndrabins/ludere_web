@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import Paper from "material-ui/Paper";
+import Paper from "@material-ui/core/Paper";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
-import Tabs, { Tab } from "material-ui/Tabs";
-import Button from "material-ui/Button";
-import IconButton from "material-ui/IconButton";
+import Tabs, { Tab } from "@material-ui/core/Tabs";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 
-import { withStyles } from "material-ui/styles";
+import { withStyles } from "@material-ui/core/styles";
 
 import CreateWorkspace from "./CreateWorkspace";
 import JoinWorkspace from "./JoinWorkspace";

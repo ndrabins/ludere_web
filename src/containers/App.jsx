@@ -11,8 +11,8 @@ import {
 } from "react-router-dom";
 
 import { lightTheme } from "../utility/themes"; //darkTheme
-import { MuiThemeProvider } from "material-ui/styles";
-import CssBaseline from "material-ui/CssBaseline";
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 import ReactGA from "react-ga";
 

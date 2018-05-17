@@ -7,7 +7,9 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  myUserProfile: {},
+  myUserProfile: {
+    photoURL: ""
+  },
   selectedUserProfile: {},
   loading: false
 };

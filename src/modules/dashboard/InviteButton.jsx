@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Button from "material-ui/Button";
-import IconButton from "material-ui/IconButton";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import PersonAdd from "@material-ui/icons/PersonAdd";
-import { withStyles } from "material-ui/styles";
-import Dialog, { DialogTitle, DialogContent } from "material-ui/Dialog";
-import TextField from "material-ui/TextField";
+import { withStyles } from "@material-ui/core/styles";
+import Dialog, { DialogTitle, DialogContent } from "@material-ui/core/Dialog";
+import TextField from "@material-ui/core/TextField";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 class InviteButton extends Component {

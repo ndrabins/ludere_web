@@ -10,10 +10,10 @@ import Table, {
   TableCell,
   TableHead,
   TableRow
-} from "material-ui/Table";
-import Checkbox from "material-ui/Checkbox";
+} from "@material-ui/core/Table";
+import Checkbox from "@material-ui/core/Checkbox";
 
-import Avatar from "material-ui/Avatar";
+import Avatar from "@material-ui/core/Avatar";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 
 class CommunityList extends Component {

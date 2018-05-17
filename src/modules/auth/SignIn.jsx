@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
-import { withStyles } from "material-ui/styles";
+import { withStyles } from "@material-ui/core/styles";
 
-import Typography from "material-ui/Typography";
-import Input, { InputLabel } from "material-ui/Input";
-import { FormControl } from "material-ui/Form";
-import IconButton from "material-ui/IconButton";
+import Typography from "@material-ui/core/Typography";
+import Input, { InputLabel } from "@material-ui/core/Input";
+import { FormControl } from "@material-ui/core/Form";
+import IconButton from "@material-ui/core/IconButton";
 import ArrowIcon from "@material-ui/icons/KeyboardArrowRight";
-import Fade from "material-ui/transitions/Fade";
-import Button from "material-ui/Button";
+import Fade from "@material-ui/core/transitions/Fade";
+import Button from "@material-ui/core/Button";
 
 import GoogleIcon from "../../static/google.svg";
 import TwitterIcon from "react-icons/lib/fa/twitter";

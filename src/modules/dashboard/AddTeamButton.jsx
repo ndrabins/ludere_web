@@ -4,16 +4,16 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
 import { withRouter } from "react-router";
-import TextField from "material-ui/TextField";
-import Button from "material-ui/Button";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import Dialog, {
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle
-} from "material-ui/Dialog";
-import Tooltip from "material-ui/Tooltip";
+} from "@material-ui/core/Dialog";
+import Tooltip from "@material-ui/core/Tooltip";
 
 class AddTeamButton extends Component {
   state = {

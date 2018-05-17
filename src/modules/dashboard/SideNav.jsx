@@ -3,11 +3,11 @@ import colors from "../../utility/constants/colors";
 import logoWhite from "../../static/light.svg";
 
 import CloseIcon from "@material-ui/icons/Close";
-import IconButton from "material-ui/IconButton";
+import IconButton from "@material-ui/core/IconButton";
 
 import TeamNav from "./TeamNav";
 import SideNavModules from "./SideNavModules";
-import { withStyles } from "material-ui/styles";
+import { withStyles } from "@material-ui/core/styles";
 
 const drawerWidth = 240;
 

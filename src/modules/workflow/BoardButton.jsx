@@ -4,11 +4,11 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import { withRouter } from "react-router";
 
-import { withStyles } from "material-ui/styles";
+import { withStyles } from "@material-ui/core/styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Typography from "material-ui/Typography";
-import Menu, { MenuItem } from "material-ui/Menu";
-import Input from "material-ui/Input";
+import Typography from "@material-ui/core/Typography";
+import Menu, { MenuItem } from "@material-ui/core/Menu";
+import Input from "@material-ui/core/Input";
 
 import { Link } from "react-router-dom";
 

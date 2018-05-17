@@ -1,13 +1,13 @@
 import ForInRight from "lodash/forInRight";
-import Avatar from "material-ui/Avatar";
+import Avatar from "@material-ui/core/Avatar";
 import moment from "moment";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { withStyles } from "material-ui/styles";
+import { withStyles } from "@material-ui/core/styles";
 import * as Actions from "../../actions";
 import Loading from "../../common/Loading";
-import { Typography } from "material-ui";
+import { Typography } from "@material-ui/core";
 
 class MessageList extends Component {
   constructor(props) {

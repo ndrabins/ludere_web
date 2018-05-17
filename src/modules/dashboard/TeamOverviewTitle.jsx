@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import fireIcon from "../../static/teamfire.svg";
-import { withStyles } from "material-ui/styles";
+import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 

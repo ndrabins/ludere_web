@@ -7,12 +7,12 @@ import colors from "../../utility/constants/colors";
 import InviteButton from "./InviteButton";
 
 import MenuIcon from "@material-ui/icons/Menu";
-import Avatar from "material-ui/Avatar";
-import IconButton from "material-ui/IconButton";
-import Menu, { MenuItem } from "material-ui/Menu";
-import Button from "material-ui/Button";
-import Typography from "material-ui/Typography";
-import { withStyles } from "material-ui/styles";
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
+import Menu, { MenuItem } from "@material-ui/core/Menu";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
 
 class NavBar extends Component {
   state = {
@@ -44,7 +44,7 @@ class NavBar extends Component {
   }
 
   render() {
-    const { photoURL, displayName, classes } = this.props;
+    const { profile, displayName, classes } = this.props;
 
     return (
       <div className={classes.container}>
@@ -66,7 +66,7 @@ class NavBar extends Component {
         <div className={classes.navEnd}>
           <Typography className={classes.displayName}>{displayName}</Typography>
           <Avatar
-            src={photoURL}
+            src={profile.photoURL}
             onClick={this.handleClickNavMenu}
             className={classes.avatar}
           />
@@ -137,7 +137,7 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-    photoURL: state.profile.myUserProfile.photoURL,
+    profile: state.profile.myUserProfile,
     displayName: state.profile.myUserProfile.displayName
   };
 }

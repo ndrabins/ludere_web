@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { withStyles } from "material-ui/styles";
+import { withStyles } from "@material-ui/core/styles";
 
-import Input from "material-ui/Input";
-import { FormControl } from "material-ui/Form";
+import Input from "@material-ui/core/Input";
+import { FormControl } from "@material-ui/core/Form";
 
 class EditableText extends Component {
   state = {

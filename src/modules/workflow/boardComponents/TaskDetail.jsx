@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
-import { withStyles } from "material-ui/styles";
-import IconButton from "material-ui/IconButton";
+import { withStyles } from "@material-ui/core/styles";
+import IconButton from "@material-ui/core/IconButton";
 import ArrowIcon from "@material-ui/icons/KeyboardArrowRight";
-import Button from "material-ui/Button";
-import Paper from "material-ui/Paper";
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
 
 import EditableText from "../../../common/EditableText";
 import SectionDivider from "../../../common/SectionDivider";

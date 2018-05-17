@@ -3,16 +3,16 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
-import IconButton from "material-ui/IconButton";
+import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 
 import Dialog, {
   DialogActions,
   DialogContent,
   DialogTitle
-} from "material-ui/Dialog";
-import Button from "material-ui/Button";
-import TextField from "material-ui/TextField";
+} from "@material-ui/core/Dialog";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 class CreateBoardButton extends Component {
   state = {

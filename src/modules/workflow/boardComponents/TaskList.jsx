@@ -6,7 +6,7 @@ import * as Actions from "../../../actions";
 
 import Task from "./Task";
 
-import Button from "material-ui/Button";
+import Button from "@material-ui/core/Button";
 
 class TaskList extends Component {
   render() {

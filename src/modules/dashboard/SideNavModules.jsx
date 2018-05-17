@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import CommunitySideNav from "../community/CommunitySideNav";
 import ChatSideNav from "../chat/ChatSideNav";
 import WorkflowSideNav from "../workflow/WorkflowSideNav";
-import { withStyles } from "material-ui/styles";
+import { withStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router";
 // import SelectableTextButton from '../../common/SelectableTextButton';
 

@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
 import { connect } from "react-redux";
-import { withStyles } from "material-ui/styles";
-import Input from "material-ui/Input";
-import { FormControl } from "material-ui/Form";
+import { withStyles } from "@material-ui/core/styles";
+import Input from "@material-ui/core/Input";
+import { FormControl } from "@material-ui/core/Form";
 import SectionDivider from "../../../common/SectionDivider";
 
 class Description extends Component {

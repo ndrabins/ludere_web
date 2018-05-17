@@ -22,13 +22,13 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 //filepond-plugin-file-validate-size
 //filepond-plugin-file-validate-type
 
-import Input, { InputLabel } from "material-ui/Input";
-import { FormControl, FormHelperText } from "material-ui/Form";
-import Typography from "material-ui/Typography";
-import Paper from "material-ui/Paper";
-import { withStyles } from "material-ui/styles";
-import Button from "material-ui/Button";
-import Snackbar from "material-ui/Snackbar";
+import Input, { InputLabel } from "@material-ui/core/Input";
+import { FormControl, FormHelperText } from "@material-ui/core/Form";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
 
 registerPlugin(
   FilepondPluginImagePreview,

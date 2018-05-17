@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { withStyles } from "material-ui/styles";
-import Typography from "material-ui/Typography";
-import Grid from "material-ui/Grid";
-import Paper from "material-ui/Paper";
+import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
 class TeamCard extends Component {
   static defaultProps = {
