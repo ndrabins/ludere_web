@@ -239,7 +239,7 @@ export function updateTask(updatedTask, taskID = null) {
       .doc(taskIDToUpdate);
 
     return taskRef
-      .update(updatedTask)
+      .set(updatedTask, { merge: true })
       .then(function() {
         //document updated succesffuly
       })
