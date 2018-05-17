@@ -5,16 +5,13 @@ import * as Actions from "../../actions";
 
 import Map from "lodash/map";
 
-import Table, {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow
-} from "@material-ui/core/Table";
-import Checkbox from "@material-ui/core/Checkbox";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 
 import Avatar from "@material-ui/core/Avatar";
-import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 
 class CommunityList extends Component {
   handleUserSelect(uid, user) {

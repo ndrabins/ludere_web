@@ -5,7 +5,9 @@ import * as Actions from "../../actions";
 import { withStyles } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
-import Input, { InputLabel } from "@material-ui/core/Input";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+
 import FormControl from "@material-ui/core/FormControl";
 import Fade from "@material-ui/core/Fade";
 import IconButton from "@material-ui/core/IconButton";

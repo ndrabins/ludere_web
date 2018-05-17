@@ -22,7 +22,8 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 //filepond-plugin-file-validate-size
 //filepond-plugin-file-validate-type
 
-import Input, { InputLabel } from "@material-ui/core/Input";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Typography from "@material-ui/core/Typography";

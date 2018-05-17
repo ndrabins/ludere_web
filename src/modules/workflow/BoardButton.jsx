@@ -7,7 +7,8 @@ import { withRouter } from "react-router";
 import { withStyles } from "@material-ui/core/styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Typography from "@material-ui/core/Typography";
-import Menu, { MenuItem } from "@material-ui/core/Menu";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import Input from "@material-ui/core/Input";
 
 import { Link } from "react-router-dom";

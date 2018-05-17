@@ -35,11 +35,17 @@ class AssignUser extends Component {
 
 const styles = {
   iconButton: {
-    width: 40,
-    height: 40
+    width: 34,
+    height: 34,
+    border: "dotted 1px #b9bbbe",
+    marginLeft: 4,
+    transition: "border 0.25s ease-out",
+    "&:hover": {
+      border: "solid 1px #303030"
+    }
   },
   icon: {
-    fontSize: 30
+    fontSize: 26
   }
 };
 
