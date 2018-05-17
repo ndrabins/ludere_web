@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 
 import Input from "@material-ui/core/Input";
-import { FormControl } from "@material-ui/core/Form";
+import FormControl from "@material-ui/core/FormControl";
 
 class EditableText extends Component {
   state = {

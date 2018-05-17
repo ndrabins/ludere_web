@@ -8,10 +8,10 @@ import * as Actions from "../../../actions";
 
 import Checkbox from "@material-ui/core/Checkbox";
 import Input from "@material-ui/core/Input";
-import { FormControl } from "@material-ui/core/Form";
+import FormControl from "@material-ui/core/FormControl";
 import SubtaskList from "./SubtaskList";
 import SectionDivider from "../../../common/SectionDivider";
-import CommentList from './CommentList';
+import CommentList from "./CommentList";
 
 class CommentSection extends Component {
   state = {
@@ -26,7 +26,7 @@ class CommentSection extends Component {
 
   handleCreateComment = () => {
     const { commentText } = this.state;
-    if (commentText === ''){
+    if (commentText === "") {
       return;
     }
 
@@ -54,7 +54,7 @@ class CommentSection extends Component {
 
     return (
       <div className={classes.root}>
-        <SectionDivider content={'Comments'} />
+        <SectionDivider content={"Comments"} />
         <CommentList comments={comments} />
         <div className={classes.entryWrapper}>
           <FormControl className={classes.formControl}>
@@ -87,7 +87,7 @@ const styles = {
   root: {
     display: "flex",
     width: "100%",
-    flexDirection: "column",
+    flexDirection: "column"
   },
   entryWrapper: {
     display: "flex",
@@ -124,12 +124,12 @@ const styles = {
   formControl: {
     width: "100%",
     marginTop: 3
-  },
+  }
 };
 
 function mapStateToProps(state) {
   return {
-    comments: state.workflow.comments,
+    comments: state.workflow.comments
   };
 }
 

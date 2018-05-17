@@ -6,10 +6,10 @@ import { withStyles } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
 import Input, { InputLabel } from "@material-ui/core/Input";
-import { FormControl } from "@material-ui/core/Form";
+import FormControl from "@material-ui/core/FormControl";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowIcon from "@material-ui/icons/KeyboardArrowRight";
-import Fade from "@material-ui/core/transitions/Fade";
+import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
 
 import GoogleIcon from "../../static/google.svg";

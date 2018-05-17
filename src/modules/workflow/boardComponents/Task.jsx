@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
 import Typography from "@material-ui/core/Typography";
-import { CircularProgress } from "@material-ui/core/Progress";
 import Filter from "lodash/filter";
-import CommentIcon from "@material-ui/icons/ModeComment";
 import Circle from "react-circle";
 import AssignUser from "./AssignUser";
 

@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
-import Fade from "@material-ui/core/transitions/Fade";
+import Fade from "@material-ui/core/Fade";
 import EditableText from "../../../common/EditableText";
 
 class SubtaskList extends Component {

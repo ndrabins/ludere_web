@@ -10,7 +10,7 @@ import * as Actions from "../../../actions";
 import SectionDivider from "../../../common/SectionDivider";
 import SubtaskList from "./SubtaskList";
 import Input from "@material-ui/core/Input";
-import { FormControl } from "@material-ui/core/Form";
+import FormControl from "@material-ui/core/FormControl";
 
 class TaskDetailSubtasks extends Component {
   state = {

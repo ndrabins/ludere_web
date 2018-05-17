@@ -4,7 +4,7 @@ import * as Actions from "../../../actions";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import Input from "@material-ui/core/Input";
-import { FormControl } from "@material-ui/core/Form";
+import FormControl from "@material-ui/core/FormControl";
 import SectionDivider from "../../../common/SectionDivider";
 
 class Description extends Component {
@@ -12,9 +12,9 @@ class Description extends Component {
     descriptionText: this.props.task.description
   };
 
-  componentWillReceiveProps(nextProps){
-    if(nextProps.description !== this.state.descriptionText){
-      this.setState({descriptionText: nextProps.task.description});
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.description !== this.state.descriptionText) {
+      this.setState({ descriptionText: nextProps.task.description });
     }
   }
 
@@ -31,8 +31,8 @@ class Description extends Component {
   handleFieldEnter = () => {
     let updatedTask = this.props.task;
 
-    if(this.props.task.description === this.state.descriptionText){
-      return //nothing has changed so don't update
+    if (this.props.task.description === this.state.descriptionText) {
+      return; //nothing has changed so don't update
     }
 
     updatedTask.description = this.state.descriptionText;
@@ -48,7 +48,7 @@ class Description extends Component {
         <FormControl className={classes.formControl}>
           <Input
             className={classes.input}
-            classes={{ focused: classes.inputFocused}}
+            classes={{ focused: classes.inputFocused }}
             value={descriptionText}
             onChange={this.handleChange("descriptionText")}
             multiline
@@ -85,13 +85,13 @@ const styles = theme => ({
     overflowY: "auto",
     overflowX: "hidden",
     cursor: "text",
-    border: 'transparent 2px solid',
-    transition: 'border .25s ease-out',
-    '&:hover': {
-      border: '#B0B2B6 2px solid',
-    },
+    border: "transparent 2px solid",
+    transition: "border .25s ease-out",
+    "&:hover": {
+      border: "#B0B2B6 2px solid"
+    }
   },
-  inputFocused:{
+  inputFocused: {
     backgroundColor: "white",
     borderRadius: 5,
     padding: 5,
@@ -99,11 +99,11 @@ const styles = theme => ({
     overflowY: "auto",
     overflowX: "hidden",
     cursor: "text",
-    transition: 'border .25s ease-out',
-    border: '2px solid #6d6d6d',
-    '&:hover': {
-      border: '2px solid #6d6d6d',
-    },
+    transition: "border .25s ease-out",
+    border: "2px solid #6d6d6d",
+    "&:hover": {
+      border: "2px solid #6d6d6d"
+    }
   },
   formControl: {
     width: "100%"
