@@ -38,14 +38,27 @@ class MessageEntry extends Component {
       .storage()
       .ref(`chat/${selectedChannel}/${file.name}`);
 
-    // data.append("file", this.uploadInput.files[0]);
-    chatUploadRef.put(file).then(function(snapshot) {
-      actions.sendMessage({
-        messageText: file.name,
-        type: "file",
-        fileURL: snapshot.downloadURL
-      });
-    });
+    const uploadTask = chatUploadRef.put(file);
+
+    uploadTask.on(
+      `state_changed`,
+      snapshot => {
+        // track progress here
+      },
+      error => {
+        error("File couldn't be uploaded :(");
+      },
+      () => {
+        //Success
+        uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+          actions.sendMessage({
+            messageText: file.name,
+            type: "file",
+            fileURL: downloadURL
+          });
+        });
+      }
+    );
   };
 
   render() {

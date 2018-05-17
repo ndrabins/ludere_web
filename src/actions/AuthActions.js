@@ -23,17 +23,7 @@ export function signUpUser(email, password) {
         //initialize the user to our user storage in firestore
         //This is where we will store all the users profile information instead of firebases user object
         //This is because you can't add fields to firebases user object
-        dispatch(initializeUser(user));
-
-        user
-          .sendEmailVerification()
-          .then(function() {
-            // Email sent.
-          })
-          .catch(function(error) {
-            // An error happened.
-            console.log("could not send verification email");
-          });
+        dispatch(initializeUser(user.user));
       })
       .catch(error => {
         dispatch(authError(error));
@@ -97,6 +87,8 @@ function initializeUser(user) {
     conversations: {} //conversationID:boolean , if a converstion is true it is an active one, if not it is inactive
   };
   let uid = user.uid;
+  console.log("user", user);
+  console.log("INITIALIZING", uid);
 
   let userRef = firebase
     .firestore()
@@ -106,6 +98,7 @@ function initializeUser(user) {
     userRef
       .set(ourUserObject)
       .then(function() {
+        console.log("SUCCESS");
         dispatch({ type: INITIALIZE_USER });
       })
       .catch(function(error) {

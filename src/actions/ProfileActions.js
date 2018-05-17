@@ -31,7 +31,10 @@ export function fetchUserProfile(userID = "fetchMyProfile") {
       .doc(`${profileID}`);
 
     profileRef.onSnapshot(function(doc) {
-      dispatch({ type: type, profile: doc.data() });
+      // TODO:  find out how this is returning undefined.
+      if (doc.data) {
+        dispatch({ type: type, profile: doc.data() });
+      }
     });
   };
 }

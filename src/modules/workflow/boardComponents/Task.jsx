@@ -6,8 +6,13 @@ import Typography from "@material-ui/core/Typography";
 import Filter from "lodash/filter";
 import Circle from "react-circle";
 import AssignUser from "./AssignUser";
+import transitions from "@material-ui/core/styles/transitions";
 
 class Task extends Component {
+  // state = {
+  //   isTaskHovered: false
+  // };
+
   getSubtaskCompletePercentage = () => {
     const { subtasks } = this.props.task;
     const totalSubtasks = subtasks.length;
@@ -20,6 +25,14 @@ class Task extends Component {
 
     return percentDone;
   };
+
+  // handleMouseOver = () => {
+  //   this.setState({ isTaskHovered: true });
+  // };
+
+  // handleMouseLeave = () => {
+  //   this.setState({ isTaskHovered: false });
+  // };
 
   render() {
     const { task, taskID } = this.props;
@@ -34,6 +47,8 @@ class Task extends Component {
       <div
         style={styles.container}
         onClick={() => this.props.actions.toggleTaskDetail(taskID)}
+        onMouseOver={this.handleMouseOver}
+        onMouseLeave={this.handleMouseLeave}
       >
         <Typography
           style={{
@@ -75,7 +90,6 @@ class Task extends Component {
 const styles = {
   container: {
     minHeight: 30,
-    cursor: "grab",
     boxShadow: "0 9px 18px 0 rgba(0, 0, 0, 0.04)",
     borderRadius: 8,
     backgroundColor: "white",
