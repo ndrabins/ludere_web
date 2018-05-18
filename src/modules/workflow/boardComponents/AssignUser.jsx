@@ -41,7 +41,7 @@ class AssignUser extends Component {
 
   getAssignedUsersContent = () => {
     const { classes, task, workspaceMembers } = this.props;
-    const possibleUsers = { ...task.assigned };
+    const possibleUsers = { ...task.assigned }; //all users that have been assigned or unassigned
 
     // get only the users that are assigned
     let assignedUsers = pickBy(possibleUsers, user => user === true);
@@ -85,7 +85,6 @@ class AssignUser extends Component {
     const { anchorEl } = this.state;
 
     const teamMembers = teams[selectedTeam].members; // array of userIDs in team
-
     return (
       <div style={styles.container}>
         {this.getAssignedUsersContent()}
@@ -103,7 +102,7 @@ class AssignUser extends Component {
         >
           {Map(teamMembers, (isTeamMember, memberID) => {
             let teamMember = workspaceMembers[memberID];
-            let isMemberAssigned = task.assigned[memberID];
+            let isMemberAssigned = task.assigned[memberID] || false;
 
             return (
               isTeamMember && (
