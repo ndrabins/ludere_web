@@ -15,8 +15,8 @@ import {
   UPDATE_CHANNEL
 } from "./types";
 
-import firebase from "firebase";
-require("firebase/firestore");
+import firebase from "firebase/app";
+import "firebase/firestore";
 
 export function fetchChannels(selectedTeam) {
   return (dispatch, getState) => {

@@ -169,8 +169,9 @@ const styles = theme => ({
     height: 30,
     border: " 2px solid white",
     marginLeft: "-10px",
-    transition: "border 0.25s ease-out",
+    transition: "border 0.25s ease-out, transform 0.25s ease-out",
     "&:hover": {
+      transform: "scale(1.1)",
       border: "solid 2px #303030"
     }
   },

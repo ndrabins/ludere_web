@@ -4,9 +4,9 @@ import {
   FETCH_MY_USER_PROFILE_SUCCESS,
   UPDATE_USER_PROFILE
 } from "./types";
-import firebase from "firebase";
+import firebase from "firebase/app";
 
-require("firebase/firestore");
+import "firebase/firestore";
 
 //fetch my profileID on default
 export function fetchUserProfile(userID = "fetchMyProfile") {

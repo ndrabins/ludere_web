@@ -12,11 +12,10 @@ import {
   FETCH_WORKSPACE_USERS_SUCCESS
 } from "./types";
 
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
 
 import * as teamActions from "./TeamActions";
-
-require("firebase/firestore");
 
 export function createWorkspace(workspaceName) {
   return (dispatch, getState) => {

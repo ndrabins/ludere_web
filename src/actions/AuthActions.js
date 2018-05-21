@@ -5,10 +5,9 @@ import {
   AUTH_SUCCESS,
   INITIALIZE_USER
 } from "./types";
-import firebase from "firebase";
 import * as localforage from "localforage";
-
-require("firebase/firestore");
+import firebase from "firebase/app";
+import "firebase/firestore";
 
 export function signUpUser(email, password) {
   return function(dispatch) {

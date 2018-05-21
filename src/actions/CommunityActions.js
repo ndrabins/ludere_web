@@ -13,9 +13,9 @@ import {
   UNSUBSCRIBE_CONVERSATION_MESSAGES,
   UNSUBSCRIBE_CONVERSATIONS
 } from "./types";
-import firebase from "firebase";
+import firebase from "firebase/app";
 
-require("firebase/firestore");
+import "firebase/firestore";
 
 export function startDirectMessage(recieverUID, recieverInfo) {
   /*

@@ -9,11 +9,11 @@ import {
   REMOVE_TEAM_MEMBER
 } from "./types";
 
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
+
 import * as chatActions from "./ChatActions";
 import * as workflowActions from "./WorkflowActions";
-
-require("firebase/firestore");
 
 export function createTeam(teamName, description = "", initialTeam = false) {
   return (dispatch, getState) => {

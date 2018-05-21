@@ -13,9 +13,9 @@ import {
   FETCH_BOARD_DATA,
   UPDATE_BOARD
 } from "./types";
-import firebase from "firebase";
+import firebase from "firebase/app";
 
-require("firebase/firestore");
+import "firebase/firestore";
 
 //fetch my profileID on default
 export function createBoard(boardName) {
