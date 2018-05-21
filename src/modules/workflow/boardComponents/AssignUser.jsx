@@ -12,6 +12,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Avatar from "@material-ui/core/Avatar";
 import Checkbox from "@material-ui/core/Checkbox";
+import Tooltip from "@material-ui/core/Tooltip";
+
 import Map from "lodash/map";
 import pickBy from "lodash/pickBy";
 
@@ -52,13 +54,18 @@ class AssignUser extends Component {
           {Map(assignedUsers, (isAssigned, memberID) => {
             let teamMember = workspaceMembers[memberID];
             return (
-              <Avatar
-                className={classes.avatar}
+              <Tooltip
                 key={memberID}
-                alt="Person"
-                src={teamMember.photoURL}
-                onClick={this.assignUserClick}
-              />
+                id="tooltip-icon"
+                title={teamMember.displayName}
+              >
+                <Avatar
+                  className={classes.avatar}
+                  alt="Person"
+                  src={teamMember.photoURL}
+                  onClick={this.assignUserClick}
+                />
+              </Tooltip>
             );
           })}
         </div>
@@ -162,9 +169,9 @@ const styles = theme => ({
     height: 30,
     border: " 2px solid white",
     marginLeft: "-10px",
+    transition: "border 0.25s ease-out",
     "&:hover": {
-      border: "solid 2px #303030",
-      color: "#303030"
+      border: "solid 2px #303030"
     }
   },
   assignedUsersContainer: {
