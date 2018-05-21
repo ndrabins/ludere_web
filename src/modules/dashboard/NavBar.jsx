@@ -119,7 +119,7 @@ const styles = {
     width: 34,
     height: 34,
     cursor: "pointer",
-    border: "2px solid #C3C3C3"
+    boxShadow: "0px 0px 0px 2px #C3C3C3"
   },
   displayName: {
     color: "#FFFFFF",

@@ -167,12 +167,12 @@ const styles = theme => ({
   avatar: {
     width: 30,
     height: 30,
-    border: " 2px solid white",
+    boxShadow: " 0px 0px 0px 2px white",
     marginLeft: "-10px",
-    transition: "border 0.25s ease-out, transform 0.25s ease-out",
+    transition: "box-shadow 0.25s ease-out, transform 0.25s ease-out",
     "&:hover": {
       transform: "scale(1.1)",
-      border: "solid 2px #303030"
+      boxShadow: "0px 0px 0px 2px #303030"
     }
   },
   assignedUsersContainer: {

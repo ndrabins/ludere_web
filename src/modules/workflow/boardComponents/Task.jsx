@@ -6,12 +6,39 @@ import Typography from "@material-ui/core/Typography";
 import Filter from "lodash/filter";
 import Circle from "react-circle";
 import AssignUser from "./AssignUser";
+import { withStyles } from "@material-ui/core/styles";
 import transitions from "@material-ui/core/styles/transitions";
 
 class Task extends Component {
   // state = {
   //   isTaskHovered: false
   // };
+
+  getSubtasksComplete = () => {
+    const { subtasks } = this.props.task;
+    const { classes } = this.props;
+    const totalSubtasks = subtasks.length;
+    const subtasksDone = Filter(subtasks, { completed: true }).length;
+
+    let percentDone = (subtasksDone / totalSubtasks * 100).toFixed(0);
+    if (totalSubtasks === 0) {
+      return <div />;
+    }
+
+    if (totalSubtasks < 10) {
+      return (
+        <Typography variant="caption" className={classes.subtaskCounter}>
+          {subtasksDone + "/" + totalSubtasks}
+        </Typography>
+      );
+    } else {
+      return (
+        <Typography variant="caption" className={classes.percentageCounter}>
+          {percentDone + "%"}
+        </Typography>
+      );
+    }
+  };
 
   getSubtaskCompletePercentage = () => {
     const { subtasks } = this.props.task;
@@ -26,16 +53,8 @@ class Task extends Component {
     return percentDone;
   };
 
-  // handleMouseOver = () => {
-  //   this.setState({ isTaskHovered: true });
-  // };
-
-  // handleMouseLeave = () => {
-  //   this.setState({ isTaskHovered: false });
-  // };
-
   render() {
-    const { task, taskID } = this.props;
+    const { task, taskID, classes } = this.props;
 
     if (task === undefined) {
       return <div />;
@@ -45,13 +64,13 @@ class Task extends Component {
 
     return (
       <div
-        style={styles.container}
+        className={classes.container}
         onClick={() => this.props.actions.toggleTaskDetail(taskID)}
         onMouseOver={this.handleMouseOver}
         onMouseLeave={this.handleMouseLeave}
       >
         <Typography
-          style={{
+          className={{
             display: "flex",
             wordWrap: "break-all",
             overflowWrap: "break-word"
@@ -59,9 +78,9 @@ class Task extends Component {
         >
           {task.title}
         </Typography>
-        <div style={styles.extraInfoContainer}>
+        <div className={classes.extraInfoContainer}>
           {task.subtasks.length > 0 && (
-            <React.Fragment>
+            <div className={classes.percentageContainer}>
               <Circle
                 animate={true} // Boolean: Animated/Static progress
                 size={30} // Number: Defines the size of the circle.
@@ -74,11 +93,8 @@ class Task extends Component {
                 showPercentage={false} // Boolean: Show/hide percentage.
                 showPercentageSymbol={false} // Boolean: Show/hide only the "%" symbol.
               />
-              <Typography variant="caption" style={styles.subtasksCounter}>
-                {Filter(task.subtasks, { completed: true }).length}/
-                {task.subtasks.length}
-              </Typography>
-            </React.Fragment>
+              {this.getSubtasksComplete()}
+            </div>
           )}
           <AssignUser task={task} taskID={taskID} />
         </div>
@@ -107,14 +123,24 @@ const styles = {
     flexDirection: "row",
     alignItems: "center"
   },
-  subtasksCounter: {
-    paddingLeft: 3
+  percentageCounter: {
+    position: "absolute"
+  },
+  subtaskCounter: {
+    position: "absolute"
   },
   commentIcon: {
     color: "#6d6d6d",
     width: 20,
     height: 20,
     marginLeft: 10
+  },
+  percentageContainer: {
+    position: "relative",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
   }
 };
 
@@ -124,4 +150,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(Task);
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Task));
