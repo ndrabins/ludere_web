@@ -71,20 +71,15 @@ export function createWorkspace(workspaceName) {
   };
 }
 
-export function joinWorkspace(workspaceID, history) {
+export function joinWorkspace(workspaceID, user) {
   return (dispatch, getState) => {
     dispatch({ type: JOIN_WORKSPACE });
-    let { user } = getState().auth;
-
-    if (user == null) {
-      console.log("no user logged in");
-      return;
-    }
 
     let membersUpdate = {};
     let usersWorkspaceUpdate = {};
+    let userID = user.privateData.uid;
 
-    membersUpdate[`members.${user.uid}`] = true;
+    membersUpdate[`members.${userID}`] = true;
     usersWorkspaceUpdate[`workspaces.${workspaceID}`] = true;
 
     let workspaceRef = firebase
@@ -94,7 +89,7 @@ export function joinWorkspace(workspaceID, history) {
     let userRef = firebase
       .firestore()
       .collection("users")
-      .doc(user.uid);
+      .doc(userID);
 
     var batch = firebase.firestore().batch();
 
@@ -104,8 +99,9 @@ export function joinWorkspace(workspaceID, history) {
     batch
       .commit()
       .then(function() {
-        dispatch({ type: JOIN_WORKSPACE_SUCCESS });
-        history.push("/community/");
+        dispatch({
+          type: JOIN_WORKSPACE_SUCCESS
+        });
       })
       .catch(function(error) {
         console.log("Transaction failed: ", error);

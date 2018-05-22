@@ -10,11 +10,12 @@ import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBack from "@material-ui/icons/ArrowBack";
+import Loading from "../../common/LoadingLottie";
 
 import { withStyles } from "@material-ui/core/styles";
 
 import CreateWorkspace from "./CreateWorkspace";
-import JoinWorkspace from "./JoinWorkspace";
+// import JoinWorkspace from "./JoinWorkspace";
 
 class WorkspaceFlow extends Component {
   state = {
@@ -34,8 +35,16 @@ class WorkspaceFlow extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, joiningWorkspaceLoading } = this.props;
     const { value } = this.state;
+    if (joiningWorkspaceLoading) {
+      return (
+        <div style={{ height: "100%" }}>
+          <Loading />
+        </div>
+      );
+    }
+
     return (
       <div className={classes.container}>
         <div className={classes.tabsContainer}>
@@ -50,7 +59,7 @@ class WorkspaceFlow extends Component {
             <Tab label="Join Workspace" />
           </Tabs>
           {value === 0 && <CreateWorkspace />}
-          {value === 1 && <JoinWorkspace />}
+          {/* {value === 1 && <JoinWorkspace />} */}
         </div>
       </div>
     );
@@ -78,7 +87,9 @@ const styles = {
 };
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    loadingJoinWorkspace: state.workspace.loadingJoinWorkspace
+  };
 }
 
 function mapDispatchToProps(dispatch) {

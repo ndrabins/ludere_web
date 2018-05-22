@@ -52,9 +52,7 @@ export function createTeam(teamName, description = "", initialTeam = false) {
         dispatch({ type: CREATE_TEAM_SUCCESS });
         dispatch(selectTeam(docRef.id));
 
-        console.log("inital team is", initialTeam);
         if (initialTeam) {
-          console.log("CREATING INITAL TEAM");
           workspaceRef.update({ initalTeam: docRef.id });
         }
 

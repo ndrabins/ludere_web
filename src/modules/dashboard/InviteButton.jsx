@@ -17,7 +17,7 @@ class InviteButton extends Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ open: false, copied: false });
   };
 
   handleClickOpen = () => {
@@ -29,7 +29,7 @@ class InviteButton extends Component {
     const { open, copied } = this.state;
 
     const localURL = window.location.href.split("/"); //get just base URL
-    const url = `https://${localURL[2]}/joinWorkspace/${selectedWorkspace}`;
+    const url = `https://${localURL[2]}/auth/${selectedWorkspace}`;
 
     return (
       <div className={classes.container}>

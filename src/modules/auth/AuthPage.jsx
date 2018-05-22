@@ -11,15 +11,23 @@ import backgroundImg from "../../static/mountains.png";
 
 class AuthPage extends Component {
   state = {
-    loginTransition: "null"
+    loginTransition: "null",
+    workspaceID: null
   };
+
+  componentDidMount() {
+    const { workspaceID } = this.props.match.params;
+    if (workspaceID) {
+      this.setState({ workspaceID: workspaceID });
+    }
+  }
 
   setFocus = focus => {
     this.setState({ loginTransition: focus });
   };
 
   render() {
-    const { loginTransition } = this.state;
+    const { loginTransition, workspaceID } = this.state;
 
     return (
       <div style={styles.authPage}>
@@ -34,10 +42,12 @@ class AuthPage extends Component {
             <SignUp
               setFocus={this.setFocus}
               loginTransition={loginTransition}
+              workspaceID={workspaceID}
             />
             <SignIn
               setFocus={this.setFocus}
               loginTransition={loginTransition}
+              workspaceID={workspaceID}
             />
           </div>
         </div>

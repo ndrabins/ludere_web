@@ -19,7 +19,8 @@ const initialState = {
   selectedWorkspace: null,
   workspaceUsers: {},
   loadingUsers: false,
-  loadingWorkspaces: false
+  loadingWorkspaces: false,
+  loadingJoinWorkspace: false
 };
 
 export default function workspaces(state = initialState, action) {
@@ -46,11 +47,20 @@ export default function workspaces(state = initialState, action) {
     case FETCH_WORKSPACES_ERROR:
       return state;
     case JOIN_WORKSPACE:
-      return state;
+      return {
+        ...state,
+        loadingJoinWorkspace: true
+      };
     case JOIN_WORKSPACE_SUCCESS:
-      return state;
+      return {
+        ...state,
+        loadingJoinWorkspace: false
+      };
     case JOIN_WORKSPACE_ERROR:
-      return state;
+      return {
+        ...state,
+        joiningWorkspaceLoading: false
+      };
     case FETCH_WORKSPACE_USERS:
       return {
         ...state,

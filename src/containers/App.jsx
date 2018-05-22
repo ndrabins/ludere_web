@@ -19,7 +19,6 @@ import ReactGA from "react-ga";
 import Loading from "../common/LoadingLottie";
 import Main from "./Main";
 import AuthPage from "../modules/auth/AuthPage";
-import JoinWorkspace from "../modules/workspace/JoinWorkspace";
 // import Home from "./Home";
 
 function PrivateRoute({ component: Component, authenticated, ...rest }) {
@@ -73,12 +72,15 @@ class App extends Component {
           <Router>
             <div style={{ height: "100%" }}>
               <Switch>
-                <Route
-                  path="/joinWorkspace/:workspaceID"
-                  component={JoinWorkspace}
+                {/* this handles invites  */}
+                <PublicRoute
+                  authenticated={this.props.authenticated}
+                  path="/auth/:workspaceID"
+                  component={AuthPage}
                 />
                 <PublicRoute
                   authenticated={this.props.authenticated}
+                  exact
                   path="/auth"
                   component={AuthPage}
                 />

@@ -43,7 +43,7 @@ class SignUp extends Component {
   };
 
   renderSignIn = () => {
-    const { loginTransition, classes } = this.props;
+    const { loginTransition, classes, workspaceID } = this.props;
     const { email, password } = this.state;
 
     if (loginTransition === "null") {
@@ -108,7 +108,9 @@ class SignUp extends Component {
             <div className={classes.buttonContainer}>
               <Button
                 variant="raised"
-                onClick={() => this.props.actions.authWithProvider("Google")}
+                onClick={() =>
+                  this.props.actions.authWithProvider("Google", workspaceID)
+                }
                 className={classes.googleButton}
               >
                 <img
@@ -121,7 +123,9 @@ class SignUp extends Component {
               <Button
                 className={classes.twitterButton}
                 variant="raised"
-                onClick={() => this.props.actions.authWithProvider("Twitter")}
+                onClick={() =>
+                  this.props.actions.authWithProvider("Twitter", workspaceID)
+                }
               >
                 <TwitterIcon className={classes.icon} />
                 SIGN IN WITH TWITTER

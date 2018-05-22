@@ -9,10 +9,11 @@ import * as localforage from "localforage";
 import firebase from "firebase/app";
 import "firebase/firestore";
 
-export function signUpUser(email, password) {
+import * as workspaceActions from "./WorkspaceActions";
+
+export function signUpUser(email, password, workspaceInviteID) {
   return function(dispatch) {
     dispatch({ type: AUTH_USER });
-
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -22,7 +23,7 @@ export function signUpUser(email, password) {
         //initialize the user to our user storage in firestore
         //This is where we will store all the users profile information instead of firebases user object
         //This is because you can't add fields to firebases user object
-        dispatch(initializeUser(user.user));
+        dispatch(initializeUser(user.user, workspaceInviteID));
       })
       .catch(error => {
         dispatch(authError(error));
@@ -30,7 +31,7 @@ export function signUpUser(email, password) {
   };
 }
 
-export function authWithProvider(providerType) {
+export function authWithProvider(providerType, workspaceInviteID) {
   return function(dispatch) {
     dispatch({ type: AUTH_USER });
     let provider;
@@ -55,7 +56,7 @@ export function authWithProvider(providerType) {
           .doc(user.uid);
         userRef.get().then(function(doc) {
           if (!doc.exists) {
-            dispatch(initializeUser(user));
+            dispatch(initializeUser(user, workspaceInviteID));
           }
           authSuccess(dispatch, user);
         });
@@ -66,7 +67,7 @@ export function authWithProvider(providerType) {
   };
 }
 
-function initializeUser(user) {
+function initializeUser(user, workspaceID) {
   //data only owner of account can see/change
   const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
@@ -81,13 +82,12 @@ function initializeUser(user) {
     privateData: privateData,
     workspaces: {},
     displayName: user.email, //till we get the user to set their own displayname? Probs should be part of the sign up?
-    photoURL: user.photoURL || "https://plus.google.com/107300655302181640274",
+    photoURL:
+      user.photoURL || "https://image.flaticon.com/icons/svg/186/186539.svg",
     lastLoginAt: timestamp,
     conversations: {} //conversationID:boolean , if a converstion is true it is an active one, if not it is inactive
   };
   let uid = user.uid;
-  console.log("user", user);
-  console.log("INITIALIZING", uid);
 
   let userRef = firebase
     .firestore()
@@ -97,8 +97,12 @@ function initializeUser(user) {
     userRef
       .set(ourUserObject)
       .then(function() {
-        console.log("SUCCESS");
         dispatch({ type: INITIALIZE_USER });
+
+        //if workspace ID is attached to URL (user was invited) then join that workspace on sign up
+        if (workspaceID) {
+          dispatch(workspaceActions.joinWorkspace(workspaceID, ourUserObject));
+        }
       })
       .catch(function(error) {
         console.error("Error writing document: ", error);
