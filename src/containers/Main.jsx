@@ -23,23 +23,17 @@ import TeamDashboard from "../modules/team/TeamDashboard";
 const drawerWidth = 298;
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      drawerVisible: true
-    };
-  }
+  state = {
+    drawerVisible: true
+  };
 
   componentDidMount() {
     const { actions, selectedTeam } = this.props;
     actions.fetchWorkspaces();
-    actions.fetchUserProfile();
 
     if (selectedTeam) {
       actions.loadTeamData(selectedTeam);
     }
-    // this.props.actions.fetchTeams();
   }
 
   componentWillUnmount() {
@@ -117,7 +111,8 @@ function mapStateToProps(state) {
     workspaces: state.workspace.workspaces,
     selectedTeam: state.team.selectedTeam,
     loadingWorkspaces: state.workspace.loadingWorkspaces,
-    loadingProfile: state.profile.loading
+    loadingProfile: state.profile.loading,
+    myUserProfile: state.profile.myUserProfile
   };
 }
 

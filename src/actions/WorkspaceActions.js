@@ -19,7 +19,7 @@ import * as teamActions from "./TeamActions";
 
 export function createWorkspace(workspaceName) {
   return (dispatch, getState) => {
-    let { uid } = getState().auth.user;
+    const { uid } = getState().auth.user;
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let workspace = {
@@ -43,25 +43,26 @@ export function createWorkspace(workspaceName) {
       .then(function(docRef) {
         dispatch({ type: CREATE_WORKSPACE_SUCCESS });
 
+        let workspaceID = docRef.id;
         //update user object with the workspace he is in
         let userRef = firebase
           .firestore()
           .collection("users")
           .doc(uid);
         let usersWorkspaceUpdate = {};
-        usersWorkspaceUpdate[`workspaces.${docRef.id}`] = true;
+        usersWorkspaceUpdate[`workspaces.${workspaceID}`] = true;
 
-        userRef
-          .update(usersWorkspaceUpdate)
-          .then(function() {})
-          .catch(function(error) {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-          });
+        userRef.update(usersWorkspaceUpdate);
 
+        console.log(workspaceName, description, initialTeam, workspaceID);
         //Create workspace with an initial team that everyone is a part of.
         dispatch(
-          teamActions.createTeam(workspaceName, description, initialTeam)
+          teamActions.createTeam(
+            workspaceName,
+            description,
+            initialTeam,
+            workspaceID
+          )
         );
       })
       .catch(function(error) {
@@ -143,6 +144,34 @@ export function selectWorkspace(workspaceID) {
   return dispatch => {
     dispatch({ type: SELECT_WORKSPACE, selectedWorkspace: workspaceID });
     dispatch(teamActions.fetchTeams());
+  };
+}
+
+export function fetchSelectedWorkspace() {
+  return (dispatch, getState) => {
+    let { uid, selectedWorkspace } = getState().auth.user;
+
+    dispatch({ type: FETCH_WORKSPACES });
+
+    let workspaceRef = firebase.firestore().collection("workspaces");
+    workspaceRef
+      .where(`members.${uid}`, "==", true)
+      .onSnapshot(function(querySnapshot) {
+        var workspaces = {};
+        querySnapshot.forEach(function(doc) {
+          if (selectedWorkspace === null) {
+            selectedWorkspace = doc.id;
+          }
+          workspaces[doc.id] = doc.data();
+        });
+
+        if (selectedWorkspace !== null) {
+          //if a user is in a workspace, load the data for it on app start.
+          dispatch(selectWorkspace(selectedWorkspace));
+        }
+
+        dispatch({ type: FETCH_WORKSPACES_SUCCESS, workspaces: workspaces });
+      });
   };
 }
 

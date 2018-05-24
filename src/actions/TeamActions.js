@@ -15,20 +15,27 @@ import "firebase/firestore";
 import * as chatActions from "./ChatActions";
 import * as workflowActions from "./WorkflowActions";
 
-export function createTeam(teamName, description = "", initialTeam = false) {
+export function createTeam(
+  teamName,
+  description = "",
+  initialTeam = false,
+  workspaceID = null
+) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
     let { selectedWorkspace } = getState().workspace;
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
+    const workspaceIDToFetch = workspaceID || selectedWorkspace;
+
     let teamRef = firebase
       .firestore()
-      .collection(`workspaces/${selectedWorkspace}/teams`);
+      .collection(`workspaces/${workspaceIDToFetch}/teams`);
 
     let workspaceRef = firebase
       .firestore()
       .collection("workspaces")
-      .doc(selectedWorkspace);
+      .doc(workspaceIDToFetch);
 
     let team = {
       description: description,

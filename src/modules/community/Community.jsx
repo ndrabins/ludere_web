@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
-import {Route} from 'react-router-dom';
+import { Route } from "react-router-dom";
 
 import CommunityList from "./CommunityList";
 import CommunityChat from "./CommunityChat";
 
 class Community extends Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.actions.fetchWorkspaceUsers();
     this.props.actions.fetchConversations();
   }
@@ -23,7 +23,7 @@ class Community extends Component {
       <div style={styles.container}>
         <Route exact path="/" component={CommunityList} />
         <Route exact path="/community/" component={CommunityList} />
-        <Route exact path="/community/chat" component={CommunityChat}/>
+        <Route exact path="/community/chat" component={CommunityChat} />
       </div>
     );
   }
@@ -33,9 +33,9 @@ const styles = {
   container: {
     height: "100%",
     display: "flex",
-    flex:1,
+    flex: 1
   }
-}
+};
 
 function mapStateToProps(state) {
   return {

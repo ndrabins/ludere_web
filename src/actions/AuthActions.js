@@ -10,6 +10,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 
 import * as workspaceActions from "./WorkspaceActions";
+import * as profileActions from "./ProfileActions";
 
 export function signUpUser(email, password, workspaceInviteID) {
   return function(dispatch) {
@@ -18,7 +19,7 @@ export function signUpUser(email, password, workspaceInviteID) {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(user => {
-        authSuccess(dispatch, user);
+        authSuccess(dispatch, user.user);
 
         //initialize the user to our user storage in firestore
         //This is where we will store all the users profile information instead of firebases user object
@@ -99,6 +100,9 @@ function initializeUser(user, workspaceID) {
       .then(function() {
         dispatch({ type: INITIALIZE_USER });
 
+        // //set user info
+        dispatch(profileActions.fetchUserProfile(uid));
+
         //if workspace ID is attached to URL (user was invited) then join that workspace on sign up
         if (workspaceID) {
           dispatch(workspaceActions.joinWorkspace(workspaceID, ourUserObject));
@@ -152,6 +156,7 @@ export function verifyAuth() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         authSuccess(dispatch, user);
+        dispatch(profileActions.fetchUserProfile());
       } else {
         dispatch(signOutUser());
       }

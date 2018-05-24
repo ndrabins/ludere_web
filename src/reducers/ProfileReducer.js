@@ -8,7 +8,8 @@ import {
 
 const initialState = {
   myUserProfile: {
-    photoURL: ""
+    photoURL: "",
+    workspaces: {}
   },
   selectedUserProfile: {},
   loading: false
@@ -19,7 +20,7 @@ export default function team(state = initialState, action) {
     case FETCH_USER_PROFILE:
       return { ...state, loading: true };
     case FETCH_USER_PROFILE_SUCCESS:
-      return { ...state, selectedUserProfile: action.profile, loading: true };
+      return { ...state, selectedUserProfile: action.profile, loading: false };
     case FETCH_MY_USER_PROFILE_SUCCESS:
       return { ...state, myUserProfile: action.profile, loading: false };
     case FETCH_USER_PROFILE_ERROR:
