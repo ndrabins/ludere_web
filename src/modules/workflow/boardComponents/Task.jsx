@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
 import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
 import Filter from "lodash/filter";
 import Circle from "react-circle";
 import AssignUser from "./AssignUser";
@@ -63,11 +64,12 @@ class Task extends Component {
     let percent = this.getSubtaskCompletePercentage();
 
     return (
-      <div
+      <Paper
         className={classes.container}
         onClick={() => this.props.actions.toggleTaskDetail(taskID)}
         onMouseOver={this.handleMouseOver}
         onMouseLeave={this.handleMouseLeave}
+        elevation={1}
       >
         <Typography
           className={{
@@ -98,7 +100,7 @@ class Task extends Component {
           )}
           <AssignUser task={task} taskID={taskID} />
         </div>
-      </div>
+      </Paper>
     );
   }
 }
@@ -106,12 +108,17 @@ class Task extends Component {
 const styles = {
   container: {
     minHeight: 30,
-    boxShadow: "0 9px 18px 0 rgba(0, 0, 0, 0.04)",
+    // boxShadow: "0 9px 18px 0 rgba(0, 0, 0, 0.04)",
     borderRadius: 8,
     backgroundColor: "white",
     padding: 10,
     margin: "0 0 8px 0",
-    cursor: "pointer"
+    cursor: "pointer",
+    transition: "box-shadow 0.2s ease-out",
+    "&:hover": {
+      boxShadow:
+        "0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)"
+    }
   },
   progress: {
     display: "block",
