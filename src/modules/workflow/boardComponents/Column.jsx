@@ -72,12 +72,15 @@ class Column extends Component {
         {(provided, snapshot) => (
           <div style={styles.wrapper}>
             <div
-              elevation={4}
               ref={provided.innerRef}
               {...provided.draggableProps}
-              style={{ ...styles.container, ...provided.draggableProps.style }}
+              className={classes.container}
+              style={{ ...provided.draggableProps.style }}
             >
-              <div style={styles.title} {...provided.dragHandleProps}>
+              <div
+                className={classes.title}
+                style={{ ...provided.dragHandleProps }}
+              >
                 <EditableText
                   value={list.name}
                   handleEnterPress={this.handleTitleChange}
@@ -100,7 +103,7 @@ class Column extends Component {
                   </MenuItem>
                 </Menu>
               </div>
-              <div style={styles.taskEntry}>
+              <div className={classes.taskEntry}>
                 <TextField
                   id="taskName"
                   placeholder="Create a task"
@@ -118,7 +121,7 @@ class Column extends Component {
                   }}
                 />
               </div>
-              <div style={styles.tasksContainer}>
+              <div className={classes.tasksContainer}>
                 <TaskList columnID={ID} taskOrder={list.taskOrder} />
               </div>
             </div>
@@ -137,7 +140,9 @@ const styles = {
     width: 240,
     backgroundColor: "#E5E5E6",
     margin: 6,
-    borderRadius: 7
+    borderRadius: 7,
+    boxShadow:
+      "0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)"
   },
   tasksContainer: {
     display: "flex"

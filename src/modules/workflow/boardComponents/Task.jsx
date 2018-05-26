@@ -72,7 +72,7 @@ class Task extends Component {
         elevation={1}
       >
         <Typography
-          className={{
+          style={{
             display: "flex",
             wordWrap: "break-all",
             overflowWrap: "break-word"
