@@ -77,10 +77,7 @@ class Column extends Component {
               className={classes.container}
               style={{ ...provided.draggableProps.style }}
             >
-              <div
-                className={classes.title}
-                style={{ ...provided.dragHandleProps }}
-              >
+              <div className={classes.title} {...provided.dragHandleProps}>
                 <EditableText
                   value={list.name}
                   handleEnterPress={this.handleTitleChange}
