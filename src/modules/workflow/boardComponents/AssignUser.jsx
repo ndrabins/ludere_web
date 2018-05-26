@@ -171,6 +171,7 @@ const styles = theme => ({
     marginLeft: "-10px",
     transition: "box-shadow 0.25s ease-out, transform 0.25s ease-out",
     "&:hover": {
+      zIndex: 10,
       transform: "scale(1.1)",
       boxShadow: "0px 0px 0px 2px #303030"
     }

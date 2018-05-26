@@ -54,7 +54,6 @@ export function createWorkspace(workspaceName) {
 
         userRef.update(usersWorkspaceUpdate);
 
-        console.log(workspaceName, description, initialTeam, workspaceID);
         //Create workspace with an initial team that everyone is a part of.
         dispatch(
           teamActions.createTeam(
