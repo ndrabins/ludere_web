@@ -107,7 +107,6 @@ class MessageList extends Component {
         }
       }
 
-      lastUser = message.sentBy;
       previousTimeStamp = message.dateCreated;
 
       if (message.type === "file") {
@@ -150,6 +149,8 @@ class MessageList extends Component {
           </div>
         );
       }
+
+      lastUser = message.sentBy;
     });
 
     return messages;
