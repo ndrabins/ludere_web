@@ -45,13 +45,13 @@ export default function workflow(state = initialState, action) {
       return {
         ...state,
         selectedBoard: action.selectedBoard,
-        selectedTask: null
+        selectedTask: null,
+        loadingLists: true,
+        loadingTasks: true
       };
     case FETCH_BOARD_DATA:
       return {
-        ...state,
-        loadingLists: true,
-        loadingTasks: true
+        ...state
       };
     case FETCH_BOARDS_SUCCESS:
       return {

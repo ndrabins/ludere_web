@@ -67,6 +67,10 @@ class Column extends Component {
     const { list, ID, classes } = this.props;
     const { anchorEl } = this.state;
 
+    if (list === undefined) {
+      return <div />;
+    }
+
     return (
       <Draggable draggableId={ID} type="COLUMN" index={this.props.index}>
         {(provided, snapshot) => (

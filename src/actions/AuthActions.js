@@ -179,7 +179,6 @@ export function authError(error) {
 }
 
 const authSuccess = (dispatch, user) => {
-  console.log("auth success!");
   dispatch({
     type: AUTH_SUCCESS,
     payload: user

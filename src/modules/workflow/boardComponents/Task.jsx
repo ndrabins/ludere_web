@@ -9,11 +9,12 @@ import Circle from "react-circle";
 import AssignUser from "./AssignUser";
 import { withStyles } from "@material-ui/core/styles";
 import transitions from "@material-ui/core/styles/transitions";
+import classnames from "classnames";
 
 class Task extends Component {
-  // state = {
-  //   isTaskHovered: false
-  // };
+  state = {
+    isDragging: false
+  };
 
   getSubtasksComplete = () => {
     const { subtasks } = this.props.task;
@@ -54,6 +55,14 @@ class Task extends Component {
     return percentDone;
   };
 
+  handleMouseDown = () => {
+    this.setState({ isDragging: true });
+  };
+
+  handleMouseUp = () => {
+    this.setState({ isDragging: false });
+  };
+
   render() {
     const { task, taskID, classes } = this.props;
 
@@ -67,8 +76,8 @@ class Task extends Component {
       <Paper
         className={classes.container}
         onClick={() => this.props.actions.toggleTaskDetail(taskID)}
-        onMouseOver={this.handleMouseOver}
-        onMouseLeave={this.handleMouseLeave}
+        onMouseDown={this.handleMouseDown}
+        onMouseUp={this.handleMouseUp}
         elevation={1}
       >
         <Typography
@@ -128,7 +137,8 @@ const styles = {
   extraInfoContainer: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "flex-end"
   },
   percentageCounter: {
     position: "absolute"
