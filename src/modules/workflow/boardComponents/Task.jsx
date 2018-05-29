@@ -12,10 +12,6 @@ import transitions from "@material-ui/core/styles/transitions";
 import classnames from "classnames";
 
 class Task extends Component {
-  state = {
-    isDragging: false
-  };
-
   getSubtasksComplete = () => {
     const { subtasks } = this.props.task;
     const { classes } = this.props;
@@ -55,16 +51,8 @@ class Task extends Component {
     return percentDone;
   };
 
-  handleMouseDown = () => {
-    this.setState({ isDragging: true });
-  };
-
-  handleMouseUp = () => {
-    this.setState({ isDragging: false });
-  };
-
   render() {
-    const { task, taskID, classes } = this.props;
+    const { task, taskID, classes, isDragging } = this.props;
 
     if (task === undefined) {
       return <div />;
@@ -74,11 +62,11 @@ class Task extends Component {
 
     return (
       <Paper
-        className={classes.container}
+        className={classnames(classes.container, {
+          [classes.draggingContainer]: isDragging
+        })}
         onClick={() => this.props.actions.toggleTaskDetail(taskID)}
-        onMouseDown={this.handleMouseDown}
-        onMouseUp={this.handleMouseUp}
-        elevation={1}
+        elevation={isDragging ? 20 : 1}
       >
         <Typography
           style={{
@@ -117,17 +105,23 @@ class Task extends Component {
 const styles = {
   container: {
     minHeight: 30,
-    // boxShadow: "0 9px 18px 0 rgba(0, 0, 0, 0.04)",
     borderRadius: 8,
+    border: "4px solid transparent",
     backgroundColor: "white",
     padding: 10,
     margin: "0 0 8px 0",
     cursor: "pointer",
-    transition: "box-shadow 0.2s ease-out",
+    transition: "box-shadow 0.2s ease-out, border 0.2s ease-out",
     "&:hover": {
       boxShadow:
         "0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)"
     }
+  },
+  draggingContainer: {
+    // backgroundColor: "black",
+    borderRadius: 8,
+    border: "4px solid #00BCD4",
+    transition: "box-shadow 0.2s ease-out, border 0.2s ease-out"
   },
   progress: {
     display: "block",

@@ -88,19 +88,19 @@ const styles = theme => ({
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     right: 0,
-    transition: "opacity 0.7s ease-out, width 1s ease-out",
+    transition: "opacity 0.5s ease-out, width .5s ease-out",
     opacity: 0
   },
   container: {
     marginTop: 6,
     height: `calc(100% - 84px)`,
-    width: 400,
+    width: "40%",
     position: "absolute",
     backgroundColor: "#f5f5f5",
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     right: 0,
-    transition: "opacity 1s ease-out, width .7s ease-out",
+    transition: "opacity .5s ease-out, width .5s ease-out",
     opacity: 1
   },
   innerContainer: {

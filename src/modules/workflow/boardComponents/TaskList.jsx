@@ -48,6 +48,7 @@ class TaskList extends Component {
                           key={taskID}
                           task={taskData[taskID]}
                           taskID={taskID}
+                          isDragging={dragSnapshot.isDragging}
                         />
                       </div>
                     )}
