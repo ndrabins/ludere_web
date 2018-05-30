@@ -12,6 +12,10 @@ import transitions from "@material-ui/core/styles/transitions";
 import classnames from "classnames";
 
 class Task extends Component {
+  state = {
+    hovered: false
+  };
+
   getSubtasksComplete = () => {
     const { subtasks } = this.props.task;
     const { classes } = this.props;
@@ -51,8 +55,17 @@ class Task extends Component {
     return percentDone;
   };
 
+  onMouseOver = () => {
+    this.setState({ hovered: true });
+  };
+
+  onMouseLeave = () => {
+    this.setState({ hovered: false });
+  };
+
   render() {
     const { task, taskID, classes, isDragging } = this.props;
+    const { hovered } = this.state;
 
     if (task === undefined) {
       return <div />;
@@ -67,6 +80,8 @@ class Task extends Component {
         })}
         onClick={() => this.props.actions.toggleTaskDetail(taskID)}
         elevation={isDragging ? 20 : 1}
+        onMouseOver={this.onMouseOver}
+        onMouseLeave={this.onMouseLeave}
       >
         <Typography
           style={{
@@ -78,24 +93,22 @@ class Task extends Component {
           {task.title}
         </Typography>
         <div className={classes.extraInfoContainer}>
-          {task.subtasks.length > 0 && (
-            <div className={classes.percentageContainer}>
-              <Circle
-                animate={true} // Boolean: Animated/Static progress
-                size={30} // Number: Defines the size of the circle.
-                lineWidth={30} // Number: Defines the thickness of the circle's stroke.
-                progress={percent} // Number: Update to change the progress and percentage.
-                progressColor="#20BDD3" // String: Color of "progress" portion of circle.
-                bgColor="whitesmoke" // String: Color of "empty" portion of circle.
-                textColor="#303030" // String: Color of percentage text color.
-                roundedStroke={true} // Boolean: Rounded/Flat line ends
-                showPercentage={false} // Boolean: Show/hide percentage.
-                showPercentageSymbol={false} // Boolean: Show/hide only the "%" symbol.
-              />
-              {this.getSubtasksComplete()}
-            </div>
-          )}
-          <AssignUser task={task} taskID={taskID} />
+          <div className={classes.percentageContainer}>
+            <Circle
+              animate={true} // Boolean: Animated/Static progress
+              size={30} // Number: Defines the size of the circle.
+              lineWidth={30} // Number: Defines the thickness of the circle's stroke.
+              progress={percent} // Number: Update to change the progress and percentage.
+              progressColor="#20BDD3" // String: Color of "progress" portion of circle.
+              bgColor="whitesmoke" // String: Color of "empty" portion of circle.
+              textColor="#303030" // String: Color of percentage text color.
+              roundedStroke={true} // Boolean: Rounded/Flat line ends
+              showPercentage={false} // Boolean: Show/hide percentage.
+              showPercentageSymbol={false} // Boolean: Show/hide only the "%" symbol.
+            />
+            {this.getSubtasksComplete()}
+          </div>
+          {hovered > 0 && <AssignUser task={task} taskID={taskID} />}
         </div>
       </Paper>
     );
@@ -132,7 +145,8 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-end"
+    justifyContent: "space-between",
+    height: 30
   },
   percentageCounter: {
     position: "absolute"

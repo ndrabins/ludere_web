@@ -137,7 +137,7 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
-    minHeight: 300,
+    minHeight: "75%", //this is to leave room for tasks moving
     width: 240,
     backgroundColor: "#E5E5E6",
     margin: 6,
@@ -146,7 +146,8 @@ const styles = {
       "0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)"
   },
   tasksContainer: {
-    display: "flex"
+    display: "flex",
+    height: "100%"
   },
   wrapper: {
     // display: "flex",
