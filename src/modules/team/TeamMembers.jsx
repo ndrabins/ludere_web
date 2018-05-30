@@ -22,9 +22,6 @@ class TeamMembers extends Component {
     anchorEl: null,
     selectedUserID: null
   };
-  componentDidMount() {
-    this.props.actions.fetchWorkspaceUsers();
-  }
 
   handleMenuClick = (event, userID) => {
     this.setState({ anchorEl: event.currentTarget, selectedUserID: userID });

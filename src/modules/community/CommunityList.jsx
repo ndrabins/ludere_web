@@ -74,7 +74,6 @@ const styles = {
 function mapStateToProps(state) {
   return {
     workspaceUsers: state.workspace.workspaceUsers,
-    loading: state.workspace.loadingUsers,
     myID: state.auth.user.uid
   };
 }

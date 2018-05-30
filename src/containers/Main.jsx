@@ -30,6 +30,7 @@ class Main extends Component {
   componentDidMount() {
     const { actions, selectedTeam } = this.props;
     actions.fetchWorkspaces();
+    actions.fetchWorkspaceUsers();
 
     if (selectedTeam) {
       actions.loadTeamData(selectedTeam);
@@ -46,9 +47,15 @@ class Main extends Component {
   }
 
   render() {
-    const { history, location, loadingWorkspaces, loadingProfile } = this.props;
+    const {
+      history,
+      location,
+      loadingWorkspaces,
+      loadingProfile,
+      loadingUsers
+    } = this.props;
 
-    if (loadingWorkspaces || loadingProfile) {
+    if (loadingWorkspaces || loadingProfile || loadingUsers) {
       return <Loading />;
     }
 
@@ -112,7 +119,8 @@ function mapStateToProps(state) {
     selectedTeam: state.team.selectedTeam,
     loadingWorkspaces: state.workspace.loadingWorkspaces,
     loadingProfile: state.profile.loading,
-    myUserProfile: state.profile.myUserProfile
+    myUserProfile: state.profile.myUserProfile,
+    loadingUsers: state.workspace.loadingUsers
   };
 }
 

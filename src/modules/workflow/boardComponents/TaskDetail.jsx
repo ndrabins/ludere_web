@@ -94,6 +94,7 @@ const styles = theme => ({
   container: {
     marginTop: 6,
     height: `calc(100% - 84px)`,
+    minWidth: 300,
     width: "40%",
     position: "absolute",
     backgroundColor: "#f5f5f5",
@@ -104,7 +105,7 @@ const styles = theme => ({
     opacity: 1
   },
   innerContainer: {
-    minWidth: 400,
+    minWidth: 300,
     height: "100%",
     display: "flex",
     flexDirection: "column"

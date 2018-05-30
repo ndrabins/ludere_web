@@ -42,7 +42,7 @@ class AssignUser extends Component {
   };
 
   getAssignedUsersContent = () => {
-    const { classes, task, workspaceMembers } = this.props;
+    const { classes, task, workspaceMembers, hovered } = this.props;
     const possibleUsers = { ...task.assigned }; //all users that have been assigned or unassigned
 
     // get only the users that are assigned
@@ -72,12 +72,14 @@ class AssignUser extends Component {
       );
     } else {
       return (
-        <IconButton
-          className={classes.iconButton}
-          onClick={this.assignUserClick}
-        >
-          <PersonIcon className={classes.icon} />
-        </IconButton>
+        hovered && (
+          <IconButton
+            className={classes.iconButton}
+            onClick={this.assignUserClick}
+          >
+            <PersonIcon className={classes.icon} />
+          </IconButton>
+        )
       );
     }
   };
