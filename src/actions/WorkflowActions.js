@@ -11,7 +11,9 @@ import {
   UNSUBSCRIBE_BOARD_DATA,
   UNSUBSCRIBE_BOARDS,
   FETCH_BOARD_DATA,
-  UPDATE_BOARD
+  UPDATE_BOARD,
+  FETCH_TAGS,
+  CREATE_TAG
 } from "./types";
 import firebase from "firebase/app";
 
@@ -170,6 +172,24 @@ export function fetchBoardData(boardID) {
       .doc(boardID)
       .collection("tasks");
 
+    let tagsRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(boardID)
+      .collection("tags");
+
+    const tagsListener = tagsRef.onSnapshot(function(querySnapshot) {
+      var tagData = {};
+      querySnapshot.forEach(function(doc) {
+        tagData[doc.id] = doc.data();
+      });
+      dispatch({
+        type: FETCH_TAGS,
+        tagData: tagData,
+        tagsListener: tagsListener
+      });
+    });
+
     const listsListener = listsRef.onSnapshot(function(querySnapshot) {
       var listData = {};
       querySnapshot.forEach(function(doc) {
@@ -223,6 +243,31 @@ export function changeColumnOrder(startIndex, endIndex) {
 
     boardRef.update({ listOrder: listOrder }).then(function() {
       dispatch({ type: CHANGE_COLUMN_ORDER });
+    });
+  };
+}
+
+export function createTag(boardID, { tagName, tagColor }) {
+  return (dispatch, getState) => {
+    const { uid } = getState().auth.user;
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+
+    const tagRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(boardID)
+      .collection("tags");
+
+    const tag = {
+      dateCreated: timestamp,
+      createdBy: uid,
+      boardID: boardID,
+      name: tagName,
+      color: tagColor
+    };
+
+    tagRef.add(tag).then(function(docRef) {
+      dispatch({ type: CREATE_TAG });
     });
   };
 }

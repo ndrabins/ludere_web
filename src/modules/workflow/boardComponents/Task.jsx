@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
@@ -8,10 +8,35 @@ import Filter from "lodash/filter";
 import Circle from "react-circle";
 import AssignUser from "./AssignUser";
 import { withStyles } from "@material-ui/core/styles";
-import Tags from "./Tags";
+import TagsButton from "./TagsButton";
 import classnames from "classnames";
+import TagsList from "../taskDetailComponents/TagsList";
 
-class Task extends Component {
+const tagsData = {
+  1: {
+    dateCreated: "tag1",
+    createdBy: 1,
+    boardID: 1,
+    name: "development",
+    color: "#e57373"
+  },
+  2: {
+    dateCreated: "tag 2",
+    createdBy: 1,
+    boardID: 1,
+    name: "urgent",
+    color: "#29b6f6"
+  },
+  3: {
+    dateCreated: "tag 3",
+    createdBy: 1,
+    boardID: 1,
+    name: "marketing",
+    color: "#796eff"
+  }
+};
+
+class Task extends PureComponent {
   state = {
     hovered: false
   };
@@ -92,6 +117,7 @@ class Task extends Component {
         >
           {task.title}
         </Typography>
+        <TagsList small tagsData={tagsData} />
         <div className={classes.extraInfoContainer}>
           {task.subtasks.length > 0 ? (
             <div className={classes.taskItemContainer}>
@@ -113,7 +139,7 @@ class Task extends Component {
             <div />
           )}
           <div className={classes.taskItemContainer}>
-            <Tags hovered={hovered} />
+            <TagsButton hovered={hovered} />
             <AssignUser task={task} taskID={taskID} hovered={hovered} />
           </div>
         </div>
@@ -128,7 +154,7 @@ const styles = {
     borderRadius: 8,
     border: "4px solid transparent",
     backgroundColor: "white",
-    padding: 10,
+    padding: 6,
     margin: "0 0 8px 0",
     cursor: "pointer",
     transition: "box-shadow 0.2s ease-out, border 0.2s ease-out",
@@ -153,7 +179,8 @@ const styles = {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    height: 30
+    height: 30,
+    marginTop: 4
   },
   percentageCounter: {
     position: "absolute"

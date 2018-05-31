@@ -47,6 +47,10 @@ class NavBar extends Component {
   render() {
     const { profile, displayName, classes } = this.props;
 
+    if (displayName === undefined) {
+      return <div />;
+    }
+
     return (
       <div className={classes.container}>
         <div className={classes.navBegin}>
