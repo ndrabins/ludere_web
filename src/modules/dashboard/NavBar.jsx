@@ -45,9 +45,9 @@ class NavBar extends Component {
   }
 
   render() {
-    const { profile, displayName, classes } = this.props;
+    const { profile, classes } = this.props;
 
-    if (displayName === undefined) {
+    if (profile === undefined) {
       return <div />;
     }
 
@@ -69,7 +69,9 @@ class NavBar extends Component {
           <InviteButton />
         </div>
         <div className={classes.navEnd}>
-          <Typography className={classes.displayName}>{displayName}</Typography>
+          <Typography className={classes.displayName}>
+            {profile.displayName}
+          </Typography>
           <Avatar
             src={profile.photoURL}
             onClick={this.handleClickNavMenu}
@@ -142,8 +144,7 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-    profile: state.profile.myUserProfile,
-    displayName: state.profile.myUserProfile.displayName
+    profile: state.profile.myUserProfile
   };
 }
 

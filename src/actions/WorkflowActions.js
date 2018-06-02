@@ -130,11 +130,14 @@ export function fetchBoards(selectedTeamID) {
 
 export function unsubscribeFromBoardData() {
   return (dispatch, getState) => {
-    const { listsListener, tasksListener } = getState().workflow;
-    if (listsListener == null || tasksListener == null) return;
+    const { listsListener, tasksListener, tagsListener } = getState().workflow;
+    if (listsListener == null || tasksListener == null || tagsListener == null)
+      //using 2 == to also return if the listener is undefined
+      return;
 
     listsListener();
     tasksListener();
+    tagsListener();
     dispatch({ type: UNSUBSCRIBE_BOARD_DATA });
   };
 }

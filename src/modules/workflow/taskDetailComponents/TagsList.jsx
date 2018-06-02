@@ -35,9 +35,10 @@ class TagsList extends Component {
         return (
           <Chip
             key={key}
-            label="tag"
+            label={tag.name}
             onDelete={() => this.handleDelete("something")}
             className={classes.chipTag}
+            style={{ backgroundColor: tag.color }}
           />
         );
       }
@@ -59,10 +60,13 @@ const styles = theme => ({
     flexDirection: "row",
     alignItems: "center",
     marginTop: 5,
-    fontColor: "#303030"
+    fontColor: "#303030",
+    flexWrap: "wrap",
+    textOverflow: "ellipsis"
   },
   chipTag: {
-    margin: 5
+    margin: 5,
+    color: "rgba(255,255,255,0.75)"
   },
   tag: {
     height: "18px",
@@ -72,6 +76,7 @@ const styles = theme => ({
     display: "flex",
     paddingLeft: 5,
     paddingRight: 5,
+    marginTop: 2,
     marginLeft: 2,
     marginRight: 2,
     justifyContent: "center",

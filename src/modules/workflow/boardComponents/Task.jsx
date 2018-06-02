@@ -8,7 +8,7 @@ import Filter from "lodash/filter";
 import Circle from "react-circle";
 import AssignUser from "./AssignUser";
 import { withStyles } from "@material-ui/core/styles";
-import TagsButton from "./TagsButton";
+import TagsButton from "../taskDetailComponents/TagsButton";
 import classnames from "classnames";
 import TagsList from "../taskDetailComponents/TagsList";
 
@@ -32,6 +32,13 @@ const tagsData = {
     createdBy: 1,
     boardID: 1,
     name: "marketing",
+    color: "#796eff"
+  },
+  4: {
+    dateCreated: "tag 3",
+    createdBy: 1,
+    boardID: 1,
+    name: "testing",
     color: "#796eff"
   }
 };
@@ -139,7 +146,7 @@ class Task extends PureComponent {
             <div />
           )}
           <div className={classes.taskItemContainer}>
-            <TagsButton hovered={hovered} />
+            <TagsButton hovered={hovered} tagsData={tagsData} />
             <AssignUser task={task} taskID={taskID} hovered={hovered} />
           </div>
         </div>
