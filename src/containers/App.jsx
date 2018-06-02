@@ -16,7 +16,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 import ReactGA from "react-ga";
 
-import Loading from "../common/LoadingLottie";
+import Loading from "../common/Loading";
 import Main from "./Main";
 import AuthPage from "../modules/auth/AuthPage";
 // import Home from "./Home";

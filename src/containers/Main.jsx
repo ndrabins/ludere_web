@@ -8,7 +8,7 @@ import { Route, Switch } from "react-router-dom";
 import WorkspaceFlow from "../modules/workspace/WorkspaceFlow";
 import NavBar from "../modules/dashboard/NavBar";
 import SideNav from "../modules/dashboard/SideNav";
-import Loading from "../common/LoadingLottie";
+import Loading from "../common/Loading";
 
 import Dashboard from "./Dashboard";
 import Calendar from "./Calendar";

@@ -4,6 +4,8 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import Board from "./boardComponents/Board";
 import TaskDetail from "./boardComponents/TaskDetail";
+import Loading from "../../common/Loading";
+import Fade from "@material-ui/core/Fade";
 
 class Workflow extends Component {
   componentWillUnmount() {
@@ -12,6 +14,22 @@ class Workflow extends Component {
   }
 
   render() {
+    const {
+      loadingTasks,
+      loadingLists,
+      loadingBoards,
+      selectedBoard
+    } = this.props;
+
+    if (
+      loadingLists ||
+      loadingTasks ||
+      loadingBoards ||
+      selectedBoard === null
+    ) {
+      return <Loading />;
+    }
+
     return (
       <div style={styles.wrapper}>
         <Board />
@@ -36,4 +54,13 @@ const styles = {
   }
 };
 
-export default connect(null, mapDispatchToProps)(Workflow);
+function mapStateToProps(state) {
+  return {
+    loadingLists: state.workflow.loadingLists,
+    loadingTasks: state.workflow.loadingTasks,
+    loadingBoards: state.workflow.loadingBoards,
+    selectedBoard: state.workflow.selectedBoard
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Workflow);

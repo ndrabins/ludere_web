@@ -3,13 +3,8 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
-import Map from "lodash/map";
-
 import TextField from "@material-ui/core/TextField";
-
 import Column from "./Column";
-import Loading from "../../../common/Loading";
-// import index from "@firebase/app";
 
 class Board extends Component {
   state = {
@@ -81,24 +76,7 @@ class Board extends Component {
   };
 
   render() {
-    const {
-      selectedBoard,
-      boards,
-      listData,
-      showTaskDetail,
-      loadingTasks,
-      loadingLists,
-      loadingBoards
-    } = this.props;
-
-    if (
-      loadingLists ||
-      loadingTasks ||
-      loadingBoards ||
-      selectedBoard === null
-    ) {
-      return <Loading />;
-    }
+    const { selectedBoard, boards, listData, showTaskDetail } = this.props;
 
     const board = boards[selectedBoard];
 
@@ -180,10 +158,7 @@ function mapStateToProps(state) {
     listData: state.workflow.listData,
     boards: state.workflow.boards,
     selectedBoard: state.workflow.selectedBoard,
-    showTaskDetail: state.workflow.showTaskDetail,
-    loadingLists: state.workflow.loadingLists,
-    loadingTasks: state.workflow.loadingTasks,
-    loadingBoards: state.workflow.loadingBoards
+    showTaskDetail: state.workflow.showTaskDetail
   };
 }
 
