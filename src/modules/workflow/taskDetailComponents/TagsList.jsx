@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import Map from "lodash/map";
 import classnames from "classnames";
 
-class TagsList extends Component {
+class TagsList extends PureComponent {
   state = {
     openTagDialog: false
   };

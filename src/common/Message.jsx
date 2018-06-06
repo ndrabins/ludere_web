@@ -7,7 +7,6 @@ import moment from "moment";
 class Message extends Component {
   render() {
     const { text, timestamp, classes, displayName, photoURL } = this.props;
-    console.log(timestamp);
     let diff = moment(timestamp).diff(moment(), "minutes");
     let formattedTimeStamp = moment()
       .add(diff, "minutes")

@@ -5,7 +5,8 @@ import * as Actions from "../../actions";
 import Board from "./boardComponents/Board";
 import TaskDetail from "./boardComponents/TaskDetail";
 import Loading from "../../common/Loading";
-import Fade from "@material-ui/core/Fade";
+import BoardHeader from "./BoardHeader";
+import { withStyles } from "@material-ui/core/styles";
 
 class Workflow extends Component {
   componentWillUnmount() {
@@ -18,7 +19,9 @@ class Workflow extends Component {
       loadingTasks,
       loadingLists,
       loadingBoards,
-      selectedBoard
+      selectedBoard,
+      boards,
+      classes
     } = this.props;
 
     if (
@@ -31,9 +34,12 @@ class Workflow extends Component {
     }
 
     return (
-      <div style={styles.wrapper}>
-        <Board />
-        <TaskDetail />
+      <div className={classes.root}>
+        <BoardHeader boardName={boards[selectedBoard].boardName} />
+        <div className={classes.wrapper}>
+          <Board />
+          <TaskDetail />
+        </div>
       </div>
     );
   }
@@ -46,6 +52,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = {
+  root: {
+    height: "100%"
+  },
   wrapper: {
     height: "100%",
     overflowX: "auto",
@@ -59,8 +68,11 @@ function mapStateToProps(state) {
     loadingLists: state.workflow.loadingLists,
     loadingTasks: state.workflow.loadingTasks,
     loadingBoards: state.workflow.loadingBoards,
-    selectedBoard: state.workflow.selectedBoard
+    selectedBoard: state.workflow.selectedBoard,
+    boards: state.workflow.boards
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Workflow);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(Workflow)
+);

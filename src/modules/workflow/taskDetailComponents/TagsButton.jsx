@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import TagIcon from "react-icons/lib/fa/tag";
 import Popover from "@material-ui/core/Popover";
-import { TextField } from "@material-ui/core";
 import TagsList from "../taskDetailComponents/TagsList";
 import { CirclePicker } from "react-color";
 import Divider from "@material-ui/core/Divider";

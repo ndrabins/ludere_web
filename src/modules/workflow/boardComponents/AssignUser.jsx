@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withStyles } from "@material-ui/core/styles";
@@ -17,7 +17,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Map from "lodash/map";
 import pickBy from "lodash/pickBy";
 
-class AssignUser extends Component {
+class AssignUser extends PureComponent {
   state = {
     showAssignUser: false,
     anchorEl: null

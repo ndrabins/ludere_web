@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
@@ -87,52 +87,57 @@ class Board extends Component {
     const { listOrder } = board;
 
     return (
-      <DragDropContext
-        onDragEnd={this.onDragEnd}
-        onDragStart={this.onDragStart}
-        style={styles.wrapper}
-      >
-        <Droppable droppableId="board" type="COLUMN" direction="horizontal">
-          {provided => (
-            <div
-              style={
-                showTaskDetail
-                  ? { ...styles.container, paddingRight: 400 }
-                  : styles.container
-              }
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-            >
-              {listOrder.map((ID, index) => (
-                <Column key={ID} ID={ID} index={index} list={listData[ID]} />
-              ))}
-              <div style={styles.listEntryDiv}>
-                <TextField
-                  id="listName"
-                  placeholder="Add a list..."
-                  value={this.state.listName}
-                  onChange={this.handleChange("listName")}
-                  margin="normal"
-                  onKeyPress={ev => {
-                    if (ev.key === "Enter" && !ev.shiftKey) {
-                      this.createList();
-                      ev.preventDefault();
-                    }
-                  }}
-                  InputProps={{
-                    disableUnderline: true
-                  }}
-                />
+      <div className={styles.root}>
+        <DragDropContext
+          onDragEnd={this.onDragEnd}
+          onDragStart={this.onDragStart}
+          style={styles.wrapper}
+        >
+          <Droppable droppableId="board" type="COLUMN" direction="horizontal">
+            {provided => (
+              <div
+                style={
+                  showTaskDetail
+                    ? { ...styles.container, paddingRight: 400 }
+                    : styles.container
+                }
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {listOrder.map((ID, index) => (
+                  <Column key={ID} ID={ID} index={index} list={listData[ID]} />
+                ))}
+                <div style={styles.listEntryDiv}>
+                  <TextField
+                    id="listName"
+                    placeholder="Add a list..."
+                    value={this.state.listName}
+                    onChange={this.handleChange("listName")}
+                    margin="normal"
+                    onKeyPress={ev => {
+                      if (ev.key === "Enter" && !ev.shiftKey) {
+                        this.createList();
+                        ev.preventDefault();
+                      }
+                    }}
+                    InputProps={{
+                      disableUnderline: true
+                    }}
+                  />
+                </div>
               </div>
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </div>
     );
   }
 }
 
 const styles = {
+  root: {
+    height: "100%"
+  },
   container: {
     display: "flex",
     paddingRight: 58

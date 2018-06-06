@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
@@ -6,9 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
-import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@material-ui/core/IconButton";
@@ -17,7 +15,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import TaskList from "./TaskList";
 import EditableText from "../../../common/EditableText";
 
-class Column extends Component {
+class Column extends PureComponent {
   state = {
     taskName: "",
     anchorEl: null
