@@ -116,7 +116,7 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    background: "linear-gradient(to right, #29b6f6, #53C6F7)",
+    background: "#6b6b6b",
     minHeight: 40
   },
   headerInner: {

@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 
 class SectionDivider extends Component {
   render() {
@@ -9,7 +8,9 @@ class SectionDivider extends Component {
     return (
       <div className={classes.root}>
         <div className={classes.divider1} />
-        <Typography variant="subheading" className={classes.content}>{content}</Typography>
+        <Typography variant="subheading" className={classes.content}>
+          {content}
+        </Typography>
         <div className={classes.divider2} />
       </div>
     );
@@ -18,30 +19,29 @@ class SectionDivider extends Component {
 
 const styles = theme => ({
   root: {
-    display:'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 5,
-    fontColor: "#303030",
+    fontColor: "#303030"
   },
-  content:{
+  content: {
     marginLeft: 10,
     marginRight: 10,
-    fontColor: "#303030",
+    fontColor: "#303030"
   },
   divider1: {
-    display: 'flex',
+    display: "flex",
     height: 2,
-    background: "linear-gradient(to right, #29b6f6, #53C6F7)",
-    width: '100%',
+    background: "#6b6b6b",
+    width: "100%"
   },
   divider2: {
-    display: 'flex',
+    display: "flex",
     height: 2,
-    background: "linear-gradient(to left, #29b6f6, #53C6F7)",
-    width: '100%',
+    background: "#6b6b6b",
+    width: "100%"
   }
 });
 export default withStyles(styles)(SectionDivider);
-
