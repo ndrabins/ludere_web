@@ -4,25 +4,26 @@ import TagIcon from "react-icons/lib/fa/tag";
 import Popover from "@material-ui/core/Popover";
 import { TextField } from "@material-ui/core";
 import TagsList from "../taskDetailComponents/TagsList";
-import { TwitterPicker } from "react-color";
+import { CirclePicker } from "react-color";
+import Divider from "@material-ui/core/Divider";
 
 const colors = [
-  "#FF6900",
-  "#FCB900",
-  "#7BDCB5",
-  "#00D084",
-  "#8ED1FC",
-  "#0693E3",
-  "#ABB8C3",
-  "#EB144C",
-  "#F78DA7",
-  "#9900EF"
+  "#6FE5C9",
+  "#E57373",
+  "#EE8D68",
+  "#F8FFAE",
+  "#00BCD4",
+  "#29B6F6",
+  "#796EFF",
+  "#CF8BF3",
+  "#A770EF"
 ];
 
 class TagsButton extends Component {
   state = {
     anchorEl: null,
-    colorPicker: "#FFF"
+    colorPicker: "#00BCD4",
+    showColorPicker: false
   };
 
   handleClick = event => {
@@ -40,7 +41,8 @@ class TagsButton extends Component {
   };
 
   handleChangeColor = color => {
-    this.setState({ background: color.hex });
+    console.log(color.hex);
+    this.setState({ colorPicker: color.hex });
   };
 
   preventOpeningTaskDetail = event => {
@@ -49,40 +51,44 @@ class TagsButton extends Component {
 
   render() {
     const { classes, hovered, tagsData } = this.props;
-    const { anchorEl } = this.state;
+    const { anchorEl, showColorPicker, colorPicker } = this.state;
 
     return (
       <div className={classes.root}>
-        {hovered && (
-          <React.Fragment>
+        <React.Fragment>
+          {hovered && (
             <TagIcon onClick={this.handleClick} className={classes.tagIcon} />
-            <Popover
-              open={Boolean(anchorEl)}
-              anchorEl={anchorEl}
-              onClose={this.handleClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "center"
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "center"
-              }}
+          )}
+          <Popover
+            open={Boolean(anchorEl)}
+            anchorEl={anchorEl}
+            onClose={this.handleClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center"
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center"
+            }}
+          >
+            <div
+              className={classes.tagModal}
+              onClick={this.preventOpeningTaskDetail}
             >
-              <div
-                className={classes.tagModal}
-                onClick={this.preventOpeningTaskDetail}
-              >
-                <TagsList tagsData={tagsData} />
-                <TwitterPicker
-                  triangle="hide"
-                  colors={colors}
-                  className={classes.colorPicker}
-                />
-              </div>
-            </Popover>
-          </React.Fragment>
-        )}
+              {/* {showColorPicker && ( */}
+              <CirclePicker
+                colors={colors}
+                color={colorPicker}
+                className={classes.colorPicker}
+                width={150}
+              />
+              {/* )} */}
+              <Divider />
+              <TagsList tagsData={tagsData} column />
+            </div>
+          </Popover>
+        </React.Fragment>
       </div>
     );
   }
@@ -111,7 +117,9 @@ const styles = theme => ({
   },
   colorPicker: {
     boxShadow: "none !important",
-    border: "none !important"
+    border: "none !important",
+    justifyContent: "center",
+    marginBottom: "0px !important"
   }
 });
 export default withStyles(styles)(TagsButton);

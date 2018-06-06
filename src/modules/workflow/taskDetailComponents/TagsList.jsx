@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import Map from "lodash/map";
+import classnames from "classnames";
 
 class TagsList extends Component {
   state = {
@@ -48,21 +49,32 @@ class TagsList extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, column } = this.props;
 
-    return <div className={classes.root}>{this.renderTags()}</div>;
+    return (
+      <div
+        className={classnames(classes.root, {
+          [classes.column]: column
+        })}
+      >
+        {this.renderTags()}
+      </div>
+    );
   }
 }
 
 const styles = theme => ({
   root: {
     display: "flex",
-    flexDirection: "row",
     alignItems: "center",
+    flexDirection: "row",
     marginTop: 5,
     fontColor: "#303030",
     flexWrap: "wrap",
     textOverflow: "ellipsis"
+  },
+  column: {
+    flexDirection: "column"
   },
   chipTag: {
     margin: 5,

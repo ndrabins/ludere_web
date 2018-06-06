@@ -1,20 +1,11 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Checkbox from "@material-ui/core/Checkbox";
-import CloseIcon from "@material-ui/icons/Close";
-import IconButton from "@material-ui/core/IconButton";
 import Map from "lodash/map";
 import Message from "../../../common/Message";
 
 class CommentList extends Component {
-  handleDeleteClick = (event, index) => {
-    event.stopPropagation();
-    this.props.handleDelete(index);
-  };
-
   render() {
-    const { comments, classes, handleDelete } = this.props;
+    const { comments, classes } = this.props;
 
     return (
       <div className={classes.root}>
@@ -23,7 +14,7 @@ class CommentList extends Component {
             <div key={key}>
               <Message
                 text={comment.content}
-                timestamp={comment.DateCreated}
+                timestamp={comment.dateCreated}
                 sentBy={comment.sentBy}
                 displayName={comment.sentByDisplayName}
                 photoURL={comment.photoURL}

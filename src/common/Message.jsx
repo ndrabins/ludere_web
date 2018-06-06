@@ -2,21 +2,14 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
-import FolderIcon from "@material-ui/icons/Folder";
 import moment from "moment";
 
 class Message extends Component {
   render() {
-    const {
-      text,
-      timestamp,
-      sentBy,
-      classes,
-      displayName,
-      photoURL
-    } = this.props;
+    const { text, timestamp, classes, displayName, photoURL } = this.props;
+    console.log(timestamp);
     let diff = moment(timestamp).diff(moment(), "minutes");
-    let formattedTimesstamp = moment()
+    let formattedTimeStamp = moment()
       .add(diff, "minutes")
       .calendar();
 
@@ -27,7 +20,7 @@ class Message extends Component {
           <div className={classes.messageHeader}>
             <Typography className={classes.name}> {displayName} </Typography>
             <Typography className={classes.date}>
-              {formattedTimesstamp}
+              {formattedTimeStamp}
             </Typography>
           </div>
           <Typography className={classes.messageText}>{text}</Typography>

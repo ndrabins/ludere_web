@@ -57,7 +57,6 @@ class Column extends Component {
 
   handleColumnDelete = columnID => {
     const { selectedTeam } = this.props;
-    console.log("deleting..");
     console.log(columnID);
     // this.props.actions.removeFromTeam(selectedTeam, columnID);
     this.handleClose();
