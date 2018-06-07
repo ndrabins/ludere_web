@@ -19,7 +19,7 @@ class BoardHeader extends Component {
           <Typography variant="headline" className={classes.header}>
             {boardName}
           </Typography>
-          <Button variant="raised" className={classes.button}>
+          <Button className={classes.button}>
             <TagIcon className={classes.tagIcon} />
             Tags
           </Button>

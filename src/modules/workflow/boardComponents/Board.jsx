@@ -91,7 +91,6 @@ class Board extends Component {
         <DragDropContext
           onDragEnd={this.onDragEnd}
           onDragStart={this.onDragStart}
-          style={styles.wrapper}
         >
           <Droppable droppableId="board" type="COLUMN" direction="horizontal">
             {provided => (
@@ -141,9 +140,6 @@ const styles = {
   container: {
     display: "flex",
     paddingRight: 58
-  },
-  wrapper: {
-    height: "100%"
   },
   listEntryDiv: {
     height: 60,

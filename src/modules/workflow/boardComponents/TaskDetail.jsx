@@ -82,7 +82,7 @@ const styles = theme => ({
   hiddenContainer: {
     marginTop: 6,
     width: "0px",
-    height: `calc(100% - 84px)`,
+    height: `calc(100% - 120px)`,
     position: "absolute",
     backgroundColor: "#E3E3E4",
     borderTopLeftRadius: 10,
@@ -94,7 +94,7 @@ const styles = theme => ({
   },
   container: {
     marginTop: 6,
-    height: `calc(100% - 84px)`,
+    height: `calc(100% - 120px)`,
     minWidth: 300,
     width: "40%",
     position: "absolute",

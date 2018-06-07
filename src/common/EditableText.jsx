@@ -96,7 +96,7 @@ const styles = theme => ({
     border: "0px #000A solid",
     borderRadius: 5,
     minHeight: 14,
-    textShadow: "1px 1px 1px rgba(0,0,0,0.4)",
+    textShadow: "1px 1px 1px rgba(0,0,0,0.24)",
     transition: "background-color 0.25s ease-out",
     "&:hover": {
       cursor: "text",

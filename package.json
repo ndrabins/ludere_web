@@ -7,7 +7,7 @@
   "start_url": ".",
   "dependencies": {
     "@material-ui/codemod": "^1.0.0-rc.0",
-    "@material-ui/core": "^1.1.0",
+    "@material-ui/core": "^1.2.0",
     "@material-ui/icons": "^1.1.0",
     "filepond": "^1.5.2",
     "filepond-plugin-file-encode": "^1.0.4",

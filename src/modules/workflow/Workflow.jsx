@@ -34,13 +34,13 @@ class Workflow extends Component {
     }
 
     return (
-      <div className={classes.root}>
+      <React.Fragment>
         <BoardHeader boardName={boards[selectedBoard].boardName} />
         <div className={classes.wrapper}>
           <Board />
           <TaskDetail />
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -53,7 +53,9 @@ function mapDispatchToProps(dispatch) {
 
 const styles = {
   root: {
-    height: "100%"
+    height: "100%",
+    overflowX: "hidden",
+    overflowY: "hidden"
   },
   wrapper: {
     height: "100%",

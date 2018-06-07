@@ -7,11 +7,11 @@ class SectionDivider extends Component {
     const { content, classes } = this.props;
     return (
       <div className={classes.root}>
-        <div className={classes.divider1} />
+        <div className={classes.divider} />
         <Typography variant="subheading" className={classes.content}>
           {content}
         </Typography>
-        <div className={classes.divider2} />
+        <div className={classes.divider} />
       </div>
     );
   }
@@ -31,16 +31,10 @@ const styles = theme => ({
     marginRight: 10,
     fontColor: "#303030"
   },
-  divider1: {
+  divider: {
     display: "flex",
     height: 2,
-    background: "#6b6b6b",
-    width: "100%"
-  },
-  divider2: {
-    display: "flex",
-    height: 2,
-    background: "#6b6b6b",
+    background: "#B9BBBE",
     width: "100%"
   }
 });
