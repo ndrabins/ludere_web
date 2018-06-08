@@ -35,7 +35,10 @@ class Workflow extends Component {
 
     return (
       <React.Fragment>
-        <BoardHeader boardName={boards[selectedBoard].boardName} />
+        <BoardHeader
+          boardName={boards[selectedBoard].boardName}
+          boardID={selectedBoard}
+        />
         <div className={classes.wrapper}>
           <Board />
           <TaskDetail />
@@ -43,12 +46,6 @@ class Workflow extends Component {
       </React.Fragment>
     );
   }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  };
 }
 
 const styles = {
@@ -72,6 +69,12 @@ function mapStateToProps(state) {
     loadingBoards: state.workflow.loadingBoards,
     selectedBoard: state.workflow.selectedBoard,
     boards: state.workflow.boards
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
   };
 }
 

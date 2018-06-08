@@ -114,6 +114,7 @@ export const UNSUBSCRIBE_BOARD_DATA = "UNSUBSCRIBE_BOARD_DATA";
 export const UNSUBSCRIBE_BOARDS = "UNSUBSCRIBE_BOARDS";
 export const UPDATE_BOARD = "UPDATE_BOARD";
 export const CREATE_TAG = "CREATE_TAG";
+export const DELETE_TAG = "DELETE_TAG";
 export const FETCH_TAGS = "FETCH_TAGS";
 
 //Task Actions

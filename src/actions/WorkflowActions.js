@@ -13,7 +13,8 @@ import {
   FETCH_BOARD_DATA,
   UPDATE_BOARD,
   FETCH_TAGS,
-  CREATE_TAG
+  CREATE_TAG,
+  DELETE_TAG
 } from "./types";
 import firebase from "firebase/app";
 
@@ -271,6 +272,21 @@ export function createTag(boardID, { tagName, tagColor }) {
 
     tagRef.add(tag).then(function(docRef) {
       dispatch({ type: CREATE_TAG });
+    });
+  };
+}
+
+export function deleteTag(boardID, tagID) {
+  return (dispatch, getState) => {
+    const tagRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(boardID)
+      .collection("tags")
+      .doc(tagID);
+
+    tagRef.delete().then(function(docRef) {
+      dispatch({ type: DELETE_TAG });
     });
   };
 }

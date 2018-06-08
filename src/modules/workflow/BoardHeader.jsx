@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
-import TagIcon from "react-icons/lib/fa/tag";
-import Button from "@material-ui/core/Button";
 import BoardsIcon from "../../static/boards.svg";
+import TagDialog from "./TagDialog";
 
 class BoardHeader extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    boardName: PropTypes.string.isRequired
+    boardName: PropTypes.string.isRequired,
+    boardID: PropTypes.string.isRequired
   };
 
   render() {
-    const { classes, boardName } = this.props;
+    const { classes, boardName, boardID } = this.props;
     return (
       <div className={classes.root}>
         <div className={classes.headerContent}>
@@ -21,10 +21,7 @@ class BoardHeader extends Component {
             <img src={BoardsIcon} className={classes.icon} alt="team icon" />
             {boardName}
           </Typography>
-          <Button className={classes.button}>
-            <TagIcon className={classes.tagIcon} />
-            Tags
-          </Button>
+          <TagDialog boardID={boardID} />
         </div>
         <div className={classes.divider} />
       </div>
@@ -57,9 +54,6 @@ const styles = theme => ({
   },
   divider: {
     borderBottom: "2px solid #97979780"
-  },
-  tagIcon: {
-    marginRight: 8
   }
 });
 export default withStyles(styles)(BoardHeader);

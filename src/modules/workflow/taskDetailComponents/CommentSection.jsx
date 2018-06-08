@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as Actions from "../../../actions";
 
-import Checkbox from "@material-ui/core/Checkbox";
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
-import SubtaskList from "./SubtaskList";
 import SectionDivider from "../../../common/SectionDivider";
 import CommentList from "./CommentList";
 

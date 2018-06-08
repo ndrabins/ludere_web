@@ -40,7 +40,6 @@ class TagsButton extends Component {
   };
 
   handleChangeColor = color => {
-    console.log(color.hex);
     this.setState({ colorPicker: color.hex });
   };
 
