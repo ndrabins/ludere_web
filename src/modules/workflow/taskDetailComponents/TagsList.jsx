@@ -1,4 +1,7 @@
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../../../actions";
 import { withStyles } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
 import Map from "lodash/map";
@@ -18,27 +21,31 @@ class TagsList extends PureComponent {
   };
 
   renderTags = () => {
-    const { classes, small, tagsData } = this.props;
+    const { classes, small, tagKeys, tagsData } = this.props;
 
-    const tags = Map(tagsData, (tag, key) => {
+    const tags = Map(tagKeys, (isTagOnTask, tagID) => {
+      if (!isTagOnTask || !tagsData[tagID]) {
+        return;
+      }
+
       if (small) {
         return (
           <div
-            key={key}
+            key={tagID}
             className={classes.tag}
-            style={{ backgroundColor: tag.color }}
+            style={{ backgroundColor: tagsData[tagID].color }}
           >
-            {tag.name}
+            {tagsData[tagID].name}
           </div>
         );
       } else {
         return (
           <Chip
-            key={key}
-            label={tag.name}
+            key={tagID}
+            label={tagsData[tagID].name}
             onDelete={() => this.handleDelete("something")}
             className={classes.chipTag}
-            style={{ backgroundColor: tag.color }}
+            style={{ backgroundColor: tagsData[tagID].color }}
           />
         );
       }
@@ -96,4 +103,19 @@ const styles = theme => ({
     fontSize: 12
   }
 });
-export default withStyles(styles)(TagsList);
+
+function mapStateToProps(state) {
+  return {
+    tagsData: state.workflow.tagData
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(TagsList)
+);

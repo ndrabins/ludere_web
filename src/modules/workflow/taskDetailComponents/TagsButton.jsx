@@ -1,28 +1,17 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../../../actions";
 import TagIcon from "react-icons/lib/fa/tag";
 import Popover from "@material-ui/core/Popover";
-import TagsList from "../taskDetailComponents/TagsList";
-import { CirclePicker } from "react-color";
-import Divider from "@material-ui/core/Divider";
-
-const colors = [
-  "#6FE5C9",
-  "#E57373",
-  "#EE8D68",
-  "#F8FFAE",
-  "#00BCD4",
-  "#29B6F6",
-  "#796EFF",
-  "#CF8BF3",
-  "#A770EF"
-];
+import Map from "lodash/map";
+import Chip from "@material-ui/core/Chip";
+import DoneIcon from "@material-ui/icons/Done";
 
 class TagsButton extends Component {
   state = {
-    anchorEl: null,
-    colorPicker: "#00BCD4",
-    showColorPicker: false
+    anchorEl: null
   };
 
   handleClick = event => {
@@ -39,17 +28,52 @@ class TagsButton extends Component {
     });
   };
 
-  handleChangeColor = color => {
-    this.setState({ colorPicker: color.hex });
+  toggleTagFromTask = tagID => {
+    const { actions, task, taskID } = this.props;
+    let isTagOnTask = task.tags[tagID];
+    let updatedTask = { ...task };
+    updatedTask.tags[tagID] = !isTagOnTask; //toggles assigning user
+    actions.updateTask(updatedTask, taskID);
   };
 
   preventOpeningTaskDetail = event => {
     event.stopPropagation();
   };
 
+  renderTags = () => {
+    const { classes, tagsData, task } = this.props;
+
+    const tags = Map(tagsData, (tag, tagID) => {
+      if (task.tags[tagID]) {
+        return (
+          <Chip
+            key={tagID}
+            style={{ background: tag.color }}
+            label={tag.name}
+            onDelete={() => this.toggleTagFromTask(tagID)}
+            className={classes.chip}
+          />
+        );
+      } else {
+        return (
+          <Chip
+            key={tagID}
+            style={{ background: tag.color }}
+            label={tag.name}
+            onDelete={() => this.toggleTagFromTask(tagID)}
+            className={classes.chip}
+            deleteIcon={<DoneIcon />}
+          />
+        );
+      }
+    });
+
+    return tags;
+  };
+
   render() {
-    const { classes, hovered, tagsData } = this.props;
-    const { anchorEl, showColorPicker, colorPicker } = this.state;
+    const { classes, hovered } = this.props;
+    const { anchorEl } = this.state;
 
     return (
       <div className={classes.root}>
@@ -74,16 +98,7 @@ class TagsButton extends Component {
               className={classes.tagModal}
               onClick={this.preventOpeningTaskDetail}
             >
-              {/* {showColorPicker && ( */}
-              <CirclePicker
-                colors={colors}
-                color={colorPicker}
-                className={classes.colorPicker}
-                width={150}
-              />
-              {/* )} */}
-              <Divider />
-              <TagsList tagsData={tagsData} column />
+              {this.renderTags()}
             </div>
           </Popover>
         </React.Fragment>
@@ -111,13 +126,37 @@ const styles = theme => ({
   },
   tagModal: {
     margin: 8,
-    maxWidth: 400
+    maxWidth: 400,
+    display: "flex",
+    flexDirection: "column"
   },
   colorPicker: {
     boxShadow: "none !important",
     border: "none !important",
     justifyContent: "center",
     marginBottom: "0px !important"
+  },
+  chip: {
+    width: "100%",
+    margin: "2px",
+    color: "rgba(255,255,255,0.75)",
+    display: "flex",
+    justifyContent: "space-between"
   }
 });
-export default withStyles(styles)(TagsButton);
+
+function mapStateToProps(state) {
+  return {
+    tagsData: state.workflow.tagData
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(TagsButton)
+);

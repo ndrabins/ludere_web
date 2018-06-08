@@ -12,37 +12,6 @@ import TagsButton from "../taskDetailComponents/TagsButton";
 import classnames from "classnames";
 import TagsList from "../taskDetailComponents/TagsList";
 
-const tagsData = {
-  1: {
-    dateCreated: "tag1",
-    createdBy: 1,
-    boardID: 1,
-    name: "development",
-    color: "#e57373"
-  },
-  2: {
-    dateCreated: "tag 2",
-    createdBy: 1,
-    boardID: 1,
-    name: "urgent",
-    color: "#29b6f6"
-  },
-  3: {
-    dateCreated: "tag 3",
-    createdBy: 1,
-    boardID: 1,
-    name: "marketing",
-    color: "#796eff"
-  },
-  4: {
-    dateCreated: "tag 3",
-    createdBy: 1,
-    boardID: 1,
-    name: "testing",
-    color: "#796eff"
-  }
-};
-
 class Task extends PureComponent {
   state = {
     hovered: false
@@ -124,7 +93,7 @@ class Task extends PureComponent {
         >
           {task.title}
         </Typography>
-        <TagsList small tagsData={tagsData} />
+        <TagsList small tagKeys={task.tags} />
         <div className={classes.extraInfoContainer}>
           {task.subtasks.length > 0 ? (
             <div className={classes.taskItemContainer}>
@@ -146,7 +115,7 @@ class Task extends PureComponent {
             <div />
           )}
           <div className={classes.taskItemContainer}>
-            <TagsButton hovered={hovered} tagsData={tagsData} />
+            <TagsButton hovered={hovered} task={task} taskID={taskID} />
             <AssignUser task={task} taskID={taskID} hovered={hovered} />
           </div>
         </div>

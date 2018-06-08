@@ -44,7 +44,7 @@ export function createTask(listID, taskTitle) {
       createdBy: uid,
       boardID: selectedBoard,
       title: taskTitle,
-      tags: [],
+      tags: {},
       subtasks: [],
       assigned: {}
     };

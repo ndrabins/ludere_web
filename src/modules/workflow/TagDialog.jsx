@@ -129,7 +129,9 @@ class TagDialog extends Component {
                 onDelete={this.clearChip}
                 className={classes.chip}
               />
-              <Button onClick={this.handleCreateTag}> Create Tag </Button>
+              <Button variant="outlined" onClick={this.handleCreateTag}>
+                Create Tag
+              </Button>
             </div>
             <FormControl className={classes.formControl}>
               <Input
@@ -200,11 +202,14 @@ const styles = theme => ({
   formControl: {
     width: "100%",
     marginTop: 3,
-    maxWidth: 300
+    maxWidth: 500
   },
   chip: {
+    width: "100%",
     margin: "2px",
-    color: "rgba(255,255,255,0.75)"
+    color: "rgba(255,255,255,0.75)",
+    display: "flex",
+    justifyContent: "space-between"
   },
   tagsList: {
     display: "flex",
