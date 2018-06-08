@@ -53,7 +53,7 @@ class Column extends PureComponent {
     this.setState({ anchorEl: null });
   };
 
-  handleColumnDelete = columnID => {
+  handleListDelete = columnID => {
     const { selectedTeam } = this.props;
     console.log(columnID);
     // this.props.actions.removeFromTeam(selectedTeam, columnID);
@@ -96,8 +96,8 @@ class Column extends PureComponent {
                   open={Boolean(anchorEl)}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={() => this.handleColumnDelete(ID)}>
-                    Delete Column
+                  <MenuItem onClick={() => this.handleListDelete(ID)}>
+                    Delete List
                   </MenuItem>
                 </Menu>
               </div>

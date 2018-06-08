@@ -18,7 +18,7 @@ import Community from "../modules/community/Community";
 //Modules
 import WorkFlow from "../modules/workflow/Workflow";
 import Chat from "../modules/chat/Chat";
-import TeamDashboard from "../modules/team/TeamDashboard";
+import TeamDashboard from "../modules/team/TeamDashboardd";
 
 const drawerWidth = 298;
 
@@ -49,7 +49,6 @@ class Main extends Component {
   render() {
     const {
       history,
-      location,
       loadingWorkspaces,
       loadingProfile,
       loadingUsers

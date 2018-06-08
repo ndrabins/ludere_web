@@ -2,16 +2,34 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import FireIcon from "../../static/teamfire.svg";
+
+import ModuleHeader from "../../common/ModuleHeader";
 
 import TeamMembers from "./TeamMembers";
 import TeamCard from "./TeamCard";
 
 class TeamDashboard extends Component {
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    selectedTeam: PropTypes.string.isRequired,
+    teams: PropTypes.object.isRequired
+  };
   render() {
-    const { classes } = this.props;
+    const { classes, selectedTeam, teams } = this.props;
+
+    const team = teams[selectedTeam];
     return (
       <div className={classes.root}>
+        <ModuleHeader>
+          <Typography variant="headline" className={classes.header}>
+            <img src={FireIcon} className={classes.icon} alt="team icon" />
+            {team.name}
+          </Typography>
+        </ModuleHeader>
         <div className={classes.row}>
           <div className={classes.column}>
             <TeamCard
@@ -48,12 +66,10 @@ const styles = theme => ({
     height: "100%",
     minHeight: 500,
     display: "flex",
-    flexDirection: "column",
-    padding: 5,
-    paddingTop: 10
+    flexDirection: "column"
   },
   row: {
-    paddingToz: 10,
+    paddingTop: 5,
     height: "50%",
     display: "flex"
   },
@@ -61,11 +77,22 @@ const styles = theme => ({
     display: "flex",
     height: "100%",
     width: "100%"
+  },
+  header: {
+    display: "flex",
+    alignItems: "center"
+  },
+  icon: {
+    filter: "invert(100%)",
+    marginRight: 8
   }
 });
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    selectedTeam: state.team.selectedTeam,
+    teams: state.team.teams
+  };
 }
 
 function mapDispatchToProps(dispatch) {

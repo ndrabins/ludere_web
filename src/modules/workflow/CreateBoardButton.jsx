@@ -16,7 +16,7 @@ import TextField from "@material-ui/core/TextField";
 class CreateBoardButton extends Component {
   state = {
     open: false,
-    boardName: ""
+    workflowName: ""
   };
 
   handleClickOpen = () => {
@@ -29,7 +29,7 @@ class CreateBoardButton extends Component {
 
   handleCreateBoard = () => {
     this.handleRequestClose();
-    this.props.actions.createBoard(this.state.boardName);
+    this.props.actions.createBoard(this.state.workflowName);
   };
 
   handleChange = prop => event => {
@@ -46,17 +46,17 @@ class CreateBoardButton extends Component {
           <AddIcon style={{ fontSize: 16 }} />
         </IconButton>
         <Dialog open={this.state.open} onClose={this.handleRequestClose}>
-          <DialogTitle>Create Board</DialogTitle>
+          <DialogTitle>Create Workflow</DialogTitle>
           <DialogContent style={{ width: 300, maxWidth: 400 }}>
             <TextField
               autoFocus
               margin="dense"
               id="name"
-              label="Board Name"
+              label="Workflow Name"
               fullWidth
               autoComplete="off"
-              value={this.state.boardName}
-              onChange={this.handleChange("boardName")}
+              value={this.state.workflowName}
+              onChange={this.handleChange("workflowName")}
               onKeyPress={ev => {
                 if (ev.key === "Enter" && !ev.shiftKey) {
                   this.handleCreateBoard();
@@ -75,7 +75,7 @@ class CreateBoardButton extends Component {
               color="primary"
               style={{ color: "white" }}
             >
-              Create Board
+              Create Workflow
             </Button>
           </DialogActions>
         </Dialog>

@@ -33,7 +33,7 @@ const inlineStyles = {
     display: "flex",
     alignItems: "center",
     width: "calc(100% - 40px)",
-    margin: "-15px 0px 10px 20px",
+    margin: "-15px 0px 0px 20px",
     borderRadius: 7,
     padding: "5px 5px"
     // boxShadow: "0 4px 20px 0px rgba(0, 0, 0, 0.12)"

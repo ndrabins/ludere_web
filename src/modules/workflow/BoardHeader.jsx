@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
 import TagIcon from "react-icons/lib/fa/tag";
 import Button from "@material-ui/core/Button";
+import BoardsIcon from "../../static/boards.svg";
 
 class BoardHeader extends Component {
   static propTypes = {
@@ -17,6 +18,7 @@ class BoardHeader extends Component {
       <div className={classes.root}>
         <div className={classes.headerContent}>
           <Typography variant="headline" className={classes.header}>
+            <img src={BoardsIcon} className={classes.icon} alt="team icon" />
             {boardName}
           </Typography>
           <Button className={classes.button}>
@@ -45,7 +47,13 @@ const styles = theme => ({
     margin: "0px 20px"
   },
   header: {
-    margin: "8px 0px"
+    margin: "8px 0px",
+    display: "flex",
+    alignItems: "center"
+  },
+  icon: {
+    filter: "invert(100%)",
+    marginRight: 8
   },
   divider: {
     borderBottom: "2px solid #97979780"
