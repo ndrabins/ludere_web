@@ -43,6 +43,10 @@ class TagsButton extends Component {
   renderTags = () => {
     const { classes, tagsData, task } = this.props;
 
+    if (Object.keys(tagsData).length === 0) {
+      return <div> Try creating some tags first! </div>;
+    }
+
     const tags = Map(tagsData, (tag, tagID) => {
       if (task.tags[tagID]) {
         return (

@@ -155,6 +155,7 @@ class TagDialog extends Component {
             </FormControl>
             <TwitterPicker
               triangle="hide"
+              color={tagColor}
               className={classes.colorPicker}
               colors={colors}
               onChangeComplete={this.handleColorPick}
