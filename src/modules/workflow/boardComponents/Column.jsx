@@ -134,7 +134,6 @@ const styles = {
   container: {
     display: "flex",
     flexDirection: "column",
-    minHeight: "75%", //this is to leave room for tasks moving
     width: 240,
     backgroundColor: "#E5E5E6",
     margin: 6,

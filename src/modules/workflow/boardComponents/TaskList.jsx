@@ -68,16 +68,19 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     width: "100%",
+    height: "100%",
     margin: 8
   },
   container: {
     // padding: 8,
     display: "flex",
     flexDirection: "column",
-    width: "100%"
+    width: "100%",
+    height: "100%"
   },
   dropZone: {
-    minHeight: 250
+    minHeight: 250,
+    height: "100%"
   },
   addButton: {
     backgroundColor: "white"
