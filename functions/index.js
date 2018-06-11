@@ -3,9 +3,6 @@ const functions = require("firebase-functions");
 
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 const admin = require("firebase-admin");
-const cors = require("cors")({
-  origin: true
-});
 admin.initializeApp();
 const firestore = admin.firestore();
 
@@ -34,6 +31,7 @@ exports.onDeleteList = functions.firestore
           console.log("Document successfully deleted!");
         });
     });
+    return null;
   });
 
 // Take the text parameter passed to this HTTP endpoint and insert it into the
@@ -51,3 +49,54 @@ exports.onDeleteList = functions.firestore
 //       return res.redirect(303, snapshot.ref.toString());
 //     });
 // });
+
+exports.onDeleteBoard = functions.firestore
+  .document("workflow/{boardID}")
+  .onDelete((snap, context) => {
+    //don't need to delete tasks here because we already do that on deleting each list
+    deleteCollection(firestore, `workflow/${snap.id}/lists`, 10);
+    return null;
+  });
+
+function deleteCollection(db, collectionPath, batchSize) {
+  var collectionRef = db.collection(collectionPath);
+  var query = collectionRef.orderBy("__name__").limit(batchSize);
+
+  return new Promise((resolve, reject) => {
+    deleteQueryBatch(db, query, batchSize, resolve, reject);
+  });
+}
+
+function deleteQueryBatch(db, query, batchSize, resolve, reject) {
+  query
+    .get()
+    .then(snapshot => {
+      // When there are no documents left, we are done
+      if (snapshot.size == 0) {
+        return 0;
+      }
+
+      // Delete documents in a batch
+      var batch = db.batch();
+      snapshot.docs.forEach(doc => {
+        batch.delete(doc.ref);
+      });
+
+      return batch.commit().then(() => {
+        return snapshot.size;
+      });
+    })
+    .then(numDeleted => {
+      if (numDeleted === 0) {
+        resolve();
+        return;
+      }
+
+      // Recurse on the next process tick, to avoid
+      // exploding the stack.
+      process.nextTick(() => {
+        deleteQueryBatch(db, query, batchSize, resolve, reject);
+      });
+    })
+    .catch(reject);
+}
