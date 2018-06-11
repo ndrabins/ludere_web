@@ -24,13 +24,12 @@ class Workflow extends Component {
       classes
     } = this.props;
 
-    if (
-      loadingLists ||
-      loadingTasks ||
-      loadingBoards ||
-      selectedBoard === null
-    ) {
+    if (loadingLists || loadingTasks || loadingBoards) {
       return <Loading />;
+    }
+
+    if (boards[selectedBoard] === undefined || selectedBoard === null) {
+      return <div> Select a board </div>;
     }
 
     return (

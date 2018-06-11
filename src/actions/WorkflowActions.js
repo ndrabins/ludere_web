@@ -15,7 +15,8 @@ import {
   UPDATE_BOARD,
   FETCH_TAGS,
   CREATE_TAG,
-  DELETE_TAG
+  DELETE_TAG,
+  DELETE_BOARD
 } from "./types";
 import firebase from "firebase/app";
 
@@ -223,10 +224,10 @@ export function fetchBoardData(boardID) {
 
 export function selectBoard(boardID) {
   return dispatch => {
-    // if (boardID === null) {
-    //   dispatch({ type: SELECT_BOARD, selectedBoard: null });
-    //   return;
-    // }
+    if (boardID === null) {
+      dispatch({ type: SELECT_BOARD, selectedBoard: null });
+      return;
+    }
     dispatch({ type: SELECT_BOARD, selectedBoard: boardID });
     dispatch(fetchBoardData(boardID));
   };
@@ -303,6 +304,21 @@ export function deleteList(listID, boardID) {
 
     listRef.delete().then(function(docRef) {
       dispatch({ type: DELETE_LIST });
+    });
+  };
+}
+
+export function deleteBoard(boardID) {
+  return dispatch => {
+    const boardRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(boardID);
+
+    selectBoard(null);
+
+    boardRef.delete().then(function(docRef) {
+      dispatch({ type: DELETE_BOARD });
     });
   };
 }
