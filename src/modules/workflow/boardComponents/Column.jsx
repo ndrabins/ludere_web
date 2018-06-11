@@ -7,7 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 import TextField from "@material-ui/core/TextField";
-import Menu from "@material-ui/core/Menu";
+import Popover from "@material-ui/core/Popover";
 import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -90,16 +90,23 @@ class Column extends PureComponent {
                 >
                   <MoreVertIcon />
                 </IconButton>
-                <Menu
-                  id="simple-menu"
-                  anchorEl={anchorEl}
+                <Popover
                   open={Boolean(anchorEl)}
+                  anchorEl={anchorEl}
                   onClose={this.handleClose}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center"
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "center"
+                  }}
                 >
                   <MenuItem onClick={() => this.handleListDelete(ID)}>
                     Delete List
                   </MenuItem>
-                </Menu>
+                </Popover>
               </div>
               <div className={classes.taskEntry}>
                 <TextField

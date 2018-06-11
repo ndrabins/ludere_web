@@ -5,7 +5,7 @@ import * as Actions from "../../actions";
 import { withStyles } from "@material-ui/core/styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Typography from "@material-ui/core/Typography";
-import Menu from "@material-ui/core/Menu";
+import Popover from "@material-ui/core/Popover";
 import MenuItem from "@material-ui/core/MenuItem";
 import Input from "@material-ui/core/Input";
 
@@ -108,17 +108,24 @@ class ChannelButton extends Component {
           aria-haspopup="true"
           onClick={ev => this.handleMenuClick(ev)}
         />
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
+        <Popover
           open={Boolean(anchorEl)}
+          anchorEl={anchorEl}
           onClose={this.handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center"
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "center"
+          }}
         >
           <MenuItem onClick={this.handleUpdateChannelName}>Edit Name</MenuItem>
           <MenuItem onClick={ev => this.handleChannelDelete(ev, channelID)}>
             Delete Channel
           </MenuItem>
-        </Menu>
+        </Popover>
       </div>
     );
   }

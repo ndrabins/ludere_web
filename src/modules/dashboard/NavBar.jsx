@@ -3,35 +3,38 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
-import colors from "../../utility/constants/colors";
 import InviteButton from "./InviteButton";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import Menu from "@material-ui/core/Menu";
+import Popover from "@material-ui/core/Popover";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import AccountIcon from "@material-ui/icons/AccountCircle";
+import LogoutIcon from "@material-ui/icons/ExitToApp";
+
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+
 import { withStyles } from "@material-ui/core/styles";
 
 class NavBar extends Component {
   state = {
-    anchorEl: null,
-    openNavMenu: false
+    anchorEl: null
   };
 
   handleClickNavMenu = event => {
-    this.setState({ openNavMenu: true, anchorEl: event.currentTarget });
+    this.setState({ anchorEl: event.currentTarget });
   };
 
-  handleRequestCloseNavMenu = () => {
-    this.setState({ openNavMenu: false });
+  handleClose = () => {
+    this.setState({ anchorEl: null });
   };
 
   handleProfileSelect = () => {
     this.props.history.push("/profile/");
-    this.handleRequestCloseNavMenu();
+    this.handleClose();
   };
 
   handleCalendarSelect() {
@@ -46,6 +49,7 @@ class NavBar extends Component {
 
   render() {
     const { profile, classes } = this.props;
+    const { anchorEl } = this.state;
 
     if (profile === undefined) {
       return <div />;
@@ -78,17 +82,34 @@ class NavBar extends Component {
             className={classes.avatar}
           />
           <div>
-            <Menu
-              id="simple-menu"
-              anchorEl={this.state.anchorEl}
-              open={this.state.openNavMenu}
-              onClose={this.handleRequestCloseNavMenu}
+            <Popover
+              open={Boolean(anchorEl)}
+              anchorEl={anchorEl}
+              onClose={this.handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "center"
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "center"
+              }}
             >
-              <MenuItem onClick={this.handleProfileSelect}>Profile</MenuItem>
-              <MenuItem onClick={() => this.props.actions.signOutUser()}>
-                Logout
-              </MenuItem>
-            </Menu>
+              <div className={classes.profileMenu}>
+                <MenuItem onClick={this.handleProfileSelect}>
+                  <ListItemIcon className={classes.icon}>
+                    <AccountIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Profile" />
+                </MenuItem>
+                <MenuItem onClick={() => this.props.actions.signOutUser()}>
+                  <ListItemIcon className={classes.icon}>
+                    <LogoutIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Logout" />
+                </MenuItem>
+              </div>
+            </Popover>
           </div>
         </div>
       </div>
@@ -130,6 +151,9 @@ const styles = {
   displayName: {
     color: "#FFFFFF",
     marginRight: 10
+  },
+  profileMenu: {
+    minWidth: 160
   },
   menuButton: {
     height: "100%",

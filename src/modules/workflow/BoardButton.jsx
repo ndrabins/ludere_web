@@ -7,8 +7,9 @@ import { withRouter } from "react-router";
 import { withStyles } from "@material-ui/core/styles";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Typography from "@material-ui/core/Typography";
-import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import Popover from "@material-ui/core/Popover";
+
 import Input from "@material-ui/core/Input";
 
 import { Link } from "react-router-dom";
@@ -113,17 +114,24 @@ class BoardButton extends Component {
           aria-haspopup="true"
           onClick={ev => this.handleMenuClick(ev)}
         />
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
+        <Popover
           open={Boolean(anchorEl)}
+          anchorEl={anchorEl}
           onClose={this.handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center"
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "center"
+          }}
         >
           <MenuItem onClick={this.handleUpdateBoardName}>Edit Name</MenuItem>
           <MenuItem onClick={ev => this.handleBoardDelete(ev, boardID)}>
             Delete Board
           </MenuItem>
-        </Menu>
+        </Popover>
       </div>
     );
   }

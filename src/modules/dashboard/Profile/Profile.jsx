@@ -6,7 +6,6 @@ import * as Actions from "../../../actions";
 import firebase from "firebase";
 
 import { FilePond, File, registerPlugin } from "react-filepond";
-import FilePondImagePreview from "filepond-plugin-image-preview";
 import FilepondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImageCrop from "filepond-plugin-image-crop";
@@ -27,7 +26,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
