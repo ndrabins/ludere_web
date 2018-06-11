@@ -36,7 +36,8 @@ class ChannelButton extends Component {
   };
 
   handleChannelDelete = (event, channelID) => {
-    console.log("deleting board", channelID);
+    const { actions } = this.props;
+    actions.deleteChannel(channelID);
     this.handleClose();
   };
 

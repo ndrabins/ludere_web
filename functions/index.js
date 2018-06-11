@@ -67,6 +67,23 @@ function deleteCollection(db, collectionPath, batchSize) {
   });
 }
 
+exports.onDeleteChannel = functions.firestore
+  .document("chat/{channelID}")
+  .onDelete((snap, context) => {
+    //don't need to delete tasks here because we already do that on deleting each list
+    deleteCollection(firestore, `chat/${snap.id}/messages`, 50);
+    return null;
+  });
+
+function deleteCollection(db, collectionPath, batchSize) {
+  var collectionRef = db.collection(collectionPath);
+  var query = collectionRef.orderBy("__name__").limit(batchSize);
+
+  return new Promise((resolve, reject) => {
+    deleteQueryBatch(db, query, batchSize, resolve, reject);
+  });
+}
+
 function deleteQueryBatch(db, query, batchSize, resolve, reject) {
   query
     .get()

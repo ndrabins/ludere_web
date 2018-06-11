@@ -12,7 +12,8 @@ import {
   UNSUBSCRIBE_MESSAGES,
   FETCH_MORE_MESSAGES,
   FETCH_MORE_MESSAGES_SUCCESS,
-  UPDATE_CHANNEL
+  UPDATE_CHANNEL,
+  DELETE_CHANNEL
 } from "./types";
 
 import firebase from "firebase/app";
@@ -195,6 +196,19 @@ export function sendMessage({ messageText, type = "message", fileURL = "" }) {
 
     messageRef.add(message).then(function(docRef) {
       dispatch({ type: SEND_MESSAGE });
+    });
+  };
+}
+
+export function deleteChannel(channelID) {
+  return dispatch => {
+    const chatRef = firebase
+      .firestore()
+      .collection("chat")
+      .doc(channelID);
+
+    chatRef.delete().then(function(docRef) {
+      dispatch({ type: DELETE_CHANNEL });
     });
   };
 }
