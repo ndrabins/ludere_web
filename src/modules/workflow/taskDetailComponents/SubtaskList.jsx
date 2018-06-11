@@ -111,7 +111,7 @@ const styles = theme => ({
     flexDirection: "row",
     alignItems: "flex-start",
     wordWrap: "break-word",
-    width: 273 // this shouldnt be hard coded but I couldn't figure out how to make the text no go past div.
+    width: "80%" // this shouldnt be hard coded but I couldn't figure out how to make the text not go past div.
   },
   closeIcon: {
     color: "#6d6d6d"
