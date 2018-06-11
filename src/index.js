@@ -20,17 +20,19 @@ import firebase from "firebase";
 
 const url = window.location.href;
 let config;
-if (url.includes("app")) {
-  // prod
-  config = {
-    apiKey: "AIzaSyCTXUH-KwzEqiWKXOlJus7ridhcaik1834",
-    authDomain: "production-ludere.firebaseapp.com",
-    databaseURL: "https://production-ludere.firebaseio.com",
-    projectId: "production-ludere",
-    storageBucket: "production-ludere.appspot.com",
-    messagingSenderId: "468372447431"
-  };
-} else if (url.includes("staging")) {
+// if (url.includes("app")) {
+//   // prod
+//   config = {
+//     apiKey: "AIzaSyCTXUH-KwzEqiWKXOlJus7ridhcaik1834",
+//     authDomain: "production-ludere.firebaseapp.com",
+//     databaseURL: "https://production-ludere.firebaseio.com",
+//     projectId: "production-ludere",
+//     storageBucket: "production-ludere.appspot.com",
+//     messagingSenderId: "468372447431"
+//   };
+// } else
+
+if (url.includes("staging")) {
   // staging
   config = {
     apiKey: "AIzaSyBN3GDDJkYMChPbB6sxZuwIEI1noSvQ0FE",

@@ -8,6 +8,7 @@ import {
   CREATE_LIST,
   CHANGE_COLUMN_ORDER,
   UPDATE_LIST,
+  DELETE_LIST,
   UNSUBSCRIBE_BOARD_DATA,
   UNSUBSCRIBE_BOARDS,
   FETCH_BOARD_DATA,
@@ -287,6 +288,21 @@ export function deleteTag(boardID, tagID) {
 
     tagRef.delete().then(function(docRef) {
       dispatch({ type: DELETE_TAG });
+    });
+  };
+}
+
+export function deleteList(listID, boardID) {
+  return dispatch => {
+    const listRef = firebase
+      .firestore()
+      .collection("workflow")
+      .doc(boardID)
+      .collection("lists")
+      .doc(listID);
+
+    listRef.delete().then(function(docRef) {
+      dispatch({ type: DELETE_LIST });
     });
   };
 }

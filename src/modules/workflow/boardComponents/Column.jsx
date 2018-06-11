@@ -54,9 +54,8 @@ class Column extends PureComponent {
   };
 
   handleListDelete = columnID => {
-    const { selectedTeam } = this.props;
-    console.log(columnID);
-    // this.props.actions.removeFromTeam(selectedTeam, columnID);
+    const { boardID, actions } = this.props;
+    actions.deleteList(columnID, boardID);
     this.handleClose();
   };
 
