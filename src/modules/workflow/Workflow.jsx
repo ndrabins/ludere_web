@@ -6,6 +6,8 @@ import Board from "./boardComponents/Board";
 import TaskDetail from "./boardComponents/TaskDetail";
 import Loading from "../../common/Loading";
 import BoardHeader from "./BoardHeader";
+import ListIcon from "../../static/list.svg";
+import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
 class Workflow extends Component {
@@ -24,12 +26,19 @@ class Workflow extends Component {
       classes
     } = this.props;
 
-    if (loadingLists || loadingTasks || loadingBoards) {
-      return <Loading />;
+    if (boards[selectedBoard] === undefined || selectedBoard === null) {
+      return (
+        <div style={styles.unselectedBoardContainer}>
+          <Typography variant="display2">
+            Start by selecting a board!
+          </Typography>
+          <img style={styles.icon} src={ListIcon} alt="list icon" />
+        </div>
+      );
     }
 
-    if (boards[selectedBoard] === undefined || selectedBoard === null) {
-      return <div> Select a board </div>;
+    if (loadingLists || loadingTasks || loadingBoards) {
+      return <Loading />;
     }
 
     return (
@@ -58,6 +67,20 @@ const styles = {
     overflowX: "auto",
     overflowY: "auto",
     display: "flex"
+  },
+  icon: {
+    marginTop: 20,
+    minWidth: 100,
+    minHeight: 100,
+    maxHeight: 200,
+    maxWidth: 200
+  },
+  unselectedBoardContainer: {
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column"
   }
 };
 

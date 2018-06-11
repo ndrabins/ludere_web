@@ -62,12 +62,15 @@ class MessageEntry extends Component {
   };
 
   render() {
-    let name = "";
-    if (this.props.selectedChannel) {
-      name = this.props.channels[this.props.selectedChannel].name;
-    }
+    const { selectedChannel, channels, classes } = this.props;
 
-    const { classes } = this.props;
+    let name = "";
+
+    if (selectedChannel && channels[selectedChannel] !== undefined) {
+      name = channels[selectedChannel].name;
+    } else {
+      return <div />;
+    }
 
     return (
       <div className={classes.container}>

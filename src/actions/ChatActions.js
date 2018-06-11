@@ -108,6 +108,11 @@ export function selectChannel(channelID) {
     const oldChannelID = getState().chat.selectedChannel;
     dispatch(unsubscribeFromMessages(oldChannelID)); //unsubscribe from previous channels
 
+    if (channelID === null) {
+      dispatch({ type: SELECT_CHANNEL, selectedChannel: null });
+      return;
+    }
+
     dispatch({ type: SELECT_CHANNEL, selectedChannel: channelID });
 
     let messageRef = firebase
@@ -206,6 +211,9 @@ export function deleteChannel(channelID) {
       .firestore()
       .collection("chat")
       .doc(channelID);
+
+    console.log(channelID);
+    dispatch(selectChannel(null));
 
     chatRef.delete().then(function(docRef) {
       dispatch({ type: DELETE_CHANNEL });
