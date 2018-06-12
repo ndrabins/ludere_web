@@ -22,12 +22,16 @@ class CommentSection extends Component {
   };
 
   handleCreateComment = () => {
+    const { comments, actions } = this.props;
     const { commentText } = this.state;
+
+    const numberOfComments = Object.keys(comments).length;
+
     if (commentText === "") {
       return;
     }
 
-    this.props.actions.createComment(commentText);
+    actions.createComment(commentText, numberOfComments);
     this.setState({ commentText: "" });
   };
 

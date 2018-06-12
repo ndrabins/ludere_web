@@ -11,6 +11,7 @@ import { withStyles } from "@material-ui/core/styles";
 import TagsButton from "../taskDetailComponents/TagsButton";
 import classnames from "classnames";
 import TagsList from "../taskDetailComponents/TagsList";
+import CommentIcon from "@material-ui/icons/Comment";
 
 class Task extends PureComponent {
   state = {
@@ -97,19 +98,27 @@ class Task extends PureComponent {
         <div className={classes.extraInfoContainer}>
           {task.subtasks.length > 0 ? (
             <div className={classes.taskItemContainer}>
-              <Circle
-                animate={true} // Boolean: Animated/Static progress
-                size={30} // Number: Defines the size of the circle.
-                lineWidth={30} // Number: Defines the thickness of the circle's stroke.
-                progress={percent} // Number: Update to change the progress and percentage.
-                progressColor="#20BDD3" // String: Color of "progress" portion of circle.
-                bgColor="whitesmoke" // String: Color of "empty" portion of circle.
-                textColor="#303030" // String: Color of percentage text color.
-                roundedStroke={true} // Boolean: Rounded/Flat line ends
-                showPercentage={false} // Boolean: Show/hide percentage.
-                showPercentageSymbol={false} // Boolean: Show/hide only the "%" symbol.
-              />
-              {this.getSubtasksComplete()}
+              <div className={classes.taskItemContainer}>
+                <Circle
+                  animate={true} // Boolean: Animated/Static progress
+                  size={30} // Number: Defines the size of the circle.
+                  lineWidth={30} // Number: Defines the thickness of the circle's stroke.
+                  progress={percent} // Number: Update to change the progress and percentage.
+                  progressColor="#20BDD3" // String: Color of "progress" portion of circle.
+                  bgColor="whitesmoke" // String: Color of "empty" portion of circle.
+                  textColor="#303030" // String: Color of percentage text color.
+                  roundedStroke={true} // Boolean: Rounded/Flat line ends
+                  showPercentage={false} // Boolean: Show/hide percentage.
+                  showPercentageSymbol={false} // Boolean: Show/hide only the "%" symbol.
+                />
+                {this.getSubtasksComplete()}
+              </div>
+              <div className={classes.taskItemContainer}>
+                <CommentIcon className={classes.commentIcon} />
+                <Typography variant="caption">
+                  {task.numberOfComments}
+                </Typography>
+              </div>
             </div>
           ) : (
             <div />
@@ -168,7 +177,7 @@ const styles = {
     color: "#6d6d6d",
     width: 20,
     height: 20,
-    marginLeft: 10
+    marginLeft: 6
   },
   taskItemContainer: {
     position: "relative",

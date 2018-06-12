@@ -273,7 +273,7 @@ export function deleteTask() {
   };
 }
 
-export function createComment(commentText) {
+export function createComment(commentText, numberOfComments) {
   return (dispatch, getState) => {
     const { uid } = getState().auth.user;
     const { myUserProfile } = getState().profile;
@@ -294,6 +294,18 @@ export function createComment(commentText) {
     let commentRef = firebase
       .firestore()
       .collection(`workflow/${selectedBoard}/tasks/${selectedTask}/comments`);
+
+    //update task with number of comments
+    let taskRef = firebase
+      .firestore()
+      .doc(`workflow/${selectedBoard}/tasks/${selectedTask}`);
+
+    taskRef.set(
+      {
+        numberOfComments: numberOfComments + 1
+      },
+      { merge: true }
+    );
 
     commentRef.add(newComment).then(function(docRef) {
       dispatch({ type: CREATE_COMMENT });
