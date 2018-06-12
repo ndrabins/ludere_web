@@ -14,7 +14,7 @@ const initialState = {
   selectedBoard: null,
   boards: {},
   listData: null,
-  tagData: null,
+  tagData: {},
   taskData: null,
   showTaskDetail: false,
   selectedTask: null,
