@@ -30,7 +30,7 @@ class Workflow extends Component {
       return (
         <div style={styles.unselectedBoardContainer}>
           <Typography variant="display2">
-            Start by selecting a board!
+            Start by selecting a workflow!
           </Typography>
           <img style={styles.icon} src={ListIcon} alt="list icon" />
         </div>
