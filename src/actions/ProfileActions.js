@@ -6,8 +6,6 @@ import {
 } from "./types";
 import firebase from "firebase/app";
 
-import "firebase/firestore";
-
 //fetch my profileID on default
 export function fetchUserProfile(userID = "fetchMyProfile") {
   return (dispatch, getState) => {

@@ -15,8 +15,6 @@ import {
 } from "./types";
 import firebase from "firebase/app";
 
-import "firebase/firestore";
-
 export function startDirectMessage(recieverUID, recieverInfo) {
   /*
     1. Check if conversation exists

@@ -17,6 +17,11 @@ import ReduxThunk from "redux-thunk";
 import rootReducer from "./reducers";
 
 import firebase from "firebase";
+import "firebase/firestore";
+import "firebase/messaging";
+import "firebase/auth";
+import "firebase/messaging";
+import "firebase/functions";
 
 const url = window.location.href;
 let config;

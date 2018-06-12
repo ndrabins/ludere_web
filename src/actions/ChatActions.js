@@ -17,7 +17,6 @@ import {
 } from "./types";
 
 import firebase from "firebase/app";
-import "firebase/firestore";
 
 export function fetchChannels(selectedTeam) {
   return (dispatch, getState) => {

@@ -13,7 +13,6 @@ import {
 } from "./types";
 
 import firebase from "firebase/app";
-import "firebase/firestore";
 
 import * as teamActions from "./TeamActions";
 

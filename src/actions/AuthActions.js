@@ -7,7 +7,6 @@ import {
 } from "./types";
 import * as localforage from "localforage";
 import firebase from "firebase/app";
-import "firebase/firestore";
 
 import * as workspaceActions from "./WorkspaceActions";
 import * as profileActions from "./ProfileActions";

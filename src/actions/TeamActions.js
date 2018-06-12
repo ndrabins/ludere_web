@@ -10,7 +10,6 @@ import {
 } from "./types";
 
 import firebase from "firebase/app";
-import "firebase/firestore";
 
 import * as chatActions from "./ChatActions";
 import * as workflowActions from "./WorkflowActions";

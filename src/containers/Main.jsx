@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 import { withStyles } from "@material-ui/core/styles";
+import firebase from "firebase";
 
 import { Route, Switch } from "react-router-dom";
 
@@ -34,6 +35,24 @@ class Main extends Component {
     if (selectedTeam) {
       actions.loadTeamData(selectedTeam);
     }
+
+    firebase
+      .messaging()
+      .usePublicVapidKey(
+        "BJb2ITjssD1V0VxkbwpzWW1-7qWLjHdsZux-cizph8Ex4KQ-OfrFdtjY8RTx-4z61IHgBI3q9-n-nnhEXy4RBuQ"
+      );
+
+    firebase
+      .messaging()
+      .requestPermission()
+      .then(function() {
+        console.log("Notification permission granted.");
+        // TODO(developer): Retrieve an Instance ID token for use with FCM.
+        // ...
+      })
+      .catch(function(err) {
+        console.log("Unable to get permission to notify.", err);
+      });
   }
 
   componentWillUnmount() {

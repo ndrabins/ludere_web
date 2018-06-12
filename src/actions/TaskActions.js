@@ -12,7 +12,6 @@ import {
   UNSUBSCRIBE_TASK_COMMENTS
 } from "./types";
 import firebase from "firebase/app";
-import "firebase/firestore";
 
 export function createTask(listID, taskTitle) {
   return (dispatch, getState) => {
