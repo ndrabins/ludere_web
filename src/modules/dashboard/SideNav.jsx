@@ -27,15 +27,13 @@ class SideNav extends Component {
           <div className={classes.sideNavInner}>
             <div className={classes.sideNavBanner}>
               <img src={logoWhite} className={classes.logo} alt="Logo" />
-              {/*
-              TODO: FIX WIDTH ISSUE
-              Disabling this till I can figure out width issue.
+
               <IconButton
                 className={classes.closeButton}
                 onClick={this.props.toggleDrawer}
               >
                 <CloseIcon />
-              </IconButton> */}
+              </IconButton>
             </div>
             <SideNavModules />
           </div>
@@ -61,7 +59,7 @@ const styles = {
     backgroundColor: "#303030",
     minWidth: drawerWidth,
     width: drawerWidth,
-    transition: "width 0.75s ease-out, min-width 0.75s ease-out",
+    transition: "width 0.5s ease-out, min-width 0.5s ease-out",
     overflow: "hidden",
     boxShadow:
       "0 5.5px 5px 0 rgba(0, 0, 0, 0.24), 0 9px 18px 0 rgba(0, 0, 0, 0.18)"
@@ -71,7 +69,7 @@ const styles = {
     minWidth: 0,
     backgroundColor: colors.lightThemePrimary,
     overflow: "hidden",
-    transition: "width 0.75s ease-out, min-width 0.75s ease-out"
+    transition: "width 0.5s ease-out, min-width 0.5s ease-out"
   },
   sideNavInner: {
     width: drawerWidth

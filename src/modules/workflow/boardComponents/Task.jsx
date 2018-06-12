@@ -175,7 +175,7 @@ const styles = {
     position: "absolute"
   },
   commentIcon: {
-    color: "#6d6d6d",
+    color: "#b9bbbe",
     width: 20,
     height: 20,
     marginLeft: 6

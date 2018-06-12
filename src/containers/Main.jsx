@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
+import { withStyles } from "@material-ui/core/styles";
 
 import { Route, Switch } from "react-router-dom";
 
@@ -20,7 +21,7 @@ import WorkFlow from "../modules/workflow/Workflow";
 import Chat from "../modules/chat/Chat";
 import TeamDashboard from "../modules/team/TeamDashboardd";
 
-const drawerWidth = 298;
+const DRAWER_WIDTH = 300;
 
 class Main extends Component {
   state = {
@@ -49,8 +50,11 @@ class Main extends Component {
       history,
       loadingWorkspaces,
       loadingProfile,
-      loadingUsers
+      loadingUsers,
+      classes
     } = this.props;
+
+    const { drawerVisible } = this.state;
 
     if (loadingWorkspaces || loadingProfile || loadingUsers) {
       return <Loading />;
@@ -62,22 +66,22 @@ class Main extends Component {
     }
 
     return (
-      <div style={styles.container}>
+      <div className={classes.container}>
         <SideNav
           history={history}
           toggleDrawer={() => this.toggleDrawer()}
-          drawerVisible={this.state.drawerVisible}
+          drawerVisible={drawerVisible}
         />
         <div
           style={{
-            ...styles.content,
-            ...{ width: `calc(100% - ${drawerWidth}px)` }
+            width: `calc(100% - ${drawerVisible ? DRAWER_WIDTH : 0}px)`
           }}
+          className={classes.content}
         >
           <NavBar
             history={history}
             toggleDrawer={() => this.toggleDrawer()}
-            drawerVisible={this.state.drawerVisible}
+            drawerVisible={drawerVisible}
           />
           <Switch>
             <Route exact path="/community/dashboard" component={Dashboard} />
@@ -106,7 +110,8 @@ const styles = {
   },
   content: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    transition: "width 0.5s ease-out"
   }
 };
 
@@ -127,4 +132,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(Main)
+);
