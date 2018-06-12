@@ -121,7 +121,7 @@ export function signInUser(email, password) {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(user => authSuccess(dispatch, user))
+      .then(user => authSuccess(dispatch, user.user))
       .catch(error => {
         dispatch(authError(error));
       });

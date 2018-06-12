@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
 import { withStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
-import ArrowIcon from "@material-ui/icons/KeyboardArrowRight";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 
@@ -13,6 +12,7 @@ import SectionDivider from "../../../common/SectionDivider";
 import TaskSubTasks from "../taskDetailComponents/TaskSubTasks";
 import Description from "../taskDetailComponents/Description";
 import CommentSection from "../taskDetailComponents/CommentSection";
+import CloseIcon from "@material-ui/icons/Close";
 
 class TaskDetail extends Component {
   handleTitleChange = title => {
@@ -46,10 +46,10 @@ class TaskDetail extends Component {
           <div className={classes.header}>
             <div className={classes.headerInner}>
               <IconButton
-                className={classes.arrowIcon}
+                className={classes.icon}
                 onClick={() => this.props.actions.toggleTaskDetail()}
               >
-                <ArrowIcon />
+                <CloseIcon />
               </IconButton>
               <div className={classes.titleContainer}>
                 <EditableText
@@ -149,7 +149,7 @@ const styles = theme => ({
       backgroundColor: "#e74c3c"
     }
   },
-  arrowIcon: {
+  icon: {
     color: "white",
     marginTop: -2,
     marginBottom: -2
@@ -160,8 +160,7 @@ function mapStateToProps(state) {
   return {
     showTaskDetail: state.workflow.showTaskDetail,
     taskData: state.workflow.taskData,
-    selectedTask: state.workflow.selectedTask,
-    showTaskDetail: state.workflow.showTaskDetail
+    selectedTask: state.workflow.selectedTask
   };
 }
 
