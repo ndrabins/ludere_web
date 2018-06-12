@@ -132,6 +132,7 @@ export function fetchWorkspaces() {
         if (selectedWorkspace !== null) {
           //if a user is in a workspace, load the data for it on app start.
           dispatch(selectWorkspace(selectedWorkspace));
+          dispatch(fetchWorkspaceUsers(selectedWorkspace));
         }
 
         dispatch({ type: FETCH_WORKSPACES_SUCCESS, workspaces: workspaces });
@@ -174,16 +175,14 @@ export function fetchSelectedWorkspace() {
   };
 }
 
-export function fetchWorkspaceUsers() {
+export function fetchWorkspaceUsers(workspaceID) {
   return (dispatch, getState) => {
     dispatch({ type: FETCH_WORKSPACE_USERS });
-
-    let workspaceUID = getState().workspace.selectedWorkspace;
 
     let userRef = firebase.firestore().collection(`users`);
 
     userRef
-      .where(`workspaces.${workspaceUID}`, "==", true)
+      .where(`workspaces.${workspaceID}`, "==", true)
       .onSnapshot(function(querySnapshot) {
         var users = {};
         querySnapshot.forEach(function(doc) {

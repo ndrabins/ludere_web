@@ -30,8 +30,6 @@ class Main extends Component {
   componentDidMount() {
     const { actions, selectedTeam } = this.props;
     actions.fetchWorkspaces();
-    actions.fetchWorkspaceUsers();
-
     if (selectedTeam) {
       actions.loadTeamData(selectedTeam);
     }
