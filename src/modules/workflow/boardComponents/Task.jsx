@@ -96,8 +96,8 @@ class Task extends PureComponent {
         </Typography>
         <TagsList small tagKeys={task.tags} />
         <div className={classes.extraInfoContainer}>
-          {task.subtasks.length > 0 ? (
-            <div className={classes.taskItemContainer}>
+          <div className={classes.taskItemContainer}>
+            {task.subtasks.length > 0 && (
               <div className={classes.taskItemContainer}>
                 <Circle
                   animate={true} // Boolean: Animated/Static progress
@@ -113,16 +113,17 @@ class Task extends PureComponent {
                 />
                 {this.getSubtasksComplete()}
               </div>
+            )}
+            {task.numberOfComments > 0 && (
               <div className={classes.taskItemContainer}>
                 <CommentIcon className={classes.commentIcon} />
                 <Typography variant="caption">
                   {task.numberOfComments}
                 </Typography>
               </div>
-            </div>
-          ) : (
+            )}
             <div />
-          )}
+          </div>
           <div className={classes.taskItemContainer}>
             <TagsButton hovered={hovered} task={task} taskID={taskID} />
             <AssignUser task={task} taskID={taskID} hovered={hovered} />
