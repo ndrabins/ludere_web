@@ -20,8 +20,8 @@ const firestore = admin.firestore();
 exports.onCreateMessage = functions.firestore
   .document("chat/{channelID}/messages/{messageID}")
   .onCreate((snap, context) => {
-    console.log(snap);
     const channelID = context.params.channelID;
+    const message = snap.data();
 
     const channelRef = firestore.doc(`chat/${channelID}`);
     //Fetch channel data for workspaceID and teamID
@@ -46,7 +46,7 @@ exports.onCreateMessage = functions.firestore
 
             //for each team member that is a member, send a notification on the channel
             Map(teamMembers, (isMember, memberID) => {
-              if (isMember) {
+              if (isMember || !message.sentBy) {
                 let notifications = {};
                 notifications[`${channelID}`] = true;
                 const userRef = firestore.doc(`users/${memberID}`);
