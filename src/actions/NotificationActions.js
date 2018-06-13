@@ -38,7 +38,6 @@ export function fetchNotifications() {
       .doc(`${uid}`);
 
     notificationRef.onSnapshot(function(doc) {
-      console.log(doc.data());
       if (!doc.exists) {
         dispatch({
           type: FETCH_NOTIFICATIONS_SUCCESS,
