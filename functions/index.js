@@ -15,7 +15,13 @@ const firestore = admin.firestore();
 //   }
 // });
 
+exports.onCreateMessage = functions.firestore
+  .document("chat/{channelID}/messages/{messageID}")
+  .onDelete((snap, context) => {
+    return null;
+  });
 // Delete all tasks in list whenever a list is deleted.
+
 exports.onDeleteList = functions.firestore
   .document("workflow/{boardID}/lists/{listID}")
   .onDelete((snap, context) => {
@@ -34,28 +40,19 @@ exports.onDeleteList = functions.firestore
     return null;
   });
 
-// Take the text parameter passed to this HTTP endpoint and insert it into the
-// Realtime Database under the path /messages/:pushId/original
-// exports.addMessage = functions.https.onRequest((req, res) => {
-//   // Grab the text parameter.
-//   const original = req.query.text;
-//   // Push the new message into the Realtime Database using the Firebase Admin SDK.
-//   return admin
-//     .database()
-//     .ref("/messages")
-//     .push({ original: original })
-//     .then(snapshot => {
-//       // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
-//       return res.redirect(303, snapshot.ref.toString());
-//     });
-// });
-
+// delete all lists in board whenever board is deleted. This will propagate to tasks as well.
 exports.onDeleteBoard = functions.firestore
   .document("workflow/{boardID}")
   .onDelete((snap, context) => {
     //don't need to delete tasks here because we already do that on deleting each list
-    deleteCollection(firestore, `workflow/${snap.id}/lists`, 10);
-    return null;
+    return deleteCollection(firestore, `workflow/${snap.id}/lists`, 10);
+  });
+
+// delete all messages on deleting a channel
+exports.onDeleteChannel = functions.firestore
+  .document("chat/{channelID}")
+  .onDelete((snap, context) => {
+    return deleteCollection(firestore, `chat/${snap.id}/messages`, 50);
   });
 
 function deleteCollection(db, collectionPath, batchSize) {
@@ -66,14 +63,6 @@ function deleteCollection(db, collectionPath, batchSize) {
     deleteQueryBatch(db, query, batchSize, resolve, reject);
   });
 }
-
-exports.onDeleteChannel = functions.firestore
-  .document("chat/{channelID}")
-  .onDelete((snap, context) => {
-    //don't need to delete tasks here because we already do that on deleting each list
-    deleteCollection(firestore, `chat/${snap.id}/messages`, 50);
-    return null;
-  });
 
 function deleteCollection(db, collectionPath, batchSize) {
   var collectionRef = db.collection(collectionPath);

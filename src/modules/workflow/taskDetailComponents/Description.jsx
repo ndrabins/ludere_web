@@ -53,8 +53,8 @@ class Description extends Component {
             onChange={this.handleChange("descriptionText")}
             multiline
             fullWidth
-            rowsMax="8"
-            rows="2"
+            rowsMax="16"
+            rows="3"
             placeholder="Add a description"
             disableUnderline
             onBlur={() => this.handleBlur()}

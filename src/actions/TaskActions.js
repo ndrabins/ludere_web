@@ -45,7 +45,8 @@ export function createTask(listID, taskTitle) {
       title: taskTitle,
       tags: {},
       subtasks: [],
-      assigned: {}
+      assigned: {},
+      numberOfComments: 0
     };
 
     taskRef.add(task).then(function(docRef) {
