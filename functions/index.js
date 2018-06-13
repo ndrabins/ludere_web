@@ -49,8 +49,10 @@ exports.onCreateMessage = functions.firestore
               if (isMember || !message.sentBy) {
                 let notifications = {};
                 notifications[`${channelID}`] = true;
-                const userRef = firestore.doc(`users/${memberID}`);
-                userRef.set(
+                const privateUserRef = firestore.doc(
+                  `privateUserData/${memberID}`
+                );
+                privateUserRef.set(
                   {
                     notifications
                   },

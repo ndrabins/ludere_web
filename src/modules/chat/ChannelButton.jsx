@@ -217,7 +217,7 @@ const styles = {
 function mapStateToProps(state) {
   return {
     selectedChannel: state.chat.selectedChannel,
-    notifications: state.profile.myUserProfile.notifications
+    notifications: state.userData.notifications
   };
 }
 

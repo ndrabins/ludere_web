@@ -35,6 +35,7 @@ class Main extends Component {
     if (selectedTeam) {
       actions.loadTeamData(selectedTeam);
     }
+    actions.fetchNotifications();
 
     // firebase
     //   .messaging()

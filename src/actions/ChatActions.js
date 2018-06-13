@@ -17,7 +17,7 @@ import {
 } from "./types";
 
 import firebase from "firebase/app";
-import { updateUserProfile } from "./ProfileActions";
+import { readNotification } from "./NotificationActions";
 
 export function fetchChannels(selectedTeam) {
   return (dispatch, getState) => {
@@ -115,12 +115,8 @@ export function selectChannel(channelID) {
       return;
     }
 
+    dispatch(readNotification(channelID));
     dispatch({ type: SELECT_CHANNEL, selectedChannel: channelID });
-
-    let notifications = {};
-
-    notifications[`notifications.${channelID}`] = false;
-    dispatch(updateUserProfile(notifications));
 
     let messageRef = firebase
       .firestore()

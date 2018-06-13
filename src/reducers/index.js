@@ -9,6 +9,7 @@ import WorkspaceReducer from "./WorkspaceReducer";
 import CommunityReducer from "./CommunityReducer";
 import ProfileReducer from "./ProfileReducer";
 import WorkflowReducer from "./WorkflowReducer";
+import UserReducer from "./UserReducer";
 
 const appReducer = combineReducers({
   auth: AuthReducer,
@@ -17,7 +18,8 @@ const appReducer = combineReducers({
   community: CommunityReducer,
   profile: ProfileReducer,
   chat: ChatReducer,
-  workflow: WorkflowReducer
+  workflow: WorkflowReducer,
+  userData: UserReducer
 });
 
 const rootReducer = (state, action) => {
