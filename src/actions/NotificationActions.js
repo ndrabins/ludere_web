@@ -19,11 +19,11 @@ export function readNotification(notificationID) {
       .collection(`privateUserData`)
       .doc(`${uid}`);
 
-    let notifications = {};
+    let newNotifications = { notifications: {} };
 
-    notifications[`notifications.${notificationID}`] = false;
+    newNotifications.notifications[`${notificationID}`] = false;
 
-    notificationRef.update(notifications);
+    notificationRef.set(newNotifications, { merge: true });
   };
 }
 
@@ -38,6 +38,7 @@ export function fetchNotifications() {
       .doc(`${uid}`);
 
     notificationRef.onSnapshot(function(doc) {
+      console.log(doc.data());
       if (!doc.exists) {
         dispatch({
           type: FETCH_NOTIFICATIONS_SUCCESS,
