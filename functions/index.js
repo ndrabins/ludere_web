@@ -1,6 +1,7 @@
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 const functions = require("firebase-functions");
 
+const Map = require("lodash/map");
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 const admin = require("firebase-admin");
 admin.initializeApp();
@@ -15,9 +16,60 @@ const firestore = admin.firestore();
 //   }
 // });
 
+// TODO: refactor this to async await
 exports.onCreateMessage = functions.firestore
   .document("chat/{channelID}/messages/{messageID}")
-  .onDelete((snap, context) => {
+  .onCreate((snap, context) => {
+    console.log(snap);
+    const channelID = context.params.channelID;
+
+    const channelRef = firestore.doc(`chat/${channelID}`);
+    //Fetch channel data for workspaceID and teamID
+    channelRef
+      .get()
+      .then(channelDoc => {
+        const channel = channelDoc.data();
+
+        if (channel.workspaceID === undefined || channel.workspaceID === null) {
+          return;
+        }
+
+        const teamRef = firestore.doc(
+          `workspaces/${channel.workspaceID}/teams/${channel.team}`
+        );
+
+        // get all teammembers to know where to send notifications
+        teamRef
+          .get()
+          .then(teamDoc => {
+            const teamMembers = teamDoc.data().members;
+
+            //for each team member that is a member, send a notification on the channel
+            Map(teamMembers, (isMember, memberID) => {
+              if (isMember) {
+                let notifications = {};
+                notifications[`${channelID}`] = true;
+                const userRef = firestore.doc(`users/${memberID}`);
+                userRef.set(
+                  {
+                    notifications
+                  },
+                  { merge: true }
+                );
+              }
+            });
+          })
+          .catch(err => {
+            console.log("Error getting document", err);
+          });
+      })
+      .catch(err => {
+        console.log("Error getting document", err);
+      });
+
+    // 1. get team ID on channel.
+    // 2. fetch team to find members
+    // 3. send each team member a notification of channelID
     return null;
   });
 // Delete all tasks in list whenever a list is deleted.

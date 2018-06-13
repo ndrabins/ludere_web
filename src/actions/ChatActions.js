@@ -17,6 +17,7 @@ import {
 } from "./types";
 
 import firebase from "firebase/app";
+import { updateUserProfile } from "./ProfileActions";
 
 export function fetchChannels(selectedTeam) {
   return (dispatch, getState) => {
@@ -63,6 +64,7 @@ export function createChannel(channelName) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
     let { selectedTeam } = getState().team;
+    let { selectedWorkspace } = getState().workspace;
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let channel = {
@@ -70,7 +72,8 @@ export function createChannel(channelName) {
       name: channelName,
       dateCreated: timestamp,
       type: "public",
-      team: selectedTeam
+      team: selectedTeam,
+      workspaceID: selectedWorkspace
     };
 
     dispatch({ type: CREATE_CHANNEL });
@@ -113,6 +116,11 @@ export function selectChannel(channelID) {
     }
 
     dispatch({ type: SELECT_CHANNEL, selectedChannel: channelID });
+
+    let notifications = {};
+
+    notifications[`notifications.${channelID}`] = false;
+    dispatch(updateUserProfile(notifications));
 
     let messageRef = firebase
       .firestore()

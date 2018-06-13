@@ -36,23 +36,23 @@ class Main extends Component {
       actions.loadTeamData(selectedTeam);
     }
 
-    firebase
-      .messaging()
-      .usePublicVapidKey(
-        "BJb2ITjssD1V0VxkbwpzWW1-7qWLjHdsZux-cizph8Ex4KQ-OfrFdtjY8RTx-4z61IHgBI3q9-n-nnhEXy4RBuQ"
-      );
+    // firebase
+    //   .messaging()
+    //   .usePublicVapidKey(
+    //     "BJb2ITjssD1V0VxkbwpzWW1-7qWLjHdsZux-cizph8Ex4KQ-OfrFdtjY8RTx-4z61IHgBI3q9-n-nnhEXy4RBuQ"
+    //   );
 
-    firebase
-      .messaging()
-      .requestPermission()
-      .then(function() {
-        console.log("Notification permission granted.");
-        // TODO(developer): Retrieve an Instance ID token for use with FCM.
-        // ...
-      })
-      .catch(function(err) {
-        console.log("Unable to get permission to notify.", err);
-      });
+    // firebase
+    //   .messaging()
+    //   .requestPermission()
+    //   .then(function() {
+    //     console.log("Notification permission granted.");
+    //     // TODO(developer): Retrieve an Instance ID token for use with FCM.
+    //     // ...
+    //   })
+    //   .catch(function(err) {
+    //     console.log("Unable to get permission to notify.", err);
+    //   });
   }
 
   componentWillUnmount() {

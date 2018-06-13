@@ -18,7 +18,7 @@ class WorkflowSideNav extends Component {
             }}
           >
             <img src={boardsIcon} />
-            <div style={{ marginLeft: 14 }}>Workflow</div>
+            <div style={{ marginLeft: 14, color: "#b9bbbe" }}>Workflow</div>
           </div>
           <CreateWorkflowButton />
         </div>

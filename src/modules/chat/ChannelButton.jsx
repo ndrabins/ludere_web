@@ -64,7 +64,7 @@ class ChannelButton extends Component {
   };
 
   render() {
-    const { classes, channelID, selectedChannel } = this.props;
+    const { classes, channelID, selectedChannel, notifications } = this.props;
     const { anchorEl, isEditingChannelName, channelName } = this.state;
 
     let channelStyle = classes.channel;
@@ -99,6 +99,7 @@ class ChannelButton extends Component {
             noWrap
             component={Link}
             to="/team/chat"
+            style={notifications[channelID] ? styles.notificationText : null}
           >
             {this.props.name}
           </Typography>
@@ -206,12 +207,17 @@ const styles = {
     overflowY: "hidden",
     overflowX: "hidden",
     cursor: "text"
+  },
+  notificationText: {
+    fontWeight: 500,
+    color: "white"
   }
 };
 
 function mapStateToProps(state) {
   return {
-    selectedChannel: state.chat.selectedChannel
+    selectedChannel: state.chat.selectedChannel,
+    notifications: state.profile.myUserProfile.notifications
   };
 }
 

@@ -16,16 +16,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import AddTeamButton from "./AddTeamButton";
 
 class TeamNav extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      indicatorHeight: 50
-    };
-  }
-
   handleTeamSelect(key) {
-    // this.setState({indicatorHeight: this.state.indicatorHeight * 2});
     this.props.history.push("/team/");
     this.props.actions.selectTeam(key);
   }

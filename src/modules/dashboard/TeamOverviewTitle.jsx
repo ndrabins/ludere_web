@@ -8,11 +8,14 @@ import { withRouter } from "react-router";
 class TeamOverviewTitle extends Component {
   render() {
     const { classes, location } = this.props;
-    let onTeamPage = location.pathname === '/team/';
+    let onTeamPage = location.pathname === "/team/";
 
     return (
       <div>
-        <Link to='/team/' className={onTeamPage ? classes.baseFocused : classes.baseWithHover}>
+        <Link
+          to="/team/"
+          className={onTeamPage ? classes.baseFocused : classes.baseWithHover}
+        >
           <img src={fireIcon} />
           <div className={classes.titleText}>Team Overview</div>
         </Link>
@@ -27,7 +30,22 @@ const styles = {
     display: "flex",
     alignSelf: "center"
   },
-  baseWithHover:{
+  baseWithHover: {
+    textDecoration: "none",
+    color: "#B9BBBE",
+    display: "flex",
+    alignContent: "center",
+    padding: 5,
+    paddingLeft: 24,
+    borderRadius: 5,
+    margin: "1px 8px",
+    "&:hover": {
+      transition: "background-color .25s ease-out",
+      backgroundColor: "#424242",
+      cursor: "pointer"
+    }
+  },
+  baseFocused: {
     textDecoration: "none",
     color: "#FFF",
     display: "flex",
@@ -35,30 +53,15 @@ const styles = {
     padding: 5,
     paddingLeft: 24,
     borderRadius: 5,
-    margin: '1px 8px',
+    margin: "1px 8px",
+    backgroundColor: "#616161",
+    transition: "background-color .25s ease-out",
     "&:hover": {
-      transition: 'background-color .25s ease-out',
+      transition: "background-color .25s ease-out",
       backgroundColor: "#424242",
       cursor: "pointer"
     }
-  },
-  baseFocused:{
-    textDecoration: "none",
-    color: "#FFF",
-    display: "flex",
-    alignContent: "center",
-    padding: 5,
-    paddingLeft: 24,
-    borderRadius: 5,
-    margin: '1px 8px',
-    backgroundColor: '#616161',
-    transition: 'background-color .25s ease-out',
-    "&:hover": {
-      transition: 'background-color .25s ease-out',
-      backgroundColor: "#424242",
-      cursor: "pointer"
-    }
-  },
+  }
 };
 
 export default withStyles(styles)(withRouter(TeamOverviewTitle));
