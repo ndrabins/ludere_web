@@ -73,7 +73,8 @@ export function createChannel(channelName) {
       dateCreated: timestamp,
       type: "public",
       team: selectedTeam,
-      workspaceID: selectedWorkspace
+      workspaceID: selectedWorkspace,
+      usersTyping: {}
     };
 
     dispatch({ type: CREATE_CHANNEL });
@@ -99,7 +100,7 @@ export function updateChannel(updates, channelID) {
       .collection("chat")
       .doc(channelID);
 
-    channelRef.update(updates).then(function() {
+    channelRef.set(updates, { merge: true }).then(function() {
       dispatch({ type: UPDATE_CHANNEL });
     });
   };

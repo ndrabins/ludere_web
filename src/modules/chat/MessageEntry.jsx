@@ -7,13 +7,31 @@ import firebase from "firebase";
 
 import TextField from "@material-ui/core/TextField";
 import AddIcon from "@material-ui/icons/Add";
+import Debounce from "lodash/debounce";
 
 class MessageEntry extends Component {
-  state = {
-    messageText: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      messageText: ""
+    };
+    // debounce the passed in dispatch method, so not to update the typing indicator every keypress
+    this.updateChannel = Debounce(this.props.actions.updateChannel, 1000);
+  }
 
   handleChange = prop => event => {
+    let updatedChannel = { usersTyping: {} };
+    const { selectedChannel, user } = this.props;
+    if (event.target.value !== "") {
+      //update typing object with current user typing
+      updatedChannel.usersTyping[user.uid] = true;
+      this.updateChannel(updatedChannel, selectedChannel);
+    } else {
+      updatedChannel.usersTyping[user.uid] = false;
+      this.updateChannel(updatedChannel, selectedChannel);
+    }
+
+    //If event.target.value == "" set user typing false
     this.setState({ [prop]: event.target.value });
   };
 
@@ -62,12 +80,12 @@ class MessageEntry extends Component {
   };
 
   render() {
-    const { selectedChannel, channels, classes } = this.props;
+    const { selectedChannel, channel, classes } = this.props;
 
     let name = "";
 
-    if (selectedChannel && channels[selectedChannel] !== undefined) {
-      name = channels[selectedChannel].name;
+    if (selectedChannel && channel !== undefined) {
+      name = channel.name;
     } else {
       return <div />;
     }
@@ -122,7 +140,7 @@ class MessageEntry extends Component {
 const styles = theme => ({
   container: {
     display: "flex",
-    marginBottom: 20,
+    marginBottom: 5,
     paddingRight: 15,
     paddingLeft: 10,
     alignItems: "center"
@@ -186,7 +204,7 @@ const styles = theme => ({
 function mapStateToProps(state) {
   return {
     selectedChannel: state.chat.selectedChannel,
-    channels: state.chat.channels
+    user: state.auth.user
   };
 }
 

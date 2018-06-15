@@ -8,6 +8,7 @@ import ChatIcon from "../../static/chat.svg";
 
 import MessageEntry from "./MessageEntry";
 import MessageList from "./MessageList";
+import TypingIndicator from "./TypingIndicator";
 
 class Chat extends Component {
   componentWillUnmount() {
@@ -18,9 +19,8 @@ class Chat extends Component {
   }
 
   render() {
-    const { loadingMessages, selectedChannel } = this.props;
-
-    if (selectedChannel === null || selectedChannel === undefined) {
+    const { loadingMessages, selectedChannelID, channels, user } = this.props;
+    if (selectedChannelID === null || selectedChannelID === undefined) {
       return (
         <div style={styles.unselectedBoardContainer}>
           <Typography variant="display2">
@@ -35,10 +35,16 @@ class Chat extends Component {
       return <Loading />;
     }
 
+    const selectedChannel = channels[selectedChannelID];
+
     return (
       <div style={styles.container}>
         <MessageList />
-        <MessageEntry />
+        <MessageEntry channel={selectedChannel} />
+        <TypingIndicator
+          usersTyping={selectedChannel.usersTyping}
+          userID={user.uid}
+        />
       </div>
     );
   }
@@ -68,8 +74,10 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-    selectedChannel: state.chat.selectedChannel,
-    loadingMessages: state.chat.loadingMessages
+    selectedChannelID: state.chat.selectedChannel,
+    loadingMessages: state.chat.loadingMessages,
+    channels: state.chat.channels,
+    user: state.auth.user
   };
 }
 
