@@ -1,4 +1,7 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import * as Actions from "../../actions";
+import { bindActionCreators } from "redux";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
@@ -8,13 +11,14 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ReactMarkdown from "react-markdown";
 import "./Message.css"; // this is here to override markdown css
 
-class Message extends Component {
+class Message extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     message: PropTypes.object.isRequired,
     type: PropTypes.string.isRequired,
     formattedTimeStamp: PropTypes.string.isRequired,
-    userID: PropTypes.string.isRequired
+    userID: PropTypes.string.isRequired,
+    messageID: PropTypes.string.isRequired
   };
 
   state = {
@@ -85,8 +89,14 @@ class Message extends Component {
     this.setState({ hovered: false });
   };
 
+  handleDeleteMessage = () => {
+    const { actions, messageID } = this.props;
+    actions.deleteMessage(messageID);
+    this.handleClose();
+  };
+
   render() {
-    const { classes, type, userID, message } = this.props;
+    const { classes, type, userID, message, actions } = this.props;
     const { anchorEl, hovered } = this.state;
     return (
       <div
@@ -118,8 +128,12 @@ class Message extends Component {
             horizontal: "center"
           }}
         >
-          <MenuItem> Edit Message </MenuItem>
-          <MenuItem> Delete Message </MenuItem>
+          <MenuItem onClick={() => this.handleDeleteMessage()}>
+            Edit Message
+          </MenuItem>
+          <MenuItem onClick={() => this.handleDeleteMessage()}>
+            Delete Message
+          </MenuItem>
         </Popover>
       </div>
     );
@@ -191,4 +205,11 @@ const styles = theme => ({
     opacity: "0"
   }
 });
-export default withStyles(styles)(Message);
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Message));

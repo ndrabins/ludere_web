@@ -13,7 +13,8 @@ import {
   FETCH_MORE_MESSAGES,
   FETCH_MORE_MESSAGES_SUCCESS,
   UPDATE_CHANNEL,
-  DELETE_CHANNEL
+  DELETE_CHANNEL,
+  DELETE_MESSAGE
 } from "./types";
 
 import firebase from "firebase/app";
@@ -205,6 +206,19 @@ export function sendMessage({ messageText, type = "message", fileURL = "" }) {
 
     messageRef.add(message).then(function(docRef) {
       dispatch({ type: SEND_MESSAGE });
+    });
+  };
+}
+
+export function deleteMessage(messageID) {
+  return (dispatch, getState) => {
+    const { selectedChannel } = getState().chat;
+    let messageRef = firebase
+      .firestore()
+      .doc(`chat/${selectedChannel}/messages/${messageID}`);
+
+    messageRef.delete().then(function() {
+      dispatch({ type: DELETE_MESSAGE });
     });
   };
 }
