@@ -80,7 +80,7 @@ class MessageList extends Component {
   }
 
   renderMessages() {
-    const { classes } = this.props;
+    const { userID } = this.props;
     let lastUser = null;
     let previousTimeStamp = null;
     let enoughTimeHasPassed = false;
@@ -116,6 +116,7 @@ class MessageList extends Component {
             type="file"
             formattedTimeStamp={timestamp}
             key={key}
+            userID={userID}
           />
         );
       }
@@ -128,6 +129,7 @@ class MessageList extends Component {
             type="small"
             formattedTimeStamp={timestamp}
             key={key}
+            userID={userID}
           />
         );
       } else {
@@ -138,6 +140,7 @@ class MessageList extends Component {
             type="normal"
             formattedTimeStamp={timestamp}
             key={key}
+            userID={userID}
           />
         );
       }
@@ -200,7 +203,8 @@ function mapStateToProps(state) {
   return {
     selectedChannel: state.chat.selectedChannel,
     messages: state.chat.messages,
-    loadingMoreMessages: state.chat.loadingMoreMessages
+    loadingMoreMessages: state.chat.loadingMoreMessages,
+    userID: state.auth.user.uid
   };
 }
 

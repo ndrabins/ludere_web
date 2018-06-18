@@ -13,7 +13,8 @@ class Message extends Component {
     classes: PropTypes.object.isRequired,
     message: PropTypes.object.isRequired,
     type: PropTypes.string.isRequired,
-    formattedTimeStamp: PropTypes.string.isRequired
+    formattedTimeStamp: PropTypes.string.isRequired,
+    userID: PropTypes.string.isRequired
   };
 
   state = {
@@ -85,7 +86,7 @@ class Message extends Component {
   };
 
   render() {
-    const { classes, type } = this.props;
+    const { classes, type, userID, message } = this.props;
     const { anchorEl, hovered } = this.state;
     return (
       <div
@@ -96,12 +97,14 @@ class Message extends Component {
         {type === "file" && this.renderFileMessage()}
         {type === "small" && this.renderSmallMessage()}
         {type === "normal" && this.renderNormalMessage()}
-        <MoreVertIcon
-          className={hovered ? classes.icon : classes.hiddenIcon}
-          aria-owns={anchorEl ? "simple-menu" : null}
-          aria-haspopup="true"
-          onClick={ev => this.handleMenuClick(ev)}
-        />
+        {message.sentBy === userID && (
+          <MoreVertIcon
+            className={hovered ? classes.icon : classes.hiddenIcon}
+            aria-owns={anchorEl ? "simple-menu" : null}
+            aria-haspopup="true"
+            onClick={ev => this.handleMenuClick(ev)}
+          />
+        )}
         <Popover
           open={Boolean(anchorEl)}
           anchorEl={anchorEl}
@@ -180,7 +183,7 @@ const styles = theme => ({
   icon: {
     color: "#6f6f6f",
     "&:hover": {
-      color: "#b9bbbe",
+      color: "#303030",
       cursor: "pointer"
     }
   },
