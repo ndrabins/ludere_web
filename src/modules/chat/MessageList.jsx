@@ -1,5 +1,4 @@
 import ForInRight from "lodash/forInRight";
-import Avatar from "@material-ui/core/Avatar";
 import moment from "moment";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -7,7 +6,7 @@ import { bindActionCreators } from "redux";
 import { withStyles } from "@material-ui/core/styles";
 import * as Actions from "../../actions";
 import Loading from "../../common/Loading";
-import { Typography } from "@material-ui/core";
+import MessageComponent from "./Message";
 
 class MessageList extends Component {
   constructor(props) {
@@ -111,42 +110,35 @@ class MessageList extends Component {
 
       if (message.type === "file") {
         messages.push(
-          <div className={classes.messageContainer} key={key}>
-            <Avatar src={message.avatarURL} style={{ margin: "0px 10px" }} />
-            <div className={classes.messageContent}>
-              <div className={classes.messageHeader}>
-                <div className={classes.name}>{message.sentByDisplayName}</div>
-                <div className={classes.date}> {timestamp} </div>
-              </div>
-              <Typography variant="title" className={classes.messageText}>
-                {message.messageText}
-              </Typography>
-              <img src={message.fileURL} className={classes.uploadedImage} />
-            </div>
-          </div>
+          <MessageComponent
+            message={message}
+            messageID={key}
+            type="file"
+            formattedTimeStamp={timestamp}
+            key={key}
+          />
         );
       }
       // render only text if last message is by the same user AND within 3 minutes
       else if (lastUser === message.sentBy && enoughTimeHasPassed) {
         messages.push(
-          <div className={classes.messageContainer} key={key}>
-            <div className={classes.messageBlockContent}>
-              <p className={classes.messageText}>{message.messageText}</p>
-            </div>
-          </div>
+          <MessageComponent
+            message={message}
+            messageID={key}
+            type="small"
+            formattedTimeStamp={timestamp}
+            key={key}
+          />
         );
       } else {
         messages.push(
-          <div className={classes.messageContainer} key={key}>
-            <Avatar src={message.avatarURL} style={{ margin: "0px 10px" }} />
-            <div className={classes.messageContent}>
-              <div className={classes.messageHeader}>
-                <div className={classes.name}>{message.sentByDisplayName}</div>
-                <div className={classes.date}> {timestamp} </div>
-              </div>
-              <p className={classes.messageText}>{message.messageText}</p>
-            </div>
-          </div>
+          <MessageComponent
+            message={message}
+            messageID={key}
+            type="normal"
+            formattedTimeStamp={timestamp}
+            key={key}
+          />
         );
       }
 
@@ -194,53 +186,6 @@ const styles = theme => ({
   messages: {
     height: "100%",
     overflow: "auto"
-  },
-  messageContainer: {
-    marginLeft: 10,
-    marginRight: 10,
-    paddingTop: 3,
-    paddingBottom: 3,
-    flexDirection: "row",
-    display: "flex",
-    backgroundColor: "transparent",
-    transition: theme.transitions.create(["background-color"]),
-    "&:hover": {
-      backgroundColor: "#C3C3C3"
-    }
-  },
-  messageContent: {
-    maxWidth: "90%",
-    marginRight: 30,
-    display: "flex",
-    flexDirection: "column"
-  },
-  messageBlockContent: {
-    width: "90%",
-    marginLeft: 60,
-    display: "flex",
-    flexDirection: "column"
-  },
-  messageHeader: {
-    display: "flex",
-    flexDirection: "row"
-  },
-  messageText: {
-    whiteSpace: "pre-line",
-    wordWrap: "break-word",
-    marginBottom: "3px",
-    marginTop: "0px",
-    fontSize: "15px"
-  },
-  name: {
-    fontSize: 16,
-    fontWeight: 500
-  },
-  date: {
-    fontSize: 12,
-    alignItems: "center",
-    display: "flex",
-    marginLeft: 3,
-    color: "#b9bbbe"
   },
   loadingContainer: {
     height: 100

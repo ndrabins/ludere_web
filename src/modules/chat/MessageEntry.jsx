@@ -36,10 +36,17 @@ class MessageEntry extends Component {
   };
 
   sendMessage = () => {
+    const { user, selectedChannel } = this.props;
+
     if (this.state.messageText === "" || !this.props.selectedChannel) {
       return;
     }
+
+    //Update that user is no longer typing
     this.props.actions.sendMessage({ messageText: this.state.messageText });
+    let updatedChannel = { usersTyping: {} };
+    updatedChannel.usersTyping[user.uid] = false;
+    this.updateChannel(updatedChannel, selectedChannel);
 
     this.setState({
       messageText: ""
