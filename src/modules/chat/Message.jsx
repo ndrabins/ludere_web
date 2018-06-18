@@ -8,6 +8,7 @@ import Avatar from "@material-ui/core/Avatar";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Popover from "@material-ui/core/Popover";
 import MenuItem from "@material-ui/core/MenuItem";
+import Input from "@material-ui/core/Input";
 import ReactMarkdown from "react-markdown";
 import "./Message.css"; // this is here to override markdown css
 
@@ -22,8 +23,11 @@ class Message extends PureComponent {
   };
 
   state = {
+    editableText: this.props.message.messageText,
     anchorEl: null,
-    hovered: false
+    hovered: false,
+    isEditing: false,
+    showDeleteDialog: false
   };
 
   renderNormalMessage = () => {
@@ -42,7 +46,6 @@ class Message extends PureComponent {
       </React.Fragment>
     );
   };
-
   renderFileMessage = () => {
     const { classes, message, formattedTimeStamp } = this.props;
 
@@ -73,40 +76,16 @@ class Message extends PureComponent {
     );
   };
 
-  handleMenuClick = event => {
-    event.stopPropagation();
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
-
-  handleMouseOver = () => {
-    this.setState({ hovered: true });
-  };
-  handleMouseLeave = () => {
-    this.setState({ hovered: false });
-  };
-
-  handleDeleteMessage = () => {
-    const { actions, messageID } = this.props;
-    actions.deleteMessage(messageID);
-    this.handleClose();
-  };
-
-  render() {
-    const { classes, type, userID, message, actions } = this.props;
+  renderMessage = () => {
+    const { classes, type, userID, message } = this.props;
     const { anchorEl, hovered } = this.state;
+
     return (
-      <div
-        className={classes.messageContainer}
-        onMouseOver={this.handleMouseOver}
-        onMouseLeave={this.handleMouseLeave}
-      >
+      <React.Fragment>
         {type === "file" && this.renderFileMessage()}
         {type === "small" && this.renderSmallMessage()}
         {type === "normal" && this.renderNormalMessage()}
+        {message.edited && <div className={classes.date}> (Edited) </div>}
         {message.sentBy === userID && (
           <MoreVertIcon
             className={hovered ? classes.icon : classes.hiddenIcon}
@@ -128,13 +107,102 @@ class Message extends PureComponent {
             horizontal: "center"
           }}
         >
-          <MenuItem onClick={() => this.handleDeleteMessage()}>
+          <MenuItem onClick={() => this.handleBeginEditing()}>
             Edit Message
           </MenuItem>
           <MenuItem onClick={() => this.handleDeleteMessage()}>
             Delete Message
           </MenuItem>
         </Popover>
+      </React.Fragment>
+    );
+  };
+
+  handleUpdateMessage = () => {
+    const { actions, messageID } = this.props;
+    const { editableText } = this.state;
+
+    const updatedMessage = { messageText: editableText, edited: true };
+
+    actions.updateMessage(messageID, updatedMessage);
+    this.setState({ isEditing: false });
+  };
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
+
+  renderEditingMessage = () => {
+    const { classes } = this.props;
+    const { editableText } = this.state;
+
+    return (
+      <Input
+        className={classes.input}
+        classes={{ focused: classes.inputFocused }}
+        value={editableText}
+        onChange={this.handleChange("editableText")}
+        multiline
+        fullWidth
+        rowsMax="16"
+        disableUnderline
+        autoFocus
+        onBlur={() => this.handleUpdateMessage()}
+        onKeyPress={ev => {
+          if (ev.key === "Enter" && !ev.shiftKey) {
+            this.handleUpdateMessage();
+            ev.preventDefault();
+          }
+        }}
+      />
+    );
+  };
+
+  handleMenuClick = event => {
+    event.stopPropagation();
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  handleMouseOver = () => {
+    this.setState({ hovered: true });
+  };
+  handleMouseLeave = () => {
+    this.setState({ hovered: false });
+  };
+
+  handleBeginEditing = () => {
+    this.setState({ isEditing: true });
+    this.handleClose();
+  };
+
+  handleDeleteMessage = () => {
+    const { actions, messageID } = this.props;
+    // actions.deleteMessage(messageID);
+    this.setState({ showDeleteDialog: true });
+    this.handleClose();
+  };
+
+  closeDeleteDialog = () => {
+    this.setState({ showDeleteDialog: false });
+  };
+
+  render() {
+    const { classes } = this.props;
+    const { isEditing } = this.state;
+
+    return (
+      <div
+        className={classes.messageContainer}
+        onMouseOver={this.handleMouseOver}
+        onMouseLeave={this.handleMouseLeave}
+      >
+        {isEditing ? this.renderEditingMessage() : this.renderMessage()}
       </div>
     );
   }
@@ -203,6 +271,36 @@ const styles = theme => ({
   },
   hiddenIcon: {
     opacity: "0"
+  },
+  input: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    padding: 5,
+    color: "black",
+    overflowY: "auto",
+    overflowX: "hidden",
+    cursor: "text",
+    border: "transparent 2px solid",
+    marginLeft: 60,
+    transition: "border .25s ease-out",
+    "&:hover": {
+      border: "#B0B2B6 2px solid"
+    }
+  },
+  inputFocused: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    padding: 5,
+    color: "black",
+    overflowY: "auto",
+    overflowX: "hidden",
+    cursor: "text",
+    marginLeft: 60,
+    transition: "border .25s ease-out",
+    border: "2px solid #00bcd4",
+    "&:hover": {
+      border: "2px solid #00bcd4"
+    }
   }
 });
 

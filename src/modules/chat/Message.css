@@ -1,5 +1,10 @@
 p {
   margin: 0px;
+  white-space: "pre-line";
+  word-wrap: "break-word";
+  word-break: "break-all";
+  overflow-wrap: "break-word";
+  margin: 3px 0px;
 }
 h1 {
   margin: 0px;

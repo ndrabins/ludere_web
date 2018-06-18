@@ -14,7 +14,8 @@ import {
   FETCH_MORE_MESSAGES_SUCCESS,
   UPDATE_CHANNEL,
   DELETE_CHANNEL,
-  DELETE_MESSAGE
+  DELETE_MESSAGE,
+  UPDATE_MESSAGE
 } from "./types";
 
 import firebase from "firebase/app";
@@ -193,7 +194,7 @@ export function sendMessage({ messageText, type = "message", fileURL = "" }) {
       dateUpdated: timestamp,
       messageText: messageText,
       sentByDisplayName: myName,
-      edited: "false",
+      edited: false,
       avatarURL: photoURL,
       emojis: [],
       fileURL: fileURL,
@@ -206,6 +207,19 @@ export function sendMessage({ messageText, type = "message", fileURL = "" }) {
 
     messageRef.add(message).then(function(docRef) {
       dispatch({ type: SEND_MESSAGE });
+    });
+  };
+}
+
+export function updateMessage(messageID, updatedMessage) {
+  return (dispatch, getState) => {
+    const { selectedChannel } = getState().chat;
+    let messageRef = firebase
+      .firestore()
+      .doc(`chat/${selectedChannel}/messages/${messageID}`);
+
+    messageRef.update(updatedMessage).then(function() {
+      dispatch({ type: UPDATE_MESSAGE });
     });
   };
 }
