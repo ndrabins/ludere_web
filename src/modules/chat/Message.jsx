@@ -88,13 +88,15 @@ class Message extends PureComponent {
         {type === "small" && this.renderSmallMessage()}
         {type === "normal" && this.renderNormalMessage()}
         {message.edited && <div className={classes.date}> (Edited) </div>}
-        {message.sentBy === userID && (
+        {message.sentBy === userID ? (
           <MoreVertIcon
             className={hovered ? classes.icon : classes.hiddenIcon}
             aria-owns={anchorEl ? "simple-menu" : null}
             aria-haspopup="true"
             onClick={ev => this.handleMenuClick(ev)}
           />
+        ) : (
+          <MoreVertIcon className={classes.hiddenIcon} />
         )}
         <Popover
           open={Boolean(anchorEl)}

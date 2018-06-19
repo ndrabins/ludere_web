@@ -8,6 +8,8 @@ import * as Actions from "../../actions";
 import Loading from "../../common/Loading";
 import MessageComponent from "./Message";
 
+const INITIAL_MESSAGE_FETCH = 25;
+
 class MessageList extends Component {
   constructor(props) {
     super(props);
@@ -60,14 +62,14 @@ class MessageList extends Component {
 
   handleScroll = () => {
     const { messages } = this.props;
-    const { numberOfMessages } = this.state;
     //return early on the case where window tries to scroll before ref set
     if (this.messageList.current === null) {
       return;
     }
 
-    // don't try to fetch more messages if thre aren't atleast numberOfMessages, IE 25
-    if (Object.keys(messages).length < numberOfMessages) {
+    // don't try to fetch more messages if thre aren't atleast INITIAL_MESSAGE_FETCH.
+    // This is to prevent to many loads and ratcheting of scroll
+    if (Object.keys(messages).length < INITIAL_MESSAGE_FETCH) {
       return;
     }
 
