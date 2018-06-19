@@ -11,7 +11,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Input from "@material-ui/core/Input";
 import ReactMarkdown from "react-markdown";
 import Button from "@material-ui/core/Button";
+import Dialog from "common/Dialog";
 import "./Message.css"; // this is here to override markdown css
+import Paper from "@material-ui/core/Paper";
 class Message extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
@@ -80,7 +82,7 @@ class Message extends PureComponent {
 
   renderMessage = () => {
     const { classes, type, userID, message } = this.props;
-    const { anchorEl, hovered } = this.state;
+    const { anchorEl, hovered, showDeleteDialog } = this.state;
 
     return (
       <React.Fragment>
@@ -114,10 +116,23 @@ class Message extends PureComponent {
           <MenuItem onClick={() => this.handleBeginEditing()}>
             Edit Message
           </MenuItem>
-          <MenuItem onClick={() => this.handleDeleteMessage()}>
+          <MenuItem onClick={() => this.openDeleteDialog()}>
             Delete Message
           </MenuItem>
         </Popover>
+        <Dialog
+          handleAction={this.handleDeleteMessage}
+          open={showDeleteDialog}
+          handleClose={this.closeDeleteDialog}
+          titleName="Delete Message"
+          actionButtonName="Delete"
+          color="#E57373"
+          helperText="Are you sure you want to delete this message?"
+        >
+          <Paper className={classes.paperMessage} elevation={4}>
+            {this.renderNormalMessage()}
+          </Paper>
+        </Dialog>
       </React.Fragment>
     );
   };
@@ -169,9 +184,8 @@ class Message extends PureComponent {
         />
         <div className={classes.editButtons}>
           <Button
-            variant="outlined"
             size="small"
-            style={{ margin: 4 }}
+            style={{ margin: 4, color: "#B9BBBE" }}
             onClick={this.handleCancelEdit}
           >
             Cancel
@@ -216,9 +230,14 @@ class Message extends PureComponent {
 
   handleDeleteMessage = () => {
     const { actions, messageID } = this.props;
-    // actions.deleteMessage(messageID);
-    this.setState({ showDeleteDialog: true });
+    actions.deleteMessage(messageID);
     this.handleClose();
+    this.setState({ showDeleteDialog: false });
+  };
+
+  openDeleteDialog = () => {
+    this.setState({ showDeleteDialog: true });
+    this.handleClose(); // closes message context menu
   };
 
   closeDeleteDialog = () => {
@@ -343,6 +362,11 @@ const styles = theme => ({
   editButtons: {
     display: "flex",
     justifyContent: "flex-end"
+  },
+  paperMessage: {
+    padding: 12,
+    display: "flex",
+    marginBottom: 32
   }
 });
 
