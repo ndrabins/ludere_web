@@ -10,8 +10,8 @@ import Popover from "@material-ui/core/Popover";
 import MenuItem from "@material-ui/core/MenuItem";
 import Input from "@material-ui/core/Input";
 import ReactMarkdown from "react-markdown";
+import Button from "@material-ui/core/Button";
 import "./Message.css"; // this is here to override markdown css
-
 class Message extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
@@ -46,6 +46,7 @@ class Message extends PureComponent {
       </React.Fragment>
     );
   };
+
   renderFileMessage = () => {
     const { classes, message, formattedTimeStamp } = this.props;
 
@@ -67,6 +68,7 @@ class Message extends PureComponent {
       </React.Fragment>
     );
   };
+
   renderSmallMessage = () => {
     const { classes, message } = this.props;
     return (
@@ -128,6 +130,13 @@ class Message extends PureComponent {
     this.setState({ isEditing: false });
   };
 
+  handleCancelEdit = () => {
+    this.setState({
+      isEditing: false,
+      editableText: this.props.message.messageText
+    });
+  };
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
@@ -139,24 +148,46 @@ class Message extends PureComponent {
     const { editableText } = this.state;
 
     return (
-      <Input
-        className={classes.input}
-        classes={{ focused: classes.inputFocused }}
-        value={editableText}
-        onChange={this.handleChange("editableText")}
-        multiline
-        fullWidth
-        rowsMax="16"
-        disableUnderline
-        autoFocus
-        onBlur={() => this.handleUpdateMessage()}
-        onKeyPress={ev => {
-          if (ev.key === "Enter" && !ev.shiftKey) {
-            this.handleUpdateMessage();
-            ev.preventDefault();
-          }
-        }}
-      />
+      <div className={classes.editContainer}>
+        <Input
+          className={classes.input}
+          classes={{ focused: classes.inputFocused }}
+          value={editableText}
+          onChange={this.handleChange("editableText")}
+          multiline
+          rowsMax="16"
+          disableUnderline
+          autoFocus
+          onKeyPress={ev => {
+            if (ev.key === "Enter" && !ev.shiftKey) {
+              this.handleUpdateMessage();
+              ev.preventDefault();
+            }
+          }}
+        />
+        <div className={classes.editButtons}>
+          <Button
+            variant="outlined"
+            size="small"
+            style={{ margin: 4 }}
+            onClick={this.handleCancelEdit}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            size="small"
+            style={{
+              color: "white",
+              margin: 4,
+              backgroundColor: "#00BCD4"
+            }}
+            onClick={this.handleUpdateMessage}
+          >
+            Save Changes
+          </Button>
+        </div>
+      </div>
     );
   };
 
@@ -301,6 +332,15 @@ const styles = theme => ({
     "&:hover": {
       border: "2px solid #00bcd4"
     }
+  },
+  editContainer: {
+    display: "flex",
+    flexDirection: "column",
+    flex: 1
+  },
+  editButtons: {
+    display: "flex",
+    justifyContent: "flex-end"
   }
 });
 
