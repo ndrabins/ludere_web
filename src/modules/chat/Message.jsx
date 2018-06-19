@@ -12,6 +12,7 @@ import Input from "@material-ui/core/Input";
 import ReactMarkdown from "react-markdown";
 import Button from "@material-ui/core/Button";
 import Dialog from "common/Dialog";
+import FileMessage from "./MessageComponents/FileMessage";
 import "./Message.css"; // this is here to override markdown css
 import Paper from "@material-ui/core/Paper";
 class Message extends PureComponent {
@@ -49,28 +50,6 @@ class Message extends PureComponent {
     );
   };
 
-  renderFileMessage = () => {
-    const { classes, message, formattedTimeStamp } = this.props;
-
-    return (
-      <React.Fragment>
-        <Avatar src={message.avatarURL} style={{ margin: "0px 10px" }} />
-        <div className={classes.messageContent}>
-          <div className={classes.messageHeader}>
-            <div className={classes.name}>{message.sentByDisplayName}</div>
-            <div className={classes.date}> {formattedTimeStamp} </div>
-          </div>
-          <ReactMarkdown source={message.messageText} />
-          <img
-            src={message.fileURL}
-            alt="file upload"
-            className={classes.uploadedImage}
-          />
-        </div>
-      </React.Fragment>
-    );
-  };
-
   renderSmallMessage = () => {
     const { classes, message } = this.props;
     return (
@@ -81,12 +60,17 @@ class Message extends PureComponent {
   };
 
   renderMessage = () => {
-    const { classes, type, userID, message } = this.props;
+    const { classes, type, userID, message, formattedTimeStamp } = this.props;
     const { anchorEl, hovered, showDeleteDialog } = this.state;
 
     return (
       <React.Fragment>
-        {type === "file" && this.renderFileMessage()}
+        {type === "file" && (
+          <FileMessage
+            message={message}
+            formattedTimeStamp={formattedTimeStamp}
+          />
+        )}
         {type === "small" && this.renderSmallMessage()}
         {type === "normal" && this.renderNormalMessage()}
         {message.edited && <div className={classes.date}> (Edited) </div>}

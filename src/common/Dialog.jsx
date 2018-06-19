@@ -39,7 +39,7 @@ class DeleteDialog extends Component {
           <div className={classes.dialogDividerContainer}>
             <div
               className={classes.dialogDividerColored}
-              style={{ backgroundColor: color }}
+              style={{ background: color }}
             />
           </div>
           <Typography className={classes.helperText}>{helperText}</Typography>
@@ -51,7 +51,7 @@ class DeleteDialog extends Component {
             <Button
               onClick={handleAction}
               className={classes.actionButton}
-              style={{ backgroundColor: color }}
+              style={{ background: color }}
             >
               {actionButtonName}
             </Button>
@@ -68,7 +68,7 @@ const styles = theme => ({
     flexDirection: "column",
     justifyContent: "center",
     color: "#303030",
-    minWidth: 300,
+    minWidth: 400,
     padding: 24,
     position: "relative"
   },
@@ -82,6 +82,7 @@ const styles = theme => ({
     right: 2
   },
   buttonContainer: {
+    marginTop: 24,
     display: "flex",
     justifyContent: "flex-end"
   },

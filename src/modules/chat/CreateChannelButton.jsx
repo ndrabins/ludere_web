@@ -6,11 +6,7 @@ import * as Actions from "../../actions";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Button from "@material-ui/core/Button";
+import Dialog from "common/Dialog";
 import TextField from "@material-ui/core/TextField";
 
 class CreateChatButton extends Component {
@@ -23,12 +19,12 @@ class CreateChatButton extends Component {
     this.setState({ open: true });
   };
 
-  handleRequestClose = () => {
+  handleClose = () => {
     this.setState({ open: false, channelName: "" });
   };
 
   handleCreateChannel = () => {
-    this.handleRequestClose();
+    this.handleClose();
     this.props.actions.createChannel(this.state.channelName);
   };
 
@@ -37,6 +33,7 @@ class CreateChatButton extends Component {
   };
 
   render() {
+    const { open, channelName } = this.state;
     return (
       <div>
         <IconButton
@@ -45,38 +42,31 @@ class CreateChatButton extends Component {
         >
           <AddIcon style={{ fontSize: 16 }} />
         </IconButton>
-        <Dialog open={this.state.open} onClose={this.handleRequestClose}>
-          <DialogTitle>Create Channel</DialogTitle>
-          <DialogContent style={{ width: 300, maxWidth: 400 }}>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Channel Name"
-              fullWidth
-              value={this.state.channelName}
-              onChange={this.handleChange("channelName")}
-              onKeyPress={ev => {
-                if (ev.key === "Enter" && !ev.shiftKey) {
-                  this.handleCreateChannel();
-                  ev.preventDefault();
-                }
-              }}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">
-              Cancel
-            </Button>
-            <Button
-              variant="raised"
-              onClick={this.handleCreateChannel}
-              color="primary"
-              style={{ color: "white" }}
-            >
-              Create Channel
-            </Button>
-          </DialogActions>
+        <Dialog
+          handleAction={this.handleCreateChannel}
+          open={open}
+          handleClose={this.handleClose}
+          titleName="Create Chat Channel"
+          actionButtonName="Create"
+          color="linear-gradient(to right, rgb(229, 115, 115), rgb(238, 141, 104))"
+          helperText="Create a channel to chat with teammates!"
+        >
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Workflow Name"
+            fullWidth
+            autoComplete="off"
+            value={channelName}
+            onChange={this.handleChange("channelName")}
+            onKeyPress={ev => {
+              if (ev.key === "Enter" && !ev.shiftKey) {
+                this.handleCreateBoard();
+                ev.preventDefault();
+              }
+            }}
+          />
         </Dialog>
       </div>
     );

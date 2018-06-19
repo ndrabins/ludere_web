@@ -6,10 +6,7 @@ import * as Actions from "../../actions";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import Dialog from "common/Dialog";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
@@ -23,12 +20,12 @@ class CreateBoardButton extends Component {
     this.setState({ open: true });
   };
 
-  handleRequestClose = () => {
+  handleClose = () => {
     this.setState({ open: false, workflowName: "" });
   };
 
   handleCreateBoard = () => {
-    this.handleRequestClose();
+    this.handleClose();
     this.props.actions.createBoard(this.state.workflowName);
   };
 
@@ -37,6 +34,8 @@ class CreateBoardButton extends Component {
   };
 
   render() {
+    const { open } = this.state;
+
     return (
       <div>
         <IconButton
@@ -45,39 +44,31 @@ class CreateBoardButton extends Component {
         >
           <AddIcon style={{ fontSize: 16 }} />
         </IconButton>
-        <Dialog open={this.state.open} onClose={this.handleRequestClose}>
-          <DialogTitle>Create Workflow</DialogTitle>
-          <DialogContent style={{ width: 300, maxWidth: 400 }}>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Workflow Name"
-              fullWidth
-              autoComplete="off"
-              value={this.state.workflowName}
-              onChange={this.handleChange("workflowName")}
-              onKeyPress={ev => {
-                if (ev.key === "Enter" && !ev.shiftKey) {
-                  this.handleCreateBoard();
-                  ev.preventDefault();
-                }
-              }}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">
-              Cancel
-            </Button>
-            <Button
-              variant="raised"
-              onClick={this.handleCreateBoard}
-              color="primary"
-              style={{ color: "white" }}
-            >
-              Create Workflow
-            </Button>
-          </DialogActions>
+        <Dialog
+          handleAction={this.handleCreateBoard}
+          open={open}
+          handleClose={this.handleClose}
+          titleName="Create Workflow"
+          actionButtonName="Create"
+          color="linear-gradient(to right, rgb(167, 112, 239), rgb(207, 139, 243))"
+          helperText="Create a workflow to manage tasks!"
+        >
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Workflow Name"
+            fullWidth
+            autoComplete="off"
+            value={this.state.workflowName}
+            onChange={this.handleChange("workflowName")}
+            onKeyPress={ev => {
+              if (ev.key === "Enter" && !ev.shiftKey) {
+                this.handleCreateBoard();
+                ev.preventDefault();
+              }
+            }}
+          />
         </Dialog>
       </div>
     );
