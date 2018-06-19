@@ -49,7 +49,7 @@ const styles = theme => ({
     alignItems: "center"
   },
   icon: {
-    filter: "invert(100%)",
+    filter: "invert(81%)", // turns white to #303030
     marginRight: 8
   },
   divider: {

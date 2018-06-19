@@ -2,31 +2,41 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
+import { withStyles } from "@material-ui/core/styles";
 import Loading from "../../common/Loading";
 import Typography from "@material-ui/core/Typography";
-import ChatIcon from "../../static/chat.svg";
+import ChatIcon from "static/chat.svg";
 
 import MessageEntry from "./MessageEntry";
 import MessageList from "./MessageList";
 import TypingIndicator from "./TypingIndicator";
+import ModuleHeader from "common/ModuleHeader";
+import Message from "@material-ui/icons/Message";
 
 class Chat extends Component {
   componentWillUnmount() {
     //clean up selection
-    const { actions, selectedChannel } = this.props;
+    const { actions, selectedChannelID } = this.props;
     actions.selectChannel(null);
-    actions.unsubscribeFromMessages(selectedChannel);
+    actions.unsubscribeFromMessages(selectedChannelID);
   }
 
   render() {
-    const { loadingMessages, selectedChannelID, channels, user } = this.props;
+    const {
+      loadingMessages,
+      selectedChannelID,
+      channels,
+      user,
+      classes
+    } = this.props;
+
     if (selectedChannelID === null || selectedChannelID === undefined) {
       return (
-        <div style={styles.unselectedBoardContainer}>
+        <div className={classes.unselectedBoardContainer}>
           <Typography variant="display2">
             Start by selecting a channel!
           </Typography>
-          <img style={styles.icon} src={ChatIcon} alt="list icon" />
+          <img className={classes.icon} src={ChatIcon} alt="list icon" />
         </div>
       );
     }
@@ -38,7 +48,13 @@ class Chat extends Component {
     const selectedChannel = channels[selectedChannelID];
 
     return (
-      <div style={styles.container}>
+      <div className={classes.container}>
+        <ModuleHeader>
+          <Typography variant="headline" className={classes.header}>
+            <Message className={classes.headerIcon} />
+            {selectedChannel.name}
+          </Typography>
+        </ModuleHeader>
         <MessageList />
         <MessageEntry channel={selectedChannel} />
         <TypingIndicator
@@ -69,6 +85,14 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column"
+  },
+  headerIcon: {
+    marginRight: 8,
+    color: "#303030"
+  },
+  header: {
+    display: "flex",
+    alignItems: "center"
   }
 };
 
@@ -87,4 +111,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chat);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(Chat)
+);
