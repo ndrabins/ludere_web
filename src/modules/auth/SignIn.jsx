@@ -172,7 +172,7 @@ const styles = {
     paddingBottom: 18,
     minWidth: 200,
     textAlign: "center",
-    textShadow: "1px 1px 1px rgba(0,0,0,0.4)"
+    textShadow: "1px 1px 1px rgba(0,0,0,0.24)"
   },
   signUpSelected: {
     width: 80,
@@ -231,10 +231,10 @@ const styles = {
     "&$cssFocused": {
       color: "#FFF",
       fontWeight: "bold",
-      textShadow: "1px 1px 1px rgba(0,0,0,0.4)"
+      textShadow: "1px 1px 1px rgba(0,0,0,0.24)"
     },
     color: "#FFF",
-    textShadow: "1px 1px 1px rgba(0,0,0,0.4)"
+    textShadow: "1px 1px 1px rgba(0,0,0,0.24)"
   },
   cssFocused: {},
   rightArrow: {
