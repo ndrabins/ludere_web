@@ -90,7 +90,10 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit
   },
-  copyButton: { background: "linear-gradient(to right, #29b6f6, #796eff)" }
+  copyButton: {
+    color: "rgba(255,255,255,.8)",
+    background: "linear-gradient(to right, #29b6f6, #796eff)"
+  }
 });
 
 function mapStateToProps(state) {
