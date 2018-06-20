@@ -5,7 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
-class TeamOverviewTitle extends Component {
+class TeamDashboardTitle extends Component {
   render() {
     const { classes, location } = this.props;
     let onTeamPage = location.pathname === "/team/";
@@ -17,7 +17,7 @@ class TeamOverviewTitle extends Component {
           className={onTeamPage ? classes.baseFocused : classes.baseWithHover}
         >
           <img src={fireIcon} />
-          <div className={classes.titleText}>Team Overview</div>
+          <div className={classes.titleText}>Team Dashboard</div>
         </Link>
       </div>
     );
@@ -64,4 +64,4 @@ const styles = {
   }
 };
 
-export default withStyles(styles)(withRouter(TeamOverviewTitle));
+export default withStyles(styles)(withRouter(TeamDashboardTitle));

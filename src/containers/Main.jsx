@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 import { withStyles } from "@material-ui/core/styles";
-import firebase from "firebase";
 
 import { Route, Switch } from "react-router-dom";
 
@@ -20,7 +19,7 @@ import Community from "../modules/community/Community";
 //Modules
 import WorkFlow from "../modules/workflow/Workflow";
 import Chat from "../modules/chat/Chat";
-import TeamDashboard from "../modules/team/TeamDashboardd";
+import TeamDashboard from "../modules/team/TeamDashboard";
 
 const DRAWER_WIDTH = 300;
 

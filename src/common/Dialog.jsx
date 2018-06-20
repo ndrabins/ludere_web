@@ -15,7 +15,13 @@ class DeleteDialog extends Component {
     titleName: PropTypes.string.isRequired,
     actionButtonName: PropTypes.string.isRequired,
     color: PropTypes.string,
-    helperText: PropTypes.string
+    helperText: PropTypes.string,
+    showActionButtons: PropTypes.bool
+  };
+
+  static defaultProps = {
+    showActionButtons: true,
+    handleAction: () => console.log("do someting")
   };
 
   render() {
@@ -27,7 +33,8 @@ class DeleteDialog extends Component {
       titleName,
       actionButtonName,
       color,
-      helperText
+      helperText,
+      showActionButtons
     } = this.props;
     return (
       <Dialog onClose={handleClose} aria-labelledby="dialog" open={open}>
@@ -44,18 +51,21 @@ class DeleteDialog extends Component {
           </div>
           <Typography className={classes.helperText}>{helperText}</Typography>
           {this.props.children}
-          <div className={classes.buttonContainer}>
-            <Button onClick={handleClose} className={classes.backButton}>
-              Back
-            </Button>
-            <Button
-              onClick={handleAction}
-              className={classes.actionButton}
-              style={{ background: color }}
-            >
-              {actionButtonName}
-            </Button>
-          </div>
+
+          {showActionButtons && (
+            <div className={classes.buttonContainer}>
+              <Button onClick={handleClose} className={classes.backButton}>
+                Back
+              </Button>
+              <Button
+                onClick={handleAction}
+                className={classes.actionButton}
+                style={{ background: color }}
+              >
+                {actionButtonName}
+              </Button>
+            </div>
+          )}
         </div>
       </Dialog>
     );

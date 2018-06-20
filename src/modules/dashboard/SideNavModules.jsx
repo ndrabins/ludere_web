@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router";
 // import SelectableTextButton from '../../common/SelectableTextButton';
 
-import TeamOverviewTitle from "./TeamOverviewTitle";
+import TeamOverviewTitle from "./TeamDashboardTitle";
 
 import { Route } from "react-router-dom";
 
