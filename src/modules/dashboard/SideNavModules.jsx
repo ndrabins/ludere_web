@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router";
 // import SelectableTextButton from '../../common/SelectableTextButton';
 
-import TeamOverviewTitle from "./TeamDashboardTitle";
+import TeamDashboard from "./TeamDashboardTitle";
 
 import { Route } from "react-router-dom";
 
@@ -22,7 +22,7 @@ class SideNavModules extends Component {
         <Route path="/community" component={CommunitySideNav} />
         {showModules && (
           <Fragment>
-            <TeamOverviewTitle />
+            <TeamDashboard />
             <ChatSideNav />
             <WorkflowSideNav />
           </Fragment>
