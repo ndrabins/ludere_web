@@ -87,7 +87,8 @@ const styles = theme => ({
     justifyContent: "flex-end"
   },
   actionButton: {
-    color: "#FFF"
+    color: "#FFF",
+    marginLeft: "8px"
   },
   backButton: {
     color: "#B9BBBE"

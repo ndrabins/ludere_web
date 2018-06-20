@@ -7,11 +7,7 @@ import { withRouter } from "react-router";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import Dialog from "common/Dialog";
 import Tooltip from "@material-ui/core/Tooltip";
 
 class AddTeamButton extends Component {
@@ -25,7 +21,7 @@ class AddTeamButton extends Component {
     this.setState({ open: true });
   };
 
-  handleRequestClose = () => {
+  handleClose = () => {
     this.setState({ open: false, teamName: "", description: "" });
   };
 
@@ -35,7 +31,7 @@ class AddTeamButton extends Component {
     }
     this.props.actions.createTeam(this.state.teamName);
     this.props.history.push("/team");
-    this.handleRequestClose();
+    this.handleClose();
   };
 
   handleChange = prop => event => {
@@ -43,6 +39,7 @@ class AddTeamButton extends Component {
   };
 
   render() {
+    const { open, teamName } = this.state;
     return (
       <div>
         <Tooltip id="tooltip-right-start" title="Add team" placement="right">
@@ -55,41 +52,31 @@ class AddTeamButton extends Component {
             <AddIcon style={{ color: "#B8B8B8", fontSize: 16 }} />
           </Button>
         </Tooltip>
-        <Dialog open={this.state.open} onClose={this.handleRequestClose}>
-          <DialogTitle>Create Team</DialogTitle>
-          <DialogContent>
-            <DialogContentText>Create Team description</DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Team Name"
-              fullWidth
-              required
-              value={this.state.teamName}
-              onChange={this.handleChange("teamName")}
-              autoComplete="false"
-              onKeyPress={ev => {
-                if (ev.key === "Enter" && !ev.shiftKey) {
-                  this.handleCreateTeam();
-                  ev.preventDefault();
-                }
-              }}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">
-              Cancel
-            </Button>
-            <Button
-              onClick={this.handleCreateTeam}
-              variant="raised"
-              color="primary"
-              style={{ color: "white" }}
-            >
-              Create
-            </Button>
-          </DialogActions>
+        <Dialog
+          handleAction={this.handleCreateTeam}
+          open={open}
+          handleClose={this.handleClose}
+          titleName="Create a new team"
+          actionButtonName="Create"
+          color="linear-gradient(to left, #6fe5c9, #00bcd4)"
+          helperText=""
+        >
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Team Name"
+            fullWidth
+            autoComplete="off"
+            value={teamName}
+            onChange={this.handleChange("teamName")}
+            onKeyPress={ev => {
+              if (ev.key === "Enter" && !ev.shiftKey) {
+                this.handleCreateTeam();
+                ev.preventDefault();
+              }
+            }}
+          />
         </Dialog>
       </div>
     );

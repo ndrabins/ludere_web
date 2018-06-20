@@ -163,11 +163,7 @@ class TagDialog extends Component {
             <div className={classes.divider} />
             <div className={classes.tagsList}>{this.renderTags()}</div>
             <DialogActions>
-              <Button
-                onClick={this.handleClose}
-                variant="outlined"
-                color="primary"
-              >
+              <Button onClick={this.handleClose} color="primary">
                 Close
               </Button>
             </DialogActions>
