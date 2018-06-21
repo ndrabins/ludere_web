@@ -138,7 +138,7 @@ class BoardButton extends Component {
             </ListItemIcon>
             <ListItemText primary="Edit Name" />
           </MenuItem>
-          <MenuItem onClick={ev => this.handleBoardDelete(ev, boardID)}>
+          <MenuItem onClick={this.handleBoardDelete}>
             <ListItemIcon className={classes.icon}>
               <DeleteIcon />
             </ListItemIcon>
@@ -165,7 +165,7 @@ class BoardButton extends Component {
             onChange={this.handleChange("boardName")}
             onKeyPress={ev => {
               if (ev.key === "Enter" && !ev.shiftKey) {
-                this.handleUpdateBoard();
+                this.handleUpdateBoardConfirmation();
                 ev.preventDefault();
               }
             }}
@@ -178,7 +178,7 @@ class BoardButton extends Component {
           titleName="Delete workflow"
           actionButtonName="Delete"
           color="rgb(229, 115, 115)"
-          helperText="Warning, this will delete all tasks in this workflow"
+          helperText="Warning: this will delete all tasks in this workflow"
         />
       </div>
     );

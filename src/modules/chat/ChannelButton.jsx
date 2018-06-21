@@ -7,7 +7,13 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Typography from "@material-ui/core/Typography";
 import Popover from "@material-ui/core/Popover";
 import MenuItem from "@material-ui/core/MenuItem";
-import Input from "@material-ui/core/Input";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "common/Dialog";
+
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 
 import { Link } from "react-router-dom";
 
@@ -15,6 +21,7 @@ class ChannelButton extends Component {
   state = {
     anchorEl: null,
     isEditingChannelName: false,
+    isDeletingChannel: false,
     channelName: this.props.name
   };
 
@@ -35,9 +42,14 @@ class ChannelButton extends Component {
     this.handleClose();
   };
 
-  handleChannelDelete = (event, channelID) => {
-    const { actions } = this.props;
+  handleChannelDeleteConfirmation = () => {
+    const { actions, channelID } = this.props;
     actions.deleteChannel(channelID);
+    this.handleClose();
+  };
+
+  handleChannelDelete = () => {
+    this.setState({ isDeletingChannel: true });
     this.handleClose();
   };
 
@@ -56,7 +68,11 @@ class ChannelButton extends Component {
     });
   };
 
-  handleFieldEnter = () => {
+  handleCloseDialog = () => {
+    this.setState({ isDeletingChannel: false, isEditingChannelName: false });
+  };
+
+  handleUpdateConfirmation = () => {
     const { channelName } = this.state;
     const { actions, channelID } = this.props;
     actions.updateChannel({ name: channelName }, channelID);
@@ -65,7 +81,12 @@ class ChannelButton extends Component {
 
   render() {
     const { classes, channelID, selectedChannel, notifications } = this.props;
-    const { anchorEl, isEditingChannelName, channelName } = this.state;
+    const {
+      anchorEl,
+      isEditingChannelName,
+      channelName,
+      isDeletingChannel
+    } = this.state;
 
     let channelStyle = classes.channel;
     let nameStyle = classes.name;
@@ -77,33 +98,17 @@ class ChannelButton extends Component {
 
     return (
       <div className={channelStyle}>
-        {isEditingChannelName ? (
-          <Input
-            className={classes.input}
-            value={channelName}
-            onChange={this.handleChange("channelName")}
-            autoFocus
-            fullWidth
-            disableUnderline
-            onKeyPress={ev => {
-              if (ev.key === "Enter") {
-                this.handleFieldEnter();
-                ev.preventDefault();
-              }
-            }}
-          />
-        ) : (
-          <Typography
-            className={nameStyle}
-            onClick={this.handleClick}
-            noWrap
-            component={Link}
-            to="/team/chat"
-            style={notifications[channelID] ? styles.notificationText : null}
-          >
-            {this.props.name}
-          </Typography>
-        )}
+        <Typography
+          className={nameStyle}
+          onClick={this.handleClick}
+          noWrap
+          component={Link}
+          to="/team/chat"
+          style={notifications[channelID] ? styles.notificationText : null}
+        >
+          {this.props.name}
+        </Typography>
+
         <MoreVertIcon
           className={classes.icon}
           aria-owns={anchorEl ? "simple-menu" : null}
@@ -123,15 +128,76 @@ class ChannelButton extends Component {
             horizontal: "center"
           }}
         >
-          <MenuItem onClick={this.handleUpdateChannelName}>Edit Name</MenuItem>
-          <MenuItem onClick={ev => this.handleChannelDelete(ev, channelID)}>
-            Delete Channel
+          <MenuItem onClick={this.handleUpdateChannelName}>
+            <ListItemIcon className={classes.icon}>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText primary="Edit Name" />
+          </MenuItem>
+          <MenuItem onClick={this.handleChannelDelete}>
+            <ListItemIcon className={classes.icon}>
+              <DeleteIcon />
+            </ListItemIcon>
+            <ListItemText primary="Delete Channel" />
           </MenuItem>
         </Popover>
+
+        <Dialog
+          handleAction={this.handleUpdateConfirmation}
+          open={isEditingChannelName}
+          handleClose={this.handleCloseDialog}
+          titleName="Edit channel name"
+          actionButtonName="Confirm"
+          color="linear-gradient(to right, rgb(167, 112, 239), rgb(207, 139, 243))"
+          helperText=""
+        >
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Channel Name"
+            fullWidth
+            autoComplete="off"
+            value={channelName}
+            onChange={this.handleChange("channelName")}
+            onKeyPress={ev => {
+              if (ev.key === "Enter" && !ev.shiftKey) {
+                this.handleUpdateConfirmation();
+                ev.preventDefault();
+              }
+            }}
+          />
+        </Dialog>
+        <Dialog
+          handleAction={this.handleChannelDeleteConfirmation}
+          open={isDeletingChannel}
+          handleClose={this.handleCloseDialog}
+          titleName="Delete channel"
+          actionButtonName="Delete"
+          color="rgb(229, 115, 115)"
+          helperText="Warning: this will delete channel and all messages"
+        />
       </div>
     );
   }
 }
+
+// {isEditingChannelName ? (
+//   <Input
+//     className={classes.input}
+//     value={channelName}
+//     onChange={this.handleChange("channelName")}
+//     autoFocus
+//     fullWidth
+//     disableUnderline
+//     onKeyPress={ev => {
+//       if (ev.key === "Enter") {
+//         this.handleFieldEnter();
+//         ev.preventDefault();
+//       }
+//     }}
+//   />
+// ) : (
 
 const styles = {
   channel: {

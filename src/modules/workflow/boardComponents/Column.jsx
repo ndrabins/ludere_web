@@ -182,12 +182,6 @@ const styles = {
   }
 };
 
-// function mapStateToProps(state) {
-//   return {
-//     listData: state.workflow.listData
-//   };
-// }
-
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(Actions, dispatch)

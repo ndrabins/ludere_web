@@ -10,11 +10,8 @@ import { withRouter } from "react-router";
 
 class TeamDashboardTitle extends Component {
   render() {
-    const { classes, location, teams, selectedTeam, history } = this.props;
+    const { classes, location, teams, selectedTeam } = this.props;
     let onTeamPage = location.pathname === "/team/";
-
-    console.log(history);
-    console.log(location);
 
     const myTeam = teams[selectedTeam];
 
