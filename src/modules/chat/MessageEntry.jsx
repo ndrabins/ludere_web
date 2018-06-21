@@ -4,7 +4,12 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import { withStyles } from "@material-ui/core/styles";
 import firebase from "firebase";
+import "emoji-mart/css/emoji-mart.css";
+import data from "emoji-mart/data/apple.json";
+import Popover from "@material-ui/core/Popover";
 
+import { Picker } from "emoji-mart";
+import EmojiIcon from "react-icons/lib/fa/smile-o";
 import TextField from "@material-ui/core/TextField";
 import AddIcon from "@material-ui/icons/Add";
 import Debounce from "lodash/debounce";
@@ -13,7 +18,8 @@ class MessageEntry extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messageText: ""
+      messageText: "",
+      anchorEl: null
     };
     // debounce the passed in dispatch method, so not to update the typing indicator every keypress
     this.updateChannel = Debounce(this.props.actions.updateChannel, 1000);
@@ -86,8 +92,23 @@ class MessageEntry extends Component {
     );
   };
 
+  openEmojiPicker = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  addEmoji = (emoji, event) => {
+    const { messageText } = this.state;
+    console.log("adding emoji", emoji);
+    this.setState({ messageText: messageText + emoji.native });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
   render() {
     const { selectedChannel, channel, classes } = this.props;
+    const { anchorEl } = this.state;
 
     let name = "";
 
@@ -139,6 +160,25 @@ class MessageEntry extends Component {
             }
           }}
         />
+        <EmojiIcon
+          className={classes.emojiIcon}
+          onClick={this.openEmojiPicker}
+        />
+        <Popover
+          open={Boolean(anchorEl)}
+          anchorEl={anchorEl}
+          onClose={this.handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center"
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "center"
+          }}
+        >
+          <Picker set="apple" data={data} onSelect={this.addEmoji} />
+        </Popover>
       </div>
     );
   }
@@ -150,7 +190,8 @@ const styles = theme => ({
     marginBottom: 5,
     paddingRight: 15,
     paddingLeft: 10,
-    alignItems: "center"
+    alignItems: "center",
+    position: "relative"
   },
   fileInput: {
     color: "#767778",
@@ -205,6 +246,19 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center"
+  },
+  emojiIcon: {
+    position: "absolute",
+    width: 28,
+    height: 28,
+    cursor: "pointer",
+    top: 7,
+    right: 18,
+    color: "#b9bbbe",
+    transition: "color 0.25s ease-out",
+    "&:hover": {
+      color: "#303030"
+    }
   }
 });
 
@@ -221,6 +275,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(MessageEntry)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(MessageEntry));

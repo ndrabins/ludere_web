@@ -8,6 +8,7 @@
   "dependencies": {
     "@material-ui/core": "^1.2.2",
     "@material-ui/icons": "^1.1.0",
+    "emoji-mart": "^2.6.1",
     "filepond": "^1.8.0",
     "filepond-plugin-file-encode": "^1.0.4",
     "filepond-plugin-file-validate-size": "^1.0.3",
