@@ -41,9 +41,7 @@ class TeamDashboard extends Component {
             <TeamCard
               title={"Notifications"}
               background={`linear-gradient(to right, #e57373, #ee8d68)`}
-            >
-              <div> coming soon </div>
-            </TeamCard>
+            />
           </div>
         </div>
         <div className={classes.row}>
@@ -51,9 +49,7 @@ class TeamDashboard extends Component {
             <TeamCard
               title={"Activity"}
               background={`linear-gradient(to right, #29b6f6, #53C6F7)`}
-            >
-              <div> coming soon </div>
-            </TeamCard>
+            />
           </div>
         </div>
       </div>
@@ -101,6 +97,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(TeamDashboard)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(TeamDashboard));
