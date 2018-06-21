@@ -196,7 +196,6 @@ export function sendMessage({ messageText, type = "message", fileURL = "" }) {
       sentByDisplayName: myName,
       edited: false,
       avatarURL: photoURL,
-      emojis: [],
       fileURL: fileURL,
       type: type // VS. type file later...
     };

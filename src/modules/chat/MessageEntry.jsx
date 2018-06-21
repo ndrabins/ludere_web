@@ -8,7 +8,7 @@ import "emoji-mart/css/emoji-mart.css";
 import data from "emoji-mart/data/apple.json";
 import Popover from "@material-ui/core/Popover";
 
-import { Picker } from "emoji-mart";
+import { NimblePicker } from "emoji-mart";
 import EmojiIcon from "react-icons/lib/fa/smile-o";
 import TextField from "@material-ui/core/TextField";
 import AddIcon from "@material-ui/icons/Add";
@@ -177,7 +177,7 @@ class MessageEntry extends Component {
             horizontal: "center"
           }}
         >
-          <Picker set="apple" data={data} onSelect={this.addEmoji} />
+          <NimblePicker set="apple" data={data} onSelect={this.addEmoji} />
         </Popover>
       </div>
     );

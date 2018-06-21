@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 class TeamCard extends Component {
@@ -33,9 +32,10 @@ const inlineStyles = {
     display: "flex",
     alignItems: "center",
     width: "calc(100% - 40px)",
-    margin: "-15px 0px 0px 20px",
+    margin: "-15px 0px -35px 20px",
     borderRadius: 7,
-    padding: "5px 5px"
+    padding: "5px 5px",
+    zIndex: 10
     // boxShadow: "0 4px 20px 0px rgba(0, 0, 0, 0.12)"
   }
 };
@@ -43,7 +43,8 @@ const inlineStyles = {
 const styles = theme => ({
   root: {
     display: "flex",
-    overflowY: "auto"
+    overflowY: "auto",
+    paddingTop: "35px"
   },
   title: {
     color: "#fff",
