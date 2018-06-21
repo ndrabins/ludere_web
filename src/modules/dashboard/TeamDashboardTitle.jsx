@@ -36,7 +36,9 @@ const styles = {
   titleText: {
     marginLeft: 14,
     display: "flex",
-    alignSelf: "center"
+    alignSelf: "center",
+    wordBreak: "break-word",
+    wordWrap: "break-word"
   },
   baseWithHover: {
     textDecoration: "none",

@@ -9,8 +9,13 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import Popover from "@material-ui/core/Popover";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "common/Dialog";
 
-import Input from "@material-ui/core/Input";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 
 import { Link } from "react-router-dom";
 
@@ -20,6 +25,7 @@ class BoardButton extends Component {
     this.state = {
       anchorEl: null,
       isEditingBoardName: false,
+      isDeletingBoard: false,
       boardName: this.props.name
     };
   }
@@ -35,10 +41,14 @@ class BoardButton extends Component {
     this.handleClose();
   };
 
-  handleBoardDelete = (event, boardID) => {
+  handleBoardDeleteConfirmation = (event, boardID) => {
     const { actions } = this.props;
-    console.log("deleting board", boardID);
     actions.deleteBoard(boardID);
+    this.handleClose();
+  };
+
+  handleBoardDelete = () => {
+    this.setState({ isDeletingBoard: true });
     this.handleClose();
   };
 
@@ -55,13 +65,17 @@ class BoardButton extends Component {
     this.setState({ anchorEl: null });
   };
 
+  handleCloseDialog = () => {
+    this.setState({ isDeletingBoard: false, isEditingBoardName: false });
+  };
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
     });
   };
 
-  handleFieldEnter = () => {
+  handleUpdateBoardConfirmation = () => {
     const { boardName } = this.state;
     const { actions, boardID } = this.props;
     actions.updateBoard({ boardName: boardName }, boardID);
@@ -70,7 +84,12 @@ class BoardButton extends Component {
 
   render() {
     const { history, boardID, selectedBoard, classes, name } = this.props;
-    const { anchorEl, isEditingBoardName, boardName } = this.state;
+    const {
+      anchorEl,
+      isEditingBoardName,
+      boardName,
+      isDeletingBoard
+    } = this.state;
 
     let workflowStyle = classes.workflow;
     let nameStyle = classes.name;
@@ -84,32 +103,16 @@ class BoardButton extends Component {
 
     return (
       <div className={workflowStyle}>
-        {isEditingBoardName ? (
-          <Input
-            className={classes.input}
-            value={boardName}
-            onChange={this.handleChange("boardName")}
-            autoFocus
-            fullWidth
-            disableUnderline
-            onKeyPress={ev => {
-              if (ev.key === "Enter") {
-                this.handleFieldEnter();
-                ev.preventDefault();
-              }
-            }}
-          />
-        ) : (
-          <Typography
-            className={nameStyle}
-            onClick={this.handleClick}
-            noWrap
-            component={Link}
-            to="/team/workflow"
-          >
-            {name}
-          </Typography>
-        )}
+        <Typography
+          className={nameStyle}
+          onClick={this.handleClick}
+          noWrap
+          component={Link}
+          to="/team/workflow"
+        >
+          {name}
+        </Typography>
+
         <MoreVertIcon
           className={classes.icon}
           aria-owns={anchorEl ? "simple-menu" : null}
@@ -129,11 +132,54 @@ class BoardButton extends Component {
             horizontal: "center"
           }}
         >
-          <MenuItem onClick={this.handleUpdateBoardName}>Edit Name</MenuItem>
+          <MenuItem onClick={this.handleUpdateBoardName}>
+            <ListItemIcon className={classes.icon}>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText primary="Edit Name" />
+          </MenuItem>
           <MenuItem onClick={ev => this.handleBoardDelete(ev, boardID)}>
-            Delete Board
+            <ListItemIcon className={classes.icon}>
+              <DeleteIcon />
+            </ListItemIcon>
+            <ListItemText primary="Delete Workflow" />
           </MenuItem>
         </Popover>
+        <Dialog
+          handleAction={this.handleUpdateBoardConfirmation}
+          open={isEditingBoardName}
+          handleClose={this.handleCloseDialog}
+          titleName="Edit workflow name"
+          actionButtonName="Confirm"
+          color="linear-gradient(to right, rgb(167, 112, 239), rgb(207, 139, 243))"
+          helperText=""
+        >
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Workflow Name"
+            fullWidth
+            autoComplete="off"
+            value={boardName}
+            onChange={this.handleChange("boardName")}
+            onKeyPress={ev => {
+              if (ev.key === "Enter" && !ev.shiftKey) {
+                this.handleUpdateBoard();
+                ev.preventDefault();
+              }
+            }}
+          />
+        </Dialog>
+        <Dialog
+          handleAction={this.handleBoardDeleteConfirmation}
+          open={isDeletingBoard}
+          handleClose={this.handleCloseDialog}
+          titleName="Delete workflow"
+          actionButtonName="Delete"
+          color="rgb(229, 115, 115)"
+          helperText="Warning, this will delete all tasks in this workflow"
+        />
       </div>
     );
   }

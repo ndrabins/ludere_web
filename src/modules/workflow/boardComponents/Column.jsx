@@ -10,7 +10,11 @@ import TextField from "@material-ui/core/TextField";
 import Popover from "@material-ui/core/Popover";
 import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 
 import TaskList from "./TaskList";
 import EditableText from "../../../common/EditableText";
@@ -103,7 +107,10 @@ class Column extends PureComponent {
                   }}
                 >
                   <MenuItem onClick={() => this.handleListDelete(ID)}>
-                    Delete List
+                    <ListItemIcon className={classes.icon}>
+                      <DeleteIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Delete List" />
                   </MenuItem>
                 </Popover>
               </div>
