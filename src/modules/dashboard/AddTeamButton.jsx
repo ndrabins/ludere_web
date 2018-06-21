@@ -26,7 +26,7 @@ class AddTeamButton extends Component {
   };
 
   handleCreateTeam = () => {
-    if (this.state.teamName.length < 2) {
+    if (this.state.teamName.length < 3) {
       return;
     }
     this.props.actions.createTeam(this.state.teamName);
@@ -103,6 +103,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withRouter(AddTeamButton)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(AddTeamButton));

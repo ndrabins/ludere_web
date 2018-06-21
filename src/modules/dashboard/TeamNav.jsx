@@ -68,7 +68,7 @@ class TeamNav extends Component {
               onClick={() => this.handleTeamSelect(key)}
             >
               <div className={classes.teamAbbreviation}>
-                {team.name.slice(0, 2)}
+                {team.name.slice(0, 3)}
               </div>
             </Button>
           </Tooltip>
@@ -214,6 +214,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(withRouter(TeamNav))
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(withRouter(TeamNav)));
