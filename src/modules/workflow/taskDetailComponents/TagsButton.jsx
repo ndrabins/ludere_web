@@ -51,6 +51,7 @@ class TagsButton extends Component {
       if (task.tags[tagID]) {
         return (
           <Chip
+            onClick={() => this.toggleTagFromTask(tagID)}
             key={tagID}
             style={{ background: tag.color }}
             label={tag.name}
@@ -61,6 +62,7 @@ class TagsButton extends Component {
       } else {
         return (
           <Chip
+            onClick={() => this.toggleTagFromTask(tagID)}
             key={tagID}
             style={{ background: tag.color }}
             label={tag.name}
@@ -161,6 +163,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(TagsButton)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(TagsButton));

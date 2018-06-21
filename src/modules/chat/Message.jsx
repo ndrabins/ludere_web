@@ -267,7 +267,7 @@ const styles = theme => ({
     wordWrap: "break-word",
     wordBreak: "break-all",
     overflowWrap: "break-word",
-    marginRight: 30,
+    // marginRight: 30,
     marginTop: "0px",
     fontSize: "15px"
   },
@@ -360,4 +360,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(Message));
+export default connect(
+  null,
+  mapDispatchToProps
+)(withStyles(styles)(Message));
