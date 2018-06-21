@@ -13,6 +13,10 @@ import ReactMarkdown from "react-markdown";
 import Button from "@material-ui/core/Button";
 import Dialog from "common/Dialog";
 import FileMessage from "./MessageComponents/FileMessage";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 import "./Message.css"; // this is here to override markdown css
 import Paper from "@material-ui/core/Paper";
 class Message extends PureComponent {
@@ -98,10 +102,16 @@ class Message extends PureComponent {
           }}
         >
           <MenuItem onClick={() => this.handleBeginEditing()}>
-            Edit Message
+            <ListItemIcon className={classes.icon}>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText primary="Edit Message" />
           </MenuItem>
           <MenuItem onClick={() => this.openDeleteDialog()}>
-            Delete Message
+            <ListItemIcon className={classes.icon}>
+              <DeleteIcon />
+            </ListItemIcon>
+            <ListItemText primary="Delete Message" />
           </MenuItem>
         </Popover>
         <Dialog
