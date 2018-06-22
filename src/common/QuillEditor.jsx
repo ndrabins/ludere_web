@@ -19,7 +19,8 @@ class QuillTextEntry extends Component {
       "italic",
       "underline",
       "strike",
-      "code-block"
+      "code-block",
+      "blockquote"
     ];
 
     const options = {
@@ -53,10 +54,9 @@ const styles = theme => ({
     color: "#303030"
   },
   quillEditor: {
-    // display: "flex",
+    fontFamily: "Roboto",
     minWidth: 400,
     overflowY: "auto"
-    // maxHeight: 300
   }
 });
 export default withStyles(styles)(QuillTextEntry);
