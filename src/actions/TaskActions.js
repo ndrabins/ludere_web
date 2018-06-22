@@ -50,7 +50,7 @@ export function createTask(listID, taskTitle) {
     };
 
     taskRef.add(task).then(function(docRef) {
-      taskOrder.push(docRef.id);
+      taskOrder.unshift(docRef.id); // unshift adds to beginning of array, instead of push that would add to end of array
       listRef.update({ taskOrder: taskOrder });
     });
   };

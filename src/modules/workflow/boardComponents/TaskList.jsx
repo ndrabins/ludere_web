@@ -1,14 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as Actions from "../../../actions";
 
 import Task from "./Task";
 
-import Button from "@material-ui/core/Button";
-
-class TaskList extends Component {
+class TaskList extends PureComponent {
   render() {
     const { columnID } = this.props;
     const { taskOrder, taskData } = this.props;
@@ -96,4 +92,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(TaskList);
+export default connect(
+  mapStateToProps,
+  null
+)(TaskList);
