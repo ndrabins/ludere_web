@@ -25,11 +25,11 @@ h5 {
 h6 {
   margin: 0px;
 }
-
 pre {
   margin: 0px;
   padding: 10px !important;
-  background-color: #eeeeee !important;
+  background-color: #23241f;
   border-radius: 5px;
-  border: 1px solid #c0c0c0;
+  /* color: #f8f8f2; */
+  /* border: 1px solid #c0c0c0; */
 }

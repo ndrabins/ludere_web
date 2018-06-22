@@ -2,14 +2,25 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
 
 class TeamCard extends Component {
   static defaultProps = {
-    background: `linear-gradient(to left, #6fe5c9, #00bcd4)`
+    background: `linear-gradient(to left, #6fe5c9, #00bcd4)`,
+    headerAction: <span />,
+    headerFunction: () => {},
+    showActionIcon: false
   };
 
   render() {
-    const { classes, title, background } = this.props;
+    const {
+      classes,
+      title,
+      background,
+      headerAction,
+      showActionIcon,
+      headerFunction
+    } = this.props;
     return (
       <Paper className={classes.paperContainer} elevation={4}>
         <Paper
@@ -19,6 +30,9 @@ class TeamCard extends Component {
           <Typography className={classes.title} variant="headline">
             {title}
           </Typography>
+          {showActionIcon && (
+            <IconButton onClick={headerFunction}>{headerAction}</IconButton>
+          )}
         </Paper>
         <div className={classes.root}>{this.props.children}</div>
       </Paper>
@@ -28,15 +42,15 @@ class TeamCard extends Component {
 
 const inlineStyles = {
   heading: {
-    minHeight: 50,
+    minHeight: 60,
     display: "flex",
     alignItems: "center",
     width: "calc(100% - 40px)",
     margin: "-15px 0px -35px 20px",
     borderRadius: 7,
     padding: "5px 5px",
-    zIndex: 10
-    // boxShadow: "0 4px 20px 0px rgba(0, 0, 0, 0.12)"
+    zIndex: 10,
+    justifyContent: "space-between"
   }
 };
 

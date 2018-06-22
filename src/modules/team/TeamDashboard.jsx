@@ -6,8 +6,11 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import FireIcon from "../../static/teamfire.svg";
+import EditIcon from "@material-ui/icons/Edit";
 
-import ModuleHeader from "../../common/ModuleHeader";
+import ModuleHeader from "common/ModuleHeader";
+import QuillEditor from "common/QuillEditor";
+import Dialog from "common/Dialog";
 
 import TeamMembers from "./TeamMembers";
 import TeamCard from "./TeamCard";
@@ -18,8 +21,26 @@ class TeamDashboard extends Component {
     selectedTeam: PropTypes.string.isRequired,
     teams: PropTypes.object.isRequired
   };
+
+  state = {
+    openAnnouncementDialog: false
+  };
+
+  handleClose = () => {
+    this.setState({ openAnnouncementDialog: false });
+  };
+
+  handleOpenAnnouncements = () => {
+    this.setState({ openAnnouncementDialog: true });
+  };
+
+  handleAnnouncementConfirm = () => {
+    console.log("yo");
+  };
+
   render() {
     const { classes, selectedTeam, teams } = this.props;
+    const { openAnnouncementDialog } = this.state;
 
     const team = teams[selectedTeam];
     return (
@@ -40,7 +61,22 @@ class TeamDashboard extends Component {
           <TeamCard
             title={"Announcements"}
             background={`linear-gradient(to left, #6fe5c9, #00bcd4)`}
-          />
+            headerAction={<EditIcon />}
+            headerFunction={this.handleOpenAnnouncements}
+            showActionIcon={true}
+          >
+            <Dialog
+              handleAction={this.handleAnnouncementConfirm}
+              open={openAnnouncementDialog}
+              handleClose={this.handleClose}
+              titleName="Create an announcement"
+              actionButtonName="Create"
+              color="linear-gradient(to left, #6fe5c9, #00bcd4)"
+              helperText="Write down content that you want your whole team to see!"
+            >
+              <QuillEditor />
+            </Dialog>
+          </TeamCard>
         </div>
       </div>
     );
