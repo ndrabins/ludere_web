@@ -28,6 +28,7 @@ export function fetchChannels(selectedTeam) {
     var chatRef = firebase.firestore().collection("chat");
     var channelListener = chatRef
       .where(`team`, "==", selectedTeam)
+      .where("type", "==", "public")
       .onSnapshot(function(querySnapshot) {
         var channels = {};
         querySnapshot.forEach(function(doc) {

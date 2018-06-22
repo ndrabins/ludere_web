@@ -48,7 +48,8 @@ class TeamMembers extends Component {
       workspaceMembers,
       teams,
       selectedTeam,
-      loading
+      loading,
+      myUserID
     } = this.props;
 
     const { anchorEl, selectedUserID } = this.state;
@@ -92,6 +93,7 @@ class TeamMembers extends Component {
                         onClose={this.handleClose}
                       >
                         <MenuItem
+                          disabled={myUserID === userID}
                           onClick={() => this.handleRemoveClick(userID)}
                         >
                           Remove Member
@@ -139,7 +141,8 @@ function mapStateToProps(state) {
     workspaceMembers: state.workspace.workspaceUsers,
     teams: state.team.teams,
     selectedTeam: state.team.selectedTeam,
-    loading: state.team.loading
+    loading: state.team.loading,
+    myUserID: state.auth.user.uid
   };
 }
 
@@ -149,6 +152,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(TeamMembers)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(TeamMembers));

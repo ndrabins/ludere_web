@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 
-class DeleteDialog extends Component {
+class LudereDialog extends Component {
   static propTypes = {
     open: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
@@ -20,6 +20,7 @@ class DeleteDialog extends Component {
   };
 
   static defaultProps = {
+    open: false,
     showActionButtons: true,
     handleAction: () => console.log("do someting")
   };
@@ -120,4 +121,4 @@ const styles = theme => ({
     height: 4
   }
 });
-export default withStyles(styles)(DeleteDialog);
+export default withStyles(styles)(LudereDialog);
