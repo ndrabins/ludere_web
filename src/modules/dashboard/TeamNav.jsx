@@ -131,7 +131,9 @@ const styles = {
     minWidth: 400,
     width: 400, //the width and margin are like this to 1. Hide the scroll bar 2. Allow the tooltips to have room to show
     marginRight: -340,
-    backgroundColor: "#0000"
+    backgroundColor: "#2a2a2a",
+    boxShadow:
+      "0 5.5px 5px 0 rgba(0, 0, 0, 0.24), 0 9px 18px 0 rgba(0, 0, 0, 0.18)"
   },
   divider: {
     marginTop: 5,
@@ -143,11 +145,8 @@ const styles = {
   container: {
     display: "flex",
     width: 60,
-    backgroundColor: "#2a2a2a",
     flexDirection: "column",
     alignItems: "center",
-    boxShadow:
-      "0 5.5px 5px 0 rgba(0, 0, 0, 0.24), 0 9px 18px 0 rgba(0, 0, 0, 0.18)",
     height: "100%",
     paddingTop: 5
   },

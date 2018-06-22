@@ -70,7 +70,7 @@ class App extends Component {
         <CssBaseline />
         <MuiThemeProvider theme={lightTheme}>
           <Router>
-            <div style={{ height: "100%" }}>
+            <div style={{ height: "100%", overflow: "hidden" }}>
               <Switch>
                 {/* this handles invites  */}
                 <PublicRoute
@@ -111,4 +111,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
