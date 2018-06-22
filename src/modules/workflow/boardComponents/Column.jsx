@@ -12,6 +12,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import Dialog from "common/Dialog";
 
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -22,7 +23,8 @@ import EditableText from "../../../common/EditableText";
 class Column extends PureComponent {
   state = {
     taskName: "",
-    anchorEl: null
+    anchorEl: null,
+    isDeletingColumn: false
   };
 
   handleChange = name => event => {
@@ -57,15 +59,24 @@ class Column extends PureComponent {
     this.setState({ anchorEl: null });
   };
 
-  handleListDelete = columnID => {
+  handleCloseDialog = () => {
+    this.setState({ isDeletingList: false });
+  };
+
+  handleListDeleteConfirmation = columnID => {
     const { boardID, actions } = this.props;
     actions.deleteList(columnID, boardID);
     this.handleClose();
   };
 
+  handleListDelete = () => {
+    this.setState({ isDeletingList: true });
+    this.handleClose();
+  };
+
   render() {
     const { list, ID, classes } = this.props;
-    const { anchorEl } = this.state;
+    const { anchorEl, isDeletingList } = this.state;
 
     if (list === undefined) {
       return <div />;
@@ -106,7 +117,7 @@ class Column extends PureComponent {
                     horizontal: "center"
                   }}
                 >
-                  <MenuItem onClick={() => this.handleListDelete(ID)}>
+                  <MenuItem onClick={this.handleListDelete}>
                     <ListItemIcon className={classes.icon}>
                       <DeleteIcon />
                     </ListItemIcon>
@@ -114,6 +125,15 @@ class Column extends PureComponent {
                   </MenuItem>
                 </Popover>
               </div>
+              <Dialog
+                handleAction={() => this.handleListDeleteConfirmation(ID)}
+                open={isDeletingList}
+                handleClose={this.handleCloseDialog}
+                titleName="Delete List"
+                actionButtonName="Delete"
+                color="rgb(229, 115, 115)"
+                helperText="Warning: this will delete list and all tasks within it."
+              />
               <div className={classes.taskEntry}>
                 <TextField
                   id="taskName"
@@ -188,4 +208,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(Column));
+export default connect(
+  null,
+  mapDispatchToProps
+)(withStyles(styles)(Column));
