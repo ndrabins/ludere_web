@@ -32,6 +32,7 @@
     "react-circle": "^1.0.3",
     "react-color": "^2.14.1",
     "react-copy-to-clipboard": "^5.0.1",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.4.1",
     "react-filepond": "^2.0.6",
     "react-ga": "^2.5.0",

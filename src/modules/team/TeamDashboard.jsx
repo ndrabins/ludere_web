@@ -30,27 +30,17 @@ class TeamDashboard extends Component {
             {team.name}
           </Typography>
         </ModuleHeader>
-        <div className={classes.row}>
-          <div className={classes.column}>
-            <TeamCard
-              title={"Team Members"}
-              background={`linear-gradient(to right, #00BCD4, #26d0ce)`}
-            >
-              <TeamMembers />
-            </TeamCard>
-            <TeamCard
-              title={"Notifications"}
-              background={`linear-gradient(to right, #e57373, #ee8d68)`}
-            />
-          </div>
-        </div>
-        <div className={classes.row}>
-          <div className={classes.column}>
-            <TeamCard
-              title={"Activity"}
-              background={`linear-gradient(to right, #29b6f6, #53C6F7)`}
-            />
-          </div>
+        <div className={classes.column}>
+          <TeamCard
+            title={"Team Members"}
+            background={`linear-gradient(to right, #29b6f6, #796eff)`}
+          >
+            <TeamMembers />
+          </TeamCard>
+          <TeamCard
+            title={"Announcements"}
+            background={`linear-gradient(to left, #6fe5c9, #00bcd4)`}
+          />
         </div>
       </div>
     );

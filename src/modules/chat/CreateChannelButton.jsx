@@ -62,7 +62,7 @@ class CreateChatButton extends Component {
             onChange={this.handleChange("channelName")}
             onKeyPress={ev => {
               if (ev.key === "Enter" && !ev.shiftKey) {
-                this.handleCreateBoard();
+                this.handleCreateChannel();
                 ev.preventDefault();
               }
             }}
@@ -88,4 +88,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(CreateChatButton);
+export default connect(
+  null,
+  mapDispatchToProps
+)(CreateChatButton);

@@ -72,7 +72,8 @@ const styles = {
     transition: "width 0.5s ease-out, min-width 0.5s ease-out"
   },
   sideNavInner: {
-    width: drawerWidth
+    width: drawerWidth,
+    height: "calc(100% - 64px)"
   },
   sideNavBanner: {
     height: 64,
