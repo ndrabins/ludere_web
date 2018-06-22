@@ -18,8 +18,8 @@ class SideNavModules extends Component {
       pathname.includes("team") || pathname.includes("profile");
     return (
       <div className={classes.container}>
-        <Route exact path="/" component={CommunitySideNav} />
-        <Route path="/community" component={CommunitySideNav} />
+        {/* <Route exact path="/" component={CommunitySideNav} />
+        <Route path="/community" component={CommunitySideNav} /> */}
         {showModules && (
           <Fragment>
             <TeamDashboard />

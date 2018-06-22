@@ -80,12 +80,12 @@ class TeamNav extends Component {
 
   render() {
     const { location, classes } = this.props;
-    let focusCommunity = location.pathname.includes("community");
+    // let focusCommunity = location.pathname.includes("community");
 
     return (
       <div className={classes.containerWrapper}>
         <div className={classes.container}>
-          <div className={classes.teamButtonContainer}>
+          {/* <div className={classes.teamButtonContainer}>
             <span
               style={
                 focusCommunity
@@ -114,7 +114,7 @@ class TeamNav extends Component {
               </Button>
             </Tooltip>
           </div>
-          <div className={classes.divider} />
+          <div className={classes.divider} /> */}
           {this.renderTeams()}
           <AddTeamButton />
         </div>

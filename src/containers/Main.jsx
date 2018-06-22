@@ -103,11 +103,11 @@ class Main extends Component {
             drawerVisible={drawerVisible}
           />
           <Switch>
-            <Route exact path="/community/dashboard" component={Dashboard} />
+            {/* <Route exact path="/community/dashboard" component={Dashboard} />
             <Route exact path="/community/calendar" component={Calendar} />
+            <Route exact path="/community" component={Community} /> */}
             <Route exact path="/profile" component={Profile} />
-            <Route exact path="/" component={Community} />
-            <Route exact path="/community" component={Community} />
+            <Route exact path="/" component={Profile} />
             <Route exact path="/team" component={TeamDashboard} />
             <Route path="/team/chat" component={Chat} />
             <Route path="/team/workflow" component={WorkFlow} />
@@ -151,6 +151,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(Main)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Main));
