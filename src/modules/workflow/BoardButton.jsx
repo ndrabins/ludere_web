@@ -41,8 +41,9 @@ class BoardButton extends Component {
     this.handleClose();
   };
 
-  handleBoardDeleteConfirmation = (event, boardID) => {
+  handleBoardDeleteConfirmation = boardID => {
     const { actions } = this.props;
+    console.log(boardID);
     actions.deleteBoard(boardID);
     this.handleClose();
   };
@@ -172,7 +173,7 @@ class BoardButton extends Component {
           />
         </Dialog>
         <Dialog
-          handleAction={this.handleBoardDeleteConfirmation}
+          handleAction={() => this.handleBoardDeleteConfirmation(boardID)}
           open={isDeletingBoard}
           handleClose={this.handleCloseDialog}
           titleName="Delete workflow"
@@ -274,6 +275,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withRouter(withStyles(styles)(BoardButton))
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(withStyles(styles)(BoardButton)));
