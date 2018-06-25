@@ -37,6 +37,30 @@ class Message extends PureComponent {
     showDeleteDialog: false
   };
 
+  componentDidMount() {
+    const { messageID } = this.props;
+
+    // this gets all element nodes of a message component. Finds the "code" blocks. And then highlights them.
+    const elementNodes = document
+      .getElementById(messageID)
+      .querySelectorAll("code");
+    elementNodes.forEach(block => {
+      window.hljs.highlightBlock(block);
+    });
+  }
+
+  componentDidUpdate() {
+    const { messageID } = this.props;
+
+    // this gets all element nodes of a message component. Finds the "code" blocks. And then highlights them.
+    const elementNodes = document
+      .getElementById(messageID)
+      .querySelectorAll("code");
+    elementNodes.forEach(block => {
+      window.hljs.highlightBlock(block);
+    });
+  }
+
   renderNormalMessage = () => {
     const { classes, message, formattedTimeStamp } = this.props;
 
@@ -239,7 +263,7 @@ class Message extends PureComponent {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, messageID } = this.props;
     const { isEditing } = this.state;
 
     return (
@@ -247,6 +271,7 @@ class Message extends PureComponent {
         className={classes.messageContainer}
         onMouseOver={this.handleMouseOver}
         onMouseLeave={this.handleMouseLeave}
+        id={messageID}
       >
         {isEditing ? this.renderEditingMessage() : this.renderMessage()}
       </div>

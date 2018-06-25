@@ -41,11 +41,6 @@ class MessageList extends Component {
     let scrollPositionBottom =
       containerHeight - (scrollbarLocation + innerContainerHeight);
 
-    // TODO: probs gonna need to add a check here so that it doesn't run this computation every scroll.
-    document.querySelectorAll("code").forEach(block => {
-      window.hljs.highlightBlock(block);
-    });
-
     if (scrollPositionBottom < 200) {
       this.scrollToBottom();
       return;
