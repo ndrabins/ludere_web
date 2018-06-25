@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
+import withMobileDialog from "@material-ui/core/withMobileDialog";
+
 import Dialog from "@material-ui/core/Dialog";
 import CloseIcon from "@material-ui/icons/Close";
 import Button from "@material-ui/core/Button";
@@ -35,10 +37,16 @@ class LudereDialog extends Component {
       actionButtonName,
       color,
       helperText,
-      showActionButtons
+      showActionButtons,
+      fullScreen
     } = this.props;
     return (
-      <Dialog onClose={handleClose} aria-labelledby="dialog" open={open}>
+      <Dialog
+        fullScreen={fullScreen}
+        onClose={handleClose}
+        aria-labelledby="dialog"
+        open={open}
+      >
         <div className={classes.root}>
           <IconButton className={classes.closeIcon} onClick={handleClose}>
             <CloseIcon />
@@ -122,4 +130,4 @@ const styles = theme => ({
     height: 4
   }
 });
-export default withStyles(styles)(LudereDialog);
+export default withStyles(styles)(withMobileDialog()(LudereDialog));
