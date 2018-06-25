@@ -244,7 +244,6 @@ export function deleteChannel(channelID) {
       .collection("chat")
       .doc(channelID);
 
-    console.log(channelID);
     dispatch(selectChannel(null));
 
     chatRef.delete().then(function(docRef) {

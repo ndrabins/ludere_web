@@ -98,7 +98,6 @@ class MessageEntry extends Component {
 
   addEmoji = (emoji, event) => {
     const { messageText } = this.state;
-    console.log("adding emoji", emoji);
     this.setState({ messageText: messageText + emoji.native });
   };
 
