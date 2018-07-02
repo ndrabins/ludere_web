@@ -66,7 +66,7 @@ class Task extends PureComponent {
   };
 
   render() {
-    const { task, taskID, classes, isDragging } = this.props;
+    const { task, taskID, classes, isDragging, selectedTaskID } = this.props;
     const { hovered } = this.state;
 
     if (task === undefined) {
@@ -78,7 +78,7 @@ class Task extends PureComponent {
     return (
       <Paper
         className={classnames(classes.container, {
-          [classes.draggingContainer]: isDragging
+          [classes.draggingContainer]: isDragging || selectedTaskID === taskID
         })}
         onClick={() => this.props.actions.toggleTaskDetail(taskID)}
         elevation={isDragging ? 20 : 1}
@@ -189,6 +189,12 @@ const styles = {
   }
 };
 
+function mapStateToProps(state) {
+  return {
+    selectedTaskID: state.workflow.selectedTask
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(Actions, dispatch)
@@ -196,6 +202,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withStyles(styles)(Task));

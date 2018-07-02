@@ -40,16 +40,6 @@ class QuillEditor extends Component {
   componentDidMount() {
     const { value } = this.props;
 
-    const toolbarOptions = [
-      "bold",
-      "italic",
-      "underline",
-      "strike",
-      "code-block",
-      "blockquote",
-      "header"
-    ];
-
     const options = {
       theme: "snow",
       placeholder: this.props.helperText,
