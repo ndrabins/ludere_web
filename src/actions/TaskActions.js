@@ -38,7 +38,7 @@ export function createTask(listID, taskTitle) {
       dateCreated: timestamp,
       dateUpdated: timestamp,
       lastUpdatedBy: uid,
-      description: "",
+      description: {},
       dueDate: null,
       createdBy: uid,
       boardID: selectedBoard,

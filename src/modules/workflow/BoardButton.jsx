@@ -43,7 +43,6 @@ class BoardButton extends Component {
 
   handleBoardDeleteConfirmation = boardID => {
     const { actions } = this.props;
-    console.log(boardID);
     actions.deleteBoard(boardID);
     this.handleClose();
   };

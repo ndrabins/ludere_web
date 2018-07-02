@@ -3,17 +3,39 @@ import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Quill from "quill";
 
-class QuillTextEntry extends Component {
+class QuillEditor extends Component {
   static propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    helperText: PropTypes.string,
+    handleBlur: PropTypes.func,
+    onChange: PropTypes.func
+  };
+
+  componentWillReceiveProps(nextProps) {
+    const { myQuill } = this.state;
+    if (nextProps.value !== this.props.value) {
+      myQuill.setContents(nextProps.value);
+    }
+  }
+
+  static defaultProps = {
+    helperText: "",
+    handleBlur: () => {},
+    onChange: () => {}
   };
 
   constructor(props) {
     super(props);
     this.quillRef = React.createRef();
+
+    this.state = {
+      myQuill: null
+    };
   }
 
   componentDidMount() {
+    const { value } = this.props;
+
     const toolbarOptions = [
       "bold",
       "italic",
@@ -25,7 +47,7 @@ class QuillTextEntry extends Component {
 
     const options = {
       theme: "snow",
-      placeholder: "Updates for the team",
+      placeholder: this.props.helperText,
       modules: {
         toolbar: toolbarOptions,
         syntax: true
@@ -33,13 +55,29 @@ class QuillTextEntry extends Component {
     };
 
     const quill = new Quill("#editor", options);
+    quill.setContents(value);
+    this.setState({ myQuill: quill });
   }
+
+  handleEditorBlur = () => {
+    const { handleBlur } = this.props;
+    const { myQuill } = this.state;
+    const quillContent = myQuill.getContents();
+
+    handleBlur(quillContent);
+    //save here
+  };
 
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <div ref={this.quillRef} id="editor" className={classes.quillEditor} />
+        <div
+          ref={this.quillRef}
+          id="editor"
+          className={classes.quillEditor}
+          onBlur={this.handleEditorBlur}
+        />
       </div>
     );
   }
@@ -50,13 +88,11 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    marginTop: 5,
     color: "#303030"
   },
   quillEditor: {
     fontFamily: "Roboto",
-    minWidth: 400,
     overflowY: "auto"
   }
 });
-export default withStyles(styles)(QuillTextEntry);
+export default withStyles(styles)(QuillEditor);

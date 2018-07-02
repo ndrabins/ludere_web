@@ -3,13 +3,17 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 
 class TeamCard extends Component {
   static defaultProps = {
     background: `linear-gradient(to left, #6fe5c9, #00bcd4)`,
     headerAction: <span />,
     headerFunction: () => {},
-    showActionIcon: false
+    showActionIcon: false,
+    floatingIcon: <span />,
+    floatingAction: () => {},
+    showFloating: false
   };
 
   render() {
@@ -19,7 +23,10 @@ class TeamCard extends Component {
       background,
       headerAction,
       showActionIcon,
-      headerFunction
+      headerFunction,
+      floatingIcon,
+      floatingAction,
+      showFloating
     } = this.props;
     return (
       <Paper className={classes.paperContainer} elevation={4}>
@@ -35,6 +42,18 @@ class TeamCard extends Component {
           )}
         </Paper>
         <div className={classes.root}>{this.props.children}</div>
+        {showFloating && (
+          <Button
+            variant="fab"
+            color="secondary"
+            aria-label="edit"
+            onClick={floatingAction}
+            className={classes.floatingButton}
+            style={{ background: background }}
+          >
+            {floatingIcon}
+          </Button>
+        )}
       </Paper>
     );
   }
@@ -71,11 +90,18 @@ const styles = theme => ({
     textShadow: "1px 1px 1px rgba(0,0,0,0.24)"
   },
   paperContainer: {
+    position: "relative",
     display: "flex",
     flexDirection: "column",
     margin: 10,
     marginTop: 20,
     flex: 1
+  },
+  floatingButton: {
+    right: 20,
+    bottom: 20,
+    position: "absolute",
+    color: "white"
   }
 });
 

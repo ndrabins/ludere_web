@@ -3,69 +3,31 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
-import Input from "@material-ui/core/Input";
-import FormControl from "@material-ui/core/FormControl";
-import SectionDivider from "../../../common/SectionDivider";
+import QuillEditor from "common/QuillEditor";
 
 class Description extends Component {
-  state = {
-    descriptionText: this.props.task.description
-  };
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.description !== this.state.descriptionText) {
-      this.setState({ descriptionText: nextProps.task.description });
-    }
-  }
-
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
     });
   };
 
-  handleBlur = () => {
-    this.handleFieldEnter();
-  };
-
-  handleFieldEnter = () => {
+  handleBlur = quillContent => {
     let updatedTask = this.props.task;
+    updatedTask.description = { ...quillContent };
 
-    if (this.props.task.description === this.state.descriptionText) {
-      return; //nothing has changed so don't update
-    }
-
-    updatedTask.description = this.state.descriptionText;
     this.props.actions.updateTask(updatedTask);
   };
 
   render() {
-    const { classes } = this.props;
-    const { descriptionText } = this.state;
-
+    const { classes, task } = this.props;
     return (
       <div className={classes.root}>
-        <FormControl className={classes.formControl}>
-          <Input
-            className={classes.input}
-            classes={{ focused: classes.inputFocused }}
-            value={descriptionText}
-            onChange={this.handleChange("descriptionText")}
-            multiline
-            fullWidth
-            rowsMax="16"
-            rows="3"
-            placeholder="Add a description"
-            disableUnderline
-            onBlur={() => this.handleBlur()}
-            onKeyPress={ev => {
-              if (ev.key === "Enter" && !ev.shiftKey) {
-                this.handleFieldEnter();
-                ev.preventDefault();
-              }
-            }}
-          />
-        </FormControl>
+        <QuillEditor
+          helperText="A description about this task"
+          handleBlur={this.handleBlur}
+          value={task.description}
+        />
       </div>
     );
   }
@@ -75,7 +37,8 @@ const styles = theme => ({
   root: {
     width: "100%",
     overflowY: "auto",
-    marginBottom: 5
+    marginBottom: 5,
+    background: "white"
   },
   input: {
     backgroundColor: "white",
@@ -116,6 +79,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(
-  withStyles(styles)(Description)
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(withStyles(styles)(Description));

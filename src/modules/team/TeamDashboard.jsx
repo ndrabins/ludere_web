@@ -34,9 +34,7 @@ class TeamDashboard extends Component {
     this.setState({ openAnnouncementDialog: true });
   };
 
-  handleAnnouncementConfirm = () => {
-    console.log("yo");
-  };
+  handleAnnouncementConfirm = () => {};
 
   render() {
     const { classes, selectedTeam, teams } = this.props;
@@ -61,9 +59,12 @@ class TeamDashboard extends Component {
           <TeamCard
             title={"Announcements"}
             background={`linear-gradient(to left, #6fe5c9, #00bcd4)`}
-            headerAction={<EditIcon />}
-            headerFunction={this.handleOpenAnnouncements}
-            showActionIcon={true}
+            // headerAction={<EditIcon />}
+            // headerFunction={this.handleOpenAnnouncements}
+            // showActionIcon={true}
+            floatingIcon={<EditIcon />}
+            floatingAction={this.handleOpenAnnouncements}
+            showFloating={true}
           >
             <Dialog
               handleAction={this.handleAnnouncementConfirm}

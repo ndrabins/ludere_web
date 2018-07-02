@@ -61,7 +61,6 @@ export function sendDirectMessage(messageText) {
 
     //refactor this here AND in chat actions
     let myName = getState().workspace.workspaceUsers[uid].displayName;
-    // console.log(getState().workspace.workspaceUsers);
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let message = {

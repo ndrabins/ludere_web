@@ -24,7 +24,7 @@ class Task extends PureComponent {
     const totalSubtasks = subtasks.length;
     const subtasksDone = Filter(subtasks, { completed: true }).length;
 
-    let percentDone = (subtasksDone / totalSubtasks * 100).toFixed(0);
+    let percentDone = ((subtasksDone / totalSubtasks) * 100).toFixed(0);
     if (totalSubtasks === 0) {
       return <div />;
     }
@@ -49,7 +49,7 @@ class Task extends PureComponent {
     const totalSubtasks = subtasks.length;
     const subtasksDone = Filter(subtasks, { completed: true }).length;
 
-    let percentDone = subtasksDone / totalSubtasks * 100;
+    let percentDone = (subtasksDone / totalSubtasks) * 100;
     if (totalSubtasks === 0) {
       return 0;
     }
@@ -195,4 +195,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(Task));
+export default connect(
+  null,
+  mapDispatchToProps
+)(withStyles(styles)(Task));

@@ -138,7 +138,6 @@ export function selectChannel(channelID) {
         });
 
         // var lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
-        // console.log("last", lastVisible);
 
         dispatch({
           type: FETCH_MESSAGES_SUCCESS,

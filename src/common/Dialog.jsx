@@ -24,7 +24,7 @@ class LudereDialog extends Component {
   static defaultProps = {
     open: false,
     showActionButtons: true,
-    handleAction: () => console.log("do someting")
+    handleAction: () => {}
   };
 
   render() {

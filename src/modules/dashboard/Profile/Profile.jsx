@@ -53,9 +53,7 @@ class Profile extends Component {
   }
 
   // Initialized the file
-  handleInit = () => {
-    console.log("filepond now initialised");
-  };
+  handleInit = () => {};
 
   handleProcessing = (
     fieldName,
@@ -294,6 +292,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(Profile)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Profile));
