@@ -14,7 +14,11 @@ class QuillEditor extends Component {
   componentWillReceiveProps(nextProps) {
     const { myQuill } = this.state;
     if (nextProps.value !== this.props.value) {
-      myQuill.setContents(nextProps.value);
+      if (typeof value === "string") {
+        myQuill.setText(nextProps.value);
+      } else {
+        myQuill.setContents(nextProps.value);
+      }
     }
   }
 
@@ -55,7 +59,11 @@ class QuillEditor extends Component {
     };
 
     const quill = new Quill("#editor", options);
-    quill.setContents(value);
+    if (typeof value === "string") {
+      quill.setText(value);
+    } else {
+      quill.setContents(value);
+    }
     this.setState({ myQuill: quill });
   }
 
