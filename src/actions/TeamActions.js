@@ -6,7 +6,9 @@ import {
   FETCH_TEAMS_SUCCESS,
   SELECT_TEAM,
   CREATE_TEAM_ERROR,
-  REMOVE_TEAM_MEMBER
+  REMOVE_TEAM_MEMBER,
+  FETCH_ANNOUNCEMENTS,
+  CREATE_ANNOUNCEMENT
 } from "./types";
 
 import firebase from "firebase/app";
@@ -65,7 +67,6 @@ export function createTeam(
         //This needs to be refactored into a general purpose setup for modules function.
         //when a team is created with the chat module, initialize their chat module with a general and announcements channel?
         dispatch(chatActions.createChannel("general"));
-        dispatch(chatActions.createChannel("announcements"));
         dispatch(workflowActions.createBoard("general"));
       })
       .catch(function(error) {
@@ -111,6 +112,7 @@ export function selectTeam(teamID) {
 export function loadTeamData(teamID) {
   //This is probs gonna need some refactoring sometime soon... God help us
   return (dispatch, getState) => {
+    dispatch(fetchAnnouncements(teamID));
     dispatch(chatActions.selectChannel(null));
     dispatch(chatActions.fetchChannels(teamID));
     dispatch(workflowActions.fetchBoards(teamID));
@@ -162,6 +164,64 @@ export function removeFromTeam(teamID, userID) {
 
     teamRef.update(newTeamMember);
     dispatch({ type: REMOVE_TEAM_MEMBER });
+  };
+}
+
+export function fetchAnnouncements(teamID) {
+  return (dispatch, getState) => {
+    let { selectedWorkspace } = getState().workspace;
+
+    dispatch({
+      type: FETCH_ANNOUNCEMENTS,
+      announcements: {},
+      loadingAnnouncements: true
+    });
+
+    let teamRef = firebase
+      .firestore()
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${teamID}/announcements`
+      );
+
+    teamRef.orderBy("dateCreated", "desc").onSnapshot(function(querySnapshot) {
+      var announcements = {};
+      querySnapshot.forEach(function(doc) {
+        announcements[doc.id] = doc.data();
+      });
+      dispatch({
+        type: FETCH_ANNOUNCEMENTS,
+        announcements: announcements,
+        loadingAnnouncements: false
+      });
+    });
+  };
+}
+
+export function createAnnouncement(announcementContent, teamID) {
+  return (dispatch, getState) => {
+    let { uid } = getState().auth.user;
+    let { selectedWorkspace } = getState().workspace;
+
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+
+    //need to refactor this lol..
+    let announcement = {
+      createdBy: uid,
+      dateCreated: timestamp,
+      dateUpdated: timestamp,
+      content: { ...announcementContent }, //need to use spread cause quill returns custom object
+      edited: false
+    };
+
+    let announcementRef = firebase
+      .firestore()
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${teamID}/announcements`
+      );
+
+    announcementRef.add(announcement).then(function(docRef) {
+      dispatch({ type: CREATE_ANNOUNCEMENT });
+    });
   };
 }
 

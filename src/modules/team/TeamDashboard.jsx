@@ -23,22 +23,32 @@ class TeamDashboard extends Component {
   };
 
   state = {
-    openAnnouncementDialog: false
+    openAnnouncementDialog: false,
+    announcementContent: {}
   };
 
   handleClose = () => {
-    this.setState({ openAnnouncementDialog: false });
+    this.setState({ openAnnouncementDialog: false, announcementContent: {} });
   };
 
   handleOpenAnnouncements = () => {
     this.setState({ openAnnouncementDialog: true });
   };
 
-  handleAnnouncementConfirm = () => {};
+  handleBlur = quillContent => {
+    this.setState({ announcementContent: quillContent });
+  };
+
+  handleAnnouncementConfirm = () => {
+    const { actions, selectedTeam } = this.props;
+    const { announcementContent } = this.state;
+    actions.createAnnouncement(announcementContent, selectedTeam);
+    this.handleClose();
+  };
 
   render() {
     const { classes, selectedTeam, teams } = this.props;
-    const { openAnnouncementDialog } = this.state;
+    const { openAnnouncementDialog, announcementContent } = this.state;
 
     const team = teams[selectedTeam];
     return (
@@ -59,9 +69,6 @@ class TeamDashboard extends Component {
           <TeamCard
             title={"Announcements"}
             background={`linear-gradient(to left, #6fe5c9, #00bcd4)`}
-            // headerAction={<EditIcon />}
-            // headerFunction={this.handleOpenAnnouncements}
-            // showActionIcon={true}
             floatingIcon={<EditIcon />}
             floatingAction={this.handleOpenAnnouncements}
             showFloating={true}
@@ -75,7 +82,11 @@ class TeamDashboard extends Component {
               color="linear-gradient(to left, #6fe5c9, #00bcd4)"
               helperText="Write down content that you want your whole team to see!"
             >
-              <QuillEditor />
+              <QuillEditor
+                helperText=""
+                handleBlur={this.handleBlur}
+                value={announcementContent}
+              />
             </Dialog>
           </TeamCard>
         </div>

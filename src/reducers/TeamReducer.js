@@ -5,13 +5,16 @@ import {
   FETCH_TEAMS,
   FETCH_TEAMS_SUCCESS,
   SELECT_TEAM,
-  REMOVE_TEAM_MEMBER
+  REMOVE_TEAM_MEMBER,
+  FETCH_ANNOUNCEMENTS
 } from "../actions/types";
 
 const initialState = {
   teams: {},
   selectedTeam: null,
-  loading: false
+  loading: false,
+  announcements: {},
+  loadingAnnouncements: false
 };
 
 export default function team(state = initialState, action) {
@@ -30,6 +33,12 @@ export default function team(state = initialState, action) {
         ...state,
         teams: action.teams,
         loading: false
+      };
+    case FETCH_ANNOUNCEMENTS:
+      return {
+        ...state,
+        loadingAnnouncements: action.loading,
+        announcements: action.announcements
       };
     case SELECT_TEAM:
       return {
