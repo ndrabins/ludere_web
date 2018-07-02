@@ -14,8 +14,6 @@ import { lightTheme } from "../utility/themes"; //darkTheme
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import ReactGA from "react-ga";
-
 import Loading from "../common/Loading";
 import Main from "./Main";
 import AuthPage from "../modules/auth/AuthPage";
@@ -51,8 +49,6 @@ function PublicRoute({ component: Component, authenticated, ...rest }) {
 
 class App extends Component {
   componentDidMount() {
-    ReactGA.initialize("UA-118955959-1");
-    ReactGA.pageview(window.location.pathname + window.location.search);
     this.props.actions.verifyAuth();
   }
 
