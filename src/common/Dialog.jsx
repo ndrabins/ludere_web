@@ -87,7 +87,7 @@ const styles = theme => ({
     flexDirection: "column",
     justifyContent: "center",
     color: "#303030",
-    minWidth: 400,
+    minWidth: 300,
     padding: 24,
     position: "relative",
     maxHeight: "90vh"
