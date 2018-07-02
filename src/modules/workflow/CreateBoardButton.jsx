@@ -8,6 +8,7 @@ import AddIcon from "@material-ui/icons/Add";
 
 import Dialog from "common/Dialog";
 import Button from "@material-ui/core/Button";
+import LudereInput from "common/LudereInput";
 import TextField from "@material-ui/core/TextField";
 
 class CreateBoardButton extends Component {
@@ -53,15 +54,11 @@ class CreateBoardButton extends Component {
           color="linear-gradient(to right, rgb(167, 112, 239), rgb(207, 139, 243))"
           helperText="Create a workflow to manage tasks!"
         >
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
+          <LudereInput
             label="Workflow Name"
-            fullWidth
-            autoComplete="off"
             value={this.state.workflowName}
-            onChange={this.handleChange("workflowName")}
+            handleChange={this.handleChange("workflowName")}
+            helperText=""
             onKeyPress={ev => {
               if (ev.key === "Enter" && !ev.shiftKey) {
                 this.handleCreateBoard();
@@ -90,4 +87,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(CreateBoardButton);
+export default connect(
+  null,
+  mapDispatchToProps
+)(CreateBoardButton);

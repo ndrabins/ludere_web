@@ -9,7 +9,7 @@ import Popover from "@material-ui/core/Popover";
 import MenuItem from "@material-ui/core/MenuItem";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import TextField from "@material-ui/core/TextField";
+import LudereInput from "common/LudereInput";
 import Dialog from "common/Dialog";
 
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -151,15 +151,12 @@ class ChannelButton extends Component {
           color="linear-gradient(to right, rgb(167, 112, 239), rgb(207, 139, 243))"
           helperText=""
         >
-          <TextField
+          <LudereInput
             autoFocus
-            margin="dense"
-            id="name"
             label="Channel Name"
-            fullWidth
-            autoComplete="off"
             value={channelName}
-            onChange={this.handleChange("channelName")}
+            handleChange={this.handleChange("channelName")}
+            helperText=""
             onKeyPress={ev => {
               if (ev.key === "Enter" && !ev.shiftKey) {
                 this.handleUpdateConfirmation();
@@ -293,6 +290,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(ChannelButton)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(ChannelButton));

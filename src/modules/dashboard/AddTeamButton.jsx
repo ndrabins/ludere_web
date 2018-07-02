@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
 import { withRouter } from "react-router";
-import TextField from "@material-ui/core/TextField";
+import LudereInput from "common/LudereInput";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import Dialog from "common/Dialog";
@@ -61,15 +61,12 @@ class AddTeamButton extends Component {
           color="linear-gradient(to left, #6fe5c9, #00bcd4)"
           helperText=""
         >
-          <TextField
+          <LudereInput
             autoFocus
-            margin="dense"
-            id="name"
             label="Team Name"
-            fullWidth
-            autoComplete="off"
             value={teamName}
-            onChange={this.handleChange("teamName")}
+            handleChange={this.handleChange("teamName")}
+            helperText=""
             onKeyPress={ev => {
               if (ev.key === "Enter" && !ev.shiftKey) {
                 this.handleCreateTeam();

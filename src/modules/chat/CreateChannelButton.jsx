@@ -7,7 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 
 import Dialog from "common/Dialog";
-import TextField from "@material-ui/core/TextField";
+import LudereInput from "common/LudereInput";
 
 class CreateChatButton extends Component {
   state = {
@@ -51,15 +51,11 @@ class CreateChatButton extends Component {
           color="linear-gradient(to right, rgb(229, 115, 115), rgb(238, 141, 104))"
           helperText="Create a channel to chat with teammates!"
         >
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Workflow Name"
-            fullWidth
-            autoComplete="off"
+          <LudereInput
+            label="Channel Name"
             value={channelName}
-            onChange={this.handleChange("channelName")}
+            handleChange={this.handleChange("channelName")}
+            helperText="Use names that help you specify what you are doing such as #design or #development"
             onKeyPress={ev => {
               if (ev.key === "Enter" && !ev.shiftKey) {
                 this.handleCreateChannel();

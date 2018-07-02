@@ -87,7 +87,6 @@ const styles = theme => ({
     background: "linear-gradient(to right, #29b6f6, #796eff)"
   },
   textField: {
-    marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit
   },
   copyButton: {
@@ -103,4 +102,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(withStyles(styles)(InviteButton));
+export default connect(
+  mapStateToProps,
+  null
+)(withStyles(styles)(InviteButton));
