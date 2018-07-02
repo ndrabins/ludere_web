@@ -36,6 +36,17 @@ h1 {
   font-weight: 500;
 }
 
+/* QUILL CSS */
+
+.ql-tooltip.ql-editing {
+  left: 0px !important;
+  top: 0px !important;
+}
+
+.ql-tooltip {
+  left: 0px !important;
+}
+
 /*  HIGHLIGHT JS SYNTAX CONFIG */
 /* different font for code blocks */
 @import url(https://fonts.googleapis.com/css?family=Inconsolata);

@@ -46,14 +46,20 @@ class QuillEditor extends Component {
       "underline",
       "strike",
       "code-block",
-      "blockquote"
+      "blockquote",
+      "header"
     ];
 
     const options = {
       theme: "snow",
       placeholder: this.props.helperText,
       modules: {
-        toolbar: toolbarOptions,
+        toolbar: [
+          [{ header: 1 }, { header: 2 }],
+          ["bold", "italic"],
+          ["blockquote", "code-block", "image", "video"],
+          [{ list: "ordered" }, { list: "bullet" }]
+        ],
         syntax: true
       }
     };
@@ -64,6 +70,7 @@ class QuillEditor extends Component {
     } else {
       quill.setContents(value);
     }
+
     this.setState({ myQuill: quill });
   }
 
@@ -99,6 +106,7 @@ const styles = theme => ({
     color: "#303030"
   },
   quillEditor: {
+    minHeight: 100,
     fontFamily: "Roboto",
     overflowY: "auto"
   }
