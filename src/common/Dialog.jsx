@@ -115,12 +115,13 @@ const styles = theme => ({
   },
   helperText: {
     fontSize: "14px",
-    marginBottom: 8
+    marginBottom: 16,
+    color: "rgba(0, 0, 0, 0.54)"
   },
   dialogDividerContainer: {
     width: "100%",
     backgroundColor: "rgba(185,187,190,0.15)",
-    marginBottom: 24,
+    marginBottom: 8,
     height: 4
   },
   dialogDividerColored: {

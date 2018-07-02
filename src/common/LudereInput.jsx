@@ -10,12 +10,16 @@ import FormControl from "@material-ui/core/FormControl";
 class LudereInput extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    value: PropTypes.string.isRequired
+    value: PropTypes.string.isRequired,
+    labelColor: PropTypes.string,
+    helperText: PropTypes.string,
+    handleChange: PropTypes.func.isRequired
   };
 
   static defaultProps = {
     label: "",
-    helperText: ""
+    helperText: "",
+    labelColor: "#303030"
   };
 
   render() {
@@ -26,6 +30,7 @@ class LudereInput extends Component {
       label,
       handleChange,
       helperText,
+      labelColor,
       ...other
     } = this.props;
     return (
@@ -35,6 +40,7 @@ class LudereInput extends Component {
             root: classes.label,
             focused: classes.cssFocused
           }}
+          style={{ color: labelColor }}
           shrink={true}
         >
           {label}
@@ -50,7 +56,7 @@ class LudereInput extends Component {
           disableUnderline
           autoComplete="off"
         />
-        <FormHelperText>{helperText}</FormHelperText>
+        {helperText !== "" && <FormHelperText>{helperText}</FormHelperText>}
       </FormControl>
     );
   }
