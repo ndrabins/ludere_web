@@ -25,10 +25,6 @@ class MessageList extends Component {
   componentDidMount() {
     this.messageList.current.addEventListener("scroll", this.handleScroll);
     this.messageList.current.scrollTop = 10000;
-
-    document.querySelectorAll("code").forEach(block => {
-      window.hljs.highlightBlock(block);
-    });
   }
 
   componentDidUpdate(prevProps) {
