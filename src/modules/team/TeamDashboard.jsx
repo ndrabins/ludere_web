@@ -14,6 +14,7 @@ import Dialog from "common/Dialog";
 
 import TeamMembers from "./TeamMembers";
 import TeamCard from "./TeamCard";
+import AnnouncementList from "./AnnouncementList";
 
 class TeamDashboard extends Component {
   static propTypes = {
@@ -47,7 +48,13 @@ class TeamDashboard extends Component {
   };
 
   render() {
-    const { classes, selectedTeam, teams } = this.props;
+    const {
+      classes,
+      selectedTeam,
+      teams,
+      announcements,
+      loadingAnnouncements
+    } = this.props;
     const { openAnnouncementDialog, announcementContent } = this.state;
 
     const team = teams[selectedTeam];
@@ -73,6 +80,10 @@ class TeamDashboard extends Component {
             floatingAction={this.handleOpenAnnouncements}
             showFloating={true}
           >
+            <AnnouncementList
+              announcements={announcements}
+              loading={loadingAnnouncements}
+            />
             <Dialog
               handleAction={this.handleAnnouncementConfirm}
               open={openAnnouncementDialog}
@@ -100,6 +111,7 @@ const styles = theme => ({
     height: "100%",
     minHeight: 500,
     display: "flex",
+    flexWrap: "nowrap",
     flexDirection: "column"
   },
   row: {
@@ -109,6 +121,7 @@ const styles = theme => ({
   },
   column: {
     display: "flex",
+    flexWrap: "nowrap",
     height: "100%",
     width: "100%"
   },
@@ -125,7 +138,9 @@ const styles = theme => ({
 function mapStateToProps(state) {
   return {
     selectedTeam: state.team.selectedTeam,
-    teams: state.team.teams
+    teams: state.team.teams,
+    announcements: state.team.announcements,
+    loadingAnnouncements: state.team.loadingAnnouncements
   };
 }
 

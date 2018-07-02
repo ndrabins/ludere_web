@@ -61,11 +61,11 @@ class TeamCard extends Component {
 
 const inlineStyles = {
   heading: {
-    minHeight: 60,
+    minHeight: 40,
     display: "flex",
     alignItems: "center",
     width: "calc(100% - 40px)",
-    margin: "-15px 0px -35px 20px",
+    margin: "-15px 0px -25px 20px",
     borderRadius: 7,
     padding: "5px 5px",
     zIndex: 10,
@@ -75,9 +75,8 @@ const inlineStyles = {
 
 const styles = theme => ({
   root: {
-    display: "flex",
     overflowY: "auto",
-    paddingTop: "35px"
+    paddingTop: "25px"
   },
   title: {
     color: "#fff",
