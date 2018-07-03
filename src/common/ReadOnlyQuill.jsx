@@ -30,7 +30,6 @@ class QuillEditor extends Component {
 
   componentDidMount() {
     const { value, editorName } = this.props;
-    console.log(editorName);
 
     const options = {
       readOnly: true,

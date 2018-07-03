@@ -17,7 +17,13 @@ class Loading extends Component {
     };
 
     return (
-      <Fade in={true} timeout={{ enter: 1000, exit: 1000 }}>
+      <Fade
+        in={true}
+        timeout={{ enter: 1000, exit: 1000 }}
+        style={{
+          transitionDelay: "800ms"
+        }}
+      >
         <div style={styles.background}>
           <Lottie
             options={defaultOptions}

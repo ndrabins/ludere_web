@@ -12,6 +12,7 @@ import ModuleHeader from "common/ModuleHeader";
 import QuillEditor from "common/QuillEditor";
 import Dialog from "common/Dialog";
 
+import Fade from "@material-ui/core/Fade";
 import TeamMembers from "./TeamMembers";
 import TeamCard from "./TeamCard";
 import AnnouncementList from "./AnnouncementList";
@@ -59,49 +60,51 @@ class TeamDashboard extends Component {
 
     const team = teams[selectedTeam];
     return (
-      <div className={classes.root}>
-        <ModuleHeader>
-          <Typography variant="headline" className={classes.header}>
-            <img src={FireIcon} className={classes.icon} alt="team icon" />
-            {team.name}
-          </Typography>
-        </ModuleHeader>
-        <div className={classes.column}>
-          <TeamCard
-            title={"Team Members"}
-            background={`linear-gradient(to right, #29b6f6, #796eff)`}
-          >
-            <TeamMembers />
-          </TeamCard>
-          <TeamCard
-            title={"Announcements"}
-            background={`linear-gradient(to left, #6fe5c9, #00bcd4)`}
-            floatingIcon={<EditIcon />}
-            floatingAction={this.handleOpenAnnouncements}
-            showFloating={true}
-          >
-            <AnnouncementList
-              announcements={announcements}
-              loading={loadingAnnouncements}
-            />
-            <Dialog
-              handleAction={this.handleAnnouncementConfirm}
-              open={openAnnouncementDialog}
-              handleClose={this.handleClose}
-              titleName="Create an announcement"
-              actionButtonName="Create"
-              color="linear-gradient(to left, #6fe5c9, #00bcd4)"
-              helperText="Write down content that you want your whole team to see!"
+      <Fade in={true} timeout={{ enter: 1000, exit: 1000 }}>
+        <div className={classes.root}>
+          <ModuleHeader>
+            <Typography variant="headline" className={classes.header}>
+              <img src={FireIcon} className={classes.icon} alt="team icon" />
+              {team.name}
+            </Typography>
+          </ModuleHeader>
+          <div className={classes.column}>
+            <TeamCard
+              title={"Team Members"}
+              background={`linear-gradient(to right, #29b6f6, #796eff)`}
             >
-              <QuillEditor
-                helperText=""
-                handleBlur={this.handleBlur}
-                value={announcementContent}
+              <TeamMembers />
+            </TeamCard>
+            <TeamCard
+              title={"Announcements"}
+              background={`linear-gradient(to left, #6fe5c9, #00bcd4)`}
+              floatingIcon={<EditIcon />}
+              floatingAction={this.handleOpenAnnouncements}
+              showFloating={true}
+            >
+              <AnnouncementList
+                announcements={announcements}
+                loading={loadingAnnouncements}
               />
-            </Dialog>
-          </TeamCard>
+              <Dialog
+                handleAction={this.handleAnnouncementConfirm}
+                open={openAnnouncementDialog}
+                handleClose={this.handleClose}
+                titleName="Create an announcement"
+                actionButtonName="Create"
+                color="linear-gradient(to left, #6fe5c9, #00bcd4)"
+                helperText="Write down content that you want your whole team to see!"
+              >
+                <QuillEditor
+                  helperText=""
+                  handleBlur={this.handleBlur}
+                  value={announcementContent}
+                />
+              </Dialog>
+            </TeamCard>
+          </div>
         </div>
-      </div>
+      </Fade>
     );
   }
 }

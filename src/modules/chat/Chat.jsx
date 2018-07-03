@@ -6,6 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Loading from "../../common/Loading";
 import Typography from "@material-ui/core/Typography";
 import ChatIcon from "static/chat.svg";
+import Fade from "@material-ui/core/Fade";
 
 import MessageEntry from "./MessageEntry";
 import MessageList from "./MessageList";
@@ -48,20 +49,22 @@ class Chat extends Component {
     const selectedChannel = channels[selectedChannelID];
 
     return (
-      <div className={classes.container}>
-        <ModuleHeader>
-          <Typography variant="headline" className={classes.header}>
-            <Message className={classes.headerIcon} />
-            {selectedChannel.name}
-          </Typography>
-        </ModuleHeader>
-        <MessageList />
-        <MessageEntry channel={selectedChannel} />
-        <TypingIndicator
-          usersTyping={selectedChannel.usersTyping}
-          userID={user.uid}
-        />
-      </div>
+      <Fade in={true} timeout={{ enter: 1000, exit: 1000 }}>
+        <div className={classes.container}>
+          <ModuleHeader>
+            <Typography variant="headline" className={classes.header}>
+              <Message className={classes.headerIcon} />
+              {selectedChannel.name}
+            </Typography>
+          </ModuleHeader>
+          <MessageList />
+          <MessageEntry channel={selectedChannel} />
+          <TypingIndicator
+            usersTyping={selectedChannel.usersTyping}
+            userID={user.uid}
+          />
+        </div>
+      </Fade>
     );
   }
 }
@@ -111,6 +114,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(Chat)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Chat));

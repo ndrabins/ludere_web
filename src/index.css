@@ -59,6 +59,7 @@ code,
 pre,
 samp {
   white-space: pre-wrap; /* force long lines to break */
+  border-radius: 5px;
 }
 
 /*

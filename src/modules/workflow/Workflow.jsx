@@ -9,6 +9,7 @@ import BoardHeader from "./BoardHeader";
 import ListIcon from "../../static/list.svg";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
+import Fade from "@material-ui/core/Fade";
 
 class Workflow extends Component {
   componentWillUnmount() {
@@ -42,25 +43,27 @@ class Workflow extends Component {
     }
 
     return (
-      <React.Fragment>
-        <BoardHeader
-          boardName={boards[selectedBoard].boardName}
-          boardID={selectedBoard}
-        />
-        <div className={classes.wrapper}>
-          <Board />
-          <TaskDetail />
+      <Fade in={true} timeout={{ enter: 1000, exit: 1000 }}>
+        <div className={classes.root}>
+          <BoardHeader
+            boardName={boards[selectedBoard].boardName}
+            boardID={selectedBoard}
+          />
+          <div className={classes.wrapper}>
+            <Board />
+            <TaskDetail />
+          </div>
         </div>
-      </React.Fragment>
+      </Fade>
     );
   }
 }
 
 const styles = {
   root: {
-    height: "100%",
-    overflowX: "hidden",
-    overflowY: "hidden"
+    display: "flex",
+    flexDirection: "column",
+    height: "100%"
   },
   wrapper: {
     height: "100%",
@@ -100,6 +103,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(Workflow)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Workflow));
