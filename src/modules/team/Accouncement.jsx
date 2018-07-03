@@ -60,9 +60,11 @@ class Announcement extends Component {
 
   handleAnnouncementEditConfirm = () => {
     const { actions, announcementID } = this.props;
-    console.log("updating");
+    const { announcementContent } = this.state;
 
-    // actions.createAnnouncement(announcementContent, selectedTeam);
+    actions.updatedAnnouncement(announcementID, {
+      content: { ...announcementContent }
+    });
     this.handleCloseDialog();
   };
 

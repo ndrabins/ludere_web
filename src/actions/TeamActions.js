@@ -9,7 +9,8 @@ import {
   REMOVE_TEAM_MEMBER,
   FETCH_ANNOUNCEMENTS,
   CREATE_ANNOUNCEMENT,
-  DELETE_ANNOUNCEMENT
+  DELETE_ANNOUNCEMENT,
+  UPDATE_ANNOUNCEMENT
 } from "./types";
 
 import firebase from "firebase/app";
@@ -238,6 +239,23 @@ export function deleteAnnouncement(announcementID) {
 
     announcementRef.delete().then(function() {
       dispatch({ type: DELETE_ANNOUNCEMENT });
+    });
+  };
+}
+
+export function updatedAnnouncement(announcementID, updatedAnnouncement) {
+  return (dispatch, getState) => {
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
+    let announcementRef = firebase
+      .firestore()
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/announcements/${announcementID}`
+      );
+
+    announcementRef.set(updatedAnnouncement, { merge: true }).then(function() {
+      dispatch({ type: UPDATE_ANNOUNCEMENT });
     });
   };
 }
