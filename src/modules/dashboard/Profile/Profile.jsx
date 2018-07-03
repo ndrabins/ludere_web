@@ -20,7 +20,7 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 //filepond-plugin-file-encode
 //filepond-plugin-file-validate-size
 //filepond-plugin-file-validate-type
-
+import Fade from "@material-ui/core/Fade";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -133,78 +133,80 @@ class Profile extends Component {
     const { classes, user, profile } = this.props;
 
     return (
-      <div className={classes.root}>
-        <Typography className={classes.title} variant="title" gutterBottom>
-          Profile
-        </Typography>
-        <div className={classes.avatar}>
-          <FilePond
-            instantUpload={true}
-            // imageCropAspectRatio="1:1"
-            // imageResizeMode="cover"
-            // imageResizeTargetWidth={200}
-            // imageResizeTargetHeight={200}
-            maxFileSize="5MB"
-            oninit={this.handleInit}
-            labelIdle={"Drag & Drop your profile picture or Click to Browse"}
-            imagePreviewHeight={400}
-            labelTapToCancel=""
-            accept="image/*"
-            server={{
-              process: this.handleProcessing,
-              abortLoad: this.handleAbort
-            }}
-            ref={ref => (this.pond = ref)}
+      <Fade in={true} timeout={{ enter: 1000, exit: 1000 }}>
+        <div className={classes.root}>
+          <Typography className={classes.title} variant="title" gutterBottom>
+            Profile
+          </Typography>
+          <div className={classes.avatar}>
+            <FilePond
+              instantUpload={true}
+              // imageCropAspectRatio="1:1"
+              // imageResizeMode="cover"
+              // imageResizeTargetWidth={200}
+              // imageResizeTargetHeight={200}
+              maxFileSize="5MB"
+              oninit={this.handleInit}
+              labelIdle={"Drag & Drop your profile picture or Click to Browse"}
+              imagePreviewHeight={400}
+              labelTapToCancel=""
+              accept="image/*"
+              server={{
+                process: this.handleProcessing,
+                abortLoad: this.handleAbort
+              }}
+              ref={ref => (this.pond = ref)}
+            >
+              {files.map(file => <File key={file} source={file} />)}
+            </FilePond>
+          </div>
+          <Typography
+            className={classes.subheading}
+            variant="headline"
+            gutterBottom
           >
-            {files.map(file => <File key={file} source={file} />)}
-          </FilePond>
-        </div>
-        <Typography
-          className={classes.subheading}
-          variant="headline"
-          gutterBottom
-        >
-          Profile Information
-        </Typography>
-        <FormControl className={classes.formControl}>
-          <InputLabel
-            FormLabelClasses={{
-              root: classes.label,
-              focused: classes.cssFocused
-            }}
-            shrink={true}
+            Profile Information
+          </Typography>
+          <FormControl className={classes.formControl}>
+            <InputLabel
+              FormLabelClasses={{
+                root: classes.label,
+                focused: classes.cssFocused
+              }}
+              shrink={true}
+            >
+              Display Name
+            </InputLabel>
+            <Input
+              classes={{ focused: classes.inputFocused }}
+              className={classes.input}
+              value={displayName}
+              onChange={this.handleChange("displayName")}
+              fullWidth
+              disableUnderline
+            />
+            <FormHelperText>
+              What do people in your workspace call you?
+            </FormHelperText>
+          </FormControl>
+          <Button
+            onClick={this.handleUpdateProfile}
+            variant="raised"
+            className={classes.saveButton}
           >
-            Display Name
-          </InputLabel>
-          <Input
-            classes={{ focused: classes.inputFocused }}
-            className={classes.input}
-            value={displayName}
-            onChange={this.handleChange("displayName")}
-            fullWidth
-            disableUnderline
+            Save Profile
+          </Button>
+          <Snackbar
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            open={openSnackbar}
+            onClose={this.handleClose}
+            ContentProps={{
+              "aria-describedby": "message-id"
+            }}
+            message={<span id="message-id">Profile Updated</span>}
           />
-          <FormHelperText>
-            What do people in your workspace call you?
-          </FormHelperText>
-        </FormControl>
-        <Button
-          onClick={this.handleUpdateProfile}
-          variant="raised"
-          className={classes.saveButton}
-        >
-          Save Profile
-        </Button>
-        <Snackbar
-          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-          open={openSnackbar}
-          onClose={this.handleClose}
-          ContentProps={{
-            "aria-describedby": "message-id"
-          }}
-          message={<span id="message-id">Profile Updated</span>}
-        />
-      </div>
+        </div>
+      </Fade>
     );
   }
 }
