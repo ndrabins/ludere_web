@@ -60,7 +60,7 @@ const styles = {
   authPage: {
     backgroundSize: "cover",
     height: "100%",
-    overflow: "hidden",
+    overflow: "auto",
     backgroundImage: `url(${backgroundImg})`,
     display: "flex",
     justifyContent: "center",
@@ -98,4 +98,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthPage);

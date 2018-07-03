@@ -133,7 +133,7 @@ const styles = theme => ({
   },
   column: {
     display: "flex",
-    flexWrap: "nowrap",
+    flexWrap: "wrap",
     height: "100%",
     width: "100%"
   },
