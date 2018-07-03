@@ -8,7 +8,8 @@ import {
   CREATE_TEAM_ERROR,
   REMOVE_TEAM_MEMBER,
   FETCH_ANNOUNCEMENTS,
-  CREATE_ANNOUNCEMENT
+  CREATE_ANNOUNCEMENT,
+  DELETE_ANNOUNCEMENT
 } from "./types";
 
 import firebase from "firebase/app";
@@ -204,7 +205,6 @@ export function createAnnouncement(announcementContent, teamID) {
 
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
-    //need to refactor this lol..
     let announcement = {
       createdBy: uid,
       dateCreated: timestamp,
@@ -221,6 +221,23 @@ export function createAnnouncement(announcementContent, teamID) {
 
     announcementRef.add(announcement).then(function(docRef) {
       dispatch({ type: CREATE_ANNOUNCEMENT });
+    });
+  };
+}
+
+export function deleteAnnouncement(announcementID) {
+  return (dispatch, getState) => {
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
+    let announcementRef = firebase
+      .firestore()
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/announcements/${announcementID}`
+      );
+
+    announcementRef.delete().then(function() {
+      dispatch({ type: DELETE_ANNOUNCEMENT });
     });
   };
 }

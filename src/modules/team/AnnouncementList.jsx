@@ -26,6 +26,7 @@ class AnnouncementList extends Component {
           return (
             <div key={key}>
               <Announcement
+                announcementID={key}
                 user={workspaceMembers[announcement.createdBy]} // get user object
                 data={announcement}
                 editorID={editorID.toString()}
