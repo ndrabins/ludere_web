@@ -67,10 +67,12 @@ class QuillEditor extends Component {
 
 const styles = theme => ({
   root: {
-    color: "#303030"
+    color: "#303030",
+    width: "100%"
   },
   quillEditor: {
-    fontFamily: "Roboto"
+    fontFamily: "Roboto",
+    wordBreak: "break-all"
   }
 });
 export default withStyles(styles)(QuillEditor);
