@@ -54,7 +54,8 @@ class TeamDashboard extends Component {
       selectedTeam,
       teams,
       announcements,
-      loadingAnnouncements
+      loadingAnnouncements,
+      workspaceMembers
     } = this.props;
     const { openAnnouncementDialog, announcementContent } = this.state;
 
@@ -73,7 +74,7 @@ class TeamDashboard extends Component {
               title={"Team Members"}
               background={`linear-gradient(to right, #29b6f6, #796eff)`}
             >
-              <TeamMembers />
+              <TeamMembers workspaceMembers={workspaceMembers} />
             </TeamCard>
             <TeamCard
               title={"Announcements"}
@@ -85,6 +86,7 @@ class TeamDashboard extends Component {
               <AnnouncementList
                 announcements={announcements}
                 loading={loadingAnnouncements}
+                workspaceMembers={workspaceMembers}
               />
               <Dialog
                 handleAction={this.handleAnnouncementConfirm}
@@ -141,6 +143,7 @@ const styles = theme => ({
 function mapStateToProps(state) {
   return {
     selectedTeam: state.team.selectedTeam,
+    workspaceMembers: state.workspace.workspaceUsers,
     teams: state.team.teams,
     announcements: state.team.announcements,
     loadingAnnouncements: state.team.loadingAnnouncements

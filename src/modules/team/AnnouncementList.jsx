@@ -7,11 +7,12 @@ import Announcement from "./Accouncement";
 class AnnouncementList extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    announcements: PropTypes.object.isRequired
+    announcements: PropTypes.object.isRequired,
+    workspaceMembers: PropTypes.object.isRequired
   };
 
   render() {
-    const { classes, announcements, loading } = this.props;
+    const { classes, announcements, loading, workspaceMembers } = this.props;
     let editorID = 0;
 
     if (loading) {
@@ -25,6 +26,7 @@ class AnnouncementList extends Component {
           return (
             <div key={key}>
               <Announcement
+                user={workspaceMembers[announcement.createdBy]} // get user object
                 data={announcement}
                 editorID={editorID.toString()}
               />

@@ -138,7 +138,6 @@ const styles = theme => ({
 
 function mapStateToProps(state) {
   return {
-    workspaceMembers: state.workspace.workspaceUsers,
     teams: state.team.teams,
     selectedTeam: state.team.selectedTeam,
     loading: state.team.loading,
