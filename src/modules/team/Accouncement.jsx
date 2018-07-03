@@ -53,7 +53,6 @@ class Announcement extends Component {
 
   handleAnnouncementDeleteConfirmation = () => {
     const { actions, announcementID } = this.props;
-    console.log("deleting");
     actions.deleteAnnouncement(announcementID);
     this.handleCloseDialog();
   };
@@ -63,7 +62,7 @@ class Announcement extends Component {
     const { announcementContent } = this.state;
 
     actions.updatedAnnouncement(announcementID, {
-      content: { ...announcementContent }
+      content: { ...announcementContent, edited: true }
     });
     this.handleCloseDialog();
   };
