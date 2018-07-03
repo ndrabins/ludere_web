@@ -19,7 +19,7 @@ class Loading extends Component {
     return (
       <Fade
         in={true}
-        timeout={{ enter: 1000, exit: 1000 }}
+        timeout={{ enter: 800, exit: 800 }}
         style={{
           transitionDelay: "800ms"
         }}

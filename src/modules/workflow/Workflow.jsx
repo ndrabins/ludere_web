@@ -43,7 +43,7 @@ class Workflow extends Component {
     }
 
     return (
-      <Fade in={true} timeout={{ enter: 1000, exit: 1000 }}>
+      <Fade in={true} timeout={{ enter: 800, exit: 800 }}>
         <div className={classes.root}>
           <BoardHeader
             boardName={boards[selectedBoard].boardName}
