@@ -11,6 +11,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import ModuleHeader from "common/ModuleHeader";
 import QuillEditor from "common/QuillEditor";
 import Dialog from "common/Dialog";
+import Loading from "common/Loading";
 
 import Fade from "@material-ui/core/Fade";
 import TeamMembers from "./TeamMembers";
@@ -55,11 +56,17 @@ class TeamDashboard extends Component {
       teams,
       announcements,
       loadingAnnouncements,
-      workspaceMembers
+      workspaceMembers,
+      loadingUsers
     } = this.props;
     const { openAnnouncementDialog, announcementContent } = this.state;
 
+    if (loadingUsers || loadingAnnouncements) {
+      return <Loading />;
+    }
+
     const team = teams[selectedTeam];
+
     return (
       <Fade in={true} timeout={{ enter: 800, exit: 800 }}>
         <div className={classes.root}>
@@ -146,7 +153,8 @@ function mapStateToProps(state) {
     workspaceMembers: state.workspace.workspaceUsers,
     teams: state.team.teams,
     announcements: state.team.announcements,
-    loadingAnnouncements: state.team.loadingAnnouncements
+    loadingAnnouncements: state.team.loadingAnnouncements,
+    loadingUsers: state.workspace.loadingUsers
   };
 }
 
