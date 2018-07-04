@@ -42,6 +42,13 @@ export function createBoard(boardName) {
       dispatch(createList(docRef.id, "Backlog"));
       dispatch(createList(docRef.id, "In Progress"));
       dispatch(createList(docRef.id, "Done"));
+      dispatch(createTag(docRef.id, { tagName: "Relax", tagColor: "#A770EF" }));
+      dispatch(
+        createTag(docRef.id, { tagName: "Priority", tagColor: "#0693E3" })
+      );
+      dispatch(
+        createTag(docRef.id, { tagName: "Urgent", tagColor: "#FF6900" })
+      );
     });
   };
 }

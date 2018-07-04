@@ -144,6 +144,7 @@ const styles = theme => ({
   },
   chip: {
     width: "100%",
+    minWidth: 150,
     margin: "2px",
     color: "rgba(255,255,255,0.75)",
     display: "flex",
