@@ -1,24 +1,25 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import * as Actions from "../../actions";
-import { bindActionCreators } from "redux";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Popover from "@material-ui/core/Popover";
-import MenuItem from "@material-ui/core/MenuItem";
-import Input from "@material-ui/core/Input";
-import ReactMarkdown from "react-markdown";
 import Button from "@material-ui/core/Button";
-import Dialog from "common/Dialog";
-import FileMessage from "./MessageComponents/FileMessage";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
+import Input from "@material-ui/core/Input";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import "./Message.css"; // this is here to override markdown css
+import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
+import Popover from "@material-ui/core/Popover";
+import { withStyles } from "@material-ui/core/styles";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import Dialog from "common/Dialog";
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
+import ReactMarkdown from "react-markdown";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../../actions";
+import "./Message.css"; // this is here to override markdown css
+import FileMessage from "./MessageComponents/FileMessage";
+
 class Message extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
