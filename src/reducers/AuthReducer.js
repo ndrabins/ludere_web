@@ -1,10 +1,16 @@
-import { AUTH_USER, SIGN_OUT_USER, AUTH_ERROR, AUTH_SUCCESS, INITIALIZE_USER } from "../actions/types";
+import {
+  AUTH_USER,
+  SIGN_OUT_USER,
+  AUTH_ERROR,
+  AUTH_SUCCESS,
+  INITIALIZE_USER
+} from "../actions/types";
 
 const initialState = {
   authenticated: false,
   error: null,
   user: null,
-  loading: true
+  loading: false
 };
 
 export default function auth(state = initialState, action) {
@@ -20,9 +26,9 @@ export default function auth(state = initialState, action) {
       return {
         ...state,
         authenticated: true,
-        user : action.payload,
+        user: action.payload,
         loading: false
-      }
+      };
     case SIGN_OUT_USER:
       return {
         ...state,
@@ -43,4 +49,3 @@ export default function auth(state = initialState, action) {
       return state;
   }
 }
-

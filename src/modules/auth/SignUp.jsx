@@ -113,6 +113,12 @@ class SignUp extends Component {
                 onChange={this.handleChange("password")}
                 fullWidth
                 disableUnderline
+                onKeyPress={ev => {
+                  if (ev.key === "Enter" && !ev.shiftKey) {
+                    this.handleSignUp();
+                    ev.preventDefault();
+                  }
+                }}
               />
             </FormControl>
             <FormControl className={classes.formControl}>
@@ -133,6 +139,12 @@ class SignUp extends Component {
                 onChange={this.handleChange("confirmPassword")}
                 fullWidth
                 disableUnderline
+                onKeyPress={ev => {
+                  if (ev.key === "Enter" && !ev.shiftKey) {
+                    this.handleSignUp();
+                    ev.preventDefault();
+                  }
+                }}
               />
             </FormControl>
             <div className={classes.buttonContainer}>

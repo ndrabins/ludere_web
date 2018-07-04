@@ -103,6 +103,12 @@ class SignUp extends Component {
                 onChange={this.handleChange("password")}
                 fullWidth
                 disableUnderline
+                onKeyPress={ev => {
+                  if (ev.key === "Enter" && !ev.shiftKey) {
+                    this.props.actions.signInUser(email, password);
+                    ev.preventDefault();
+                  }
+                }}
               />
             </FormControl>
             <div className={classes.buttonContainer}>
@@ -282,6 +288,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(SignUp)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(SignUp));

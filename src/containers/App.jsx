@@ -53,14 +53,6 @@ class App extends Component {
   }
 
   render() {
-    const { loading } = this.props;
-    if (loading) {
-      return (
-        <div style={{ height: "100%" }}>
-          <Loading />
-        </div>
-      );
-    }
     return (
       <div className="App">
         <CssBaseline />
@@ -96,8 +88,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated,
-    loading: state.auth.loading
+    authenticated: state.auth.authenticated
   };
 }
 

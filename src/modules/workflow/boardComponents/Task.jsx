@@ -151,6 +151,7 @@ const styles = {
     padding: 6,
     margin: "0 0 8px 0",
     cursor: "pointer",
+    wordBreak: "break-all",
     transition: "box-shadow 0.2s ease-out, border 0.2s ease-out",
     "&:hover": {
       boxShadow:
