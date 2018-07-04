@@ -25,7 +25,7 @@ class SignUp extends Component {
       password: "",
       confirmPassword: "",
       showPassword: false,
-      error: ""
+      localError: ""
     };
   }
 
@@ -49,16 +49,17 @@ class SignUp extends Component {
     const { email, password, confirmPassword } = this.state;
 
     if (password !== confirmPassword || password === "") {
-      this.setState({ error: `Passwords don't match` });
+      this.setState({ localError: `Passwords don't match` });
       return;
     }
 
+    this.setState({ localError: "" });
     this.props.actions.signUpUser(email, password, workspaceID);
   };
 
   renderSignUp = () => {
-    const { loginTransition, classes, workspaceID } = this.props;
-    const { email, password, confirmPassword } = this.state;
+    const { loginTransition, classes, workspaceID, error } = this.props;
+    const { email, password, confirmPassword, localError } = this.state;
 
     if (loginTransition === "null") {
       return (
@@ -147,6 +148,10 @@ class SignUp extends Component {
                 }}
               />
             </FormControl>
+            {error && <span className={classes.errorText}> {error} </span>}
+            {localError && (
+              <span className={classes.errorText}> {localError} </span>
+            )}
             <div className={classes.buttonContainer}>
               <Button
                 variant="raised"
@@ -188,7 +193,7 @@ class SignUp extends Component {
   };
 
   render() {
-    const { loginTransition, setFocus, classes } = this.props;
+    const { setFocus, classes } = this.props;
 
     return (
       <div className={classes.formContainer} onClick={() => setFocus("SignUp")}>
@@ -309,11 +314,16 @@ const styles = {
     justifyContent: "flex-end",
     flexGrow: 1,
     marginBottom: 40
+  },
+  errorText: {
+    color: "#e74c3c"
   }
 };
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    error: state.auth.error
+  };
 }
 
 function mapDispatchToProps(dispatch) {

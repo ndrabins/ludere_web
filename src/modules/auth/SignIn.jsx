@@ -43,7 +43,7 @@ class SignUp extends Component {
   };
 
   renderSignIn = () => {
-    const { loginTransition, classes, workspaceID } = this.props;
+    const { loginTransition, classes, workspaceID, error } = this.props;
     const { email, password } = this.state;
 
     if (loginTransition === "null") {
@@ -111,6 +111,7 @@ class SignUp extends Component {
                 }}
               />
             </FormControl>
+            {error && <span className={classes.errorText}> {error} </span>}
             <div className={classes.buttonContainer}>
               <Button
                 variant="raised"
@@ -275,11 +276,16 @@ const styles = {
     justifyContent: "flex-end",
     flexGrow: 1,
     marginBottom: 40
+  },
+  errorText: {
+    color: "#e74c3c"
   }
 };
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    error: state.auth.error
+  };
 }
 
 function mapDispatchToProps(dispatch) {

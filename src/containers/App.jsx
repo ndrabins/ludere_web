@@ -60,7 +60,6 @@ class App extends Component {
           <Router>
             <div style={{ height: "100%", overflow: "hidden" }}>
               <Switch>
-                {/* this handles invites  */}
                 <PublicRoute
                   authenticated={this.props.authenticated}
                   path="/auth/:workspaceID"
