@@ -17,7 +17,7 @@ class WorkflowSideNav extends Component {
               justifyContent: "center"
             }}
           >
-            <img src={boardsIcon} />
+            <img src={boardsIcon} alt="boardIcon" />
             <div style={{ marginLeft: 14, color: "#b9bbbe" }}>Workflow</div>
           </div>
           <CreateWorkflowButton />

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import CommunitySideNav from "../community/CommunitySideNav";
+// import CommunitySideNav from "../community/CommunitySideNav";
 import ChatSideNav from "../chat/ChatSideNav";
 import WorkflowSideNav from "../workflow/WorkflowSideNav";
 import { withStyles } from "@material-ui/core/styles";
@@ -8,8 +8,6 @@ import { Scrollbars } from "react-custom-scrollbars";
 // import SelectableTextButton from '../../common/SelectableTextButton';
 
 import TeamDashboard from "./TeamDashboardTitle";
-
-import { Route } from "react-router-dom";
 
 class SideNavModules extends Component {
   render() {

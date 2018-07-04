@@ -11,10 +11,10 @@ import NavBar from "../modules/dashboard/NavBar";
 import SideNav from "../modules/dashboard/SideNav";
 import Loading from "../common/Loading";
 
-import Dashboard from "./Dashboard";
-import Calendar from "./Calendar";
+// import Dashboard from "./Dashboard";
+// import Calendar from "./Calendar";
 import Profile from "../modules/dashboard/Profile/Profile";
-import Community from "../modules/community/Community";
+// import Community from "../modules/community/Community";
 
 //Modules
 import WorkFlow from "../modules/workflow/Workflow";

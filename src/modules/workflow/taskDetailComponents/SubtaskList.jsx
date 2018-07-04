@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
@@ -26,7 +25,7 @@ class SubtaskList extends Component {
   };
 
   render() {
-    const { subtasks, classes, handleDelete, subtaskUpdate } = this.props;
+    const { subtasks, classes, subtaskUpdate } = this.props;
     const { hovered } = this.state;
 
     return (
@@ -42,7 +41,7 @@ class SubtaskList extends Component {
               <Checkbox
                 onClick={() => this.props.handleToggleSubtask(index)}
                 classes={{
-                  root: classes.root,
+                  root: classes.checkBoxRoot,
                   checked: classes.checked
                 }}
                 checked={subtask.completed}
@@ -116,7 +115,7 @@ const styles = theme => ({
   closeIcon: {
     color: "#6d6d6d"
   },
-  root: {
+  checkBoxRoot: {
     "&$checked": {
       color: "#00ca72"
     }

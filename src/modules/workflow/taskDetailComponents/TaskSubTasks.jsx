@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -47,9 +46,9 @@ class TaskDetailSubtasks extends Component {
 
   handleDelete = removeIndex => {
     const { task } = this.props;
-    let { subtasks } = task;
-    subtasks = subtasks.splice(removeIndex, 1);
-    this.props.actions.updateTask(task);
+    let updatedTask = { ...task };
+    updatedTask.subtasks.splice(removeIndex, 1);
+    this.props.actions.updateTask(updatedTask);
   };
 
   updateSubtaskContent = (subtaskContent, index) => {
@@ -165,6 +164,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(TaskDetailSubtasks)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(TaskDetailSubtasks));

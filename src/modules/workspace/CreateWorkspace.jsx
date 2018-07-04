@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
-const required = value => (value == null ? "Required" : undefined);
+// const required = value => (value == null ? "Required" : undefined);
 
 class CreateWorkspaceForm extends Component {
   state = {
@@ -25,12 +25,12 @@ class CreateWorkspaceForm extends Component {
   };
 
   render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { handleSubmit } = this.props;
     return (
       <form onSubmit={handleSubmit} style={styles.form}>
         <h3> CREATE A WORKSPACE </h3>
         <TextField
-          autoComplete="false"
+          autoComplete="off"
           autoFocus
           margin="dense"
           id="name"
@@ -39,7 +39,6 @@ class CreateWorkspaceForm extends Component {
           required
           value={this.state.workspaceName}
           onChange={this.handleChange("workspaceName")}
-          autoComplete="false"
           onKeyPress={ev => {
             if (ev.key === "Enter" && !ev.shiftKey) {
               this.handleCreateWorkspace();
@@ -78,14 +77,13 @@ const styles = {
   }
 };
 
-function mapStateToProps(state) {
-  return {};
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(Actions, dispatch)
   };
 }
 
-export default connect(null, mapDispatchToProps)(CreateWorkspaceForm);
+export default connect(
+  null,
+  mapDispatchToProps
+)(CreateWorkspaceForm);

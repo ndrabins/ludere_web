@@ -18,7 +18,7 @@ class ActiveConversationList extends Component {
     let displayedConversations = Map(conversations, (conversation, key) => {
       let title = "";
       Map(conversation.members, (memberStatus, memberID) => {
-        if(!workspaceUsers[memberID].displayName){
+        if (!workspaceUsers[memberID].displayName) {
           return;
         }
         title += workspaceUsers[memberID].displayName;
@@ -55,6 +55,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ActiveConversationList
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ActiveConversationList);

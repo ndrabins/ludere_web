@@ -10,7 +10,6 @@ import { withRouter } from "react-router";
 import Map from "lodash/map";
 
 import Button from "@material-ui/core/Button";
-import PeopleIcon from "@material-ui/icons/PeopleOutline";
 import Tooltip from "@material-ui/core/Tooltip";
 
 import AddTeamButton from "./AddTeamButton";
@@ -79,7 +78,7 @@ class TeamNav extends Component {
   }
 
   render() {
-    const { location, classes } = this.props;
+    const { classes } = this.props;
     // let focusCommunity = location.pathname.includes("community");
 
     return (

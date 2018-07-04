@@ -7,7 +7,6 @@ import moment from "moment";
 import Map from "lodash/map";
 
 import Avatar from "@material-ui/core/Avatar";
-import FolderIcon from "@material-ui/icons/Folder";
 class CommunityMessageList extends Component {
   renderMessages() {
     var lastUser = null;
@@ -142,6 +141,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  CommunityMessageList
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CommunityMessageList);

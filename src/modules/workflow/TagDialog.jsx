@@ -18,17 +18,17 @@ import Chip from "@material-ui/core/Chip";
 import FormControl from "@material-ui/core/FormControl";
 import { TwitterPicker } from "react-color";
 
-const colorsAlt = [
-  "#6FE5C9",
-  "#E57373",
-  "#EE8D68",
-  "#F8FFAE",
-  "#00BCD4",
-  "#29B6F6",
-  "#796EFF",
-  "#CF8BF3",
-  "#A770EF"
-];
+// const colorsAlt = [
+//   "#6FE5C9",
+//   "#E57373",
+//   "#EE8D68",
+//   "#F8FFAE",
+//   "#00BCD4",
+//   "#29B6F6",
+//   "#796EFF",
+//   "#CF8BF3",
+//   "#A770EF"
+// ];
 
 const colors = [
   "#FF6900",
@@ -232,6 +232,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(TagDialog)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(TagDialog));

@@ -7,9 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 
 import Dialog from "common/Dialog";
-import Button from "@material-ui/core/Button";
 import LudereInput from "common/LudereInput";
-import TextField from "@material-ui/core/TextField";
 
 class CreateBoardButton extends Component {
   state = {

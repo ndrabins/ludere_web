@@ -14,7 +14,6 @@ import { lightTheme } from "../utility/themes"; //darkTheme
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import Loading from "../common/Loading";
 import Main from "./Main";
 import AuthPage from "../modules/auth/AuthPage";
 // import Home from "./Home";

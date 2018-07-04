@@ -50,7 +50,7 @@ class CommentSection extends Component {
   // };
 
   render() {
-    const { classes, task, comments } = this.props;
+    const { classes, comments } = this.props;
     const { commentText } = this.state;
 
     return (
@@ -140,6 +140,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(CommentSection)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(CommentSection));

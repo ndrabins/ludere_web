@@ -64,7 +64,7 @@ class Profile extends Component {
     progress,
     abort
   ) => {
-    const { user, profile, actions } = this.props;
+    const { user, actions } = this.props;
     const fileUpload = file;
     const profileRef = firebase.storage().ref(`images/${user.uid}/profilePic`);
     const task = profileRef.put(fileUpload, metadata);
@@ -130,7 +130,7 @@ class Profile extends Component {
 
   render() {
     const { files, displayName, openSnackbar } = this.state;
-    const { classes, user, profile } = this.props;
+    const { classes } = this.props;
 
     return (
       <Fade in={true} timeout={{ enter: 800, exit: 800 }}>

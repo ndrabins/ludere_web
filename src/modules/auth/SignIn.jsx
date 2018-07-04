@@ -151,7 +151,7 @@ class SignUp extends Component {
   };
 
   render() {
-    const { loginTransition, setFocus, classes } = this.props;
+    const { setFocus, classes } = this.props;
 
     return (
       <div className={classes.formContainer} onClick={() => setFocus("SignIn")}>
