@@ -95,6 +95,10 @@ class Announcement extends Component {
       .add(diff, "minutes")
       .calendar();
 
+    if (!user) {
+      return <div />;
+    }
+
     let editorName = "editor" + editorID;
     return (
       <div className={classes.root}>
