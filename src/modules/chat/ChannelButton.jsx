@@ -106,7 +106,12 @@ class ChannelButton extends Component {
           to="/team/chat"
           style={notifications[channelID] ? styles.notificationText : null}
         >
-          {this.props.name}
+          <div
+            className={
+              notifications[channelID] ? classes.notificationIcon : null
+            }
+          />
+          # {this.props.name}
         </Typography>
 
         <MoreVertIcon
@@ -230,7 +235,16 @@ const styles = {
       cursor: "pointer"
     }
   },
+  notificationIcon: {
+    height: 6,
+    width: 12,
+    borderRadius: 5,
+    left: 26,
+    background: "#6FE5C9",
+    position: "absolute"
+  },
   name: {
+    position: "relative",
     textDecoration: "none",
     display: "flex",
     width: "100%",
@@ -244,6 +258,7 @@ const styles = {
     }
   },
   selectedName: {
+    position: "relative",
     textDecoration: "none",
     color: "#FFFFFF",
     display: "flex",

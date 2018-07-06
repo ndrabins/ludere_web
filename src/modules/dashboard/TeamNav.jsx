@@ -15,18 +15,34 @@ import Tooltip from "@material-ui/core/Tooltip";
 import AddTeamButton from "./AddTeamButton";
 
 class TeamNav extends Component {
-  handleTeamSelect(key) {
-    this.props.history.push("/team/");
-    this.props.actions.selectTeam(key);
+  handleTeamSelect(teamID) {
+    const { actions, history } = this.props;
+    history.push("/team/");
+    actions.readNotification(teamID);
+    actions.selectTeam(teamID);
   }
 
   handleCommunitySelect() {
-    this.props.history.push("/community/");
-    this.props.actions.selectTeam(null);
+    const { actions, history } = this.props;
+
+    history.push("/community/");
+    actions.selectTeam(null);
+  }
+
+  isTeamNotification(teamID) {
+    const { notifications, selectedTeam } = this.props;
+    if (notifications === undefined || notifications[teamID] === undefined) {
+      return false;
+    }
+
+    if (notifications[teamID] && teamID !== selectedTeam) {
+      return true;
+    }
+    return false;
   }
 
   renderTeams() {
-    const { location, classes } = this.props;
+    const { location, classes, notifcations } = this.props;
     if (!this.props.teams) {
       return;
     }
@@ -34,11 +50,12 @@ class TeamNav extends Component {
     let focusTeam = location.pathname.includes("team");
     let index = 0;
 
-    let teams = Map(this.props.teams, (team, key) => {
-      let selectIndicatorStyle = focusTeam && this.props.selectedTeam === key;
+    let teams = Map(this.props.teams, (team, teamID) => {
+      let selectIndicatorStyle =
+        focusTeam && this.props.selectedTeam === teamID;
       index++;
       return (
-        <div key={key} className={classes.teamButtonContainer}>
+        <div key={teamID} className={classes.teamButtonContainer}>
           <span
             style={
               selectIndicatorStyle
@@ -64,11 +81,14 @@ class TeamNav extends Component {
                 ...styles.teamButton,
                 background: GradientArray[index % 4]
               }}
-              onClick={() => this.handleTeamSelect(key)}
+              onClick={() => this.handleTeamSelect(teamID)}
             >
               <div className={classes.teamAbbreviation}>
                 {team.name.slice(0, 3)}
               </div>
+              {this.isTeamNotification(teamID) && (
+                <div className={classes.teamNotification} />
+              )}
             </Button>
           </Tooltip>
         </div>
@@ -156,8 +176,18 @@ const styles = {
     height: 36
   },
   teamButton: {
+    position: "relative",
     width: 36,
     height: 36
+  },
+  teamNotification: {
+    width: 10,
+    height: 10,
+    position: "absolute",
+    right: 0,
+    bottom: 0,
+    borderRadius: 5,
+    background: "#FFF"
   },
   notSelected: {
     width: 0,
@@ -184,6 +214,7 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
+    alignItems: "center",
     width: "100%",
     minHeight: 38,
     margin: "6px 0px 6px 0px"
@@ -202,7 +233,8 @@ const styles = {
 function mapStateToProps(state) {
   return {
     teams: state.team.teams,
-    selectedTeam: state.team.selectedTeam
+    selectedTeam: state.team.selectedTeam,
+    notifications: state.userData.notifications
   };
 }
 
