@@ -38,9 +38,11 @@ exports.handler = functions.firestore
               return;
             }
             //for each team member that is a member, send a notification on the channel
+
             Map(teamMembers, (isMember, memberID) => {
               if (isMember && message.sentBy !== memberID) {
                 let notifications = {};
+                notifications[`${channel.team}`] = true; // set notification on the team
                 notifications[`${channelID}`] = true;
                 const privateUserRef = firestore.doc(
                   `privateUserData/${memberID}`
