@@ -1,5 +1,6 @@
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
+const Map = require("lodash/map");
 
 try {
   admin.initializeApp(functions.config().firebase);
@@ -14,7 +15,8 @@ exports.handler = functions.firestore
 
     const channelRef = firestore.doc(`chat/${channelID}`);
     //Fetch channel data for workspaceID and teamID
-    channelRef
+
+    return channelRef
       .get()
       .then(channelDoc => {
         const channel = channelDoc.data();
@@ -32,10 +34,12 @@ exports.handler = functions.firestore
           .get()
           .then(teamDoc => {
             const teamMembers = teamDoc.data().members;
-
+            if (teamMembers === undefined) {
+              return;
+            }
             //for each team member that is a member, send a notification on the channel
             Map(teamMembers, (isMember, memberID) => {
-              if (isMember && !message.sentBy) {
+              if (isMember && message.sentBy !== memberID) {
                 let notifications = {};
                 notifications[`${channelID}`] = true;
                 const privateUserRef = firestore.doc(
@@ -51,15 +55,14 @@ exports.handler = functions.firestore
             });
           })
           .catch(err => {
-            console.log("Error getting document", err);
+            console.log("Error in fetching team members", err);
           });
       })
       .catch(err => {
-        console.log("Error getting document", err);
+        console.log("Error in fetching channel", err);
       });
 
     // 1. get team ID on channel.
     // 2. fetch team to find members
     // 3. send each team member a notification of channelID
-    return null;
   });
