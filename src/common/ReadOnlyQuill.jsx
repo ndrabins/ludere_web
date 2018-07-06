@@ -71,7 +71,10 @@ const styles = theme => ({
   },
   quillEditor: {
     fontFamily: "Roboto",
-    wordBreak: "break-all"
+    wordBreak: "break-word",
+    wordWrap: "break-word",
+    overflowWrap: "break-word"
+    // wordBreak: "break-word"
   }
 });
 export default withStyles(styles)(QuillEditor);

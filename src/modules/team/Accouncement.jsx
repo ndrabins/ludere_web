@@ -207,6 +207,7 @@ const styles = theme => ({
   name: {
     wordWrap: "break-word",
     wordBreak: "break-all",
+    whiteSpace: "pre-line",
     overflowWrap: "break-word"
   },
   timestamp: {

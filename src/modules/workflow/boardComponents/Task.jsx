@@ -96,8 +96,9 @@ class Task extends PureComponent {
         <Typography
           style={{
             display: "flex",
-            wordWrap: "break-all",
-            overflowWrap: "break-word"
+            wordWrap: "break-word",
+            overflowWrap: "break-word",
+            wordBreak: "break-word"
           }}
         >
           {task.title}
