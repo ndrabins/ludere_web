@@ -15,7 +15,8 @@ import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
 
 import GoogleIcon from "../../static/google.svg";
-import TwitterIcon from "react-icons/lib/fa/twitter";
+import FacebookIcon from "react-icons/lib/fa/facebook";
+
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -128,14 +129,14 @@ class SignUp extends Component {
                 SIGN IN WITH GOOGLE
               </Button>
               <Button
-                className={classes.twitterButton}
+                className={classes.facebookButton}
                 variant="raised"
                 onClick={() =>
-                  this.props.actions.authWithProvider("Twitter", workspaceID)
+                  this.props.actions.authWithProvider("Facebook", workspaceID)
                 }
               >
-                <TwitterIcon className={classes.icon} />
-                SIGN IN WITH TWITTER
+                <FacebookIcon className={classes.icon} />
+                SIGN IN WITH FACEBOOK
               </Button>
             </div>
             <IconButton
@@ -256,13 +257,13 @@ const styles = {
     background: "#FFF",
     color: "#6A6A6A"
   },
-  twitterButton: {
+  facebookButton: {
     marginTop: 10,
     width: 240,
-    background: "#55acee",
+    background: "#2553B4",
     color: "#FFF",
     "&:hover": {
-      background: "#3197E5"
+      background: "#446BBF"
     }
   },
   icon: {

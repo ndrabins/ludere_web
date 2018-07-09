@@ -38,8 +38,8 @@ export function authWithProvider(providerType, workspaceInviteID) {
 
     if (providerType === "Google") {
       provider = new firebase.auth.GoogleAuthProvider();
-    } else if (providerType === "Twitter") {
-      provider = new firebase.auth.TwitterAuthProvider();
+    } else if (providerType === "Facebook") {
+      provider = new firebase.auth.FacebookAuthProvider();
     }
 
     firebase
@@ -62,6 +62,7 @@ export function authWithProvider(providerType, workspaceInviteID) {
         });
       })
       .catch(function(error) {
+        console.log(error);
         authError(error);
       });
   };
