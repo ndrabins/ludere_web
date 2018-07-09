@@ -121,9 +121,12 @@ export function fetchBoards(selectedTeamID) {
     dispatch({ type: FETCH_BOARDS });
     dispatch(unsubscribeFromBoards()); // unsubscribe from previous listener;
 
+    let { selectedWorkspace } = getState().workspace;
+
     let workflowRef = firebase.firestore().collection("workflow");
     const boardsListener = workflowRef
       .where(`teamID`, "==", selectedTeamID)
+      .where("workspaceID", "==", selectedWorkspace)
       .onSnapshot(function(querySnapshot) {
         var boards = {};
         querySnapshot.forEach(function(doc) {

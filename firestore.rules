@@ -1,22 +1,22 @@
 service cloud.firestore {
   match /databases/{database}/documents {
 
-   match /users/{userID} {
-      allow create, update, delete: if isOwner(userID);
-      allow read: if isSignedIn();
+    match /users/{userID} {
+        allow create, update, delete: if isOwner(userID);
+        allow read: if isSignedIn();
     }
 
-   	match /privateUserData/{userID} {
+    match /privateUserData/{userID} {
       allow read, write: if isOwner(userID);
     }
 
     match /chat/{chatID} {
       allow read:
-				if isSignedIn() && isMemberOfTeam(resource.data.workspaceID, resource.data.teamID);
+        if isSignedIn() && isMemberOfTeam(resource.data.workspaceID, resource.data.teamID);
       allow write:
-				if isSignedIn() && isMemberOfTeam(request.resource.data.workspaceID, request.resource.data.teamID);
+        if isSignedIn() && isMemberOfTeam(request.resource.data.workspaceID, request.resource.data.teamID);
       match /messages/{messageID} {
-      	allow read: if isSignedIn();
+        allow read: if isSignedIn();
         allow create: if isSignedIn() && isOwner(request.resource.data.sentBy);
         allow delete: if isSignedIn() && isOwner(resource.data.sentBy);
         allow update: if isSignedIn() && isOwner(resource.data.sentBy);
@@ -27,34 +27,52 @@ service cloud.firestore {
       allow read: if isSignedIn() && resource.data.members[request.auth.uid] == true;
       allow create: if isSignedIn();
       allow delete: if isSignedIn() && resource.data.workspaceOwner == request.auth.uid;
-      allow update: if isSignedIn() && resource.data.workspaceOwner == request.auth.uid;
+      allow update: if isSignedIn(); //TODO: this needs to change
+
       match /teams/{teamID} {
         allow read: if isSignedIn() && resource.data.members[request.auth.uid];
         allow create: if isSignedIn() && isMemberOfWorkspace(workspaceID);
-      	allow delete: if isSignedIn();
-      	allow update: if isSignedIn();
+        allow delete: if isSignedIn() && isMemberOfWorkspace(workspaceID);
+        allow update: if isSignedIn() && isMemberOfTeam(workspaceID, teamID);
 
         match /announcements/{announcementID} {
-      	 	allow read, write: if isSignedIn()
-						&& isMemberOfTeam(workspaceID, teamID);
-     		}
+          allow read, write: if isSignedIn()
+            && isMemberOfTeam(workspaceID, teamID);
+        }
       }
     }
 
     match /workflow/{boardID} {
-      allow read, write: if isSignedIn()
-        && isMemberOfTeam(resource.data.workspaceID, resource.data.teamID);
+      allow read:
+        if isSignedIn() && isMemberOfTeam(resource.data.workspaceID, resource.data.teamID);
+      allow write:
+        if isSignedIn() && isMemberOfTeam(request.resource.data.workspaceID, request.resource.data.teamID);
+
       match /lists/{listID} {
-      	 allow read, write: if isSignedIn();
+        allow read:
+          if isSignedIn();
+        allow write:
+          if isSignedIn();
       }
+
       match /tasks/{taskID} {
-      	 allow read, write: if isSignedIn();
-         match /comments/{commentID} {
-      		 allow read, write: if isSignedIn();
+        allow read:
+          if isSignedIn();
+        allow write:
+          if isSignedIn();
+
+        match /comments/{commentID} {
+          allow read:
+            if isSignedIn();
+          allow write:
+            if isSignedIn();
         }
       }
       match /tags/{tagID} {
-      	 allow read, write: if isSignedIn();
+        allow read:
+          if isSignedIn();
+        allow write:
+          if isSignedIn();
       }
     }
     // FUNCTIONS
@@ -68,16 +86,16 @@ service cloud.firestore {
     }
 
     function isMemberOfTeam(workspaceID, teamID) {
-    	return isMember(get(/databases/$(database)/documents/workspaces/$(workspaceID)/teams/$(teamID)));
+      return isMember(get(/databases/$(database)/documents/workspaces/$(workspaceID)/teams/$(teamID)));
     }
 
     function isMemberOfWorkspace(workspaceID) {
-    	return isMember(get(/databases/$(database)/documents/workspaces/$(workspaceID)));
+      return isMember(get(/databases/$(database)/documents/workspaces/$(workspaceID)));
     }
 
     function isSignedIn(){
-    	return request.auth.uid != null;
+      return request.auth.uid != null;
     }
-
   }
 }
+
