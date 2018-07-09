@@ -25,16 +25,18 @@ export function createBoard(boardName) {
   return (dispatch, getState) => {
     dispatch({ type: CREATE_BOARD });
     let { uid } = getState().auth.user;
+    let { selectedWorkspace } = getState().workspace;
     let selectedTeamID = getState().team.selectedTeam;
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let board = {
       dateCreated: timestamp,
       createdBy: uid,
-      teamID: selectedTeamID,
       boardName: boardName,
       type: "public",
-      listOrder: []
+      listOrder: [],
+      teamID: selectedTeamID,
+      workspaceID: selectedWorkspace
     };
 
     let boardRef = firebase.firestore().collection("workflow");

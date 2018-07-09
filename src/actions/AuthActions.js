@@ -71,24 +71,19 @@ export function authWithProvider(providerType, workspaceInviteID) {
 function initializeUser(user, workspaceID) {
   //data only owner of account can see/change
   const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-
-  let privateData = {
-    uid: user.uid,
-    emailVerified: user.emailVerified,
-    createdAt: timestamp,
-    email: user.email
-  };
+  let uid = user.uid;
 
   let ourUserObject = {
-    privateData: privateData,
+    uid: uid,
+    emailVerified: user.emailVerified,
+    createdAt: timestamp,
+    email: user.email,
     workspaces: {},
     displayName: user.email, //till we get the user to set their own displayname? Probs should be part of the sign up?
     photoURL:
       user.photoURL || "https://image.flaticon.com/icons/svg/186/186539.svg",
-    lastLoginAt: timestamp,
-    conversations: {} //conversationID:boolean , if a converstion is true it is an active one, if not it is inactive
+    lastLoginAt: timestamp
   };
-  let uid = user.uid;
 
   let userRef = firebase
     .firestore()

@@ -24,11 +24,12 @@ import { readNotification } from "./NotificationActions";
 export function fetchChannels(selectedTeam) {
   return (dispatch, getState) => {
     dispatch({ type: FETCH_CHANNELS });
+    let { selectedWorkspace } = getState().workspace;
 
     var chatRef = firebase.firestore().collection("chat");
     var channelListener = chatRef
-      .where(`team`, "==", selectedTeam)
-      .where("type", "==", "public")
+      .where(`teamID`, "==", selectedTeam)
+      .where("workspaceID", "==", selectedWorkspace)
       .onSnapshot(function(querySnapshot) {
         var channels = {};
         querySnapshot.forEach(function(doc) {
@@ -75,7 +76,7 @@ export function createChannel(channelName) {
       name: channelName,
       dateCreated: timestamp,
       type: "public",
-      team: selectedTeam,
+      teamID: selectedTeam,
       workspaceID: selectedWorkspace,
       usersTyping: {}
     };

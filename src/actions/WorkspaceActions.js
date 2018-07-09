@@ -76,7 +76,7 @@ export function joinWorkspace(workspaceID, user) {
 
     let membersUpdate = {};
     let usersWorkspaceUpdate = {};
-    let userID = user.privateData.uid;
+    let userID = user.uid;
 
     membersUpdate[`members.${userID}`] = true;
     usersWorkspaceUpdate[`workspaces.${workspaceID}`] = true;
