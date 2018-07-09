@@ -66,6 +66,10 @@ const styles = theme => ({
     display: "flex",
     marginLeft: 3,
     color: "#b9bbbe"
+  },
+  uploadedImage: {
+    width: "100%",
+    height: "100%"
   }
 });
 export default withStyles(styles)(ModuleHeader);

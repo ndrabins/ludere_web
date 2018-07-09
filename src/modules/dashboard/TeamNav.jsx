@@ -42,7 +42,7 @@ class TeamNav extends Component {
   }
 
   renderTeams() {
-    const { location, classes, notifcations } = this.props;
+    const { location, classes } = this.props;
     if (!this.props.teams) {
       return;
     }
