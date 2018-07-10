@@ -15,24 +15,26 @@ import firebase from "firebase/app";
 
 export function createTask(listID, taskTitle) {
   return (dispatch, getState) => {
-    dispatch({ type: CREATE_TASK });
     let { uid } = getState().auth.user;
     const { selectedBoard } = getState().workflow;
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
     let taskOrder = getState().workflow.listData[listID].taskOrder;
+
+    dispatch({ type: CREATE_TASK });
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let taskRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(selectedBoard)
-      .collection("tasks");
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/tasks`
+      );
 
     let listRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(selectedBoard)
-      .collection("lists")
-      .doc(listID);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/lists/${listID}`
+      );
 
     let task = {
       dateCreated: timestamp,
@@ -59,6 +61,8 @@ export function createTask(listID, taskTitle) {
 export function changeTaskOrder(startIndex, endIndex, listID) {
   return (dispatch, getState) => {
     const { selectedBoard, listData } = getState().workflow;
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
 
     let taskOrder = listData[listID].taskOrder;
 
@@ -67,10 +71,9 @@ export function changeTaskOrder(startIndex, endIndex, listID) {
 
     let listRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(selectedBoard)
-      .collection("lists")
-      .doc(listID);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/lists/${listID}`
+      );
 
     listRef.update({ taskOrder: taskOrder }).then(function() {
       dispatch({ type: CHANGE_TASK_ORDER });
@@ -81,6 +84,8 @@ export function changeTaskOrder(startIndex, endIndex, listID) {
 export function moveTaskToColumn(startIndex, endIndex, startListID, endListID) {
   return (dispatch, getState) => {
     const { selectedBoard, listData } = getState().workflow;
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
 
     let startListTaskOrder = listData[startListID].taskOrder;
     let endListTaskOrder = listData[endListID].taskOrder;
@@ -92,17 +97,15 @@ export function moveTaskToColumn(startIndex, endIndex, startListID, endListID) {
 
     const startListRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(selectedBoard)
-      .collection("lists")
-      .doc(startListID);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/lists/${startListID}`
+      );
 
     const endListRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(selectedBoard)
-      .collection("lists")
-      .doc(endListID);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/lists/${endListID}`
+      );
 
     startListRef.update({ taskOrder: startListTaskOrder });
     endListRef.update({ taskOrder: endListTaskOrder });
@@ -158,24 +161,24 @@ export function fetchTask(taskID) {
     const { selectedBoard } = getState().workflow;
     dispatch({ type: SELECT_TASK, selectedTask: taskID });
 
-    dispatch({ type: FETCH_COMMENTS });
-    let commentRef = firebase
-      .firestore()
-      .collection(`workflow/${selectedBoard}/tasks/${taskID}/comments`);
+    // dispatch({ type: FETCH_COMMENTS });
+    // let commentRef = firebase
+    //   .firestore()
+    //   .collection(`workflow/${selectedBoard}/tasks/${taskID}/comments`);
 
-    const taskCommentsListener = commentRef
-      .orderBy("dateCreated")
-      .onSnapshot(function(querySnapshot) {
-        var comments = {};
-        querySnapshot.forEach(function(doc) {
-          comments[doc.id] = doc.data();
-        });
-        dispatch({
-          type: FETCH_COMMENTS_SUCCESS,
-          comments: comments,
-          taskCommentsListener: taskCommentsListener
-        });
-      });
+    // const taskCommentsListener = commentRef
+    //   .orderBy("dateCreated")
+    //   .onSnapshot(function(querySnapshot) {
+    //     var comments = {};
+    //     querySnapshot.forEach(function(doc) {
+    //       comments[doc.id] = doc.data();
+    //     });
+    //     dispatch({
+    //       type: FETCH_COMMENTS_SUCCESS,
+    //       comments: comments,
+    //       taskCommentsListener: taskCommentsListener
+    //     });
+    //   });
   };
 }
 
@@ -191,6 +194,8 @@ export function unsubscribeFromTaskComments() {
 
 export function updateTaskTitle(title) {
   return (dispatch, getState) => {
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
     //javascript voodoo here man
     //it has to be done this way lol.
     const selectedBoard = getState()["workflow"]["selectedBoard"];
@@ -199,10 +204,9 @@ export function updateTaskTitle(title) {
 
     let taskRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(selectedBoard)
-      .collection("tasks")
-      .doc(selectedTask);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/tasks/${selectedTask}`
+      );
 
     return taskRef
       .update({
@@ -221,6 +225,9 @@ export function updateTaskTitle(title) {
 export function updateTask(updatedTask, taskID = null) {
   return (dispatch, getState) => {
     const { selectedTask, selectedBoard } = getState().workflow;
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
     dispatch({ type: UPDATE_TASK });
 
     let taskIDToUpdate;
@@ -232,10 +239,9 @@ export function updateTask(updatedTask, taskID = null) {
 
     let taskRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(selectedBoard)
-      .collection("tasks")
-      .doc(taskIDToUpdate);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/tasks/${taskID}`
+      );
 
     return taskRef
       .set(updatedTask, { merge: true })
@@ -252,14 +258,16 @@ export function updateTask(updatedTask, taskID = null) {
 export function deleteTask() {
   return (dispatch, getState) => {
     const { selectedTask, selectedBoard } = getState().workflow;
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
     dispatch({ type: DELETE_TASK });
 
     let taskRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(selectedBoard)
-      .collection("tasks")
-      .doc(selectedTask);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/tasks/${taskID}`
+      );
 
     return taskRef
       .delete()
