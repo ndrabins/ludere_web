@@ -25,8 +25,11 @@ export function fetchChannels(selectedTeam) {
   return (dispatch, getState) => {
     dispatch({ type: FETCH_CHANNELS });
     let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
 
-    var chatRef = firebase.firestore().collection("chat");
+    var chatRef = firebase
+      .firestore()
+      .collection(`workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat`);
     var channelListener = chatRef
       .where(`teamID`, "==", selectedTeam)
       .where("workspaceID", "==", selectedWorkspace)
@@ -85,7 +88,7 @@ export function createChannel(channelName) {
 
     firebase
       .firestore()
-      .collection("chat")
+      .collection(`workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat`)
       .add(channel)
       .then(function(docRef) {
         dispatch({ type: CREATE_CHANNEL_SUCCESS });
@@ -99,9 +102,12 @@ export function createChannel(channelName) {
 
 export function updateChannel(updates, channelID) {
   return (dispatch, getState) => {
+    let { selectedTeam } = getState().team;
+    let { selectedWorkspace } = getState().workspace;
+
     let channelRef = firebase
       .firestore()
-      .collection("chat")
+      .collection(`workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat`)
       .doc(channelID);
 
     channelRef.set(updates, { merge: true }).then(function() {
@@ -112,6 +118,9 @@ export function updateChannel(updates, channelID) {
 
 export function selectChannel(channelID) {
   return (dispatch, getState) => {
+    let { selectedTeam } = getState().team;
+    let { selectedWorkspace } = getState().workspace;
+
     const oldChannelID = getState().chat.selectedChannel;
     dispatch(unsubscribeFromMessages(oldChannelID)); //unsubscribe from previous channels
 
@@ -125,7 +134,9 @@ export function selectChannel(channelID) {
 
     let messageRef = firebase
       .firestore()
-      .collection(`chat/${channelID}/messages`);
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${channelID}/messages`
+      );
 
     dispatch({ type: FETCH_MESSAGES });
 
@@ -151,7 +162,11 @@ export function selectChannel(channelID) {
 
 export function getMoreMessages(numberOfMessages) {
   return (dispatch, getState) => {
+    let { selectedTeam } = getState().team;
+    let { selectedWorkspace } = getState().workspace;
+
     const selectedChannelID = getState().chat.selectedChannel;
+
     let oldMessageListener = getState().chat.messagesListener;
     oldMessageListener();
 
@@ -159,7 +174,9 @@ export function getMoreMessages(numberOfMessages) {
 
     let messageRef = firebase
       .firestore()
-      .collection(`chat/${selectedChannelID}/messages`);
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${selectedChannelID}/messages`
+      );
 
     var messageListener = messageRef
       .orderBy("dateCreated", "desc")
@@ -184,6 +201,9 @@ export function sendMessage({ messageText, type = "message", fileURL = "" }) {
     let { uid } = getState().auth.user;
     let { photoURL } = getState().profile.myUserProfile;
     let { selectedChannel } = getState().chat;
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     //need to refactor this lol..
@@ -203,7 +223,9 @@ export function sendMessage({ messageText, type = "message", fileURL = "" }) {
 
     let messageRef = firebase
       .firestore()
-      .collection(`chat/${selectedChannel}/messages`);
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${selectedChannel}/messages`
+      );
 
     messageRef.add(message).then(function(docRef) {
       dispatch({ type: SEND_MESSAGE });
@@ -213,10 +235,15 @@ export function sendMessage({ messageText, type = "message", fileURL = "" }) {
 
 export function updateMessage(messageID, updatedMessage) {
   return (dispatch, getState) => {
-    const { selectedChannel } = getState().chat;
+    let { selectedChannel } = getState().chat;
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
     let messageRef = firebase
       .firestore()
-      .doc(`chat/${selectedChannel}/messages/${messageID}`);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${selectedChannel}/messages/${messageID}`
+      );
 
     messageRef.update(updatedMessage).then(function() {
       dispatch({ type: UPDATE_MESSAGE });
@@ -227,9 +254,14 @@ export function updateMessage(messageID, updatedMessage) {
 export function deleteMessage(messageID) {
   return (dispatch, getState) => {
     const { selectedChannel } = getState().chat;
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
     let messageRef = firebase
       .firestore()
-      .doc(`chat/${selectedChannel}/messages/${messageID}`);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${selectedChannel}/messages/${messageID}`
+      );
 
     messageRef.delete().then(function() {
       dispatch({ type: DELETE_MESSAGE });
@@ -238,10 +270,13 @@ export function deleteMessage(messageID) {
 }
 
 export function deleteChannel(channelID) {
-  return dispatch => {
+  return (dispatch, getState) => {
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
     const chatRef = firebase
       .firestore()
-      .collection("chat")
+      .collection(`workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat`)
       .doc(channelID);
 
     dispatch(selectChannel(null));

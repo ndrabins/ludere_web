@@ -62,7 +62,7 @@ class TaskDetail extends Component {
           <div className={classes.taskContent}>
             <Description task={task} />
             <TaskSubTasks task={task} />
-            <CommentSection task={task} />
+            {/* <CommentSection task={task} /> */}
             <SectionDivider content={"Utility"} />
             <Button
               onClick={this.handleDelete}
@@ -170,6 +170,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(TaskDetail)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(TaskDetail));

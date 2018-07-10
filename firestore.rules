@@ -1,6 +1,12 @@
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // TODO:
+    // Move all teamdata into a subcollection of team.
+
+    // Make invite by email only
+    //
+
     match /users/{userID} {
         allow create, update, delete: if isOwner(userID);
         allow read: if isSignedIn();
@@ -10,27 +16,14 @@ service cloud.firestore {
       allow read, write: if isOwner(userID);
     }
 
-    match /chat/{chatID} {
-      allow read:
-        if isSignedIn() && isMemberOfTeam(resource.data.workspaceID, resource.data.teamID);
-      allow write:
-        if isSignedIn() && isMemberOfTeam(request.resource.data.workspaceID, request.resource.data.teamID);
-      match /messages/{messageID} {
-        allow read: if isSignedIn();
-        allow create: if isSignedIn() && isOwner(request.resource.data.sentBy);
-        allow delete: if isSignedIn() && isOwner(resource.data.sentBy);
-        allow update: if isSignedIn() && isOwner(resource.data.sentBy);
-      }
-    }
-
     match /workspaces/{workspaceID} {
-      allow read: if isSignedIn() && resource.data.members[request.auth.uid] == true;
+      allow read: if isSignedIn() && existingData().members[currentUser().uid] == true;
       allow create: if isSignedIn();
-      allow delete: if isSignedIn() && resource.data.workspaceOwner == request.auth.uid;
-      allow update: if isSignedIn(); //TODO: this needs to change
+      allow delete: if isSignedIn() && existingData().workspaceOwner == currentUser().uid;
+      allow update: if isSignedIn() && existingData().members[currentUser().uid] == true;
 
       match /teams/{teamID} {
-        allow read: if isSignedIn() && resource.data.members[request.auth.uid];
+        allow read: if isSignedIn() && existingData().members[currentUser().uid];
         allow create: if isSignedIn() && isMemberOfWorkspace(workspaceID);
         allow delete: if isSignedIn() && isMemberOfWorkspace(workspaceID);
         allow update: if isSignedIn() && isMemberOfTeam(workspaceID, teamID);
@@ -39,50 +32,57 @@ service cloud.firestore {
           allow read, write: if isSignedIn()
             && isMemberOfTeam(workspaceID, teamID);
         }
-      }
-    }
 
-    match /workflow/{boardID} {
-      allow read:
-        if isSignedIn() && isMemberOfTeam(resource.data.workspaceID, resource.data.teamID);
-      allow write:
-        if isSignedIn() && isMemberOfTeam(request.resource.data.workspaceID, request.resource.data.teamID);
-
-      match /lists/{listID} {
-        allow read:
-          if isSignedIn();
-        allow write:
-          if isSignedIn();
-      }
-
-      match /tasks/{taskID} {
-        allow read:
-          if isSignedIn();
-        allow write:
-          if isSignedIn();
-
-        match /comments/{commentID} {
+        match /chat/{chatID} {
           allow read:
-            if isSignedIn();
+            if isSignedIn() && isMemberOfTeam(workspaceID, teamID);
           allow write:
-            if isSignedIn();
+            if isSignedIn() && isMemberOfTeam(workspaceID, teamID);
+          match /messages/{messageID} {
+            allow read: if isSignedIn() && isMemberOfTeam(workspaceID, teamID);
+            allow create: if isOwner(incomingData().sentBy) && isMemberOfTeam(workspaceID, teamID);
+            allow delete: if isOwner(existingData().sentBy) && isMemberOfTeam(workspaceID, teamID);
+            allow update: if isOwner(existingData().sentBy) && isMemberOfTeam(workspaceID, teamID);
+          }
+        }
+
+        match /workflow/{boardID} {
+          allow read:
+            if isSignedIn() && isMemberOfTeam(workspaceID, teamID);
+          allow write:
+            if isSignedIn() && isMemberOfTeam(workspaceID, teamID);
+
+          match /lists/{listID} {
+            allow read:
+              if isSignedIn() && isMemberOfTeam(workspaceID, teamID);
+            allow write:
+              if isSignedIn() && isMemberOfTeam(workspaceID, teamID);
+          }
+
+          match /tasks/{taskID} {
+            allow read:
+              if isSignedIn() && isMemberOfTeam(workspaceID, teamID);
+            allow write:
+              if isSignedIn() && isMemberOfTeam(workspaceID, teamID);
+          }
+
+          match /tags/{tagID} {
+            allow read:
+              if isSignedIn() && isMemberOfTeam(workspaceID, teamID);
+            allow write:
+              if isSignedIn() && isMemberOfTeam(workspaceID, teamID);
+          }
         }
       }
-      match /tags/{tagID} {
-        allow read:
-          if isSignedIn();
-        allow write:
-          if isSignedIn();
-      }
-    }
-    // FUNCTIONS
-    function isOwner(userID) {
-      return request.auth.uid == userID
     }
 
-    // Check if is a member of whatever resource
+    // FUNCTIONS
+    function isOwner(userID) {
+      return currentUser().uid == userID
+    }
+
     function isMember(rsc) {
-      return rsc.data.members[request.auth.uid];
+      return rsc.data.members[currentUser().uid];
     }
 
     function isMemberOfTeam(workspaceID, teamID) {
@@ -95,6 +95,18 @@ service cloud.firestore {
 
     function isSignedIn(){
       return request.auth.uid != null;
+    }
+
+    function existingData() {
+      return resource.data;
+    }
+
+    function incomingData() {
+      return request.resource.data;
+    }
+
+    function currentUser() {
+      return request.auth;
     }
   }
 }
