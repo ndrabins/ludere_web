@@ -7,15 +7,21 @@ try {
 const firestore = admin.firestore();
 
 exports.handler = functions.firestore
-  .document("workflow/{boardID}/lists/{listID}")
+  .document(
+    "workspace/{workspaceID}/teams/{teamID}/workflow/{boardID}/lists/{listID}"
+  )
   .onDelete((snap, context) => {
     const deletedList = snap.data();
-    const boardID = deletedList.boardID;
+    const workspaceID = context.params.workspaceID;
+    const teamID = context.params.teamID;
+    const boardID = context.params.boardID;
     const taskOrder = deletedList.taskOrder;
 
     taskOrder.forEach(taskID => {
       firestore
-        .doc(`workflow/${boardID}/tasks/${taskID}`)
+        .doc(
+          `workspace/${workspaceID}/teams/${teamID}/workflow/${boardID}/tasks/${taskID}`
+        )
         .delete()
         .then(function() {
           console.log("Document successfully deleted!");

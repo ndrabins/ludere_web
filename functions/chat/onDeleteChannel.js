@@ -9,11 +9,15 @@ const deleteUtility = require("../utility/deleteCollection");
 
 // delete all messages on deleting a channel
 exports.handler = functions.firestore
-  .document("chat/{channelID}")
+  .document("workspace/{workspaceID}/teams/{teamID}/chat/{channelID}")
   .onDelete((snap, context) => {
+    const workspaceID = context.params.workspaceID;
+    const teamID = context.params.teamID;
+    const channelID = context.params.channelID;
+
     return deleteUtility.deleteCollection(
       firestore,
-      `chat/${snap.id}/messages`,
+      `workspace/${workspaceID}/teams/${teamID}/chat/${channelID}/messages`,
       50
     );
   });

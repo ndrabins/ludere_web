@@ -266,7 +266,7 @@ export function deleteTask() {
     let taskRef = firebase
       .firestore()
       .doc(
-        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/tasks/${taskID}`
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/tasks/${selectedTask}`
       );
 
     return taskRef
