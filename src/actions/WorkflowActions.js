@@ -26,7 +26,7 @@ export function createBoard(boardName) {
     dispatch({ type: CREATE_BOARD });
     let { uid } = getState().auth.user;
     let { selectedWorkspace } = getState().workspace;
-    let selectedTeamID = getState().team.selectedTeam;
+    let { selectedTeam } = getState().team;
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let board = {
@@ -35,11 +35,16 @@ export function createBoard(boardName) {
       boardName: boardName,
       type: "public",
       listOrder: [],
-      teamID: selectedTeamID,
+      teamID: selectedTeam,
       workspaceID: selectedWorkspace
     };
 
-    let boardRef = firebase.firestore().collection("workflow");
+    let boardRef = firebase
+      .firestore()
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow`
+      );
+
     boardRef.add(board).then(function(docRef) {
       dispatch(createList(docRef.id, "Backlog"));
       dispatch(createList(docRef.id, "In Progress"));
@@ -57,9 +62,14 @@ export function createBoard(boardName) {
 
 export function updateBoard(updates, boardID) {
   return (dispatch, getState) => {
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
     let boardRef = firebase
       .firestore()
-      .collection("workflow")
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow`
+      )
       .doc(boardID);
 
     boardRef.update(updates).then(function() {
@@ -71,20 +81,24 @@ export function updateBoard(updates, boardID) {
 export function createList(boardID, listName) {
   return (dispatch, getState) => {
     dispatch({ type: CREATE_LIST });
+
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
     let { uid } = getState().auth.user;
     let listOrder = getState().workflow.boards[boardID].listOrder;
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     let listRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(boardID)
-      .collection("lists");
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${boardID}/lists`
+      );
 
     let boardRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(boardID);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${boardID}`
+      );
 
     let list = {
       dateCreated: timestamp,
@@ -103,12 +117,16 @@ export function createList(boardID, listName) {
 
 export function updateList(list, listID) {
   return (dispatch, getState) => {
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
     let listRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(list.boardID)
-      .collection("lists")
-      .doc(listID);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${
+          list.boardID
+        }/lists/${listID}`
+      );
 
     listRef.update(list).then(function() {
       dispatch({ type: UPDATE_LIST });
@@ -123,7 +141,11 @@ export function fetchBoards(selectedTeamID) {
 
     let { selectedWorkspace } = getState().workspace;
 
-    let workflowRef = firebase.firestore().collection("workflow");
+    let workflowRef = firebase
+      .firestore()
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeamID}/workflow`
+      );
     const boardsListener = workflowRef
       .where(`teamID`, "==", selectedTeamID)
       .where("workspaceID", "==", selectedWorkspace)
@@ -174,25 +196,28 @@ export function fetchBoardData(boardID) {
       return;
     }
 
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
     dispatch({ type: FETCH_BOARD_DATA });
 
     let listsRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(boardID)
-      .collection("lists");
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${boardID}/lists`
+      );
 
     let tasksRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(boardID)
-      .collection("tasks");
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${boardID}/tasks`
+      );
 
     let tagsRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(boardID)
-      .collection("tags");
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${boardID}/tags`
+      );
 
     const tagsListener = tagsRef.onSnapshot(function(querySnapshot) {
       var tagData = {};
@@ -246,6 +271,9 @@ export function selectBoard(boardID) {
 export function changeColumnOrder(startIndex, endIndex) {
   return (dispatch, getState) => {
     const { selectedBoard, boards } = getState().workflow;
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
     const boardData = boards[selectedBoard];
 
     let listOrder = [...boardData.listOrder];
@@ -254,8 +282,9 @@ export function changeColumnOrder(startIndex, endIndex) {
 
     let boardRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(selectedBoard);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}`
+      );
 
     boardRef.update({ listOrder: listOrder }).then(function() {
       dispatch({ type: CHANGE_COLUMN_ORDER });
@@ -266,13 +295,15 @@ export function changeColumnOrder(startIndex, endIndex) {
 export function createTag(boardID, { tagName, tagColor }) {
   return (dispatch, getState) => {
     const { uid } = getState().auth.user;
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
     const tagRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(boardID)
-      .collection("tags");
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${boardID}/tags`
+      );
 
     const tag = {
       dateCreated: timestamp,
@@ -290,12 +321,14 @@ export function createTag(boardID, { tagName, tagColor }) {
 
 export function deleteTag(boardID, tagID) {
   return (dispatch, getState) => {
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
     const tagRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(boardID)
-      .collection("tags")
-      .doc(tagID);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${boardID}/tags/${tagID}`
+      );
 
     tagRef.delete().then(function(docRef) {
       dispatch({ type: DELETE_TAG });
@@ -304,13 +337,15 @@ export function deleteTag(boardID, tagID) {
 }
 
 export function deleteList(listID, boardID) {
-  return dispatch => {
+  return (dispatch, getState) => {
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
     const listRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(boardID)
-      .collection("lists")
-      .doc(listID);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${boardID}/lists/${listID}`
+      );
 
     listRef.delete().then(function(docRef) {
       dispatch({ type: DELETE_LIST });
@@ -319,11 +354,15 @@ export function deleteList(listID, boardID) {
 }
 
 export function deleteBoard(boardID) {
-  return dispatch => {
+  return (dispatch, getState) => {
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
     const boardRef = firebase
       .firestore()
-      .collection("workflow")
-      .doc(boardID);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${boardID}`
+      );
 
     selectBoard(null);
 
