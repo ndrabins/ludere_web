@@ -36,6 +36,11 @@ h1 {
   font-weight: 500;
 }
 
+/* changelog css */
+#HW_badge_cont.HW_visible {
+  position: absolute;
+}
+
 /* QUILL CSS */
 .ql-toolbar {
   display: flex;

@@ -13,6 +13,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import AccountIcon from "@material-ui/icons/AccountCircle";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
+import NotifcationIcon from "@material-ui/icons/NotificationsNoneRounded";
 
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -21,8 +22,24 @@ import { withStyles } from "@material-ui/core/styles";
 
 class NavBar extends Component {
   state = {
-    anchorEl: null
+    anchorEl: null,
+    headwayInitialized: false
   };
+
+  componentDidMount() {
+    const { headwayInitialized } = this.state;
+    if (!headwayInitialized) {
+      this.setState({ headwayInitialized: true });
+      console.log("init");
+      var config = {
+        selector: ".changelog",
+        trigger: ".changelogToggle",
+        account: "J5eVgJ"
+        // account: "a7zR7N"
+      };
+      window.Headway.init(config);
+    }
+  }
 
   handleClickNavMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -73,6 +90,13 @@ class NavBar extends Component {
           <InviteButton />
         </div>
         <div className={classes.navEnd}>
+          <div className={classes.changelogContainer}>
+            <NotifcationIcon className="changlelogToggle" />
+            <span
+              className="changelog"
+              style={{ position: "absolute", right: 30, bottom: 24 }}
+            />
+          </div>
           <Typography className={classes.displayName}>
             {profile.displayName}
           </Typography>
@@ -139,6 +163,7 @@ const styles = {
     alignItems: "center"
   },
   navBegin: {
+    color: "white",
     display: "flex",
     justifyContent: "center"
   },
@@ -163,6 +188,11 @@ const styles = {
     "&:hover": {
       backgroundColor: "#2a2a2a"
     }
+  },
+  changelogContainer: {
+    position: "relative",
+    paddingRight: 8,
+    color: "white"
   }
 };
 
@@ -178,6 +208,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(NavBar)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(NavBar));

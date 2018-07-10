@@ -26,7 +26,7 @@ exports.handler = functions.firestore
         }
 
         const teamRef = firestore.doc(
-          `workspaces/${channel.workspaceID}/teams/${channel.team}`
+          `workspaces/${channel.workspaceID}/teams/${channel.teamID}`
         );
 
         // get all teammembers to know where to send notifications
