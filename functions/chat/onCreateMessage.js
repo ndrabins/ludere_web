@@ -20,10 +20,9 @@ exports.handler = functions.firestore
     const teamRef = firestore.doc(`workspaces/${workspaceID}/teams/${teamID}`);
 
     // get all teammembers to know where to send notifications
-    teamRef
+    return teamRef
       .get()
       .then(teamDoc => {
-        console.warn(teamDoc.data());
         const teamMembers = teamDoc.data().members;
         if (teamMembers === undefined) {
           return;
