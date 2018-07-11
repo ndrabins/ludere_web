@@ -9,7 +9,7 @@ const firestore = admin.firestore();
 
 exports.handler = functions.firestore
   .document(
-    "workspace/{workspaceID}/teams/{teamID}/chat/{channelID}/messages/{messageID}"
+    "workspaces/{workspaceID}/teams/{teamID}/chat/{channelID}/messages/{messageID}"
   )
   .onCreate((snap, context) => {
     const channelID = context.params.channelID;
@@ -23,6 +23,7 @@ exports.handler = functions.firestore
     teamRef
       .get()
       .then(teamDoc => {
+        console.warn(teamDoc.data());
         const teamMembers = teamDoc.data().members;
         if (teamMembers === undefined) {
           return;

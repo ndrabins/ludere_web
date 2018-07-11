@@ -8,7 +8,7 @@ const firestore = admin.firestore();
 
 exports.handler = functions.firestore
   .document(
-    "workspace/{workspaceID}/teams/{teamID}/workflow/{boardID}/lists/{listID}"
+    "workspaces/{workspaceID}/teams/{teamID}/workflow/{boardID}/lists/{listID}"
   )
   .onDelete((snap, context) => {
     const deletedList = snap.data();
@@ -20,7 +20,7 @@ exports.handler = functions.firestore
     taskOrder.forEach(taskID => {
       firestore
         .doc(
-          `workspace/${workspaceID}/teams/${teamID}/workflow/${boardID}/tasks/${taskID}`
+          `workspaces/${workspaceID}/teams/${teamID}/workflow/${boardID}/tasks/${taskID}`
         )
         .delete()
         .then(function() {
