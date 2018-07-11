@@ -33,7 +33,7 @@ exports.handler = functions.firestore
         Map(teamMembers, (isMember, memberID) => {
           if (isMember && message.sentBy !== memberID) {
             let notifications = {};
-            notifications[`${channel.team}`] = true; // set notification on the teamg
+            notifications[`${teamID}`] = true; // set notification on the teamg
             notifications[`${channelID}`] = true;
             const privateUserRef = firestore.doc(`privateUserData/${memberID}`);
             privateUserRef.set(
@@ -46,7 +46,7 @@ exports.handler = functions.firestore
         });
       })
       .catch(err => {
-        console.log("Error in fetching team members", err);
+        console.log("Error in notifications", err);
       });
 
     // 1. get team ID on channel.
