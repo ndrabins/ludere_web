@@ -58,7 +58,7 @@ class Chat extends Component {
               {selectedChannel.name}
             </Typography>
           </ModuleHeader>
-          <MessageList messages={messages} />
+          <MessageList messages={messages} channelID={selectedChannelID} />
           <MessageEntry channel={selectedChannel} />
           <TypingIndicator
             usersTyping={selectedChannel.usersTyping}

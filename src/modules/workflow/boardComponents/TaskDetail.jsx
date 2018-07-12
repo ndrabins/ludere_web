@@ -62,7 +62,7 @@ class TaskDetail extends Component {
           <div className={classes.taskContent}>
             <Description task={task} />
             <TaskSubTasks task={task} />
-            <CommentSection task={task} />
+            <CommentSection taskID={selectedTask} />
             <SectionDivider content={"Utility"} />
             <Button
               onClick={this.handleDelete}

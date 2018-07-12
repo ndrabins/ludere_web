@@ -50,14 +50,13 @@ class CommentSection extends Component {
   // };
 
   render() {
-    const { classes, comments } = this.props;
+    const { classes, comments, taskID } = this.props;
     const { commentText } = this.state;
 
     return (
       <div className={classes.root}>
         <SectionDivider content={"Comments"} />
-        {/* <CommentList comments={comments} /> */}
-        <MessageList messages={comments} />
+        <MessageList messages={comments} channelID={taskID} />
         <div className={classes.entryWrapper}>
           <FormControl className={classes.formControl}>
             <Input

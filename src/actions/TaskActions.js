@@ -248,7 +248,7 @@ export function updateTask(updatedTask, taskID = null) {
     let taskRef = firebase
       .firestore()
       .doc(
-        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/tasks/${taskID}`
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/tasks/${taskIDToUpdate}`
       );
 
     return taskRef

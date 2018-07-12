@@ -264,16 +264,15 @@ export function sendMessage({
   };
 }
 
-export function updateMessage(messageID, updatedMessage) {
+export function updateMessage(messageID, updatedMessage, channelID) {
   return (dispatch, getState) => {
-    let { selectedChannel } = getState().chat;
     let { selectedWorkspace } = getState().workspace;
     let { selectedTeam } = getState().team;
 
     let messageRef = firebase
       .firestore()
       .doc(
-        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${selectedChannel}/messages/${messageID}`
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${channelID}/messages/${messageID}`
       );
 
     messageRef.update(updatedMessage).then(function() {
@@ -282,16 +281,16 @@ export function updateMessage(messageID, updatedMessage) {
   };
 }
 
-export function deleteMessage(messageID) {
+export function deleteMessage(messageID, channelID) {
   return (dispatch, getState) => {
-    const { selectedChannel } = getState().chat;
+    console.log(messageID, channelID);
     let { selectedWorkspace } = getState().workspace;
     let { selectedTeam } = getState().team;
 
     let messageRef = firebase
       .firestore()
       .doc(
-        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${selectedChannel}/messages/${messageID}`
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${channelID}/messages/${messageID}`
       );
 
     messageRef.delete().then(function() {

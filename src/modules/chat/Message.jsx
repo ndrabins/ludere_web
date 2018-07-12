@@ -157,12 +157,12 @@ class Message extends PureComponent {
   };
 
   handleUpdateMessage = () => {
-    const { actions, messageID } = this.props;
+    const { actions, messageID, channelID } = this.props;
     const { editableText } = this.state;
 
     const updatedMessage = { messageText: editableText, edited: true };
 
-    actions.updateMessage(messageID, updatedMessage);
+    actions.updateMessage(messageID, updatedMessage, channelID);
     this.setState({ isEditing: false });
   };
 
@@ -248,8 +248,8 @@ class Message extends PureComponent {
   };
 
   handleDeleteMessage = () => {
-    const { actions, messageID } = this.props;
-    actions.deleteMessage(messageID);
+    const { actions, messageID, channelID } = this.props;
+    actions.deleteMessage(messageID, channelID);
     this.handleClose();
     this.setState({ showDeleteDialog: false });
   };

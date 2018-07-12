@@ -89,7 +89,7 @@ class MessageList extends Component {
   }
 
   renderMessages() {
-    const { userID } = this.props;
+    const { userID, channelID } = this.props;
     let lastUser = null;
     let previousTimeStamp = null;
     let enoughTimeHasPassed = false;
@@ -126,6 +126,7 @@ class MessageList extends Component {
             formattedTimeStamp={timestamp}
             key={key}
             userID={userID}
+            channelID={channelID}
           />
         );
       }
@@ -139,6 +140,7 @@ class MessageList extends Component {
             formattedTimeStamp={timestamp}
             key={key}
             userID={userID}
+            channelID={channelID}
           />
         );
       } else {
@@ -150,6 +152,7 @@ class MessageList extends Component {
             formattedTimeStamp={timestamp}
             key={key}
             userID={userID}
+            channelID={channelID}
           />
         );
       }
@@ -210,7 +213,6 @@ const styles = theme => ({
 
 function mapStateToProps(state) {
   return {
-    selectedChannel: state.chat.selectedChannel,
     loadingMoreMessages: state.chat.loadingMoreMessages,
     userID: state.auth.user.uid
   };
