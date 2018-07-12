@@ -28,6 +28,7 @@ class Chat extends Component {
       selectedChannelID,
       channels,
       user,
+      messages,
       classes
     } = this.props;
 
@@ -57,7 +58,7 @@ class Chat extends Component {
               {selectedChannel.name}
             </Typography>
           </ModuleHeader>
-          <MessageList />
+          <MessageList messages={messages} />
           <MessageEntry channel={selectedChannel} />
           <TypingIndicator
             usersTyping={selectedChannel.usersTyping}
@@ -103,6 +104,7 @@ function mapStateToProps(state) {
   return {
     selectedChannelID: state.chat.selectedChannel,
     loadingMessages: state.chat.loadingMessages,
+    messages: state.chat.messages,
     channels: state.chat.channels,
     user: state.auth.user
   };

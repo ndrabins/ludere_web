@@ -6,12 +6,13 @@ import {
   SELECT_TASK,
   UPDATE_TASK,
   DELETE_TASK,
-  CREATE_COMMENT,
   FETCH_COMMENTS,
   FETCH_COMMENTS_SUCCESS,
   UNSUBSCRIBE_TASK_COMMENTS
 } from "./types";
 import firebase from "firebase/app";
+
+import * as chatActions from "./ChatActions";
 
 export function createTask(listID, taskTitle) {
   return (dispatch, getState) => {
@@ -54,6 +55,9 @@ export function createTask(listID, taskTitle) {
     taskRef.add(task).then(function(docRef) {
       taskOrder.unshift(docRef.id); // unshift adds to beginning of array, instead of push that would add to end of array
       listRef.update({ taskOrder: taskOrder });
+
+      // create a chat channel with same ID as task.
+      dispatch(chatActions.createChannel("general", docRef.id));
     });
   };
 }
@@ -127,7 +131,7 @@ export function moveTaskToColumn(startIndex, endIndex, startListID, endListID) {
   };
 }
 
-export function toggleTaskDetail(taskID = null) {
+export function toggleTaskDetail(taskID = null, commentChannelID = null) {
   return (dispatch, getState) => {
     const { selectedTask, showTaskDetail, selectedBoard } = getState().workflow;
 
@@ -138,7 +142,7 @@ export function toggleTaskDetail(taskID = null) {
 
     // detail is open, just switch task we are looking at
     if (taskID !== null && taskID !== selectedTask) {
-      dispatch(fetchTask(taskID));
+      dispatch(fetchTask(taskID, commentChannelID));
     }
 
     //detail is closed, open it on task
@@ -154,31 +158,35 @@ export function toggleTaskDetail(taskID = null) {
   };
 }
 
-export function fetchTask(taskID) {
+export function fetchTask(taskID, commentChannelID) {
   return (dispatch, getState) => {
     dispatch(unsubscribeFromTaskComments()); // unsubscribe from previous comments
 
-    const { selectedBoard } = getState().workflow;
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
     dispatch({ type: SELECT_TASK, selectedTask: taskID });
 
-    // dispatch({ type: FETCH_COMMENTS });
-    // let commentRef = firebase
-    //   .firestore()
-    //   .collection(`workflow/${selectedBoard}/tasks/${taskID}/comments`);
+    dispatch({ type: FETCH_COMMENTS });
+    let commentRef = firebase
+      .firestore()
+      .collection(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${taskID}/messages`
+      );
 
-    // const taskCommentsListener = commentRef
-    //   .orderBy("dateCreated")
-    //   .onSnapshot(function(querySnapshot) {
-    //     var comments = {};
-    //     querySnapshot.forEach(function(doc) {
-    //       comments[doc.id] = doc.data();
-    //     });
-    //     dispatch({
-    //       type: FETCH_COMMENTS_SUCCESS,
-    //       comments: comments,
-    //       taskCommentsListener: taskCommentsListener
-    //     });
-    //   });
+    const taskCommentsListener = commentRef
+      .orderBy("dateCreated", "desc")
+      .onSnapshot(function(querySnapshot) {
+        var comments = {};
+        querySnapshot.forEach(function(doc) {
+          comments[doc.id] = doc.data();
+        });
+        dispatch({
+          type: FETCH_COMMENTS_SUCCESS,
+          comments: comments,
+          taskCommentsListener: taskCommentsListener
+        });
+      });
   };
 }
 
@@ -283,30 +291,23 @@ export function deleteTask() {
 
 export function createComment(commentText, numberOfComments) {
   return (dispatch, getState) => {
-    const { uid } = getState().auth.user;
-    const { myUserProfile } = getState().profile;
-
     const { selectedTask, selectedBoard } = getState().workflow;
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
 
-    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-
-    let newComment = {
-      sentBy: uid,
-      dateCreated: timestamp,
-      content: commentText,
-      sentByDisplayName: myUserProfile.displayName,
-      edited: "false",
-      photoURL: myUserProfile.photoURL
-    };
-
-    let commentRef = firebase
-      .firestore()
-      .collection(`workflow/${selectedBoard}/tasks/${selectedTask}/comments`);
+    dispatch(
+      chatActions.sendMessage({
+        messageText: commentText,
+        channelID: selectedTask
+      })
+    );
 
     //update task with number of comments
     let taskRef = firebase
       .firestore()
-      .doc(`workflow/${selectedBoard}/tasks/${selectedTask}`);
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/tasks/${selectedTask}`
+      );
 
     taskRef.set(
       {
@@ -314,9 +315,5 @@ export function createComment(commentText, numberOfComments) {
       },
       { merge: true }
     );
-
-    commentRef.add(newComment).then(function(docRef) {
-      dispatch({ type: CREATE_COMMENT });
-    });
   };
 }

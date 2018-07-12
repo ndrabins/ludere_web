@@ -211,7 +211,6 @@ const styles = theme => ({
 function mapStateToProps(state) {
   return {
     selectedChannel: state.chat.selectedChannel,
-    messages: state.chat.messages,
     loadingMoreMessages: state.chat.loadingMoreMessages,
     userID: state.auth.user.uid
   };

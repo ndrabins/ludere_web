@@ -33,6 +33,7 @@ export function fetchChannels(selectedTeam) {
     var channelListener = chatRef
       .where(`teamID`, "==", selectedTeam)
       .where("workspaceID", "==", selectedWorkspace)
+      .where("type", "==", "public")
       .onSnapshot(function(querySnapshot) {
         var channels = {};
         querySnapshot.forEach(function(doc) {
@@ -67,7 +68,7 @@ export function unsubscribeFromMessages(channelID) {
   };
 }
 
-export function createChannel(channelName) {
+export function createChannel(channelName, channelID = null) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
     let { selectedTeam } = getState().team;
@@ -86,17 +87,39 @@ export function createChannel(channelName) {
 
     dispatch({ type: CREATE_CHANNEL });
 
-    firebase
-      .firestore()
-      .collection(`workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat`)
-      .add(channel)
-      .then(function(docRef) {
-        dispatch({ type: CREATE_CHANNEL_SUCCESS });
-      })
-      .catch(function(error) {
-        dispatch({ type: CREATE_CHANNEL_ERROR });
-        console.error("Error adding document: ", error);
-      });
+    // if channelID does not equal null or undefined, set the object with the task ID
+    if (!!channelID) {
+      channel.type = "taskComments";
+      channel.name = "task comments";
+
+      firebase
+        .firestore()
+        .doc(
+          `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${channelID}`
+        )
+        .set(channel)
+        .then(function(docRef) {
+          dispatch({ type: CREATE_CHANNEL_SUCCESS });
+        })
+        .catch(function(error) {
+          dispatch({ type: CREATE_CHANNEL_ERROR });
+          console.error("Error adding document: ", error);
+        });
+    } else {
+      firebase
+        .firestore()
+        .collection(
+          `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat`
+        )
+        .add(channel)
+        .then(function(docRef) {
+          dispatch({ type: CREATE_CHANNEL_SUCCESS });
+        })
+        .catch(function(error) {
+          dispatch({ type: CREATE_CHANNEL_ERROR });
+          console.error("Error adding document: ", error);
+        });
+    }
   };
 }
 
@@ -196,7 +219,12 @@ export function getMoreMessages(numberOfMessages) {
   };
 }
 
-export function sendMessage({ messageText, type = "message", fileURL = "" }) {
+export function sendMessage({
+  messageText,
+  type = "message",
+  fileURL = "",
+  channelID = null
+}) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
     let { photoURL } = getState().profile.myUserProfile;
@@ -205,6 +233,9 @@ export function sendMessage({ messageText, type = "message", fileURL = "" }) {
     let { selectedTeam } = getState().team;
 
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+
+    // if we pass in a channelID use that, if not use selected channel
+    let targetChannelID = !!channelID ? channelID : selectedChannel;
 
     //need to refactor this lol..
     let myName = getState().workspace.workspaceUsers[uid].displayName;
@@ -224,7 +255,7 @@ export function sendMessage({ messageText, type = "message", fileURL = "" }) {
     let messageRef = firebase
       .firestore()
       .collection(
-        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${selectedChannel}/messages`
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${targetChannelID}/messages`
       );
 
     messageRef.add(message).then(function(docRef) {

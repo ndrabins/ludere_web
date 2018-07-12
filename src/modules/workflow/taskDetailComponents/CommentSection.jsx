@@ -8,7 +8,7 @@ import * as Actions from "../../../actions";
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
 import SectionDivider from "../../../common/SectionDivider";
-import CommentList from "./CommentList";
+import MessageList from "modules/chat/MessageList";
 
 class CommentSection extends Component {
   state = {
@@ -56,7 +56,8 @@ class CommentSection extends Component {
     return (
       <div className={classes.root}>
         <SectionDivider content={"Comments"} />
-        <CommentList comments={comments} />
+        {/* <CommentList comments={comments} /> */}
+        <MessageList messages={comments} />
         <div className={classes.entryWrapper}>
           <FormControl className={classes.formControl}>
             <Input

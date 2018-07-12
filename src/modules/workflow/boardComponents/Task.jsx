@@ -88,7 +88,9 @@ class Task extends PureComponent {
           [classes.draggingContainer]:
             isDragging || (selectedTaskID === taskID && showTaskDetail)
         })}
-        onClick={() => this.props.actions.toggleTaskDetail(taskID)}
+        onClick={() =>
+          this.props.actions.toggleTaskDetail(taskID, task.commentChannelID)
+        }
         elevation={isDragging ? 20 : 1}
         onMouseOver={this.onMouseOver}
         onMouseLeave={this.onMouseLeave}
