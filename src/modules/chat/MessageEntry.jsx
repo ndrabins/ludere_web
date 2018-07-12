@@ -27,14 +27,14 @@ class MessageEntry extends Component {
 
   handleChange = prop => event => {
     let updatedChannel = { usersTyping: {} };
-    const { selectedChannel, user } = this.props;
+    const { channelID, user } = this.props;
     if (event.target.value !== "") {
       //update typing object with current user typing
       updatedChannel.usersTyping[user.uid] = true;
-      this.updateChannel(updatedChannel, selectedChannel);
+      this.updateChannel(updatedChannel, channelID);
     } else {
       updatedChannel.usersTyping[user.uid] = false;
-      this.updateChannel(updatedChannel, selectedChannel);
+      this.updateChannel(updatedChannel, channelID);
     }
 
     //If event.target.value == "" set user typing false
@@ -42,17 +42,20 @@ class MessageEntry extends Component {
   };
 
   sendMessage = () => {
-    const { user, selectedChannel } = this.props;
+    const { user, channelID } = this.props;
 
-    if (this.state.messageText === "" || !this.props.selectedChannel) {
+    if (this.state.messageText === "" || !this.props.channelID) {
       return;
     }
 
     //Update that user is no longer typing
-    this.props.actions.sendMessage({ messageText: this.state.messageText });
+    this.props.actions.sendMessage({
+      messageText: this.state.messageText,
+      channelID
+    });
     let updatedChannel = { usersTyping: {} };
     updatedChannel.usersTyping[user.uid] = false;
-    this.updateChannel(updatedChannel, selectedChannel);
+    this.updateChannel(updatedChannel, channelID);
 
     this.setState({
       messageText: ""
@@ -62,12 +65,12 @@ class MessageEntry extends Component {
   uploadFile = ev => {
     ev.preventDefault();
 
-    const { selectedChannel, actions } = this.props;
+    const { channelID, actions } = this.props;
 
     const file = this.uploadInput.files[0];
     const chatUploadRef = firebase
       .storage()
-      .ref(`chat/${selectedChannel}/${file.name}`);
+      .ref(`chat/${channelID}/${file.name}`);
 
     const uploadTask = chatUploadRef.put(file);
 
@@ -85,7 +88,8 @@ class MessageEntry extends Component {
           actions.sendMessage({
             messageText: file.name,
             type: "file",
-            fileURL: downloadURL
+            fileURL: downloadURL,
+            channelID
           });
         });
       }
@@ -106,16 +110,8 @@ class MessageEntry extends Component {
   };
 
   render() {
-    const { selectedChannel, channel, classes } = this.props;
+    const { helperText, classes } = this.props;
     const { anchorEl } = this.state;
-
-    let name = "";
-
-    if (selectedChannel && channel !== undefined) {
-      name = channel.name;
-    } else {
-      return <div />;
-    }
 
     return (
       <div className={classes.container}>
@@ -138,7 +134,7 @@ class MessageEntry extends Component {
         <TextField
           autoFocus
           id="name"
-          placeholder={`Message #${name}`}
+          placeholder={helperText}
           fullWidth
           rowsMax={12}
           multiline
@@ -263,7 +259,6 @@ const styles = theme => ({
 
 function mapStateToProps(state) {
   return {
-    selectedChannel: state.chat.selectedChannel,
     user: state.auth.user
   };
 }

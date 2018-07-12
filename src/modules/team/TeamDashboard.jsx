@@ -67,6 +67,11 @@ class TeamDashboard extends Component {
 
     const team = teams[selectedTeam];
 
+    if (team === undefined) {
+      this.props.history.push("/profile/");
+      return <div />;
+    }
+
     return (
       <Fade in={true} timeout={{ enter: 800, exit: 800 }}>
         <div className={classes.root}>

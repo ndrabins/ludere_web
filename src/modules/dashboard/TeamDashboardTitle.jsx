@@ -15,6 +15,10 @@ class TeamDashboardTitle extends Component {
 
     const myTeam = teams[selectedTeam];
 
+    if (myTeam === undefined) {
+      return <div />;
+    }
+
     return (
       <div>
         <Link
@@ -85,7 +89,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(
-    withStyles(styles)(TeamDashboardTitle)
-  )
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(withStyles(styles)(TeamDashboardTitle))
 );

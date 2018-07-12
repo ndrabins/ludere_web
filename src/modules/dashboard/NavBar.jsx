@@ -30,12 +30,10 @@ class NavBar extends Component {
     const { headwayInitialized } = this.state;
     if (!headwayInitialized) {
       this.setState({ headwayInitialized: true });
-      console.log("init");
       var config = {
         selector: ".changelog",
         trigger: ".changelogToggle",
         account: "J5eVgJ"
-        // account: "a7zR7N"
       };
       window.Headway.init(config);
     }

@@ -5,10 +5,10 @@ import { bindActionCreators } from "redux";
 
 import * as Actions from "../../../actions";
 
-import Input from "@material-ui/core/Input";
-import FormControl from "@material-ui/core/FormControl";
 import SectionDivider from "../../../common/SectionDivider";
 import MessageList from "modules/chat/MessageList";
+import TypingIndicator from "modules/chat/TypingIndicator";
+import MessageEntry from "modules/chat/MessageEntry";
 
 class CommentSection extends Component {
   state = {
@@ -50,14 +50,14 @@ class CommentSection extends Component {
   // };
 
   render() {
-    const { classes, comments, taskID } = this.props;
+    const { classes, comments, taskID, userID } = this.props;
     const { commentText } = this.state;
 
     return (
       <div className={classes.root}>
         <SectionDivider content={"Comments"} />
         <MessageList messages={comments} channelID={taskID} />
-        <div className={classes.entryWrapper}>
+        {/* <div className={classes.entryWrapper}>
           <FormControl className={classes.formControl}>
             <Input
               className={classes.input}
@@ -77,8 +77,13 @@ class CommentSection extends Component {
                 }
               }}
             />
-          </FormControl>
-        </div>
+          </FormControl> */}
+        <MessageEntry channelID={taskID} helperText="Comment here" />
+        {/* <TypingIndicator
+          usersTyping={selectedChannel.usersTyping}
+          userID={userID}
+        /> */}
+        {/* </div> */}
       </div>
     );
   }
@@ -130,7 +135,8 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-    comments: state.workflow.comments
+    comments: state.workflow.comments,
+    userID: state.auth.user.uid
   };
 }
 
