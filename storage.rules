@@ -1,17 +1,22 @@
 service firebase.storage {
   match /b/{bucket}/o {
+
+  	// all files stored in a chat channel
   	match /chat/{chatID}/{fileID} {
-        allow read;
+        allow read: if isSignedIn();
         allow write: if request.resource.size < 5 * 1024 * 1024;
       }
+
+    // users profile picture
     match /images {
-			match /{allImages=**} {
-        allow read;
-      }
 			match /{userId}/{imageId} {
-        allow read;
+        allow read: if isSignedIn();
         allow write: if request.auth.uid == userId && request.resource.size < 5 * 1024 * 1024 && request.resource.contentType.matches('image/.*');
       }
 		}
+
+    function isSignedIn(){
+      return request.auth.uid != null;
+    }
   }
 }

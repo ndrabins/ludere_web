@@ -2,7 +2,6 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     // Make invite by email only
-    //
 
     match /users/{userID} {
         allow create, update, delete: if isOwner(userID);
