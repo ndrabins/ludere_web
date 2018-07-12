@@ -50,39 +50,19 @@ class CommentSection extends Component {
   // };
 
   render() {
-    const { classes, comments, taskID, userID } = this.props;
-    const { commentText } = this.state;
+    const { classes, comments, taskID, userID, commentChannel } = this.props;
 
     return (
       <div className={classes.root}>
         <SectionDivider content={"Comments"} />
         <MessageList messages={comments} channelID={taskID} />
-        {/* <div className={classes.entryWrapper}>
-          <FormControl className={classes.formControl}>
-            <Input
-              className={classes.input}
-              classes={{ focused: classes.inputFocused }}
-              value={commentText}
-              onChange={this.handleChange("commentText")}
-              multiline
-              fullWidth
-              rows="2"
-              rowsMax="5"
-              placeholder="Comments..."
-              disableUnderline
-              onKeyPress={ev => {
-                if (ev.key === "Enter" && !ev.shiftKey) {
-                  this.handleCreateComment();
-                  ev.preventDefault();
-                }
-              }}
-            />
-          </FormControl> */}
         <MessageEntry channelID={taskID} helperText="Comment here" />
-        {/* <TypingIndicator
-          usersTyping={selectedChannel.usersTyping}
-          userID={userID}
-        /> */}
+        {!!commentChannel && (
+          <TypingIndicator
+            usersTyping={commentChannel.usersTyping}
+            userID={userID}
+          />
+        )}
         {/* </div> */}
       </div>
     );
@@ -136,7 +116,8 @@ const styles = {
 function mapStateToProps(state) {
   return {
     comments: state.workflow.comments,
-    userID: state.auth.user.uid
+    userID: state.auth.user.uid,
+    commentChannel: state.workflow.commentChannel
   };
 }
 

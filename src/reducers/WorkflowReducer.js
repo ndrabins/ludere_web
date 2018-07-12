@@ -7,7 +7,8 @@ import {
   SELECT_TASK,
   FETCH_COMMENTS_SUCCESS,
   FETCH_BOARD_DATA,
-  FETCH_TAGS
+  FETCH_TAGS,
+  FETCH_COMMENTS_CHANNEL_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
   loadingTasks: false,
   loadingTags: false,
   comments: {},
+  commentChannel: {},
   taskCommentsListener: null,
   tasksListener: null,
   listsListener: null,
@@ -77,6 +79,12 @@ export default function workflow(state = initialState, action) {
       return { ...state, showTaskDetail: !state.showTaskDetail };
     case SELECT_TASK:
       return { ...state, selectedTask: action.selectedTask };
+    case FETCH_COMMENTS_CHANNEL_SUCCESS:
+      return {
+        ...state,
+        commentChannel: action.commentChannel,
+        commentChannelListener: action.commentChannelListener
+      };
     case FETCH_COMMENTS_SUCCESS:
       return {
         ...state,

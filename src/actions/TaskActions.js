@@ -8,6 +8,7 @@ import {
   DELETE_TASK,
   FETCH_COMMENTS,
   FETCH_COMMENTS_SUCCESS,
+  FETCH_COMMENTS_CHANNEL_SUCCESS,
   UNSUBSCRIBE_TASK_COMMENTS
 } from "./types";
 import firebase from "firebase/app";
@@ -173,6 +174,20 @@ export function fetchTask(taskID, commentChannelID) {
       .collection(
         `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${taskID}/messages`
       );
+
+    let commentChannelRef = firebase
+      .firestore()
+      .doc(
+        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/chat/${taskID}`
+      );
+
+    const commentChannelListener = commentChannelRef.onSnapshot(function(doc) {
+      dispatch({
+        type: FETCH_COMMENTS_CHANNEL_SUCCESS,
+        commentChannel: doc.data(),
+        commentChannelListener: commentChannelListener
+      });
+    });
 
     const taskCommentsListener = commentRef
       .orderBy("dateCreated", "desc")
