@@ -71,7 +71,6 @@ class QuillEditor extends Component {
     const { handleBlur } = this.props;
     const { myQuill } = this.state;
     const quillContent = myQuill.getContents();
-    console.log("something");
 
     handleBlur(quillContent);
     //save here
@@ -80,7 +79,6 @@ class QuillEditor extends Component {
   onClick = () => {
     const { myQuill } = this.state;
 
-    console.log("clicking");
     var range = myQuill.getSelection();
     if (range) {
       if (range.length == 0) {
