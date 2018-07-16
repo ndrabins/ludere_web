@@ -11,17 +11,6 @@ class QuillEditor extends Component {
     onChange: PropTypes.func
   };
 
-  componentWillReceiveProps(nextProps) {
-    const { myQuill } = this.state;
-    if (nextProps.value !== this.props.value) {
-      if (typeof value === "string") {
-        myQuill.setText(nextProps.value);
-      } else {
-        myQuill.setContents(nextProps.value);
-      }
-    }
-  }
-
   static defaultProps = {
     helperText: "",
     handleBlur: () => {},
@@ -33,8 +22,22 @@ class QuillEditor extends Component {
     this.quillRef = React.createRef();
 
     this.state = {
-      myQuill: null
+      myQuill: null,
+      selectedIndex: 0,
+      selectedRange: 0
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { myQuill, selectedIndex, selectedRange } = this.state;
+    if (nextProps.value !== this.props.value) {
+      if (typeof value === "string") {
+        myQuill.setText(nextProps.value);
+      } else {
+        myQuill.setContents(nextProps.value);
+      }
+      myQuill.setSelection(selectedIndex, selectedRange);
+    }
   }
 
   componentDidMount() {
@@ -68,9 +71,32 @@ class QuillEditor extends Component {
     const { handleBlur } = this.props;
     const { myQuill } = this.state;
     const quillContent = myQuill.getContents();
+    console.log("something");
 
     handleBlur(quillContent);
     //save here
+  };
+
+  onClick = () => {
+    const { myQuill } = this.state;
+
+    console.log("clicking");
+    var range = myQuill.getSelection();
+    if (range) {
+      if (range.length == 0) {
+        this.setState({
+          selectedIndex: range.index,
+          selectedRange: 0
+        });
+      } else {
+        this.setState({
+          selectedIndex: range.index,
+          selectedRange: range.length
+        });
+      }
+    } else {
+      console.log("User cursor is not in editor");
+    }
   };
 
   render() {
@@ -82,6 +108,7 @@ class QuillEditor extends Component {
           id="editor"
           className={classes.quillEditor}
           onBlur={this.handleEditorBlur}
+          onClick={this.onClick}
         />
       </div>
     );
