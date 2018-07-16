@@ -76,7 +76,8 @@ const inlineStyles = {
 const styles = theme => ({
   root: {
     overflowY: "auto",
-    paddingTop: "25px"
+    paddingTop: "25px",
+    height: "100%"
   },
   title: {
     color: "#fff",

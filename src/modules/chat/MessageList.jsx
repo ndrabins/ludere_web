@@ -7,6 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 import * as Actions from "../../actions";
 import Loading from "../../common/Loading";
 import MessageComponent from "./Message";
+import MessagesIcon from "static/undraw_noMessages.svg";
 
 const INITIAL_MESSAGE_FETCH = 25;
 
@@ -171,7 +172,7 @@ class MessageList extends Component {
   };
 
   render() {
-    const { loadingMoreMessages, classes } = this.props;
+    const { loadingMoreMessages, classes, messages } = this.props;
 
     return (
       <div className={classes.container}>
@@ -181,7 +182,17 @@ class MessageList extends Component {
               <Loading />
             </div>
           )}
-          {this.renderMessages()}
+          {Object.keys(messages).length === 0 ? (
+            <div className={classes.emptyMessages}>
+              <img
+                className={classes.icon}
+                src={MessagesIcon}
+                alt="list icon"
+              />
+            </div>
+          ) : (
+            this.renderMessages()
+          )}
           <div
             style={{ float: "left", clear: "both", height: 20 }}
             ref={this.messagesEnd}
@@ -208,6 +219,20 @@ const styles = theme => ({
   uploadedImage: {
     maxWidth: 400,
     maxHeight: 400
+  },
+  icon: {
+    marginTop: 20,
+    minWidth: 100,
+    minHeight: 100,
+    maxHeight: 200,
+    maxWidth: 200
+  },
+  emptyMessages: {
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column"
   }
 });
 

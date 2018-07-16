@@ -5,7 +5,7 @@ import * as Actions from "../../actions";
 import { withStyles } from "@material-ui/core/styles";
 import Loading from "../../common/Loading";
 import Typography from "@material-ui/core/Typography";
-import ChatIcon from "static/chat.svg";
+import ChatIcon from "static/undraw_messaging.svg";
 import Fade from "@material-ui/core/Fade";
 
 import MessageEntry from "./MessageEntry";
@@ -35,7 +35,7 @@ class Chat extends Component {
     if (selectedChannelID === null || selectedChannelID === undefined) {
       return (
         <div className={classes.unselectedBoardContainer}>
-          <Typography variant="display2">
+          <Typography variant="display1">
             Start by selecting a channel!
           </Typography>
           <img className={classes.icon} src={ChatIcon} alt="list icon" />

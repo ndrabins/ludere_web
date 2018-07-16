@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Map from "lodash/map";
 import Announcement from "./Accouncement";
+import AnnouncementsIcon from "static/undraw_announcements.svg";
 
 class AnnouncementList extends Component {
   static propTypes = {
@@ -17,6 +18,18 @@ class AnnouncementList extends Component {
 
     if (loading) {
       return <div />;
+    }
+
+    if (Object.keys(announcements).length === 0) {
+      return (
+        <div className={classes.emptyAnnouncements}>
+          <img
+            className={classes.icon}
+            src={AnnouncementsIcon}
+            alt="list icon"
+          />
+        </div>
+      );
     }
 
     return (
@@ -47,6 +60,20 @@ const styles = theme => ({
     justifyContent: "center",
     marginTop: 5,
     color: "#303030"
+  },
+  icon: {
+    marginTop: 20,
+    minWidth: 100,
+    minHeight: 100,
+    maxHeight: 200,
+    maxWidth: 200
+  },
+  emptyAnnouncements: {
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column"
   }
 });
 export default withStyles(styles)(AnnouncementList);

@@ -6,7 +6,7 @@ import Board from "./boardComponents/Board";
 import TaskDetail from "./boardComponents/TaskDetail";
 import Loading from "../../common/Loading";
 import BoardHeader from "./BoardHeader";
-import ListIcon from "../../static/list.svg";
+import TasksIcon from "../../static/undraw_tasks.svg";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Fade from "@material-ui/core/Fade";
@@ -30,10 +30,10 @@ class Workflow extends Component {
     if (boards[selectedBoard] === undefined || selectedBoard === null) {
       return (
         <div style={styles.unselectedBoardContainer}>
-          <Typography variant="display2">
+          <Typography variant="display1">
             Start by selecting a workflow!
           </Typography>
-          <img style={styles.icon} src={ListIcon} alt="list icon" />
+          <img style={styles.icon} src={TasksIcon} alt="list icon" />
         </div>
       );
     }
