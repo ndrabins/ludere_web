@@ -3,6 +3,7 @@
     "default": "staging-ludere",
     "production": "production-ludere",
     "staging": "staging-ludere",
-    "dev": "dev-ludere"
+    "dev": "dev-ludere",
+    "beta": "beta-ludere"
   }
 }

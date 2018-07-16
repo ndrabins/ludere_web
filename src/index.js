@@ -47,6 +47,15 @@ if (url.includes("staging")) {
     storageBucket: "staging-ludere.appspot.com",
     messagingSenderId: "674177146337"
   };
+} else if (url.includes("beta")) {
+  config = {
+    apiKey: "AIzaSyBGaxF7Gkwl0dAkEeOMStGgqDhdJdKXnWY",
+    authDomain: "beta-ludere.firebaseapp.com",
+    databaseURL: "https://beta-ludere.firebaseio.com",
+    projectId: "beta-ludere",
+    storageBucket: "beta-ludere.appspot.com",
+    messagingSenderId: "824616822639"
+  };
 } else {
   //dev
   config = {
