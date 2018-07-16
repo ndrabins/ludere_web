@@ -9,7 +9,9 @@ import {
   JOIN_WORKSPACE_SUCCESS,
   JOIN_WORKSPACE_ERROR,
   FETCH_WORKSPACE_USERS,
-  FETCH_WORKSPACE_USERS_SUCCESS
+  FETCH_WORKSPACE_USERS_SUCCESS,
+  UPDATE_WORKSPACE,
+  INVITE_USERS
 } from "./types";
 
 import firebase from "firebase/app";
@@ -25,7 +27,8 @@ export function createWorkspace(workspaceName) {
       name: workspaceName,
       dateCreated: timestamp,
       workspaceOwner: uid,
-      members: {}
+      members: {},
+      invitedEmails: {}
     };
 
     const initialTeam = true; // set flag that this is the first team for workspace
@@ -192,5 +195,65 @@ export function fetchWorkspaceUsers(workspaceID) {
           workspaceUsers: users
         });
       });
+  };
+}
+
+export function inviteUsers(emailArray) {
+  return (dispatch, getState) => {
+    let { selectedWorkspace } = getState().workspace;
+
+    let updatedWorkspace = { invitedEmails: {} };
+    var actionCodeSettings = {
+      // URL you want to redirect back to. The domain (www.example.com) for this
+      // URL must be whitelisted in the Firebase Console.
+      url: "https://www.example.com/finishSignUp?cartId=1234",
+      // This must be true.
+      handleCodeInApp: true,
+      iOS: {
+        bundleId: "com.example.ios"
+      },
+      android: {
+        packageName: "com.example.android",
+        installApp: true,
+        minimumVersion: "12"
+      }
+    };
+
+    // for each email in array, update workspace with the invite to that email,
+    // and send an email inviting that user to workspace
+    emailArray.map(email => {
+      updatedWorkspace.invitedEmails[email] = true;
+      firebase
+        .auth()
+        .sendSignInLinkToEmail(email, actionCodeSettings)
+        .then(function() {
+          // The link was successfully sent. Inform the user.
+          // Save the email locally so you don't need to ask the user for it again
+          // if they open the link on the same device.
+          console.log("email sent successfully to", email);
+        })
+        .catch(function(error) {
+          console.log(error);
+          // Some error occurred, you can inspect the code: error.code
+        });
+    });
+
+    console.log(updatedWorkspace);
+
+    // dispatch(updateWorkspace(updatedWorkspace));
+  };
+}
+
+export function updateWorkspace(data) {
+  return (dispatch, getState) => {
+    let { selectedWorkspace } = getState().workspace;
+
+    let workspaceRef = firebase
+      .firestore()
+      .doc(`workspaces/${selectedWorkspace}`);
+
+    workspaceRef.set(data, { merge: true }).then(function() {
+      dispatch({ type: UPDATE_WORKSPACE });
+    });
   };
 }

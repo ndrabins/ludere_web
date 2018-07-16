@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../../actions";
+
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import PersonAdd from "@material-ui/icons/PersonAdd";
@@ -60,7 +63,10 @@ class InviteButton extends Component {
 
   sendInvites = () => {
     const { emailList } = this.state;
+    const { actions } = this.props;
     console.log(emailList);
+    actions.inviteUsers(emailList);
+
     this.handleClose();
   };
 
@@ -187,7 +193,13 @@ function mapStateToProps(state) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(withStyles(styles)(InviteButton));
