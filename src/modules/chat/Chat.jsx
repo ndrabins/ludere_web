@@ -58,7 +58,11 @@ class Chat extends Component {
               {selectedChannel.name}
             </Typography>
           </ModuleHeader>
-          <MessageList messages={messages} channelID={selectedChannelID} />
+          <MessageList
+            messages={messages}
+            channelID={selectedChannelID}
+            stopScroll={false}
+          />
           <MessageEntry
             channelID={selectedChannelID}
             helperText={`Message #${selectedChannel.name} here`}

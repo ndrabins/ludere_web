@@ -235,9 +235,7 @@ export function updateTaskTitle(title) {
       .update({
         title: title
       })
-      .then(function() {
-        console.log("Document successfully updated!");
-      })
+      .then(function() {})
       .catch(function(error) {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);

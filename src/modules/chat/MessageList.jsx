@@ -30,6 +30,11 @@ class MessageList extends Component {
 
   componentDidUpdate(prevProps) {
     const { oldScrollPosition } = this.state;
+    const { stopScroll } = this.props;
+
+    if (stopScroll) {
+      return;
+    }
 
     let containerHeight = this.messageList.current.scrollHeight;
     let innerContainerHeight = this.messageList.current.clientHeight;

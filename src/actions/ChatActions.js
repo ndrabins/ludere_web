@@ -283,7 +283,6 @@ export function updateMessage(messageID, updatedMessage, channelID) {
 
 export function deleteMessage(messageID, channelID) {
   return (dispatch, getState) => {
-    console.log(messageID, channelID);
     let { selectedWorkspace } = getState().workspace;
     let { selectedTeam } = getState().team;
 

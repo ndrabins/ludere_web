@@ -30,7 +30,8 @@ class QuillEditor extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { myQuill, selectedIndex, selectedRange } = this.state;
-    if (nextProps.value !== this.props.value) {
+
+    if (JSON.stringify(nextProps.value) !== JSON.stringify(this.props.value)) {
       if (typeof value === "string") {
         myQuill.setText(nextProps.value);
       } else {
@@ -81,7 +82,7 @@ class QuillEditor extends Component {
 
     var range = myQuill.getSelection();
     if (range) {
-      if (range.length == 0) {
+      if (range.length === 0) {
         this.setState({
           selectedIndex: range.index,
           selectedRange: 0
