@@ -7,11 +7,12 @@ import {
 } from "./types";
 import * as localforage from "localforage";
 import firebase from "firebase/app";
+import queryString from "query-string";
 
 import * as workspaceActions from "./WorkspaceActions";
 import * as profileActions from "./ProfileActions";
 
-export function signUpUser(email, password, workspaceInviteID) {
+export function signUpUser(email, password) {
   return function(dispatch) {
     dispatch({ type: AUTH_USER });
     firebase
@@ -23,7 +24,7 @@ export function signUpUser(email, password, workspaceInviteID) {
         //initialize the user to our user storage in firestore
         //This is where we will store all the users profile information instead of firebases user object
         //This is because you can't add fields to firebases user object
-        dispatch(initializeUser(user.user, workspaceInviteID));
+        dispatch(initializeUser(user.user));
       })
       .catch(error => {
         dispatch(authError(error));
@@ -31,7 +32,7 @@ export function signUpUser(email, password, workspaceInviteID) {
   };
 }
 
-export function authWithProvider(providerType, workspaceInviteID) {
+export function authWithProvider(providerType) {
   return function(dispatch) {
     dispatch({ type: AUTH_USER });
     let provider;
@@ -56,7 +57,7 @@ export function authWithProvider(providerType, workspaceInviteID) {
           .doc(user.uid);
         userRef.get().then(function(doc) {
           if (!doc.exists) {
-            dispatch(initializeUser(user, workspaceInviteID));
+            dispatch(initializeUser(user));
           }
           authSuccess(dispatch, user);
         });
@@ -68,7 +69,7 @@ export function authWithProvider(providerType, workspaceInviteID) {
   };
 }
 
-function initializeUser(user, workspaceID) {
+function initializeUser(user) {
   //data only owner of account can see/change
   const timestamp = firebase.firestore.FieldValue.serverTimestamp();
   let uid = user.uid;
@@ -91,7 +92,7 @@ function initializeUser(user, workspaceID) {
     .doc(uid);
   return dispatch => {
     userRef
-      .set(ourUserObject)
+      .set(ourUserObject, { merge: true })
       .then(function() {
         dispatch({ type: INITIALIZE_USER });
 
@@ -99,9 +100,6 @@ function initializeUser(user, workspaceID) {
         dispatch(profileActions.fetchUserProfile(uid));
 
         //if workspace ID is attached to URL (user was invited) then join that workspace on sign up
-        if (workspaceID) {
-          dispatch(workspaceActions.joinWorkspace(workspaceID, ourUserObject));
-        }
       })
       .catch(function(error) {
         console.error("Error writing document: ", error);
@@ -120,6 +118,36 @@ export function signInUser(email, password) {
       .catch(error => {
         dispatch(authError(error));
       });
+  };
+}
+
+export function signInUserWithEmailLink(paramString, url) {
+  return dispatch => {
+    dispatch({ type: AUTH_USER });
+
+    console.log("trying to sign in with ", url);
+    console.log(queryString.parse(paramString));
+    let params = queryString.parse(paramString);
+    if (firebase.auth().isSignInWithEmailLink(url)) {
+      // The client SDK will parse the code from the link for you.
+      // firebase
+      console.log("is sign in link");
+      firebase
+        .auth()
+        .signInWithEmailLink(params.email, url)
+        .then(user => {
+          authSuccess(dispatch, user.user);
+
+          //initialize the user to our user storage in firestore
+          //This is where we will store all the users profile information instead of firebases user object
+          //This is because you can't add fields to firebases user object
+          dispatch(initializeUser(user.user));
+        })
+        .catch(error => {
+          console.log(error);
+          dispatch(authError(error));
+        });
+    }
   };
 }
 

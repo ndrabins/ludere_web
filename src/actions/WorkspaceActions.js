@@ -151,7 +151,8 @@ export function selectWorkspace(workspaceID) {
 
 export function fetchSelectedWorkspace() {
   return (dispatch, getState) => {
-    let { uid, selectedWorkspace } = getState().auth.user;
+    let { uid } = getState().auth.user;
+    let { selectedWorkspace } = getState().workspace;
 
     dispatch({ type: FETCH_WORKSPACES });
 
@@ -201,46 +202,21 @@ export function fetchWorkspaceUsers(workspaceID) {
 export function inviteUsers(emailArray) {
   return (dispatch, getState) => {
     let { selectedWorkspace } = getState().workspace;
+    dispatch({ type: INVITE_USERS });
 
-    let updatedWorkspace = { invitedEmails: {} };
-    var actionCodeSettings = {
-      // URL you want to redirect back to. The domain (www.example.com) for this
-      // URL must be whitelisted in the Firebase Console.
-      url: "https://www.example.com/finishSignUp?cartId=1234",
-      // This must be true.
-      handleCodeInApp: true,
-      iOS: {
-        bundleId: "com.example.ios"
-      },
-      android: {
-        packageName: "com.example.android",
-        installApp: true,
-        minimumVersion: "12"
-      }
-    };
+    var inviteUsersToWorkspace = firebase
+      .functions()
+      .httpsCallable("inviteUser-handler");
 
-    // for each email in array, update workspace with the invite to that email,
-    // and send an email inviting that user to workspace
-    emailArray.map(email => {
-      updatedWorkspace.invitedEmails[email] = true;
-      firebase
-        .auth()
-        .sendSignInLinkToEmail(email, actionCodeSettings)
-        .then(function() {
-          // The link was successfully sent. Inform the user.
-          // Save the email locally so you don't need to ask the user for it again
-          // if they open the link on the same device.
-          console.log("email sent successfully to", email);
-        })
-        .catch(function(error) {
-          console.log(error);
-          // Some error occurred, you can inspect the code: error.code
-        });
+    inviteUsersToWorkspace({
+      emails: emailArray,
+      workspaceID: selectedWorkspace
+    }).then(function(result) {
+      // returns object of users ID's
+
+      console.log(result.data);
+      // dispatch(updateWorkspace(results.data));
     });
-
-    console.log(updatedWorkspace);
-
-    // dispatch(updateWorkspace(updatedWorkspace));
   };
 }
 

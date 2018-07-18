@@ -47,8 +47,16 @@ function PublicRoute({ component: Component, authenticated, ...rest }) {
 }
 
 class App extends Component {
+  state = {
+    paramString: window.location.search,
+    url: window.location.href
+  };
+
   componentDidMount() {
+    const { paramString, url } = this.state;
+
     this.props.actions.verifyAuth();
+    this.props.actions.signInUserWithEmailLink(paramString, url);
   }
 
   render() {

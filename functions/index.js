@@ -23,3 +23,5 @@ exports.onDeleteChannel = require("./chat/onDeleteChannel");
 
 exports.onDeleteList = require("./workflow/onDeleteList");
 exports.onDeleteBoard = require("./workflow/onDeleteBoard");
+
+exports.inviteUser = require("./workspaces/inviteUser");

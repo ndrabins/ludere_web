@@ -47,7 +47,7 @@ class Profile extends Component {
 
     this.state = {
       files: [],
-      displayName: this.props.profile.displayName,
+      displayName: this.props.profile && this.props.profile.displayName,
       openSnackbar: false
     };
   }
