@@ -6,7 +6,7 @@ try {
 } catch (e) {} // You do that because the admin SDK can only be initialized once.
 const firestore = admin.firestore();
 
-exports.handler = functions.firestore
+export const handler = functions.firestore
   .document(
     "workspaces/{workspaceID}/teams/{teamID}/workflow/{boardID}/lists/{listID}"
   )

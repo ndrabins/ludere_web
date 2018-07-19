@@ -8,7 +8,7 @@ const firestore = admin.firestore();
 const deleteUtility = require("../utility/deleteCollection");
 
 // delete all lists in board whenever board is deleted. This will propagate to tasks as well.
-exports.handler = functions.firestore
+export const handler = functions.firestore
   .document("workspaces/{workspaceID}/teams/{teamID}/workflow/{boardID}")
   .onDelete((snap, context) => {
     const workspaceID = context.params.workspaceID;

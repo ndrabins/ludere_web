@@ -8,7 +8,7 @@ const firestore = admin.firestore();
 const deleteUtility = require("../utility/deleteCollection");
 
 // delete all messages on deleting a channel
-exports.handler = functions.firestore
+export const handler = functions.firestore
   .document("workspaces/{workspaceID}/teams/{teamID}/chat/{channelID}")
   .onDelete((snap, context) => {
     const workspaceID = context.params.workspaceID;
