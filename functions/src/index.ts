@@ -10,7 +10,7 @@ import * as OnCreateMessage from "./chat/onCreateMessage";
 import * as OnDeleteChannel from "./chat/onDeleteChannel";
 import * as OnDeleteBoard from "./workflow/onDeleteBoard";
 import * as OnDeleteList from "./workflow/onDeleteList";
-// import * as InviteUser from "./workspaces/inviteUser";
+import * as InviteUser from "./workspaces/inviteUser";
 
 // TODO: refactor this to async await es6
 
@@ -20,4 +20,4 @@ exports.onDeleteChannel = OnDeleteChannel.handler;
 exports.onDeleteList = OnDeleteList.handler;
 exports.onDeleteBoard = OnDeleteBoard.handler;
 
-// exports.inviteUser = InviteUser.handler;
+exports.inviteUser = InviteUser.handler;
