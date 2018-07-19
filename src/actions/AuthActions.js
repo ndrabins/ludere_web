@@ -27,7 +27,7 @@ export function signUpUser(email, password) {
         dispatch(initializeUser(user.user));
       })
       .catch(error => {
-        dispatch(authError(error));
+        dispatch(authError("signup", error));
       });
   };
 }
@@ -63,7 +63,7 @@ export function authWithProvider(providerType) {
         });
       })
       .catch(function(error) {
-        console.log(error);
+        console.log("provider", error);
         authError(error);
       });
   };
@@ -102,8 +102,6 @@ function initializeUser(user, workspaceID) {
         dispatch({ type: INITIALIZE_USER });
 
         // //set user info
-        dispatch(profileActions.fetchUserProfile(uid));
-
         //if workspace ID is attached to URL (user was invited) then join that workspace on sign up
       })
       .catch(function(error) {
@@ -121,7 +119,7 @@ export function signInUser(email, password) {
       .signInWithEmailAndPassword(email, password)
       .then(user => authSuccess(dispatch, user.user))
       .catch(error => {
-        dispatch(authError(error));
+        dispatch("signin", authError(error));
       });
   };
 }
@@ -130,8 +128,6 @@ export function signInUserWithEmailLink(paramString, url) {
   return dispatch => {
     dispatch({ type: AUTH_USER });
 
-    console.log("trying to sign in with ", url);
-    console.log(queryString.parse(paramString));
     let params = queryString.parse(paramString);
     if (firebase.auth().isSignInWithEmailLink(url)) {
       // The client SDK will parse the code from the link for you.
@@ -145,7 +141,17 @@ export function signInUserWithEmailLink(paramString, url) {
           //initialize the user to our user storage in firestore
           //This is where we will store all the users profile information instead of firebases user object
           //This is because you can't add fields to firebases user object
-          dispatch(initializeUser(user.user, params.workspaceID));
+
+          var userRef = firebase
+            .firestore()
+            .collection("users")
+            .doc(user.user.uid);
+          userRef.get().then(function(doc) {
+            if (!doc.exists) {
+              dispatch(initializeUser(user.user, params.workspaceID));
+            }
+            authSuccess(dispatch, user);
+          });
         })
         .catch(error => {
           console.log(error);
