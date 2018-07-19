@@ -205,7 +205,7 @@ export function inviteUsers(emailArray) {
 
     var inviteUsersToWorkspace = firebase
       .functions()
-      .httpsCallable("inviteUser-handler");
+      .httpsCallable("inviteUser");
 
     inviteUsersToWorkspace({
       emails: emailArray,

@@ -69,7 +69,7 @@ export function authWithProvider(providerType) {
   };
 }
 
-function initializeUser(user) {
+function initializeUser(user, workspaceID) {
   //data only owner of account can see/change
   const timestamp = firebase.firestore.FieldValue.serverTimestamp();
   let uid = user.uid;
@@ -82,8 +82,14 @@ function initializeUser(user) {
     displayName: user.email, //till we get the user to set their own displayname? Probs should be part of the sign up?
     photoURL:
       user.photoURL || "https://image.flaticon.com/icons/svg/186/186539.svg",
+    workspaces: {},
     lastLoginAt: timestamp
   };
+
+  // if valid workspaceID, add it to user object
+  if (!!workspaceID) {
+    ourUserObject.workspaces[workspaceID] = true;
+  }
 
   let userRef = firebase
     .firestore()
@@ -139,7 +145,7 @@ export function signInUserWithEmailLink(paramString, url) {
           //initialize the user to our user storage in firestore
           //This is where we will store all the users profile information instead of firebases user object
           //This is because you can't add fields to firebases user object
-          dispatch(initializeUser(user.user));
+          dispatch(initializeUser(user.user, params.workspaceID));
         })
         .catch(error => {
           console.log(error);
