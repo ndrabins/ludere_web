@@ -181,7 +181,6 @@ export function fetchSelectedWorkspace() {
 export function fetchWorkspaceUsers(workspaceID) {
   return (dispatch, getState) => {
     dispatch({ type: FETCH_WORKSPACE_USERS });
-
     let userRef = firebase.firestore().collection(`users`);
 
     userRef
@@ -212,10 +211,26 @@ export function inviteUsers(emailArray) {
       emails: emailArray,
       workspaceID: selectedWorkspace
     }).then(function(result) {
-      // returns object of users ID's
+      //update workspace members with new members
+      dispatch(updateWorkspace({ members: result.data }));
 
-      console.log(result.data);
-      // dispatch(updateWorkspace(results.data));
+      //once users are creating by cloud function, send each user an email invite link
+      emailArray.map(email => {
+        var actionCodeSettings = {
+          url: `${
+            window.location.origin
+          }?email=${email}&workspaceID=${selectedWorkspace}`,
+          handleCodeInApp: true
+        };
+
+        firebase
+          .auth()
+          .sendSignInLinkToEmail(email, actionCodeSettings)
+          .then(function() {})
+          .catch(function(error) {
+            console.log(error);
+          });
+      });
     });
   };
 }

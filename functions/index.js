@@ -7,16 +7,7 @@ try {
 } catch (e) {} // You do that because the admin SDK can only be initialized once.
 const firestore = admin.firestore();
 
-// HOWTO make an onCall function.
-// exports.helloWorld = functions.https.onCall((data, context) => {
-//   try {
-//     return "passed";
-//   } catch (err) {
-//     throw new functions.https.HttpsError("unknown", error.message, error);
-//   }
-// });
-
-// TODO: refactor this to async await
+// TODO: refactor this to async await es6
 
 exports.onCreateMessage = require("./chat/onCreateMessage");
 exports.onDeleteChannel = require("./chat/onDeleteChannel");

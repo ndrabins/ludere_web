@@ -79,7 +79,6 @@ function initializeUser(user) {
     emailVerified: user.emailVerified,
     createdAt: timestamp,
     email: user.email,
-    workspaces: {},
     displayName: user.email, //till we get the user to set their own displayname? Probs should be part of the sign up?
     photoURL:
       user.photoURL || "https://image.flaticon.com/icons/svg/186/186539.svg",
@@ -131,7 +130,6 @@ export function signInUserWithEmailLink(paramString, url) {
     if (firebase.auth().isSignInWithEmailLink(url)) {
       // The client SDK will parse the code from the link for you.
       // firebase
-      console.log("is sign in link");
       firebase
         .auth()
         .signInWithEmailLink(params.email, url)
