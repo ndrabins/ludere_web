@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 import Loading from "../../common/Loading";
 
 import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import backgroundImg from "../../static/mountains.png";
 
+import logoWhite from "../../static/light.svg";
 import CreateWorkspace from "./CreateWorkspace";
-// import JoinWorkspace from "./JoinWorkspace";
 
 class WorkspaceFlow extends Component {
   state = {
@@ -41,20 +41,11 @@ class WorkspaceFlow extends Component {
 
     return (
       <div className={classes.container}>
-        <div className={classes.tabsContainer}>
-          <Tabs
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            centered
-          >
-            <Tab label="Create Workspace" />
-            <Tab label="Join Workspace" />
-          </Tabs>
-          {value === 0 && <CreateWorkspace />}
-          {/* {value === 1 && <JoinWorkspace />} */}
-        </div>
+        <img src={logoWhite} alt="Logo" />
+        <Paper className={classes.createWorkspaceContainer}>
+          <CreateWorkspace />
+        </Paper>
+        {/* {value === 1 && <JoinWorkspace />} */}
       </div>
     );
   }
@@ -66,14 +57,25 @@ const styles = {
     height: "100%",
     flex: 1,
     justifyContent: "center",
+    flexDirection: "column",
     alignItems: "center",
     fontFamily: "Roboto",
     width: "100%",
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundImage: `url(${backgroundImg})`,
+    backgroundSize: "cover"
   },
-  tabsContainer: {
-    minWidth: 400,
-    minHeight: 500
+  createWorkspaceContainer: {
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "#303030",
+    opacity: 0.85,
+    padding: 10,
+    marginTop: 20,
+    minWidth: 350,
+    maxWidth: 500,
+    marginLeft: 20,
+    marginRight: 20
   },
   content: {
     padding: 40

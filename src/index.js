@@ -12,6 +12,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import * as storage from "localforage";
 import hardSet from "redux-persist/lib/stateReconciler/hardSet";
 import { PersistGate } from "redux-persist/integration/react";
+import Loading from "common/Loading";
 
 import ReduxThunk from "redux-thunk";
 import rootReducer from "./reducers";
@@ -93,7 +94,7 @@ let persistor = persistStore(store);
 // <App />
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
+    <PersistGate loading={<Loading />} persistor={persistor}>
       <App />
     </PersistGate>
   </Provider>,

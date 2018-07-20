@@ -274,12 +274,6 @@ const styles = {
       border: "1px solid #FFF"
     }
   },
-  rightArrow: {
-    color: "white",
-    position: "absolute",
-    right: 0,
-    bottom: 0
-  },
   label: {
     "&$cssFocused": {
       color: "#FFF",
@@ -288,6 +282,12 @@ const styles = {
     color: "#FFF"
   },
   cssFocused: {},
+  rightArrow: {
+    color: "white",
+    position: "absolute",
+    right: 0,
+    bottom: 0
+  },
   googleButton: {
     marginTop: 30,
     width: 240,

@@ -6,6 +6,7 @@ import * as Actions from "../../actions";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 
+import Loading from "common/Loading";
 import logoWhite from "../../static/light.svg";
 import backgroundImg from "../../static/mountains.png";
 
@@ -27,7 +28,12 @@ class AuthPage extends Component {
   };
 
   render() {
+    const { loading } = this.props;
     const { loginTransition, workspaceID } = this.state;
+
+    if (loading) {
+      return <Loading loadingDelay={false} />;
+    }
 
     return (
       <div style={styles.authPage}>
@@ -89,7 +95,9 @@ const styles = {
 };
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    loading: state.auth.loading
+  };
 }
 
 function mapDispatchToProps(dispatch) {

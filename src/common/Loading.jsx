@@ -9,6 +9,10 @@ class Loading extends Component {
     this.state = { isStopped: false, isPaused: false };
   }
 
+  static defaultProps = {
+    lodaingDelay: true
+  };
+
   render() {
     const defaultOptions = {
       loop: true,
@@ -16,12 +20,14 @@ class Loading extends Component {
       animationData: animationData
     };
 
+    const { lodaingDelay } = this.props;
+
     return (
       <Fade
         in={true}
         timeout={{ enter: 800, exit: 800 }}
         style={{
-          transitionDelay: "800ms"
+          transitionDelay: lodaingDelay ? "800ms" : "0ms"
         }}
       >
         <div style={styles.background}>
