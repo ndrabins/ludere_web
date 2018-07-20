@@ -20,11 +20,14 @@ export function signUpUser(email, password) {
       .createUserWithEmailAndPassword(email, password)
       .then(user => {
         authSuccess(dispatch, user.user);
-
         //initialize the user to our user storage in firestore
         //This is where we will store all the users profile information instead of firebases user object
         //This is because you can't add fields to firebases user object
         dispatch(initializeUser(user.user));
+        user.user.sendEmailVerification().then(function() {
+          console.log("sending verification email");
+          // send email for them to verify their account
+        });
       })
       .catch(error => {
         dispatch(authError("signup", error));
@@ -56,6 +59,7 @@ export function authWithProvider(providerType) {
           .collection("users")
           .doc(user.uid);
         userRef.get().then(function(doc) {
+          // their first time signing in / up
           if (!doc.exists) {
             dispatch(initializeUser(user));
           }
