@@ -13,6 +13,10 @@ import IconButton from "@material-ui/core/IconButton";
 import ArrowIcon from "@material-ui/icons/KeyboardArrowRight";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
+import FormHelperText from "@material-ui/core/FormHelperText";
+
+import Dialog from "common/Dialog";
+import LudereInput from "common/LudereInput";
 
 import GoogleIcon from "../../static/google.svg";
 import FacebookIcon from "react-icons/lib/fa/facebook";
@@ -24,7 +28,9 @@ class SignUp extends Component {
     this.state = {
       email: "",
       password: "",
-      showPassword: false
+      showPassword: false,
+      resetEmail: "",
+      isResettingPassword: false
     };
   }
 
@@ -43,9 +49,23 @@ class SignUp extends Component {
     }
   };
 
+  handleCloseDialog = () => {
+    this.setState({ isResettingPassword: false, resetEmail: "" });
+  };
+
+  handleOpenResetDialog = () => {
+    this.setState({ isResettingPassword: true });
+  };
+
+  handleResetPassword = () => {
+    const { resetEmail } = this.state;
+    this.props.actions.resetPassword(resetEmail);
+    this.handleCloseDialog();
+  };
+
   renderSignIn = () => {
     const { loginTransition, classes, workspaceID, error } = this.props;
-    const { email, password } = this.state;
+    const { email, password, resetEmail, isResettingPassword } = this.state;
 
     if (loginTransition === "null") {
       return (
@@ -111,6 +131,35 @@ class SignUp extends Component {
                   }
                 }}
               />
+              <FormHelperText
+                className={classes.helperText}
+                onClick={this.handleOpenResetDialog}
+              >
+                Forgot Password?
+              </FormHelperText>
+              <Dialog
+                handleAction={this.handleResetPassword}
+                open={isResettingPassword}
+                handleClose={this.handleCloseDialog}
+                titleName="Forgot password"
+                actionButtonName="Confirm"
+                color="linear-gradient(270deg, #6FE5C9 0%, #00BCD4 100%)"
+                helperText=""
+              >
+                <LudereInput
+                  autoFocus
+                  label="Your email address"
+                  value={resetEmail}
+                  handleChange={this.handleChange("resetEmail")}
+                  helperText="We will send an email with instruction on resetting your password. Please check both your inbox and spam folder."
+                  onKeyPress={ev => {
+                    if (ev.key === "Enter" && !ev.shiftKey) {
+                      this.handleResetPassword();
+                      ev.preventDefault();
+                    }
+                  }}
+                />
+              </Dialog>
             </FormControl>
             {error && <span className={classes.errorText}> {error} </span>}
             <div className={classes.buttonContainer}>
@@ -221,11 +270,11 @@ const styles = {
     overflow: "hidden",
     cursor: "text",
     transition: "border 0.25s ease-out",
+    marginBottom: 10,
     "&:hover": {
       cursor: "text",
       border: "1px solid #f9f9f9"
-    },
-    marginBottom: 10
+    }
   },
   inputFocused: {
     border: "1px solid #FFF",
@@ -280,6 +329,15 @@ const styles = {
   },
   errorText: {
     color: "#e74c3c"
+  },
+  helperText: {
+    marginTop: "-5px",
+    color: "#303030",
+    transition: "color 0.2s ease-out, text-decoration 0.2s ease-out",
+    "&:hover": {
+      color: "white",
+      textDecoration: "underline"
+    }
   }
 };
 

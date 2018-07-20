@@ -7,6 +7,7 @@ export const LOAD_APP_DATA = "LOAD_APP_DATA";
 export const LOAD_APP_DATA_ERROR = "LOAD_APP_DATA_ERROR";
 export const LOAD_APP_DATA_SUCCESS = "LOAD_APP_DATA_SUCCESS";
 export const INITIALIZE_USER = "INITIALIZE_USER";
+export const RESET_PASSWORD = "RESET_PASSWORD";
 
 //Team actions
 export const CREATE_TEAM = "CREATE_TEAM";

@@ -3,7 +3,8 @@ import {
   AUTH_USER,
   SIGN_OUT_USER,
   AUTH_SUCCESS,
-  INITIALIZE_USER
+  INITIALIZE_USER,
+  RESET_PASSWORD
 } from "./types";
 import * as localforage from "localforage";
 import firebase from "firebase/app";
@@ -123,7 +124,7 @@ export function signInUser(email, password) {
       .signInWithEmailAndPassword(email, password)
       .then(user => authSuccess(dispatch, user.user))
       .catch(error => {
-        dispatch("signin", authError(error));
+        dispatch(authError(error));
       });
   };
 }
@@ -184,6 +185,23 @@ export function signOutUser() {
       .catch(function(err) {
         // This code runs if there were any errors
         console.log(err);
+      });
+  };
+}
+
+export function resetPassword(emailAddress) {
+  return function(dispatch) {
+    dispatch({
+      type: RESET_PASSWORD
+    });
+    firebase
+      .auth()
+      .sendPasswordResetEmail(emailAddress)
+      .then(function() {
+        // Email sent.
+      })
+      .catch(function(error) {
+        // An error happened.
       });
   };
 }
