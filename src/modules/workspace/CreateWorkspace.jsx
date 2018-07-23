@@ -53,7 +53,6 @@ class CreateWorkspaceForm extends Component {
             Workspace Name
           </InputLabel>
           <Input
-            type="password"
             classes={{ focused: classes.inputFocused }}
             className={classes.input}
             value={this.state.workspaceName}

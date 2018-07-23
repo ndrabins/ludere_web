@@ -1,7 +1,6 @@
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import React, { PureComponent } from "react";
-import getUrls from "get-urls";
 
 class RichLinkPreview extends PureComponent {
   static propTypes = {
@@ -19,11 +18,6 @@ class RichLinkPreview extends PureComponent {
   renderRichLinks() {
     const { classes, messageContent } = this.props;
 
-    const linksSet = getUrls(messageContent);
-    const linksArray = [...linksSet];
-    console.log(linksArray);
-    this.fetchRichLink("https://api.github.com/users/chriscoyier/repos");
-    return <div />;
     // let linkPreviews = Map(linksArray, (link, index) => {
     //   return (
     //     <div className={classes.richLinkContainer} key={index}>
