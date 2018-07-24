@@ -176,7 +176,7 @@ export function fetchAnnouncements(teamID) {
     dispatch({
       type: FETCH_ANNOUNCEMENTS,
       announcements: {},
-      loadingAnnouncements: true
+      loading: true
     });
 
     let teamRef = firebase
@@ -193,7 +193,7 @@ export function fetchAnnouncements(teamID) {
       dispatch({
         type: FETCH_ANNOUNCEMENTS,
         announcements: announcements,
-        loadingAnnouncements: false
+        loading: false
       });
     });
   };
