@@ -126,7 +126,10 @@ class Message extends PureComponent {
             horizontal: "center"
           }}
         >
-          <MenuItem onClick={() => this.handleBeginEditing()}>
+          <MenuItem
+            onClick={() => this.handleBeginEditing()}
+            disabled={message.type === "file"}
+          >
             <ListItemIcon className={classes.icon}>
               <EditIcon />
             </ListItemIcon>

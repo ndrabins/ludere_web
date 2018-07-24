@@ -117,7 +117,6 @@ class MessageEntry extends Component {
       <div className={classes.container}>
         <div className={classes.fileInput}>
           <input
-            accept="image/*"
             className={classes.fileUploader}
             id="raised-button-file"
             multiple
