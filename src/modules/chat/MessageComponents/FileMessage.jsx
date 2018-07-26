@@ -97,11 +97,12 @@ class FileMessage extends Component {
       <div className={classes.fileContainer}>
         <div className={classes.fileHeader}>
           <FileIcon className={classes.fileIcon} />
-          <a href={message.fileURL} download className={classes.fileText}>
-            <Typography className={classes.fileText}>
-              {message.messageText}
-            </Typography>
-          </a>
+          <Typography
+            className={classes.fileText}
+            onClick={() => this.downloadFile(message.fileURL)}
+          >
+            {message.messageText}
+          </Typography>
         </div>
         <Tooltip title="Download File">
           <IconButton onClick={() => this.downloadFile(message.fileURL)}>
