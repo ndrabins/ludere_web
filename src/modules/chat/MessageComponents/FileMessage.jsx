@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-import ReactMarkdown from "react-markdown";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import FileIcon from "@material-ui/icons/InsertDriveFileOutlined";
 import DownloadIcon from "@material-ui/icons/CloudDownloadTwoTone";
 import { Typography } from "../../../../node_modules/@material-ui/core";
+import Dialog from "@material-ui/core/Dialog";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const IMAGEFILE_REGEX = /\.(gif|jpg|jpeg|tiff|png)$/i;
 
@@ -16,24 +17,37 @@ class FileMessage extends Component {
     message: PropTypes.object.isRequired
   };
 
+  state = {
+    expandImage: false
+  };
+
+  handleClose = () => {
+    this.setState({ expandImage: false });
+  };
+
+  handleExpandImage = () => {
+    console.log("opening");
+    this.setState({ expandImage: true });
+  };
+
   downloadFile = url => {
+    const { message } = this.props;
+
     var xhr = new XMLHttpRequest();
     xhr.responseType = "blob";
     xhr.onload = function(event) {
       var blob = xhr.response;
-      console.log("blob?", blob);
+      var windowURL = window.URL;
+      var fileUrl = windowURL.createObjectURL(blob);
+      var anchor = document.createElement("a");
+      anchor.href = fileUrl;
+      anchor.target = "_blank";
+      anchor.download = message.messageText;
+      anchor.style = "display: none";
 
-      var a = document.createElement("a");
-      document.body.appendChild(a);
-      a.style = "display: none";
-      return (blob, fileName) => {
-        console.log("something?");
-        var url = window.URL.createObjectURL(blob);
-        a.href = url;
-        a.download = fileName;
-        a.click();
-        // window.URL.revokeObjectURL(url);
-      };
+      document.body.appendChild(anchor);
+      anchor.click();
+      windowURL.revokeObjectURL(fileUrl);
     };
     xhr.open("GET", url);
     xhr.send();
@@ -41,13 +55,38 @@ class FileMessage extends Component {
 
   imageFile = () => {
     const { classes, message } = this.props;
+    const { expandImage } = this.state;
 
     return (
-      <img
-        src={message.fileURL}
-        alt="file upload"
-        className={classes.uploadedImage}
-      />
+      <React.Fragment>
+        <img
+          src={message.fileURL}
+          alt="message file"
+          className={classes.uploadedImage}
+          onClick={this.handleExpandImage}
+        />
+        <Dialog
+          open={expandImage}
+          onClose={this.handleClose}
+          aria-labelledby="simple-dialog-title"
+        >
+          <div className={classes.imageWrapper}>
+            <img
+              src={message.fileURL}
+              alt="message file"
+              className={classes.expandedImage}
+            />
+            <Tooltip title="Download File">
+              <IconButton
+                onClick={() => this.downloadFile(message.fileURL)}
+                className={classes.floatingIconButton}
+              >
+                <DownloadIcon className={classes.floatingDownloadIcon} />
+              </IconButton>
+            </Tooltip>
+          </div>
+        </Dialog>
+      </React.Fragment>
     );
   };
 
@@ -64,9 +103,11 @@ class FileMessage extends Component {
             </Typography>
           </a>
         </div>
-        <IconButton onClick={() => this.downloadFile(message.fileURL)}>
-          <DownloadIcon className={classes.downloadIcon} />
-        </IconButton>
+        <Tooltip title="Download File">
+          <IconButton onClick={() => this.downloadFile(message.fileURL)}>
+            <DownloadIcon className={classes.downloadIcon} />
+          </IconButton>
+        </Tooltip>
       </div>
     );
   };
@@ -127,8 +168,21 @@ const styles = theme => ({
     color: "#b9bbbe"
   },
   uploadedImage: {
+    height: "auto",
+    width: "auto",
+    maxWidth: "400px",
+    maxHeight: "400px",
+    cursor: "pointer"
+  },
+  imageWrapper: {
+    position: "relative"
+  },
+  expandedImage: {
+    height: "100%",
     width: "100%",
-    height: "100%"
+    // maxWidth: "80%",
+    // maxHeight: "80%",
+    cursor: "pointer"
   },
   fileContainer: {
     display: "flex",
@@ -147,6 +201,17 @@ const styles = theme => ({
   },
   fileIcon: {
     fontSize: 46
+  },
+  floatingIconButton: {
+    position: "absolute",
+    width: 50,
+    height: 50,
+    right: 20,
+    bottom: 20
+  },
+  floatingDownloadIcon: {
+    fontSize: 40,
+    color: "white"
   },
   downloadIcon: {
     fontSize: 30
