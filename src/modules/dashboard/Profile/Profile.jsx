@@ -7,19 +7,14 @@ import firebase from "firebase";
 
 import { FilePond, File, registerPlugin } from "react-filepond";
 import FilepondPluginImagePreview from "filepond-plugin-image-preview";
-import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImageCrop from "filepond-plugin-image-crop";
 import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageTransform from "filepond-plugin-image-transform";
-import FilePondPluginFileEncode from "filepond-plugin-file-encode";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginValidateSize from "filepond-plugin-file-validate-size";
 
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 
-//filepond-plugin-file-encode
-//filepond-plugin-file-validate-size
-//filepond-plugin-file-validate-type
 import Fade from "@material-ui/core/Fade";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -32,11 +27,9 @@ import Snackbar from "@material-ui/core/Snackbar";
 
 registerPlugin(
   FilepondPluginImagePreview,
-  FilePondPluginImageExifOrientation,
   FilePondPluginImageCrop,
   FilePondPluginImageResize,
   FilePondPluginImageTransform,
-  FilePondPluginFileEncode,
   FilePondPluginFileValidateType,
   FilePondPluginValidateSize
 );
@@ -46,7 +39,7 @@ class Profile extends Component {
     super(props);
 
     this.state = {
-      files: [],
+      files: [], //${this.props.profile.photoURL}
       displayName: this.props.profile && this.props.profile.displayName,
       openSnackbar: false
     };
@@ -66,6 +59,7 @@ class Profile extends Component {
   ) => {
     const { user, actions } = this.props;
     const fileUpload = file;
+
     const profileRef = firebase.storage().ref(`images/${user.uid}/profilePic`);
     const task = profileRef.put(fileUpload, metadata);
 
@@ -75,7 +69,8 @@ class Profile extends Component {
         progress(true, snapshot.bytesTransferred, snapshot.totalBytes);
       },
       error => {
-        error("File couldn't be uploaded :(");
+        console.log("Error:", error);
+        this.handleAbort();
       },
       () => {
         //Success
@@ -145,12 +140,14 @@ class Profile extends Component {
               // imageResizeMode="cover"
               // imageResizeTargetWidth={200}
               // imageResizeTargetHeight={200}
+              // allowImageExifOrientation={true}
               maxFileSize="5MB"
               oninit={this.handleInit}
               labelIdle={"Drag & Drop your profile picture or Click to Browse"}
               imagePreviewHeight={400}
               labelTapToCancel=""
-              accept="image/*"
+              labelFileTypeNotAllowed="Invalid filetype. Try an image file like png, jpeg or a gif"
+              acceptedFileTypes={["image/*"]}
               server={{
                 process: this.handleProcessing,
                 abortLoad: this.handleAbort

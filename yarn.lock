@@ -3429,11 +3429,7 @@ filepond-plugin-image-transform@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/filepond-plugin-image-transform/-/filepond-plugin-image-transform-1.1.1.tgz#6087349a7f270290b415344a2d2642bc47799755"
 
-filepond@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/filepond/-/filepond-1.4.0.tgz#c5208c6aa6f759592fde1822534731630a1bd5f3"
-
-filepond@^1.8.8:
+filepond@^1.8.6:
   version "1.8.8"
   resolved "https://registry.yarnpkg.com/filepond/-/filepond-1.8.8.tgz#51a408d7df2aeb8824716ab043841efb8c602c42"
 
@@ -7157,11 +7153,11 @@ react-event-listener@^0.6.0:
     prop-types "^15.6.0"
     warning "^3.0.0"
 
-react-filepond@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/react-filepond/-/react-filepond-2.0.6.tgz#4729f4168b676d8b377570ee04598850d78a7e64"
+react-filepond@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/react-filepond/-/react-filepond-2.0.8.tgz#43b34f5cf7dfc2d977a100f309bdae11e537d79a"
   dependencies:
-    filepond "^1.4.0"
+    filepond "^1.8.6"
 
 react-ga@^2.5.0:
   version "2.5.0"
