@@ -3017,9 +3017,9 @@ eslint-plugin-jsx-a11y@5.1.1:
     emoji-regex "^6.1.0"
     jsx-ast-utils "^1.4.0"
 
-eslint-plugin-prettier@^2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-2.6.1.tgz#de902b4a66b7bca24296429a59a1cc04020ccbbd"
+eslint-plugin-prettier@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-2.6.2.tgz#71998c60aedfa2141f7bfcbf9d1c459bf98b4fad"
   dependencies:
     fast-diff "^1.1.1"
     jest-docblock "^21.0.0"
@@ -3397,9 +3397,9 @@ filename-regex@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/filename-regex/-/filename-regex-2.0.1.tgz#c1c4b9bee3e09725ddb106b75c1e301fe2f18b26"
 
-filepond-plugin-file-encode@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-file-encode/-/filepond-plugin-file-encode-1.0.4.tgz#954e979d12c1d9a8ea96c990b1f1b1fcc51cd7b4"
+filepond-plugin-file-encode@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-file-encode/-/filepond-plugin-file-encode-1.0.5.tgz#d22c96105a04d22073455549c3ee570fc5766bc8"
 
 filepond-plugin-file-validate-size@^1.0.3:
   version "1.0.3"
@@ -3409,33 +3409,33 @@ filepond-plugin-file-validate-type@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/filepond-plugin-file-validate-type/-/filepond-plugin-file-validate-type-1.1.0.tgz#ee1cef9174f02c360ca8f1f8839389e8cc2640f5"
 
-filepond-plugin-image-crop@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-image-crop/-/filepond-plugin-image-crop-1.0.1.tgz#1c3132cc72a2e0b0d3eecb4da63283b1b9f3ca2d"
+filepond-plugin-image-crop@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-crop/-/filepond-plugin-image-crop-1.0.3.tgz#0c6a0c6cca273b7818aa5689ed8ebdd53146e021"
 
-filepond-plugin-image-exif-orientation@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-image-exif-orientation/-/filepond-plugin-image-exif-orientation-1.0.1.tgz#79a8204c47d218c8a3262b466f34e6af18ea231a"
+filepond-plugin-image-exif-orientation@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-exif-orientation/-/filepond-plugin-image-exif-orientation-1.0.2.tgz#5470d2c0c19c7ef5a3a74169f29a76b910eb721b"
 
-filepond-plugin-image-preview@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-image-preview/-/filepond-plugin-image-preview-1.0.9.tgz#e82032eac45be1c56efbe5bac19d137c5df908f3"
+filepond-plugin-image-preview@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-preview/-/filepond-plugin-image-preview-1.1.0.tgz#1a4de4b9511fb15d8df65f722067ac1ef865c2a1"
 
-filepond-plugin-image-resize@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-image-resize/-/filepond-plugin-image-resize-1.0.1.tgz#40a11c5499f1c62dc3221f6a840ae8b4c8f742f7"
+filepond-plugin-image-resize@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-resize/-/filepond-plugin-image-resize-1.2.0.tgz#0256cf562f0192a90c47ec0102e8feee5eba4246"
 
-filepond-plugin-image-transform@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-image-transform/-/filepond-plugin-image-transform-1.0.1.tgz#07f7f888fba3663795d6b5e2d03b2de88f4cc3f4"
+filepond-plugin-image-transform@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-transform/-/filepond-plugin-image-transform-1.1.1.tgz#6087349a7f270290b415344a2d2642bc47799755"
 
 filepond@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/filepond/-/filepond-1.4.0.tgz#c5208c6aa6f759592fde1822534731630a1bd5f3"
 
-filepond@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/filepond/-/filepond-1.8.0.tgz#9a8b05db78f91912964cb17742a3bb5ba99c9202"
+filepond@^1.8.8:
+  version "1.8.8"
+  resolved "https://registry.yarnpkg.com/filepond/-/filepond-1.8.8.tgz#51a408d7df2aeb8824716ab043841efb8c602c42"
 
 fileset@^2.0.2:
   version "2.0.3"
@@ -5552,6 +5552,12 @@ md5.js@^1.3.4:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
+mdast-add-list-metadata@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/mdast-add-list-metadata/-/mdast-add-list-metadata-1.0.1.tgz#95e73640ce2fc1fa2dcb7ec443d09e2bfe7db4cf"
+  dependencies:
+    unist-util-visit-parents "1.1.2"
+
 media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
@@ -7195,10 +7201,11 @@ react-lottie@^1.2.3:
     babel-runtime "^6.26.0"
     lottie-web "^5.1.3"
 
-react-markdown@^3.3.4:
-  version "3.3.4"
-  resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-3.3.4.tgz#4002599ad133c649923a49aedc06b2f3af2016b6"
+react-markdown@^3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-3.4.1.tgz#9fb726a94dfcb600d625fd06a5550629801303dc"
   dependencies:
+    mdast-add-list-metadata "^1.0.1"
     prop-types "^15.6.1"
     remark-parse "^5.0.0"
     unified "^6.1.5"
@@ -8703,6 +8710,10 @@ unist-util-remove-position@^1.0.0:
 unist-util-stringify-position@^1.0.0, unist-util-stringify-position@^1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/unist-util-stringify-position/-/unist-util-stringify-position-1.1.2.tgz#3f37fcf351279dcbca7480ab5889bb8a832ee1c6"
+
+unist-util-visit-parents@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/unist-util-visit-parents/-/unist-util-visit-parents-1.1.2.tgz#f6e3afee8bdbf961c0e6f028ea3c0480028c3d06"
 
 unist-util-visit@^1.1.0, unist-util-visit@^1.3.0:
   version "1.3.1"

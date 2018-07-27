@@ -26,7 +26,6 @@ class FileMessage extends Component {
   };
 
   handleExpandImage = () => {
-    console.log("opening");
     this.setState({ expandImage: true });
   };
 

@@ -304,7 +304,7 @@ const styles = theme => ({
     flexDirection: "column",
     whiteSpace: "pre-line",
     wordWrap: "break-word",
-    wordBreak: "break-all",
+    wordBreak: "break-word",
     overflowWrap: "break-word",
     // marginRight: 30,
     marginTop: "0px",
@@ -317,7 +317,7 @@ const styles = theme => ({
     flexDirection: "column",
     whiteSpace: "pre-line",
     wordWrap: "break-word",
-    wordBreak: "break-all",
+    wordBreak: "break-word",
     overflowWrap: "break-word",
     marginTop: "0px",
     fontSize: "15px"
