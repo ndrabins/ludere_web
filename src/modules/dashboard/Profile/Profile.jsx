@@ -28,7 +28,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 registerPlugin(
   FilepondPluginImagePreview,
   FilePondPluginImageCrop,
-  FilePondPluginImageResize,
   FilePondPluginImageTransform,
   FilePondPluginFileValidateType,
   FilePondPluginValidateSize
@@ -136,11 +135,8 @@ class Profile extends Component {
           <div className={classes.avatar}>
             <FilePond
               instantUpload={true}
-              // imageCropAspectRatio="1:1"
-              // imageResizeMode="cover"
-              // imageResizeTargetWidth={200}
-              // imageResizeTargetHeight={200}
-              // allowImageExifOrientation={true}
+              allowRevert={false}
+              allowImageTransform={true}
               maxFileSize="5MB"
               oninit={this.handleInit}
               labelIdle={"Drag & Drop your profile picture or Click to Browse"}
