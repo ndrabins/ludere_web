@@ -82,11 +82,10 @@ const styles = theme => ({
   hiddenContainer: {
     marginTop: 6,
     width: "0px",
-    height: `calc(100% - 120px)`,
+    height: `calc(100% - 130px)`,
     position: "absolute",
     backgroundColor: "#E3E3E4",
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
+    borderRadius: 10,
     right: 25,
     transition:
       "opacity 0.5s ease-out, right 0.5s ease-out, width 0.5s ease-out 0.5s",
@@ -94,14 +93,13 @@ const styles = theme => ({
   },
   container: {
     marginTop: 6,
-    height: `calc(100% - 120px)`,
+    height: `calc(100% - 130px)`,
     minWidth: 300,
     width: "40%",
     position: "absolute",
     backgroundColor: "#f5f5f5",
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
-    right: 0,
+    borderRadius: 10,
+    right: 20,
     transition: "opacity .5s ease-out, right 0.5s ease-out",
     opacity: 1
   },
@@ -113,6 +111,7 @@ const styles = theme => ({
   },
   header: {
     borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
