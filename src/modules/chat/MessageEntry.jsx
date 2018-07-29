@@ -7,6 +7,9 @@ import firebase from "firebase";
 import "emoji-mart/css/emoji-mart.css";
 import data from "emoji-mart/data/apple.json";
 import Popover from "@material-ui/core/Popover";
+import GiphyModal from "./GiphyModal";
+import GifIcon from "@material-ui/icons/Gif";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 import { NimblePicker } from "emoji-mart";
 import EmojiIcon from "react-icons/lib/fa/smile-o";
@@ -19,7 +22,8 @@ class MessageEntry extends Component {
     super(props);
     this.state = {
       messageText: "",
-      anchorEl: null
+      anchorEl: null,
+      openGiphy: false
     };
     // debounce the passed in dispatch method, so not to update the typing indicator every keypress
     this.updateChannel = Debounce(this.props.actions.updateChannel, 1000);
@@ -30,8 +34,10 @@ class MessageEntry extends Component {
     const { channelID, user } = this.props;
     if (event.target.value !== "") {
       //update typing object with current user typing
-      updatedChannel.usersTyping[user.uid] = true;
-      this.updateChannel(updatedChannel, channelID);
+      if (updatedChannel.usersTyping[user.uid] !== undefined) {
+        updatedChannel.usersTyping[user.uid] = true;
+        this.updateChannel(updatedChannel, channelID);
+      }
     } else {
       updatedChannel.usersTyping[user.uid] = false;
       this.updateChannel(updatedChannel, channelID);
@@ -96,6 +102,14 @@ class MessageEntry extends Component {
     );
   };
 
+  openGifPicker = () => {
+    this.setState({ openGiphy: true });
+  };
+
+  handleClickAwayGif = () => {
+    this.setState({ openGiphy: false });
+  };
+
   openEmojiPicker = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
@@ -111,7 +125,7 @@ class MessageEntry extends Component {
 
   render() {
     const { helperText, classes } = this.props;
-    const { anchorEl } = this.state;
+    const { anchorEl, openGiphy } = this.state;
 
     return (
       <div className={classes.container}>
@@ -154,6 +168,11 @@ class MessageEntry extends Component {
             }
           }}
         />
+        <ClickAwayListener onClickAway={this.handleClickAwayGif}>
+          <GiphyModal open={openGiphy} />
+          <GifIcon onClick={this.openGifPicker} className={classes.gifIcon} />
+        </ClickAwayListener>
+
         <EmojiIcon
           className={classes.emojiIcon}
           onClick={this.openEmojiPicker}
@@ -248,6 +267,20 @@ const styles = theme => ({
     cursor: "pointer",
     top: 7,
     right: 18,
+    color: "#b9bbbe",
+    transition: "color 0.25s ease-out",
+    "&:hover": {
+      color: "#303030"
+    }
+  },
+  gifIcon: {
+    position: "absolute",
+    width: 28,
+    height: 28,
+    cursor: "pointer",
+    top: 7,
+    fontSize: 46,
+    right: 46,
     color: "#b9bbbe",
     transition: "color 0.25s ease-out",
     "&:hover": {

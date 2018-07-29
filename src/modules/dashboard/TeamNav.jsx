@@ -69,12 +69,7 @@ class TeamNav extends Component {
                   }
             }
           />
-          <Tooltip
-            id="tooltip-right-start"
-            title={team.name}
-            placement="right"
-            className={classes.toolTipContainer}
-          >
+          <Tooltip id="tooltip-right-start" title={team.name} placement="right">
             <Button
               variant="fab"
               style={{
@@ -222,11 +217,6 @@ const styles = {
   teamAbbreviation: {
     fontSize: 14,
     color: "white"
-  },
-  toolTipContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
   }
 };
 
