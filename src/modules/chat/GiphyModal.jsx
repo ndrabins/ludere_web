@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import Input from "@material-ui/core/Input";
 
 import GphApiClient from "giphy-js-sdk-core";
 const client = GphApiClient("70Srj0AeBXYJwYfoax7jLWEEyv53EWf7");
@@ -77,13 +78,15 @@ class GiphyButton extends Component {
     return (
       <ClickAwayListener onClickAway={this.handleClose}>
         <Paper className={classes.container}>
-          <TextField
-            required
-            id="required"
-            label="Required"
-            onChange={this.handleChange("giphySearchName")}
-            className={classes.textField}
-            margin="none"
+          <Input
+            className={classes.input}
+            classes={{ focused: classes.inputFocused }}
+            value={giphySearchName}
+            onChange={this.handleChange("subtaskContent")}
+            fullWidth
+            placeholder="Search for your favorite gifs!"
+            disableUnderline
+            autoFocus
           />
           <GridList cellHeight={160} className={classes.gridList} cols={3}>
             {gifs.map(gif => (
@@ -97,7 +100,7 @@ class GiphyButton extends Component {
                   onClick={() =>
                     this.handleLocalSendGif(
                       `http://media3.giphy.com/media/${gif.id}/giphy.gif`,
-                      gif.title
+                      gif.title + ".gif"
                     )
                   }
                 />
@@ -135,6 +138,36 @@ const styles = theme => ({
     "&:hover": {
       zIndex: 10,
       transform: "scale(1.1)"
+    }
+  },
+  input: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    padding: 5,
+    marginBottom: 10,
+    color: "black",
+    overflowY: "auto",
+    overflowX: "hidden",
+    cursor: "text",
+    border: "transparent 2px solid",
+    transition: "border .25s ease-out",
+    "&:hover": {
+      border: "#B0B2B6 2px solid"
+    }
+  },
+  inputFocused: {
+    marginBottom: 10,
+    backgroundColor: "white",
+    borderRadius: 5,
+    padding: 5,
+    color: "black",
+    overflowY: "auto",
+    overflowX: "hidden",
+    cursor: "text",
+    transition: "border .25s ease-out",
+    border: "2px solid #6d6d6d",
+    "&:hover": {
+      border: "2px solid #6d6d6d"
     }
   }
 });
