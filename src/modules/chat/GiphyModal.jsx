@@ -8,11 +8,12 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Input from "@material-ui/core/Input";
+import GiphyLogo from "static/GiphyLogo.png";
 
 import GphApiClient from "giphy-js-sdk-core";
 const client = GphApiClient("70Srj0AeBXYJwYfoax7jLWEEyv53EWf7");
 
-class GiphyButton extends Component {
+class GiphyModal extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired
   };
@@ -22,14 +23,12 @@ class GiphyButton extends Component {
       giphySearchName: "",
       gifs: []
     };
-    // debounce the passed in dispatch method, so not to fetch gifs each key
   }
 
   componentDidMount() {
     client
       .trending("gifs", { rating: "pg-13", limit: 24 })
       .then(response => {
-        console.log(response.data);
         this.setState({ gifs: response.data });
       })
       .catch(err => {
@@ -78,28 +77,33 @@ class GiphyButton extends Component {
     return (
       <ClickAwayListener onClickAway={this.handleClose}>
         <Paper className={classes.container}>
-          <Input
-            className={classes.input}
-            classes={{ focused: classes.inputFocused }}
-            value={giphySearchName}
-            onChange={this.handleChange("subtaskContent")}
-            fullWidth
-            placeholder="Search for your favorite gifs!"
-            disableUnderline
-            autoFocus
-          />
+          <div className={classes.inputContainer}>
+            <Input
+              className={classes.input}
+              classes={{ focused: classes.inputFocused }}
+              value={giphySearchName}
+              onChange={this.handleChange("giphySearchName")}
+              fullWidth
+              placeholder="Search for your favorite gifs!"
+              disableUnderline
+              autoFocus
+            />
+            <img
+              src={GiphyLogo}
+              alt="giphy logo"
+              className={classes.giphyLogo}
+            />
+          </div>
           <GridList cellHeight={160} className={classes.gridList} cols={3}>
             {gifs.map(gif => (
               <GridListTile key={gif.url} cols={1} className={classes.gridTile}>
                 <img
-                  src={`http://media3.giphy.com/media/${
-                    gif.id
-                  }/giphy-downsized.gif`}
+                  src={gif.images.downsized.gif_url}
                   key={gif.url}
                   alt={gif.title}
                   onClick={() =>
                     this.handleLocalSendGif(
-                      `http://media3.giphy.com/media/${gif.id}/giphy.gif`,
+                      gif.images.original.gif_url,
                       gif.title + ".gif"
                     )
                   }
@@ -120,16 +124,22 @@ const styles = theme => ({
     width: "calc(100% - 36px)",
     flexDirection: "column",
     top: "-405px",
-    margin: "0px 10px",
-    padding: 5,
+    margin: "0px 2px",
+    padding: 8,
     height: 400,
     overflowX: "hidden"
+  },
+  inputContainer: {
+    display: "flex",
+    flexDirection: "row",
+    marginBottom: "10px",
+    zIndex: 5
   },
   gridList: {
     display: "flex",
     width: "100%",
     height: 400,
-    padding: 10,
+    padding: 8,
     overflowX: "hidden"
   },
   gridTile: {
@@ -141,14 +151,14 @@ const styles = theme => ({
     }
   },
   input: {
-    backgroundColor: "white",
+    backgroundColor: "#EEEEEE",
     borderRadius: 5,
     padding: 5,
-    marginBottom: 10,
     color: "black",
     overflowY: "auto",
     overflowX: "hidden",
     cursor: "text",
+    marginRight: "8px",
     border: "transparent 2px solid",
     transition: "border .25s ease-out",
     "&:hover": {
@@ -156,19 +166,23 @@ const styles = theme => ({
     }
   },
   inputFocused: {
-    marginBottom: 10,
-    backgroundColor: "white",
+    backgroundColor: "#EEEEEE",
     borderRadius: 5,
     padding: 5,
     color: "black",
     overflowY: "auto",
     overflowX: "hidden",
     cursor: "text",
+    marginRight: "8px",
     transition: "border .25s ease-out",
     border: "2px solid #6d6d6d",
     "&:hover": {
       border: "2px solid #6d6d6d"
     }
+  },
+  giphyLogo: {
+    width: 100,
+    height: 38
   }
 });
-export default withStyles(styles)(GiphyButton);
+export default withStyles(styles)(GiphyModal);

@@ -36,11 +36,7 @@ class TaskDetail extends Component {
     return (
       <Paper
         elevation={16}
-        className={
-          this.props.showTaskDetail
-            ? classes.container
-            : classes.hiddenContainer
-        }
+        className={showTaskDetail ? classes.container : classes.hiddenContainer}
       >
         <div className={classes.innerContainer}>
           <div className={classes.header}>
@@ -59,19 +55,21 @@ class TaskDetail extends Component {
               </div>
             </div>
           </div>
-          <div className={classes.taskContent}>
-            <Description task={task} />
-            <TaskSubTasks task={task} />
-            <CommentSection taskID={selectedTask} />
-            <SectionDivider content={"Utility"} />
-            <Button
-              onClick={this.handleDelete}
-              variant="raised"
-              className={classes.deleteButton}
-            >
-              Delete Task
-            </Button>
-          </div>
+          {showTaskDetail && (
+            <div className={classes.taskContent}>
+              <Description task={task} />
+              <TaskSubTasks task={task} />
+              <CommentSection taskID={selectedTask} />
+              <SectionDivider content={"Utility"} />
+              <Button
+                onClick={this.handleDelete}
+                variant="raised"
+                className={classes.deleteButton}
+              >
+                Delete Task
+              </Button>
+            </div>
+          )}
         </div>
       </Paper>
     );
