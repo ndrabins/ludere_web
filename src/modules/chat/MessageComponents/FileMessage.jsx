@@ -141,9 +141,7 @@ const styles = theme => ({
     color: "#303030"
   },
   messageContent: {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
+    width: "100%",
     whiteSpace: "pre-line",
     wordWrap: "break-word",
     wordBreak: "break-all",
@@ -168,8 +166,6 @@ const styles = theme => ({
     color: "#b9bbbe"
   },
   uploadedImage: {
-    height: "auto",
-    width: "auto",
     maxWidth: "400px",
     maxHeight: "400px",
     cursor: "pointer"

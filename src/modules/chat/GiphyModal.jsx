@@ -26,6 +26,7 @@ class GiphyModal extends Component {
   }
 
   componentDidMount() {
+    // this throws a warning in the console but as far as I know it shouldn't...
     client
       .trending("gifs", { rating: "pg-13", limit: 24 })
       .then(response => {
