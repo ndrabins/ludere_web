@@ -9,7 +9,6 @@ import data from "emoji-mart/data/apple.json";
 import Popover from "@material-ui/core/Popover";
 import GiphyModal from "./GiphyModal";
 import GifIcon from "@material-ui/icons/Gif";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 import { NimblePicker } from "emoji-mart";
 import EmojiIcon from "react-icons/lib/fa/smile-o";
@@ -102,11 +101,22 @@ class MessageEntry extends Component {
     );
   };
 
+  handleSendGif = (gifURL, gifName) => {
+    const { channelID } = this.props;
+
+    this.props.actions.sendMessage({
+      messageText: gifName,
+      type: "file",
+      fileURL: gifURL,
+      channelID
+    });
+  };
+
   openGifPicker = () => {
     this.setState({ openGiphy: true });
   };
 
-  handleClickAwayGif = () => {
+  handleClickAwayGiphy = () => {
     this.setState({ openGiphy: false });
   };
 
@@ -168,10 +178,12 @@ class MessageEntry extends Component {
             }
           }}
         />
-        <ClickAwayListener onClickAway={this.handleClickAwayGif}>
-          <GiphyModal open={openGiphy} />
-          <GifIcon onClick={this.openGifPicker} className={classes.gifIcon} />
-        </ClickAwayListener>
+        <GiphyModal
+          open={openGiphy}
+          handleClickAwayGiphy={this.handleClickAwayGiphy}
+          handleSendGif={this.handleSendGif}
+        />
+        <GifIcon onClick={this.openGifPicker} className={classes.gifIcon} />
 
         <EmojiIcon
           className={classes.emojiIcon}
