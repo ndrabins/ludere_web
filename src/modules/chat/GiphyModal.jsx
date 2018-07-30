@@ -11,7 +11,7 @@ import Input from "@material-ui/core/Input";
 import GiphyLogo from "static/GiphyLogo.png";
 
 import GphApiClient from "giphy-js-sdk-core";
-const client = GphApiClient("70Srj0AeBXYJwYfoax7jLWEEyv53EWf7");
+const client = GphApiClient("azVscOW5d6t3LzyJE1rwD3cnu0DwB1vH");
 
 class GiphyModal extends Component {
   static propTypes = {
