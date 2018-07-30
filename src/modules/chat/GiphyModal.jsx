@@ -87,6 +87,7 @@ class GiphyModal extends Component {
           src={gif.images.downsized_small.mp4_url}
           key={gif.url}
           alt={gif.title}
+          muted
           autoPlay
           loop
           className={classes.image}
