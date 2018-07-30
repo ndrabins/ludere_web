@@ -245,7 +245,8 @@ const styles = theme => ({
     border: "1px solid #c3c3c3",
     fontSize: 16,
     padding: "10px 12px",
-    width: "calc(100% - 24px)",
+    paddingRight: 66,
+    width: "calc(100% - 76px)",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     fontFamily: [
       "Roboto",
@@ -279,7 +280,7 @@ const styles = theme => ({
     height: 28,
     cursor: "pointer",
     top: 7,
-    right: 18,
+    right: 26,
     color: "#b9bbbe",
     transition: "color 0.25s ease-out",
     "&:hover": {
@@ -288,12 +289,12 @@ const styles = theme => ({
   },
   gifIcon: {
     position: "absolute",
-    width: 28,
-    height: 28,
+    width: 36,
+    height: 42,
     cursor: "pointer",
-    top: 7,
+    top: 0,
     fontSize: 46,
-    right: 46,
+    right: 52,
     color: "#b9bbbe",
     transition: "color 0.25s ease-out",
     "&:hover": {

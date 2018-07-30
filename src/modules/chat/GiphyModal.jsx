@@ -6,7 +6,6 @@ import Paper from "@material-ui/core/Paper";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Input from "@material-ui/core/Input";
 import GiphyLogo from "static/GiphyLogo.png";
-import Hidden from "@material-ui/core/Hidden";
 
 import GphApiClient from "giphy-js-sdk-core";
 const client = GphApiClient("azVscOW5d6t3LzyJE1rwD3cnu0DwB1vH");
