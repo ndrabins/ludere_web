@@ -9,7 +9,7 @@ import { Typography } from "../../../../node_modules/@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
 import Tooltip from "@material-ui/core/Tooltip";
 
-const IMAGEFILE_REGEX = /\.(gif|jpg|jpeg|tiff|png)$/i;
+const IMAGEFILE_REGEX = /\.(gif|jpg|jpeg|tiff|png|mp4)$/i;
 
 class FileMessage extends Component {
   static propTypes = {

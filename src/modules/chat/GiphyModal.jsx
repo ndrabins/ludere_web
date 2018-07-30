@@ -28,7 +28,7 @@ class GiphyModal extends Component {
   componentDidMount() {
     // this throws a warning in the console but as far as I know it shouldn't...
     client
-      .trending("gifs", { rating: "pg-13", limit: 24 })
+      .trending("gifs", { rating: "pg", limit: 24 })
       .then(response => {
         this.setState({ gifs: response.data });
       })
@@ -41,8 +41,9 @@ class GiphyModal extends Component {
     const { giphySearchName } = this.state;
 
     client
-      .search("gifs", { q: giphySearchName, limit: 12, rating: "pg-13" })
+      .search("gifs", { q: giphySearchName, limit: 12, rating: "pg" })
       .then(response => {
+        console.log(response.data);
         this.setState({ gifs: response.data });
       })
       .catch(err => {
@@ -85,7 +86,7 @@ class GiphyModal extends Component {
               value={giphySearchName}
               onChange={this.handleChange("giphySearchName")}
               fullWidth
-              placeholder="Search for your favorite gifs!"
+              placeholder="Showing Trending Gifs. Type here to search for more!"
               disableUnderline
               autoFocus
             />
@@ -95,11 +96,16 @@ class GiphyModal extends Component {
               className={classes.giphyLogo}
             />
           </div>
-          <GridList cellHeight={160} className={classes.gridList} cols={3}>
+          <GridList
+            cellHeight={200}
+            className={classes.gridList}
+            cols={3}
+            spacing={8}
+          >
             {gifs.map(gif => (
               <GridListTile key={gif.url} cols={1} className={classes.gridTile}>
                 <img
-                  src={gif.images.downsized.gif_url}
+                  src={gif.images.preview_gif.gif_url}
                   key={gif.url}
                   alt={gif.title}
                   onClick={() =>
@@ -126,7 +132,6 @@ const styles = theme => ({
     flexDirection: "column",
     top: "-405px",
     margin: "0px 2px",
-    padding: 8,
     height: 400,
     overflowX: "hidden"
   },
@@ -134,17 +139,19 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "row",
     marginBottom: "10px",
-    zIndex: 5
+    zIndex: 5,
+    padding: 8
   },
   gridList: {
     display: "flex",
     width: "100%",
     height: 400,
-    padding: 8,
-    overflowX: "hidden"
+    overflowX: "hidden",
+    zIndex: 1
   },
   gridTile: {
     transition: "transform .2s ease-out, z-index 0.2s ease-out",
+    // padding: 4,
     cursor: "pointer",
     "&:hover": {
       zIndex: 10,
