@@ -66,6 +66,7 @@ class Chat extends Component {
           <MessageEntry
             channelID={selectedChannelID}
             helperText={`Message #${selectedChannel.name} here`}
+            small={false}
           />
           <TypingIndicator
             usersTyping={selectedChannel.usersTyping}

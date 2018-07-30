@@ -166,8 +166,8 @@ const styles = theme => ({
     color: "#b9bbbe"
   },
   uploadedImage: {
-    maxWidth: "400px",
-    maxHeight: "400px",
+    maxWidth: "300px",
+    maxHeight: "300px",
     cursor: "pointer"
   },
   imageWrapper: {

@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
 
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Input from "@material-ui/core/Input";
 import GiphyLogo from "static/GiphyLogo.png";
+import Hidden from "@material-ui/core/Hidden";
 
 import GphApiClient from "giphy-js-sdk-core";
 const client = GphApiClient("azVscOW5d6t3LzyJE1rwD3cnu0DwB1vH");
@@ -41,7 +39,7 @@ class GiphyModal extends Component {
     const { giphySearchName } = this.state;
 
     client
-      .search("gifs", { q: giphySearchName, limit: 12, rating: "pg" })
+      .search("gifs", { q: giphySearchName, limit: 24, rating: "pg" })
       .then(response => {
         console.log(response.data);
         this.setState({ gifs: response.data });
@@ -68,9 +66,45 @@ class GiphyModal extends Component {
     this.handleClose();
   };
 
+  renderColumn(columnNumber, numberOfColumns) {
+    const { classes } = this.props;
+    const { gifs } = this.state;
+    const numberOfGifs = gifs.length;
+
+    const columnGifs = gifs.slice(
+      (numberOfGifs / numberOfColumns) * columnNumber,
+      (numberOfGifs / numberOfColumns) * (columnNumber + 1)
+    );
+
+    return columnGifs.map(gif => (
+      <div
+        key={gif.url}
+        className={classes.gridTile}
+        style={{
+          height: gif.images.preview_gif.height
+        }}
+      >
+        <video
+          src={gif.images.downsized_small.mp4_url}
+          key={gif.url}
+          alt={gif.title}
+          autoPlay
+          loop
+          className={classes.image}
+          onClick={() =>
+            this.handleLocalSendGif(
+              gif.images.original.gif_url,
+              gif.title + ".gif"
+            )
+          }
+        />
+      </div>
+    ));
+  }
+
   render() {
-    const { classes, open } = this.props;
-    const { giphySearchName, gifs } = this.state;
+    const { classes, open, small } = this.props;
+    const { giphySearchName } = this.state;
 
     if (!open) {
       return <span />;
@@ -96,28 +130,21 @@ class GiphyModal extends Component {
               className={classes.giphyLogo}
             />
           </div>
-          <GridList
-            cellHeight={200}
-            className={classes.gridList}
-            cols={3}
-            spacing={8}
-          >
-            {gifs.map(gif => (
-              <GridListTile key={gif.url} cols={1} className={classes.gridTile}>
-                <img
-                  src={gif.images.preview_gif.gif_url}
-                  key={gif.url}
-                  alt={gif.title}
-                  onClick={() =>
-                    this.handleLocalSendGif(
-                      gif.images.original.gif_url,
-                      gif.title + ".gif"
-                    )
-                  }
-                />
-              </GridListTile>
-            ))}
-          </GridList>
+          <div className={classes.masonry}>
+            {!small && (
+              <React.Fragment>
+                <div className={classes.column}>{this.renderColumn(0, 3)}</div>
+                <div className={classes.column}>{this.renderColumn(1, 3)}</div>
+                <div className={classes.column}>{this.renderColumn(2, 3)}</div>
+              </React.Fragment>
+            )}
+            {small && (
+              <React.Fragment>
+                <div className={classes.column}>{this.renderColumn(0, 2)}</div>
+                <div className={classes.column}>{this.renderColumn(1, 2)}</div>
+              </React.Fragment>
+            )}
+          </div>
         </Paper>
       </ClickAwayListener>
     );
@@ -142,21 +169,40 @@ const styles = theme => ({
     zIndex: 5,
     padding: 8
   },
-  gridList: {
+  masonry: {
     display: "flex",
     width: "100%",
     height: 400,
     overflowX: "hidden",
-    zIndex: 1
+    zIndex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignContent: "stretch"
+  },
+  column: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignContent: "stretch",
+    flexGrow: 1,
+    margin: 2
   },
   gridTile: {
     transition: "transform .2s ease-out, z-index 0.2s ease-out",
-    // padding: 4,
+    margin: 2,
+    flex: "auto",
+    width: "100%",
     cursor: "pointer",
+    borderRadius: "8px",
+
     "&:hover": {
       zIndex: 10,
       transform: "scale(1.1)"
     }
+  },
+  image: {
+    width: "100%",
+    borderRadius: 8
   },
   input: {
     backgroundColor: "#EEEEEE",

@@ -56,7 +56,11 @@ class CommentSection extends Component {
       <div className={classes.root}>
         <SectionDivider content={"Comments"} />
         <MessageList messages={comments} channelID={taskID} stopScroll={true} />
-        <MessageEntry channelID={taskID} helperText="Comment here" />
+        <MessageEntry
+          channelID={taskID}
+          helperText="Comment here"
+          small={true}
+        />
         {!!commentChannel && (
           <TypingIndicator
             usersTyping={commentChannel.usersTyping}

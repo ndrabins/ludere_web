@@ -134,7 +134,7 @@ class MessageEntry extends Component {
   };
 
   render() {
-    const { helperText, classes } = this.props;
+    const { helperText, classes, small } = this.props;
     const { anchorEl, openGiphy } = this.state;
 
     return (
@@ -182,6 +182,7 @@ class MessageEntry extends Component {
           open={openGiphy}
           handleClickAwayGiphy={this.handleClickAwayGiphy}
           handleSendGif={this.handleSendGif}
+          small={small}
         />
         <GifIcon onClick={this.openGifPicker} className={classes.gifIcon} />
 
