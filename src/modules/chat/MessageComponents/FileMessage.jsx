@@ -169,7 +169,9 @@ const styles = theme => ({
     maxWidth: "300px",
     maxHeight: "300px",
     cursor: "pointer",
-    borderRadius: 8
+    borderRadius: 8,
+    width: "100%",
+    height: "auto"
   },
   imageWrapper: {
     position: "relative"
