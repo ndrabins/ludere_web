@@ -53,7 +53,10 @@ class TagsButton extends Component {
           <Chip
             onClick={() => this.toggleTagFromTask(tagID)}
             key={tagID}
-            style={{ background: tag.color }}
+            style={{
+              background: tag.color + "48",
+              color: tag.color
+            }}
             label={tag.name}
             onDelete={() => this.toggleTagFromTask(tagID)}
             className={classes.chip}
@@ -64,11 +67,20 @@ class TagsButton extends Component {
           <Chip
             onClick={() => this.toggleTagFromTask(tagID)}
             key={tagID}
-            style={{ background: tag.color }}
+            style={{
+              background: tag.color + "48",
+              color: tag.color
+            }}
             label={tag.name}
             onDelete={() => this.toggleTagFromTask(tagID)}
             className={classes.chip}
-            deleteIcon={<DoneIcon />}
+            deleteIcon={
+              <DoneIcon
+                style={{
+                  color: tag.color
+                }}
+              />
+            }
           />
         );
       }
