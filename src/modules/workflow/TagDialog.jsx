@@ -96,7 +96,10 @@ class TagDialog extends Component {
       return (
         <Chip
           key={tagID}
-          style={{ background: tag.color }}
+          style={{
+            background: tag.color + "48",
+            color: tag.color
+          }}
           label={tag.name}
           onDelete={() => this.handleDeleteTag(tagID)}
           className={classes.chip}
@@ -124,7 +127,10 @@ class TagDialog extends Component {
           <div className={classes.dialogContent}>
             <div className={classes.row}>
               <Chip
-                style={{ background: tagColor }}
+                style={{
+                  background: tagColor + "48",
+                  color: tagColor
+                }}
                 label={tagName || "Tag"}
                 onDelete={this.clearChip}
                 className={classes.chip}

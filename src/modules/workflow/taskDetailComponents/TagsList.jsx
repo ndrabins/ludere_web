@@ -33,7 +33,10 @@ class TagsList extends PureComponent {
           <div
             key={tagID}
             className={classes.tag}
-            style={{ backgroundColor: tagsData[tagID].color }}
+            style={{
+              background: tagsData[tagID].color + "48",
+              color: tagsData[tagID].color
+            }}
           >
             {tagsData[tagID].name}
           </div>
@@ -116,6 +119,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(TagsList)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(TagsList));
