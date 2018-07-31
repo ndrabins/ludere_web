@@ -67,6 +67,7 @@ class Chat extends Component {
             channelID={selectedChannelID}
             helperText={`Message #${selectedChannel.name} here`}
             small={false}
+            autoFocus={true}
           />
           <TypingIndicator
             usersTyping={selectedChannel.usersTyping}

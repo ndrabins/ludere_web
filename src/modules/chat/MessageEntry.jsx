@@ -134,7 +134,7 @@ class MessageEntry extends Component {
   };
 
   render() {
-    const { helperText, classes, small } = this.props;
+    const { helperText, classes, small, autoFocus } = this.props;
     const { anchorEl, openGiphy } = this.state;
 
     return (
@@ -155,7 +155,7 @@ class MessageEntry extends Component {
           </label>
         </div>
         <TextField
-          autoFocus
+          autoFocus={autoFocus}
           id="name"
           placeholder={helperText}
           fullWidth

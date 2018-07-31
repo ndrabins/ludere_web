@@ -54,12 +54,12 @@ class CommentSection extends Component {
 
     return (
       <div className={classes.root}>
-        <SectionDivider content={"Comments"} />
         <MessageList messages={comments} channelID={taskID} stopScroll={true} />
         <MessageEntry
           channelID={taskID}
           helperText="Comment here"
           small={true}
+          autoFocus={false}
         />
         {!!commentChannel && (
           <TypingIndicator
@@ -77,7 +77,8 @@ const styles = {
   root: {
     display: "flex",
     width: "100%",
-    flexDirection: "column"
+    flexDirection: "column",
+    margin: -8
   },
   entryWrapper: {
     display: "flex",

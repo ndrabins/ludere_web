@@ -59,6 +59,7 @@ class TaskDetail extends Component {
             <div className={classes.taskContent}>
               <Description task={task} />
               <TaskSubTasks task={task} />
+              <SectionDivider content={"Comments"} />
               <CommentSection taskID={selectedTask} />
               <SectionDivider content={"Utility"} />
               <Button
