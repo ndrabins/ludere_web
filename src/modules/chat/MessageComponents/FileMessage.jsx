@@ -113,13 +113,19 @@ class FileMessage extends Component {
   };
 
   render() {
-    const { classes, message, formattedTimeStamp } = this.props;
+    const {
+      classes,
+      message,
+      formattedTimeStamp,
+      avatarURL,
+      userName
+    } = this.props;
     return (
       <React.Fragment>
-        <Avatar src={message.avatarURL} style={{ margin: "0px 10px" }} />
+        <Avatar src={avatarURL} style={{ margin: "0px 10px" }} />
         <div className={classes.messageContent}>
           <div className={classes.messageHeader}>
-            <div className={classes.name}>{message.sentByDisplayName}</div>
+            <div className={classes.name}>{userName}</div>
             <div className={classes.date}> {formattedTimeStamp} </div>
           </div>
           {/* <ReactMarkdown source={message.messageText} /> */}

@@ -95,7 +95,7 @@ class MessageList extends Component {
   }
 
   renderMessages() {
-    const { userID, channelID } = this.props;
+    const { userID, channelID, workspaceMembers } = this.props;
     let lastUser = null;
     let previousTimeStamp = null;
     let enoughTimeHasPassed = false;
@@ -133,6 +133,8 @@ class MessageList extends Component {
             key={key}
             userID={userID}
             channelID={channelID}
+            userName={workspaceMembers[message.sentBy].displayName}
+            avatarURL={workspaceMembers[message.sentBy].photoURL}
           />
         );
       }
@@ -147,6 +149,8 @@ class MessageList extends Component {
             key={key}
             userID={userID}
             channelID={channelID}
+            userName={workspaceMembers[message.sentBy].displayName}
+            avatarURL={workspaceMembers[message.sentBy].photoURL}
           />
         );
       } else {
@@ -159,6 +163,8 @@ class MessageList extends Component {
             key={key}
             userID={userID}
             channelID={channelID}
+            userName={workspaceMembers[message.sentBy].displayName}
+            avatarURL={workspaceMembers[message.sentBy].photoURL}
           />
         );
       }
@@ -243,6 +249,7 @@ const styles = theme => ({
 
 function mapStateToProps(state) {
   return {
+    workspaceMembers: state.workspace.workspaceUsers,
     loadingMoreMessages: state.chat.loadingMoreMessages,
     userID: state.auth.user.uid
   };

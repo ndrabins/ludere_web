@@ -27,7 +27,8 @@ class Message extends PureComponent {
     type: PropTypes.string.isRequired,
     formattedTimeStamp: PropTypes.string.isRequired,
     userID: PropTypes.string.isRequired,
-    messageID: PropTypes.string.isRequired
+    messageID: PropTypes.string.isRequired,
+    userName: PropTypes.string.isRequired
   };
 
   state = {
@@ -63,14 +64,20 @@ class Message extends PureComponent {
   }
 
   renderNormalMessage = () => {
-    const { classes, message, formattedTimeStamp } = this.props;
+    const {
+      classes,
+      message,
+      formattedTimeStamp,
+      userName,
+      avatarURL
+    } = this.props;
 
     return (
       <React.Fragment>
-        <Avatar src={message.avatarURL} style={{ margin: "0px 10px" }} />
+        <Avatar src={avatarURL} style={{ margin: "0px 10px" }} />
         <div className={classes.messageContent}>
           <div className={classes.messageHeader}>
-            <div className={classes.name}>{message.sentByDisplayName}</div>
+            <div className={classes.name}>{userName}</div>
             <div className={classes.date}> {formattedTimeStamp} </div>
           </div>
           <ReactMarkdown source={message.messageText} />
@@ -89,7 +96,15 @@ class Message extends PureComponent {
   };
 
   renderMessage = () => {
-    const { classes, type, userID, message, formattedTimeStamp } = this.props;
+    const {
+      classes,
+      type,
+      userID,
+      message,
+      formattedTimeStamp,
+      avatarURL,
+      userName
+    } = this.props;
     const { anchorEl, hovered, showDeleteDialog } = this.state;
 
     return (
@@ -98,6 +113,8 @@ class Message extends PureComponent {
           <FileMessage
             message={message}
             formattedTimeStamp={formattedTimeStamp}
+            avatarURL={avatarURL}
+            userName={userName}
           />
         )}
         {type === "small" && this.renderSmallMessage()}

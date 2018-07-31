@@ -227,7 +227,6 @@ export function sendMessage({
 }) {
   return (dispatch, getState) => {
     let { uid } = getState().auth.user;
-    let { photoURL } = getState().profile.myUserProfile;
     let { selectedChannel } = getState().chat;
     let { selectedWorkspace } = getState().workspace;
     let { selectedTeam } = getState().team;
@@ -238,16 +237,13 @@ export function sendMessage({
     let targetChannelID = !!channelID ? channelID : selectedChannel;
 
     //need to refactor this lol..
-    let myName = getState().workspace.workspaceUsers[uid].displayName;
 
     let message = {
       sentBy: uid,
       dateCreated: timestamp,
       dateUpdated: timestamp,
       messageText: messageText,
-      sentByDisplayName: myName,
       edited: false,
-      avatarURL: photoURL,
       fileURL: fileURL,
       type: type // VS. type file later...
     };
