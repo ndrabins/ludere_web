@@ -54,7 +54,7 @@ export function createBoard(boardName) {
         createTag(docRef.id, { tagName: "Priority", tagColor: "#0693E3" })
       );
       dispatch(
-        createTag(docRef.id, { tagName: "Urgent", tagColor: "#FF6900" })
+        createTag(docRef.id, { tagName: "Urgent", tagColor: "#d50000" })
       );
     });
   };

@@ -149,7 +149,7 @@ const styles = {
   container: {
     minHeight: 30,
     borderRadius: 8,
-    border: "4px solid transparent",
+    border: "3px solid transparent",
     backgroundColor: "white",
     padding: 6,
     margin: "0 0 8px 0",
@@ -164,7 +164,7 @@ const styles = {
   draggingContainer: {
     // backgroundColor: "black",
     borderRadius: 8,
-    border: "4px solid #00BCD4",
+    border: "3px solid #00BCD4",
     transition: "box-shadow 0.2s ease-out, border 0.2s ease-out"
   },
   progress: {

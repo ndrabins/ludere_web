@@ -40,7 +40,7 @@ class GiphyModal extends Component {
     client
       .search("gifs", { q: giphySearchName, limit: 24, rating: "pg" })
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         this.setState({ gifs: response.data });
       })
       .catch(err => {
@@ -107,7 +107,7 @@ class GiphyModal extends Component {
     const { giphySearchName } = this.state;
 
     if (!open) {
-      return <span />;
+      return null;
     }
 
     return (
@@ -180,6 +180,7 @@ const styles = theme => ({
     alignContent: "stretch"
   },
   column: {
+    flex: 1,
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
