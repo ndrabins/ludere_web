@@ -28,6 +28,10 @@ class MessageEntry extends Component {
     this.updateChannel = Debounce(this.props.actions.updateChannel, 1000);
   }
 
+  static defaultProps = {
+    actionOnSendMessage: () => {}
+  };
+
   handleChange = prop => event => {
     let updatedChannel = { usersTyping: {} };
     const { channelID, user } = this.props;
@@ -61,6 +65,7 @@ class MessageEntry extends Component {
     let updatedChannel = { usersTyping: {} };
     updatedChannel.usersTyping[user.uid] = false;
     this.updateChannel(updatedChannel, channelID);
+    this.props.actionOnSendMessage();
 
     this.setState({
       messageText: ""
@@ -96,6 +101,7 @@ class MessageEntry extends Component {
             fileURL: downloadURL,
             channelID
           });
+          this.props.actionOnSendMessage();
         });
       }
     );
@@ -110,6 +116,7 @@ class MessageEntry extends Component {
       fileURL: gifURL,
       channelID
     });
+    this.props.actionOnSendMessage();
   };
 
   openGifPicker = () => {

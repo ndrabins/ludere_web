@@ -5,49 +5,20 @@ import { bindActionCreators } from "redux";
 
 import * as Actions from "../../../actions";
 
-import SectionDivider from "../../../common/SectionDivider";
 import MessageList from "modules/chat/MessageList";
 import TypingIndicator from "modules/chat/TypingIndicator";
 import MessageEntry from "modules/chat/MessageEntry";
 
 class CommentSection extends Component {
-  state = {
-    commentText: ""
-  };
-
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
-  };
-
-  handleCreateComment = () => {
+  countComments = () => {
     const { comments, actions } = this.props;
-    const { commentText } = this.state;
 
     const numberOfComments = Object.keys(comments).length;
+    const updatedTask = { numberOfComments: numberOfComments };
 
-    if (commentText === "") {
-      return;
-    }
-
-    actions.createComment(commentText, numberOfComments);
-    this.setState({ commentText: "" });
+    console.log("updating task");
+    actions.updateTask(updatedTask);
   };
-
-  // handleDelete = removeIndex => {
-  //   const { task } = this.props;
-  //   let { subtasks } = task;
-  //   subtasks = subtasks.splice(removeIndex, 1);
-  //   this.props.actions.updateTask(task);
-  // };
-
-  // updatecommentText = (index, commentText) => {
-  //   const { task } = this.props;
-  //   let { subtasks } = task;
-  //   subtasks[index].content = commentText;
-  //   this.props.actions.updateTask(task);
-  // };
 
   render() {
     const { classes, comments, taskID, userID, commentChannel } = this.props;
@@ -60,6 +31,7 @@ class CommentSection extends Component {
           helperText="Comment here"
           small={true}
           autoFocus={false}
+          actionOnSendMessage={this.countComments}
         />
         {!!commentChannel && (
           <TypingIndicator
