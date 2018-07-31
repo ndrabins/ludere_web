@@ -12,7 +12,8 @@ class Description extends Component {
     });
   };
 
-  handleBlur = quillContent => {
+  updateQuill = quillContent => {
+    console.log("updating");
     let updatedTask = this.props.task;
     updatedTask.description = { ...quillContent };
 
@@ -25,8 +26,9 @@ class Description extends Component {
       <div className={classes.root}>
         <QuillEditor
           helperText="A description about this task"
-          handleBlur={this.handleBlur}
+          handleBlur={this.updateQuill}
           value={task.description}
+          onChange={this.updateQuill}
         />
       </div>
     );

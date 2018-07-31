@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Quill from "quill";
+import Debounce from "lodash/debounce";
 
 class QuillEditor extends Component {
   static propTypes = {
@@ -14,7 +15,7 @@ class QuillEditor extends Component {
   static defaultProps = {
     helperText: "",
     handleBlur: () => {},
-    onChange: () => {}
+    onChange: () => {} // do nothing on onChange unless we give a prop
   };
 
   constructor(props) {
@@ -26,6 +27,7 @@ class QuillEditor extends Component {
       selectedIndex: 0,
       selectedRange: 0
     };
+    this.onChange = Debounce(this.props.onChange, 3000); // debounce changes to not send too many network updates
   }
 
   componentWillReceiveProps(nextProps) {
@@ -66,7 +68,19 @@ class QuillEditor extends Component {
     }
 
     this.setState({ myQuill: quill });
+
+    quill.on("editor-change", (eventName, ...args) => {
+      if (eventName === "text-change") {
+        this.handleEditorChange();
+      }
+    });
   }
+
+  handleEditorChange = () => {
+    const { myQuill } = this.state;
+    // TODO: May need to do some refactoring on this code.. calls twicces
+    this.onChange(myQuill.getContents());
+  };
 
   handleEditorBlur = () => {
     const { handleBlur } = this.props;
