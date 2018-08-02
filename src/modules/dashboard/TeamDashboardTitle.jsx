@@ -22,17 +22,22 @@ class TeamDashboardTitle extends Component {
   };
 
   handleSaveSettings = () => {
-    console.log("saving");
+    const { actions } = this.props;
+    const { teamName } = this.state;
+
+    actions.updateTeam({ name: teamName });
 
     this.handleClose();
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false,
+      teamName: this.props.teams[this.props.selectedTeam].name
+    });
   };
 
   handleOpen = event => {
-    // event.stopPropagation();
     this.setState({ open: true });
   };
 
@@ -60,9 +65,10 @@ class TeamDashboardTitle extends Component {
 
     return (
       <div>
-        <Link
-          to="/team/"
+        <Typography
           className={onTeamPage ? classes.baseFocused : classes.baseWithHover}
+          component={Link}
+          to="/team/"
         >
           <img src={fireIcon} alt="fireIcon" />
           <div className={classes.titleText}> {myTeam.name} Dashboard </div>
@@ -110,7 +116,7 @@ class TeamDashboardTitle extends Component {
               </div>
             </div>
           </Dialog>
-        </Link>
+        </Typography>
       </div>
     );
   }

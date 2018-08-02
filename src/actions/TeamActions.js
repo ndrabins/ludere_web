@@ -10,7 +10,8 @@ import {
   FETCH_ANNOUNCEMENTS,
   CREATE_ANNOUNCEMENT,
   DELETE_ANNOUNCEMENT,
-  UPDATE_ANNOUNCEMENT
+  UPDATE_ANNOUNCEMENT,
+  UPDATE_TEAM
 } from "./types";
 
 import firebase from "firebase/app";
@@ -75,6 +76,21 @@ export function createTeam(
         console.error("Error adding document: ", error);
         dispatch({ type: CREATE_TEAM_ERROR });
       });
+  };
+}
+
+export function updateTeam(data) {
+  return (dispatch, getState) => {
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
+    let teamRef = firebase
+      .firestore()
+      .doc(`workspaces/${selectedWorkspace}/teams/${selectedTeam}`);
+
+    teamRef.set(data, { merge: true }).then(function() {
+      dispatch({ type: UPDATE_TEAM });
+    });
   };
 }
 
