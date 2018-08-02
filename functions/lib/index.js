@@ -12,10 +12,11 @@ const OnDeleteChannel = require("./chat/onDeleteChannel");
 const OnDeleteBoard = require("./workflow/onDeleteBoard");
 const OnDeleteList = require("./workflow/onDeleteList");
 const InviteUser = require("./workspaces/inviteUser");
-// TODO: refactor this to async await es6
+const onDeleteTeam = require("./team/onDeleteTeam");
 exports.onCreateMessage = OnCreateMessage.handler;
 exports.onDeleteChannel = OnDeleteChannel.handler;
 exports.onDeleteList = OnDeleteList.handler;
 exports.onDeleteBoard = OnDeleteBoard.handler;
+exports.onDeleteTeam = onDeleteTeam.handler;
 exports.inviteUser = InviteUser.handler;
 //# sourceMappingURL=index.js.map

@@ -23,6 +23,10 @@ exports.handler = functions.https.onCall((data, context) => __awaiter(this, void
     let workspaceID = data.workspaceID;
     let workspaceData = {};
     let updateWorkspacePromises;
+    if (!context.auth) {
+        // Throwing an HttpsError so that the client gets the error details.
+        throw new functions.https.HttpsError("failed-precondition", "The function must be called " + "while authenticated.");
+    }
     let createUserPromises = data.emails.map(email => {
         return admin
             .auth()
