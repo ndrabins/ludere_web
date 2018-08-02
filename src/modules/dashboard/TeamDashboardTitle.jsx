@@ -17,7 +17,7 @@ import Button from "@material-ui/core/Button";
 class TeamDashboardTitle extends Component {
   state = {
     open: false,
-    teamName: this.props.teams[this.props.selectedTeam].name,
+    teamName: "",
     teamNameToDelete: ""
   };
 
@@ -38,7 +38,10 @@ class TeamDashboardTitle extends Component {
   };
 
   handleOpen = event => {
-    this.setState({ open: true });
+    this.setState({
+      open: true,
+      teamName: this.props.teams[this.props.selectedTeam].name
+    });
   };
 
   handleChange = name => event => {
@@ -48,7 +51,10 @@ class TeamDashboardTitle extends Component {
   };
 
   handleDeleteTeam = () => {
-    console.log("deleting team");
+    const { actions } = this.props;
+    this.handleClose();
+    actions.deleteTeam();
+    actions.selectTeam(null);
   };
 
   render() {

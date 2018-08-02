@@ -11,7 +11,8 @@ import {
   CREATE_ANNOUNCEMENT,
   DELETE_ANNOUNCEMENT,
   UPDATE_ANNOUNCEMENT,
-  UPDATE_TEAM
+  UPDATE_TEAM,
+  DELETE_TEAM
 } from "./types";
 
 import firebase from "firebase/app";
@@ -90,6 +91,21 @@ export function updateTeam(data) {
 
     teamRef.set(data, { merge: true }).then(function() {
       dispatch({ type: UPDATE_TEAM });
+    });
+  };
+}
+
+export function deleteTeam() {
+  return (dispatch, getState) => {
+    let { selectedWorkspace } = getState().workspace;
+    let { selectedTeam } = getState().team;
+
+    let teamRef = firebase
+      .firestore()
+      .doc(`workspaces/${selectedWorkspace}/teams/${selectedTeam}`);
+
+    teamRef.delete().then(function(docRef) {
+      dispatch({ type: DELETE_TEAM });
     });
   };
 }

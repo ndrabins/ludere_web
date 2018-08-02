@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
-// import CommunitySideNav from "../community/CommunitySideNav";
+import { connect } from "react-redux";
+
 import ChatSideNav from "../chat/ChatSideNav";
 import WorkflowSideNav from "../workflow/WorkflowSideNav";
 import { withStyles } from "@material-ui/core/styles";
@@ -13,10 +14,10 @@ import TeamDashboardTitle from "./TeamDashboardTitle";
 
 class SideNavModules extends Component {
   render() {
-    const { classes, location } = this.props;
+    const { classes, location, selectedTeam } = this.props;
     const { pathname } = location;
-    const showModules =
-      pathname.includes("team") || pathname.includes("profile");
+
+    const showModules = selectedTeam !== null;
     return (
       <Scrollbars autoHide autoHideTimeout={1000} autoHideDuration={200}>
         <div className={classes.container}>
@@ -91,4 +92,13 @@ const styles = {
   }
 };
 
-export default withStyles(styles)(withRouter(SideNavModules));
+function mapStateToProps(state) {
+  return {
+    selectedTeam: state.team.selectedTeam
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(withStyles(styles)(withRouter(SideNavModules)));
