@@ -117,6 +117,7 @@ class Board extends Component {
                     id="listName"
                     placeholder="Add a list..."
                     value={this.state.listName}
+                    style={{ marginTop: 8 }}
                     onChange={this.handleChange("listName")}
                     margin="normal"
                     onKeyPress={ev => {
@@ -175,4 +176,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Board);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Board);

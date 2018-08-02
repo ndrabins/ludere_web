@@ -19,7 +19,8 @@ class LudereInput extends Component {
   static defaultProps = {
     label: "",
     helperText: "",
-    labelColor: "#303030"
+    labelColor: "#303030",
+    autoFocus: true
   };
 
   render() {
@@ -31,6 +32,7 @@ class LudereInput extends Component {
       handleChange,
       helperText,
       labelColor,
+      autoFocus,
       ...other
     } = this.props;
     return (
@@ -51,7 +53,7 @@ class LudereInput extends Component {
           className={classes.input}
           value={value}
           onChange={handleChange}
-          autoFocus
+          autoFocus={autoFocus}
           fullWidth
           disableUnderline
           autoComplete="off"
@@ -64,7 +66,8 @@ class LudereInput extends Component {
 
 const styles = theme => ({
   formControl: {
-    marginBotton: 10
+    marginBotton: 10,
+    width: "100%"
   },
   input: {
     backgroundColor: "transparent",

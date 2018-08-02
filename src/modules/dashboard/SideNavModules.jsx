@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import ArrowIcon from "@material-ui/icons/ArrowRightAltRounded";
 import SelectTeamIcon from "static/undraw_selectTeam.svg";
 
-import TeamDashboard from "./TeamDashboardTitle";
+import TeamDashboardTitle from "./TeamDashboardTitle";
 
 class SideNavModules extends Component {
   render() {
@@ -24,7 +24,7 @@ class SideNavModules extends Component {
         <Route path="/community" component={CommunitySideNav} /> */}
           {showModules ? (
             <Fragment>
-              <TeamDashboard />
+              <TeamDashboardTitle />
 
               <ChatSideNav />
               <WorkflowSideNav />
