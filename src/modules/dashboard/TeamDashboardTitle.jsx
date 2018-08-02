@@ -99,8 +99,8 @@ class TeamDashboardTitle extends Component {
                 handleChange={this.handleChange("teamName")}
                 helperText=""
               />
-              <SectionDivider content={"Danger"} />
               <div className={classes.deleteContainer}>
+                <SectionDivider content={"Danger"} />
                 <Typography style={{ marginBottom: 16 }}>
                   <b style={{ color: "rgb(229, 115, 115)" }}>Warning</b>: This
                   is irreversible and will delete all data from team.
@@ -183,7 +183,7 @@ const styles = {
     minWidth: 300
   },
   deleteContainer: {
-    marginTop: 8
+    marginTop: 32
   },
   deleteButton: {
     color: "rgb(229, 115, 115)",

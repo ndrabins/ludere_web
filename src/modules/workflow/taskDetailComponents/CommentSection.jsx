@@ -48,8 +48,7 @@ const styles = {
   root: {
     display: "flex",
     width: "100%",
-    flexDirection: "column",
-    margin: -8
+    flexDirection: "column"
   },
   entryWrapper: {
     display: "flex",
