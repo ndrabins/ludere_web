@@ -18,7 +18,8 @@ class TeamDashboardTitle extends Component {
   state = {
     open: false,
     teamName: "",
-    teamNameToDelete: ""
+    teamNameToDelete: "",
+    onTeamDashboard: false
   };
 
   handleSaveSettings = () => {
@@ -61,7 +62,7 @@ class TeamDashboardTitle extends Component {
     const { classes, location, teams, selectedTeam } = this.props;
     const { open, teamName, teamNameToDelete } = this.state;
 
-    let onTeamPage = location.pathname === "/team/";
+    let onTeamPage = location === "/team/";
 
     const myTeam = teams[selectedTeam];
 
@@ -208,9 +209,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(withStyles(styles)(TeamDashboardTitle))
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(TeamDashboardTitle));

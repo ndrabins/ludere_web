@@ -47,12 +47,10 @@ class TeamNav extends Component {
       return;
     }
 
-    let focusTeam = location.pathname.includes("team");
     let index = 0;
 
     let teams = Map(this.props.teams, (team, teamID) => {
-      let selectIndicatorStyle =
-        focusTeam && this.props.selectedTeam === teamID;
+      let selectIndicatorStyle = this.props.selectedTeam === teamID;
       index++;
       return (
         <div key={teamID} className={classes.teamButtonContainer}>

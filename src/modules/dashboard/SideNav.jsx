@@ -14,6 +14,7 @@ const drawerWidth = 240;
 class SideNav extends Component {
   render() {
     const { classes } = this.props;
+
     return (
       <div className={classes.container}>
         <TeamNav />
@@ -35,7 +36,7 @@ class SideNav extends Component {
                 <CloseIcon />
               </IconButton>
             </div>
-            <SideNavModules />
+            <SideNavModules location={this.props.history.location.pathname} />
           </div>
         </div>
       </div>
