@@ -301,32 +301,3 @@ export function deleteTask() {
       });
   };
 }
-
-export function createComment(commentText, numberOfComments) {
-  return (dispatch, getState) => {
-    const { selectedTask, selectedBoard } = getState().workflow;
-    let { selectedWorkspace } = getState().workspace;
-    let { selectedTeam } = getState().team;
-
-    dispatch(
-      chatActions.sendMessage({
-        messageText: commentText,
-        channelID: selectedTask
-      })
-    );
-
-    //update task with number of comments
-    let taskRef = firebase
-      .firestore()
-      .doc(
-        `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/tasks/${selectedTask}`
-      );
-
-    taskRef.set(
-      {
-        numberOfComments: numberOfComments + 1
-      },
-      { merge: true }
-    );
-  };
-}

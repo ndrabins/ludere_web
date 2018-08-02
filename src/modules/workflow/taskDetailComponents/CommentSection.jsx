@@ -14,9 +14,8 @@ class CommentSection extends Component {
     const { comments, actions } = this.props;
 
     const numberOfComments = Object.keys(comments).length;
-    const updatedTask = { numberOfComments: numberOfComments };
+    const updatedTask = { numberOfComments: numberOfComments + 1 };
 
-    console.log("updating task");
     actions.updateTask(updatedTask);
   };
 
