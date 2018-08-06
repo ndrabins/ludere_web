@@ -8,6 +8,7 @@ import "emoji-mart/css/emoji-mart.css";
 import data from "emoji-mart/data/apple.json";
 import Popover from "@material-ui/core/Popover";
 import GiphyModal from "./GiphyModal";
+import FileUploaderProgress from "./MessageComponents/FileUploaderProgress";
 import GifIcon from "@material-ui/icons/Gif";
 
 import { NimblePicker } from "emoji-mart";
@@ -22,7 +23,11 @@ class MessageEntry extends Component {
     this.state = {
       messageText: "",
       anchorEl: null,
-      openGiphy: false
+      openGiphy: false,
+      fileUploadPercent: 0,
+      fileUploadInProgress: false,
+      fileName: "",
+      fileSize: 0
     };
     // debounce the passed in dispatch method, so not to update the typing indicator every keypress
     this.updateChannel = Debounce(this.props.actions.updateChannel, 1000);
@@ -83,17 +88,31 @@ class MessageEntry extends Component {
       .ref(`chat/${channelID}/${file.name}`);
 
     const uploadTask = chatUploadRef.put(file);
+    this.setState({
+      fileUploadInProgress: true,
+      fileName: file.name,
+      fileSize: file.size
+    });
 
     uploadTask.on(
       `state_changed`,
       snapshot => {
         // track progress here
+        //snapshot.bytesTransferred, snapshot.totalBytes);
+        let percentDone =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        this.setState({
+          fileUploadPercent: percentDone
+        });
+        console.log(percentDone);
       },
       error => {
         error("File couldn't be uploaded :(");
       },
       () => {
         //Success
+        this.setState({ fileUploadInProgress: false });
+
         uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
           actions.sendMessage({
             messageText: file.name,
@@ -101,8 +120,8 @@ class MessageEntry extends Component {
             fileURL: downloadURL,
             channelID
           });
-          this.props.actionOnSendMessage();
         });
+        this.props.actionOnSendMessage();
       }
     );
   };
@@ -142,7 +161,14 @@ class MessageEntry extends Component {
 
   render() {
     const { helperText, classes, small, autoFocus } = this.props;
-    const { anchorEl, openGiphy } = this.state;
+    const {
+      anchorEl,
+      openGiphy,
+      fileUploadInProgress,
+      fileUploadPercent,
+      fileName,
+      fileSize
+    } = this.state;
 
     return (
       <div className={classes.container}>
@@ -184,6 +210,12 @@ class MessageEntry extends Component {
               ev.preventDefault();
             }
           }}
+        />
+        <FileUploaderProgress
+          fileUploadPercent={fileUploadPercent}
+          fileName={fileName}
+          fileUploadInProgress={fileUploadInProgress}
+          fileSize={fileSize}
         />
         <GiphyModal
           open={openGiphy}
@@ -279,7 +311,8 @@ const styles = theme => ({
   htmlLabel: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    cursor: "pointer"
   },
   emojiIcon: {
     position: "absolute",
