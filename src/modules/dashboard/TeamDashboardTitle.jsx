@@ -39,6 +39,8 @@ class TeamDashboardTitle extends Component {
   };
 
   handleOpen = event => {
+    // event.preventDefault(); // need to move the menu outside the link for this to work well
+    // event.stopPropagation();
     this.setState({
       open: true,
       teamName: this.props.teams[this.props.selectedTeam].name

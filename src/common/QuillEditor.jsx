@@ -53,7 +53,7 @@ class QuillEditor extends Component {
         toolbar: [
           [{ header: 1 }, { header: 2 }],
           ["bold", "italic"],
-          ["blockquote", "code-block", "image", "video"],
+          ["blockquote", "code-block", "video"],
           [{ list: "ordered" }, { list: "bullet" }]
         ],
         syntax: true
