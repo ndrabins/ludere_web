@@ -111,7 +111,12 @@ class MessageEntry extends Component {
       },
       () => {
         //Success
-        this.setState({ fileUploadInProgress: false });
+        this.setState({
+          fileUploadInProgress: false,
+          fileName: "",
+          fileSize: 0,
+          fileUploadPercent: 0
+        });
 
         uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
           actions.sendMessage({

@@ -6,6 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Input from "@material-ui/core/Input";
 import GiphyLogo from "static/GiphyLogo.png";
+import Fade from "@material-ui/core/Fade";
 
 import GphApiClient from "giphy-js-sdk-core";
 const client = GphApiClient("azVscOW5d6t3LzyJE1rwD3cnu0DwB1vH");
@@ -106,46 +107,57 @@ class GiphyModal extends Component {
     const { classes, open, small } = this.props;
     const { giphySearchName } = this.state;
 
-    if (!open) {
-      return null;
-    }
-
     return (
       <ClickAwayListener onClickAway={this.handleClose}>
-        <Paper className={classes.container}>
-          <div className={classes.inputContainer}>
-            <Input
-              className={classes.input}
-              classes={{ focused: classes.inputFocused }}
-              value={giphySearchName}
-              onChange={this.handleChange("giphySearchName")}
-              fullWidth
-              placeholder="Showing Trending Gifs. Type here to search for more!"
-              disableUnderline
-              autoFocus
-            />
-            <img
-              src={GiphyLogo}
-              alt="giphy logo"
-              className={classes.giphyLogo}
-            />
-          </div>
-          <div className={classes.masonry}>
-            {!small && (
-              <React.Fragment>
-                <div className={classes.column}>{this.renderColumn(0, 3)}</div>
-                <div className={classes.column}>{this.renderColumn(1, 3)}</div>
-                <div className={classes.column}>{this.renderColumn(2, 3)}</div>
-              </React.Fragment>
-            )}
-            {small && (
-              <React.Fragment>
-                <div className={classes.column}>{this.renderColumn(0, 2)}</div>
-                <div className={classes.column}>{this.renderColumn(1, 2)}</div>
-              </React.Fragment>
-            )}
-          </div>
-        </Paper>
+        <Fade in={open} timeout={{ enter: 200, exit: 200 }}>
+          <Paper
+            className={classes.container}
+            style={{ zIndex: open ? 0 : -10 }} // hide content behind chat so that we can have fade animation
+          >
+            <div className={classes.inputContainer}>
+              <Input
+                className={classes.input}
+                classes={{ focused: classes.inputFocused }}
+                value={giphySearchName}
+                onChange={this.handleChange("giphySearchName")}
+                fullWidth
+                placeholder="Showing Trending Gifs. Type here to search for more!"
+                disableUnderline
+                autoFocus
+              />
+              <img
+                src={GiphyLogo}
+                alt="giphy logo"
+                className={classes.giphyLogo}
+              />
+            </div>
+            <div className={classes.masonry}>
+              {!small && (
+                <React.Fragment>
+                  <div className={classes.column}>
+                    {this.renderColumn(0, 3)}
+                  </div>
+                  <div className={classes.column}>
+                    {this.renderColumn(1, 3)}
+                  </div>
+                  <div className={classes.column}>
+                    {this.renderColumn(2, 3)}
+                  </div>
+                </React.Fragment>
+              )}
+              {small && (
+                <React.Fragment>
+                  <div className={classes.column}>
+                    {this.renderColumn(0, 2)}
+                  </div>
+                  <div className={classes.column}>
+                    {this.renderColumn(1, 2)}
+                  </div>
+                </React.Fragment>
+              )}
+            </div>
+          </Paper>
+        </Fade>
       </ClickAwayListener>
     );
   }
@@ -160,7 +172,8 @@ const styles = theme => ({
     top: "-405px",
     margin: "0px 2px",
     height: 400,
-    overflowX: "hidden"
+    overflowX: "hidden",
+    transition: "z-index 0.25s ease-out"
   },
   inputContainer: {
     display: "flex",
