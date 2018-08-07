@@ -181,7 +181,8 @@ const styles = {
     marginTop: 4
   },
   percentageCounter: {
-    position: "absolute"
+    position: "absolute",
+    fontSize: "10px"
   },
   subtaskCounter: {
     position: "absolute"

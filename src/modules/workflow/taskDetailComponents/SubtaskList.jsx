@@ -5,6 +5,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
 import Fade from "@material-ui/core/Fade";
 import EditableText from "../../../common/EditableText";
+import CheckboxLottie from "common/CheckBox";
 
 class SubtaskList extends Component {
   state = {
@@ -38,14 +39,10 @@ class SubtaskList extends Component {
             onMouseLeave={() => this.handleLeave()}
           >
             <div className={classes.subtaskContent}>
-              <Checkbox
-                onClick={() => this.props.handleToggleSubtask(index)}
-                classes={{
-                  root: classes.checkBoxRoot,
-                  checked: classes.checked
-                }}
-                checked={subtask.completed}
-                tabIndex={-1}
+              <CheckboxLottie
+                isChecked={subtask.completed}
+                subtaskID={index}
+                handleClick={() => this.props.handleToggleSubtask(index)}
               />
               <div className={classes.textContainer}>
                 <EditableText
@@ -72,55 +69,60 @@ class SubtaskList extends Component {
 }
 
 const styles = theme => ({
-  root: {
-    overflowY: "auto"
-  },
+  root: {},
   subtask: {
     padding: 0,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: "-8px",
     width: "100%"
   },
   text: {
     whiteSpace: "pre-line",
     wordWrap: "break-word",
-    transition: "color 0.5s ease-out",
-    paddingTop: 5,
-    width: "100%"
+    width: "100%",
+    background: "transparent",
+    borderRadius: 5,
+    padding: 5,
+    transition: "background-color 0.25s ease-out, color 0.25s ease-out",
+    "&:hover": {
+      cursor: "text",
+      background: "rgba(0,0,0,.15)  "
+    }
   },
   completedText: {
     whiteSpace: "pre-line",
     wordWrap: "break-word",
     textDecoration: "line-through",
     color: "#B0B2B6",
-    transition: "color 0.25s ease-out",
-    paddingTop: 5,
-    width: "100%"
+    width: "100%",
+    background: "transparent",
+    borderRadius: 5,
+    padding: 5,
+    transition: "background-color 0.25s ease-out, color 0.25s ease-out",
+    "&:hover": {
+      cursor: "text",
+      background: "rgba(0,0,0,.15)"
+    }
   },
   textContainer: {
+    wordBreak: "break-word",
     whiteSpace: "pre-line",
     wordWrap: "break-word",
-    paddingTop: 10,
-    width: "100%"
+    width: "100%",
+    paddingLeft: 48
   },
   subtaskContent: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: "center",
+    position: "relative",
     wordWrap: "break-word",
-    width: "80%" // this shouldnt be hard coded but I couldn't figure out how to make the text not go past div.
+    width: "100%" // this shouldnt be hard coded but I couldn't figure out how to make the text not go past div.
   },
   closeIcon: {
     color: "#6d6d6d"
-  },
-  checkBoxRoot: {
-    "&$checked": {
-      color: "#00ca72"
-    }
-  },
-  checked: {}
+  }
 });
 
 export default withStyles(styles)(SubtaskList);

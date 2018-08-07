@@ -7,8 +7,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 
-import EditableText from "../../../common/EditableText";
-import SectionDivider from "../../../common/SectionDivider";
+import EditableText from "common/EditableText";
+import SectionDivider from "common/SectionDivider";
 import TaskSubTasks from "../taskDetailComponents/TaskSubTasks";
 import Description from "../taskDetailComponents/Description";
 import CommentSection from "../taskDetailComponents/CommentSection";
