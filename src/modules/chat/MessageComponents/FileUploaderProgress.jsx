@@ -40,7 +40,10 @@ class FileUploaderProgress extends Component {
 
     return (
       <Fade in={fileUploadInProgress} timeout={{ enter: 200, exit: 200 }}>
-        <Paper className={classes.root}>
+        <Paper
+          className={classes.root}
+          style={{ zIndex: fileUploadInProgress ? 0 : -10 }}
+        >
           <div className={classes.textContainer}>
             <Typography variant="title" style={{ color: "#303030" }}>
               {fileName} {" - "}
@@ -77,7 +80,8 @@ const styles = theme => ({
     height: 100,
     justifyContent: "center",
     overflowX: "hidden",
-    padding: 16
+    padding: 16,
+    transition: "z-index 0.2s ease-out"
   },
   fileIcon: {
     fontSize: 46

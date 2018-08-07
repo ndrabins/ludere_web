@@ -104,7 +104,6 @@ class MessageEntry extends Component {
         this.setState({
           fileUploadPercent: percentDone
         });
-        console.log(percentDone);
       },
       error => {
         error("File couldn't be uploaded :(");
