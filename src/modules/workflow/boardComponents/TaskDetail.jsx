@@ -120,7 +120,7 @@ const styles = theme => ({
   headerInner: {
     display: "flex",
     width: "100%",
-    height: "100%",
+    // height: "100%",
     flexDirection: "row",
     alignItems: "center",
     paddingRight: 10,
@@ -128,14 +128,13 @@ const styles = theme => ({
     marginBottom: "-3px"
   },
   taskContent: {
-    height: "100%",
+    // height: "100%",
     padding: 8,
     overflowY: "auto"
   },
   titleContainer: {
     width: "100%",
-    display: "flex",
-    height: "100%"
+    display: "flex"
   },
   deleteButton: {
     marginTop: 10,
