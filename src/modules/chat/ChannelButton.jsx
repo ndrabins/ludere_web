@@ -22,7 +22,7 @@ class ChannelButton extends Component {
     anchorEl: null,
     isEditingChannelName: false,
     isDeletingChannel: false,
-    channelName: this.props.name
+    channelName: this.props.name,
   };
 
   handleClickNavMenu = event => {
@@ -64,7 +64,7 @@ class ChannelButton extends Component {
 
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
     });
   };
 
@@ -85,7 +85,7 @@ class ChannelButton extends Component {
       anchorEl,
       isEditingChannelName,
       channelName,
-      isDeletingChannel
+      isDeletingChannel,
     } = this.state;
 
     let channelStyle = classes.channel;
@@ -126,11 +126,11 @@ class ChannelButton extends Component {
           onClose={this.handleClose}
           anchorOrigin={{
             vertical: "bottom",
-            horizontal: "center"
+            horizontal: "center",
           }}
           transformOrigin={{
             vertical: "top",
-            horizontal: "center"
+            horizontal: "center",
           }}
         >
           <MenuItem onClick={this.handleUpdateChannelName}>
@@ -215,8 +215,8 @@ const styles = {
     "&:hover": {
       borderRadius: 5,
       backgroundColor: "#424242",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   selectedChannel: {
     display: "flex",
@@ -232,8 +232,8 @@ const styles = {
     "&:hover": {
       borderRadius: 5,
       backgroundColor: "#424242",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   notificationIcon: {
     height: 6,
@@ -241,7 +241,7 @@ const styles = {
     borderRadius: 5,
     left: 26,
     background: "#6FE5C9",
-    position: "absolute"
+    position: "absolute",
   },
   name: {
     position: "relative",
@@ -254,8 +254,8 @@ const styles = {
     color: "#6f6f6f",
     "&:hover": {
       color: "#b9bbbe",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   selectedName: {
     position: "relative",
@@ -264,15 +264,15 @@ const styles = {
     display: "flex",
     width: "100%",
     alignItems: "center",
-    paddingLeft: 52
+    paddingLeft: 52,
   },
   icon: {
     color: "#6f6f6f",
     marginTop: 2,
     "&:hover": {
       color: "#b9bbbe",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   input: {
     fontWeight: 500,
@@ -284,24 +284,24 @@ const styles = {
     color: "black",
     overflowY: "hidden",
     overflowX: "hidden",
-    cursor: "text"
+    cursor: "text",
   },
   notificationText: {
     fontWeight: 500,
-    color: "white"
-  }
+    color: "white",
+  },
 };
 
 function mapStateToProps(state) {
   return {
     selectedChannel: state.chat.selectedChannel,
-    notifications: state.userData.notifications
+    notifications: state.userData.notifications,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

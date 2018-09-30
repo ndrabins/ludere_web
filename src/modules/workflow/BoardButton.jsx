@@ -26,13 +26,13 @@ class BoardButton extends Component {
       anchorEl: null,
       isEditingBoardName: false,
       isDeletingBoard: false,
-      boardName: this.props.name
+      boardName: this.props.name,
     };
   }
 
   handleHover = () => {
     this.setState({
-      isHovered: !this.state.isHovered
+      isHovered: !this.state.isHovered,
     });
   };
 
@@ -71,7 +71,7 @@ class BoardButton extends Component {
 
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
     });
   };
 
@@ -83,12 +83,19 @@ class BoardButton extends Component {
   };
 
   render() {
-    const { history, boardID, selectedBoard, classes, name } = this.props;
+    const {
+      history,
+      boardID,
+      selectedBoard,
+      classes,
+      name,
+      notifications,
+    } = this.props;
     const {
       anchorEl,
       isEditingBoardName,
       boardName,
-      isDeletingBoard
+      isDeletingBoard,
     } = this.state;
 
     let workflowStyle = classes.workflow;
@@ -108,8 +115,12 @@ class BoardButton extends Component {
           onClick={this.handleClick}
           noWrap
           component={Link}
+          style={notifications[boardID] ? styles.notificationText : null}
           to="/team/workflow"
         >
+          <div
+            className={notifications[boardID] ? classes.notificationIcon : null}
+          />
           {name}
         </Typography>
 
@@ -125,11 +136,11 @@ class BoardButton extends Component {
           onClose={this.handleClose}
           anchorOrigin={{
             vertical: "bottom",
-            horizontal: "center"
+            horizontal: "center",
           }}
           transformOrigin={{
             vertical: "top",
-            horizontal: "center"
+            horizontal: "center",
           }}
         >
           <MenuItem onClick={this.handleUpdateBoardName}>
@@ -196,8 +207,8 @@ const styles = {
     "&:hover": {
       borderRadius: 5,
       backgroundColor: "#424242",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   selectedWorkflow: {
     display: "flex",
@@ -213,8 +224,8 @@ const styles = {
     "&:hover": {
       borderRadius: 5,
       backgroundColor: "#424242",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   name: {
     textDecoration: "none",
@@ -226,8 +237,8 @@ const styles = {
     color: "#6f6f6f",
     "&:hover": {
       color: "#b9bbbe",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   selectedName: {
     textDecoration: "none",
@@ -235,15 +246,15 @@ const styles = {
     display: "flex",
     width: "100%",
     alignItems: "center",
-    paddingLeft: 52
+    paddingLeft: 52,
   },
   icon: {
     color: "#6f6f6f",
     marginTop: 2,
     "&:hover": {
       color: "#b9bbbe",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   input: {
     fontWeight: 500,
@@ -255,19 +266,32 @@ const styles = {
     color: "black",
     overflowY: "hidden",
     overflowX: "hidden",
-    cursor: "text"
-  }
+    cursor: "text",
+  },
+  notificationIcon: {
+    height: 6,
+    width: 12,
+    borderRadius: 5,
+    left: 35, // not sure this has to be different from channel button to look the same...
+    background: "#6FE5C9",
+    position: "absolute",
+  },
+  notificationText: {
+    fontWeight: 500,
+    color: "white",
+  },
 };
 
 function mapStateToProps(state) {
   return {
-    selectedBoard: state.workflow.selectedBoard
+    selectedBoard: state.workflow.selectedBoard,
+    notifications: state.userData.notifications,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

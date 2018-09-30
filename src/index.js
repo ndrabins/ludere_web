@@ -46,7 +46,7 @@ if (url.includes("staging")) {
     databaseURL: "https://staging-ludere.firebaseio.com",
     projectId: "staging-ludere",
     storageBucket: "staging-ludere.appspot.com",
-    messagingSenderId: "674177146337"
+    messagingSenderId: "674177146337",
   };
 } else if (url.includes("beta")) {
   config = {
@@ -55,7 +55,7 @@ if (url.includes("staging")) {
     databaseURL: "https://beta-ludere.firebaseio.com",
     projectId: "beta-ludere",
     storageBucket: "beta-ludere.appspot.com",
-    messagingSenderId: "824616822639"
+    messagingSenderId: "824616822639",
   };
 } else {
   //dev
@@ -65,7 +65,7 @@ if (url.includes("staging")) {
     databaseURL: "https://dev-ludere.firebaseio.com",
     projectId: "dev-ludere",
     storageBucket: "dev-ludere.appspot.com",
-    messagingSenderId: "826975908697"
+    messagingSenderId: "826975908697",
   };
 }
 
@@ -77,7 +77,7 @@ firestore.settings(settings);
 const persistConfig = {
   key: "ludereRoot",
   storage,
-  stateReconciler: hardSet
+  stateReconciler: hardSet,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
