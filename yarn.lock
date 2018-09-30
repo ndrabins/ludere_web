@@ -3412,9 +3412,9 @@ filepond-plugin-file-encode@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/filepond-plugin-file-encode/-/filepond-plugin-file-encode-1.0.5.tgz#d22c96105a04d22073455549c3ee570fc5766bc8"
 
-filepond-plugin-file-validate-size@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-file-validate-size/-/filepond-plugin-file-validate-size-1.0.3.tgz#645edd3405687d72e2a68c1d28983fed1594d5e3"
+filepond-plugin-file-validate-size@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-file-validate-size/-/filepond-plugin-file-validate-size-1.0.4.tgz#72e77b3cd65e6440e34ba5394dc9991076d7bc48"
 
 filepond-plugin-file-validate-type@^1.1.0:
   version "1.1.0"
@@ -3428,21 +3428,21 @@ filepond-plugin-image-exif-orientation@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/filepond-plugin-image-exif-orientation/-/filepond-plugin-image-exif-orientation-1.0.2.tgz#5470d2c0c19c7ef5a3a74169f29a76b910eb721b"
 
-filepond-plugin-image-preview@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-image-preview/-/filepond-plugin-image-preview-1.1.0.tgz#1a4de4b9511fb15d8df65f722067ac1ef865c2a1"
+filepond-plugin-image-preview@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-preview/-/filepond-plugin-image-preview-2.0.1.tgz#e272b52bceb613cb11146b40cd2cbaef19f363c7"
 
-filepond-plugin-image-resize@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-image-resize/-/filepond-plugin-image-resize-1.2.0.tgz#0256cf562f0192a90c47ec0102e8feee5eba4246"
+filepond-plugin-image-resize@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-resize/-/filepond-plugin-image-resize-2.0.1.tgz#c03c4ace90a388fcc14717ab422e2b1c9d1e50c5"
 
-filepond-plugin-image-transform@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-image-transform/-/filepond-plugin-image-transform-1.1.1.tgz#6087349a7f270290b415344a2d2642bc47799755"
+filepond-plugin-image-transform@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-transform/-/filepond-plugin-image-transform-2.1.0.tgz#ffc8b95dd33ecf7e7aa316b9e24dcc3faa1a9ac3"
 
-filepond@^1.8.6:
-  version "1.8.8"
-  resolved "https://registry.yarnpkg.com/filepond/-/filepond-1.8.8.tgz#51a408d7df2aeb8824716ab043841efb8c602c42"
+filepond@^2.2.0:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/filepond/-/filepond-2.3.1.tgz#e48d742c203637f14d91e71c33b3035b7a2b6793"
 
 fileset@^2.0.2:
   version "2.0.3"
@@ -7165,11 +7165,11 @@ react-event-listener@^0.6.2:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
-react-filepond@^2.0.8:
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/react-filepond/-/react-filepond-2.0.8.tgz#43b34f5cf7dfc2d977a100f309bdae11e537d79a"
+react-filepond@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-filepond/-/react-filepond-3.0.1.tgz#8aa50d5b29f37c8568b4c9d6b8bd46da81e7aa10"
   dependencies:
-    filepond "^1.8.6"
+    filepond "^2.2.0"
 
 react-icons@^3.1.0:
   version "3.1.0"
