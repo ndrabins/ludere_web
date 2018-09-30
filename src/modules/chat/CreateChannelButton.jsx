@@ -71,8 +71,9 @@ class CreateChatButton extends Component {
 
 const styles = {
   createChannelButton: {
-    width: 22,
-    height: 22,
+    width: 24,
+    height: 24,
+    padding: 0,
     color: "white",
     background: "linear-gradient(to right, #e57373, #ee8d68)"
   }

@@ -164,6 +164,7 @@ const styles = theme => ({
     fontSize: 16
   },
   inviteButton: {
+    padding: 0,
     width: 24,
     height: 24,
     background: "linear-gradient(to right, #29b6f6, #796eff)"

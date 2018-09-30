@@ -72,8 +72,9 @@ class CreateBoardButton extends Component {
 
 const styles = {
   createWorkFlowButton: {
-    width: 22,
-    height: 22,
+    width: 24,
+    height: 24,
+    padding: 0,
     color: "white",
     background: "linear-gradient(to right, #a770ef, #cf8bf3)"
   }
