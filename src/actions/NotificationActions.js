@@ -1,7 +1,7 @@
 import {
   FETCH_NOTIFICATIONS,
   FETCH_NOTIFICATIONS_SUCCESS,
-  NOTIFICATION_READ
+  NOTIFICATION_READ,
 } from "../actions/types";
 
 import firebase from "firebase/app";
@@ -41,13 +41,13 @@ export function fetchNotifications() {
       if (!doc.exists) {
         dispatch({
           type: FETCH_NOTIFICATIONS_SUCCESS,
-          notifications: {}
+          notifications: {},
         });
         return;
       }
       dispatch({
         type: FETCH_NOTIFICATIONS_SUCCESS,
-        notifications: doc.data().notifications
+        notifications: doc.data().notifications,
       });
     });
   };

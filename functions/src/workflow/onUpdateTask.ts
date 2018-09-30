@@ -9,13 +9,13 @@ const firestore = admin.firestore();
 
 export const handler = functions.firestore
   .document(
-    "workspaces/{workspaceID}/teams/{teamID}/chat/{channelID}/messages/{messageID}"
+    "workspaces/{workspaceID}/teams/{teamID}/workflow/{boardID}/tasks/{taskID}"
   )
-  .onCreate((snap, context) => {
-    const channelID = context.params.channelID;
+  .onUpdate((snap, context) => {
+    const boardID = context.params.boardID;
     const workspaceID = context.params.workspaceID;
     const teamID = context.params.teamID;
-    const message = snap.data();
+    const taskID = context.params.taskID;
 
     const teamRef = firestore.doc(`workspaces/${workspaceID}/teams/${teamID}`);
 
@@ -30,10 +30,11 @@ export const handler = functions.firestore
         //for each team member that is a member, send a notification on the channel
 
         Map(teamMembers, (isMember, memberID) => {
-          if (isMember && message.sentBy !== memberID) {
+          if (isMember) {
             let notifications = {};
-            notifications[`${teamID}`] = true; // set notification on the teamg
-            notifications[`${channelID}`] = true;
+            notifications[`${teamID}`] = true; // set notification on the team
+            notifications[`${boardID}`] = true;
+            notifications[`${taskID}`] = true;
             const privateUserRef = firestore.doc(`privateUserData/${memberID}`);
             privateUserRef.set(
               {

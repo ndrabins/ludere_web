@@ -53,7 +53,9 @@ class BoardButton extends Component {
   };
 
   handleClick = () => {
-    this.props.actions.selectBoard(this.props.boardID);
+    const { boardID } = this.props;
+    this.props.actions.selectBoard(boardID);
+    this.props.actions.readNotification(boardID);
   };
 
   handleMenuClick = event => {

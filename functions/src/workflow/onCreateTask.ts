@@ -15,7 +15,8 @@ export const handler = functions.firestore
     const boardID = context.params.boardID;
     const workspaceID = context.params.workspaceID;
     const teamID = context.params.teamID;
-    const message = snap.data();
+    const taskID = context.params.taskID;
+    const task = snap.data();
 
     const teamRef = firestore.doc(`workspaces/${workspaceID}/teams/${teamID}`);
 
@@ -30,10 +31,11 @@ export const handler = functions.firestore
         //for each team member that is a member, send a notification on the channel
 
         Map(teamMembers, (isMember, memberID) => {
-          if (isMember && message.sentBy !== memberID) {
+          if (isMember && task.createdBy !== memberID) {
             let notifications = {};
-            notifications[`${teamID}`] = true; // set notification on the teamg
+            notifications[`${teamID}`] = true; // set notification on the team
             notifications[`${boardID}`] = true;
+            notifications[`${taskID}`] = true;
             const privateUserRef = firestore.doc(`privateUserData/${memberID}`);
             privateUserRef.set(
               {
