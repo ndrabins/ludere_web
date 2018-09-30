@@ -17,7 +17,7 @@ import Loading from "common/Loading";
 import ReduxThunk from "redux-thunk";
 import rootReducer from "./reducers";
 
-import firebase from "firebase";
+import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/messaging";
 import "firebase/auth";

@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 import { withStyles } from "@material-ui/core/styles";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/storage";
+
 import "emoji-mart/css/emoji-mart.css";
 import data from "emoji-mart/data/apple.json";
 import Popover from "@material-ui/core/Popover";

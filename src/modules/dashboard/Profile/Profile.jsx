@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
 
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/storage";
 
 import { FilePond, File, registerPlugin } from "react-filepond";
 import FilepondPluginImagePreview from "filepond-plugin-image-preview";
@@ -150,7 +151,9 @@ class Profile extends Component {
               }}
               ref={ref => (this.pond = ref)}
             >
-              {files.map(file => <File key={file} source={file} />)}
+              {files.map(file => (
+                <File key={file} source={file} />
+              ))}
             </FilePond>
           </div>
           <Typography
