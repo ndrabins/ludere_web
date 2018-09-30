@@ -6,7 +6,6 @@ import * as Actions from "actions";
 import fireIcon from "../../static/teamfire.svg";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import { withRouter } from "react-router";
 import SettingsIcon from "@material-ui/icons/SettingsRounded";
 import Dialog from "common/Dialog";
 import LudereInput from "common/LudereInput";
@@ -19,7 +18,7 @@ class TeamDashboardTitle extends Component {
     open: false,
     teamName: "",
     teamNameToDelete: "",
-    onTeamDashboard: false
+    onTeamDashboard: false,
   };
 
   handleSaveSettings = () => {
@@ -34,7 +33,7 @@ class TeamDashboardTitle extends Component {
   handleClose = () => {
     this.setState({
       open: false,
-      teamName: this.props.teams[this.props.selectedTeam].name
+      teamName: this.props.teams[this.props.selectedTeam].name,
     });
   };
 
@@ -43,13 +42,13 @@ class TeamDashboardTitle extends Component {
     // event.stopPropagation();
     this.setState({
       open: true,
-      teamName: this.props.teams[this.props.selectedTeam].name
+      teamName: this.props.teams[this.props.selectedTeam].name,
     });
   };
 
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
     });
   };
 
@@ -138,7 +137,7 @@ const styles = {
     alignSelf: "center",
     wordBreak: "break-word",
     wordWrap: "break-word",
-    flex: 1
+    flex: 1,
   },
   baseWithHover: {
     textDecoration: "none",
@@ -153,8 +152,8 @@ const styles = {
     transition: "background-color .25s ease-out",
     "&:hover": {
       backgroundColor: "#424242",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   baseFocused: {
     textDecoration: "none",
@@ -170,22 +169,22 @@ const styles = {
     transition: "background-color .25s ease-out",
     "&:hover": {
       backgroundColor: "#424242",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   settingsIcon: {
     fontSize: 18,
     color: "#6f6f6f",
     "&:hover": {
       color: "#b9bbbe",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   settingsContainer: {
-    minWidth: 300
+    minWidth: 300,
   },
   deleteContainer: {
-    marginTop: 32
+    marginTop: 32,
   },
   deleteButton: {
     color: "rgb(229, 115, 115)",
@@ -193,21 +192,21 @@ const styles = {
     transition: "background-color .25s ease-out, color .25s ease-out",
     "&:hover": {
       color: "white",
-      backgroundColor: "rgb(229, 115, 115)"
-    }
-  }
+      backgroundColor: "rgb(229, 115, 115)",
+    },
+  },
 };
 
 function mapStateToProps(state) {
   return {
     teams: state.team.teams,
-    selectedTeam: state.team.selectedTeam
+    selectedTeam: state.team.selectedTeam,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

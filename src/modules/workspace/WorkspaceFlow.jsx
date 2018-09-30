@@ -30,7 +30,6 @@ class WorkspaceFlow extends Component {
 
   render() {
     const { classes, joiningWorkspaceLoading } = this.props;
-    const { value } = this.state;
     if (joiningWorkspaceLoading) {
       return (
         <div style={{ height: "100%" }}>

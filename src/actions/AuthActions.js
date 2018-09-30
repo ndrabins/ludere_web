@@ -10,7 +10,6 @@ import * as localforage from "localforage";
 import firebase from "firebase/app";
 import queryString from "query-string";
 
-import * as workspaceActions from "./WorkspaceActions";
 import * as profileActions from "./ProfileActions";
 
 export function signUpUser(email, password) {

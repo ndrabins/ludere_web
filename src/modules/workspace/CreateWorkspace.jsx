@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
@@ -16,7 +15,7 @@ import FormControl from "@material-ui/core/FormControl";
 class CreateWorkspaceForm extends Component {
   state = {
     workspaceName: "",
-    description: ""
+    description: "",
   };
 
   handleCreateWorkspace = () => {
@@ -46,7 +45,7 @@ class CreateWorkspaceForm extends Component {
           <InputLabel
             FormLabelClasses={{
               root: classes.label,
-              focused: classes.cssFocused
+              focused: classes.cssFocused,
             }}
             shrink={true}
           >
@@ -92,7 +91,7 @@ const styles = {
     justifyContent: "center",
     flexDirection: "column",
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   button: {
     // background: "linear-gradient(to left, #6fe5c9, #00bcd4)",
@@ -101,11 +100,11 @@ const styles = {
     background: "linear-gradient(to left, #6fe5c9, #00bcd4)",
     transition: "opacity 0.25s ease-out",
     "&:hover": {
-      opacity: 0.9
-    }
+      opacity: 0.9,
+    },
   },
   formControl: {
-    marginBotton: 10
+    marginBotton: 10,
   },
   input: {
     backgroundColor: "transparent",
@@ -118,57 +117,57 @@ const styles = {
     transition: "border 0.25s ease-out",
     "&:hover": {
       cursor: "text",
-      border: "1px solid #C3C3C3"
+      border: "1px solid #C3C3C3",
     },
-    marginBottom: 10
+    marginBottom: 10,
   },
   inputFocused: {
     border: "1px solid #FFF",
     transition: "border 0.25s ease-out",
     "&:hover": {
       cursor: "text",
-      border: "1px solid #FFF"
-    }
+      border: "1px solid #FFF",
+    },
   },
   fillerText: {
     color: "#C3C3C3",
-    marginBottom: 20
+    marginBottom: 20,
   },
   label: {
     "&$cssFocused": {
       color: "#FFF",
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
-    color: "#FFF"
+    color: "#FFF",
   },
   cssFocused: {},
   dialogDividerContainer: {
     width: "100%",
     marginBottom: 8,
-    height: 4
+    height: 4,
   },
   dialogDividerColored: {
     background: "linear-gradient(to left, #6fe5c9, #00bcd4)",
     width: "40%",
     borderRadius: 5,
     marginBottom: 24,
-    height: 4
+    height: 4,
   },
   title: {
     fontSize: 24,
     margin: "8px 0px",
-    color: "white"
+    color: "white",
   },
   buttonContainer: {
     display: "flex",
     justifyContent: "flex-end",
-    alignItems: "flex-end"
-  }
+    alignItems: "flex-end",
+  },
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

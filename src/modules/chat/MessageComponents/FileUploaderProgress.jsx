@@ -17,7 +17,7 @@ class FileUploaderProgress extends Component {
   };
 
   formatBytes(a, b) {
-    if (0 == a) return "0 Bytes";
+    if (0 == a) return "0 Bytes"; // eslint-disable-line
     var c = 1024,
       d = b || 2,
       e = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"],

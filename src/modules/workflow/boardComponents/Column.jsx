@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
 import { withStyles } from "@material-ui/core/styles";
 
-import { Droppable, Draggable } from "react-beautiful-dnd";
+import { Draggable } from "react-beautiful-dnd";
 
 import TextField from "@material-ui/core/TextField";
 import Popover from "@material-ui/core/Popover";
@@ -24,12 +24,12 @@ class Column extends PureComponent {
   state = {
     taskName: "",
     anchorEl: null,
-    isDeletingColumn: false
+    isDeletingColumn: false,
   };
 
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
     });
   };
 
@@ -47,7 +47,7 @@ class Column extends PureComponent {
     this.props.actions.createTask(this.props.ID, this.state.taskName);
 
     this.setState({
-      taskName: ""
+      taskName: "",
     });
   };
 
@@ -110,11 +110,11 @@ class Column extends PureComponent {
                   onClose={this.handleClose}
                   anchorOrigin={{
                     vertical: "bottom",
-                    horizontal: "center"
+                    horizontal: "center",
                   }}
                   transformOrigin={{
                     vertical: "top",
-                    horizontal: "center"
+                    horizontal: "center",
                   }}
                 >
                   <MenuItem onClick={this.handleListDelete}>
@@ -172,11 +172,11 @@ const styles = {
     margin: 6,
     borderRadius: 7,
     boxShadow:
-      "0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)"
+      "0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)",
   },
   tasksContainer: {
     display: "flex",
-    height: "100%"
+    height: "100%",
   },
   wrapper: {
     // display: "flex",
@@ -194,17 +194,17 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     borderTopLeftRadius: 7,
-    borderTopRightRadius: 7
+    borderTopRightRadius: 7,
   },
   taskEntry: {
     paddingLeft: 10,
-    paddingRight: 10
-  }
+    paddingRight: 10,
+  },
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 
