@@ -39,8 +39,6 @@ class CheckBox extends Component {
     const { handleClick, isChecked } = this.props;
     const { animation } = this.state;
 
-    console.log(isChecked);
-
     if (animation !== null) {
       if (!isChecked) {
         animation.play();
@@ -56,16 +54,17 @@ class CheckBox extends Component {
   };
 
   render() {
-    const { classes, subtaskID, isChecked } = this.props;
-    // const { isStopped, animation } = this.state;
+    const { classes, subtaskID } = this.props;
 
     return (
       <div className={classes.background} onClick={() => this.handleClick()}>
-        <div
-          ref={this.lottieRef}
-          id={subtaskID}
-          className={classes.checkLottie}
-        />
+        <div className={classes.innerContainer}>
+          <div
+            ref={this.lottieRef}
+            id={subtaskID}
+            className={classes.checkLottie}
+          />
+        </div>
       </div>
     );
   }
@@ -80,12 +79,20 @@ const styles = {
     width: "36px",
     justifyContent: "center",
     alignItems: "center",
-    cursor: "pointer",
-    transform: "scale(1.9)"
+    cursor: "pointer"
+    // transform: "scale(1.9)"
   },
   checkLottie: {
-    width: 36,
-    height: 36
+    position: "absolute",
+    width: 72,
+    height: 72
+  },
+  innerContainer: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   }
 };
 

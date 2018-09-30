@@ -80,14 +80,14 @@ class TaskDetail extends Component {
 const styles = theme => ({
   hiddenContainer: {
     marginTop: 6,
-    width: "0px",
+    width: "40%",
     height: `calc(100% - 130px)`,
     position: "absolute",
     backgroundColor: "#E3E3E4",
     borderRadius: 10,
     right: 25,
-    transition:
-      "opacity 0.5s ease-out, right 0.5s ease-out, width 0.5s ease-out 0.5s",
+    transition: "opacity 0.5s ease-out",
+    zIndex: -10,
     opacity: 0
   },
   container: {
@@ -98,8 +98,8 @@ const styles = theme => ({
     position: "absolute",
     backgroundColor: "#f5f5f5",
     borderRadius: 10,
-    right: 20,
-    transition: "opacity .5s ease-out, right 0.5s ease-out",
+    right: 25,
+    transition: "opacity .5s ease-out",
     opacity: 1
   },
   innerContainer: {

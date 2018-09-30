@@ -110,7 +110,7 @@ const styles = theme => ({
     whiteSpace: "pre-line",
     wordWrap: "break-word",
     width: "100%",
-    paddingLeft: 48
+    paddingLeft: 36
   },
   subtaskContent: {
     display: "flex",
