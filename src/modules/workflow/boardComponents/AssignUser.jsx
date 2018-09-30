@@ -20,7 +20,7 @@ import pickBy from "lodash/pickBy";
 class AssignUser extends PureComponent {
   state = {
     showAssignUser: false,
-    anchorEl: null
+    anchorEl: null,
   };
 
   assignUserClick = event => {
@@ -28,7 +28,7 @@ class AssignUser extends PureComponent {
     event.stopPropagation();
     this.setState({
       showAssignUser: !showAssignUser,
-      anchorEl: event.currentTarget
+      anchorEl: event.currentTarget,
     });
   };
 
@@ -105,8 +105,8 @@ class AssignUser extends PureComponent {
           PaperProps={{
             style: {
               maxHeight: 500,
-              width: 400
-            }
+              width: 400,
+            },
           }}
         >
           {Map(teamMembers, (isTeamMember, memberID) => {
@@ -129,7 +129,7 @@ class AssignUser extends PureComponent {
                       onClick={event => this.assignUserToTask(event, memberID)}
                       classes={{
                         root: classes.root,
-                        checked: classes.checked
+                        checked: classes.checked,
                       }}
                     />
                   </ListItemSecondaryAction>
@@ -147,24 +147,25 @@ const styles = theme => ({
   iconButton: {
     width: 30,
     height: 30,
+    padding: 0,
     border: "dashed 1px #b9bbbe",
     marginLeft: 4,
     color: "#b9bbbe",
     transition: "border 0.25s ease-out, color 0.25s ease-out",
     "&:hover": {
       border: "solid 1px #303030",
-      color: "#303030"
-    }
+      color: "#303030",
+    },
   },
   root: {
     "&$checked": {
-      color: "#00BCD4"
-    }
+      color: "#00BCD4",
+    },
   },
   checked: {},
   icon: {
     fontSize: 24,
-    color: "inherit"
+    color: "inherit",
   },
   avatar: {
     width: 30,
@@ -175,29 +176,30 @@ const styles = theme => ({
     "&:hover": {
       zIndex: 10,
       transform: "scale(1.1)",
-      boxShadow: "0px 0px 0px 2px #303030"
-    }
+      boxShadow: "0px 0px 0px 2px #303030",
+    },
   },
   assignedUsersContainer: {
     display: "flex",
-    marginLeft: 15
-  }
+    marginLeft: 15,
+  },
 });
 
 function mapStateToProps(state) {
   return {
     workspaceMembers: state.workspace.workspaceUsers,
     teams: state.team.teams,
-    selectedTeam: state.team.selectedTeam
+    selectedTeam: state.team.selectedTeam,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(AssignUser)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(AssignUser));

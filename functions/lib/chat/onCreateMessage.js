@@ -32,7 +32,7 @@ exports.handler = functions.firestore
                 notifications[`${channelID}`] = true;
                 const privateUserRef = firestore.doc(`privateUserData/${memberID}`);
                 privateUserRef.set({
-                    notifications
+                    notifications,
                 }, { merge: true });
             }
         });
