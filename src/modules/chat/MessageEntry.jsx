@@ -14,7 +14,7 @@ import FileUploaderProgress from "./MessageComponents/FileUploaderProgress";
 import GifIcon from "@material-ui/icons/Gif";
 
 import { NimblePicker } from "emoji-mart";
-import { FaSmile } from "react-icons/fa";
+import { FaRegSmile } from "react-icons/fa";
 
 import TextField from "@material-ui/core/TextField";
 import AddIcon from "@material-ui/icons/Add";
@@ -232,7 +232,10 @@ class MessageEntry extends Component {
         />
         <GifIcon onClick={this.openGifPicker} className={classes.gifIcon} />
 
-        <FaSmile className={classes.emojiIcon} onClick={this.openEmojiPicker} />
+        <FaRegSmile
+          className={classes.emojiIcon}
+          onClick={this.openEmojiPicker}
+        />
         <Popover
           open={Boolean(anchorEl)}
           anchorEl={anchorEl}
@@ -256,10 +259,10 @@ class MessageEntry extends Component {
 const styles = theme => ({
   container: {
     display: "flex",
-    marginBottom: 5,
-    paddingRight: 15,
-    paddingLeft: 10,
-    alignItems: "center",
+    marginBottom: 4,
+    paddingRight: 16,
+    paddingTop: 8,
+    paddingLeft: 8,
     position: "relative"
   },
   fileInput: {
@@ -279,8 +282,7 @@ const styles = theme => ({
   },
   textRoot: {
     padding: 0,
-    borderRadius: 4,
-    marginBottom: 20
+    borderRadius: 4
   },
   textInput: {
     borderRadius: 4,
@@ -323,7 +325,7 @@ const styles = theme => ({
     width: 28,
     height: 28,
     cursor: "pointer",
-    top: 7,
+    top: 14,
     right: 26,
     color: "#b9bbbe",
     transition: "color 0.25s ease-out",
@@ -336,7 +338,7 @@ const styles = theme => ({
     width: 36,
     height: 42,
     cursor: "pointer",
-    top: 0,
+    top: 8,
     fontSize: 46,
     right: 52,
     color: "#b9bbbe",

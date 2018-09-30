@@ -7188,9 +7188,9 @@ react-filepond@^3.0.1:
   dependencies:
     filepond "^2.2.0"
 
-react-icons@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.1.0.tgz#004bc8d8b64a5480cdebd86ccb72ba5930b0e434"
+react-icons@^3.1.0-beta.1:
+  version "3.1.0-beta.1"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.1.0-beta.1.tgz#2b91e4eefa05dd663517bf459182bd8f00406fae"
 
 react-jss@^8.1.0:
   version "8.4.0"
