@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
 import PropTypes from "prop-types";
-import TagIcon from "react-icons/lib/fa/tag";
+import { FaTag } from "react-icons/fa";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -116,7 +116,7 @@ class TagDialog extends Component {
     return (
       <div className={classes.root}>
         <Button className={classes.button} onClick={this.handleClickOpen}>
-          <TagIcon className={classes.tagIcon} />
+          <FaTag className={classes.tagIcon} />
           Tags
         </Button>
         <Dialog
@@ -148,7 +148,7 @@ class TagDialog extends Component {
                 placeholder="Create a tag here!"
                 startAdornment={
                   <InputAdornment position="start">
-                    <TagIcon />
+                    <FaTag />
                   </InputAdornment>
                 }
                 onKeyPress={ev => {

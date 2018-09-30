@@ -12,7 +12,8 @@ import FileUploaderProgress from "./MessageComponents/FileUploaderProgress";
 import GifIcon from "@material-ui/icons/Gif";
 
 import { NimblePicker } from "emoji-mart";
-import EmojiIcon from "react-icons/lib/fa/smile-o";
+import { FaSmile } from "react-icons/fa";
+
 import TextField from "@material-ui/core/TextField";
 import AddIcon from "@material-ui/icons/Add";
 import Debounce from "lodash/debounce";
@@ -229,10 +230,7 @@ class MessageEntry extends Component {
         />
         <GifIcon onClick={this.openGifPicker} className={classes.gifIcon} />
 
-        <EmojiIcon
-          className={classes.emojiIcon}
-          onClick={this.openEmojiPicker}
-        />
+        <FaSmile className={classes.emojiIcon} onClick={this.openEmojiPicker} />
         <Popover
           open={Boolean(anchorEl)}
           anchorEl={anchorEl}

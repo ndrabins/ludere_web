@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../../actions";
-import TagIcon from "react-icons/lib/fa/tag";
+import { FaTag } from "react-icons/fa";
 import Popover from "@material-ui/core/Popover";
 import Map from "lodash/map";
 import Chip from "@material-ui/core/Chip";
@@ -97,7 +97,7 @@ class TagsButton extends Component {
       <div className={classes.root}>
         <React.Fragment>
           {hovered && (
-            <TagIcon onClick={this.handleClick} className={classes.tagIcon} />
+            <FaTag onClick={this.handleClick} className={classes.tagIcon} />
           )}
           <Popover
             open={Boolean(anchorEl)}

@@ -14,7 +14,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ArrowIcon from "@material-ui/icons/KeyboardArrowRight";
 import Button from "@material-ui/core/Button";
 import GoogleIcon from "../../static/google.svg";
-import FacebookIcon from "react-icons/lib/fa/facebook";
+import { FaFacebook } from "react-icons/fa";
 
 class SignUp extends Component {
   constructor(props) {
@@ -174,7 +174,7 @@ class SignUp extends Component {
                   this.props.actions.authWithProvider("Facebook", workspaceID)
                 }
               >
-                <FacebookIcon className={classes.icon} />
+                <FaFacebook className={classes.icon} />
                 SIGN IN WITH FACEBOOK
               </Button>
             </div>
