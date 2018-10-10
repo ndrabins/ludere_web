@@ -30,7 +30,7 @@ class SignUp extends Component {
       password: "",
       showPassword: false,
       resetEmail: "",
-      isResettingPassword: false
+      isResettingPassword: false,
     };
   }
 
@@ -90,7 +90,7 @@ class SignUp extends Component {
               <InputLabel
                 FormLabelClasses={{
                   root: classes.label,
-                  focused: classes.cssFocused
+                  focused: classes.cssFocused,
                 }}
                 shrink={true}
               >
@@ -110,7 +110,7 @@ class SignUp extends Component {
               <InputLabel
                 FormLabelClasses={{
                   root: classes.label,
-                  focused: classes.cssFocused
+                  focused: classes.cssFocused,
                 }}
                 shrink={true}
               >
@@ -220,7 +220,7 @@ const styles = {
     background: `linear-gradient(270deg, #6FE5C9 0%, #00BCD4 100%)`,
     borderRadius: "0px 15px 15px 0px",
     padding: 10,
-    height: "100%"
+    height: "100%",
   },
   headerText: {
     color: "white",
@@ -229,11 +229,11 @@ const styles = {
     paddingBottom: 18,
     minWidth: 200,
     textAlign: "center",
-    textShadow: "1px 1px 1px rgba(0,0,0,0.24)"
+    textShadow: "1px 1px 1px rgba(0,0,0,0.24)",
   },
   signUpSelected: {
     width: 80,
-    transition: "width 0.4s ease-out"
+    transition: "width 0.4s ease-out",
   },
   noneSelected: {
     width: 320,
@@ -241,13 +241,13 @@ const styles = {
     height: "100%",
     alignItems: "center",
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   signInSelected: {
     width: 400,
     transition: "width 0.4s ease-out",
     display: "flex",
-    height: "100%"
+    height: "100%",
   },
   signInContent: {
     display: "flex",
@@ -256,10 +256,10 @@ const styles = {
     paddingRight: 80,
     width: "100%",
     paddingTop: 42,
-    position: "relative"
+    position: "relative",
   },
   formControl: {
-    marginBotton: 10
+    marginBotton: 10,
   },
   input: {
     backgroundColor: "transparent",
@@ -273,38 +273,38 @@ const styles = {
     marginBottom: 10,
     "&:hover": {
       cursor: "text",
-      border: "1px solid #f9f9f9"
-    }
+      border: "1px solid #f9f9f9",
+    },
   },
   inputFocused: {
     border: "1px solid #FFF",
     transition: "border 0.25s ease-out",
     "&:hover": {
       cursor: "text",
-      border: "1px solid #FFF"
-    }
+      border: "1px solid #FFF",
+    },
   },
   label: {
     "&$cssFocused": {
       color: "#FFF",
       fontWeight: "bold",
-      textShadow: "1px 1px 1px rgba(0,0,0,0.24)"
+      textShadow: "1px 1px 1px rgba(0,0,0,0.24)",
     },
     color: "#FFF",
-    textShadow: "1px 1px 1px rgba(0,0,0,0.24)"
+    textShadow: "1px 1px 1px rgba(0,0,0,0.24)",
   },
   cssFocused: {},
   rightArrow: {
     color: "white",
     position: "absolute",
     right: 0,
-    bottom: 0
+    bottom: 0,
   },
   googleButton: {
     marginTop: 30,
     width: 240,
     background: "#FFF",
-    color: "#6A6A6A"
+    color: "#6A6A6A",
   },
   facebookButton: {
     marginTop: 10,
@@ -312,23 +312,23 @@ const styles = {
     background: "#2553B4",
     color: "#FFF",
     "&:hover": {
-      background: "#446BBF"
-    }
+      background: "#446BBF",
+    },
   },
   icon: {
     height: 24,
     width: 24,
-    marginRight: 10
+    marginRight: 10,
   },
   buttonContainer: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-end",
     flexGrow: 1,
-    marginBottom: 40
+    marginBottom: 40,
   },
   errorText: {
-    color: "#e74c3c"
+    color: "#e74c3c",
   },
   helperText: {
     marginTop: "-5px",
@@ -336,20 +336,20 @@ const styles = {
     transition: "color 0.2s ease-out, text-decoration 0.2s ease-out",
     "&:hover": {
       color: "white",
-      textDecoration: "underline"
-    }
-  }
+      textDecoration: "underline",
+    },
+  },
 };
 
 function mapStateToProps(state) {
   return {
-    error: state.auth.error
+    error: state.auth.error,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

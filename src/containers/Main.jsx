@@ -25,7 +25,7 @@ const DRAWER_WIDTH = 300;
 
 class Main extends Component {
   state = {
-    drawerVisible: true
+    drawerVisible: true,
   };
 
   componentDidMount() {
@@ -70,7 +70,7 @@ class Main extends Component {
       loadingWorkspaces,
       loadingProfile,
       loadingUsers,
-      classes
+      classes,
     } = this.props;
 
     const { drawerVisible } = this.state;
@@ -93,7 +93,7 @@ class Main extends Component {
         />
         <div
           style={{
-            width: `calc(100% - ${drawerVisible ? DRAWER_WIDTH : 0}px)`
+            width: `calc(100% - ${drawerVisible ? DRAWER_WIDTH : 0}px)`,
           }}
           className={classes.content}
         >
@@ -125,13 +125,13 @@ const styles = {
     height: "100%",
     maxHeight: "100%",
     flex: 1,
-    overflow: "hidden"
+    overflow: "hidden",
   },
   content: {
     display: "flex",
     flexDirection: "column",
-    transition: "width 0.5s ease-out"
-  }
+    transition: "width 0.5s ease-out",
+  },
 };
 
 function mapStateToProps(state) {
@@ -141,13 +141,13 @@ function mapStateToProps(state) {
     loadingWorkspaces: state.workspace.loadingWorkspaces,
     loadingProfile: state.profile.loading,
     myUserProfile: state.profile.myUserProfile,
-    loadingUsers: state.workspace.loadingUsers
+    loadingUsers: state.workspace.loadingUsers,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

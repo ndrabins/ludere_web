@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import * as animationData from "static/checked_done_.json";
+import animationData from "static/checked_done_.json";
 import { withStyles } from "@material-ui/core/styles";
 import Lottie from "lottie-web";
 
@@ -14,7 +14,7 @@ class CheckBox extends Component {
   static defaultProps = {
     lodaingDelay: true,
     checked: false,
-    subtaskID: "lottieCheckbox"
+    subtaskID: "lottieCheckbox",
   };
 
   componentDidMount() {
@@ -25,7 +25,7 @@ class CheckBox extends Component {
       renderer: "svg",
       loop: false,
       autoplay: false,
-      animationData: animationData // the path to the animation json
+      animationData: animationData, // the path to the animation json
     });
 
     if (isChecked) {
@@ -79,21 +79,21 @@ const styles = {
     width: "36px",
     justifyContent: "center",
     alignItems: "center",
-    cursor: "pointer"
+    cursor: "pointer",
     // transform: "scale(1.9)"
   },
   checkLottie: {
     position: "absolute",
     width: 72,
-    height: 72
+    height: 72,
   },
   innerContainer: {
     width: "100%",
     height: "100%",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 };
 
 export default withStyles(styles)(CheckBox);

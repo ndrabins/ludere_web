@@ -1,43 +1,45 @@
 import React, { Component } from "react";
-import Lottie from "react-lottie";
-import * as animationData from "../static/loader.json";
+// import Lottie from "react-lottie";
+import Lottie from "lottie-web";
+
+import animationData from "../static/loader.json";
 import Fade from "@material-ui/core/Fade";
 
 class Loading extends Component {
   constructor(props) {
     super(props);
-    this.state = { isStopped: false, isPaused: false };
+    this.lottieRef = React.createRef();
+
+    this.state = { isStopped: true, animation: null };
   }
 
   static defaultProps = {
-    lodaingDelay: true
+    loadingDelay: true,
   };
 
-  render() {
-    const defaultOptions = {
+  componentDidMount() {
+    const animation = Lottie.loadAnimation({
+      container: document.getElementById("loadingLottie"), // the dom element that will contain the animation
+      renderer: "svg",
       loop: true,
       autoplay: true,
-      animationData: animationData
-    };
+      animationData: animationData, // the path to the animation json
+    });
+  }
 
-    const { lodaingDelay } = this.props;
+  render() {
+    const { loadingDelay } = this.props;
 
     return (
       <Fade
         in={true}
         timeout={{ enter: 800, exit: 800 }}
         style={{
-          transitionDelay: lodaingDelay ? "800ms" : "0ms"
+          transitionDelay: loadingDelay ? "800ms" : "0ms",
         }}
       >
         <div style={styles.background}>
-          <Lottie
-            options={defaultOptions}
-            height={400}
-            width={400}
-            isStopped={this.state.isStopped}
-            isPaused={this.state.isPaused}
-          />
+          <div ref={this.lottieRef} id="loadingLottie" style={styles.lottie} />
         </div>
       </Fade>
     );
@@ -51,8 +53,12 @@ const styles = {
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
-    width: "100%"
-  }
+    width: "100%",
+  },
+  lottie: {
+    width: 400,
+    height: 400,
+  },
 };
 
 export default Loading;
