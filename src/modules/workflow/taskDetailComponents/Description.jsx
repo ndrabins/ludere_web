@@ -8,12 +8,11 @@ import QuillEditor from "common/QuillEditor";
 class Description extends Component {
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
     });
   };
 
   updateQuill = quillContent => {
-    console.log("updating");
     let updatedTask = this.props.task;
     updatedTask.description = { ...quillContent };
 
@@ -40,7 +39,7 @@ const styles = theme => ({
     width: "100%",
     overflowY: "auto",
     marginBottom: 5,
-    background: "white"
+    background: "white",
   },
   input: {
     backgroundColor: "white",
@@ -53,8 +52,8 @@ const styles = theme => ({
     border: "transparent 2px solid",
     transition: "border .25s ease-out",
     "&:hover": {
-      border: "#B0B2B6 2px solid"
-    }
+      border: "#B0B2B6 2px solid",
+    },
   },
   inputFocused: {
     backgroundColor: "white",
@@ -67,17 +66,17 @@ const styles = theme => ({
     transition: "border .25s ease-out",
     border: "2px solid #6d6d6d",
     "&:hover": {
-      border: "2px solid #6d6d6d"
-    }
+      border: "2px solid #6d6d6d",
+    },
   },
   formControl: {
-    width: "100%"
-  }
+    width: "100%",
+  },
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

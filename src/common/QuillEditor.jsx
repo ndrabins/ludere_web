@@ -9,13 +9,13 @@ class QuillEditor extends Component {
     classes: PropTypes.object.isRequired,
     helperText: PropTypes.string,
     handleBlur: PropTypes.func,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {
     helperText: "",
     handleBlur: () => {},
-    onChange: () => {} // do nothing on onChange unless we give a prop
+    onChange: () => {}, // do nothing on onChange unless we give a prop
   };
 
   constructor(props) {
@@ -25,7 +25,7 @@ class QuillEditor extends Component {
     this.state = {
       myQuill: null,
       selectedIndex: 0,
-      selectedRange: 0
+      selectedRange: 0,
     };
     this.onChange = Debounce(this.props.onChange, 3000); // debounce changes to not send too many network updates
   }
@@ -54,10 +54,10 @@ class QuillEditor extends Component {
           [{ header: 1 }, { header: 2 }],
           ["bold", "italic"],
           ["blockquote", "code-block", "video"],
-          [{ list: "ordered" }, { list: "bullet" }]
+          [{ list: "ordered" }, { list: "bullet" }],
         ],
-        syntax: true
-      }
+        syntax: true,
+      },
     };
 
     const quill = new Quill("#editor", options);
@@ -78,7 +78,7 @@ class QuillEditor extends Component {
 
   handleEditorChange = () => {
     const { myQuill } = this.state;
-    // TODO: May need to do some refactoring on this code.. calls twicces
+    // TODO: May need to do some refactoring on this code.. calls twice
     this.onChange(myQuill.getContents());
   };
 
@@ -99,16 +99,16 @@ class QuillEditor extends Component {
       if (range.length === 0) {
         this.setState({
           selectedIndex: range.index,
-          selectedRange: 0
+          selectedRange: 0,
         });
       } else {
         this.setState({
           selectedIndex: range.index,
-          selectedRange: range.length
+          selectedRange: range.length,
         });
       }
     } else {
-      console.log("User cursor is not in editor");
+      // console.log("User cursor is not in editor");
     }
   };
 
@@ -133,12 +133,12 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    color: "#303030"
+    color: "#303030",
   },
   quillEditor: {
     minHeight: 100,
     fontFamily: "Roboto",
-    overflowY: "auto"
-  }
+    overflowY: "auto",
+  },
 });
 export default withStyles(styles)(QuillEditor);
