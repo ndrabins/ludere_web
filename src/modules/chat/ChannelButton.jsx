@@ -249,7 +249,7 @@ const styles = {
     display: "flex",
     width: "100%",
     alignItems: "center",
-    paddingLeft: 40,
+    paddingLeft: 52,
     transition: "color 0.25s ease-out",
     color: "#6f6f6f",
     "&:hover": {
@@ -264,7 +264,7 @@ const styles = {
     display: "flex",
     width: "100%",
     alignItems: "center",
-    paddingLeft: 40,
+    paddingLeft: 52,
   },
   icon: {
     color: "#6f6f6f",
