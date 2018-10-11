@@ -28,7 +28,7 @@ class Message extends PureComponent {
     formattedTimeStamp: PropTypes.string.isRequired,
     userID: PropTypes.string.isRequired,
     messageID: PropTypes.string.isRequired,
-    userName: PropTypes.string.isRequired
+    userName: PropTypes.string.isRequired,
   };
 
   state = {
@@ -36,7 +36,7 @@ class Message extends PureComponent {
     anchorEl: null,
     hovered: false,
     isEditing: false,
-    showDeleteDialog: false
+    showDeleteDialog: false,
   };
 
   componentDidMount() {
@@ -69,7 +69,7 @@ class Message extends PureComponent {
       message,
       formattedTimeStamp,
       userName,
-      avatarURL
+      avatarURL,
     } = this.props;
 
     return (
@@ -103,7 +103,7 @@ class Message extends PureComponent {
       message,
       formattedTimeStamp,
       avatarURL,
-      userName
+      userName,
     } = this.props;
     const { anchorEl, hovered, showDeleteDialog } = this.state;
 
@@ -136,11 +136,11 @@ class Message extends PureComponent {
           onClose={this.handleClose}
           anchorOrigin={{
             vertical: "bottom",
-            horizontal: "center"
+            horizontal: "center",
           }}
           transformOrigin={{
             vertical: "top",
-            horizontal: "center"
+            horizontal: "center",
           }}
         >
           <MenuItem
@@ -189,13 +189,13 @@ class Message extends PureComponent {
   handleCancelEdit = () => {
     this.setState({
       isEditing: false,
-      editableText: this.props.message.messageText
+      editableText: this.props.message.messageText,
     });
   };
 
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
     });
   };
 
@@ -235,7 +235,7 @@ class Message extends PureComponent {
             style={{
               color: "white",
               margin: 4,
-              backgroundColor: "#00BCD4"
+              backgroundColor: "#00BCD4",
             }}
             onClick={this.handleUpdateMessage}
           >
@@ -310,8 +310,8 @@ const styles = theme => ({
     alignItems: "center",
     transition: theme.transitions.create(["background-color"]),
     "&:hover": {
-      backgroundColor: "#EEEEEE"
-    }
+      backgroundColor: "#EEEEEE",
+    },
   },
   messageContent: {
     flex: 1,
@@ -323,7 +323,7 @@ const styles = theme => ({
     overflowWrap: "break-word",
     // marginRight: 30,
     marginTop: "0px",
-    fontSize: "15px"
+    fontSize: "15px",
   },
   messageBlockContent: {
     flex: 1,
@@ -335,32 +335,32 @@ const styles = theme => ({
     wordBreak: "break-word",
     overflowWrap: "break-word",
     marginTop: "0px",
-    fontSize: "15px"
+    fontSize: "15px",
   },
   messageHeader: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   name: {
     fontSize: 16,
-    fontWeight: 500
+    fontWeight: 500,
   },
   date: {
     fontSize: 12,
     alignItems: "center",
     display: "flex",
     marginLeft: 3,
-    color: "#b9bbbe"
+    color: "#b9bbbe",
   },
   icon: {
     color: "#6f6f6f",
     "&:hover": {
       color: "#303030",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   hiddenIcon: {
-    opacity: "0"
+    opacity: "0",
   },
   input: {
     backgroundColor: "white",
@@ -374,8 +374,8 @@ const styles = theme => ({
     marginLeft: 60,
     transition: "border .25s ease-out",
     "&:hover": {
-      border: "#B0B2B6 2px solid"
-    }
+      border: "#B0B2B6 2px solid",
+    },
   },
   inputFocused: {
     backgroundColor: "white",
@@ -389,28 +389,28 @@ const styles = theme => ({
     transition: "border .25s ease-out",
     border: "2px solid #00bcd4",
     "&:hover": {
-      border: "2px solid #00bcd4"
-    }
+      border: "2px solid #00bcd4",
+    },
   },
   editContainer: {
     display: "flex",
     flexDirection: "column",
-    flex: 1
+    flex: 1,
   },
   editButtons: {
     display: "flex",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
   },
   paperMessage: {
     padding: 12,
     display: "flex",
-    marginBottom: 32
-  }
+    marginBottom: 32,
+  },
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

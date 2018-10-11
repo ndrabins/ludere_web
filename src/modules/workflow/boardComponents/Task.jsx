@@ -15,7 +15,7 @@ import CommentIcon from "@material-ui/icons/Comment";
 
 class Task extends PureComponent {
   state = {
-    hovered: false
+    hovered: false,
   };
 
   getSubtasksComplete = () => {
@@ -72,7 +72,7 @@ class Task extends PureComponent {
       classes,
       isDragging,
       selectedTaskID,
-      showTaskDetail
+      showTaskDetail,
     } = this.props;
     const { hovered } = this.state;
 
@@ -86,7 +86,7 @@ class Task extends PureComponent {
       <Paper
         className={classnames(classes.container, {
           [classes.draggingContainer]:
-            isDragging || (selectedTaskID === taskID && showTaskDetail)
+            isDragging || (selectedTaskID === taskID && showTaskDetail),
         })}
         onClick={() =>
           this.props.actions.toggleTaskDetail(taskID, task.commentChannelID)
@@ -100,7 +100,7 @@ class Task extends PureComponent {
             display: "flex",
             wordWrap: "break-word",
             overflowWrap: "break-word",
-            wordBreak: "break-word"
+            wordBreak: "break-word",
           }}
         >
           {task.title}
@@ -158,19 +158,19 @@ const styles = {
     transition: "box-shadow 0.2s ease-out, border 0.2s ease-out",
     "&:hover": {
       boxShadow:
-        "0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)"
-    }
+        "0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)",
+    },
   },
   draggingContainer: {
     // backgroundColor: "black",
     borderRadius: 8,
     border: "3px solid #00BCD4",
-    transition: "box-shadow 0.2s ease-out, border 0.2s ease-out"
+    transition: "box-shadow 0.2s ease-out, border 0.2s ease-out",
   },
   progress: {
     display: "block",
     width: 24,
-    height: 24
+    height: 24,
   },
   extraInfoContainer: {
     display: "flex",
@@ -178,40 +178,40 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-between",
     height: 30,
-    marginTop: 4
+    marginTop: 4,
   },
   percentageCounter: {
     position: "absolute",
-    fontSize: "10px"
+    fontSize: "10px",
   },
   subtaskCounter: {
-    position: "absolute"
+    position: "absolute",
   },
   commentIcon: {
     color: "#b9bbbe",
     width: 20,
     height: 20,
-    marginLeft: 6
+    marginLeft: 6,
   },
   taskItemContainer: {
     position: "relative",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 };
 
 function mapStateToProps(state) {
   return {
     selectedTaskID: state.workflow.selectedTask,
-    showTaskDetail: state.workflow.showTaskDetail
+    showTaskDetail: state.workflow.showTaskDetail,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

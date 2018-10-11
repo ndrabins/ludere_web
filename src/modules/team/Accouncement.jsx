@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
+import dayjs from "dayjs";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-import moment from "moment";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -25,14 +25,14 @@ class Announcement extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
-    announcementID: PropTypes.string.isRequired
+    announcementID: PropTypes.string.isRequired,
   };
 
   state = {
     anchorEl: null,
     isEditingAnnouncement: false,
     isDeletingAnnouncement: false,
-    announcementContent: this.props.data.content
+    announcementContent: this.props.data.content,
   };
 
   handleClose = () => {
@@ -42,7 +42,7 @@ class Announcement extends Component {
   handleCloseDialog = () => {
     this.setState({
       isEditingAnnouncement: false,
-      isDeletingAnnouncement: false
+      isDeletingAnnouncement: false,
     });
   };
 
@@ -62,7 +62,7 @@ class Announcement extends Component {
     const { announcementContent } = this.state;
 
     actions.updatedAnnouncement(announcementID, {
-      content: { ...announcementContent, edited: true }
+      content: { ...announcementContent, edited: true },
     });
     this.handleCloseDialog();
   };
@@ -87,13 +87,10 @@ class Announcement extends Component {
       anchorEl,
       isEditingAnnouncement,
       isDeletingAnnouncement,
-      announcementContent
+      announcementContent,
     } = this.state;
 
-    let diff = moment(data.dateCreated).diff(moment(), "minutes");
-    let timestamp = moment()
-      .add(diff, "minutes")
-      .calendar();
+    let timestamp = dayjs.unix(data.dateCreated.seconds).format("h:mm A MM/DD");
 
     if (!user) {
       return <div />;
@@ -124,11 +121,11 @@ class Announcement extends Component {
               onClose={this.handleClose}
               anchorOrigin={{
                 vertical: "bottom",
-                horizontal: "center"
+                horizontal: "center",
               }}
               transformOrigin={{
                 vertical: "top",
-                horizontal: "center"
+                horizontal: "center",
               }}
             >
               <MenuItem onClick={this.handleUpdateAnnouncementOpen}>
@@ -190,51 +187,51 @@ const styles = theme => ({
     boxShadow: "0 4px 4px 0 rgba(0,0,0,0.12), 0 0 8px 0 rgba(0,0,0,0.24)",
     borderRadius: 4,
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   header: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   user: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   name: {
     wordWrap: "break-word",
     wordBreak: "break-all",
     whiteSpace: "pre-line",
-    overflowWrap: "break-word"
+    overflowWrap: "break-word",
   },
   timestamp: {
     display: "flex",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
   },
   accessory: {
     flexDirection: "row",
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
   icon: {
     color: "#b9bbbe",
     "&:hover": {
       color: "#6f6f6f",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   },
   paperMessage: {
     padding: 12,
-    display: "flex"
-  }
+    display: "flex",
+  },
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

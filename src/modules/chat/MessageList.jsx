@@ -1,5 +1,4 @@
 import ForInRight from "lodash/forInRight";
-import moment from "moment";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -8,6 +7,7 @@ import * as Actions from "../../actions";
 import Loading from "../../common/Loading";
 import MessageComponent from "./Message";
 import MessagesIcon from "static/undraw_noMessages.svg";
+import dayjs from "dayjs";
 
 const INITIAL_MESSAGE_FETCH = 25;
 
@@ -19,7 +19,7 @@ class MessageList extends Component {
 
     this.state = {
       numberOfMessages: 25,
-      oldScrollPosition: 0
+      oldScrollPosition: 0,
     };
   }
 
@@ -84,7 +84,7 @@ class MessageList extends Component {
     if (this.messageList.current.scrollTop === 0) {
       //on fetch more, save old scroll position
       this.setState({
-        oldScrollPosition: containerHeight
+        oldScrollPosition: containerHeight,
       });
       this.handleFetchMore();
     }
@@ -99,29 +99,29 @@ class MessageList extends Component {
     let lastUser = null;
     let previousTimeStamp = null;
     let enoughTimeHasPassed = false;
+    let timestamp = "";
 
     let messages = [];
 
     ForInRight(this.props.messages, (message, key) => {
-      let diff = moment(message.dateCreated).diff(moment(), "minutes");
-      let timestamp = moment()
-        .add(diff, "minutes")
-        .calendar();
+      if (message.dateCreated !== null) {
+        timestamp = dayjs
+          .unix(message.dateCreated.seconds)
+          .format("h:mm A MM/DD");
 
-      // check to see if 3 minutes have passed to change render
-      if (previousTimeStamp !== null) {
-        let recentDiff = moment(message.dateCreated).diff(
-          previousTimeStamp,
-          "seconds"
-        );
-        if (recentDiff < 180) {
-          enoughTimeHasPassed = true;
-        } else {
-          enoughTimeHasPassed = false;
+        if (previousTimeStamp !== null) {
+          let recentDiff = message.dateCreated.seconds - previousTimeStamp;
+          if (recentDiff < 180) {
+            enoughTimeHasPassed = true;
+          } else {
+            enoughTimeHasPassed = false;
+          }
         }
-      }
 
-      previousTimeStamp = message.dateCreated;
+        previousTimeStamp = message.dateCreated.seconds;
+      } else {
+        timestamp = "";
+      }
 
       if (message.type === "file") {
         messages.push(
@@ -218,46 +218,46 @@ const styles = theme => ({
   container: {
     display: "flex",
     flex: 1,
-    flexDirection: "column"
+    flexDirection: "column",
   },
   messages: {
     height: "100%",
-    overflow: "auto"
+    overflow: "auto",
   },
   loadingContainer: {
-    height: 100
+    height: 100,
   },
   uploadedImage: {
     maxWidth: 400,
-    maxHeight: 400
+    maxHeight: 400,
   },
   icon: {
     marginTop: 20,
     minWidth: 100,
     minHeight: 100,
     maxHeight: 200,
-    maxWidth: 200
+    maxWidth: 200,
   },
   emptyMessages: {
     height: "100%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 });
 
 function mapStateToProps(state) {
   return {
     workspaceMembers: state.workspace.workspaceUsers,
     loadingMoreMessages: state.chat.loadingMoreMessages,
-    userID: state.auth.user.uid
+    userID: state.auth.user.uid,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 
