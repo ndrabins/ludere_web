@@ -1,24 +1,26 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { withStyles } from "@material-ui/core/styles";
 
 import Input from "@material-ui/core/Input";
 import FormControl from "@material-ui/core/FormControl";
 
-class EditableText extends Component {
+class EditableText extends PureComponent {
   state = {
     value: this.props.value,
-    renderEditableText: false
+    renderEditableText: false,
+    intialValue: this.props.value,
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.value !== this.state.value) {
+    const { value, intialValue } = this.state;
+    if (nextProps.value !== value && nextProps.value !== intialValue) {
       this.setState({ value: nextProps.value });
     }
   }
 
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
     });
   };
 
@@ -79,7 +81,7 @@ class EditableText extends Component {
 const styles = theme => ({
   container: {
     display: "flex",
-    width: "100%"
+    width: "100%",
   },
   normalText: {
     width: "100%",
@@ -99,8 +101,8 @@ const styles = theme => ({
     transition: "background-color 0.25s ease-out",
     "&:hover": {
       cursor: "text",
-      backgroundColor: "rgba(0,0,0,.15)  "
-    }
+      backgroundColor: "rgba(0,0,0,.15)  ",
+    },
   },
   input: {
     fontWeight: 500,
@@ -110,11 +112,11 @@ const styles = theme => ({
     color: "black",
     overflowY: "auto",
     overflowX: "hidden",
-    cursor: "text"
+    cursor: "text",
   },
   formControl: {
-    width: "100%"
-  }
+    width: "100%",
+  },
 });
 
 export default withStyles(styles)(EditableText);

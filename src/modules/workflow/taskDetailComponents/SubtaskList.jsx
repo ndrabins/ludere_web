@@ -8,7 +8,7 @@ import CheckboxLottie from "common/CheckBox";
 
 class SubtaskList extends Component {
   state = {
-    hovered: null
+    hovered: null,
   };
 
   handleDeleteClick = (event, index) => {
@@ -74,7 +74,7 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "100%"
+    width: "100%",
   },
   text: {
     whiteSpace: "pre-line",
@@ -86,8 +86,8 @@ const styles = theme => ({
     transition: "background-color 0.25s ease-out, color 0.25s ease-out",
     "&:hover": {
       cursor: "text",
-      background: "rgba(0,0,0,.15)  "
-    }
+      background: "rgba(0,0,0,.15)  ",
+    },
   },
   completedText: {
     whiteSpace: "pre-line",
@@ -101,15 +101,15 @@ const styles = theme => ({
     transition: "background-color 0.25s ease-out, color 0.25s ease-out",
     "&:hover": {
       cursor: "text",
-      background: "rgba(0,0,0,.15)"
-    }
+      background: "rgba(0,0,0,.15)",
+    },
   },
   textContainer: {
     wordBreak: "break-word",
     whiteSpace: "pre-line",
     wordWrap: "break-word",
     width: "100%",
-    paddingLeft: 36
+    paddingLeft: 36,
   },
   subtaskContent: {
     display: "flex",
@@ -117,11 +117,11 @@ const styles = theme => ({
     alignItems: "center",
     position: "relative",
     wordWrap: "break-word",
-    width: "100%" // this shouldnt be hard coded but I couldn't figure out how to make the text not go past div.
+    width: "100%", // this shouldnt be hard coded but I couldn't figure out how to make the text not go past div.
   },
   closeIcon: {
-    color: "#6d6d6d"
-  }
+    color: "#6d6d6d",
+  },
 });
 
 export default withStyles(styles)(SubtaskList);
