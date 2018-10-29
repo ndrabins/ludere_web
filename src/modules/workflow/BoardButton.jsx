@@ -270,14 +270,14 @@ const styles = {
     overflowX: "hidden",
     cursor: "text",
   },
-  notificationIcon: {
-    height: 6,
-    width: 12,
-    borderRadius: 5,
-    left: 35, // not sure this has to be different from channel button to look the same...
-    background: "#6FE5C9",
-    position: "absolute",
-  },
+  // notificationIcon: {
+  //   height: 6,
+  //   width: 12,
+  //   borderRadius: 5,
+  //   left: 35, // not sure this has to be different from channel button to look the same...
+  //   background: "#6FE5C9",
+  //   position: "absolute",
+  // },
   notificationText: {
     fontWeight: 500,
     color: "white",

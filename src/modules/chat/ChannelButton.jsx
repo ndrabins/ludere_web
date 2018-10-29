@@ -235,14 +235,14 @@ const styles = {
       cursor: "pointer",
     },
   },
-  notificationIcon: {
-    height: 6,
-    width: 12,
-    borderRadius: 5,
-    left: 26,
-    background: "#6FE5C9",
-    position: "absolute",
-  },
+  // notificationIcon: {
+  //   height: 6,
+  //   width: 12,
+  //   borderRadius: 5,
+  //   left: 26,
+  //   background: "#6FE5C9",
+  //   position: "absolute",
+  // },
   name: {
     position: "relative",
     textDecoration: "none",
