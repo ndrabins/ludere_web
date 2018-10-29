@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Checkbox from "@material-ui/core/Checkbox";
 
 import * as Actions from "../../../actions";
 
@@ -13,12 +12,12 @@ import FormControl from "@material-ui/core/FormControl";
 
 class TaskDetailSubtasks extends Component {
   state = {
-    subtaskContent: ""
+    subtaskContent: "",
   };
 
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
     });
   };
 
@@ -29,7 +28,7 @@ class TaskDetailSubtasks extends Component {
     let subtasks = newTask.subtasks;
     newTask.subtasks = [
       ...subtasks,
-      { content: subtaskContent, completed: false }
+      { content: subtaskContent, completed: false },
     ];
 
     this.props.actions.updateTask(newTask);
@@ -73,13 +72,13 @@ class TaskDetailSubtasks extends Component {
           subtaskUpdate={this.updateSubtaskContent}
         />
         <div className={classes.entryWrapper}>
-          <Checkbox
+          {/* <Checkbox
             checked={true}
             tabIndex={-1}
             disabled
             disableRipple={true}
             classes={{ checked: classes.decorationCheckbox }}
-          />
+          /> */}
           <FormControl className={classes.formControl}>
             <Input
               className={classes.input}
@@ -109,12 +108,12 @@ const styles = {
   root: {
     display: "flex",
     width: "100%",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   entryWrapper: {
-    marginRight: 15,
-    display: "flex"
-    // marginTop: -8
+    marginRight: 8,
+    marginLeft: 8,
+    display: "flex",
   },
   input: {
     backgroundColor: "white",
@@ -127,8 +126,8 @@ const styles = {
     border: "transparent 2px solid",
     transition: "border .25s ease-out",
     "&:hover": {
-      border: "#B0B2B6 2px solid"
-    }
+      border: "#B0B2B6 2px solid",
+    },
   },
   inputFocused: {
     backgroundColor: "white",
@@ -141,17 +140,17 @@ const styles = {
     transition: "border .25s ease-out",
     border: "2px solid #6d6d6d",
     "&:hover": {
-      border: "2px solid #6d6d6d"
-    }
+      border: "2px solid #6d6d6d",
+    },
   },
   formControl: {
     width: "100%",
-    marginTop: 3
+    marginTop: 3,
   },
   decorationCheckbox: {
     marginTop: -5,
-    color: "#686869"
-  }
+    color: "#686869",
+  },
 };
 
 function mapStateToProps(state) {
@@ -160,7 +159,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 
