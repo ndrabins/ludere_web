@@ -64,7 +64,7 @@ class TaskDetail extends Component {
               <SectionDivider content={"Utility"} />
               <Button
                 onClick={this.handleDelete}
-                variant="raised"
+                variant="contained"
                 className={classes.deleteButton}
               >
                 Delete Task
@@ -88,7 +88,7 @@ const styles = theme => ({
     right: 25,
     transition: "opacity 0.5s ease-out",
     zIndex: -10,
-    opacity: 0
+    opacity: 0,
   },
   container: {
     marginTop: 6,
@@ -100,13 +100,13 @@ const styles = theme => ({
     borderRadius: 10,
     right: 25,
     transition: "opacity .5s ease-out",
-    opacity: 1
+    opacity: 1,
   },
   innerContainer: {
     minWidth: 300,
     height: "100%",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   header: {
     borderTopLeftRadius: 10,
@@ -115,7 +115,7 @@ const styles = theme => ({
     flexDirection: "column",
     alignItems: "flex-start",
     background: "#6b6b6b",
-    minHeight: 40
+    minHeight: 40,
   },
   headerInner: {
     display: "flex",
@@ -125,16 +125,16 @@ const styles = theme => ({
     alignItems: "center",
     paddingRight: 10,
     marginTop: "-2px",
-    marginBottom: "-3px"
+    marginBottom: "-3px",
   },
   taskContent: {
     // height: "100%",
     padding: 8,
-    overflowY: "auto"
+    overflowY: "auto",
   },
   titleContainer: {
     width: "100%",
-    display: "flex"
+    display: "flex",
   },
   deleteButton: {
     marginTop: 10,
@@ -143,27 +143,27 @@ const styles = theme => ({
     color: "white",
     backgroundColor: "#b9bbbe",
     "&:hover": {
-      backgroundColor: "#e74c3c"
-    }
+      backgroundColor: "#e74c3c",
+    },
   },
   icon: {
     color: "white",
     marginTop: -2,
-    marginBottom: -2
-  }
+    marginBottom: -2,
+  },
 });
 
 function mapStateToProps(state) {
   return {
     showTaskDetail: state.workflow.showTaskDetail,
     taskData: state.workflow.taskData,
-    selectedTask: state.workflow.selectedTask
+    selectedTask: state.workflow.selectedTask,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

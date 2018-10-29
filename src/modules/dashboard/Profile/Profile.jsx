@@ -41,7 +41,7 @@ class Profile extends Component {
     this.state = {
       files: [], //${this.props.profile.photoURL}
       displayName: this.props.profile && this.props.profile.displayName,
-      openSnackbar: false
+      openSnackbar: false,
     };
   }
 
@@ -83,7 +83,7 @@ class Profile extends Component {
     return {
       abort: () => {
         abort();
-      }
+      },
     };
   };
 
@@ -100,7 +100,7 @@ class Profile extends Component {
 
         // Let FilePond know the request has been cancelled
         abort();
-      }
+      },
     };
   };
 
@@ -147,7 +147,7 @@ class Profile extends Component {
               acceptedFileTypes={["image/*"]}
               server={{
                 process: this.handleProcessing,
-                abortLoad: this.handleAbort
+                abortLoad: this.handleAbort,
               }}
               ref={ref => (this.pond = ref)}
             >
@@ -167,7 +167,7 @@ class Profile extends Component {
             <InputLabel
               FormLabelClasses={{
                 root: classes.label,
-                focused: classes.cssFocused
+                focused: classes.cssFocused,
               }}
               shrink={true}
             >
@@ -187,7 +187,7 @@ class Profile extends Component {
           </FormControl>
           <Button
             onClick={this.handleUpdateProfile}
-            variant="raised"
+            variant="contained"
             className={classes.saveButton}
           >
             Save Profile
@@ -197,7 +197,7 @@ class Profile extends Component {
             open={openSnackbar}
             onClose={this.handleClose}
             ContentProps={{
-              "aria-describedby": "message-id"
+              "aria-describedby": "message-id",
             }}
             message={<span id="message-id">Profile Updated</span>}
           />
@@ -217,30 +217,30 @@ const styles = {
     paddingLeft: 100,
     paddingRight: 100,
     paddingBottom: 20,
-    overflowY: "auto"
+    overflowY: "auto",
   },
   title: {
     fontSize: 32,
-    marginBottom: 20
+    marginBottom: 20,
   },
   subheading: {
     marginTop: 20,
-    marginBottom: 10
+    marginBottom: 10,
   },
   avatar: {
     width: 400,
-    minWidth: 400
+    minWidth: 400,
   },
   formControl: {
     marginBotton: 10,
-    width: "100%"
+    width: "100%",
   },
   label: {
     "&$cssFocused": {
       color: "#303030",
-      fontWeight: 500
+      fontWeight: 500,
     },
-    color: "#303030"
+    color: "#303030",
   },
   cssFocused: {},
   input: {
@@ -254,22 +254,22 @@ const styles = {
     transition: "border 0.25s ease-out",
     "&:hover": {
       cursor: "text",
-      border: "1px solid #B9BBBE"
-    }
+      border: "1px solid #B9BBBE",
+    },
   },
   inputFocused: {
     border: "1px solid #303030",
     transition: "border 0.25s ease-out",
     "&:hover": {
       cursor: "text",
-      border: "1px solid #303030"
-    }
+      border: "1px solid #303030",
+    },
   },
   saveButton: {
     marginTop: 30,
     color: "white",
-    background: `linear-gradient(to right, #29b6f6, #796eff)`
-  }
+    background: `linear-gradient(to right, #29b6f6, #796eff)`,
+  },
 };
 
 // lightThemePrimary: "#303030",
@@ -280,13 +280,13 @@ const styles = {
 function mapStateToProps(state) {
   return {
     user: state.auth.user,
-    profile: state.profile.myUserProfile
+    profile: state.profile.myUserProfile,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

@@ -164,7 +164,7 @@ class SignUp extends Component {
             {error && <span className={classes.errorText}> {error} </span>}
             <div className={classes.buttonContainer}>
               <Button
-                variant="raised"
+                variant="contained"
                 onClick={() =>
                   this.props.actions.authWithProvider("Google", workspaceID)
                 }
@@ -179,7 +179,7 @@ class SignUp extends Component {
               </Button>
               <Button
                 className={classes.facebookButton}
-                variant="raised"
+                variant="contained"
                 onClick={() =>
                   this.props.actions.authWithProvider("Facebook", workspaceID)
                 }

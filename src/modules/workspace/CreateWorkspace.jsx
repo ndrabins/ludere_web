@@ -72,7 +72,7 @@ class CreateWorkspaceForm extends Component {
         <div className={classes.buttonContainer}>
           <Button
             onClick={this.handleCreateWorkspace}
-            variant="raised"
+            variant="contained"
             color="primary"
             className={classes.button}
           >
