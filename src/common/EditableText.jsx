@@ -13,6 +13,7 @@ class EditableText extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { value, intialValue } = this.state;
+
     if (nextProps.value !== value && nextProps.value !== intialValue) {
       this.setState({ value: nextProps.value });
     }

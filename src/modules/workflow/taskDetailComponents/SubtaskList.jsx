@@ -1,42 +1,23 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
-import Fade from "@material-ui/core/Fade";
 import EditableText from "../../../common/EditableText";
 import CheckboxLottie from "common/CheckBox";
 
-class SubtaskList extends Component {
-  state = {
-    hovered: null,
-  };
-
+class SubtaskList extends PureComponent {
   handleDeleteClick = (event, index) => {
     event.stopPropagation();
     this.props.handleDelete(index);
   };
 
-  handleHover = index => {
-    this.setState({ hovered: index });
-  };
-
-  handleLeave = () => {
-    this.setState({ hovered: null });
-  };
-
   render() {
     const { subtasks, classes, subtaskUpdate } = this.props;
-    const { hovered } = this.state;
 
     return (
       <div className={classes.root}>
         {subtasks.map((subtask, index) => (
-          <div
-            key={index}
-            className={classes.subtask}
-            onMouseOver={() => this.handleHover(index)}
-            onMouseLeave={() => this.handleLeave()}
-          >
+          <div key={index} className={classes.subtask}>
             <div className={classes.subtaskContent}>
               <CheckboxLottie
                 isChecked={subtask.completed}
@@ -53,13 +34,12 @@ class SubtaskList extends Component {
                 />
               </div>
             </div>
-            <Fade in={index === hovered} timeout={{ enter: 250, exit: 100 }}>
-              <IconButton
-                onClick={event => this.handleDeleteClick(event, index)}
-              >
-                <CloseIcon className={classes.closeIcon} />
-              </IconButton>
-            </Fade>
+            <IconButton
+              onClick={event => this.handleDeleteClick(event, index)}
+              className={classes.deleteIconButton}
+            >
+              <CloseIcon className={classes.closeIcon} />
+            </IconButton>
           </div>
         ))}
       </div>
@@ -75,6 +55,9 @@ const styles = theme => ({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
+    "&:hover $deleteIconButton": {
+      opacity: 1,
+    },
   },
   text: {
     whiteSpace: "pre-line",
@@ -121,6 +104,10 @@ const styles = theme => ({
   },
   closeIcon: {
     color: "#6d6d6d",
+  },
+  deleteIconButton: {
+    opacity: 0,
+    transition: "opacity 0.25s ease-out",
   },
 });
 
