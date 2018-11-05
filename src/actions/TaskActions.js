@@ -264,8 +264,6 @@ export function updateTask(updatedTask, taskID = null) {
         `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/tasks/${taskIDToUpdate}`
       );
 
-    console.log("updatedTask", updatedTask);
-
     return taskRef
       .set(updatedTask, { merge: true })
       .then(function() {
