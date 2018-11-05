@@ -57,7 +57,7 @@ class TaskDetail extends Component {
           </div>
           {showTaskDetail && (
             <div className={classes.taskContent}>
-              <Description task={task} />
+              <Description task={task} taskID={selectedTask} />
               <TaskSubTasks task={task} />
               <SectionDivider content={"Comments"} />
               <CommentSection taskID={selectedTask} />

@@ -24,6 +24,9 @@ import "firebase/auth";
 import "firebase/messaging";
 import "firebase/functions";
 
+import $ from "jquery";
+window.$ = window.jQuery = $;
+
 const url = window.location.href;
 let config;
 // if (url.includes("app")) {

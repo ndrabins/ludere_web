@@ -9,7 +9,7 @@ import {
   FETCH_COMMENTS,
   FETCH_COMMENTS_SUCCESS,
   FETCH_COMMENTS_CHANNEL_SUCCESS,
-  UNSUBSCRIBE_TASK_COMMENTS
+  UNSUBSCRIBE_TASK_COMMENTS,
 } from "./types";
 import firebase from "firebase/app";
 
@@ -42,7 +42,7 @@ export function createTask(listID, taskTitle) {
       dateCreated: timestamp,
       dateUpdated: timestamp,
       lastUpdatedBy: uid,
-      description: {},
+      description: "",
       dueDate: null,
       createdBy: uid,
       boardID: selectedBoard,
@@ -50,7 +50,7 @@ export function createTask(listID, taskTitle) {
       tags: {},
       subtasks: [],
       assigned: {},
-      numberOfComments: 0
+      numberOfComments: 0,
     };
 
     taskRef.add(task).then(function(docRef) {
@@ -185,7 +185,7 @@ export function fetchTask(taskID, commentChannelID) {
       dispatch({
         type: FETCH_COMMENTS_CHANNEL_SUCCESS,
         commentChannel: doc.data(),
-        commentChannelListener: commentChannelListener
+        commentChannelListener: commentChannelListener,
       });
     });
 
@@ -199,7 +199,7 @@ export function fetchTask(taskID, commentChannelID) {
         dispatch({
           type: FETCH_COMMENTS_SUCCESS,
           comments: comments,
-          taskCommentsListener: taskCommentsListener
+          taskCommentsListener: taskCommentsListener,
         });
       });
   };
@@ -233,7 +233,7 @@ export function updateTaskTitle(title) {
 
     return taskRef
       .update({
-        title: title
+        title: title,
       })
       .then(function() {})
       .catch(function(error) {
@@ -263,6 +263,8 @@ export function updateTask(updatedTask, taskID = null) {
       .doc(
         `workspaces/${selectedWorkspace}/teams/${selectedTeam}/workflow/${selectedBoard}/tasks/${taskIDToUpdate}`
       );
+
+    console.log("updatedTask", updatedTask);
 
     return taskRef
       .set(updatedTask, { merge: true })

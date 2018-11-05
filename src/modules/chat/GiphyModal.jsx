@@ -13,26 +13,28 @@ const client = GphApiClient("azVscOW5d6t3LzyJE1rwD3cnu0DwB1vH");
 
 class GiphyModal extends Component {
   static propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
   };
   constructor(props) {
     super(props);
     this.state = {
       giphySearchName: "",
-      gifs: []
+      gifs: [],
+      initialFetch: true,
     };
   }
 
-  componentDidMount() {
-    // this throws a warning in the console but as far as I know it shouldn't...
-    client
-      .trending("gifs", { rating: "pg", limit: 24 })
-      .then(response => {
-        this.setState({ gifs: response.data });
-      })
-      .catch(err => {
-        console.log("error", err);
-      });
+  componentDidUpdate() {
+    if (this.props.open && this.state.initialFetch) {
+      client
+        .trending("gifs", { rating: "pg", limit: 24 })
+        .then(response => {
+          this.setState({ gifs: response.data, initialFetch: false });
+        })
+        .catch(err => {
+          console.log("error", err);
+        });
+    }
   }
 
   fetchGifsRequest = () => {
@@ -56,7 +58,7 @@ class GiphyModal extends Component {
 
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
     });
     this.fetchGifsRequest();
   };
@@ -81,7 +83,7 @@ class GiphyModal extends Component {
         key={gif.url}
         className={classes.gridTile}
         style={{
-          height: gif.images.preview_gif.height
+          height: gif.images.preview_gif.height,
         }}
       >
         <video
@@ -173,14 +175,14 @@ const styles = theme => ({
     margin: "0px 2px",
     height: 400,
     overflowX: "hidden",
-    transition: "z-index 0.25s ease-out"
+    transition: "z-index 0.25s ease-out",
   },
   inputContainer: {
     display: "flex",
     flexDirection: "row",
     marginBottom: "10px",
     zIndex: 5,
-    padding: 8
+    padding: 8,
   },
   masonry: {
     display: "flex",
@@ -190,7 +192,7 @@ const styles = theme => ({
     zIndex: 1,
     flexDirection: "row",
     justifyContent: "center",
-    alignContent: "stretch"
+    alignContent: "stretch",
   },
   column: {
     flex: 1,
@@ -199,7 +201,7 @@ const styles = theme => ({
     justifyContent: "flex-start",
     alignContent: "stretch",
     flexGrow: 1,
-    margin: 2
+    margin: 2,
   },
   gridTile: {
     transition: "transform .2s ease-out, z-index 0.2s ease-out",
@@ -211,12 +213,12 @@ const styles = theme => ({
 
     "&:hover": {
       zIndex: 10,
-      transform: "scale(1.1)"
-    }
+      transform: "scale(1.1)",
+    },
   },
   image: {
     width: "100%",
-    borderRadius: 8
+    borderRadius: 8,
   },
   input: {
     backgroundColor: "#EEEEEE",
@@ -230,8 +232,8 @@ const styles = theme => ({
     border: "transparent 2px solid",
     transition: "border .25s ease-out",
     "&:hover": {
-      border: "#B0B2B6 2px solid"
-    }
+      border: "#B0B2B6 2px solid",
+    },
   },
   inputFocused: {
     backgroundColor: "#EEEEEE",
@@ -245,12 +247,12 @@ const styles = theme => ({
     transition: "border .25s ease-out",
     border: "2px solid #6d6d6d",
     "&:hover": {
-      border: "2px solid #6d6d6d"
-    }
+      border: "2px solid #6d6d6d",
+    },
   },
   giphyLogo: {
     width: 100,
-    height: 38
-  }
+    height: 38,
+  },
 });
 export default withStyles(styles)(GiphyModal);
