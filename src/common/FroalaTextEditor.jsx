@@ -31,12 +31,25 @@ class FroalaTextEditor extends Component {
     model: this.props.value,
   };
 
+  componentDidMount() {
+    //remove warning
+    const wrapper = document.querySelector(".fr-wrapper a");
+    if (wrapper) {
+      wrapper.remove();
+    }
+  }
+
   componentDidUpdate() {
     const { value } = this.props;
 
     const { model } = this.state;
     if (value !== model) {
       this.setState({ model: value });
+    }
+
+    const wrapper = document.querySelector(".fr-wrapper a");
+    if (wrapper) {
+      wrapper.remove();
     }
   }
 
@@ -90,6 +103,7 @@ class FroalaTextEditor extends Component {
       froalaModel = stringValue;
     }
 
+    // to delete froalas warning.. we will pay eventually
     return (
       <div className={classes.root}>
         <FroalaEditor
