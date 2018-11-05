@@ -87,7 +87,6 @@ class FroalaTextEditor extends Component {
     // this horrible piece of code is to handle the legacy code of having description as an object
     if (typeof model === "object") {
       let stringValue = JSON.stringify(model);
-      console.log("SHOUND BE HITTING THIS");
       froalaModel = stringValue;
     }
 
