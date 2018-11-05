@@ -66,8 +66,14 @@ class FroalaTextEditor extends Component {
     }
   }
 
+  componentDidUpdate() {
+    const wrapper = document.querySelector(".fr-wrapper a");
+    if (wrapper) {
+      wrapper.remove();
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
-    const { model } = this.state;
     const { value } = this.props;
 
     if (nextProps.value !== value) {
