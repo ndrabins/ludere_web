@@ -27,32 +27,6 @@ class FroalaTextEditor extends Component {
     value: "",
   };
 
-  state = {
-    model: this.props.value,
-  };
-
-  componentDidMount() {
-    //remove warning
-    const wrapper = document.querySelector(".fr-wrapper a");
-    if (wrapper) {
-      wrapper.remove();
-    }
-  }
-
-  componentDidUpdate() {
-    const { value } = this.props;
-
-    const { model } = this.state;
-    if (value !== model) {
-      this.setState({ model: value });
-    }
-
-    const wrapper = document.querySelector(".fr-wrapper a");
-    if (wrapper) {
-      wrapper.remove();
-    }
-  }
-
   config = {
     placeholderText: this.props.helperText,
     charCounterCount: false,
@@ -80,27 +54,45 @@ class FroalaTextEditor extends Component {
     ],
   };
 
+  state = {
+    model: this.props.value,
+  };
+
+  componentDidMount() {
+    //remove warning from froala.. sorry guys. I will buy this when this app makes money
+    const wrapper = document.querySelector(".fr-wrapper a");
+    if (wrapper) {
+      wrapper.remove();
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { model } = this.state;
+    const { value } = this.props;
+
+    if (nextProps.value !== value) {
+      this.setState({ model: nextProps.value });
+    }
+  }
+
   handleModelChange = model => {
     this.setState({
       model: model,
     });
     this.props.onChange(model);
-    // console.log(model);
   };
 
   render() {
     const { classes, taskID } = this.props;
     const { model } = this.state;
-    let froalaModel = model;
+    let formattedModel = model;
 
     if (taskID === undefined) {
       return null;
     }
 
-    // this horrible piece of code is to handle the legacy code of having description as an object
     if (typeof model === "object") {
-      let stringValue = JSON.stringify(model);
-      froalaModel = stringValue;
+      formattedModel = JSON.stringify(model);
     }
 
     // to delete froalas warning.. we will pay eventually
@@ -109,7 +101,7 @@ class FroalaTextEditor extends Component {
         <FroalaEditor
           tag={"textarea"}
           config={this.config}
-          model={froalaModel}
+          model={formattedModel}
           onModelChange={this.handleModelChange}
         />
       </div>
