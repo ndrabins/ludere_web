@@ -53,7 +53,9 @@ export const handler = functions.firestore
               workspaceID: workspaceID,
               hasBeenViewedBefore: false,
               dateCreated: context.timestamp,
-              data: {},
+              data: {
+                newTask: true,
+              },
             });
           }
         });

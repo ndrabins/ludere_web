@@ -65,6 +65,11 @@ class Task extends PureComponent {
     this.setState({ hovered: false });
   };
 
+  handleClick = (taskID, commentID) => {
+    this.props.actions.toggleTaskDetail(taskID, commentID);
+    this.props.actions.readNotification(taskID);
+  };
+
   render() {
     const {
       task,
@@ -73,6 +78,7 @@ class Task extends PureComponent {
       isDragging,
       selectedTaskID,
       showTaskDetail,
+      notifications,
     } = this.props;
     const { hovered } = this.state;
 
@@ -80,21 +86,23 @@ class Task extends PureComponent {
       return <div />;
     }
 
+    const showNotification =
+      notifications[taskID] && notifications[taskID].showNotification;
     let percent = this.getSubtaskCompletePercentage();
 
+    //
     return (
       <Paper
         className={classnames(classes.container, {
           [classes.draggingContainer]:
             isDragging || (selectedTaskID === taskID && showTaskDetail),
         })}
-        onClick={() =>
-          this.props.actions.toggleTaskDetail(taskID, task.commentChannelID)
-        }
+        onClick={() => this.handleClick(taskID, task.commentChannelID)}
         elevation={isDragging ? 20 : 1}
         onMouseOver={this.onMouseOver}
         onMouseLeave={this.onMouseLeave}
       >
+        {showNotification && <div className={classes.notificationIndicator} />}
         <Typography
           style={{
             display: "flex",
@@ -149,11 +157,12 @@ const styles = {
   container: {
     minHeight: 30,
     borderRadius: 8,
-    border: "3px solid transparent",
+    border: "2px solid transparent",
     backgroundColor: "white",
     padding: 6,
     margin: "0 0 8px 0",
     cursor: "pointer",
+    position: "relative",
     wordBreak: "break-all",
     transition: "box-shadow 0.2s ease-out, border 0.2s ease-out",
     "&:hover": {
@@ -164,7 +173,7 @@ const styles = {
   draggingContainer: {
     // backgroundColor: "black",
     borderRadius: 8,
-    border: "3px solid #00BCD4",
+    border: "2px solid #00BCD4",
     transition: "box-shadow 0.2s ease-out, border 0.2s ease-out",
   },
   progress: {
@@ -200,12 +209,24 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
   },
+  notificationIndicator: {
+    width: "14px",
+    height: "14px",
+    background: "linear-gradient(to right, #00BCD4, #26d0ce)",
+    zIndex: 1000,
+    position: "absolute",
+    top: "-8px",
+    left: "-8px",
+    borderRadius: 100,
+    boxShadow: "0px 1px 3px 0px rgba(0, 0, 0, 0.2)",
+  },
 };
 
 function mapStateToProps(state) {
   return {
     selectedTaskID: state.workflow.selectedTask,
     showTaskDetail: state.workflow.showTaskDetail,
+    notifications: state.userData.notifications,
   };
 }
 
