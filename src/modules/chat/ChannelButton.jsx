@@ -88,6 +88,9 @@ class ChannelButton extends Component {
       isDeletingChannel,
     } = this.state;
 
+    const showNotification =
+      notifications[channelID] && notifications[channelID].showNotification;
+
     let channelStyle = classes.channel;
     let nameStyle = classes.name;
 
@@ -104,13 +107,9 @@ class ChannelButton extends Component {
           noWrap
           component={Link}
           to="/team/chat"
-          style={notifications[channelID] ? styles.notificationText : null}
+          style={showNotification ? styles.notificationText : null}
         >
-          <div
-            className={
-              notifications[channelID] ? classes.notificationIcon : null
-            }
-          />
+          <div className={showNotification ? classes.notificationIcon : null} />
           # {this.props.name}
         </Typography>
 

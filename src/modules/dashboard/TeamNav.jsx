@@ -31,11 +31,12 @@ class TeamNav extends Component {
 
   isTeamNotification(teamID) {
     const { notifications, selectedTeam } = this.props;
+
     if (notifications === undefined || notifications[teamID] === undefined) {
       return false;
     }
 
-    if (notifications[teamID] && teamID !== selectedTeam) {
+    if (notifications[teamID].showNotification && teamID !== selectedTeam) {
       return true;
     }
     return false;
@@ -59,11 +60,11 @@ class TeamNav extends Component {
               selectIndicatorStyle
                 ? {
                     ...styles.selectIndicator,
-                    background: GradientArray[index % 4]
+                    background: GradientArray[index % 4],
                   }
                 : {
                     ...styles.notSelected,
-                    background: GradientArray[index % 4]
+                    background: GradientArray[index % 4],
                   }
             }
           />
@@ -72,7 +73,7 @@ class TeamNav extends Component {
               variant="fab"
               style={{
                 ...styles.teamButton,
-                background: GradientArray[index % 4]
+                background: GradientArray[index % 4],
               }}
               onClick={() => this.handleTeamSelect(teamID)}
             >
@@ -145,14 +146,14 @@ const styles = {
     marginRight: -340,
     backgroundColor: "#2a2a2a",
     boxShadow:
-      "0 5.5px 5px 0 rgba(0, 0, 0, 0.24), 0 9px 18px 0 rgba(0, 0, 0, 0.18)"
+      "0 5.5px 5px 0 rgba(0, 0, 0, 0.24), 0 9px 18px 0 rgba(0, 0, 0, 0.18)",
   },
   divider: {
     marginTop: 5,
     marginBottom: 5,
     height: 2,
     width: "34px",
-    backgroundColor: "#C3C3C3"
+    backgroundColor: "#C3C3C3",
   },
   container: {
     display: "flex",
@@ -160,18 +161,18 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     height: "100%",
-    paddingTop: 5
+    paddingTop: 5,
   },
   communityButton: {
     color: "#FFF",
     background: `linear-gradient(to left, #6fe5c9, #00bcd4)`,
     width: 36,
-    height: 36
+    height: 36,
   },
   teamButton: {
     position: "relative",
     width: 36,
-    height: 36
+    height: 36,
   },
   teamNotification: {
     width: 10,
@@ -180,7 +181,7 @@ const styles = {
     right: 0,
     bottom: 0,
     borderRadius: 5,
-    background: "#FFF"
+    background: "#FFF",
   },
   notSelected: {
     width: 0,
@@ -190,7 +191,7 @@ const styles = {
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
     transition: "width .25s linear",
-    left: 0
+    left: 0,
   },
   selectIndicator: {
     position: "absolute",
@@ -200,7 +201,7 @@ const styles = {
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
     transition: "width .25s linear",
-    left: 0
+    left: 0,
   },
   teamButtonContainer: {
     position: "relative",
@@ -210,25 +211,25 @@ const styles = {
     alignItems: "center",
     width: "100%",
     minHeight: 38,
-    margin: "6px 0px 6px 0px"
+    margin: "6px 0px 6px 0px",
   },
   teamAbbreviation: {
     fontSize: 14,
-    color: "white"
-  }
+    color: "white",
+  },
 };
 
 function mapStateToProps(state) {
   return {
     teams: state.team.teams,
     selectedTeam: state.team.selectedTeam,
-    notifications: state.userData.notifications
+    notifications: state.userData.notifications,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

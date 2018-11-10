@@ -36,11 +36,7 @@ export const handler = functions.firestore
               teamID: teamID,
               workspaceID: workspaceID,
               dateCreated: context.timestamp,
-              data: {
-                taskCreated: true,
-                taskTitle: task.title, // to display in activity
-                createdBy: task.createdBy,
-              },
+              data: {},
             });
             createNotification(firestore, memberID, boardID, {
               type: "board",

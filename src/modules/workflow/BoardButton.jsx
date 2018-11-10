@@ -100,6 +100,9 @@ class BoardButton extends Component {
       isDeletingBoard,
     } = this.state;
 
+    const showNotification =
+      notifications[boardID] && notifications[boardID].showNotification;
+
     let workflowStyle = classes.workflow;
     let nameStyle = classes.name;
     if (
@@ -117,12 +120,10 @@ class BoardButton extends Component {
           onClick={this.handleClick}
           noWrap
           component={Link}
-          style={notifications[boardID] ? styles.notificationText : null}
+          style={showNotification ? styles.notificationText : null}
           to="/team/workflow"
         >
-          <div
-            className={notifications[boardID] ? classes.notificationIcon : null}
-          />
+          <div className={showNotification ? classes.notificationIcon : null} />
           {name}
         </Typography>
 
