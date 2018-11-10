@@ -10,10 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-try {
-    admin.initializeApp(functions.config().firebase);
-}
-catch (e) { }
 const firestore = admin.firestore();
 // delete all messages on deleting a channel
 exports.handler = functions.https.onCall((data, context) => __awaiter(this, void 0, void 0, function* () {
@@ -34,7 +30,7 @@ exports.handler = functions.https.onCall((data, context) => __awaiter(this, void
             email: email,
             emailVerified: false,
             displayName: email,
-            photoURL: "https://image.flaticon.com/icons/svg/186/186539.svg"
+            photoURL: "https://image.flaticon.com/icons/svg/186/186539.svg",
         })
             .then(userRecord => {
             return userRecord;

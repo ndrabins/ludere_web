@@ -50,6 +50,7 @@ export function createTask(listID, taskTitle) {
       tags: {},
       subtasks: [],
       assigned: {},
+      followers: {},
       numberOfComments: 0,
     };
 

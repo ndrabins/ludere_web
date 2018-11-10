@@ -1,9 +1,6 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 
-try {
-  admin.initializeApp(functions.config().firebase);
-} catch (e) {}
 const firestore = admin.firestore();
 
 // delete all messages on deleting a channel
@@ -31,7 +28,7 @@ export const handler = functions.https.onCall(async (data, context) => {
         email: email,
         emailVerified: false,
         displayName: email,
-        photoURL: "https://image.flaticon.com/icons/svg/186/186539.svg"
+        photoURL: "https://image.flaticon.com/icons/svg/186/186539.svg",
       })
       .then(userRecord => {
         return userRecord;

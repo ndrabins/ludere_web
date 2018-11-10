@@ -16,14 +16,15 @@ export function readNotification(notificationID) {
 
     const notificationRef = firebase
       .firestore()
-      .collection(`privateUserData`)
-      .doc(`${uid}`);
+      .collection("privateUserData")
+      .doc(`${uid}`)
+      .collection("notifications")
+      .doc(`${notificationID}`);
 
-    let newNotifications = { notifications: {} };
-
-    newNotifications.notifications[`${notificationID}`] = false;
-
-    notificationRef.set(newNotifications, { merge: true });
+    notificationRef.set(
+      { showNotification: false, hasBeenViewedBefore: true },
+      { merge: true }
+    );
   };
 }
 
@@ -35,19 +36,17 @@ export function fetchNotifications() {
     const notificationRef = firebase
       .firestore()
       .collection(`privateUserData`)
-      .doc(`${uid}`);
+      .doc(`${uid}`)
+      .collection(`notifications`);
 
-    notificationRef.onSnapshot(function(doc) {
-      if (!doc.exists) {
-        dispatch({
-          type: FETCH_NOTIFICATIONS_SUCCESS,
-          notifications: {},
-        });
-        return;
-      }
+    notificationRef.onSnapshot(function(querySnapshot) {
+      var notifications = {};
+      querySnapshot.forEach(function(doc) {
+        notifications[doc.id] = doc.data();
+      });
       dispatch({
         type: FETCH_NOTIFICATIONS_SUCCESS,
-        notifications: doc.data().notifications,
+        notifications: notifications,
       });
     });
   };

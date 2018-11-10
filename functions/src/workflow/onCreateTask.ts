@@ -1,10 +1,8 @@
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
 const Map = require("lodash/map");
+import { createNotification } from "../notifications/notifications";
 
-try {
-  admin.initializeApp(functions.config().firebase);
-} catch (e) {}
 const firestore = admin.firestore();
 
 export const handler = functions.firestore
@@ -32,17 +30,35 @@ export const handler = functions.firestore
 
         Map(teamMembers, (isMember, memberID) => {
           if (isMember && task.createdBy !== memberID) {
-            let notifications = {};
-            notifications[`${teamID}`] = true; // set notification on the team
-            notifications[`${boardID}`] = true;
-            notifications[`${taskID}`] = true;
-            const privateUserRef = firestore.doc(`privateUserData/${memberID}`);
-            privateUserRef.set(
-              {
-                notifications,
+            createNotification(firestore, memberID, teamID, {
+              type: "team",
+              priority: false,
+              teamID: teamID,
+              workspaceID: workspaceID,
+              dateCreated: context.timestamp,
+              data: {
+                taskCreated: true,
+                taskTitle: task.title, // to display in activity
+                createdBy: task.createdBy,
               },
-              { merge: true }
-            );
+            });
+            createNotification(firestore, memberID, boardID, {
+              type: "board",
+              priority: false,
+              teamID: teamID,
+              workspaceID: workspaceID,
+              dateCreated: context.timestamp,
+              data: {},
+            });
+            createNotification(firestore, memberID, taskID, {
+              type: "task",
+              priority: false,
+              teamID: teamID,
+              workspaceID: workspaceID,
+              hasBeenViewedBefore: false,
+              dateCreated: context.timestamp,
+              data: {},
+            });
           }
         });
       })

@@ -10,6 +10,10 @@ service cloud.firestore {
 
     match /privateUserData/{userID} {
       allow read, write: if isOwner(userID);
+
+      match /notifications/{notificationID} {
+        allow read, write: if isOwner(userID);
+      }
     }
 
     match /workspaces/{workspaceID} {

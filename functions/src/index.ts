@@ -1,10 +1,10 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
-
 try {
   admin.initializeApp(functions.config().firebase);
-} catch (e) {} // You do that because the admin SDK can only be initialized once.
+} catch (e) {} // You do that because the admin SDK can only be initialized once.const firestore = admin.firestore();
 const firestore = admin.firestore();
+firestore.settings({ timestampsInSnapshots: true });
 
 import * as OnCreateMessage from "./chat/onCreateMessage";
 import * as OnDeleteChannel from "./chat/onDeleteChannel";

@@ -5,8 +5,9 @@ const admin = require("firebase-admin");
 try {
     admin.initializeApp(functions.config().firebase);
 }
-catch (e) { } // You do that because the admin SDK can only be initialized once.
+catch (e) { } // You do that because the admin SDK can only be initialized once.const firestore = admin.firestore();
 const firestore = admin.firestore();
+firestore.settings({ timestampsInSnapshots: true });
 const OnCreateMessage = require("./chat/onCreateMessage");
 const OnDeleteChannel = require("./chat/onDeleteChannel");
 const OnDeleteBoard = require("./workflow/onDeleteBoard");

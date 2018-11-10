@@ -1,9 +1,6 @@
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
 
-try {
-  admin.initializeApp(functions.config().firebase);
-} catch (e) {}
 const firestore = admin.firestore();
 const deleteUtility = require("../utility/deleteCollection");
 
