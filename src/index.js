@@ -27,50 +27,14 @@ import "firebase/functions";
 import $ from "jquery";
 window.$ = window.jQuery = $;
 
-const url = window.location.href;
-let config;
-// if (url.includes("app")) {
-//   // prod
-//   config = {
-//     apiKey: "AIzaSyCTXUH-KwzEqiWKXOlJus7ridhcaik1834",
-//     authDomain: "production-ludere.firebaseapp.com",
-//     databaseURL: "https://production-ludere.firebaseio.com",
-//     projectId: "production-ludere",
-//     storageBucket: "production-ludere.appspot.com",
-//     messagingSenderId: "468372447431"
-//   };
-// } else
-
-if (url.includes("staging")) {
-  // staging
-  config = {
-    apiKey: "AIzaSyBN3GDDJkYMChPbB6sxZuwIEI1noSvQ0FE",
-    authDomain: "staging-ludere.firebaseapp.com",
-    databaseURL: "https://staging-ludere.firebaseio.com",
-    projectId: "staging-ludere",
-    storageBucket: "staging-ludere.appspot.com",
-    messagingSenderId: "674177146337",
-  };
-} else if (url.includes("beta")) {
-  config = {
-    apiKey: "AIzaSyBGaxF7Gkwl0dAkEeOMStGgqDhdJdKXnWY",
-    authDomain: "beta-ludere.firebaseapp.com",
-    databaseURL: "https://beta-ludere.firebaseio.com",
-    projectId: "beta-ludere",
-    storageBucket: "beta-ludere.appspot.com",
-    messagingSenderId: "824616822639",
-  };
-} else {
-  //dev
-  config = {
-    apiKey: "AIzaSyB-ZZE-ROAr-JOOmDQIa-v4YBwLzbXGklE",
-    authDomain: "dev-ludere.firebaseapp.com",
-    databaseURL: "https://dev-ludere.firebaseio.com",
-    projectId: "dev-ludere",
-    storageBucket: "dev-ludere.appspot.com",
-    messagingSenderId: "826975908697",
-  };
-}
+const config = {
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+};
 
 firebase.initializeApp(config);
 const firestore = firebase.firestore();
