@@ -235,6 +235,7 @@ export function updateTaskTitle(title) {
     return taskRef
       .update({
         title: title,
+        dateUpdated: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function() {})
       .catch(function(error) {
@@ -258,6 +259,8 @@ export function updateTask(updatedTask, taskID = null) {
     } else {
       taskIDToUpdate = taskID;
     }
+
+    updatedTask.dateUpdated = firebase.firestore.FieldValue.serverTimestamp();
 
     let taskRef = firebase
       .firestore()

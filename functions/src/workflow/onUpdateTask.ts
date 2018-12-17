@@ -3,6 +3,7 @@ const functions = require("firebase-functions");
 const Map = require("lodash/map");
 
 const firestore = admin.firestore();
+import { createNotification } from "../notifications/notifications";
 
 export const handler = functions.firestore
   .document(
@@ -28,17 +29,30 @@ export const handler = functions.firestore
 
         Map(teamMembers, (isMember, memberID) => {
           if (isMember) {
-            let notifications = {};
-            notifications[`${teamID}`] = true; // set notification on the team
-            notifications[`${boardID}`] = true;
-            notifications[`${taskID}`] = true;
-            const privateUserRef = firestore.doc(`privateUserData/${memberID}`);
-            privateUserRef.set(
-              {
-                notifications,
-              },
-              { merge: true }
-            );
+            createNotification(firestore, memberID, teamID, {
+              type: "team",
+              priority: false,
+              teamID: teamID,
+              workspaceID: workspaceID,
+              dateCreated: context.timestamp,
+              data: {},
+            });
+            createNotification(firestore, memberID, boardID, {
+              type: "board",
+              priority: false,
+              teamID: teamID,
+              workspaceID: workspaceID,
+              dateCreated: context.timestamp,
+              data: {},
+            });
+            createNotification(firestore, memberID, taskID, {
+              type: "task",
+              priority: false,
+              teamID: teamID,
+              workspaceID: workspaceID,
+              dateCreated: context.timestamp,
+              data: {}, // put here what was actually updated
+            });
           }
         });
       })
