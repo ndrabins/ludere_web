@@ -30,14 +30,14 @@ class MessageEntry extends Component {
       fileUploadPercent: 0,
       fileUploadInProgress: false,
       fileName: "",
-      fileSize: 0
+      fileSize: 0,
     };
     // debounce the passed in dispatch method, so not to update the typing indicator every keypress
     this.updateChannel = Debounce(this.props.actions.updateChannel, 1000);
   }
 
   static defaultProps = {
-    actionOnSendMessage: () => {}
+    actionOnSendMessage: () => {},
   };
 
   handleChange = prop => event => {
@@ -68,7 +68,7 @@ class MessageEntry extends Component {
     //Update that user is no longer typing
     this.props.actions.sendMessage({
       messageText: this.state.messageText,
-      channelID
+      channelID,
     });
     let updatedChannel = { usersTyping: {} };
     updatedChannel.usersTyping[user.uid] = false;
@@ -76,7 +76,7 @@ class MessageEntry extends Component {
     this.props.actionOnSendMessage();
 
     this.setState({
-      messageText: ""
+      messageText: "",
     });
   };
 
@@ -94,7 +94,7 @@ class MessageEntry extends Component {
     this.setState({
       fileUploadInProgress: true,
       fileName: file.name,
-      fileSize: file.size
+      fileSize: file.size,
     });
 
     uploadTask.on(
@@ -105,7 +105,7 @@ class MessageEntry extends Component {
         let percentDone =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         this.setState({
-          fileUploadPercent: percentDone
+          fileUploadPercent: percentDone,
         });
       },
       error => {
@@ -117,7 +117,7 @@ class MessageEntry extends Component {
           fileUploadInProgress: false,
           fileName: "",
           fileSize: 0,
-          fileUploadPercent: 0
+          fileUploadPercent: 0,
         });
 
         uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
@@ -125,7 +125,7 @@ class MessageEntry extends Component {
             messageText: file.name,
             type: "file",
             fileURL: downloadURL,
-            channelID
+            channelID,
           });
         });
         this.props.actionOnSendMessage();
@@ -140,7 +140,7 @@ class MessageEntry extends Component {
       messageText: gifName,
       type: "file",
       fileURL: gifURL,
-      channelID
+      channelID,
     });
     this.props.actionOnSendMessage();
   };
@@ -174,7 +174,7 @@ class MessageEntry extends Component {
       fileUploadInProgress,
       fileUploadPercent,
       fileName,
-      fileSize
+      fileSize,
     } = this.state;
 
     return (
@@ -183,7 +183,6 @@ class MessageEntry extends Component {
           <input
             className={classes.fileUploader}
             id="raised-button-file"
-            multiple
             type="file"
             onChange={this.uploadFile}
             ref={ref => {
@@ -208,8 +207,8 @@ class MessageEntry extends Component {
             disableUnderline: true,
             classes: {
               root: classes.textRoot,
-              input: classes.textInput
-            }
+              input: classes.textInput,
+            },
           }}
           onKeyPress={ev => {
             if (ev.key === "Enter" && !ev.shiftKey) {
@@ -242,11 +241,11 @@ class MessageEntry extends Component {
           onClose={this.handleClose}
           anchorOrigin={{
             vertical: "bottom",
-            horizontal: "center"
+            horizontal: "center",
           }}
           transformOrigin={{
             vertical: "top",
-            horizontal: "center"
+            horizontal: "center",
           }}
         >
           <NimblePicker set="apple" data={data} onSelect={this.addEmoji} />
@@ -263,7 +262,7 @@ const styles = theme => ({
     paddingRight: 16,
     paddingTop: 8,
     paddingLeft: 8,
-    position: "relative"
+    position: "relative",
   },
   fileInput: {
     color: "#767778",
@@ -277,12 +276,12 @@ const styles = theme => ({
     marginRight: 5,
     transition: theme.transitions.create(["background-color"]),
     "&:hover": {
-      backgroundColor: "#c3c3c3"
-    }
+      backgroundColor: "#c3c3c3",
+    },
   },
   textRoot: {
     padding: 0,
-    borderRadius: 4
+    borderRadius: 4,
   },
   textInput: {
     borderRadius: 4,
@@ -300,25 +299,25 @@ const styles = theme => ({
       "sans-serif",
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
+      '"Segoe UI Symbol"',
     ].join(","),
     "&:hover": {
       borderColor: "#6d6d6d",
-      boxShadow: "0 0 0 0.2rem rgba(109,109,109,.12)"
+      boxShadow: "0 0 0 0.2rem rgba(109,109,109,.12)",
     },
     "&:focus": {
       borderColor: "#6d6d6d",
-      boxShadow: "0 0 0 0.2rem rgba(109,109,109,.25)"
-    }
+      boxShadow: "0 0 0 0.2rem rgba(109,109,109,.25)",
+    },
   },
   fileUploader: {
-    display: "none"
+    display: "none",
   },
   htmlLabel: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    cursor: "pointer"
+    cursor: "pointer",
   },
   emojiIcon: {
     position: "absolute",
@@ -330,8 +329,8 @@ const styles = theme => ({
     color: "#b9bbbe",
     transition: "color 0.25s ease-out",
     "&:hover": {
-      color: "#303030"
-    }
+      color: "#303030",
+    },
   },
   gifIcon: {
     position: "absolute",
@@ -344,20 +343,20 @@ const styles = theme => ({
     color: "#b9bbbe",
     transition: "color 0.25s ease-out",
     "&:hover": {
-      color: "#303030"
-    }
-  }
+      color: "#303030",
+    },
+  },
 });
 
 function mapStateToProps(state) {
   return {
-    user: state.auth.user
+    user: state.auth.user,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 
