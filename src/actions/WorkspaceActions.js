@@ -11,7 +11,7 @@ import {
   FETCH_WORKSPACE_USERS,
   FETCH_WORKSPACE_USERS_SUCCESS,
   UPDATE_WORKSPACE,
-  INVITE_USERS
+  INVITE_USERS,
 } from "./types";
 
 import firebase from "firebase/app";
@@ -28,7 +28,7 @@ export function createWorkspace(workspaceName) {
       dateCreated: timestamp,
       workspaceOwner: uid,
       members: {},
-      invitedEmails: {}
+      invitedEmails: {},
     };
 
     const initialTeam = true; // set flag that this is the first team for workspace
@@ -102,7 +102,7 @@ export function joinWorkspace(workspaceID, user) {
       .commit()
       .then(function() {
         dispatch({
-          type: JOIN_WORKSPACE_SUCCESS
+          type: JOIN_WORKSPACE_SUCCESS,
         });
       })
       .catch(function(error) {
@@ -192,7 +192,7 @@ export function fetchWorkspaceUsers(workspaceID) {
         });
         dispatch({
           type: FETCH_WORKSPACE_USERS_SUCCESS,
-          workspaceUsers: users
+          workspaceUsers: users,
         });
       });
   };
@@ -209,18 +209,19 @@ export function inviteUsers(emailArray) {
 
     inviteUsersToWorkspace({
       emails: emailArray,
-      workspaceID: selectedWorkspace
+      workspaceID: selectedWorkspace,
     }).then(function(result) {
       //update workspace members with new members
       dispatch(updateWorkspace({ members: result.data }));
 
-      //once users are creating by cloud function, send each user an email invite link
+      //once users are created by cloud function, send each user an email invite link
+      // eslint-disable-next-line
       emailArray.map(email => {
         var actionCodeSettings = {
           url: `${
             window.location.origin
           }?email=${email}&workspaceID=${selectedWorkspace}`,
-          handleCodeInApp: true
+          handleCodeInApp: true,
         };
 
         firebase

@@ -10,24 +10,27 @@ import red from "@material-ui/core/colors/red";
 export const lightTheme = createMuiTheme({
   palette: {
     primary: {
-      ...lightBlue
+      ...lightBlue,
     }, // Purple and green play nicely together.
     secondary: {
-      ...orange
+      ...orange,
     },
-    error: red
+    error: red,
+  },
+  typography: {
+    useNextVariants: true,
   },
   overrides: {
     MuiPaper: {
       rounded: {
-        borderRadius: 7
-      }
-    }
-  }
+        borderRadius: 7,
+      },
+    },
+  },
 });
 
 export const darkTheme = createMuiTheme({
   palette: {
-    type: "dark" // Switching the dark mode on is a single property value change.
-  }
+    type: "dark", // Switching the dark mode on is a single property value change.
+  },
 });

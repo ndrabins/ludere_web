@@ -25,7 +25,7 @@ class SignUp extends Component {
       password: "",
       confirmPassword: "",
       showPassword: false,
-      localError: ""
+      localError: "",
     };
   }
 
@@ -64,7 +64,7 @@ class SignUp extends Component {
     if (loginTransition === "null") {
       return (
         <Fade in={true} timeout={{ enter: 1000, exit: 1000 }}>
-          <Typography className={classes.headerText} variant="display1">
+          <Typography className={classes.headerText} variant="h4">
             GET STARTED
           </Typography>
         </Fade>
@@ -73,14 +73,14 @@ class SignUp extends Component {
       return (
         <Fade in={true} timeout={{ enter: 1000, exit: 1000 }}>
           <div className={classes.signUpContent}>
-            <Typography className={classes.headerText} variant="display1">
+            <Typography className={classes.headerText} variant="h4">
               Get Started
             </Typography>
             <FormControl className={classes.formControl}>
               <InputLabel
                 FormLabelClasses={{
                   root: classes.label,
-                  focused: classes.cssFocused
+                  focused: classes.cssFocused,
                 }}
                 shrink={true}
               >
@@ -100,7 +100,7 @@ class SignUp extends Component {
               <InputLabel
                 FormLabelClasses={{
                   root: classes.label,
-                  focused: classes.cssFocused
+                  focused: classes.cssFocused,
                 }}
                 shrink={true}
               >
@@ -126,7 +126,7 @@ class SignUp extends Component {
               <InputLabel
                 FormLabelClasses={{
                   root: classes.label,
-                  focused: classes.cssFocused
+                  focused: classes.cssFocused,
                 }}
                 shrink={true}
               >
@@ -209,7 +209,7 @@ const styles = {
     fontFamily: "Open Sans",
     fontWeight: "bold",
     paddingBottom: 18,
-    minWidth: 200
+    minWidth: 200,
   },
   formContainer: {
     display: "flex",
@@ -218,13 +218,13 @@ const styles = {
     opacity: 0.85,
     borderRadius: "15px 0px 0px 15px",
     padding: 10,
-    height: "100%"
+    height: "100%",
   },
   signUpSelected: {
     width: 400,
     transition: "width 0.4s ease-out",
     display: "flex",
-    height: "100%"
+    height: "100%",
     // justifyContent: "center"
   },
   noneSelected: {
@@ -233,11 +233,11 @@ const styles = {
     height: "100%",
     alignItems: "center",
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   signInSelected: {
     width: 80,
-    transition: "width 0.4s ease-out"
+    transition: "width 0.4s ease-out",
   },
   signUpContent: {
     display: "flex",
@@ -246,10 +246,10 @@ const styles = {
     paddingRight: 80,
     width: "100%",
     paddingTop: 42,
-    position: "relative"
+    position: "relative",
   },
   formControl: {
-    marginBotton: 10
+    marginBotton: 10,
   },
   input: {
     backgroundColor: "transparent",
@@ -262,37 +262,37 @@ const styles = {
     transition: "border 0.25s ease-out",
     "&:hover": {
       cursor: "text",
-      border: "1px solid #C3C3C3"
+      border: "1px solid #C3C3C3",
     },
-    marginBottom: 10
+    marginBottom: 10,
   },
   inputFocused: {
     border: "1px solid #FFF",
     transition: "border 0.25s ease-out",
     "&:hover": {
       cursor: "text",
-      border: "1px solid #FFF"
-    }
+      border: "1px solid #FFF",
+    },
   },
   label: {
     "&$cssFocused": {
       color: "#FFF",
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
-    color: "#FFF"
+    color: "#FFF",
   },
   cssFocused: {},
   rightArrow: {
     color: "white",
     position: "absolute",
     right: 0,
-    bottom: 0
+    bottom: 0,
   },
   googleButton: {
     marginTop: 30,
     width: 240,
     background: "#FFF",
-    color: "#6A6A6A"
+    color: "#6A6A6A",
   },
   facebookButton: {
     marginTop: 10,
@@ -300,35 +300,35 @@ const styles = {
     background: "#2553B4",
     color: "#FFF",
     "&:hover": {
-      background: "#446BBF"
-    }
+      background: "#446BBF",
+    },
   },
   icon: {
     height: 24,
     width: 24,
-    marginRight: 10
+    marginRight: 10,
   },
   buttonContainer: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-end",
     flexGrow: 1,
-    marginBottom: 40
+    marginBottom: 40,
   },
   errorText: {
-    color: "#e74c3c"
-  }
+    color: "#e74c3c",
+  },
 };
 
 function mapStateToProps(state) {
   return {
-    error: state.auth.error
+    error: state.auth.error,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

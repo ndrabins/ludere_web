@@ -24,15 +24,13 @@ class Workflow extends Component {
       loadingBoards,
       selectedBoard,
       boards,
-      classes
+      classes,
     } = this.props;
 
     if (boards[selectedBoard] === undefined || selectedBoard === null) {
       return (
         <div style={styles.unselectedBoardContainer}>
-          <Typography variant="display1">
-            Start by selecting a workflow!
-          </Typography>
+          <Typography variant="h4">Start by selecting a workflow!</Typography>
           <img style={styles.icon} src={TasksIcon} alt="list icon" />
         </div>
       );
@@ -63,28 +61,28 @@ const styles = {
   root: {
     display: "flex",
     flexDirection: "column",
-    height: "100%"
+    height: "100%",
   },
   wrapper: {
     height: "100%",
     overflowX: "auto",
     overflowY: "auto",
-    display: "flex"
+    display: "flex",
   },
   icon: {
     marginTop: 20,
     minWidth: 100,
     minHeight: 100,
     maxHeight: 200,
-    maxWidth: 200
+    maxWidth: 200,
   },
   unselectedBoardContainer: {
     height: "100%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 };
 
 function mapStateToProps(state) {
@@ -93,13 +91,13 @@ function mapStateToProps(state) {
     loadingTasks: state.workflow.loadingTasks,
     loadingBoards: state.workflow.loadingBoards,
     selectedBoard: state.workflow.selectedBoard,
-    boards: state.workflow.boards
+    boards: state.workflow.boards,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

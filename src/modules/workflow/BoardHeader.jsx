@@ -9,7 +9,7 @@ class BoardHeader extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     boardName: PropTypes.string.isRequired,
-    boardID: PropTypes.string.isRequired
+    boardID: PropTypes.string.isRequired,
   };
 
   render() {
@@ -17,7 +17,7 @@ class BoardHeader extends Component {
     return (
       <div className={classes.root}>
         <div className={classes.headerContent}>
-          <Typography variant="headline" className={classes.header}>
+          <Typography variant="h5" className={classes.header}>
             <img src={BoardsIcon} className={classes.icon} alt="team icon" />
             {boardName}
           </Typography>
@@ -35,25 +35,25 @@ const styles = theme => ({
     flexDirection: "column",
     justifyContent: "center",
     marginTop: 5,
-    color: "#303030"
+    color: "#303030",
   },
   headerContent: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    margin: "0px 20px"
+    margin: "0px 20px",
   },
   header: {
     margin: "8px 0px",
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
   icon: {
     filter: "invert(81%)", // turns white to #303030
-    marginRight: 8
+    marginRight: 8,
   },
   divider: {
-    borderBottom: "2px solid #97979780"
-  }
+    borderBottom: "2px solid #97979780",
+  },
 });
 export default withStyles(styles)(BoardHeader);

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import Lottie from "react-lottie";
 import Lottie from "lottie-web";
 
 import animationData from "../static/loader.json";
@@ -18,6 +17,7 @@ class Loading extends Component {
   };
 
   componentDidMount() {
+    // eslint-disable-next-line
     const animation = Lottie.loadAnimation({
       container: document.getElementById("loadingLottie"), // the dom element that will contain the animation
       renderer: "svg",

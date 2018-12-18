@@ -9,7 +9,6 @@ import "firebase/storage";
 import { FilePond, File, registerPlugin } from "react-filepond";
 import FilepondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageCrop from "filepond-plugin-image-crop";
-import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageTransform from "filepond-plugin-image-transform";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginValidateSize from "filepond-plugin-file-validate-size";
@@ -130,7 +129,7 @@ class Profile extends Component {
     return (
       <Fade in={true} timeout={{ enter: 800, exit: 800 }}>
         <div className={classes.root}>
-          <Typography className={classes.title} variant="title" gutterBottom>
+          <Typography className={classes.title} variant="h6" gutterBottom>
             Profile
           </Typography>
           <div className={classes.avatar}>
@@ -156,11 +155,7 @@ class Profile extends Component {
               ))}
             </FilePond>
           </div>
-          <Typography
-            className={classes.subheading}
-            variant="headline"
-            gutterBottom
-          >
+          <Typography className={classes.subheading} variant="h5" gutterBottom>
             Profile Information
           </Typography>
           <FormControl className={classes.formControl}>

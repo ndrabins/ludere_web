@@ -71,7 +71,7 @@ class SignUp extends Component {
       return (
         <Fade in={true} timeout={{ enter: 1000, exit: 1000 }}>
           <div className={classes.noneSelected}>
-            <Typography className={classes.headerText} variant="display1">
+            <Typography className={classes.headerText} variant="h4">
               SIGN IN
             </Typography>
           </div>
@@ -83,7 +83,7 @@ class SignUp extends Component {
       return (
         <Fade in={true} timeout={{ enter: 1000, exit: 1000 }}>
           <div className={classes.signInContent}>
-            <Typography className={classes.headerText} variant="display1">
+            <Typography className={classes.headerText} variant="h4">
               Sign In
             </Typography>
             <FormControl className={classes.formControl}>

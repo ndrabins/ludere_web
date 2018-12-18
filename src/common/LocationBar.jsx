@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 
 class LocationBar extends Component {
   static defaultProps = {
-    background: `somewhere mysterious`
+    background: `somewhere mysterious`,
   };
 
   getLocation = () => {
@@ -23,7 +23,7 @@ class LocationBar extends Component {
     return (
       <div className={classes.root}>
         <div className={classes.nameContainer}>
-          <Typography variant="title" className={classes.location}>
+          <Typography variant="h6" className={classes.location}>
             {this.getLocation()}
           </Typography>
         </div>
@@ -38,14 +38,14 @@ const styles = {
     display: "flex",
     height: "48px",
     borderBottom: "1px solid #C3C3C3",
-    alignItems: "center"
+    alignItems: "center",
   },
   nameContainer: {
-    marginLeft: 15
+    marginLeft: 15,
   },
   location: {
-    color: "#303030"
-  }
+    color: "#303030",
+  },
 };
 
 export default withStyles(styles)(LocationBar);

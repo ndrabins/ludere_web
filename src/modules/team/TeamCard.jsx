@@ -13,7 +13,7 @@ class TeamCard extends Component {
     showActionIcon: false,
     floatingIcon: <span />,
     floatingAction: () => {},
-    showFloating: false
+    showFloating: false,
   };
 
   render() {
@@ -26,7 +26,7 @@ class TeamCard extends Component {
       headerFunction,
       floatingIcon,
       floatingAction,
-      showFloating
+      showFloating,
     } = this.props;
     return (
       <Paper className={classes.paperContainer} elevation={4}>
@@ -34,7 +34,7 @@ class TeamCard extends Component {
           style={{ ...inlineStyles.heading, background: background }}
           elevation={2}
         >
-          <Typography className={classes.title} variant="headline">
+          <Typography className={classes.title} variant="h5">
             {title}
           </Typography>
           {showActionIcon && (
@@ -69,15 +69,15 @@ const inlineStyles = {
     borderRadius: 7,
     padding: "5px 5px",
     zIndex: 10,
-    justifyContent: "space-between"
-  }
+    justifyContent: "space-between",
+  },
 };
 
 const styles = theme => ({
   root: {
     overflowY: "auto",
     paddingTop: "25px",
-    height: "100%"
+    height: "100%",
   },
   title: {
     color: "#fff",
@@ -87,7 +87,7 @@ const styles = theme => ({
     paddingLeft: 10,
     fontWeight: 600,
     fontSize: 16,
-    textShadow: "1px 1px 1px rgba(0,0,0,0.24)"
+    textShadow: "1px 1px 1px rgba(0,0,0,0.24)",
   },
   paperContainer: {
     position: "relative",
@@ -95,14 +95,14 @@ const styles = theme => ({
     flexDirection: "column",
     margin: 10,
     marginTop: 20,
-    flex: 1
+    flex: 1,
   },
   floatingButton: {
     right: 20,
     bottom: 20,
     position: "absolute",
-    color: "white"
-  }
+    color: "white",
+  },
 });
 
 export default withStyles(styles)(TeamCard);

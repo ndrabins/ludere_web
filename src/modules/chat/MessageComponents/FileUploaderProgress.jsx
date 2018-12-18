@@ -13,7 +13,7 @@ class FileUploaderProgress extends Component {
     fileUploadPercent: PropTypes.number.isRequired,
     fileUploadInProgress: PropTypes.bool.isRequired,
     fileName: PropTypes.string.isRequired,
-    fileSize: PropTypes.number.isRequired
+    fileSize: PropTypes.number.isRequired,
   };
 
   formatBytes(a, b) {
@@ -31,7 +31,7 @@ class FileUploaderProgress extends Component {
       fileUploadPercent,
       fileUploadInProgress,
       fileName,
-      fileSize
+      fileSize,
     } = this.props;
 
     // if (!fileUploadInProgress) {
@@ -45,11 +45,11 @@ class FileUploaderProgress extends Component {
           style={{ zIndex: fileUploadInProgress ? 0 : -10 }}
         >
           <div className={classes.textContainer}>
-            <Typography variant="title" style={{ color: "#303030" }}>
+            <Typography variant="h6" style={{ color: "#303030" }}>
               {fileName} {" - "}
             </Typography>
             <Typography
-              variant="subheading"
+              variant="subtitle1"
               style={{ color: "#b9bbbe", paddingLeft: 8 }}
             >
               {this.formatBytes(fileSize)}
@@ -81,22 +81,22 @@ const styles = theme => ({
     justifyContent: "center",
     overflowX: "hidden",
     padding: 16,
-    transition: "z-index 0.2s ease-out"
+    transition: "z-index 0.2s ease-out",
   },
   fileIcon: {
-    fontSize: 46
+    fontSize: 46,
   },
   textContainer: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
   progressContainer: {
     alignItems: "center",
     flexDirection: "row",
-    display: "flex"
+    display: "flex",
   },
   progress: {
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 });
 export default withStyles(styles)(FileUploaderProgress);

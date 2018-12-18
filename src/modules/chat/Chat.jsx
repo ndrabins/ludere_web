@@ -29,15 +29,13 @@ class Chat extends Component {
       channels,
       user,
       messages,
-      classes
+      classes,
     } = this.props;
 
     if (selectedChannelID === null || selectedChannelID === undefined) {
       return (
         <div className={classes.unselectedBoardContainer}>
-          <Typography variant="display1">
-            Start by selecting a channel!
-          </Typography>
+          <Typography variant="h4">Start by selecting a channel!</Typography>
           <img className={classes.icon} src={ChatIcon} alt="list icon" />
         </div>
       );
@@ -53,7 +51,7 @@ class Chat extends Component {
       <Fade in={true} timeout={{ enter: 800, exit: 800 }}>
         <div className={classes.container}>
           <ModuleHeader>
-            <Typography variant="headline" className={classes.header}>
+            <Typography variant="h5" className={classes.header}>
               <Message className={classes.headerIcon} />
               {selectedChannel.name}
             </Typography>
@@ -83,30 +81,30 @@ const styles = {
   container: {
     height: "100%",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   icon: {
     marginTop: 20,
     minWidth: 100,
     minHeight: 100,
     maxHeight: 200,
-    maxWidth: 200
+    maxWidth: 200,
   },
   unselectedBoardContainer: {
     height: "100%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   headerIcon: {
     marginRight: 8,
-    color: "#303030"
+    color: "#303030",
   },
   header: {
     display: "flex",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 };
 
 function mapStateToProps(state) {
@@ -115,13 +113,13 @@ function mapStateToProps(state) {
     loadingMessages: state.chat.loadingMessages,
     messages: state.chat.messages,
     channels: state.chat.channels,
-    user: state.auth.user
+    user: state.auth.user,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

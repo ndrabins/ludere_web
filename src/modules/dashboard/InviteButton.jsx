@@ -8,29 +8,27 @@ import IconButton from "@material-ui/core/IconButton";
 import PersonAdd from "@material-ui/icons/PersonAdd";
 import { withStyles } from "@material-ui/core/styles";
 import Dialog from "common/Dialog";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import Chip from "@material-ui/core/Chip";
 
 import LudereInput from "common/LudereInput";
 
+// eslint-disable-next-line
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 class InviteButton extends Component {
   state = {
     open: false,
-    copied: false,
     email: "",
     emailList: [],
-    emailError: ""
+    emailError: "",
   };
 
   handleClose = () => {
     this.setState({
       open: false,
-      copied: false,
       emailError: "",
       emailList: [],
-      email: ""
+      email: "",
     });
   };
 
@@ -71,11 +69,8 @@ class InviteButton extends Component {
   };
 
   render() {
-    const { classes, selectedWorkspace } = this.props;
-    const { open, copied, email, emailList } = this.state;
-
-    // const localURL = window.location.href.split("/"); //get just base URL
-    // const url = `https://${localURL[2]}/auth/${selectedWorkspace}`;
+    const { classes } = this.props;
+    const { open, email, emailList } = this.state;
 
     return (
       <div className={classes.container}>
@@ -129,23 +124,6 @@ class InviteButton extends Component {
               );
             })}
           </div>
-
-          {/* <TextField
-            id="url"
-            label="Invite URL"
-            className={classes.textField}
-            value={url}
-            margin="normal"
-            fullWidth
-          />
-          <CopyToClipboard
-            text={url}
-            onCopy={() => this.setState({ copied: true })}
-          >
-            <Button variant="raised" className={classes.copyButton}>
-              {copied ? "COPIED" : "COPY"}
-            </Button>
-          </CopyToClipboard> */}
         </Dialog>
       </div>
     );
@@ -157,46 +135,46 @@ const styles = theme => ({
     marginLeft: 10,
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   personAdd: {
     color: "white",
-    fontSize: 16
+    fontSize: 16,
   },
   inviteButton: {
     padding: 0,
     width: 24,
     height: 24,
-    background: "linear-gradient(to right, #29b6f6, #796eff)"
+    background: "linear-gradient(to right, #29b6f6, #796eff)",
   },
   textField: {
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing.unit,
   },
   inviteContainer: {
-    marginTop: 10
+    marginTop: 10,
   },
   chip: {
-    margin: 4
+    margin: 4,
   },
   addButton: {
-    marginLeft: 8
+    marginLeft: 8,
   },
   copyButton: {
     color: "rgba(255,255,255,.8)",
-    background: "linear-gradient(to right, #29b6f6, #796eff)"
-  }
+    background: "linear-gradient(to right, #29b6f6, #796eff)",
+  },
 });
 
 function mapStateToProps(state) {
   return {
     selectedWorkspace: state.workspace.selectedWorkspace,
-    workspaces: state.workspace.workspaces
+    workspaces: state.workspace.workspaces,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 

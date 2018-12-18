@@ -22,12 +22,12 @@ class TeamDashboard extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     selectedTeam: PropTypes.string.isRequired,
-    teams: PropTypes.object.isRequired
+    teams: PropTypes.object.isRequired,
   };
 
   state = {
     openAnnouncementDialog: false,
-    announcementContent: {}
+    announcementContent: {},
   };
 
   handleClose = () => {
@@ -57,7 +57,7 @@ class TeamDashboard extends Component {
       announcements,
       loadingAnnouncements,
       workspaceMembers,
-      loadingUsers
+      loadingUsers,
     } = this.props;
     const { openAnnouncementDialog, announcementContent } = this.state;
 
@@ -76,7 +76,7 @@ class TeamDashboard extends Component {
       <Fade in={true} timeout={{ enter: 800, exit: 800 }}>
         <div className={classes.root}>
           <ModuleHeader>
-            <Typography variant="headline" className={classes.header}>
+            <Typography variant="h5" className={classes.header}>
               <img src={FireIcon} className={classes.icon} alt="team icon" />
               {team.name}
             </Typography>
@@ -129,27 +129,27 @@ const styles = theme => ({
     minHeight: 500,
     display: "flex",
     flexWrap: "nowrap",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   row: {
     paddingTop: 5,
     height: "50%",
-    display: "flex"
+    display: "flex",
   },
   column: {
     display: "flex",
     flexWrap: "wrap",
     height: "100%",
-    width: "100%"
+    width: "100%",
   },
   header: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
   icon: {
     filter: "invert(81%)", // turns white to #303030
-    marginRight: 8
-  }
+    marginRight: 8,
+  },
 });
 
 function mapStateToProps(state) {
@@ -159,13 +159,13 @@ function mapStateToProps(state) {
     teams: state.team.teams,
     announcements: state.team.announcements,
     loadingAnnouncements: state.team.loadingAnnouncements,
-    loadingUsers: state.workspace.loadingUsers
+    loadingUsers: state.workspace.loadingUsers,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 
