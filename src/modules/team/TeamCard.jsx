@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
+import Fab from "@material-ui/core/Fab";
 
 class TeamCard extends Component {
   static defaultProps = {
@@ -43,8 +43,7 @@ class TeamCard extends Component {
         </Paper>
         <div className={classes.root}>{this.props.children}</div>
         {showFloating && (
-          <Button
-            variant="fab"
+          <Fab
             color="secondary"
             aria-label="edit"
             onClick={floatingAction}
@@ -52,7 +51,7 @@ class TeamCard extends Component {
             style={{ background: background }}
           >
             {floatingIcon}
-          </Button>
+          </Fab>
         )}
       </Paper>
     );

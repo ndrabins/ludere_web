@@ -3742,12 +3742,11 @@ eslint-plugin-jsx-a11y@6.1.2:
     has "^1.0.3"
     jsx-ast-utils "^2.0.1"
 
-eslint-plugin-prettier@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-2.7.0.tgz#b4312dcf2c1d965379d7f9d5b5f8aaadc6a45904"
+eslint-plugin-prettier@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.0.0.tgz#f6b823e065f8c36529918cdb766d7a0e975ec30c"
   dependencies:
-    fast-diff "^1.1.1"
-    jest-docblock "^21.0.0"
+    prettier-linter-helpers "^1.0.0"
 
 eslint-plugin-react@7.11.1:
   version "7.11.1"
@@ -4068,9 +4067,13 @@ fast-deep-equal@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
 
-fast-diff@1.1.2, fast-diff@^1.1.1:
+fast-diff@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.1.2.tgz#4b62c42b8e03de3f848460b639079920695d0154"
+
+fast-diff@^1.1.2:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
 
 fast-glob@^2.0.2:
   version "2.2.1"
@@ -4164,41 +4167,41 @@ filename-regex@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/filename-regex/-/filename-regex-2.0.1.tgz#c1c4b9bee3e09725ddb106b75c1e301fe2f18b26"
 
-filepond-plugin-file-encode@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-file-encode/-/filepond-plugin-file-encode-1.0.5.tgz#d22c96105a04d22073455549c3ee570fc5766bc8"
+filepond-plugin-file-encode@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-file-encode/-/filepond-plugin-file-encode-2.0.0.tgz#336c9c435937dc23e1b5dfca9e183dd89fe23e2e"
 
-filepond-plugin-file-validate-size@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-file-validate-size/-/filepond-plugin-file-validate-size-1.0.4.tgz#72e77b3cd65e6440e34ba5394dc9991076d7bc48"
+filepond-plugin-file-validate-size@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-file-validate-size/-/filepond-plugin-file-validate-size-2.1.0.tgz#f36cde660e6235c2dfa0ac9667d5f63e832984b9"
 
-filepond-plugin-file-validate-type@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-file-validate-type/-/filepond-plugin-file-validate-type-1.1.0.tgz#ee1cef9174f02c360ca8f1f8839389e8cc2640f5"
+filepond-plugin-file-validate-type@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-file-validate-type/-/filepond-plugin-file-validate-type-1.2.1.tgz#02f5ca2411db0bf23c4afd81355f15c5a57b2c3a"
 
-filepond-plugin-image-crop@^1.0.3:
+filepond-plugin-image-crop@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-crop/-/filepond-plugin-image-crop-2.0.0.tgz#a6a40c11c7cadb81b841ab1f8807871157b3277f"
+
+filepond-plugin-image-exif-orientation@^1.0.3:
   version "1.0.3"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-image-crop/-/filepond-plugin-image-crop-1.0.3.tgz#0c6a0c6cca273b7818aa5689ed8ebdd53146e021"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-exif-orientation/-/filepond-plugin-image-exif-orientation-1.0.3.tgz#b2914b5fd8ec1bc5fc2eb1b0c969275fdbcf9198"
 
-filepond-plugin-image-exif-orientation@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-image-exif-orientation/-/filepond-plugin-image-exif-orientation-1.0.2.tgz#5470d2c0c19c7ef5a3a74169f29a76b910eb721b"
-
-filepond-plugin-image-preview@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-image-preview/-/filepond-plugin-image-preview-2.0.1.tgz#e272b52bceb613cb11146b40cd2cbaef19f363c7"
+filepond-plugin-image-preview@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-preview/-/filepond-plugin-image-preview-3.1.4.tgz#5b40b0059844350490459f633feabbc51f3a54d8"
 
 filepond-plugin-image-resize@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/filepond-plugin-image-resize/-/filepond-plugin-image-resize-2.0.1.tgz#c03c4ace90a388fcc14717ab422e2b1c9d1e50c5"
 
-filepond-plugin-image-transform@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/filepond-plugin-image-transform/-/filepond-plugin-image-transform-2.1.0.tgz#ffc8b95dd33ecf7e7aa316b9e24dcc3faa1a9ac3"
+filepond-plugin-image-transform@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-image-transform/-/filepond-plugin-image-transform-3.1.0.tgz#e593928bbd7d08733da3f8ed085a11642d330c36"
 
-filepond@^2.2.0:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/filepond/-/filepond-2.3.1.tgz#e48d742c203637f14d91e71c33b3035b7a2b6793"
+filepond@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/filepond/-/filepond-3.5.1.tgz#727a5e0f71effa841ea4c78b9ae13edc2cfaf4b1"
 
 fileset@^2.0.2:
   version "2.0.3"
@@ -5802,10 +5805,6 @@ jest-diff@^23.6.0:
     diff "^3.2.0"
     jest-get-type "^22.1.0"
     pretty-format "^23.6.0"
-
-jest-docblock@^21.0.0:
-  version "21.2.0"
-  resolved "https://registry.yarnpkg.com/jest-docblock/-/jest-docblock-21.2.0.tgz#51529c3b30d5fd159da60c27ceedc195faf8d414"
 
 jest-docblock@^23.2.0:
   version "23.2.0"
@@ -8290,6 +8289,12 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
+prettier-linter-helpers@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/prettier-linter-helpers/-/prettier-linter-helpers-1.0.0.tgz#d23d41fe1375646de2d0104d3454a3008802cf7b"
+  dependencies:
+    fast-diff "^1.1.2"
+
 prettier@^1.14.2:
   version "1.14.3"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.3.tgz#90238dd4c0684b7edce5f83b0fb7328e48bd0895"
@@ -8707,11 +8712,9 @@ react-event-listener@^0.6.2:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
-react-filepond@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/react-filepond/-/react-filepond-3.0.1.tgz#8aa50d5b29f37c8568b4c9d6b8bd46da81e7aa10"
-  dependencies:
-    filepond "^2.2.0"
+react-filepond@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-filepond/-/react-filepond-5.0.0.tgz#28c30a878ce27b9b4899f877f4c3ead8dc9a026e"
 
 react-froala-wysiwyg@^2.9.1:
   version "2.9.1"

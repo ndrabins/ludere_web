@@ -7,6 +7,7 @@ import firebase from "firebase/app";
 import "firebase/storage";
 
 import { FilePond, File, registerPlugin } from "react-filepond";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilepondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageCrop from "filepond-plugin-image-crop";
 import FilePondPluginImageTransform from "filepond-plugin-image-transform";
@@ -14,6 +15,7 @@ import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginValidateSize from "filepond-plugin-file-validate-size";
 
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+// import "./filepond.css";
 
 import Fade from "@material-ui/core/Fade";
 import Input from "@material-ui/core/Input";
@@ -26,6 +28,7 @@ import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 
 registerPlugin(
+  FilePondPluginImageExifOrientation,
   FilepondPluginImagePreview,
   FilePondPluginImageCrop,
   FilePondPluginImageTransform,
@@ -138,9 +141,15 @@ class Profile extends Component {
               allowRevert={false}
               allowImageTransform={true}
               maxFileSize="5MB"
+              imagePreviewHeight={170}
+              imageCropAspectRatio="1:1"
+              imageResizeTargetWidth="300"
+              imageResizeTargetHeight="300"
+              stylePanelLayout="compact circle"
+              styleLoadIndicatorPosition="center bottom"
+              styleButtonRemoveItemPosition="center bottom"
               oninit={this.handleInit}
               labelIdle={"Drag & Drop your profile picture or Click to Browse"}
-              imagePreviewHeight={400}
               labelTapToCancel=""
               labelFileTypeNotAllowed="Invalid filetype. Try an image file like png, jpeg or a gif"
               acceptedFileTypes={["image/*"]}
@@ -219,12 +228,13 @@ const styles = {
     marginBottom: 20,
   },
   subheading: {
-    marginTop: 20,
+    marginTop: 30,
     marginBottom: 10,
   },
   avatar: {
     width: 400,
     minWidth: 400,
+    marginBottom: 20,
   },
   formControl: {
     marginBotton: 10,

@@ -5,11 +5,11 @@ import * as Actions from "../../actions";
 import { withStyles } from "@material-ui/core/styles";
 // import ColorArray from "../../utility/constants/colorsArray";
 import GradientArray from "../../utility/constants/gradientArray";
+import Fab from "@material-ui/core/Fab";
 
 import { withRouter } from "react-router";
 import Map from "lodash/map";
 
-import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 
 import AddTeamButton from "./AddTeamButton";
@@ -69,8 +69,7 @@ class TeamNav extends Component {
             }
           />
           <Tooltip id="tooltip-right-start" title={team.name} placement="right">
-            <Button
-              variant="fab"
+            <Fab
               style={{
                 ...styles.teamButton,
                 background: GradientArray[index % 4],
@@ -83,7 +82,7 @@ class TeamNav extends Component {
               {this.isTeamNotification(teamID) && (
                 <div className={classes.teamNotification} />
               )}
-            </Button>
+            </Fab>
           </Tooltip>
         </div>
       );

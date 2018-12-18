@@ -5,7 +5,7 @@ import * as Actions from "../../actions";
 
 import { withRouter } from "react-router";
 import LudereInput from "common/LudereInput";
-import Button from "@material-ui/core/Button";
+import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Dialog from "common/Dialog";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -14,7 +14,7 @@ class AddTeamButton extends Component {
   state = {
     open: false,
     teamName: "",
-    description: ""
+    description: "",
   };
 
   handleClickOpen = () => {
@@ -43,14 +43,13 @@ class AddTeamButton extends Component {
     return (
       <div>
         <Tooltip id="tooltip-right-start" title="Add team" placement="right">
-          <Button
-            variant="fab"
+          <Fab
             aria-label="add"
             style={styles.addTeamButton}
             onClick={this.handleClickOpen}
           >
             <AddIcon style={{ color: "#B8B8B8", fontSize: 16 }} />
-          </Button>
+          </Fab>
         </Tooltip>
         <Dialog
           handleAction={this.handleCreateTeam}
@@ -86,8 +85,8 @@ const styles = {
     height: 36,
     margin: "8px 0px 8px 0px",
     border: "1px dashed #c3c3c3",
-    backgroundColor: "rgba(0, 0, 0, 0.0)"
-  }
+    backgroundColor: "rgba(0, 0, 0, 0.0)",
+  },
 };
 
 function mapStateToProps(state) {
@@ -96,7 +95,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 
