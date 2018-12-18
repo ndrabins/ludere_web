@@ -10,11 +10,8 @@ import WorkspaceFlow from "../modules/workspace/WorkspaceFlow";
 import NavBar from "../modules/dashboard/NavBar";
 import SideNav from "../modules/dashboard/SideNav";
 import Loading from "../common/Loading";
-
-// import Dashboard from "./Dashboard";
-// import Calendar from "./Calendar";
 import Profile from "../modules/dashboard/Profile/Profile";
-// import Community from "../modules/community/Community";
+import ErrorBoundary from "common/Utility/ErrorBoundary";
 
 //Modules
 import WorkFlow from "../modules/workflow/Workflow";
@@ -30,29 +27,12 @@ class Main extends Component {
 
   componentDidMount() {
     const { actions, selectedTeam } = this.props;
+
     actions.fetchWorkspaces();
     if (selectedTeam) {
       actions.loadTeamData(selectedTeam);
     }
     actions.fetchNotifications();
-
-    // firebase
-    //   .messaging()
-    //   .usePublicVapidKey(
-    //     "BJb2ITjssD1V0VxkbwpzWW1-7qWLjHdsZux-cizph8Ex4KQ-OfrFdtjY8RTx-4z61IHgBI3q9-n-nnhEXy4RBuQ"
-    //   );
-
-    // firebase
-    //   .messaging()
-    //   .requestPermission()
-    //   .then(function() {
-    //     console.log("Notification permission granted.");
-    //     // TODO(developer): Retrieve an Instance ID token for use with FCM.
-    //     // ...
-    //   })
-    //   .catch(function(err) {
-    //     console.log("Unable to get permission to notify.", err);
-    //   });
   }
 
   componentWillUnmount() {
@@ -103,14 +83,13 @@ class Main extends Component {
             drawerVisible={drawerVisible}
           />
           <Switch>
-            {/* <Route exact path="/community/dashboard" component={Dashboard} />
-            <Route exact path="/community/calendar" component={Calendar} />
-            <Route exact path="/community" component={Community} /> */}
-            <Route exact path="/profile" component={Profile} />
-            <Route exact path="/" component={Profile} />
-            <Route exact path="/team" component={TeamDashboard} />
-            <Route path="/team/chat" component={Chat} />
-            <Route path="/team/workflow" component={WorkFlow} />
+            <ErrorBoundary>
+              <Route exact path="/profile" component={Profile} />
+              <Route exact path="/" component={Profile} />
+              <Route exact path="/team" component={TeamDashboard} />
+              <Route path="/team/chat" component={Chat} />
+              <Route path="/team/workflow" component={WorkFlow} />
+            </ErrorBoundary>
           </Switch>
         </div>
       </div>
