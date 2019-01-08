@@ -15,6 +15,10 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import ErrorIcon from "@material-ui/icons/Error";
+import ResetPassword from "./components/ResetPassword";
+import SectionDivider from "common/SectionDivider";
 
 const backgroundImg =
   "https://images.unsplash.com/photo-1480339066136-cbded9b457ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80";
@@ -22,7 +26,12 @@ const backgroundImg =
 class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = { displayName: "" };
+    this.state = {
+      displayName: "",
+      uploadingInProgress: false,
+      uploadError: false,
+      openSnackbar: false,
+    };
     this.uploadRef = React.createRef();
   }
 
@@ -34,14 +43,18 @@ class Profile extends Component {
 
     const profileRef = firebase.storage().ref(`images/${user.uid}/profilePic`);
     const task = profileRef.put(fileUpload);
+    this.setState({ uploadingInProgress: true, uploadError: false });
+
     task.on(
       `state_changed`,
       snapshot => {},
       error => {
         console.log("Error:", error);
+        this.setState({ uploadingInProgress: false, uploadError: true });
       },
       () => {
         //Success
+        this.setState({ uploadingInProgress: false, uploadError: false });
         task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
           actions.updateUserProfile({ photoURL: downloadURL });
         });
@@ -73,7 +86,12 @@ class Profile extends Component {
   };
 
   render() {
-    const { displayName, openSnackbar } = this.state;
+    const {
+      displayName,
+      openSnackbar,
+      uploadingInProgress,
+      uploadError,
+    } = this.state;
     const { classes, profile } = this.props;
 
     return (
@@ -100,8 +118,22 @@ class Profile extends Component {
               htmlFor="avatar-file-upload"
               onClick={this.handleAvatarClick}
             />
+            <Fade in={uploadingInProgress} timeout={{ enter: 500, exit: 500 }}>
+              <CircularProgress className={classes.avatarAdornment} />
+            </Fade>
           </div>
           <div className={classes.content}>
+            <Fade in={uploadError} timeout={{ enter: 500, exit: 500 }}>
+              <div className={classes.errorContainer}>
+                <ErrorIcon
+                  className={classes.avatarAdornment}
+                  style={{ color: "rgb(213, 0, 0)" }}
+                />
+                <Typography className={classes.errorText}>
+                  Error: File is too large. (Max 5mb)
+                </Typography>
+              </div>
+            </Fade>
             <Typography
               className={classes.subheading}
               variant="h5"
@@ -109,6 +141,8 @@ class Profile extends Component {
             >
               Profile Information
             </Typography>
+            <ResetPassword />
+
             <FormControl className={classes.formControl}>
               <InputLabel
                 FormLabelClasses={{
@@ -163,16 +197,18 @@ const styles = {
     overflowY: "auto",
   },
   subheading: {
+    marginTop: "64px",
     marginBottom: 10,
   },
   content: {
-    marginTop: 120,
+    marginTop: 8,
     marginLeft: 40,
     marginRight: 40,
   },
   header: {
     position: "relative",
     height: 200,
+
     paddingLeft: 40,
     paddingRight: 40,
     paddingBottom: 20,
@@ -183,15 +219,29 @@ const styles = {
     objectFit: "cover",
     left: 0,
     width: "100%",
-    filter: "grayscale(1)",
+    filter: "grayscale(50%)",
+    borderBottom: "3px solid #6d6d6d",
+  },
+  avatarAdornment: {
+    position: "absolute",
+    left: "100px",
+    bottom: "-70px",
+    pointerEvents: "none",
   },
   avatar: {
     position: "absolute",
     width: 160,
     height: 160,
     borderRadius: "50%",
-    bottom: "-50px",
+    bottom: "-80px",
     objectFit: "cover",
+    border: "3px solid #6d6d6d",
+    transition: "border 0.25s ease-out, transform 0.25s ease-out",
+    cursor: "pointer",
+    "&:hover": {
+      border: "3px solid #29b6f6",
+      transform: "scale(1.1)",
+    },
   },
   formControl: {
     marginBotton: 10,
@@ -234,6 +284,13 @@ const styles = {
     marginTop: 30,
     color: "white",
     background: `linear-gradient(to right, #29b6f6, #796eff)`,
+  },
+  errorText: {
+    color: "rgb(213, 0, 0)",
+    marginLeft: "170px",
+  },
+  errorContainer: {
+    display: "flex",
   },
 };
 
