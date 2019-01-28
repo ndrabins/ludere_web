@@ -4,7 +4,7 @@ import {
   SIGN_OUT_USER,
   AUTH_SUCCESS,
   INITIALIZE_USER,
-  RESET_PASSWORD
+  RESET_PASSWORD,
 } from "./types";
 import * as localforage from "localforage";
 import firebase from "firebase/app";
@@ -87,7 +87,7 @@ function initializeUser(user, workspaceID) {
     photoURL:
       user.photoURL || "https://image.flaticon.com/icons/svg/186/186539.svg",
     workspaces: {},
-    lastLoginAt: timestamp
+    lastLoginAt: timestamp,
   };
 
   // if valid workspaceID, add it to user object
@@ -172,7 +172,7 @@ export function signOutUser() {
       .signOut()
       .then(() => {
         dispatch({
-          type: SIGN_OUT_USER
+          type: SIGN_OUT_USER,
         });
       });
 
@@ -189,13 +189,16 @@ export function signOutUser() {
 }
 
 export function resetPassword(emailAddress) {
-  return function(dispatch) {
+  return (dispatch, getState) => {
+    const { email } = getState().auth.user;
+    const usersEmailAddress = emailAddress ? emailAddress : email;
+
     dispatch({
-      type: RESET_PASSWORD
+      type: RESET_PASSWORD,
     });
     firebase
       .auth()
-      .sendPasswordResetEmail(emailAddress)
+      .sendPasswordResetEmail(usersEmailAddress)
       .then(function() {
         // Email sent.
       })
@@ -220,7 +223,7 @@ export function verifyAuth() {
 
 export function authUser() {
   return {
-    type: AUTH_USER
+    type: AUTH_USER,
   };
 }
 
@@ -228,13 +231,13 @@ export function authError(error) {
   console.log("auth error");
   return {
     type: AUTH_ERROR,
-    payload: error
+    payload: error,
   };
 }
 
 const authSuccess = (dispatch, user) => {
   dispatch({
     type: AUTH_SUCCESS,
-    payload: user
+    payload: user,
   });
 };

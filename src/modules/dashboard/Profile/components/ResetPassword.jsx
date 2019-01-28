@@ -3,34 +3,50 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "actions";
 import { withStyles } from "@material-ui/core/styles";
-import LudereInput from "common/LudereInput";
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
 
 class ResetPassword extends Component {
   state = {
-    newPassword: "",
-    confirmationNewPassword: "",
+    openSnackbar: false,
   };
 
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
   };
 
+  handleResetPassword = () => {
+    const { actions } = this.props;
+    this.setState({ openSnackbar: true });
+    actions.resetPassword();
+  };
+
+  handleClose = () => {
+    this.setState({ openSnackbar: false });
+  };
+
   render() {
-    const { newPassword, confirmationNewPassword } = this.state;
+    const { openSnackbar } = this.state;
+    const { classes } = this.props;
 
     return (
-      <div>
-        <LudereInput
-          label="New password"
-          value={newPassword}
-          handleChange={this.handleChange("newPassword")}
-          // helperText="We will send an email with instruction on resetting your password. Please check both your inbox and spam folder."
-        />
-        <LudereInput
-          label="Confirm new password"
-          value={confirmationNewPassword}
-          handleChange={this.handleChange("confirmationNewPassword")}
-          // helperText="We will send an email with instruction on resetting your password. Please check both your inbox and spam folder."
+      <div className={classes.root}>
+        <Button
+          variant="outlined"
+          color="default"
+          className={classes.button}
+          onClick={this.handleResetPassword}
+        >
+          Reset Password
+        </Button>
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          open={openSnackbar}
+          onClose={this.handleClose}
+          ContentProps={{
+            "aria-describedby": "message-id",
+          }}
+          message={<span id="message-id">Reset Password Email Sent</span>}
         />
       </div>
     );
@@ -39,11 +55,7 @@ class ResetPassword extends Component {
 
 const styles = {
   root: {
-    width: "100%",
-    height: "100%",
-    alignItems: "flex-start",
-    flexDirection: "column",
-    overflowY: "auto",
+    marginBottom: 24,
   },
 };
 

@@ -18,7 +18,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ErrorIcon from "@material-ui/icons/Error";
 import ResetPassword from "./components/ResetPassword";
-import SectionDivider from "common/SectionDivider";
+import Divider from "@material-ui/core/Divider";
 
 const backgroundImg =
   "https://images.unsplash.com/photo-1480339066136-cbded9b457ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80";
@@ -119,7 +119,7 @@ class Profile extends Component {
               onClick={this.handleAvatarClick}
             />
             <Fade in={uploadingInProgress} timeout={{ enter: 500, exit: 500 }}>
-              <CircularProgress className={classes.avatarAdornment} />
+              <CircularProgress className={classes.avatarLoader} />
             </Fade>
           </div>
           <div className={classes.content}>
@@ -141,7 +141,6 @@ class Profile extends Component {
             >
               Profile Information
             </Typography>
-            <ResetPassword />
 
             <FormControl className={classes.formControl}>
               <InputLabel
@@ -172,6 +171,10 @@ class Profile extends Component {
             >
               Save Profile
             </Button>
+
+            <Divider variant="middle" className={classes.divider} />
+
+            <ResetPassword />
           </div>
           <Snackbar
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
@@ -228,10 +231,18 @@ const styles = {
     bottom: "-70px",
     pointerEvents: "none",
   },
+  avatarLoader: {
+    position: "absolute",
+    left: "100px",
+    bottom: "-70px",
+    pointerEvents: "none",
+    zIndex: 3,
+  },
   avatar: {
     position: "absolute",
     width: 160,
     height: 160,
+    zIndex: 1,
     borderRadius: "50%",
     bottom: "-80px",
     objectFit: "cover",
@@ -244,7 +255,7 @@ const styles = {
     },
   },
   formControl: {
-    marginBotton: 10,
+    marginBottom: 16,
     width: "100%",
   },
   label: {
@@ -281,7 +292,7 @@ const styles = {
     display: "none",
   },
   saveButton: {
-    marginTop: 30,
+    marginTop: 8,
     color: "white",
     background: `linear-gradient(to right, #29b6f6, #796eff)`,
   },
@@ -290,7 +301,12 @@ const styles = {
     marginLeft: "170px",
   },
   errorContainer: {
+    zIndex: 0,
     display: "flex",
+  },
+  divider: {
+    marginTop: 16,
+    marginBottom: 16,
   },
 };
 
